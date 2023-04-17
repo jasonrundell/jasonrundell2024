@@ -65,17 +65,19 @@ export default function Index({ preview, allPosts }) {
                 <Row>
                   <Paragraph>
                     🗓️{' '}
-                    <Link href="https://calendly.com/jason-rundell/30min">
-                      Book time with me
-                    </Link>
+                    <Link
+                      href="https://calendly.com/jason-rundell/30min"
+                      label="Book time with me"
+                    />
                   </Paragraph>
                 </Row>
                 <Row>
                   <Paragraph>
                     👀{' '}
-                    <Link url="https://github.com/jasonrundell?tab=repositories&q=&type=&language=&sort=">
-                      Check out my open-source work on GitHub
-                    </Link>
+                    <Link
+                      href="https://github.com/jasonrundell?tab=repositories&q=&type=&language=&sort="
+                      label="Check out my open-source work on GitHub"
+                    />
                   </Paragraph>
                 </Row>
               </Box>
