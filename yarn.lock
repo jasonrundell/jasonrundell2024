@@ -1165,10 +1165,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jasonrundell/dropship@^1.25.0":
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/@jasonrundell/dropship/-/dropship-1.25.0.tgz#3c014c43d195a3802dc5e62ed03463419bb73842"
-  integrity sha512-EQhn82kvE1yuUKTSA9FMh9wvcEtAXysb7/9cu1aOggU0JfDdmsCJNkTIPxB3m8/Sh31tRQfApkkK0tVIf0xEmw==
+"@jasonrundell/dropship@^1.26.5":
+  version "1.26.5"
+  resolved "https://registry.yarnpkg.com/@jasonrundell/dropship/-/dropship-1.26.5.tgz#7b08d3bc41279cfbfa4c4d17c83b01e5d487dd8c"
+  integrity sha512-sm+0lEzthg/kk+uoat+bpBCOMZKvpqp8VLKEIGg5wPZJhDL4Ym4n9wZQAAU+aG+SSFyAvUl4PjsRsVFRWn/s6Q==
   dependencies:
     "@emotion/css" "^11.10.6"
     "@emotion/react" "^11.10.6"

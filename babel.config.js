@@ -8,6 +8,5 @@ module.exports = {
         },
       },
     ],
-    '@emotion/babel-preset-css-prop',
   ],
 }
