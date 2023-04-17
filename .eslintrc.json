@@ -1,0 +1,10 @@
+{
+  "extends": "next",
+  "parserOptions": {
+    "requireConfigFile": false
+  },
+  "rules": {
+    "@emotion/jsx-import": "off",
+    "@emotion/pkg-renaming": "off"
+  }
+}
