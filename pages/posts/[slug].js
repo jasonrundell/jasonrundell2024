@@ -3,7 +3,7 @@ import Head from 'next/head'
 import ErrorPage from 'next/error'
 import Container from '../../components/container'
 import PostBody from '../../components/post-body'
-import MoreStories from '../../components/more-stories'
+import MorePosts from '../../components/more-posts'
 import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import SectionSeparator from '../../components/section-separator'
@@ -44,7 +44,7 @@ export default function Post({ post, morePosts, preview }) {
             </article>
             <SectionSeparator />
             {morePosts && morePosts.length > 0 && (
-              <MoreStories posts={morePosts} />
+              <MorePosts posts={morePosts} />
             )}
           </>
         )}
