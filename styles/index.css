@@ -4,6 +4,11 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
+html,
+body {
+  font-family: 'Outfit', Helvetica, Tahoma, Geneva, sans-serif !important;
+}
+
 p {
   margin: 1rem 0 1rem 0;
 }
