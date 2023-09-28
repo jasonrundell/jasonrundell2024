@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="bg-accent-1 border-t border-accent-2">
       <Container>
         <div className="py-28 flex flex-col lg:flex-row items-center">
-          <Heading level={3} label="Let' Connect" />
+          <Heading level={3} label="Let' Connect" classNames="font-bold" />
           <Row>
             <ul>
               <li>
