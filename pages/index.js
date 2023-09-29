@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import {
+  Container,
   Section,
   Spacer,
   Row,
@@ -9,21 +10,26 @@ import {
   Link,
 } from '@jasonrundell/dropship'
 
-import Container from '../components/container'
 import MorePosts from '../components/more-posts'
 import HeroPost from '../components/hero-post'
 import Layout from '../components/layout'
-import { getAllPostsForHome } from '../lib/api'
-import { CMS_NAME } from '../lib/constants'
+import Skills from '../components/Skills'
+import { getAllPostsForHome } from '../lib/api/posts'
+import { getAllSkillsForHome } from '../lib/api/skills'
+import { SITE_NAME } from '../lib/constants'
 
-export default function Index({ preview, allPosts }) {
+export default function Index({ preview, allPosts, allSkills }) {
   const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+  const posts = allPosts.slice(1)
+  const skills = allSkills.slice(1)
+
+  console.log('allPosts', allPosts)
+  console.log('allSkills', allSkills)
   return (
     <>
       <Layout preview={preview}>
         <Head>
-          <title>Next.js Blog Example with {CMS_NAME}</title>
+          <title>{SITE_NAME}</title>
         </Head>
         <Container>
           <Section id="intro">
@@ -32,7 +38,10 @@ export default function Index({ preview, allPosts }) {
               <Heading label="Jason Rundell" classNames="font-bold" />
             </Row>
             <Row>
-              <Heading level={2} label="Full Stack Web Developer" />
+              <Heading
+                level={2}
+                label="Engineering Manager / Full Stack Web Developer"
+              />
             </Row>
             <Row>
               <Paragraph>
@@ -76,46 +85,56 @@ export default function Index({ preview, allPosts }) {
             </Row>
             <Spacer sizeLarge="largest" />
           </Section>
-          <Section id="tools-and-technologies">
+        </Container>
+        <Section id="tools-and-technologies" classNames="bg--dark">
+          <Container>
             <Spacer sizeLarge="largest" />
             <Row>
               <Heading level={3} label="Tools and Technologies" />
             </Row>
+            <Row>{skills.length > 0 && <Skills items={skills} />}</Row>
             <Spacer sizeLarge="largest" />
-          </Section>
-          <Section id="experience">
+          </Container>
+        </Section>
+        <Section id="experience">
+          <Container>
             <Spacer sizeLarge="largest" />
             <Row>
               <Heading level={3} label="Experience" />
             </Row>
             <Spacer sizeLarge="largest" />
-          </Section>
-          <Section id="references">
+          </Container>
+        </Section>
+        <Section id="references" classNames="bg--dark">
+          <Container>
             <Spacer sizeLarge="largest" />
             <Row>
               <Heading level={3} label="References" />
             </Row>
             <Spacer sizeLarge="largest" />
-          </Section>
-          <Section id="latest-post">
+          </Container>
+        </Section>
+        <Section id="latest-post">
+          <Container>
             <Spacer sizeLarge="largest" />
             <Row>
               <Heading level={3} label="My latest post" />
             </Row>
             <Spacer sizeLarge="largest" />
-          </Section>
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-            />
-          )}
-          {morePosts.length > 0 && <MorePosts posts={morePosts} />}
-        </Container>
+
+            {heroPost && (
+              <HeroPost
+                title={heroPost.title}
+                coverImage={heroPost.coverImage}
+                date={heroPost.date}
+                author={heroPost.author}
+                slug={heroPost.slug}
+                excerpt={heroPost.excerpt}
+              />
+            )}
+            {posts.length > 0 && <MorePosts items={posts} />}
+          </Container>
+        </Section>
       </Layout>
     </>
   )
@@ -123,7 +142,8 @@ export default function Index({ preview, allPosts }) {
 
 export async function getStaticProps({ preview = false }) {
   const allPosts = (await getAllPostsForHome(preview)) ?? []
+  const allSkills = (await getAllSkillsForHome(preview)) ?? []
   return {
-    props: { preview, allPosts },
+    props: { preview, allPosts, allSkills },
   }
 }

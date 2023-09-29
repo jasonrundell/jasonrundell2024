@@ -4,9 +4,23 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
+/* Variable for font color */
+/* Variables for background colors #232f3e, #11161d, and #000 */
+:root {
+  --text-color: #9aaec6;
+  --background-color: #232f3e;
+  --background-color-2: #11161d;
+  --background-color-3: #000;
+  --size-normal: 1.25rem;
+  --size-small: 1rem;
+  --size-smallest: 0.25rem;
+}
+
 html,
 body {
   font-family: 'Outfit', Helvetica, Tahoma, Geneva, sans-serif !important;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 p {
@@ -14,5 +28,43 @@ p {
 }
 
 a {
+  color: #e9be62;
   text-decoration: underline;
+}
+
+footer {
+  background-color: var(--background-color-2);
+}
+
+.bg {
+  background-color: var(--background-color);
+}
+
+.bg--dark {
+  background-color: var(--background-color-2);
+}
+
+.bg--darkest {
+  background-color: var(--background-color-3);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  margin-bottom: var(--size-normal);
+  list-style: none;
+  padding-left: 0;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: var(--size-smallest);
+}
+
+.item-text {
+  flex: 1;
+  font-size: var(--size-small);
 }

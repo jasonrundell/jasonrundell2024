@@ -1,12 +1,8 @@
 require('dotenv').config()
-// console.log(process.env)
 const spaceImport = require('contentful-import')
 const exportFile = require('./export.json')
 
 const { CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN } = process.env
-
-console.log('CONTENTFUL_SPACE_ID', CONTENTFUL_SPACE_ID)
-console.log('CONTENTFUL_ACCESS_TOKEN', CONTENTFUL_ACCESS_TOKEN)
 
 if (!CONTENTFUL_SPACE_ID || !CONTENTFUL_ACCESS_TOKEN) {
   throw new Error(
