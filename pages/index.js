@@ -100,7 +100,7 @@ export default function Index({
           <Container>
             <Spacer sizeLarge="largest" />
             <Row>
-              <Heading level={3} label="Tools and Technologies" />
+              <Heading level={2} label="Tools and Technologies" />
             </Row>
             <Row>{skills.length > 0 && <Skills items={skills} />}</Row>
             <Spacer sizeLarge="largest" />
@@ -110,7 +110,7 @@ export default function Index({
           <Container>
             <Spacer sizeLarge="largest" />
             <Row>
-              <Heading level={3} label="Experience" />
+              <Heading level={2} label="Experience" />
             </Row>
             <Row>
               {positions.length > 0 && <Positions positions={positions} />}
@@ -122,7 +122,7 @@ export default function Index({
           <Container>
             <Spacer sizeLarge="largest" />
             <Row>
-              <Heading level={3} label="References" />
+              <Heading level={2} label="References" />
             </Row>
             <Row>
               {references.length > 0 && <References references={references} />}
@@ -134,7 +134,7 @@ export default function Index({
           <Container>
             <Spacer sizeLarge="largest" />
             <Row>
-              <Heading level={3} label="My latest post" />
+              <Heading level={2} label="My latest post" />
             </Row>
             <Spacer sizeLarge="largest" />
             {heroPost && (

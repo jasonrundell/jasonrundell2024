@@ -17,7 +17,7 @@ const Positions = ({ positions }) => {
         const { id, role, company, startDate, endDate } = position
         return (
           <li key={id} className="item--positions">
-            <Heading level={2} label={role} />
+            <Heading level={3} label={role} />
             <span className="company">{company}</span>
             <br />
             <span className="start-date">{startDate}</span> -{' '}

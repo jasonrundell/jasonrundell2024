@@ -25,7 +25,7 @@ const Skills = ({ items }) => {
           {uniqueCategories.map((parentCategory, index) => {
             return (
               <div key={index} className="list">
-                <Heading level={2} label={parentCategory} />
+                <Heading level={3} label={parentCategory} />
                 <ul className="list">
                   {items.map((item) => {
                     const { id, name, category } = item

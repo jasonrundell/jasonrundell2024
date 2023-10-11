@@ -16,6 +16,7 @@
   --size-small: 1rem;
   --size-smallest: 0.25rem;
   --primary-color: #e9be62;
+  --secondary-color: #eee;
 }
 
 html,
@@ -94,8 +95,13 @@ footer {
   font-size: var(--size-small);
 }
 
+h2,
 .cite {
   color: var(--primary-color);
+}
+
+h3 {
+  color: var(--secondary-color);
 }
 
 .company {
