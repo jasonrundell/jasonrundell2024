@@ -12,7 +12,7 @@ import { getAllPostsWithSlug, getPostAndMorePosts } from '../../lib/api/posts'
 import PostTitle from '../../components/post-title'
 import { CMS_NAME } from '../../lib/constants'
 
-export default function Post({ post, morePosts, preview }) {
+export default function Post({ post, posts, preview }) {
   const router = useRouter()
 
   if (!router.isFallback && !post) {
@@ -43,9 +43,7 @@ export default function Post({ post, morePosts, preview }) {
               <PostBody content={post.content} />
             </article>
             <SectionSeparator />
-            {morePosts && morePosts.length > 0 && (
-              <MorePosts posts={morePosts} />
-            )}
+            {posts && morePosts.length > 0 && <MorePosts items={posts} />}
           </>
         )}
       </Container>
@@ -60,7 +58,7 @@ export async function getStaticProps({ params, preview = false }) {
     props: {
       preview,
       post: data?.post ?? null,
-      morePosts: data?.morePosts ?? null,
+      posts: data?.posts ?? null,
     },
   }
 }

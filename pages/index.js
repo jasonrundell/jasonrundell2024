@@ -14,17 +14,18 @@ import MorePosts from '../components/more-posts'
 import HeroPost from '../components/hero-post'
 import Layout from '../components/layout'
 import Skills from '../components/Skills'
+import References from '../components/References'
 import { getAllPostsForHome } from '../lib/api/posts'
 import { getAllSkillsForHome } from '../lib/api/skills'
+import { getAllReferencesForHome } from '../lib/api/references'
 import { SITE_NAME } from '../lib/constants'
 
-export default function Index({ preview, allPosts, allSkills }) {
+export default function Index({ preview, allPosts, allSkills, allReferences }) {
   const heroPost = allPosts[0]
   const posts = allPosts.slice(1)
   const skills = allSkills.slice(1)
+  const references = allReferences.slice(1)
 
-  console.log('allPosts', allPosts)
-  console.log('allSkills', allSkills)
   return (
     <>
       <Layout preview={preview}>
@@ -111,6 +112,9 @@ export default function Index({ preview, allPosts, allSkills }) {
             <Row>
               <Heading level={3} label="References" />
             </Row>
+            <Row>
+              {references.length > 0 && <References references={references} />}
+            </Row>
             <Spacer sizeLarge="largest" />
           </Container>
         </Section>
@@ -143,7 +147,8 @@ export default function Index({ preview, allPosts, allSkills }) {
 export async function getStaticProps({ preview = false }) {
   const allPosts = (await getAllPostsForHome(preview)) ?? []
   const allSkills = (await getAllSkillsForHome(preview)) ?? []
+  const allReferences = (await getAllReferencesForHome(preview)) ?? []
   return {
-    props: { preview, allPosts, allSkills },
+    props: { preview, allPosts, allSkills, allReferences },
   }
 }
