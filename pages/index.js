@@ -96,41 +96,8 @@ export default function Index({
             <Spacer sizeLarge="largest" />
           </Section>
         </Container>
-        <Section id="tools-and-technologies" classNames="bg--dark">
-          <Container>
-            <Spacer sizeLarge="largest" />
-            <Row>
-              <Heading level={2} label="Tools and Technologies" />
-            </Row>
-            <Row>{skills.length > 0 && <Skills items={skills} />}</Row>
-            <Spacer sizeLarge="largest" />
-          </Container>
-        </Section>
-        <Section id="experience">
-          <Container>
-            <Spacer sizeLarge="largest" />
-            <Row>
-              <Heading level={2} label="Experience" />
-            </Row>
-            <Row>
-              {positions.length > 0 && <Positions positions={positions} />}
-            </Row>
-            <Spacer sizeLarge="largest" />
-          </Container>
-        </Section>
-        <Section id="references" classNames="bg--dark">
-          <Container>
-            <Spacer sizeLarge="largest" />
-            <Row>
-              <Heading level={2} label="References" />
-            </Row>
-            <Row>
-              {references.length > 0 && <References references={references} />}
-            </Row>
-            <Spacer sizeLarge="largest" />
-          </Container>
-        </Section>
-        <Section id="latest-post">
+
+        <Section id="latest-post" classNames="bg--dark">
           <Container>
             <Spacer sizeLarge="largest" />
             <Row>
@@ -147,7 +114,56 @@ export default function Index({
                 excerpt={heroPost.excerpt}
               />
             )}
+            <Spacer sizeLarge="largest" />
+          </Container>
+        </Section>
+
+        <Section id="tools-and-technologies">
+          <Container>
+            <Spacer sizeLarge="largest" />
+            <Row>
+              <Heading level={2} label="Tools and Technologies" />
+            </Row>
+            <Row>{skills.length > 0 && <Skills items={skills} />}</Row>
+            <Spacer sizeLarge="largest" />
+          </Container>
+        </Section>
+
+        <Section id="experience" classNames="bg--dark">
+          <Container>
+            <Spacer sizeLarge="largest" />
+            <Row>
+              <Heading level={2} label="Experience" />
+            </Row>
+            <Row>
+              {positions.length > 0 && <Positions positions={positions} />}
+            </Row>
+            <Spacer sizeLarge="largest" />
+          </Container>
+        </Section>
+
+        <Section id="references">
+          <Container>
+            <Spacer sizeLarge="largest" />
+            <Row>
+              <Heading level={2} label="References" />
+            </Row>
+            <Row>
+              {references.length > 0 && <References references={references} />}
+            </Row>
+            <Spacer sizeLarge="largest" />
+          </Container>
+        </Section>
+
+        <Section id="references" classNames="bg--dark">
+          <Container>
+            <Spacer sizeLarge="largest" />
+            <Row>
+              <Heading level={2} label="Other Posts" />
+            </Row>
+            <Spacer sizeLarge="largest" />
             {posts.length > 0 && <MorePosts items={posts} />}
+            <Spacer sizeLarge="largest" />
           </Container>
         </Section>
       </Layout>
