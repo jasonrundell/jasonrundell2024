@@ -35,8 +35,6 @@ export default function Index({
   const references = allReferences
   const positions = allPositions
 
-  console.log('positions', positions)
-
   return (
     <>
       <Layout preview={preview}>
