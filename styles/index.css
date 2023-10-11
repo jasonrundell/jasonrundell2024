@@ -68,6 +68,15 @@ footer {
   list-style: none;
 }
 
+.list--positions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .item {
   display: flex;
   flex-direction: row;
@@ -75,7 +84,8 @@ footer {
   margin-bottom: var(--size-smallest);
 }
 
-.item--references {
+.item--references,
+.item--positions {
   margin-bottom: var(--size-large);
 }
 
@@ -86,4 +96,13 @@ footer {
 
 .cite {
   color: var(--primary-color);
+}
+
+.company {
+  font-style: italic;
+}
+
+.start-date,
+.end-date {
+  font-size: var(--size-small);
 }

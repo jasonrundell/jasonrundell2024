@@ -13,18 +13,29 @@ import {
 import MorePosts from '../components/more-posts'
 import HeroPost from '../components/hero-post'
 import Layout from '../components/layout'
-import Skills from '../components/Skills'
+import Positions from '../components/Positions'
 import References from '../components/References'
+import Skills from '../components/Skills'
 import { getAllPostsForHome } from '../lib/api/posts'
 import { getAllSkillsForHome } from '../lib/api/skills'
 import { getAllReferencesForHome } from '../lib/api/references'
+import { getAllPositionsForHome } from '../lib/api/positions'
 import { SITE_NAME } from '../lib/constants'
 
-export default function Index({ preview, allPosts, allSkills, allReferences }) {
+export default function Index({
+  preview,
+  allPosts,
+  allSkills,
+  allReferences,
+  allPositions,
+}) {
   const heroPost = allPosts[0]
   const posts = allPosts.slice(1)
-  const skills = allSkills.slice(1)
-  const references = allReferences.slice(1)
+  const skills = allSkills
+  const references = allReferences
+  const positions = allPositions
+
+  console.log('positions', positions)
 
   return (
     <>
@@ -103,6 +114,9 @@ export default function Index({ preview, allPosts, allSkills, allReferences }) {
             <Row>
               <Heading level={3} label="Experience" />
             </Row>
+            <Row>
+              {positions.length > 0 && <Positions positions={positions} />}
+            </Row>
             <Spacer sizeLarge="largest" />
           </Container>
         </Section>
@@ -148,7 +162,8 @@ export async function getStaticProps({ preview = false }) {
   const allPosts = (await getAllPostsForHome(preview)) ?? []
   const allSkills = (await getAllSkillsForHome(preview)) ?? []
   const allReferences = (await getAllReferencesForHome(preview)) ?? []
+  const allPositions = (await getAllPositionsForHome(preview)) ?? []
   return {
-    props: { preview, allPosts, allSkills, allReferences },
+    props: { preview, allPosts, allSkills, allReferences, allPositions },
   }
 }
