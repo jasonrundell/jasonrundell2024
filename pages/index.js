@@ -137,7 +137,6 @@ export default function Index({
               <Heading level={3} label="My latest post" />
             </Row>
             <Spacer sizeLarge="largest" />
-
             {heroPost && (
               <HeroPost
                 title={heroPost.title}

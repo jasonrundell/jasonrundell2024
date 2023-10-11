@@ -1,4 +1,15 @@
 {
+  "name": "jasonrundell2023",
+  "description": "Jason Rundell's personal site (2023 edition).",
+  "version": "1.0.0",
+  "author": "Jason Rundell <jason.rundell@gmail.com>",
+  "keywords": [
+    "next.js",
+    "contentful",
+    "tailwindcss",
+    "react",
+    "emotion"
+  ],
   "private": true,
   "scripts": {
     "dev": "next",
@@ -35,5 +46,13 @@
     "postcss": "8.4.5",
     "prop-types": "^15.8.1",
     "tailwindcss": "^3.3.1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jasonrundell/jasonrundell2023"
+  },
+  "bugs": {
+    "url": "https://github.com/jasonrundell/jasonrundell2023/issues"
   }
 }
