@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg--darkest">
       <Container>
-        <div className="py-28 flex flex-col lg:flex-row items-center">
+        <div className="py-20 flex flex-col items-center">
           <Heading level={3} label="Let' Connect" classNames="font-bold" />
           <Row>
             <ul>
@@ -36,7 +36,7 @@ export default function Footer() {
             </ul>
           </Row>
         </div>
-        <Box>
+        <div className="py-20 flex flex-col items-center">
           <Paragraph>
             <small>
               Site design by{' '}
@@ -51,7 +51,7 @@ export default function Footer() {
               reserved.
             </small>
           </Paragraph>
-        </Box>
+        </div>
       </Container>
     </footer>
   )
