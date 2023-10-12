@@ -35,80 +35,10 @@ a {
   text-decoration: underline;
 }
 
-footer {
-  background-color: var(--background-color-2);
-}
-
-.bg {
-  background-color: var(--background-color);
-}
-
-.bg--dark {
-  background-color: var(--background-color-2);
-}
-
-.bg--darkest {
-  background-color: var(--background-color-3);
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  margin-top: 0;
-  margin-bottom: var(--size-normal);
-  list-style: none;
-  padding-left: 0;
-}
-
-.list--references {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: var(--size-normal);
-  padding: 0;
-  list-style: none;
-}
-
-.list--positions {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.item {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-bottom: var(--size-smallest);
-}
-
-.item--references,
-.item--positions {
-  margin-bottom: var(--size-large);
-}
-
-.item-text {
-  flex: 1;
-  font-size: var(--size-small);
-}
-
-h2,
-.cite {
+h2 {
   color: var(--primary-color);
 }
 
 h3 {
   color: var(--secondary-color);
-}
-
-.company {
-  font-style: italic;
-}
-
-.start-date,
-.end-date {
-  font-size: var(--size-small);
 }

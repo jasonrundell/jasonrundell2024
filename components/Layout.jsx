@@ -1,14 +1,14 @@
 import { Main } from '@jasonrundell/dropship'
-import Alert from '../components/alert'
-import Footer from '../components/footer'
-import Meta from '../components/meta'
+import Footer from './Footer'
+import Meta from './Meta'
+import Navigation from './Navigation'
 
 export default function Layout({ preview, children }) {
   return (
     <>
       <Meta />
       <div className="min-h-screen">
-        <Alert preview={preview} />
+        <Navigation />
         <Main>{children}</Main>
       </div>
       <Footer />

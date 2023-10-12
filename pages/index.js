@@ -9,10 +9,11 @@ import {
   Paragraph,
   Link,
 } from '@jasonrundell/dropship'
+import styled from '@emotion/styled'
 
 import MorePosts from '../components/more-posts'
 import HeroPost from '../components/hero-post'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import Positions from '../components/Positions'
 import References from '../components/References'
 import Skills from '../components/Skills'
@@ -21,6 +22,7 @@ import { getAllSkillsForHome } from '../lib/api/skills'
 import { getAllReferencesForHome } from '../lib/api/references'
 import { getAllPositionsForHome } from '../lib/api/positions'
 import { SITE_NAME } from '../lib/constants'
+import { tokens } from '../data/tokens'
 
 export default function Index({
   preview,
@@ -35,6 +37,10 @@ export default function Index({
   const references = allReferences
   const positions = allPositions
 
+  const StyledSectionBgDark = styled.section`
+    background-color: ${tokens['--background-color-2']};
+  `
+
   return (
     <>
       <Layout preview={preview}>
@@ -42,7 +48,7 @@ export default function Index({
           <title>{SITE_NAME}</title>
         </Head>
         <Container>
-          <Section id="intro">
+          <Section id="home">
             <Spacer sizeLarge="largest" />
             <Row>
               <Heading label="Jason Rundell" classNames="font-bold" />
@@ -97,7 +103,7 @@ export default function Index({
           </Section>
         </Container>
 
-        <Section id="latest-post" classNames="bg--dark">
+        <StyledSectionBgDark id="latest-post">
           <Container>
             <Spacer sizeLarge="largest" />
             <Row>
@@ -116,9 +122,9 @@ export default function Index({
             )}
             <Spacer sizeLarge="largest" />
           </Container>
-        </Section>
+        </StyledSectionBgDark>
 
-        <Section id="tools-and-technologies">
+        <Section id="skills">
           <Container>
             <Spacer sizeLarge="largest" />
             <Row>
@@ -129,7 +135,7 @@ export default function Index({
           </Container>
         </Section>
 
-        <Section id="experience" classNames="bg--dark">
+        <StyledSectionBgDark id="experience">
           <Container>
             <Spacer sizeLarge="largest" />
             <Row>
@@ -140,7 +146,7 @@ export default function Index({
             </Row>
             <Spacer sizeLarge="largest" />
           </Container>
-        </Section>
+        </StyledSectionBgDark>
 
         <Section id="references">
           <Container>
@@ -155,7 +161,7 @@ export default function Index({
           </Container>
         </Section>
 
-        <Section id="references" classNames="bg--dark">
+        <StyledSectionBgDark id="blog">
           <Container>
             <Spacer sizeLarge="largest" />
             <Row>
@@ -165,7 +171,7 @@ export default function Index({
             {posts.length > 0 && <MorePosts items={posts} />}
             <Spacer sizeLarge="largest" />
           </Container>
-        </Section>
+        </StyledSectionBgDark>
       </Layout>
     </>
   )

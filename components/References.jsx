@@ -2,31 +2,9 @@ import PropTypes from 'prop-types'
 import { Blockquote, Paragraph, Strong } from '@jasonrundell/dropship'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import styled from '@emotion/styled'
 
-const document = {
-  nodeType: 'document',
-  data: {},
-  content: [
-    {
-      nodeType: 'paragraph',
-      data: {},
-      content: [
-        {
-          nodeType: 'text',
-          value: 'Hello',
-          data: {},
-          marks: [{ type: 'bold' }],
-        },
-        {
-          nodeType: 'text',
-          value: ' world!',
-          data: {},
-          marks: [{ type: 'italic' }],
-        },
-      ],
-    },
-  ],
-}
+import { tokens } from '../data/tokens'
 
 const options = {
   renderMark: {
@@ -37,22 +15,41 @@ const options = {
   },
 }
 
-const References = ({ references }) => (
-  <ul className="list--references">
-    {references.map((reference) => {
-      const { id, citeName, company } = reference
-      const quote = reference.quote.json
-      return (
-        <li key={id} className="item--references">
-          <Blockquote>{documentToReactComponents(quote, options)}</Blockquote>
-          <cite className="cite">
-            - {citeName} ({company})
-          </cite>
-        </li>
-      )
-    })}
-  </ul>
-)
+const References = ({ references }) => {
+  const StyledList = styled.ul`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: ${tokens['--size-normal']};
+    padding: 0;
+    list-style: none;
+  `
+
+  const StyledListItem = styled.li`
+    margin-bottom: ${tokens['--size-large']};
+  `
+
+  const StyledCite = styled.cite`
+    color: ${tokens['--primary-color']};
+  `
+
+  return (
+    <StyledList>
+      {references.map((reference) => {
+        const { id, citeName, company } = reference
+        const quote = reference.quote.json
+        return (
+          <StyledListItem key={id}>
+            <Blockquote>{documentToReactComponents(quote, options)}</Blockquote>
+            <StyledCite>
+              - {citeName} ({company})
+            </StyledCite>
+          </StyledListItem>
+        )
+      })}
+    </StyledList>
+  )
+}
 
 References.propTypes = {
   references: PropTypes.arrayOf(

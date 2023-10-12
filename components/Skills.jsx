@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types'
 import { Box, Grid, Heading, Row } from '@jasonrundell/dropship'
+import styled from '@emotion/styled'
+
 import { onlyUnique } from '../lib/onlyUnique'
+import { tokens } from '../data/tokens'
 
 const Skills = ({ items }) => {
   let categories = []
@@ -13,6 +16,36 @@ const Skills = ({ items }) => {
   // I only want the unique categories
   const uniqueCategories = categories.filter(onlyUnique)
 
+  const StyledListContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    margin-bottom: ${tokens['--size-normal']};
+    list-style: none;
+    padding-left: 0;
+  `
+
+  const StyledList = styled.ul`
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    margin-bottom: ${tokens['--size-normal']};
+    list-style: none;
+    padding-left: 0;
+  `
+
+  const StyledListItem = styled.li`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: ${tokens['--size-smallest']};
+  `
+
+  const StyledItemText = styled.span`
+    flex: 1;
+    font-size: ${tokens['--size-small']};
+  `
+
   return (
     <>
       <Row>
@@ -24,26 +57,26 @@ const Skills = ({ items }) => {
         >
           {uniqueCategories.map((parentCategory, index) => {
             return (
-              <div key={index} className="list">
+              <StyledListContainer key={index}>
                 <Heading level={3} label={parentCategory} />
-                <ul className="list">
+                <StyledList>
                   {items.map((item) => {
                     const { id, name, category } = item
 
                     if (parentCategory === category) {
                       return (
-                        <li key={id} className="item">
+                        <StyledListItem key={id}>
                           <Box isTight>
-                            <span className="item-text">{name}</span>
+                            <StyledItemText>{name}</StyledItemText>
                           </Box>
-                        </li>
+                        </StyledListItem>
                       )
                     } else {
                       return null
                     }
                   })}
-                </ul>
-              </div>
+                </StyledList>
+              </StyledListContainer>
             )
           })}
         </Grid>

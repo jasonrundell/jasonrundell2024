@@ -1,31 +1,46 @@
 import PropTypes from 'prop-types'
-
+import styled from '@emotion/styled'
 import { Heading } from '@jasonrundell/dropship'
 
-// import {
-//   list,
-//   item,
-//   company as companyStyle,
-//   startDate as startDateStyle,
-//   endDate as endDateStyle,
-// } from './Positions.module.scss'
+import { tokens } from '../data/tokens'
 
 const Positions = ({ positions }) => {
+  const StyledList = styled.ul`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  `
+
+  const StyledListItem = styled.li`
+    margin-bottom: ${tokens['--size-large']};
+  `
+
+  const StyledCompany = styled.span`
+    font-style: italic;
+  `
+
+  const StyledDate = styled.span`
+    font-size: ${tokens['--size-small']};
+  `
+
   return (
-    <ul className="list--positions">
+    <StyledList>
       {positions.map((position) => {
         const { id, role, company, startDate, endDate } = position
         return (
-          <li key={id} className="item--positions">
+          <StyledListItem key={id}>
             <Heading level={3} label={role} />
-            <span className="company">{company}</span>
+            <StyledCompany>{company}</StyledCompany>
             <br />
-            <span className="start-date">{startDate}</span> -{' '}
-            <span className="end-date">{endDate}</span>
-          </li>
+            <StyledDate>{startDate}</StyledDate> -{' '}
+            <StyledDate>{endDate}</StyledDate>
+          </StyledListItem>
         )
       })}
-    </ul>
+    </StyledList>
   )
 }
 

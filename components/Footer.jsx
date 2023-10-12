@@ -1,13 +1,20 @@
-import { Box, Heading, Paragraph, Row } from '@jasonrundell/dropship'
+import { Heading, Paragraph, Row } from '@jasonrundell/dropship'
 import Link from 'next/link'
-import Container from './container'
+import styled from '@emotion/styled'
 
-export default function Footer() {
+import Container from './container'
+import { tokens } from '../data/tokens'
+
+const Footer = () => {
+  const StyledFooter = styled.footer`
+    background-color: ${tokens['--background-color-3']};
+  `
+
   return (
-    <footer className="bg--darkest">
+    <StyledFooter id="contact">
       <Container>
         <div className="py-20 flex flex-col items-center">
-          <Heading level={3} label="Let' Connect" classNames="font-bold" />
+          <Heading level={3} label="Let's Connect" classNames="font-bold" />
           <Row>
             <ul>
               <li>
@@ -53,6 +60,8 @@ export default function Footer() {
           </Paragraph>
         </div>
       </Container>
-    </footer>
+    </StyledFooter>
   )
 }
+
+export default Footer
