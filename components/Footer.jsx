@@ -46,16 +46,7 @@ const Footer = () => {
         <div className="py-20 flex flex-col items-center">
           <Paragraph>
             <small>
-              Site design by{' '}
-              <Link
-                href="https://donnavitan.com"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Donna Vitan
-              </Link>
-              ❤️ © Jason Rundell {new Date().getFullYear()}. All rights
-              reserved.
+              © Jason Rundell {new Date().getFullYear()}. All rights reserved.
             </small>
           </Paragraph>
         </div>

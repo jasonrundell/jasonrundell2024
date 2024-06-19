@@ -24,6 +24,7 @@ body {
   font-family: 'Outfit', Helvetica, Tahoma, Geneva, sans-serif !important;
   background-color: var(--background-color);
   color: var(--text-color);
+  margin-top: 4rem;
 }
 
 p {
@@ -41,4 +42,26 @@ h2 {
 
 h3 {
   color: var(--secondary-color);
+}
+
+.rmm__topbar {
+  background-color: var(--background-color-3);
+  color: var(--text-color);
+}
+
+.rmm__nav {
+  background-color: var(--background-color-2);
+  color: var(--text-color);
+}
+
+.rmm__main {
+  background-color: var(--background-color-3);
+}
+
+.rmm__menu {
+  background-color: var(--background-color-2) !important;
+}
+
+.rmm__hamburger--slice {
+  background-color: var(--primary-color);
 }

@@ -37,8 +37,13 @@ export default function Index({
   const references = allReferences
   const positions = allPositions
 
-  const StyledSectionBgDark = styled.section`
+  const StyledDivBgDark = styled.div`
     background-color: ${tokens['--background-color-2']};
+    padding-top: ${tokens['--size-section']};
+  `
+
+  const StyledDiv = styled.div`
+    padding-top: ${tokens['--size-section']};
   `
 
   return (
@@ -48,130 +53,146 @@ export default function Index({
           <title>{SITE_NAME}</title>
         </Head>
         <Container>
-          <Section id="home">
-            <Spacer sizeLarge="largest" />
-            <Row>
-              <Heading label="Jason Rundell" classNames="font-bold" />
-            </Row>
-            <Row>
-              <Heading
-                level={2}
-                label="Engineering Manager / Full Stack Web Developer"
-              />
-            </Row>
-            <Row>
-              <Paragraph>
-                Hello. I&apos;m a developer who loves learning and using the
-                latest in front end web development. My skill set includes
-                experience with Docker, React, NextJS, Gatsby, Contentful, PHP,
-                MySQL, SASS, CSS, HTML, JavaScript, and Amazon Web Services.
-              </Paragraph>
-              <Paragraph>
-                My passion for creating web experiences began in my high
-                school&apos;s library back in 1997 when I discovered GeoCities.
-                Since then, I&apos;ve been fortunate to work on a diverse range
-                of projects spanning multiple technologies, including iframes,
-                Flash, WordPress multisites, jQuery Mobile, custom CMS
-                applications, a Facebook contest platform, React design systems,
-                Jamstack architecture, and most recently, exploration of the
-                possibilities and limitations of AI and generative art. I am
-                constantly exploring new trends and experimenting with emerging
-                technologies in my spare time to expand my skills and knowledge.
-                As a lifelong learner, I embrace change, seek out challenges,
-                and thrive on the fast-paced nature of the tech industry.
-              </Paragraph>
-            </Row>
-            <Row>
-              <Paragraph>
-                🗓️{' '}
-                <Link
-                  href="https://calendly.com/jason-rundell/30min"
-                  label="Book time with me"
+          <StyledDiv id="home">
+            <Section>
+              <Spacer sizeLarge="largest" />
+              <Row>
+                <Heading label="Jason Rundell" classNames="font-bold" />
+              </Row>
+              <Row>
+                <Heading
+                  level={2}
+                  label="Engineering Manager / Full Stack Web Developer"
                 />
-              </Paragraph>
-            </Row>
-            <Row>
-              <Paragraph>
-                👀{' '}
-                <Link
-                  href="https://github.com/jasonrundell?tab=repositories&q=&type=&language=&sort="
-                  label="Check out my open-source work on GitHub"
-                />
-              </Paragraph>
-            </Row>
-            <Spacer sizeLarge="largest" />
-          </Section>
+              </Row>
+              <Row>
+                <Paragraph>
+                  Hello. I&apos;m a developer who loves learning and using the
+                  latest in front end web development. My skill set includes
+                  experience with Docker, React, NextJS, Gatsby, Contentful,
+                  PHP, MySQL, SASS, CSS, HTML, JavaScript, and Amazon Web
+                  Services.
+                </Paragraph>
+                <Paragraph>
+                  My passion for creating web experiences began in my high
+                  school&apos;s library back in 1997 when I discovered
+                  GeoCities. Since then, I&apos;ve been fortunate to work on a
+                  diverse range of projects spanning multiple technologies,
+                  including iframes, Flash, WordPress multisites, jQuery Mobile,
+                  custom CMS applications, a Facebook contest platform, React
+                  design systems, Jamstack architecture, and most recently,
+                  exploration of the possibilities and limitations of AI and
+                  generative art. I am constantly exploring new trends and
+                  experimenting with emerging technologies in my spare time to
+                  expand my skills and knowledge. As a lifelong learner, I
+                  embrace change, seek out challenges, and thrive on the
+                  fast-paced nature of the tech industry.
+                </Paragraph>
+              </Row>
+              <Row>
+                <Paragraph>
+                  🗓️{' '}
+                  <Link
+                    href="https://calendly.com/jason-rundell/60-minute-meeting"
+                    label="Book time with me"
+                  />
+                </Paragraph>
+              </Row>
+              <Row>
+                <Paragraph>
+                  👀{' '}
+                  <Link
+                    href="https://github.com/jasonrundell?tab=repositories&q=&type=&language=&sort="
+                    label="Check out my open-source work on GitHub"
+                  />
+                </Paragraph>
+              </Row>
+              <Spacer sizeLarge="largest" />
+            </Section>
+          </StyledDiv>
         </Container>
 
-        <StyledSectionBgDark id="latest-post">
-          <Container>
-            <Spacer sizeLarge="largest" />
-            <Row>
-              <Heading level={2} label="My latest post" />
-            </Row>
-            <Spacer sizeLarge="largest" />
-            {heroPost && (
-              <HeroPost
-                title={heroPost.title}
-                coverImage={heroPost.coverImage}
-                date={heroPost.date}
-                author={heroPost.author}
-                slug={heroPost.slug}
-                excerpt={heroPost.excerpt}
-              />
-            )}
-            <Spacer sizeLarge="largest" />
-          </Container>
-        </StyledSectionBgDark>
+        <StyledDivBgDark id="latest-post">
+          <Section>
+            <Container>
+              <Spacer sizeLarge="largest" />
+              <Row>
+                <Heading level={2} label="My latest blog post" />
+              </Row>
+              <Spacer sizeLarge="largest" />
+              {heroPost && (
+                <HeroPost
+                  title={heroPost.title}
+                  coverImage={heroPost.coverImage}
+                  date={heroPost.date}
+                  author={heroPost.author}
+                  slug={heroPost.slug}
+                  excerpt={heroPost.excerpt}
+                />
+              )}
+              <Spacer sizeLarge="largest" />
+            </Container>
+          </Section>
+        </StyledDivBgDark>
 
-        <Section id="skills">
-          <Container>
-            <Spacer sizeLarge="largest" />
-            <Row>
-              <Heading level={2} label="Tools and Technologies" />
-            </Row>
-            <Row>{skills.length > 0 && <Skills items={skills} />}</Row>
-            <Spacer sizeLarge="largest" />
-          </Container>
-        </Section>
+        <StyledDiv id="skills">
+          <Section>
+            <Container>
+              <Spacer sizeLarge="largest" />
+              <Row>
+                <Heading level={2} label="Tools and technologies" />
+              </Row>
+              <Row>{skills.length > 0 && <Skills items={skills} />}</Row>
+              <Spacer sizeLarge="largest" />
+            </Container>
+          </Section>
+        </StyledDiv>
 
-        <StyledSectionBgDark id="experience">
-          <Container>
-            <Spacer sizeLarge="largest" />
-            <Row>
-              <Heading level={2} label="Experience" />
-            </Row>
-            <Row>
-              {positions.length > 0 && <Positions positions={positions} />}
-            </Row>
-            <Spacer sizeLarge="largest" />
-          </Container>
-        </StyledSectionBgDark>
+        <StyledDivBgDark id="experience">
+          <Section>
+            <Container>
+              <Spacer sizeLarge="largest" />
+              <Row>
+                <Heading level={2} label="Experience" />
+              </Row>
+              <Row>
+                {positions.length > 0 && <Positions positions={positions} />}
+              </Row>
+              <Spacer sizeLarge="largest" />
+            </Container>
+          </Section>
+        </StyledDivBgDark>
 
-        <Section id="references">
-          <Container>
-            <Spacer sizeLarge="largest" />
-            <Row>
-              <Heading level={2} label="References" />
-            </Row>
-            <Row>
-              {references.length > 0 && <References references={references} />}
-            </Row>
-            <Spacer sizeLarge="largest" />
-          </Container>
-        </Section>
+        <StyledDiv id="references">
+          <Section>
+            <Container>
+              <Spacer sizeLarge="largest" />
+              <Row>
+                <Heading level={2} label="References" />
+              </Row>
+              <Row>
+                {references.length > 0 && (
+                  <References references={references} />
+                )}
+              </Row>
+              <Spacer sizeLarge="largest" />
+            </Container>
+          </Section>
+        </StyledDiv>
 
-        <StyledSectionBgDark id="blog">
-          <Container>
-            <Spacer sizeLarge="largest" />
-            <Row>
-              <Heading level={2} label="Other Posts" />
-            </Row>
-            <Spacer sizeLarge="largest" />
-            {posts.length > 0 && <MorePosts items={posts} />}
-            <Spacer sizeLarge="largest" />
-          </Container>
-        </StyledSectionBgDark>
+        <StyledDivBgDark id="blog">
+          <Section>
+            <Container>
+              <Spacer sizeLarge="largest" />
+              <Row>
+                <Heading level={2} label="Blog" />
+              </Row>
+              <Spacer sizeLarge="largest" />
+              {posts.length > 0 && <MorePosts items={posts} />}
+              <Spacer sizeLarge="largest" />
+            </Container>
+          </Section>
+        </StyledDivBgDark>
       </Layout>
     </>
   )

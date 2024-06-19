@@ -26,7 +26,9 @@ const References = ({ references }) => {
   `
 
   const StyledListItem = styled.li`
-    margin-bottom: ${tokens['--size-large']};
+    margin-bottom: ${tokens['--size-xlarge']};
+    padding-left: ${tokens['--size-xlarge']};
+    padding-right: ${tokens['--size-xlarge']};
   `
 
   const StyledCite = styled.cite`

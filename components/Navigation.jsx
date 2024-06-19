@@ -6,7 +6,7 @@ import { tokens } from '../data/tokens'
 const Navigation = () => {
   const StyledNav = styled.nav`
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
     padding: ${tokens['--size-small']};
@@ -64,7 +64,7 @@ const Navigation = () => {
         </StyledListItem>
         <StyledListItem>
           <StyledLink href="/jason-rundell-web-developer-resume.pdf" download>
-            Resume
+            Download Resume
           </StyledLink>
         </StyledListItem>
       </StyledList>
