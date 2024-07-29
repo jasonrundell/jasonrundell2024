@@ -1,9 +1,14 @@
 import { Heading, Paragraph, Row } from '@jasonrundell/dropship'
 import Link from 'next/link'
 import styled from '@emotion/styled'
-
 import Container from './container'
+import Character from './Character'
+
 import { tokens } from '../data/tokens'
+import { characters } from '../data/characters'
+
+// choose a random index from characters array
+var randomIndex = Math.floor(Math.random() * characters.length)
 
 const Footer = () => {
   const StyledFooter = styled.footer`
@@ -42,14 +47,25 @@ const Footer = () => {
               </li>
             </ul>
           </Row>
+          <Row>
+            <Paragraph>
+              Sneak peak at interactive characters I&apos;m trying to integrate
+              into my site to add some fun and creativity!
+            </Paragraph>
+          </Row>
+          <Row>
+            <Character character={characters[randomIndex]} />
+          </Row>
+          <Row>
+            <Paragraph>
+              <small>
+                © Jason Rundell {new Date().getFullYear()}. All rights reserved.
+              </small>
+            </Paragraph>
+          </Row>
         </div>
-        <div className="py-20 flex flex-col items-center">
-          <Paragraph>
-            <small>
-              © Jason Rundell {new Date().getFullYear()}. All rights reserved.
-            </small>
-          </Paragraph>
-        </div>
+
+        <div className="py-20 flex flex-col items-center"></div>
       </Container>
     </StyledFooter>
   )

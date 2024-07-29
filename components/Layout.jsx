@@ -2,7 +2,6 @@ import { Main } from '@jasonrundell/dropship'
 import Menu from '@jasonrundell/react-mega-menu'
 import Footer from './Footer'
 import Meta from './Meta'
-// import Navigation from './Navigation'
 
 const menuConfig = {
   topbar: {
