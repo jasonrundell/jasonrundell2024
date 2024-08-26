@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Heading, Paragraph, Row } from '@jasonrundell/dropship'
 import Link from 'next/link'
 import styled from '@emotion/styled'
@@ -14,6 +15,13 @@ const Footer = () => {
   const StyledFooter = styled.footer`
     background-color: ${tokens['--background-color-3']};
   `
+
+  const [randomCharacter, setRandomCharacter] = useState(null)
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * characters.length)
+    setRandomCharacter(characters[randomIndex])
+  }, [])
 
   return (
     <StyledFooter id="contact">
@@ -54,7 +62,7 @@ const Footer = () => {
             </Paragraph>
           </Row>
           <Row>
-            <Character character={characters[randomIndex]} />
+            {randomCharacter && <Character character={randomCharacter} />}
           </Row>
           <Row>
             <Paragraph>

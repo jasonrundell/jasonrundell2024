@@ -3,7 +3,7 @@
  * Description: Display a character that consists of 1 image, 1 name, 1 shortBio, and 4 quotes.
  */
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'next/image'
 import styled from '@emotion/styled'

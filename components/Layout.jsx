@@ -45,11 +45,6 @@ const menuConfig = {
         type: 'main',
         url: '/#contact',
       },
-      {
-        label: 'Download Resume',
-        type: 'main',
-        url: '/jason-rundell-web-developer-resume.pdf',
-      },
     ],
   },
 }
