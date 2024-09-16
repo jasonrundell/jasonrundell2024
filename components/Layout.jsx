@@ -1,5 +1,5 @@
 import { Main } from '@jasonrundell/dropship'
-import Menu from '@jasonrundell/react-mega-menu'
+import { Menu } from '@jasonrundell/react-mega-menu'
 import Footer from './Footer'
 import Meta from './Meta'
 
@@ -55,7 +55,7 @@ export default function Layout({ preview, children }) {
       <Meta />
       <div className="min-h-screen">
         <div>
-          <Menu menuConfig={menuConfig} />
+          <Menu config={menuConfig} />
         </div>
         <Main>{children}</Main>
       </div>

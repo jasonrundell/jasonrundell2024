@@ -1,6 +1,6 @@
 {
-  "name": "jasonrundell2023",
-  "description": "Jason Rundell's personal site (2023 edition).",
+  "name": "jasonrundell2024",
+  "description": "Jason Rundell's personal site (2024 edition).",
   "version": "1.0.0",
   "author": "Jason Rundell <jason.rundell@gmail.com>",
   "keywords": [
@@ -10,7 +10,6 @@
     "react",
     "emotion"
   ],
-  "private": true,
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -25,7 +24,7 @@
     "@emotion/babel-preset-css-prop": "^11.10.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.11.0",
-    "@jasonrundell/react-mega-menu": "^1.7.3",
+    "@jasonrundell/react-mega-menu": "^2.0.8",
     "babel-plugin-emotion": "^11.0.0",
     "classnames": "2.3.1",
     "date-fns": "2.28.0",
@@ -51,9 +50,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jasonrundell/jasonrundell2023"
+    "url": "https://github.com/jasonrundell/jasonrundell2024"
   },
   "bugs": {
-    "url": "https://github.com/jasonrundell/jasonrundell2023/issues"
+    "url": "https://github.com/jasonrundell/jasonrundell2024/issues"
   }
 }
