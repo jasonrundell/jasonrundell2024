@@ -61,9 +61,11 @@ const Footer = () => {
               into my site to add some fun and creativity!
             </Paragraph>
           </Row>
-          <Row>
-            {randomCharacter && <Character character={randomCharacter} />}
-          </Row>
+          {randomCharacter && (
+            <Row>
+              <Character character={randomCharacter} />
+            </Row>
+          )}
           <Row>
             <Paragraph>
               <small>
