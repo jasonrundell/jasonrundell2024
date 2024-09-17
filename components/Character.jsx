@@ -48,7 +48,7 @@ const Character = ({ character }) => {
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * character.quotes.length)
     setRandomQuote(character.quotes[randomIndex])
-  }, [])
+  }, [character.quotes])
 
   // animate the quote by slowly typing out each letter
   useEffect(() => {
@@ -67,7 +67,7 @@ const Character = ({ character }) => {
       <Image
         loader={myLoader}
         src={character.image}
-        alt={character.name}
+        alt={character.name || ''}
         width={250}
         height={250}
       />
