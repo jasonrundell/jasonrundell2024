@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
+import { Spacer, Footer } from '@jasonrundell/dropship'
 import Container from '../../components/container'
 import PostBody from '../../components/post-body'
 import MorePosts from '../../components/more-posts'
-import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import SectionSeparator from '../../components/section-separator'
 import Layout from '../../components/Layout'
@@ -22,28 +22,31 @@ export default function Post({ post, posts, preview }) {
   return (
     <Layout preview={preview}>
       <Container>
-        <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
             <article>
               <Head>
-                <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
-                </title>
+                <title>{`${post.title} | Next.js Blog Example with ${CMS_NAME}`}</title>
                 <meta property="og:image" content={post.coverImage.url} />
               </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                author={post.author}
-              />
+              <Spacer sizeLarge="largest" />
+              <header>
+                <PostHeader
+                  title={post.title}
+                  coverImage={post.coverImage}
+                  date={post.date}
+                  author={post.author}
+                />
+              </header>
               <PostBody content={post.content} />
             </article>
             <SectionSeparator />
-            {posts && morePosts.length > 0 && <MorePosts items={posts} />}
+            <Footer>
+              {posts && morePosts.length > 0 && <MorePosts items={posts} />}
+            </Footer>
+            <Spacer sizeLarge="largest" />
           </>
         )}
       </Container>

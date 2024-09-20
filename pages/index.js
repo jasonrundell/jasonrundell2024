@@ -43,7 +43,7 @@ export default function Index({
   `
 
   const StyledDiv = styled.div`
-    padding-top: ${tokens['--size-section']};
+    padding-top: ${tokens['--size-small']};
   `
 
   return (
@@ -62,17 +62,32 @@ export default function Index({
               <Row>
                 <Heading
                   level={2}
-                  label="Engineering Manager / Full Stack Web Developer"
+                  label="Full Stack Web Developer &amp; Manager"
                 />
               </Row>
               <Row>
                 <Paragraph>
-                  Hello. I&apos;m a developer who loves learning and using the
-                  latest in front end web development. My skill set includes
-                  experience with Docker, React, NextJS, Gatsby, Contentful,
-                  PHP, MySQL, SASS, CSS, HTML, JavaScript, and Amazon Web
-                  Services.
+                  I&apos;m an experienced developer who loves learning and using
+                  the latest in front end web development, but I also have a
+                  wealth of experience and love for back end, dev ops, database
+                  design, component driven design, design systems, and aligning
+                  developer career growth with business goals as a manager or
+                  tech lead.
                 </Paragraph>
+                <Paragraph>
+                  My technical skill set includes experience with:
+                </Paragraph>
+                <Paragraph>
+                  HTML, CSS, JavaScript, PHP, Node.js, React, Next.js, Cypress,
+                  Storybook, LaunchDarkly, AWS, Docker, WordPress, Figma, Git,
+                  Chromatic, Sentry, Google Tag Manager, Figma, Contentful,
+                  Jira, MySQL, Amplify, Jenkins, CircleCI, Docker, GitHub,
+                  Bitbucket.
+                </Paragraph>
+                <Heading
+                  level={3}
+                  label="After 20 years, I still love working on the web"
+                />
                 <Paragraph>
                   My passion for creating web experiences began in my high
                   school&apos;s library back in 1997 when I discovered
@@ -81,12 +96,13 @@ export default function Index({
                   including iframes, Flash, WordPress multisites, jQuery Mobile,
                   custom CMS applications, a Facebook contest platform, React
                   design systems, Jamstack architecture, and most recently,
-                  exploration of the possibilities and limitations of AI and
-                  generative art. I am constantly exploring new trends and
-                  experimenting with emerging technologies in my spare time to
-                  expand my skills and knowledge. As a lifelong learner, I
-                  embrace change, seek out challenges, and thrive on the
-                  fast-paced nature of the tech industry.
+                  exploration of the possibilities and limitations of
+                  automation, AI and AGI (Artificial General Intelligence). I am
+                  constantly exploring new trends and experimenting with
+                  emerging technologies in my spare time to expand my skills and
+                  knowledge. As a lifelong learner, I embrace change, seek out
+                  challenges, and thrive on the fast-paced nature of the tech
+                  industry.
                 </Paragraph>
               </Row>
               <Row>
@@ -112,25 +128,28 @@ export default function Index({
           </StyledDiv>
         </Container>
 
-        <StyledDivBgDark id="latest-post">
+        <StyledDivBgDark id="blog">
           <Section>
             <Container>
-              <Spacer sizeLarge="largest" />
               <Row>
                 <Heading level={2} label="My latest blog post" />
               </Row>
-              <Spacer sizeLarge="largest" />
               {heroPost && (
-                <HeroPost
-                  title={heroPost.title}
-                  coverImage={heroPost.coverImage}
-                  date={heroPost.date}
-                  author={heroPost.author}
-                  slug={heroPost.slug}
-                  excerpt={heroPost.excerpt}
-                />
+                <Row>
+                  <HeroPost
+                    title={heroPost.title}
+                    coverImage={heroPost.coverImage}
+                    date={heroPost.date}
+                    author={heroPost.author}
+                    slug={heroPost.slug}
+                    excerpt={heroPost.excerpt}
+                  />
+                </Row>
               )}
-              <Spacer sizeLarge="largest" />
+              <Row>
+                <Heading level={2} label="Blog" />
+              </Row>
+              {posts.length > 0 && <MorePosts items={posts} />}
             </Container>
           </Section>
         </StyledDivBgDark>
@@ -179,20 +198,6 @@ export default function Index({
             </Container>
           </Section>
         </StyledDiv>
-
-        <StyledDivBgDark id="blog">
-          <Section>
-            <Container>
-              <Spacer sizeLarge="largest" />
-              <Row>
-                <Heading level={2} label="Blog" />
-              </Row>
-              <Spacer sizeLarge="largest" />
-              {posts.length > 0 && <MorePosts items={posts} />}
-              <Spacer sizeLarge="largest" />
-            </Container>
-          </Section>
-        </StyledDivBgDark>
       </Layout>
     </>
   )

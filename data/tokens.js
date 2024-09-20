@@ -10,5 +10,5 @@ export const tokens = {
   '--size-smallest': '0.25rem',
   '--primary-color': '#e9be62',
   '--secondary-color': '#eee',
-  '--size-section': '8rem',
+  '--size-section': '3rem',
 }
