@@ -49,19 +49,36 @@ h3 {
   color: var(--text-color);
 }
 
-.rmm__nav {
+#topbar,
+#rmm__hamburger--label--container {
+  margin-left: 1rem;
+}
+
+#rmm__nav {
   background-color: var(--background-color-2);
   color: var(--text-color);
 }
 
-.rmm__main {
-  background-color: var(--background-color-3);
+#rmm__main {
+  margin-left: 1rem;
 }
 
-.rmm__menu {
-  background-color: var(--background-color-2) !important;
+#rmm__menu {
+  background-color: var(--background-color-2);
 }
 
 .rmm__hamburger--slice {
   background-color: var(--primary-color);
+}
+
+ul {
+  list-style-type: disc;
+}
+
+li {
+  margin: 0 0 0 var(--size-small);
+}
+
+hr {
+  margin: var(--size-large) 0 var(--size-large) 0;
 }

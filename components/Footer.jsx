@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styled from '@emotion/styled'
 import Container from './container'
 import Character from './Character'
-
+import BackToTop from './back-top-top'
 import { tokens } from '../data/tokens'
 import { characters } from '../data/characters'
 
@@ -61,11 +61,11 @@ const Footer = () => {
               into my site to add some fun and creativity!
             </Paragraph>
           </Row>
-          {randomCharacter && (
+          {/* {randomCharacter && (
             <Row>
               <Character character={randomCharacter} />
             </Row>
-          )}
+          )} */}
           <Row>
             <Paragraph>
               <small>
@@ -74,7 +74,7 @@ const Footer = () => {
             </Paragraph>
           </Row>
         </div>
-
+        <BackToTop />
         <div className="py-20 flex flex-col items-center"></div>
       </Container>
     </StyledFooter>

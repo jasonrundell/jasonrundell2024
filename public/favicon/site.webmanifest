@@ -6,62 +6,62 @@
   "description": "Jason Rundell - Full Stack Web Developer and Manager",
   "icons": [
     {
-      "src": "/favicons/favicon-32x32.png",
+      "src": "/favicon/favicon-32x32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-76x76.png",
+      "src": "/favicon/favicon-76x76.png",
       "sizes": "76x76",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-57x57.png",
+      "src": "/favicon/favicon-57x57.png",
       "sizes": "57x57",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-76x76.png",
+      "src": "/favicon/favicon-76x76.png",
       "sizes": "76x76",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-96x96.png",
+      "src": "/favicon/favicon-96x96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-128x128.png",
+      "src": "/favicon/favicon-128x128.png",
       "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-144x144.png",
+      "src": "/favicon/favicon-144x144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-180x180.png",
+      "src": "/favicon/favicon-180x180.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-192x192.png",
+      "src": "/favicon/favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-228x228.png",
+      "src": "/favicon/favicon-228x228.png",
       "sizes": "228x228",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-192x192.png",
+      "src": "/favicon/favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/favicons/favicon-512x512.png",
+      "src": "/favicon/favicon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

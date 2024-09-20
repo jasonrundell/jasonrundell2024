@@ -43,7 +43,7 @@ export default function Index({
   `
 
   const StyledDiv = styled.div`
-    padding-top: ${tokens['--size-section']};
+    padding-top: ${tokens['--size-small']};
   `
 
   return (
@@ -128,25 +128,28 @@ export default function Index({
           </StyledDiv>
         </Container>
 
-        <StyledDivBgDark id="latest-post">
+        <StyledDivBgDark id="blog">
           <Section>
             <Container>
-              <Spacer sizeLarge="largest" />
               <Row>
                 <Heading level={2} label="My latest blog post" />
               </Row>
-              <Spacer sizeLarge="largest" />
               {heroPost && (
-                <HeroPost
-                  title={heroPost.title}
-                  coverImage={heroPost.coverImage}
-                  date={heroPost.date}
-                  author={heroPost.author}
-                  slug={heroPost.slug}
-                  excerpt={heroPost.excerpt}
-                />
+                <Row>
+                  <HeroPost
+                    title={heroPost.title}
+                    coverImage={heroPost.coverImage}
+                    date={heroPost.date}
+                    author={heroPost.author}
+                    slug={heroPost.slug}
+                    excerpt={heroPost.excerpt}
+                  />
+                </Row>
               )}
-              <Spacer sizeLarge="largest" />
+              <Row>
+                <Heading level={2} label="Blog" />
+              </Row>
+              {posts.length > 0 && <MorePosts items={posts} />}
             </Container>
           </Section>
         </StyledDivBgDark>
@@ -195,20 +198,6 @@ export default function Index({
             </Container>
           </Section>
         </StyledDiv>
-
-        <StyledDivBgDark id="blog">
-          <Section>
-            <Container>
-              <Spacer sizeLarge="largest" />
-              <Row>
-                <Heading level={2} label="Blog" />
-              </Row>
-              <Spacer sizeLarge="largest" />
-              {posts.length > 0 && <MorePosts items={posts} />}
-              <Spacer sizeLarge="largest" />
-            </Container>
-          </Section>
-        </StyledDivBgDark>
       </Layout>
     </>
   )
