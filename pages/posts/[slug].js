@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import Link from 'next/link'
 import ErrorPage from 'next/error'
 import { Spacer, Footer } from '@jasonrundell/dropship'
 import Container from '../../components/container'
@@ -32,6 +33,9 @@ export default function Post({ post, posts, preview }) {
                 <meta property="og:image" content={post.coverImage.url} />
               </Head>
               <Spacer sizeLarge="largest" />
+              <Link href={`/`}>Home</Link> &gt;{' '}
+              <Link href={`/#blog`}>Blog</Link> &gt; {post.title}
+              <Spacer sizeLarge="largest" />
               <header>
                 <PostHeader
                   title={post.title}
@@ -43,9 +47,13 @@ export default function Post({ post, posts, preview }) {
               <PostBody content={post.content} />
             </article>
             <SectionSeparator />
-            <Footer>
-              {posts && morePosts.length > 0 && <MorePosts items={posts} />}
-            </Footer>
+
+            {posts && morePosts.length > 0 && (
+              <Footer>
+                <MorePosts items={posts} />
+              </Footer>
+            )}
+
             <Spacer sizeLarge="largest" />
           </>
         )}

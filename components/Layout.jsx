@@ -17,31 +17,37 @@ export default function Layout({ children }) {
     menu: {
       items: [
         {
+          id: 'home',
           label: 'Home',
           type: 'main',
           url: '/#home',
         },
         {
+          id: 'blog',
           label: 'Blog',
           type: 'main',
           url: '/#blog',
         },
         {
+          id: 'skills',
           label: 'Skills',
           type: 'main',
           url: '/#skills',
         },
         {
+          id: 'experience',
           label: 'Experience',
           type: 'main',
           url: '/#experience',
         },
         {
+          id: 'references',
           label: 'References',
           type: 'main',
           url: '/#references',
         },
         {
+          id: 'contact',
           label: 'Contact',
           type: 'main',
           url: '/#contact',

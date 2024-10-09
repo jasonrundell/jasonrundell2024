@@ -32,7 +32,7 @@ export default function Index({
   allPositions,
 }) {
   const heroPost = allPosts[0]
-  const posts = allPosts.slice(1)
+  const posts = allPosts.slice(0)
   const skills = allSkills
   const references = allReferences
   const positions = allPositions
@@ -43,7 +43,7 @@ export default function Index({
   `
 
   const StyledDiv = styled.div`
-    padding-top: ${tokens['--size-small']};
+    padding-top: ${tokens['--size-section']};
   `
 
   return (
@@ -67,12 +67,11 @@ export default function Index({
               </Row>
               <Row>
                 <Paragraph>
-                  I&apos;m an experienced developer who loves learning and using
-                  the latest in front end web development, but I also have a
-                  wealth of experience and love for back end, dev ops, database
-                  design, component driven design, design systems, and aligning
-                  developer career growth with business goals as a manager or
-                  tech lead.
+                  Hey! I&apos;m an experienced developer who loves learning and
+                  using the latest in front end web development, but I also have
+                  a wealth of experience and love for back end, dev ops,
+                  database design, component driven design, design systems, and
+                  leading with empathy as a manager or tech lead.
                 </Paragraph>
                 <Paragraph>
                   My technical skill set includes experience with:
@@ -131,7 +130,7 @@ export default function Index({
         <StyledDivBgDark id="blog">
           <Section>
             <Container>
-              <Row>
+              {/* <Row>
                 <Heading level={2} label="My latest blog post" />
               </Row>
               {heroPost && (
@@ -145,7 +144,7 @@ export default function Index({
                     excerpt={heroPost.excerpt}
                   />
                 </Row>
-              )}
+              )} */}
               <Row>
                 <Heading level={2} label="Blog" />
               </Row>
@@ -157,7 +156,6 @@ export default function Index({
         <StyledDiv id="skills">
           <Section>
             <Container>
-              <Spacer sizeLarge="largest" />
               <Row>
                 <Heading level={2} label="Tools and technologies" />
               </Row>

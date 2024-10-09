@@ -14,8 +14,8 @@ export default function Author({ name, picture, date }) {
         />
       </div>
       <div>
-        <div className="text-xl font-bold">{name}</div>
-        <DateComponent dateString={date} />
+        <div className="text-xl font-bold">By: {name}</div>
+        Published: <DateComponent dateString={date} />
       </div>
     </Row>
   )
