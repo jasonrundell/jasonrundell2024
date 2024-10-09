@@ -57,11 +57,15 @@ export default function Index({
             <Section>
               <Spacer sizeLarge="largest" />
               <Row>
-                <Heading label="Jason Rundell" classNames="font-bold" />
+                <Heading
+                  level={2}
+                  label="Jason Rundell"
+                  classNames="font-bold"
+                />
               </Row>
               <Row>
                 <Heading
-                  level={2}
+                  level={3}
                   label="Full Stack Web Developer &amp; Manager"
                 />
               </Row>
