@@ -44,7 +44,7 @@ h3 {
   color: var(--secondary-color);
 }
 
-.rmm__topbar {
+#rmm__topbar {
   background-color: var(--background-color-3);
   color: var(--text-color);
 }
