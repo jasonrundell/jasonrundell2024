@@ -20,31 +20,13 @@ export default function Layout({ children }) {
           id: 'home',
           label: 'Home',
           type: 'main',
-          url: '/#home',
+          url: '/',
         },
         {
           id: 'blog',
           label: 'Blog',
           type: 'main',
           url: '/#blog',
-        },
-        {
-          id: 'skills',
-          label: 'Skills',
-          type: 'main',
-          url: '/#skills',
-        },
-        {
-          id: 'experience',
-          label: 'Experience',
-          type: 'main',
-          url: '/#experience',
-        },
-        {
-          id: 'references',
-          label: 'References',
-          type: 'main',
-          url: '/#references',
         },
         {
           id: 'contact',

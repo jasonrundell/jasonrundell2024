@@ -8,7 +8,7 @@ import { tokens } from '../data/tokens'
 const Skills = ({ items }) => {
   let categories = []
 
-  // build array of categories
+  // Build array of categories
   items.forEach((category) => {
     categories.push(category.category)
   })
@@ -27,7 +27,8 @@ const Skills = ({ items }) => {
 
   const StyledList = styled.ul`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin-top: 0;
     margin-bottom: ${tokens['--size-normal']};
     list-style: none;
@@ -35,14 +36,12 @@ const Skills = ({ items }) => {
   `
 
   const StyledListItem = styled.li`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin-bottom: ${tokens['--size-smallest']};
+    display: inline;
+    margin-right: ${tokens['--size-small']};
+    margin-left: 0;
   `
 
   const StyledItemText = styled.span`
-    flex: 1;
     font-size: ${tokens['--size-small']};
   `
 
@@ -52,7 +51,7 @@ const Skills = ({ items }) => {
         <Grid
           columnCount={1}
           mediumColumnCount={2}
-          largeColumnCount={3}
+          largeColumnCount={2}
           breakInside="avoid"
         >
           {uniqueCategories.map((parentCategory, index) => {
@@ -60,21 +59,13 @@ const Skills = ({ items }) => {
               <StyledListContainer key={index}>
                 <Heading level={3} label={parentCategory} />
                 <StyledList>
-                  {items.map((item) => {
-                    const { id, name, category } = item
-
-                    if (parentCategory === category) {
-                      return (
-                        <StyledListItem key={id}>
-                          <Box isTight>
-                            <StyledItemText>{name}</StyledItemText>
-                          </Box>
-                        </StyledListItem>
-                      )
-                    } else {
-                      return null
-                    }
-                  })}
+                  {items
+                    .filter((item) => item.category === parentCategory)
+                    .map((item) => (
+                      <StyledListItem key={item.id}>
+                        <StyledItemText>{item.name}</StyledItemText>
+                      </StyledListItem>
+                    ))}
                 </StyledList>
               </StyledListContainer>
             )

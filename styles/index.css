@@ -4,6 +4,13 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
+/* @font-face {
+  font-family: 'VCR OSD Mono';
+  src: url('/VCR_OSD_MONO_1.001.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
 /* Variable for font color */
 /* Variables for background colors #232f3e, #11161d, and #000 */
 :root {
@@ -21,14 +28,16 @@
 
 html,
 body {
+  /* font-family: 'Outfit', Helvetica, Tahoma, Geneva, sans-serif !important; */
   font-family: 'Outfit', Helvetica, Tahoma, Geneva, sans-serif !important;
   background-color: var(--background-color);
   color: var(--text-color);
   margin-top: 4rem;
 }
 
-p {
-  margin: var(--size-small) 0 var(--size-small) 0;
+p,
+ul {
+  margin: 0 0 var(--size-small) 0;
 }
 
 a {

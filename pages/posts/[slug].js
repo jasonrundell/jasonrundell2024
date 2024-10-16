@@ -2,8 +2,8 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
+import styled from '@emotion/styled'
 import { Spacer, Footer } from '@jasonrundell/dropship'
-import Container from '../../components/container'
 import PostBody from '../../components/post-body'
 import MorePosts from '../../components/more-posts'
 import PostHeader from '../../components/post-header'
@@ -12,6 +12,7 @@ import Layout from '../../components/Layout'
 import { getAllPostsWithSlug, getPostAndMorePosts } from '../../lib/api/posts'
 import PostTitle from '../../components/post-title'
 import { CMS_NAME } from '../../lib/constants'
+import { tokens } from '../../data/tokens'
 
 export default function Post({ post, posts, preview }) {
   const router = useRouter()
@@ -20,9 +21,14 @@ export default function Post({ post, posts, preview }) {
     return <ErrorPage statusCode={404} />
   }
 
+  const StyledDiv = styled.div`
+    padding-left: ${tokens['--size-section']};
+    padding-right: ${tokens['--size-section']};
+  `
+
   return (
     <Layout preview={preview}>
-      <Container>
+      <StyledDiv>
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
@@ -57,7 +63,7 @@ export default function Post({ post, posts, preview }) {
             <Spacer sizeLarge="largest" />
           </>
         )}
-      </Container>
+      </StyledDiv>
     </Layout>
   )
 }

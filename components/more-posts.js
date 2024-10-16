@@ -4,7 +4,7 @@ import PostPreview from '../components/post-preview'
 export default function MorePosts({ items }) {
   return (
     <Section id="more-posts">
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 md:gap-x-16">
         {items.map((post) => (
           <PostPreview
             key={post.slug}

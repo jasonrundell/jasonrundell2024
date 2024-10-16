@@ -28,39 +28,35 @@ const Footer = () => {
       <Container>
         <div className="py-20 flex flex-col items-center">
           <Heading level={3} label="Let's Connect" classNames="font-bold" />
-          <Row>
-            <ul>
-              <li>
-                <Link href="mailto:contact@jasonrundell.com">
-                  contact@jasonrundell.com
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://github.com/jasonrundell"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  GitHub
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://www.linkedin.com/in/jasonrundell/"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  LinkedIn
-                </Link>
-              </li>
-            </ul>
-          </Row>
-          <Row>
-            <Paragraph>
-              Sneak peak at interactive characters I&apos;m trying to integrate
-              into my site to add some fun and creativity!
-            </Paragraph>
-          </Row>
+          <ul>
+            <li>
+              <Link href="mailto:contact@jasonrundell.com">
+                contact@jasonrundell.com
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="https://github.com/jasonrundell"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                GitHub
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="https://www.linkedin.com/in/jasonrundell/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                LinkedIn
+              </Link>
+            </li>
+          </ul>
+          {/* <Paragraph>
+            Sneak peak at interactive characters I&apos;m trying to integrate
+            into my site to add some fun and creativity!
+          </Paragraph> */}
           {/* {randomCharacter && (
             <Row>
               <Character character={randomCharacter} />

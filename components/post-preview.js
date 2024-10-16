@@ -27,7 +27,6 @@ export default function PostPreview({
       <Row>
         <Paragraph>{excerpt}</Paragraph>
       </Row>
-      <hr />
     </div>
   )
 }
