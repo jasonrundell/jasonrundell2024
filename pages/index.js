@@ -13,7 +13,7 @@ import styled from '@emotion/styled'
 import MorePosts from '../components/more-posts'
 // import HeroPost from '../components/hero-post'
 import Layout from '../components/Layout'
-import Positions from '../components/Positions'
+// import Positions from '../components/Positions'
 import References from '../components/References'
 import Skills from '../components/Skills'
 import { getAllPostsForHome } from '../lib/api/posts'
@@ -23,18 +23,12 @@ import { getAllPositionsForHome } from '../lib/api/positions'
 import { SITE_NAME } from '../lib/constants'
 import { tokens } from '../data/tokens'
 
-export default function Index({
-  preview,
-  allPosts,
-  allSkills,
-  allReferences,
-  allPositions,
-}) {
+export default function Index({ preview, allPosts, allSkills, allReferences }) {
   // const heroPost = allPosts[0]
   const posts = allPosts.slice(0)
   const skills = allSkills
   const references = allReferences
-  const positions = allPositions
+  // const positions = allPositions
 
   const StyledDiv = styled.div`
     padding-left: ${tokens['--size-section']};

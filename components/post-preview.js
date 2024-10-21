@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Spacer, Paragraph, Row } from '@jasonrundell/dropship'
+
 import DateComponent from '../components/date'
 import CoverImage from './cover-image'
 
@@ -21,7 +22,6 @@ export default function PostPreview({
       </Row>
       <Spacer sizeLarge="largest" />
       <Row>
-        Published:&nbsp;
         <DateComponent dateString={date} />
       </Row>
       <Row>

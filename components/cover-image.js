@@ -12,7 +12,7 @@ export default function CoverImage({ title, url, slug }) {
   )
 
   return (
-    <div style={{ position: 'relative', height: '400px' }}>
+    <div>
       {slug ? (
         <Link href={`/posts/${slug}`} aria-label={title}>
           {image}

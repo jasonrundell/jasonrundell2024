@@ -39,6 +39,12 @@ const Skills = ({ items }) => {
     display: inline;
     margin-right: ${tokens['--size-small']};
     margin-left: 0;
+    border-radius: 9999px;
+    color: ${tokens['--background-color']};
+    background-color: ${tokens['--primary-color']};
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin: 0.5rem ${tokens['--size-smallest']};
   `
 
   const StyledItemText = styled.span`
