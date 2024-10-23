@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
-import { Blockquote, Paragraph, Strong, Button } from '@jasonrundell/dropship'
+import { Blockquote, Paragraph, Strong } from '@jasonrundell/dropship'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styled from '@emotion/styled'
@@ -15,70 +14,51 @@ const options = {
   },
 }
 
-const StyledCarouselContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: left;
-`
-
-const StyledReference = styled.div`
-  margin-bottom: ${tokens['--size-xlarge']};
-  padding-left: ${tokens['--size-xlarge']};
-  padding-right: ${tokens['--size-xlarge']};
-`
-
-const StyledCite = styled.cite`
-  color: ${tokens['--primary-color']};
-`
-
-const NavigationContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: ${tokens['--size-normal']};
-  margin-left: ${tokens['--size-normal']};
-  margin-right: ${tokens['--size-normal']};
-`
-
 const References = ({ references }) => {
-  const [currentReferenceIndex, setCurrentReferenceIndex] = useState(0)
+  const StyledReference = styled.div`
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  `
 
-  const handleNext = () => {
-    setCurrentReferenceIndex((prevIndex) =>
-      prevIndex === references.length - 1 ? 0 : prevIndex + 1
-    )
-  }
+  const StyledReferenceEmphasis = styled.div`
+    font-size: 1.5rem;
 
-  const handlePrev = () => {
-    setCurrentReferenceIndex((prevIndex) =>
-      prevIndex === 0 ? references.length - 1 : prevIndex - 1
-    )
-  }
+    @media (min-width: 768px) {
+      font-size: 2rem;
+    }
+  `
 
-  const currentReference = references[currentReferenceIndex]
-  const { citeName, company, quote } = currentReference || {}
-
-  // Additional defensive checks for quote and its structure
-  const renderQuote =
-    quote && quote.json
-      ? documentToReactComponents(quote.json, options) // Make sure you access quote.json directly
-      : 'No quote available.'
+  const StyledCite = styled.cite`
+    color: ${tokens['--secondary-color']};
+  `
 
   return (
-    <StyledCarouselContainer>
-      <StyledReference>
-        <Blockquote>{renderQuote}</Blockquote>
-        <StyledCite>
-          - {citeName || 'Unknown'} ({company || 'Unknown'})
-        </StyledCite>
-      </StyledReference>
+    references.length > 0 &&
+    references.map((reference, index) => {
+      const { citeName, company, quote, emphasis } = reference || {}
 
-      <NavigationContainer>
-        <Button onClick={handlePrev} label="Previous" />
-        <Button onClick={handleNext} label="Next" />
-      </NavigationContainer>
-    </StyledCarouselContainer>
+      // Additional defensive checks for quote and its structure
+      const renderQuote =
+        quote && quote.json
+          ? documentToReactComponents(quote.json, options) // Make sure you access quote.json directly
+          : 'No quote available.'
+      return (
+        <StyledReference key={index}>
+          {emphasis ? (
+            <StyledReferenceEmphasis>
+              <Blockquote>{renderQuote}</Blockquote>
+            </StyledReferenceEmphasis>
+          ) : (
+            <Blockquote>{renderQuote}</Blockquote>
+          )}
+          <StyledCite>
+            - {citeName || 'Unknown'} ({company || 'Unknown'})
+          </StyledCite>
+        </StyledReference>
+      )
+    })
   )
 }
 
@@ -91,6 +71,8 @@ References.propTypes = {
       }).isRequired,
       citeName: PropTypes.string.isRequired,
       company: PropTypes.string.isRequired,
+      order: PropTypes.number,
+      emphasis: PropTypes.bool,
     })
   ).isRequired,
 }

@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 
 const backToTopStyle = css`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 2rem;
+  right: 2rem;
   background-color: #e9be62;
   color: #000;
   padding: 10px 20px;
@@ -50,7 +50,7 @@ const BackToTop = () => {
       `}
       onClick={scrollToTop}
     >
-      Beam me up, Scotty!
+      Back to top
     </div>
   )
 }

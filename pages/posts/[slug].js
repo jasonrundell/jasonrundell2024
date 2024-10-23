@@ -38,10 +38,10 @@ export default function Post({ post, posts, preview }) {
                 <title>{`${post.title} | Next.js Blog Example with ${CMS_NAME}`}</title>
                 <meta property="og:image" content={post.coverImage.url} />
               </Head>
-              <Spacer sizeLarge="largest" />
+              <Spacer />
               <Link href={`/`}>Home</Link> &gt;{' '}
               <Link href={`/#blog`}>Blog</Link> &gt; {post.title}
-              <Spacer sizeLarge="largest" />
+              <Spacer />
               <header>
                 <PostHeader
                   title={post.title}
@@ -60,7 +60,7 @@ export default function Post({ post, posts, preview }) {
               </Footer>
             )}
 
-            <Spacer sizeLarge="largest" />
+            <Spacer />
           </>
         )}
       </StyledDiv>

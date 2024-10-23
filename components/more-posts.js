@@ -1,10 +1,17 @@
-import { Section } from '@jasonrundell/dropship'
+import { Section, Grid } from '@jasonrundell/dropship'
 import PostPreview from '../components/post-preview'
 
 export default function MorePosts({ items }) {
   return (
     <Section id="more-posts">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:gap-x-16">
+      <Grid
+        gridTemplateColumns="1fr"
+        mediumTemplateColumns="1fr 1fr"
+        largeTemplateColumns="1fr 1fr 1fr"
+        columnGap="2rem"
+        rowGap="2rem"
+        id="grid"
+      >
         {items.map((post) => (
           <PostPreview
             key={post.slug}
@@ -16,7 +23,7 @@ export default function MorePosts({ items }) {
             excerpt={post.excerpt}
           />
         ))}
-      </div>
+      </Grid>
     </Section>
   )
 }

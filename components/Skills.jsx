@@ -23,6 +23,7 @@ const Skills = ({ items }) => {
     margin-bottom: ${tokens['--size-normal']};
     list-style: none;
     padding-left: 0;
+    width: 100%;
   `
 
   const StyledList = styled.ul`
@@ -30,7 +31,6 @@ const Skills = ({ items }) => {
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 0;
-    margin-bottom: ${tokens['--size-normal']};
     list-style: none;
     padding-left: 0;
   `
@@ -39,12 +39,8 @@ const Skills = ({ items }) => {
     display: inline;
     margin-right: ${tokens['--size-small']};
     margin-left: 0;
-    border-radius: 9999px;
-    color: ${tokens['--background-color']};
-    background-color: ${tokens['--primary-color']};
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    margin: 0.5rem ${tokens['--size-smallest']};
+    color: ${tokens['--text-color']};
+    margin: 0 ${tokens['--size-small']} 0 0;
   `
 
   const StyledItemText = styled.span`
@@ -52,33 +48,24 @@ const Skills = ({ items }) => {
   `
 
   return (
-    <>
-      <Row>
-        <Grid
-          columnCount={1}
-          mediumColumnCount={2}
-          largeColumnCount={2}
-          breakInside="avoid"
-        >
-          {uniqueCategories.map((parentCategory, index) => {
-            return (
-              <StyledListContainer key={index}>
-                <Heading level={3} label={parentCategory} />
-                <StyledList>
-                  {items
-                    .filter((item) => item.category === parentCategory)
-                    .map((item) => (
-                      <StyledListItem key={item.id}>
-                        <StyledItemText>{item.name}</StyledItemText>
-                      </StyledListItem>
-                    ))}
-                </StyledList>
-              </StyledListContainer>
-            )
-          })}
-        </Grid>
-      </Row>
-    </>
+    <Row>
+      {uniqueCategories.map((parentCategory, index) => {
+        return (
+          <StyledListContainer key={index}>
+            <h4>{parentCategory}</h4>
+            <StyledList>
+              {items
+                .filter((item) => item.category === parentCategory)
+                .map((item) => (
+                  <StyledListItem key={item.id}>
+                    <StyledItemText>{item.name}</StyledItemText>
+                  </StyledListItem>
+                ))}
+            </StyledList>
+          </StyledListContainer>
+        )
+      })}
+    </Row>
   )
 }
 
