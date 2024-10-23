@@ -108,9 +108,9 @@ export default function Index({
             </Row>
           </StyledSection>
           <Grid
-            columnCount={1}
-            mediumColumnCount={2}
-            largeColumnCount={2}
+            gridTemplateColumns="1fr"
+            mediumTemplateColumns="1fr 1fr"
+            largeTemplateColumns="1fr 1fr"
             breakInside="avoid"
           >
             <StyledSection id="skills">
