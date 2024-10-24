@@ -17,11 +17,6 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
     background-color: ${tokens['--background-color-3']};
     align-items: center;
   `
-  console.log('title', title)
-  if (image && !image.file) {
-    console.log('image missing', title)
-    return true
-  }
 
   return (
     <div>
