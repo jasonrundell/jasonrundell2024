@@ -1,25 +1,42 @@
-import { Heading, Section, Row, Box } from '@jasonrundell/dropship'
+import styled from '@emotion/styled'
+import { Heading, Row, Spacer } from '@jasonrundell/dropship'
 import Author from '../components/author'
-import CoverImage from '../components/cover-image'
+import PostImage from '../components/post-image'
+import { tokens } from '../data/tokens'
 
-export default function PostHeader({ title, coverImage, date, author }) {
-  console.log('date', date)
+export default function PostHeader({ title, featuredImage, date, author }) {
+  const HeadingOne = styled.h1`
+    font-size: ${tokens['--size-xlarge']};
+    font-weight: 700;
+    color: ${tokens['--secondary-color']};
+    line-height: ${tokens['--size-xlarge']};
+    margin-top: 0;
+    margin-bottom: ${tokens['--size-xlarge']};
+  `
+
   return (
-    <Section>
-      <Heading level={1} label={title} classNames="font-bold" />
+    <header>
+      <HeadingOne>{title}</HeadingOne>
       {author && (
-        <Box>
+        <>
           <Author name={author.name} picture={author.picture} date={date} />
-        </Box>
+          <Spacer />
+        </>
       )}
-      <Row>
-        <CoverImage title={title} url={coverImage.url} />
-        {coverImage.description && (
-          <Row classNames="text-center mt-2 text-gray-500 italic">
-            {coverImage.description}
-          </Row>
-        )}
-      </Row>
-    </Section>
+      {featuredImage && featuredImage.file && (
+        <Row>
+          <PostImage
+            title={title}
+            url={featuredImage.file.url}
+            altText={featuredImage.altText}
+          />
+          {featuredImage.description && (
+            <Row classNames="text-center mt-2 text-gray-500 italic">
+              {featuredImage.description}
+            </Row>
+          )}
+        </Row>
+      )}
+    </header>
   )
 }

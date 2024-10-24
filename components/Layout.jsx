@@ -27,31 +27,24 @@ export default function Layout({ children }) {
       <Meta />
       <div id="menu">
         <div id="rmm__menu" role="navigation">
-          <Image
-            id="topbar"
-            src="/top-bar-icon.png"
-            alt="Placeholder Logo"
-            width={32}
-            height={32}
-          />
-          <h1 id="rmm__title">Jason Rundell</h1>
+          <Link role="menuitem" href="/">
+            <Image
+              id="topbar"
+              src="/top-bar-icon.png"
+              alt="Placeholder Logo"
+              width={32}
+              height={32}
+            />
+          </Link>
+          <h1 id="rmm__title">
+            <Link role="menuitem" href="/" className="decoration--none">
+              Jason Rundell
+            </Link>
+          </h1>
           <nav id="rmm__nav" aria-label="Main Navigation" role="navigation">
-            <ul
-              id="rmm__main"
-              role="menubar"
-              aria-label="Main Menu"
-              className="rmm__nav-list"
-            >
-              <li
-                id="rmm-main-nav-item-blog"
-                role="none"
-                className="rmm__main-nav-item"
-              >
-                <Link
-                  role="menuitem"
-                  href="/#blog"
-                  className="rmm__main-nav-item-link"
-                >
+            <ul id="rmm__main" role="menubar" aria-label="Main Menu">
+              <li id="rmm-main-nav-item-blog" role="none">
+                <Link role="menuitem" href="/#blog">
                   Blog
                 </Link>
               </li>

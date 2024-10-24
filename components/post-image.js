@@ -2,24 +2,28 @@ import ContentfulImage from './contentful-image'
 import Link from 'next/link'
 import styled from '@emotion/styled'
 
-export default function CoverImage({ title, url, slug }) {
+export default function PostImage({ title, url, slug, altText }) {
   const StyledContainer = styled.div`
     position: relative;
-    height: 200px;
+    // 4:3 ratio
     width: 300px;
+    height: 225px;
 
     @media (min-width: 768px) {
-      width: 300px;
+      // 4:3 ratio
+      width: 500px;
+      height: 375px;
     }
   `
+
   const image = (
     <StyledContainer>
       <ContentfulImage
-        alt={`Cover Image for ${title}`}
+        alt={altText}
         src={url}
         fill={true}
         style={{ objectFit: 'cover' }}
-        sizes="(max-width: 300px) 100vw, 200px"
+        sizes="(max-width: 500px) 100vw, 375px"
       />
     </StyledContainer>
   )

@@ -1,7 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS } from '@contentful/rich-text-types'
+import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { Section, Row } from '@jasonrundell/dropship'
-import markdownStyles from './markdown-styles.module.css'
 import RichTextAsset from './rich-text-asset'
 
 const customMarkdownOptions = (content) => ({
@@ -13,18 +12,21 @@ const customMarkdownOptions = (content) => ({
       />
     ),
   },
+  renderMark: {
+    [MARKS.CODE]: (embedded) => (
+      <div dangerouslySetInnerHTML={{ __html: embedded }} />
+    ),
+  },
 })
 
 export default function PostBody({ content }) {
   return (
     <Section>
       <Row>
-        <div className={markdownStyles['markdown']}>
-          {documentToReactComponents(
-            content.json,
-            customMarkdownOptions(content)
-          )}
-        </div>
+        {documentToReactComponents(
+          content.json,
+          customMarkdownOptions(content)
+        )}
       </Row>
     </Section>
   )

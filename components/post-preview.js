@@ -3,16 +3,10 @@ import { Spacer, Paragraph, Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
 import DateComponent from '../components/date'
-import CoverImage from './cover-image'
+import PreviewImage from './preview-image'
 import { tokens } from '../data/tokens'
 
-export default function PostPreview({
-  title,
-  coverImage,
-  date,
-  excerpt,
-  slug,
-}) {
+export default function PostPreview({ title, image, date, excerpt, slug }) {
   const StyledImage = styled.div`
     position: relative;
     display: flex;
@@ -23,14 +17,21 @@ export default function PostPreview({
     background-color: ${tokens['--background-color-3']};
     align-items: center;
   `
+  console.log('title', title)
+  if (image && !image.file) {
+    console.log('image missing', title)
+    return true
+  }
 
   return (
     <div>
-      <Row className="mb-5">
-        <StyledImage>
-          <CoverImage title={title} slug={slug} url={coverImage.url} />
-        </StyledImage>
-      </Row>
+      {image && image.file && (
+        <Row className="mb-5">
+          <StyledImage>
+            <PreviewImage title={title} slug={slug} url={image.file.url} />
+          </StyledImage>
+        </Row>
+      )}
       <Spacer />
       <Row>
         <Link href={`/posts/${slug}`}>{title}</Link>
