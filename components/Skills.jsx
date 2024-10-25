@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Box, Grid, Heading, Row } from '@jasonrundell/dropship'
+import { Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
 import { onlyUnique } from '../lib/onlyUnique'

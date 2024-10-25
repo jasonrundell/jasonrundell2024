@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Heading, Row, Spacer } from '@jasonrundell/dropship'
+import { Row, Spacer } from '@jasonrundell/dropship'
 import Author from '../components/author'
 import PostImage from '../components/post-image'
 import { tokens } from '../data/tokens'
@@ -23,7 +23,7 @@ export default function PostHeader({ title, featuredImage, date, author }) {
           <Spacer />
         </>
       )}
-      {featuredImage && featuredImage.file && (
+      {featuredImage?.file && (
         <Row>
           <PostImage
             title={title}

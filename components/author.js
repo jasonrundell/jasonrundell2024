@@ -1,4 +1,4 @@
-import { Container, Heading, Section, Row } from '@jasonrundell/dropship'
+import { Row } from '@jasonrundell/dropship'
 import ContentfulImage from './contentful-image'
 import DateComponent from './date'
 

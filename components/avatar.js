@@ -1,4 +1,4 @@
-import { Container, Heading, Section, Row } from '@jasonrundell/dropship'
+import { Row } from '@jasonrundell/dropship'
 import ContentfulImage from './contentful-image'
 
 export default function Avatar({ name, picture }) {

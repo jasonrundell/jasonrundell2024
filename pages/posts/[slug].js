@@ -67,8 +67,8 @@ export default function Post({ post, posts, preview }) {
   return (
     <Layout preview={preview}>
       <Head>
-        <title>{`${post.title} | ${SITE_NAME}`}</title>
-        {post.featuredImage && post.featuredImage.file && (
+        <title>{post ? `${post.title} | ${SITE_NAME}` : SITE_NAME}</title>
+        {post?.featuredImage?.file && (
           <meta property="og:image" content={post.featuredImage.file.url} />
         )}
       </Head>
