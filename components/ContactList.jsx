@@ -37,7 +37,7 @@ const ContactList = () => {
           href="https://github.com/jasonrundell?tab=repositories&q=&type=&language=&sort="
           rel="noopener noreferrer"
           target="_blank"
-          label="Check out my open-source work on GitHub"
+          label="My open-source work on GitHub"
         />
       </StylesListItem>
       <StylesListItem>
