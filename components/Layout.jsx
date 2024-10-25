@@ -25,7 +25,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Meta />
-      <div id="menu">
+      <div id="menu" role="menu">
         <div id="rmm__menu" role="navigation">
           <Link role="menuitem" href="/">
             <Image
