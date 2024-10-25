@@ -64,6 +64,10 @@ export default function Post({ post, posts, preview }) {
     color: ${tokens['--secondary-color']};
   `
 
+  const StyledDivBgDark = styled.div`
+    background-color: ${tokens['--background-color-2']};
+  `
+
   return (
     <Layout preview={preview}>
       <Head>
@@ -95,20 +99,22 @@ export default function Post({ post, posts, preview }) {
                   <PostBody content={post.content} />
                 </StyledBody>
               </article>
-
-              {posts && posts.length > 0 && (
-                <Footer id="more-posts">
-                  <StyledMorePostsHeading>More posts</StyledMorePostsHeading>
-                  <Spacer />
-                  <MorePosts items={posts} />
-                </Footer>
-              )}
-
               <Spacer />
             </>
           )}
         </StyledSection>
       </StyledContainer>
+      {posts && posts.length > 0 && (
+        <StyledDivBgDark>
+          <StyledContainer>
+            <StyledSection id="more-posts">
+              <StyledMorePostsHeading>More posts</StyledMorePostsHeading>
+              <Spacer />
+              <MorePosts items={posts} />
+            </StyledSection>
+          </StyledContainer>
+        </StyledDivBgDark>
+      )}
     </Layout>
   )
 }

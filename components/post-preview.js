@@ -18,6 +18,11 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
     align-items: center;
   `
 
+  const StyledHeading = styled.h4`
+    font-size: ${tokens['--size-large']};
+    line-height: 1.3;
+  `
+
   return (
     <div>
       {image && image.file && (
@@ -29,7 +34,9 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
       )}
       <Spacer />
       <Row>
-        <Link href={`/posts/${slug}`}>{title}</Link>
+        <StyledHeading>
+          <Link href={`/posts/${slug}`}>{title}</Link>
+        </StyledHeading>
       </Row>
       <Spacer />
       <Row>

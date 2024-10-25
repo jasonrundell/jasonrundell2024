@@ -166,3 +166,13 @@ li {
 .decoration--none {
   text-decoration: none;
 }
+
+.youtube-embed {
+  height: 300px;
+}
+
+@media (min-width: 768px) {
+  .youtube-embed {
+    height: 500px;
+  }
+}
