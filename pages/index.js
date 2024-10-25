@@ -115,11 +115,11 @@ export default function Index({
             breakInside="avoid"
           >
             <StyledSection id="skills">
-              <h3>Skills</h3>
+              <h2>Skills</h2>
               <Row>{skills.length > 0 && <Skills items={skills} />}</Row>
             </StyledSection>
             <StyledSection id="experience">
-              <h3>Experience</h3>
+              <h2>Experience</h2>
               <Row>
                 {positions.length > 0 && <Positions positions={positions} />}
               </Row>
@@ -139,7 +139,7 @@ export default function Index({
             </StyledSection>
           </Grid>
           <StyledSection id="recommendations">
-            <h3>Recommendations</h3>
+            <h2>Recommendations</h2>
             <Row>
               {references.length > 0 && <References references={references} />}
             </Row>
@@ -149,7 +149,7 @@ export default function Index({
         <StyledDivBgDark>
           <StyledContainer>
             <StyledSection id="blog">
-              <h3>Blog</h3>
+              <h2>Blog</h2>
               <Row>{posts.length > 0 && <MorePosts items={posts} />}</Row>
             </StyledSection>
           </StyledContainer>

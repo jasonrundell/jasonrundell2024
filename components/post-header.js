@@ -5,7 +5,7 @@ import PostImage from '../components/post-image'
 import { tokens } from '../data/tokens'
 
 export default function PostHeader({ title, featuredImage, date, author }) {
-  const HeadingOne = styled.h1`
+  const Heading = styled.h2`
     font-size: ${tokens['--size-xlarge']};
     font-weight: 700;
     color: ${tokens['--secondary-color']};
@@ -16,7 +16,7 @@ export default function PostHeader({ title, featuredImage, date, author }) {
 
   return (
     <header>
-      <HeadingOne>{title}</HeadingOne>
+      <Heading>{title}</Heading>
       {author && (
         <>
           <Author name={author.name} picture={author.picture} date={date} />

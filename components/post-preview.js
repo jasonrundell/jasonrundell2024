@@ -18,7 +18,7 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
     align-items: center;
   `
 
-  const StyledHeading = styled.h4`
+  const StyledHeading = styled.h3`
     font-size: ${tokens['--size-large']};
     line-height: 1.3;
   `

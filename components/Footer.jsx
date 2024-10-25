@@ -46,7 +46,7 @@ const Footer = () => {
               <Character character={randomCharacter} />
             </Row>
           )} */}
-          <h3>Contact me</h3>
+          <h2>Contact me</h2>
           <Row>
             <ContactList />
           </Row>
