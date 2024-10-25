@@ -111,6 +111,7 @@ export default function Index({
             gridTemplateColumns="1fr"
             mediumTemplateColumns="1fr 1fr"
             largeTemplateColumns="1fr 1fr"
+            columnGap="2rem"
             breakInside="avoid"
           >
             <StyledSection id="skills">

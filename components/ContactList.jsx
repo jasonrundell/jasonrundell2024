@@ -19,10 +19,11 @@ const ContactList = () => {
   return (
     <StyledList>
       <StylesListItem>
-        📧 <Link href="mailto:contact@jaosnrundell.com" label="Email me" />
+        <Icon type="Email" />{' '}
+        <Link href="mailto:contact@jaosnrundell.com" label="Email me" />
       </StylesListItem>
       <StylesListItem>
-        🗓️{' '}
+        <Icon type="Calendar" />{' '}
         <Link
           href="https://calendly.com/jason-rundell/60-minute-meeting"
           rel="noopener noreferrer"
