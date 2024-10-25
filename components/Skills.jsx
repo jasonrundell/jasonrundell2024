@@ -47,12 +47,17 @@ const Skills = ({ items }) => {
     font-size: ${tokens['--size-small']};
   `
 
+  const StyledHeading = styled.h3`
+    font-size: ${tokens['--size-normal']};
+    margin: 0;
+  `
+
   return (
     <Row>
       {uniqueCategories.map((parentCategory, index) => {
         return (
           <StyledListContainer key={index}>
-            <h4>{parentCategory}</h4>
+            <StyledHeading>{parentCategory}</StyledHeading>
             <StyledList>
               {items
                 .filter((item) => item.category === parentCategory)
