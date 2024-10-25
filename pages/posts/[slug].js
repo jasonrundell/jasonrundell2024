@@ -58,11 +58,19 @@ export default function Post({ post, posts, preview }) {
     }
   `
 
+  const StyledMorePostsHeading = styled.h2`
+    font-size: ${tokens['--size-large']};
+    font-weight: 700;
+    color: ${tokens['--secondary-color']};
+  `
+
   return (
     <Layout preview={preview}>
       <Head>
         <title>{`${post.title} | ${SITE_NAME}`}</title>
-        <meta property="og:image" content={post.featuredImage.file.url} />
+        {post.featuredImage && post.featuredImage.file && (
+          <meta property="og:image" content={post.featuredImage.file.url} />
+        )}
       </Head>
       <StyledContainer>
         <StyledSection id="home">
@@ -88,8 +96,10 @@ export default function Post({ post, posts, preview }) {
                 </StyledBody>
               </article>
 
-              {posts && morePosts.length > 0 && (
-                <Footer>
+              {posts && posts.length > 0 && (
+                <Footer id="more-posts">
+                  <StyledMorePostsHeading>More posts</StyledMorePostsHeading>
+                  <Spacer />
                   <MorePosts items={posts} />
                 </Footer>
               )}
@@ -105,12 +115,11 @@ export default function Post({ post, posts, preview }) {
 
 export async function getStaticProps({ params, preview = false }) {
   const data = await getPostAndMorePosts(params.slug, preview)
-
   return {
     props: {
-      preview,
       post: data?.post ?? null,
-      posts: data?.posts ?? null,
+      posts: data?.morePosts ?? null,
+      preview,
     },
   }
 }
