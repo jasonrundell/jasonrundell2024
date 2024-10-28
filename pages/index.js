@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import { Row, Link, Grid } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
+import dynamic from 'next/dynamic'
 
 import { getAllSkillsForHome } from '../lib/api/skills'
 import { getAllReferencesForHome } from '../lib/api/references'
@@ -11,14 +12,15 @@ import { getAllProjectsForHome } from '../lib/api/projects'
 import { SITE_NAME } from '../lib/constants'
 import { tokens } from '../data/tokens'
 
+const Positions = dynamic(() => import('../components/Positions'))
+const References = dynamic(() => import('../components/References'))
+const Skills = dynamic(() => import('../components/Skills'))
+const Icon = dynamic(() => import('../components/Icon'))
+const ContactList = dynamic(() => import('../components/ContactList'))
+const MorePosts = dynamic(() => import('../components/more-posts'))
+const MoreProjects = dynamic(() => import('../components/more-projects'))
+
 import Layout from '../components/Layout'
-import Positions from '../components/Positions'
-import References from '../components/References'
-import Skills from '../components/Skills'
-import Icon from '../components/Icon'
-import ContactList from '../components/ContactList'
-import MorePosts from '../components/more-posts'
-import MoreProjects from '../components/more-projects'
 
 export default function Index({
   preview,
