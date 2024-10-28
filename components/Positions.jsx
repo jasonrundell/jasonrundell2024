@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
-// import { Heading, Grid } from '@jasonrundell/dropship'
 
 import { tokens } from '../data/tokens'
 
@@ -21,10 +20,6 @@ const Positions = ({ positions }) => {
   const StyledCompany = styled.span`
     font-style: normal;
   `
-
-  // const StyledDate = styled.span`
-  //   font-size: ${tokens['--size-small']};
-  // `
 
   const uniquePositions = positions.filter(
     (position, index, self) =>
