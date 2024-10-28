@@ -57,6 +57,8 @@ export default function Index({
   `
 
   const StyledList = styled.ul`
+    margin: 0;
+    padding: 0;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -114,7 +116,7 @@ export default function Index({
             gridTemplateColumns="1fr"
             mediumTemplateColumns="1fr 1fr"
             largeTemplateColumns="1fr 1fr"
-            columnGap="2rem"
+            columnGap="3rem"
             breakInside="avoid"
           >
             <StyledSection id="skills">
