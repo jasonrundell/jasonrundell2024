@@ -65,7 +65,7 @@ export default function Index({
     width: 100%;
   `
 
-  const StylesListItem = styled.li`
+  const StyledListItem = styled.li`
     margin: 0;
   `
 
@@ -130,7 +130,7 @@ export default function Index({
               </Row>
               <Row>
                 <StyledList>
-                  <StylesListItem>
+                  <StyledListItem>
                     <Icon type="LinkedIn" />{' '}
                     <Link
                       href="https://www.linkedin.com/in/jasonrundell/"
@@ -138,7 +138,7 @@ export default function Index({
                       target="_blank"
                       label="See more on LinkedIn"
                     />
-                  </StylesListItem>
+                  </StyledListItem>
                 </StyledList>
               </Row>
             </StyledSection>

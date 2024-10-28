@@ -1,10 +1,15 @@
 import styled from '@emotion/styled'
-import { Row } from '@jasonrundell/dropship'
+import { Row, Spacer } from '@jasonrundell/dropship'
 import Link from 'next/link'
 import PostImage from '../components/post-image'
 import { tokens } from '../data/tokens'
 
-export default function ProjectHeader({ title, featuredImage, link }) {
+export default function ProjectHeader({
+  title,
+  featuredImage,
+  link,
+  technologies,
+}) {
   const Heading = styled.h2`
     font-size: ${tokens['--size-xlarge']};
     font-weight: 700;
@@ -21,6 +26,19 @@ export default function ProjectHeader({ title, featuredImage, link }) {
     width: 100%;
   `
 
+  const StyledList = styled.ul`
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+  `
+
+  const StyledListItem = styled.li`
+    margin: 0;
+    padding: 0 0.5rem 0 0;
+  `
+
   return (
     <header>
       <Heading>{title}</Heading>
@@ -34,6 +52,15 @@ export default function ProjectHeader({ title, featuredImage, link }) {
           </Row>
         </>
       )}
+      <Spacer />
+      <h3>Tech stack</h3>
+      <Row>
+        <StyledList>
+          {technologies.map((tech, index) => (
+            <StyledListItem key={index}>{tech}</StyledListItem>
+          ))}
+        </StyledList>
+      </Row>
       {featuredImage?.file && (
         <Row>
           <PostImage

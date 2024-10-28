@@ -13,17 +13,17 @@ const ContactList = () => {
     width: 100%;
   `
 
-  const StylesListItem = styled.li`
+  const StyledListItem = styled.li`
     margin: 0;
     padding: 0.25rem 0;
   `
   return (
     <StyledList>
-      <StylesListItem>
+      <StyledListItem>
         <Icon type="Email" />{' '}
         <Link href="mailto:contact@jaosnrundell.com" label="Email me" />
-      </StylesListItem>
-      <StylesListItem>
+      </StyledListItem>
+      <StyledListItem>
         <Icon type="Calendar" />{' '}
         <Link
           href="https://calendly.com/jason-rundell/60-minute-meeting"
@@ -31,8 +31,8 @@ const ContactList = () => {
           target="_blank"
           label="Book time with me"
         />
-      </StylesListItem>
-      <StylesListItem>
+      </StyledListItem>
+      <StyledListItem>
         <Icon type="GitHub" />{' '}
         <Link
           href="https://github.com/jasonrundell?tab=repositories&q=&type=&language=&sort="
@@ -40,8 +40,8 @@ const ContactList = () => {
           target="_blank"
           label="My open-source work on GitHub"
         />
-      </StylesListItem>
-      <StylesListItem>
+      </StyledListItem>
+      <StyledListItem>
         <Icon type="LinkedIn" />{' '}
         <Link
           href="https://www.linkedin.com/in/jasonrundell/"
@@ -49,7 +49,7 @@ const ContactList = () => {
           target="_blank"
           label="Connect on LinkedIn"
         />
-      </StylesListItem>
+      </StyledListItem>
     </StyledList>
   )
 }

@@ -57,7 +57,7 @@ export default function Layout({ children }) {
     align-items: center;
   `
 
-  const StylesListItem = styled.li`
+  const StyledListItem = styled.li`
     display: flex;
     flex-flow: row nowrap;
     margin: 0;
@@ -99,7 +99,7 @@ export default function Layout({ children }) {
         <StyledMenu>
           <StyledNav aria-label="Main Navigation" role="navigation">
             <StyledList aria-label="Main Menu" role="menu">
-              <StylesListItem role="presentation">
+              <StyledListItem role="presentation">
                 <Link href="/" role="menuitem">
                   <StyledLogo
                     src="/top-bar-icon.png"
@@ -113,7 +113,7 @@ export default function Layout({ children }) {
                     Jason Rundell
                   </Link>
                 </StyledTitle>
-              </StylesListItem>
+              </StyledListItem>
               <li role="presentation">
                 <Link role="menuitem" href="/#blog">
                   Blog

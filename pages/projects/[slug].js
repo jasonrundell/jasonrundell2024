@@ -93,8 +93,13 @@ export default function Project({ project, projects, preview }) {
                   title={project.title}
                   featuredImage={project.featuredImage}
                   link={project.link}
+                  technologies={project.technology}
                 />
-                <Spacer />
+                <Spacer
+                  smallScreen="large"
+                  mediumScreen="larger"
+                  largeScreen="largest"
+                />
                 <h3>About</h3>
                 <StyledBody className="project-content">
                   <PostBody content={project.description} />
