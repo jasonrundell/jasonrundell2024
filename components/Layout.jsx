@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
 import { Main } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
-import Footer from './Footer'
-import Meta from './Meta'
 import { tokens } from '../data/tokens'
+
+const Footer = dynamic(() => import('./Footer'))
+const Meta = dynamic(() => import('./Meta'))
 
 export default function Layout({ children }) {
   useEffect(() => {
