@@ -1,22 +1,43 @@
-import { Row } from '@jasonrundell/dropship'
+import styled from '@emotion/styled'
 import ContentfulImage from './contentful-image'
 import DateComponent from './date'
 
 export default function Author({ name, picture, date }) {
+  const StyledContainer = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+    justify-items: start;
+    align-items: center;
+  `
+
+  const StyledAuthor = styled.div`
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+  `
+
+  const StyledPublished = styled.div`
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  `
+
   return (
-    <Row className="flex flex-row justify-items-start items-center">
-      <div className="relative w-12 h-12 mr-4">
+    <StyledContainer>
+      <StyledAuthor>
         <ContentfulImage
           src={picture.url}
           fill
           className="rounded-full"
           alt={name}
         />
-      </div>
+      </StyledAuthor>
       <div>
-        <div className="text-xl font-bold">By: {name}</div>
+        <StyledPublished>By: {name}</StyledPublished>
         Published: <DateComponent dateString={date} />
       </div>
-    </Row>
+    </StyledContainer>
   )
 }

@@ -1,9 +1,3 @@
-/* purgecss start ignore */
-@tailwind base;
-@tailwind components;
-/* purgecss end ignore */
-@tailwind utilities;
-
 /* @font-face {
   font-family: 'VCR OSD Mono';
   src: url('/VCR_OSD_MONO_1.001.ttf') format('truetype');
@@ -48,6 +42,7 @@ a {
 
 h1 {
   font-size: var(--size-large);
+  font-weight: 400;
   margin: 0;
   line-height: 1.3;
 }
@@ -56,10 +51,12 @@ h2 {
   font-size: 1.5rem;
   margin: 0 0 var(--size-small) 0;
   color: var(--secondary-color);
+  font-weight: 400;
 }
 
 h3 {
   font-size: 1.5rem;
+  font-weight: 400;
   margin: 0 0 var(--size-small) 0;
   color: var(--primary-color);
 }
@@ -67,6 +64,7 @@ h3 {
 h3,
 h4,
 time {
+  font-weight: 400;
   color: var(--secondary-color);
 }
 
@@ -120,58 +118,20 @@ li {
   --background-color-end: #232f3e;
 }
 
-#rmm__menu {
-  display: flex;
-  flex-direction: row;
-  max-width: 64rem;
-  margin: 0 auto;
-  height: 4rem;
-  align-items: center;
-}
-
-#rmm__topbar {
-  position: relative;
-  display: flex;
-  top: auto;
-  left: auto;
-  height: auto;
-  width: auto;
-}
-
-#topbar {
-  margin-right: var(--size-small);
-  margin-left: var(--size-large);
-}
-
-#rmm__title {
-  text-wrap: nowrap;
-  color: var(--secondary-color);
-  background-color: none;
-}
-
-#rmm__nav {
-  background-color: none;
-  display: flex;
-}
-
-#rmm__main {
-  display: flex;
-  margin: 0 0 0 2rem;
-  list-style: none;
-  flex-direction: row;
-}
-
-.rmm__main-nav-item {
-  padding-left: 0;
-  padding-right: var(--size-normal);
-}
-
 .decoration--none {
   text-decoration: none;
 }
 
 .youtube-embed {
   height: 300px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.font-bold {
+  font-weight: bold;
 }
 
 @media (min-width: 768px) {

@@ -49,6 +49,14 @@ const BackToTop = () => {
         display: ${isVisible ? 'block' : 'none'};
       `}
       onClick={scrollToTop}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          scrollToTop()
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label="Back to top"
     >
       Back to top
     </div>

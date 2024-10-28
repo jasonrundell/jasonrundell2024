@@ -14,6 +14,13 @@ export default function PostHeader({ title, featuredImage, date, author }) {
     margin-bottom: ${tokens['--size-xlarge']};
   `
 
+  const StyledDescription = styled.p`
+    font-size: ${tokens['--size-small']};
+    text-transform: italic;
+    color: ${tokens['--secondary-color']};
+    width: 100%;
+  `
+
   return (
     <header>
       <Heading>{title}</Heading>
@@ -31,9 +38,7 @@ export default function PostHeader({ title, featuredImage, date, author }) {
             altText={featuredImage.altText}
           />
           {featuredImage.description && (
-            <Row classNames="text-center mt-2 text-gray-500 italic">
-              {featuredImage.description}
-            </Row>
+            <StyledDescription>{featuredImage.description}</StyledDescription>
           )}
         </Row>
       )}

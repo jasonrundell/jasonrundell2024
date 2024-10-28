@@ -16,6 +16,7 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
     object-fit: cover;
     background-color: ${tokens['--background-color-3']};
     align-items: center;
+    margin-bottom: ${tokens['--size-normal']};
   `
 
   const StyledHeading = styled.h3`
@@ -26,7 +27,7 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
   return (
     <div>
       {image && image.file && (
-        <Row className="mb-5">
+        <Row>
           <StyledImage>
             <PreviewImage title={title} slug={slug} url={image.file.url} />
           </StyledImage>

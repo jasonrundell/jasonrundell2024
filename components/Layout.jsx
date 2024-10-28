@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { Main } from '@jasonrundell/dropship'
+import styled from '@emotion/styled'
 import Link from 'next/link'
 import Image from 'next/image'
 import Footer from './Footer'
 import Meta from './Meta'
+import { tokens } from '../data/tokens'
 
 export default function Layout({ children }) {
   useEffect(() => {
@@ -22,36 +24,102 @@ export default function Layout({ children }) {
     }
   }, [])
 
+  const StyledMenuContainer = styled.div`
+    @property --background-color-start {
+      syntax: '<color>';
+      initial-value: ${tokens['--background-color']};
+      inherits: false;
+    }
+
+    @property --background-color-end {
+      syntax: '<color>';
+      initial-value: ${tokens['--background-color']};
+      inherits: false;
+    }
+
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: ${tokens['--background-color']};
+    transition: background 1.3s ease, --background-color-start 1.3s ease,
+      --background-color-end 1.3s ease;
+  `
+
+  const StyledMenu = styled.div`
+    display: flex;
+    flex-direction: row;
+    max-width: 64rem;
+    margin: 0 auto;
+    height: 4rem;
+    align-items: center;
+  `
+
+  const StylesListItem = styled.li`
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+  `
+
+  const StyledList = styled.ul`
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex-direction: row;
+    align-items: center;
+  `
+
+  const StyledNav = styled.nav`
+    display: flex;
+  `
+
+  const StyledTitle = styled.h1`
+    text-wrap: nowrap;
+
+    a {
+      color: ${tokens['--secondary-color']};
+    }
+  `
+
+  const StyledLogo = styled(Image)`
+    margin-right: ${tokens['--size-small']};
+  `
+
   return (
     <>
       <Meta />
-      <div id="menu" role="navigation">
-        <div id="rmm__menu" role="menu">
-          <Link role="menuitem" href="/">
-            <Image
-              id="topbar"
-              src="/top-bar-icon.png"
-              alt="Placeholder Logo"
-              width={32}
-              height={32}
-            />
-          </Link>
-          <h1 id="rmm__title">
-            <Link role="menuitem" href="/" className="decoration--none">
-              Jason Rundell
-            </Link>
-          </h1>
-          <nav id="rmm__nav" aria-label="Main Navigation" role="navigation">
-            <ul id="rmm__main" role="menubar" aria-label="Main Menu">
-              <li id="rmm-main-nav-item-blog" role="none">
+      <StyledMenuContainer id="menu">
+        <StyledMenu>
+          <StyledNav aria-label="Main Navigation" role="navigation">
+            <StyledList aria-label="Main Menu" role="menu">
+              <StylesListItem role="presentation">
+                <Link href="/">
+                  <StyledLogo
+                    src="/top-bar-icon.png"
+                    alt="Placeholder Logo"
+                    width={32}
+                    height={32}
+                    role="menuitem"
+                  />
+                </Link>
+                <StyledTitle>
+                  <Link href="/" className="decoration--none" role="menuitem">
+                    Jason Rundell
+                  </Link>
+                </StyledTitle>
+              </StylesListItem>
+              <li role="presentation">
                 <Link role="menuitem" href="/#blog">
                   Blog
                 </Link>
               </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+            </StyledList>
+          </StyledNav>
+        </StyledMenu>
+      </StyledMenuContainer>
       <Main>{children}</Main>
       <Footer />
     </>

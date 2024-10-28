@@ -1,15 +1,7 @@
 {
-  "extends": ["next", "plugin:jsx-a11y/recommended"],
+  "extends": ["next", "plugin:jsx-a11y/strict"],
   "parserOptions": {
     "requireConfigFile": false
   },
-  "plugins": ["jsx-a11y"],
-  "rules": {
-    "@emotion/jsx-import": "off",
-    "@emotion/pkg-renaming": "off",
-    "jsx-a11y/anchor-is-valid": "error",
-    "jsx-a11y/alt-text": "warn",
-    "jsx-a11y/no-autofocus": "warn",
-    "jsx-a11y/no-redundant-roles": "warn"
-  }
+  "plugins": ["jsx-a11y"]
 }

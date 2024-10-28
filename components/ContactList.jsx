@@ -6,6 +6,7 @@ import Icon from './Icon'
 const ContactList = () => {
   const StyledList = styled.ul`
     margin: 0;
+    padding: 0;
     list-style: none;
     display: flex;
     flex-direction: column;

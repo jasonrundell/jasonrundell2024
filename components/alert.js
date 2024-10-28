@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Container from './container'
+import { Container } from '@jasonrundell/dropship'
 import cn from 'classnames'
 import { EXAMPLE_PATH } from '../lib/constants'
 
