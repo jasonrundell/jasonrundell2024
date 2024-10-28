@@ -65,11 +65,15 @@ export default function Layout({ children }) {
 
   const StyledList = styled.ul`
     display: flex;
-    margin: 0;
+    margin: 0 0 0 1rem;
     padding: 0;
     list-style: none;
     flex-direction: row;
     align-items: center;
+
+    @media (min-width: 768px) {
+      margin: 0;
+    }
   `
 
   const StyledNav = styled.nav`

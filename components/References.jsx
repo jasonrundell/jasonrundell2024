@@ -18,8 +18,6 @@ const References = ({ references }) => {
   const StyledReference = styled.div`
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
   `
 
   const StyledReferenceEmphasis = styled.div`
