@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Row, Link, Grid } from '@jasonrundell/dropship'
+import { Row, Link, Grid, Spacer } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 
@@ -157,6 +157,7 @@ export default function Index({
           <StyledContainer>
             <StyledSection id="blog">
               <h2>Blog</h2>
+              <Spacer />
               <Row>{posts.length > 0 && <MorePosts items={posts} />}</Row>
             </StyledSection>
             <StyledSection id="projects">
