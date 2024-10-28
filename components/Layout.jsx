@@ -100,16 +100,15 @@ export default function Layout({ children }) {
           <StyledNav aria-label="Main Navigation" role="navigation">
             <StyledList aria-label="Main Menu" role="menu">
               <StylesListItem role="presentation">
-                <Link href="/">
+                <Link href="/" role="menuitem">
                   <StyledLogo
                     src="/top-bar-icon.png"
                     alt="Placeholder Logo"
                     width={32}
                     height={32}
-                    role="menuitem"
                   />
                 </Link>
-                <StyledTitle>
+                <StyledTitle role="presentation">
                   <Link href="/" className="decoration--none" role="menuitem">
                     Jason Rundell
                   </Link>
