@@ -3,33 +3,36 @@ import Head from 'next/head'
 import { Row, Link, Grid } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
-import MorePosts from '../components/more-posts'
-// import HeroPost from '../components/hero-post'
+import { getAllSkillsForHome } from '../lib/api/skills'
+import { getAllReferencesForHome } from '../lib/api/references'
+import { getAllPositionsForHome } from '../lib/api/positions'
+import { getAllPostsForHome } from '../lib/api/posts'
+import { getAllProjectsForHome } from '../lib/api/projects'
+import { SITE_NAME } from '../lib/constants'
+import { tokens } from '../data/tokens'
+
 import Layout from '../components/Layout'
 import Positions from '../components/Positions'
 import References from '../components/References'
 import Skills from '../components/Skills'
 import Icon from '../components/Icon'
 import ContactList from '../components/ContactList'
-import { getAllPostsForHome } from '../lib/api/posts'
-import { getAllSkillsForHome } from '../lib/api/skills'
-import { getAllReferencesForHome } from '../lib/api/references'
-import { getAllPositionsForHome } from '../lib/api/positions'
-import { SITE_NAME } from '../lib/constants'
-import { tokens } from '../data/tokens'
+import MorePosts from '../components/more-posts'
+import MoreProjects from '../components/more-projects'
 
 export default function Index({
   preview,
-  allPosts,
   allSkills,
   allReferences,
   allPositions,
+  allPosts,
+  allProjects,
 }) {
-  // const heroPost = allPosts[0]
-  const posts = allPosts.slice(0)
   const skills = allSkills
   const references = allReferences
   const positions = allPositions
+  const posts = allPosts.slice(0)
+  const projects = allProjects.slice(0)
 
   const StyledDivBgDark = styled.div`
     background-color: ${tokens['--background-color-2']};
@@ -152,6 +155,12 @@ export default function Index({
               <h2>Blog</h2>
               <Row>{posts.length > 0 && <MorePosts items={posts} />}</Row>
             </StyledSection>
+            <StyledSection id="projects">
+              <h2>Projects</h2>
+              <Row>
+                {projects.length > 0 && <MoreProjects items={projects} />}
+              </Row>
+            </StyledSection>
           </StyledContainer>
         </StyledDivBgDark>
       </Layout>
@@ -160,11 +169,19 @@ export default function Index({
 }
 
 export async function getStaticProps({ preview = false }) {
-  const allPosts = (await getAllPostsForHome(preview)) ?? []
   const allSkills = (await getAllSkillsForHome(preview)) ?? []
   const allReferences = (await getAllReferencesForHome(preview)) ?? []
   const allPositions = (await getAllPositionsForHome(preview)) ?? []
+  const allPosts = (await getAllPostsForHome(preview)) ?? []
+  const allProjects = (await getAllProjectsForHome(preview)) ?? []
   return {
-    props: { preview, allPosts, allSkills, allReferences, allPositions },
+    props: {
+      preview,
+      allSkills,
+      allReferences,
+      allPositions,
+      allPosts,
+      allProjects,
+    },
   }
 }

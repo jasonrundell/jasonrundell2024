@@ -1,9 +1,9 @@
 import { Section, Grid } from '@jasonrundell/dropship'
-import PostPreview from '../components/post-preview'
+import ProjectPreview from '../components/project-preview'
 
-export default function MorePosts({ items }) {
+export default function MoreProjects({ items }) {
   return (
-    <Section id="more-projects">
+    <Section id="more-posts">
       <Grid
         gridTemplateColumns="1fr"
         mediumTemplateColumns="1fr 1fr"
@@ -12,13 +12,12 @@ export default function MorePosts({ items }) {
         rowGap="2rem"
       >
         {items.map((post) => (
-          <PostPreview
+          <ProjectPreview
             key={post.slug}
             title={post.title}
             image={post.featuredImage}
-            date={post.date}
-            excerpt={post.excerpt}
             slug={post.slug}
+            excerpt={post.excerpt}
           />
         ))}
       </Grid>

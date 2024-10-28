@@ -2,7 +2,7 @@ import ContentfulImage from './contentful-image'
 import Link from 'next/link'
 import styled from '@emotion/styled'
 
-export default function PreviewImage({ title, url, slug, altText }) {
+export default function ProjectPreviewImage({ title, url, slug, altText }) {
   const StyledContainer = styled.div`
     position: relative;
     // 4:3 ratio
@@ -24,7 +24,7 @@ export default function PreviewImage({ title, url, slug, altText }) {
   return (
     <>
       {slug ? (
-        <Link href={`/posts/${slug}`} aria-label={title}>
+        <Link href={`/project/${slug}`} aria-label={title}>
           {image}
         </Link>
       ) : (

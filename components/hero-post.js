@@ -3,12 +3,18 @@ import { Container, Section, Row, Paragraph } from '@jasonrundell/dropship'
 import DateComponent from '../components/date'
 import PreviewImage from '../components/preview-image'
 
-export default function HeroPost({ title, coverImage, date, excerpt, slug }) {
+export default function HeroPost({
+  title,
+  featuredImage,
+  date,
+  excerpt,
+  slug,
+}) {
   return (
     <Container>
       <Section id="hero-post">
         <div className="mb-8 md:mb-16">
-          <PreviewImage title={title} slug={slug} url={coverImage.url} />
+          <PreviewImage title={title} slug={slug} url={featuredImage.url} />
         </div>
         <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
           <Row>

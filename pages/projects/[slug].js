@@ -6,25 +6,28 @@ import ErrorPage from 'next/error'
 import styled from '@emotion/styled'
 import { Spacer } from '@jasonrundell/dropship'
 import PostBody from '../../components/post-body'
-import MorePosts from '../../components/more-posts'
-import PostHeader from '../../components/post-header'
+import ProjectHeader from '../../components/project-header'
+import MoreProjects from '../../components/more-projects'
 import Layout from '../../components/Layout'
-import { getAllPostsWithSlug, getPostAndMorePosts } from '../../lib/api/posts'
+import {
+  getAllProjectsWithSlug,
+  getProjectAndMoreProjects,
+} from '../../lib/api/projects'
 import { SITE_NAME } from '../../lib/constants'
 import { tokens } from '../../data/tokens'
 
-export default function Post({ post, posts, preview }) {
+export default function Project({ project, projects, preview }) {
   const router = useRouter()
 
   useEffect(() => {
     // Apply style to the first paragraph in the content
-    const firstParagraph = document.querySelector('.post-content p')
+    const firstParagraph = document.querySelector('.project-content p')
     if (firstParagraph) {
       firstParagraph.style.fontSize = tokens['--size-large']
     }
   }, [])
 
-  if (!router.isFallback && !post) {
+  if (!router.isFallback && !project) {
     return <ErrorPage statusCode={404} />
   }
 
@@ -70,9 +73,9 @@ export default function Post({ post, posts, preview }) {
   return (
     <Layout preview={preview}>
       <Head>
-        <title>{post ? `${post.title} | ${SITE_NAME}` : SITE_NAME}</title>
-        {post?.featuredImage?.file && (
-          <meta property="og:image" content={post.featuredImage.file.url} />
+        <title>{project ? `${project.title} | ${SITE_NAME}` : SITE_NAME}</title>
+        {project?.featuredImage?.file && (
+          <meta property="og:image" content={project.featuredImage.file.url} />
         )}
       </Head>
       <StyledContainer>
@@ -83,18 +86,18 @@ export default function Post({ post, posts, preview }) {
             <>
               <Breadcrumb>
                 <Link href={`/`}>Home</Link> &gt;{' '}
-                <Link href={`/#blog`}>Blog</Link> &gt; {post.title}
+                <Link href={`/#projects`}>Projects</Link> &gt; {project.title}
               </Breadcrumb>
               <article>
-                <PostHeader
-                  title={post.title}
-                  featuredImage={post.featuredImage}
-                  date={post.date}
-                  author={post.author}
+                <ProjectHeader
+                  title={project.title}
+                  featuredImage={project.featuredImage}
+                  link={project.link}
                 />
                 <Spacer />
-                <StyledBody className="post-content">
-                  <PostBody content={post.content} />
+                <h3>About</h3>
+                <StyledBody className="project-content">
+                  <PostBody content={project.description} />
                 </StyledBody>
               </article>
               <Spacer />
@@ -102,13 +105,13 @@ export default function Post({ post, posts, preview }) {
           )}
         </StyledSection>
       </StyledContainer>
-      {posts && posts.length > 0 && (
+      {projects && projects.length > 0 && (
         <StyledDivBgDark>
           <StyledContainer>
-            <StyledSection id="more-posts">
-              <StyledMorePostsHeading>More posts</StyledMorePostsHeading>
+            <StyledSection id="more-projects">
+              <StyledMorePostsHeading>More projects</StyledMorePostsHeading>
               <Spacer />
-              <MorePosts items={posts} />
+              <MoreProjects items={projects} />
             </StyledSection>
           </StyledContainer>
         </StyledDivBgDark>
@@ -118,20 +121,20 @@ export default function Post({ post, posts, preview }) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const data = await getPostAndMorePosts(params.slug, preview)
+  const data = await getProjectAndMoreProjects(params.slug, preview)
   return {
     props: {
-      post: data?.post ?? null,
-      posts: data?.morePosts ?? null,
+      project: data?.project ?? null,
+      projects: data?.moreProjects ?? null,
       preview,
     },
   }
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug()
+  const allProjects = await getAllProjectsWithSlug()
   return {
-    paths: allPosts?.map(({ slug }) => `/posts/${slug}`) ?? [],
+    paths: allProjects?.map(({ slug }) => `/projects/${slug}`) ?? [],
     fallback: true,
   }
 }

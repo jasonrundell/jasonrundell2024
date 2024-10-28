@@ -116,6 +116,11 @@ export default function Layout({ children }) {
                   Blog
                 </Link>
               </li>
+              <li role="presentation">
+                <Link role="menuitem" href="/#projects">
+                  Projects
+                </Link>
+              </li>
             </StyledList>
           </StyledNav>
         </StyledMenu>
