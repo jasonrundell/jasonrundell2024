@@ -1,22 +1,12 @@
-import { useState, useEffect } from 'react'
+import React from 'react'
 import { Row, Spacer } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 import BackToTop from './BackToTop'
 import ContactList from './ContactList'
+// import Character from './Character'
 import { tokens } from '../data/tokens'
-import { characters } from '../data/characters'
-
-// choose a random index from characters array
-var randomIndex = Math.floor(Math.random() * characters.length)
 
 const Footer = () => {
-  const [randomCharacter, setRandomCharacter] = useState(null)
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * characters.length)
-    setRandomCharacter(characters[randomIndex])
-  }, [])
-
   const StyledFooter = styled.footer`
     background-color: ${tokens['--background-color-3']};
   `
@@ -37,15 +27,13 @@ const Footer = () => {
     <StyledFooter id="contact">
       <StyledContainer>
         <StyledSection>
-          {/* <p>
+          <p>
             Sneak peak at interactive characters I&apos;m trying to integrate
             into my site to add some fun and creativity!
-          </p> */}
-          {/* {randomCharacter && (
-            <Row>
-              <Character character={randomCharacter} />
-            </Row>
-          )} */}
+          </p>
+          {/* <Row>
+            <Character />
+          </Row> */}
           <Spacer />
           <h2>Contact me</h2>
           <Row>
