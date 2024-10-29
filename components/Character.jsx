@@ -12,7 +12,7 @@ import { tokens } from '../data/tokens'
 import { characters } from '../data/characters'
 
 // choose a random index from characters array
-var randomIndex = Math.floor(Math.random() * characters.length)
+const randomIndex = Math.floor(Math.random() * characters.length)
 
 const StyledContainer = styled.div`
   display: block;
