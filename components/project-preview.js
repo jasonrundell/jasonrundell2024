@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Spacer, Paragraph, Row } from '@jasonrundell/dropship'
+import { Spacer, Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
 import ProjectPreviewImage from './project-preview-image'
@@ -44,7 +44,7 @@ export default function ProjectPreview({ title, image, slug, excerpt }) {
       </Row>
       <Spacer />
       <Row>
-        <Paragraph>{excerpt}</Paragraph>
+        <p>{excerpt}</p>
       </Row>
       <Spacer />
     </div>

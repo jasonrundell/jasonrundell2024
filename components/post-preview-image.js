@@ -6,8 +6,13 @@ export default function PostPreviewImage({ title, url, slug, altText }) {
   const StyledContainer = styled.div`
     position: relative;
     // 4:3 ratio
-    width: 320px;
-    height: 240px;
+    width: 300px;
+    height: 225px;
+
+    @media (min-width: 360px) {
+      width: 320px;
+      height: 240px;
+    }
   `
   const image = (
     <StyledContainer>

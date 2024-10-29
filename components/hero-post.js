@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Container, Section, Row, Paragraph } from '@jasonrundell/dropship'
+import { Container, Row } from '@jasonrundell/dropship'
 import DateComponent from '../components/date'
 import PreviewImage from '../components/preview-image'
 
@@ -12,7 +12,7 @@ export default function HeroPost({
 }) {
   return (
     <Container>
-      <Section id="hero-post">
+      <section id="hero-post">
         <div className="mb-8 md:mb-16">
           <PreviewImage title={title} slug={slug} url={featuredImage.url} />
         </div>
@@ -24,10 +24,10 @@ export default function HeroPost({
             </div>
           </Row>
           <Row>
-            <Paragraph>{excerpt}</Paragraph>
+            <p>{excerpt}</p>
           </Row>
         </div>
-      </Section>
+      </section>
     </Container>
   )
 }

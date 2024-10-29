@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Blockquote, Paragraph, Strong } from '@jasonrundell/dropship'
+import { Blockquote } from '@jasonrundell/dropship'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styled from '@emotion/styled'
@@ -7,10 +7,10 @@ import { tokens } from '../data/tokens'
 
 const options = {
   renderMark: {
-    [MARKS.BOLD]: (text) => <Strong>{text}</Strong>,
+    [MARKS.BOLD]: (text) => <strong>{text}</strong>,
   },
   renderNode: {
-    [BLOCKS.PARAGRAPH]: (node, children) => <Paragraph>{children}</Paragraph>,
+    [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
   },
 }
 

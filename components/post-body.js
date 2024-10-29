@@ -1,6 +1,6 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types'
-import { Section, Row } from '@jasonrundell/dropship'
+import { Row } from '@jasonrundell/dropship'
 import RichTextAsset from './rich-text-asset'
 
 const customMarkdownOptions = (content) => ({
@@ -21,13 +21,13 @@ const customMarkdownOptions = (content) => ({
 
 export default function PostBody({ content }) {
   return (
-    <Section>
+    <section>
       <Row>
         {documentToReactComponents(
           content.json,
           customMarkdownOptions(content)
         )}
       </Row>
-    </Section>
+    </section>
   )
 }

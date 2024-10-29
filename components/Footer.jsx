@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Paragraph, Row, Spacer } from '@jasonrundell/dropship'
+import { Row, Spacer } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 import BackToTop from './back-top-top'
 import ContactList from './ContactList'
@@ -37,10 +37,10 @@ const Footer = () => {
     <StyledFooter id="contact">
       <StyledContainer>
         <StyledSection>
-          {/* <Paragraph>
+          {/* <p>
             Sneak peak at interactive characters I&apos;m trying to integrate
             into my site to add some fun and creativity!
-          </Paragraph> */}
+          </p> */}
           {/* {randomCharacter && (
             <Row>
               <Character character={randomCharacter} />
@@ -53,11 +53,11 @@ const Footer = () => {
           </Row>
           <Spacer />
           <Row>
-            <Paragraph>
+            <p>
               <small>
                 © Jason Rundell {new Date().getFullYear()}. All rights reserved.
               </small>
-            </Paragraph>
+            </p>
           </Row>
 
           <BackToTop />

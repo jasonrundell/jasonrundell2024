@@ -18,7 +18,6 @@ const Skills = dynamic(() => import('../components/Skills'))
 const Icon = dynamic(() => import('../components/Icon'))
 const ContactList = dynamic(() => import('../components/ContactList'))
 const MorePosts = dynamic(() => import('../components/more-posts'))
-const MoreProjects = dynamic(() => import('../components/more-projects'))
 
 import Layout from '../components/Layout'
 

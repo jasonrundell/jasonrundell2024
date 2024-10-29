@@ -41,10 +41,7 @@ const Skills = ({ items }) => {
     margin-left: 0;
     color: ${tokens['--text-color']};
     margin: 0 ${tokens['--size-small']} 0 0;
-  `
-
-  const StyledItemText = styled.span`
-    font-size: ${tokens['--size-small']};
+    line-height: 1.6;
   `
 
   const StyledHeading = styled.h3`
@@ -62,9 +59,7 @@ const Skills = ({ items }) => {
               {items
                 .filter((item) => item.category === parentCategory)
                 .map((item) => (
-                  <StyledListItem key={item.id}>
-                    <StyledItemText>{item.name}</StyledItemText>
-                  </StyledListItem>
+                  <StyledListItem key={item.id}>{item.name}</StyledListItem>
                 ))}
             </StyledList>
           </StyledListContainer>

@@ -1,9 +1,9 @@
-import { Section, Grid } from '@jasonrundell/dropship'
+import { Grid } from '@jasonrundell/dropship'
 import ProjectPreview from '../components/project-preview'
 
 export default function MoreProjects({ items }) {
   return (
-    <Section id="more-projects">
+    <section id="more-projects">
       <Grid
         gridTemplateColumns="1fr"
         mediumTemplateColumns="1fr 1fr"
@@ -21,6 +21,6 @@ export default function MoreProjects({ items }) {
           />
         ))}
       </Grid>
-    </Section>
+    </section>
   )
 }

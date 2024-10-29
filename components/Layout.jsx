@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Main } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -117,7 +116,7 @@ export default function Layout({ children }) {
           </StyledNav>
         </StyledMenu>
       </StyledMenuContainer>
-      <Main>{children}</Main>
+      <main>{children}</main>
       <Footer />
     </>
   )

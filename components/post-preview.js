@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Spacer, Paragraph, Row } from '@jasonrundell/dropship'
+import { Spacer, Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
 import DateComponent from '../components/date'
@@ -42,7 +42,7 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
         <DateComponent dateString={date} />
       </Row>
       <Row>
-        <Paragraph>{excerpt}</Paragraph>
+        <p>{excerpt}</p>
       </Row>
       <Spacer />
     </div>
