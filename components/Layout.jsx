@@ -96,7 +96,7 @@ export default function Layout({ children }) {
           <StyledNav aria-label="Main Navigation" role="navigation">
             <StyledList aria-label="Main Menu" role="menu">
               <StyledListItem role="presentation">
-                <StyledTitle role="presentation">
+                <StyledTitle>
                   <Link href="/" className="decoration--none" role="menuitem">
                     Jason Rundell
                   </Link>
