@@ -68,7 +68,10 @@ export default function Index({
   `
 
   const StyledListItem = styled.li`
+    display: flex;
     margin: 0;
+    padding: 0.5rem 0;
+    align-items: center;
   `
 
   const StyledSection = styled.section`
@@ -116,9 +119,9 @@ export default function Index({
           </StyledSection>
           <Grid
             gridTemplateColumns="1fr"
-            mediumTemplateColumns="1fr 1fr"
-            largeTemplateColumns="1fr 1fr"
-            columnGap="3rem"
+            mediumTemplateColumns="1fr 1fr 1r"
+            largeTemplateColumns="1fr 1fr 1fr"
+            columnGap="2rem"
             breakInside="avoid"
           >
             <StyledSection id="skills">
@@ -144,6 +147,23 @@ export default function Index({
                 </StyledList>
               </Row>
             </StyledSection>
+            <StyledSection id="projects">
+              <h2>Projects</h2>
+              <Row>
+                <StyledList>
+                  {projects.length > 0 &&
+                    projects.map((project) => (
+                      <StyledListItem key={project.slug}>
+                        <Icon type="GitHub" />{' '}
+                        <Link
+                          href={`/projects/${project.slug}`}
+                          label={project.title}
+                        />
+                      </StyledListItem>
+                    ))}
+                </StyledList>
+              </Row>
+            </StyledSection>
           </Grid>
           <StyledSection id="recommendations">
             <h2>Recommendations</h2>
@@ -159,12 +179,6 @@ export default function Index({
               <h2>Blog</h2>
               <Spacer />
               <Row>{posts.length > 0 && <MorePosts items={posts} />}</Row>
-            </StyledSection>
-            <StyledSection id="projects">
-              <h2>Projects</h2>
-              <Row>
-                {projects.length > 0 && <MoreProjects items={projects} />}
-              </Row>
             </StyledSection>
           </StyledContainer>
         </StyledDivBgDark>

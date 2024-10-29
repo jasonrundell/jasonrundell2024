@@ -3,7 +3,7 @@ import ProjectPreview from '../components/project-preview'
 
 export default function MoreProjects({ items }) {
   return (
-    <Section id="more-posts">
+    <Section id="more-projects">
       <Grid
         gridTemplateColumns="1fr"
         mediumTemplateColumns="1fr 1fr"

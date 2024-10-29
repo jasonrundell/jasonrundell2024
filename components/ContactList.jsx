@@ -14,8 +14,10 @@ const ContactList = () => {
   `
 
   const StyledListItem = styled.li`
+    display: flex;
     margin: 0;
-    padding: 0.25rem 0;
+    padding: 0.5rem 0;
+    align-items: center;
   `
   return (
     <StyledList>
