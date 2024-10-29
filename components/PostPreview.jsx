@@ -2,10 +2,11 @@ import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
-import ProjectPreviewImage from './project-preview-image'
+import DateComponent from '../components/Date'
+import PostPreviewImage from './PostPreviewImage'
 import { tokens } from '../data/tokens'
 
-export default function ProjectPreview({ title, image, slug, excerpt }) {
+export default function PostPreview({ title, image, date, excerpt, slug }) {
   const StyledImage = styled.div`
     position: relative;
     display: flex;
@@ -28,21 +29,18 @@ export default function ProjectPreview({ title, image, slug, excerpt }) {
       {image && image.file && (
         <Row>
           <StyledImage>
-            <ProjectPreviewImage
-              title={title}
-              slug={slug}
-              url={image.file.url}
-            />
+            <PostPreviewImage title={title} slug={slug} url={image.file.url} />
           </StyledImage>
         </Row>
       )}
-      <Spacer />
       <Row>
         <StyledHeading>
-          <Link href={`/projects/${slug}`}>{title}</Link>
+          <Link href={`/posts/${slug}`}>{title}</Link>
         </StyledHeading>
       </Row>
-      <Spacer />
+      <Row>
+        <DateComponent dateString={date} />
+      </Row>
       <Row>
         <p>{excerpt}</p>
       </Row>

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Container, Row } from '@jasonrundell/dropship'
-import DateComponent from '../components/date'
+import DateComponent from '../components/Date'
 import PreviewImage from '../components/preview-image'
 
 export default function HeroPost({

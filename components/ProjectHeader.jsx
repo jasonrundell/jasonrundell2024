@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Row, Spacer } from '@jasonrundell/dropship'
 import Link from 'next/link'
-import PostImage from '../components/post-image'
+import PostImage from '../components/PostImage'
 import { tokens } from '../data/tokens'
 
 export default function ProjectHeader({

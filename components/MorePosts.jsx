@@ -1,9 +1,9 @@
 import { Grid } from '@jasonrundell/dropship'
-import PostPreview from '../components/post-preview'
+import PostPreview from '../components/PostPreview'
 
 export default function MorePosts({ items }) {
   return (
-    <section id="more-projects">
+    <section id="more-posts">
       <Grid
         gridTemplateColumns="1fr"
         mediumTemplateColumns="1fr 1fr"

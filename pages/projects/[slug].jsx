@@ -5,9 +5,9 @@ import Link from 'next/link'
 import ErrorPage from 'next/error'
 import styled from '@emotion/styled'
 import { Spacer } from '@jasonrundell/dropship'
-import PostBody from '../../components/post-body'
-import ProjectHeader from '../../components/project-header'
-import MoreProjects from '../../components/more-projects'
+import PostBody from '../../components/PostBody'
+import ProjectHeader from '../../components/ProjectHeader'
+import MoreProjects from '../../components/MoreProjects'
 import Layout from '../../components/Layout'
 import {
   getAllProjectsWithSlug,

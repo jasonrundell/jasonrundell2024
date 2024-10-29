@@ -1,5 +1,5 @@
 import { Grid } from '@jasonrundell/dropship'
-import ProjectPreview from '../components/project-preview'
+import ProjectPreview from '../components/ProjectPreview'
 
 export default function MoreProjects({ items }) {
   return (

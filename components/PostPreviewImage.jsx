@@ -1,4 +1,4 @@
-import ContentfulImage from './contentful-image'
+import ContentfulImage from './ContentfulImage'
 import Link from 'next/link'
 import styled from '@emotion/styled'
 

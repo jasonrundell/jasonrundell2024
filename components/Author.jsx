@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import ContentfulImage from './contentful-image'
-import DateComponent from './date'
+import ContentfulImage from './ContentfulImage'
+import DateComponent from './Date'
 import { tokens } from '../data/tokens'
 
 export default function Author({ name, picture, date }) {

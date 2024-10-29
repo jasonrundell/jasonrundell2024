@@ -17,7 +17,7 @@ const References = dynamic(() => import('../components/References'))
 const Skills = dynamic(() => import('../components/Skills'))
 const Icon = dynamic(() => import('../components/Icon'))
 const ContactList = dynamic(() => import('../components/ContactList'))
-const MorePosts = dynamic(() => import('../components/more-posts'))
+const MorePosts = dynamic(() => import('../components/MorePosts'))
 
 import Layout from '../components/Layout'
 

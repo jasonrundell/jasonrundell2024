@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Row, Spacer } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
-import BackToTop from './back-top-top'
+import BackToTop from './BackToTop'
 import ContactList from './ContactList'
 import { tokens } from '../data/tokens'
 import { characters } from '../data/characters'
