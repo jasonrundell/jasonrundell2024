@@ -33,13 +33,11 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
           </StyledImage>
         </Row>
       )}
-      <Spacer />
       <Row>
         <StyledHeading>
           <Link href={`/posts/${slug}`}>{title}</Link>
         </StyledHeading>
       </Row>
-      <Spacer />
       <Row>
         <DateComponent dateString={date} />
       </Row>

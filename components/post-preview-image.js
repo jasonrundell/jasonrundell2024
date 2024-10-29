@@ -6,8 +6,8 @@ export default function PostPreviewImage({ title, url, slug, altText }) {
   const StyledContainer = styled.div`
     position: relative;
     // 4:3 ratio
-    width: 300px;
-    height: 225px;
+    width: 320px;
+    height: 240px;
   `
   const image = (
     <StyledContainer>
@@ -16,7 +16,7 @@ export default function PostPreviewImage({ title, url, slug, altText }) {
         src={url}
         fill={true}
         style={{ objectFit: 'cover' }}
-        sizes="(max-width: 300px) 100vw, 225px"
+        sizes="(max-width: 320px) 100vw, 240px"
       />
     </StyledContainer>
   )

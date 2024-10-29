@@ -38,7 +38,7 @@ export default function Post({ post, posts, preview }) {
   `
 
   const StyledSection = styled.section`
-    padding: 2rem 0;
+    padding: ${tokens['--size-xlarge']} 0;
   `
 
   const Breadcrumb = styled.div`

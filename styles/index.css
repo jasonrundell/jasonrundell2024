@@ -30,6 +30,10 @@ body {
   margin-top: 3rem;
 }
 
+body {
+  margin: 0;
+}
+
 p,
 ul {
   margin: 0 0 var(--size-small) 0;

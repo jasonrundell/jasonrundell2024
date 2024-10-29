@@ -16,8 +16,8 @@ const StyledContainer = styled.div`
   width: 20rem;
   flex-direction: column;
   border: 2px solid ${tokens['--primary-color']};
-  padding: 2rem;
-  margin: 2rem 0;
+  padding: ${tokens['--size-xlarge']};
+  margin: ${tokens['--size-xlarge']} 0;
 `
 // background-color: ${tokens['--background-color-2']};
 // padding: 1rem;

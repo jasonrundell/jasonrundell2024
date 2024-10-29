@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import ContentfulImage from './contentful-image'
 import DateComponent from './date'
+import { tokens } from '../data/tokens'
 
 export default function Author({ name, picture, date }) {
   const StyledContainer = styled.div`
@@ -15,12 +16,12 @@ export default function Author({ name, picture, date }) {
     position: relative;
     width: 3rem;
     height: 3rem;
-    margin-right: 1rem;
+    margin-right: ${tokens['--size-small']};
   `
 
   const StyledPublished = styled.div`
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: ${tokens['--size-normal']};
     line-height: 1.75rem;
   `
 

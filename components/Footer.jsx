@@ -30,7 +30,7 @@ const Footer = () => {
     }
   `
   const StyledSection = styled.section`
-    padding: 2rem 0;
+    padding: ${tokens['--size-xlarge']} 0;
   `
 
   return (
@@ -46,6 +46,7 @@ const Footer = () => {
               <Character character={randomCharacter} />
             </Row>
           )} */}
+          <Spacer />
           <h2>Contact me</h2>
           <Row>
             <ContactList />

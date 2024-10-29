@@ -41,7 +41,7 @@ export default function Project({ project, projects, preview }) {
   `
 
   const StyledSection = styled.section`
-    padding: 2rem 0;
+    padding: ${tokens['--size-xlarge']} 0;
   `
 
   const Breadcrumb = styled.div`

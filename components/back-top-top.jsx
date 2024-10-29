@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { useEffect, useState } from 'react'
+import { tokens } from '../data/tokens'
 
 const backToTopStyle = css`
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: ${tokens['--size-xlarge']};
+  right: ${tokens['--size-xlarge']};
   background-color: #e9be62;
   color: #000;
   padding: 10px 20px;

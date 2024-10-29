@@ -21,10 +21,10 @@ const References = ({ references }) => {
   `
 
   const StyledReferenceEmphasis = styled.div`
-    font-size: 1.5rem;
+    font-size: ${tokens['--size-large']};
 
     @media (min-width: 768px) {
-      font-size: 2rem;
+      font-size: ${tokens['--size-xlarge']};
     }
   `
 

@@ -75,7 +75,7 @@ export default function Index({
   `
 
   const StyledSection = styled.section`
-    padding: 2rem 0;
+    padding: ${tokens['--size-xlarge']} 0;
   `
 
   return (
@@ -176,6 +176,7 @@ export default function Index({
         <StyledDivBgDark>
           <StyledContainer>
             <StyledSection id="blog">
+              <Spacer />
               <h2>Blog</h2>
               <Spacer />
               <Row>{posts.length > 0 && <MorePosts items={posts} />}</Row>

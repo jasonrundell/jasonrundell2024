@@ -3,7 +3,6 @@ import { Main } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import Image from 'next/image'
 import { tokens } from '../data/tokens'
 
 const Footer = dynamic(() => import('./Footer'))
@@ -59,15 +58,9 @@ export default function Layout({ children }) {
     align-items: center;
   `
 
-  const StyledListItem = styled.li`
-    display: flex;
-    flex-flow: row nowrap;
-    margin: 0;
-  `
-
   const StyledList = styled.ul`
     display: flex;
-    margin: 0 0 0 1rem;
+    margin: 0 0 0 ${tokens['--size-large']};
     padding: 0;
     list-style: none;
     flex-direction: row;
@@ -76,6 +69,12 @@ export default function Layout({ children }) {
     @media (min-width: 768px) {
       margin: 0;
     }
+  `
+
+  const StyledListItem = styled.li`
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
   `
 
   const StyledNav = styled.nav`
@@ -90,10 +89,6 @@ export default function Layout({ children }) {
     }
   `
 
-  const StyledLogo = styled(Image)`
-    margin-right: ${tokens['--size-small']};
-  `
-
   return (
     <>
       <Meta />
@@ -102,14 +97,6 @@ export default function Layout({ children }) {
           <StyledNav aria-label="Main Navigation" role="navigation">
             <StyledList aria-label="Main Menu" role="menu">
               <StyledListItem role="presentation">
-                <Link href="/" role="menuitem">
-                  <StyledLogo
-                    src="/top-bar-icon.png"
-                    alt="Placeholder Logo"
-                    width={32}
-                    height={32}
-                  />
-                </Link>
                 <StyledTitle role="presentation">
                   <Link href="/" className="decoration--none" role="menuitem">
                     Jason Rundell
