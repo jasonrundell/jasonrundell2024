@@ -11,8 +11,6 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
     position: relative;
     display: flex;
     margin: 0 auto;
-    height: 208px;
-    width: auto;
     object-fit: cover;
     background-color: ${tokens['--background-color-3']};
     align-items: center;

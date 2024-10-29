@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
+import styled from '@emotion/styled'
 import Link from 'next/link'
 import { tokens } from '../data/tokens'
 
@@ -59,7 +59,7 @@ export default function Layout({ children }) {
 
   const StyledList = styled.ul`
     display: flex;
-    margin: 0 0 0 ${tokens['--size-large']};
+    margin: 0 0 0 1rem;
     padding: 0;
     list-style: none;
     flex-direction: row;
@@ -73,7 +73,7 @@ export default function Layout({ children }) {
   const StyledListItem = styled.li`
     display: flex;
     flex-flow: row nowrap;
-    margin: 0;
+    margin: 0 1.5rem 0 0;
   `
 
   const StyledNav = styled.nav`
@@ -94,24 +94,24 @@ export default function Layout({ children }) {
       <StyledMenuContainer id="menu">
         <StyledMenu>
           <StyledNav aria-label="Main Navigation" role="navigation">
-            <StyledList aria-label="Main Menu" role="menu">
-              <StyledListItem role="presentation">
+            <StyledList aria-label="Main Menu" role="menubar">
+              <StyledListItem role="none">
                 <StyledTitle>
                   <Link href="/" className="decoration--none" role="menuitem">
                     Jason Rundell
                   </Link>
                 </StyledTitle>
               </StyledListItem>
-              <li role="presentation">
+              <StyledListItem role="none">
                 <Link role="menuitem" href="/#blog">
                   Blog
                 </Link>
-              </li>
-              <li role="presentation">
+              </StyledListItem>
+              <StyledListItem role="none">
                 <Link role="menuitem" href="/#projects">
                   Projects
                 </Link>
-              </li>
+              </StyledListItem>
             </StyledList>
           </StyledNav>
         </StyledMenu>
