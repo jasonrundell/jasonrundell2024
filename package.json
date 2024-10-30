@@ -19,18 +19,17 @@
     "analyze": "cross-env ANALYZE=true npm run build"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^16.0.0",
-    "@contentful/rich-text-types": "^17.0.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "date-fns": "2.28.0",
+    "date-fns": "^4.1.0",
     "next": "14.2.11",
     "postcss-normalize": "^13.0.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sharp": "^0.33.5"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@contentful/rich-text-react-renderer": "^16.0.0",
+    "@contentful/rich-text-types": "^17.0.0",
     "@jasonrundell/dropship": "^2.9.0",
     "@next/bundle-analyzer": "^15.0.2",
     "autoprefixer": "^10.4.20",
@@ -41,7 +40,8 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "postcss": "^8.4.47",
     "prop-types": "^15.8.1",
-    "react-axe": "^3.5.4"
+    "react-axe": "^3.5.4",
+    "sharp": "^0.33.5"
   },
   "license": "MIT",
   "repository": {
