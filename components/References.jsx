@@ -23,7 +23,7 @@ const References = ({ references }) => {
   const StyledReferenceEmphasis = styled.div`
     font-size: ${tokens['--size-large']};
 
-    @media (min-width: 768px) {
+    @media (min-width: 48rem) {
       font-size: ${tokens['--size-xlarge']};
     }
   `

@@ -9,8 +9,8 @@ const backToTopStyle = css`
   right: ${tokens['--size-xlarge']};
   background-color: #e9be62;
   color: #000;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.3125rem;
   cursor: pointer;
   display: none;
   &:hover {

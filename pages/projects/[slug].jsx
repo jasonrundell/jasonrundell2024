@@ -34,7 +34,7 @@ export default function Project({ project, projects, preview }) {
   const StyledContainer = styled.div`
     padding: 0 ${tokens['--size-large']};
 
-    @media (min-width: 768px) {
+    @media (min-width: 48rem) {
       margin: 0 auto;
       max-width: 64rem;
     }

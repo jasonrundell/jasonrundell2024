@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
-import DateComponent from '../components/Date'
+import ContentDate from '../components/ContentDate'
 import PostPreviewImage from './PostPreviewImage'
 import { tokens } from '../data/tokens'
 
@@ -37,7 +37,7 @@ export default function PostPreview({ title, image, date, excerpt, slug }) {
         </StyledHeading>
       </Row>
       <Row>
-        <DateComponent dateString={date} />
+        <ContentDate dateString={date} />
       </Row>
       <Row>
         <p>{excerpt}</p>

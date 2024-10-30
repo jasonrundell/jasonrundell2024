@@ -9,7 +9,7 @@ export default function PostImage({ title, url, slug, altText }) {
     width: 300px;
     height: 225px;
 
-    @media (min-width: 768px) {
+    @media (min-width: 48rem) {
       // 4:3 ratio
       width: 500px;
       height: 375px;

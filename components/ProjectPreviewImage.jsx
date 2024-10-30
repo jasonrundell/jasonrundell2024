@@ -6,8 +6,18 @@ export default function ProjectPreviewImage({ title, url, slug, altText }) {
   const StyledContainer = styled.div`
     position: relative;
     // 4:3 ratio
-    width: 300px;
-    height: 225px;
+    width: 272px;
+    height: 204px;
+
+    @media (min-width: 360px) {
+      width: 320px;
+      height: 240px;
+    }
+
+    @media (min-width: 48rem) {
+      width: 361px;
+      height: 270px;
+    }
   `
   const image = (
     <StyledContainer>
@@ -16,7 +26,7 @@ export default function ProjectPreviewImage({ title, url, slug, altText }) {
         src={url}
         fill={true}
         style={{ objectFit: 'cover' }}
-        sizes="(max-width: 300px) 100vw, 225px"
+        sizes="(max-width: 272px) 100vw"
       />
     </StyledContainer>
   )

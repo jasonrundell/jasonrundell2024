@@ -18,7 +18,7 @@ const StyledContainer = styled.div`
   display: block;
   width: 20rem;
   flex-direction: column;
-  border: 2px solid ${tokens['--primary-color']};
+  border: 0.125rem solid ${tokens['--primary-color']};
   padding: ${tokens['--size-xlarge']};
   margin: ${tokens['--size-xlarge']} 0;
 `

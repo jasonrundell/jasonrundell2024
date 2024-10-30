@@ -14,7 +14,7 @@ export default function PostPreviewImage({ title, url, slug, altText }) {
       height: 240px;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 48rem) {
       width: 361px;
       height: 270px;
     }

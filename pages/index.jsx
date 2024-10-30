@@ -43,7 +43,7 @@ export default function Index({
     font-size: 1.75rem;
     line-height: 1.3;
 
-    @media (min-width: 768px) {
+    @media (min-width: 48rem) {
       font-size: 2.75rem;
     }
   `
@@ -51,7 +51,7 @@ export default function Index({
   const StyledContainer = styled.div`
     padding: 0 ${tokens['--size-large']};
 
-    @media (min-width: 768px) {
+    @media (min-width: 48rem) {
       margin: 0 auto;
       max-width: 64rem;
     }

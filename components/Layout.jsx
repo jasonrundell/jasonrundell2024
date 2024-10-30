@@ -65,7 +65,7 @@ export default function Layout({ children }) {
     flex-direction: row;
     align-items: center;
 
-    @media (min-width: 768px) {
+    @media (min-width: 48rem) {
       margin: 0;
     }
   `

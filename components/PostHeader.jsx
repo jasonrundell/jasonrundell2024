@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Row, Spacer } from '@jasonrundell/dropship'
-import Author from '../components/Author'
+import Author from '../components/PostAuthor'
 import PostImage from '../components/PostImage'
 import { tokens } from '../data/tokens'
 

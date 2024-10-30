@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Container, Row } from '@jasonrundell/dropship'
-import DateComponent from '../components/Date'
+import ContentDate from '../components/ContentDate'
 import PreviewImage from '../components/preview-image'
 
 export default function HeroPost({
@@ -20,7 +20,7 @@ export default function HeroPost({
           <Row>
             <Link href={`/posts/${slug}`}>{title}</Link>
             <div className="mb-4 md:mb-0">
-              <DateComponent dateString={date} />
+              <ContentDate dateString={date} />
             </div>
           </Row>
           <Row>
