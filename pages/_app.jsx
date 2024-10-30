@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import '../styles/index.css'
 
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <GoogleAnalytics trackingId="G-GZFPYCJVHQ" />
       <Component {...pageProps} />
     </>
   )
