@@ -97,18 +97,18 @@ export default function Layout({ children }) {
             <StyledList aria-label="Main Menu" role="menubar">
               <StyledListItem role="none">
                 <StyledTitle>
-                  <Link href="/" className="decoration--none" role="menuitem">
+                  <Link href="/" className="decoration--none">
                     Jason Rundell
                   </Link>
                 </StyledTitle>
               </StyledListItem>
               <StyledListItem role="none">
-                <Link role="menuitem" href="/#blog">
+                <Link href="/#blog" role="menuitem">
                   Blog
                 </Link>
               </StyledListItem>
               <StyledListItem role="none">
-                <Link role="menuitem" href="/#projects">
+                <Link href="/#projects" role="menuitem">
                   Projects
                 </Link>
               </StyledListItem>
