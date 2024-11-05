@@ -44,6 +44,8 @@ const Footer = () => {
             <p>
               <small>
                 © Jason Rundell {new Date().getFullYear()}. All rights reserved.
+                Design consulting from{' '}
+                <a href="https://donnavitan.com">Donna Vitan</a> ❤️.
               </small>
             </p>
           </Row>
