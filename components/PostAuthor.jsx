@@ -33,6 +33,7 @@ export default function PostAuthor({ name, picture, date }) {
           fill
           className="rounded-full"
           alt={name}
+          sizes="(max-width: 48px)"
         />
       </StyledAuthor>
       <div>
