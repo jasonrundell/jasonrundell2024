@@ -187,7 +187,7 @@ export default function Index({
   )
 }
 
-export async function getStaticProps({ preview = false }) {
+export async function getStaticProps({ preview = false } = {}) {
   const allSkills = (await getAllSkillsForHome(preview)) ?? []
   const allReferences = (await getAllReferencesForHome(preview)) ?? []
   const allPositions = (await getAllPositionsForHome(preview)) ?? []
