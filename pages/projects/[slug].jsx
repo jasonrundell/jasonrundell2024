@@ -113,7 +113,7 @@ export default function Project({ project, projects, preview }) {
       {projects && projects.length > 0 && (
         <StyledDivBgDark>
           <StyledContainer>
-            <StyledSection id="more-projects">
+            <StyledSection>
               <StyledMorePostsHeading>More projects</StyledMorePostsHeading>
               <Spacer />
               <MoreProjects items={projects} />

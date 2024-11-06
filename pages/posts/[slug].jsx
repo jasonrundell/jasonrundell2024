@@ -105,7 +105,7 @@ export default function Post({ post, posts, preview }) {
       {posts && posts.length > 0 && (
         <StyledDivBgDark>
           <StyledContainer>
-            <StyledSection id="more-posts">
+            <StyledSection>
               <StyledMorePostsHeading>More posts</StyledMorePostsHeading>
               <Spacer />
               <MorePosts items={posts} />
