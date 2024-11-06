@@ -4,12 +4,7 @@ import Link from 'next/link'
 import PostImage from '../components/PostImage'
 import { tokens } from '../data/tokens'
 
-export default function ProjectHeader({
-  title,
-  featuredImage,
-  link,
-  technologies,
-}) {
+export default function ProjectHeader({ title, featuredImage, link }) {
   const Heading = styled.h2`
     font-size: ${tokens['--size-xlarge']};
     font-weight: 700;
@@ -26,19 +21,6 @@ export default function ProjectHeader({
     width: 100%;
   `
 
-  const StyledList = styled.ul`
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-flow: row wrap;
-  `
-
-  const StyledListItem = styled.li`
-    margin: 0;
-    padding: 0 0.5rem 0 0;
-  `
-
   return (
     <header>
       <Heading>{title}</Heading>
@@ -52,15 +34,6 @@ export default function ProjectHeader({
           </Row>
         </>
       )}
-      <Spacer />
-      <h3>Tech stack</h3>
-      <Row>
-        <StyledList>
-          {technologies.map((tech, index) => (
-            <StyledListItem key={index}>{tech}</StyledListItem>
-          ))}
-        </StyledList>
-      </Row>
       {featuredImage?.file && (
         <Row>
           <PostImage

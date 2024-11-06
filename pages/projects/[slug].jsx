@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
 import styled from '@emotion/styled'
-import { Spacer } from '@jasonrundell/dropship'
+import { Grid, Row, Spacer } from '@jasonrundell/dropship'
 import PostBody from '../../components/PostBody'
 import ProjectHeader from '../../components/ProjectHeader'
 import MoreProjects from '../../components/MoreProjects'
@@ -18,14 +18,17 @@ import { tokens } from '../../data/tokens'
 
 export default function Project({ project, projects, preview }) {
   const router = useRouter()
+  const contentRef = useRef(null)
 
   useEffect(() => {
-    // Apply style to the first paragraph in the content
-    const firstParagraph = document.querySelector('.project-content p')
-    if (firstParagraph) {
-      firstParagraph.style.fontSize = tokens['--size-large']
+    if (contentRef.current) {
+      // Apply style to the first paragraph in the content
+      const firstParagraph = contentRef.current.querySelector('p')
+      if (firstParagraph) {
+        firstParagraph.style.fontSize = tokens['--size-large']
+      }
     }
-  }, [])
+  }, [project])
 
   if (!router.isFallback && !project) {
     return <ErrorPage statusCode={404} />
@@ -70,6 +73,19 @@ export default function Project({ project, projects, preview }) {
     background-color: ${tokens['--background-color-2']};
   `
 
+  const StyledList = styled.ul`
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+  `
+
+  const StyledListItem = styled.li`
+    margin: 0;
+    padding: 0 0 0.5rem 0;
+  `
+
   return (
     <Layout preview={preview}>
       <Head>
@@ -93,17 +109,30 @@ export default function Project({ project, projects, preview }) {
                   title={project.title}
                   featuredImage={project.featuredImage}
                   link={project.link}
-                  technologies={project.technology}
                 />
                 <Spacer
                   smallScreen="large"
                   mediumScreen="larger"
                   largeScreen="largest"
                 />
-                <h3>About</h3>
-                <StyledBody className="project-content">
-                  <PostBody content={project.description} />
-                </StyledBody>
+                <Grid largeTemplateColumns="1fr 3fr">
+                  <div>
+                    <h3>Tech stack</h3>
+                    <Row>
+                      <StyledList>
+                        {project.technology.map((tech, index) => (
+                          <StyledListItem key={index}>{tech}</StyledListItem>
+                        ))}
+                      </StyledList>
+                    </Row>
+                  </div>
+                  <div>
+                    <h3>About</h3>
+                    <StyledBody className="project-content" ref={contentRef}>
+                      <PostBody content={project.description} />
+                    </StyledBody>
+                  </div>
+                </Grid>
               </article>
               <Spacer />
             </>

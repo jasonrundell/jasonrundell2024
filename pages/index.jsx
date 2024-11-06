@@ -69,7 +69,7 @@ export default function Index({
   const StyledListItem = styled.li`
     display: flex;
     margin: 0;
-    padding: 0.5rem 0;
+    padding: 0 0 1rem 0;
     align-items: center;
   `
 
