@@ -1,5 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
+import { Provider } from 'react-redux'
+import { store } from '../redux/store'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import '../styles/index.css'
 
@@ -17,7 +19,9 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <GoogleAnalytics gaId="G-GZFPYCJVHQ" />
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   )
 }
