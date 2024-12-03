@@ -62,7 +62,7 @@ export default function Layout({ children }) {
 
   const StyledList = styled.ul`
     display: flex;
-    margin: 0 0 0 1rem;
+    margin: 0 0 0 1.5rem;
     padding: 0;
     list-style: none;
     flex-direction: row;
