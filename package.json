@@ -10,6 +10,7 @@
     "emotion"
   ],
   "scripts": {
+    "dell": "npm run dev",
     "dev": "next",
     "build": "next build",
     "start": "next dev",

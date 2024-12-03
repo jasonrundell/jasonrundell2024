@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import HeadingAnimation from './HeadingAnimation'
 import { tokens } from '../data/tokens'
 
 const Footer = dynamic(() => import('./Footer'))
@@ -44,7 +45,9 @@ export default function Layout({ children }) {
     right: 0;
     z-index: 99;
     background-color: ${tokens['--background-color']};
-    transition: background 1.3s ease, --background-color-start 1.3s ease,
+    transition:
+      background 1.3s ease,
+      --background-color-start 1.3s ease,
       --background-color-end 1.3s ease;
   `
 
@@ -59,7 +62,7 @@ export default function Layout({ children }) {
 
   const StyledList = styled.ul`
     display: flex;
-    margin: 0 0 0 1rem;
+    margin: 0 0 0 1.5rem;
     padding: 0;
     list-style: none;
     flex-direction: row;
@@ -74,19 +77,114 @@ export default function Layout({ children }) {
     display: flex;
     flex-flow: row nowrap;
     margin: 0 1.5rem 0 0;
-  `
-
-  const StyledNav = styled.nav`
-    display: flex;
-  `
-
-  const StyledTitle = styled.h1`
     text-wrap: nowrap;
 
     a {
       color: ${tokens['--secondary-color']};
     }
   `
+
+  const StyledNav = styled.nav`
+    display: flex;
+  `
+
+  const StyledTitle = styled(HeadingAnimation)`
+    text-wrap: nowrap;
+  `
+
+  // steps for animated heading
+  const steps = [
+    'Jason Rundell',
+    'Jason Rundell',
+    'Jason Rundell',
+    'Jason Rundell',
+    'Jason Rundell',
+    'Jason Rundell',
+    'Jason Rundel',
+    'Jason Runde',
+    'Jason Rund',
+    'Jason Run',
+    'Jason Ru',
+    'Jason R',
+    'Jason ',
+    'Jason',
+    'Jaso',
+    'Jas',
+    'Ja',
+    'J',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    'jason$',
+    'jason$',
+    'jason$',
+    'jason$',
+    'jason$',
+    'jason$',
+    'jason$',
+    'jason$ n',
+    'jason$ np',
+    'jason$ npm',
+    'jason$ npm ',
+    'jason$ npm r',
+    'jason$ npm ru',
+    'jason$ npm run',
+    'jason$ npm run ',
+    'jason$ npm run d',
+    'jason$ npm run de',
+    'jason$ npm run dev',
+    'jason$ npm run dev',
+    'jason$ npm run dev',
+    'jason$ npm run dev',
+    'jason$ npm run dev',
+    'jason$ npm run dev',
+    'jason$ npm run dev',
+    'jason$ npm run dev',
+    'jason$ npm run de',
+    'jason$ npm run d',
+    'jason$ npm run de',
+    'jason$ npm run del',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ npm run dell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    'jason$ rundell',
+    ':)',
+    ':)',
+    ':)',
+    ':)',
+    ':)',
+    ':)',
+    ':)',
+    ':)',
+    ':)',
+    ':)',
+    ':)',
+    ':)',
+    'Jason Rundell',
+  ]
 
   return (
     <>
@@ -96,11 +194,7 @@ export default function Layout({ children }) {
           <StyledNav aria-label="Main Navigation" role="navigation">
             <StyledList aria-label="Main Menu" role="menubar">
               <StyledListItem role="menuitem">
-                <StyledTitle>
-                  <Link href="/" className="decoration--none">
-                    Jason Rundell
-                  </Link>
-                </StyledTitle>
+                <StyledTitle steps={steps} speed={100} />
               </StyledListItem>
               <StyledListItem role="menuitem">
                 <Link href="/#blog">Blog</Link>
