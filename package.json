@@ -30,10 +30,11 @@
   "devDependencies": {
     "@contentful/rich-text-react-renderer": "^16.0.0",
     "@contentful/rich-text-types": "^17.0.0",
-    "@jasonrundell/dropship": "^2.9.2",
+    "@jasonrundell/dropship": "^3.0.1",
     "@next/bundle-analyzer": "^15.0.2",
     "@next/third-parties": "^15.0.2",
     "@sentry/nextjs": "^8.35.0",
+    "@types/react": "19.0.1",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",

@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { Row, Spacer } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'

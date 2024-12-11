@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
-import ContentDate from '../components/ContentDate'
+import ContentDate from './ContentDate'
 import PostPreviewImage from './PostPreviewImage'
 import { tokens } from '../data/tokens'
 
