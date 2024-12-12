@@ -30,7 +30,7 @@
   "devDependencies": {
     "@contentful/rich-text-react-renderer": "^16.0.0",
     "@contentful/rich-text-types": "^17.0.0",
-    "@jasonrundell/dropship": "^3.0.1",
+    "@jasonrundell/dropship": "^3.1.0",
     "@next/bundle-analyzer": "^15.0.2",
     "@next/third-parties": "^15.0.2",
     "@sentry/nextjs": "^8.35.0",

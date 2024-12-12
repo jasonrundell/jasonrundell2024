@@ -104,13 +104,13 @@ export default async function Home() {
         >
           <StyledSection id="skills">
             <h2>Skills</h2>
-            <Row>{skills.length > 0 && <Skills items={skills} />}</Row>
+            {/* <Row>{skills.length > 0 && <Skills items={skills} />}</Row> */}
           </StyledSection>
           <StyledSection id="experience">
             <h2>Experience</h2>
-            <Row>
+            {/* <Row>
               {positions.length > 0 && <Positions positions={positions} />}
-            </Row>
+            </Row> */}
             <Row>
               <StyledList>
                 <StyledListItem>
@@ -127,7 +127,7 @@ export default async function Home() {
           </StyledSection>
           <StyledSection id="projects">
             <h2>Projects</h2>
-            <Row>
+            {/* <Row>
               <StyledList>
                 {projects.length > 0 &&
                   projects.map((project) => (
@@ -140,14 +140,14 @@ export default async function Home() {
                     </StyledListItem>
                   ))}
               </StyledList>
-            </Row>
+            </Row> */}
           </StyledSection>
         </Grid>
         <StyledSection id="recommendations">
           <h2>Recommendations</h2>
-          <Row>
+          {/* <Row>
             {references.length > 0 && <References references={references} />}
-          </Row>
+          </Row> */}
         </StyledSection>
       </StyledContainer>
 
@@ -157,7 +157,7 @@ export default async function Home() {
             <Spacer />
             <h2>Blog</h2>
             <Spacer />
-            <Row>{posts.length > 0 && <MorePosts items={posts} />}</Row>
+            {/* <Row>{posts.length > 0 && <MorePosts items={posts} />}</Row> */}
           </StyledSection>
         </StyledContainer>
       </StyledDivBgDark>

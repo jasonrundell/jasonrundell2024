@@ -1,7 +1,14 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-const HeadingAnimation = ({ steps, speed }) => {
+export interface HeadingAnimationProps {
+  steps: string[]
+  speed: number
+}
+
+const HeadingAnimation = ({ steps, speed }: HeadingAnimationProps) => {
   const [currentStep, setCurrentStep] = useState(0)
 
   useEffect(() => {

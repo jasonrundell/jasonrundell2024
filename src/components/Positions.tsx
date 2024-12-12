@@ -1,9 +1,18 @@
-import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 import { tokens } from '../data/tokens'
 
-const Positions = ({ positions }) => {
+export interface PositionsProps {
+  positions: {
+    id: string
+    role: string
+    company: string
+    startDate: string
+    endDate: string
+  }[]
+}
+
+const Positions = ({ positions }: PositionsProps) => {
   const StyledList = styled.ul`
     display: flex;
     flex-direction: column;
@@ -42,18 +51,6 @@ const Positions = ({ positions }) => {
       })}
     </StyledList>
   )
-}
-
-Positions.propTypes = {
-  positions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      role: PropTypes.string.isRequired,
-      company: PropTypes.string.isRequired,
-      startDate: PropTypes.string.isRequired,
-      endDate: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 }
 
 export default Positions

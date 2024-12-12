@@ -2,6 +2,7 @@
  * Component: Character
  * Description: Display a character that consists of 1 image, 1 name, 1 shortBio, and 4 quotes.
  */
+'use client'
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
@@ -29,8 +30,14 @@ const StyledQuote = styled.div`
   display: block;
 `
 
-const Character = () => {
-  const [randomCharacter, setRandomCharacter] = useState(null)
+const Character: React.FC = () => {
+  const [randomCharacter, setRandomCharacter] = useState<{
+    image: string
+    name: string
+    visualDescription: string
+    shortBio: string
+    quotes: string[]
+  } | null>(null)
   const [quote, setQuote] = useState('')
   const [randomQuote, setRandomQuote] = useState('')
   const [index, setIndex] = useState(0)

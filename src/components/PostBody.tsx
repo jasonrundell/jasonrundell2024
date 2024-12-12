@@ -3,7 +3,22 @@ import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { Row } from '@jasonrundell/dropship'
 import RichTextAsset from './RichTextAsset'
 
-const customMarkdownOptions = (content) => ({
+export interface PostBodyProps {
+  content: {
+    json: any
+    links: {
+      assets: {
+        block: {
+          sys: {
+            id: string
+          }
+        }[]
+      }
+    }
+  }
+}
+
+const customMarkdownOptions = (content: PostBodyProps) => ({
   renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: (node) => (
       <RichTextAsset
@@ -19,7 +34,7 @@ const customMarkdownOptions = (content) => ({
   },
 })
 
-export default function PostBody({ content }) {
+export default function PostBody({ content }: PostBodyProps) {
   return (
     <section>
       <Row>

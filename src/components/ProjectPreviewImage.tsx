@@ -2,7 +2,19 @@ import ContentfulImage from './ContentfulImage'
 import Link from 'next/link'
 import styled from '@emotion/styled'
 
-export default function ProjectPreviewImage({ title, url, slug, altText }) {
+export interface PostPreviewImageProps {
+  title: string
+  url: string
+  slug?: string
+  altText?: string
+}
+
+export default function ProjectPreviewImage({
+  title,
+  url,
+  slug,
+  altText,
+}: PostPreviewImageProps) {
   const StyledContainer = styled.div`
     position: relative;
     // 4:3 ratio

@@ -1,6 +1,11 @@
 import Image from 'next/image'
 
-export default function RichTextAsset({ id, assets }) {
+export interface RichTextAssetProps {
+  id: string
+  assets: { sys: { id: string }; url: string; description?: string }[]
+}
+
+export default function RichTextAsset({ id, assets }: RichTextAssetProps) {
   const asset = assets?.find((asset) => asset.sys.id === id)
 
   if (asset?.url) {

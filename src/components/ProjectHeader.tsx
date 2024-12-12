@@ -1,10 +1,26 @@
 import styled from '@emotion/styled'
 import { Row, Spacer } from '@jasonrundell/dropship'
 import Link from 'next/link'
-import PostImage from '../components/PostImage'
+import PostImage from './PostImage'
 import { tokens } from '../data/tokens'
 
-export default function ProjectHeader({ title, featuredImage, link }) {
+export interface ProjectHeaderProps {
+  title: string
+  featuredImage: {
+    file: {
+      url: string
+    }
+    altText: string
+    description: string
+  }
+  link?: string
+}
+
+export default function ProjectHeader({
+  title,
+  featuredImage,
+  link,
+}: ProjectHeaderProps) {
   const Heading = styled.h2`
     font-size: ${tokens['--size-xlarge']};
     font-weight: 700;

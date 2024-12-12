@@ -3,13 +3,23 @@ import { Container, Row } from '@jasonrundell/dropship'
 import ContentDate from '../components/ContentDate'
 import PreviewImage from '../components/preview-image'
 
+export interface HeroPostProps {
+  title: string
+  featuredImage: {
+    url: string
+  }
+  date: string
+  excerpt: string
+  slug: string
+}
+
 export default function HeroPost({
   title,
   featuredImage,
   date,
   excerpt,
   slug,
-}) {
+}: HeroPostProps) {
   return (
     <Container>
       <section id="hero-post">

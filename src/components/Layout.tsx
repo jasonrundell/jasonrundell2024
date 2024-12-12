@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
@@ -8,10 +10,16 @@ import { tokens } from '../data/tokens'
 const Footer = dynamic(() => import('./Footer'))
 const Meta = dynamic(() => import('./Meta'))
 
-export default function Layout({ children }) {
+export interface LayoutProps {
+  children: React.ReactNode
+}
+
+export default function Layout({ children }: LayoutProps) {
   useEffect(() => {
     const handleScroll = () => {
       const menu = document.getElementById('menu')
+      if (menu === null) return
+
       if (window.scrollY > 0) {
         menu.classList.add('scrolled')
       } else {
@@ -45,9 +53,7 @@ export default function Layout({ children }) {
     right: 0;
     z-index: 99;
     background-color: ${tokens['--background-color']};
-    transition:
-      background 1.3s ease,
-      --background-color-start 1.3s ease,
+    transition: background 1.3s ease, --background-color-start 1.3s ease,
       --background-color-end 1.3s ease;
   `
 

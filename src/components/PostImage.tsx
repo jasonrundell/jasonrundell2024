@@ -2,7 +2,19 @@ import ContentfulImage from './ContentfulImage'
 import Link from 'next/link'
 import styled from '@emotion/styled'
 
-export default function PostImage({ title, url, slug, altText }) {
+export interface PostImageProps {
+  title: string
+  url: string
+  slug?: string
+  altText: string
+}
+
+export default function PostImage({
+  title,
+  url,
+  slug,
+  altText,
+}: PostImageProps) {
   const StyledContainer = styled.div`
     position: relative;
     // 4:3 ratio

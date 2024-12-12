@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { Blockquote } from '@jasonrundell/dropship'
 // import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -14,7 +13,22 @@ const options = {
   // },
 }
 
-const References = ({ references }) => {
+export interface Reference {
+  id: string
+  quote: {
+    json: any
+  }
+  citeName: string
+  company: string
+  order: number
+  emphasis: boolean
+}
+
+export interface References {
+  references: Reference[]
+}
+
+const References = ({ references }: References) => {
   const StyledReference = styled.div`
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
@@ -58,21 +72,6 @@ const References = ({ references }) => {
       )
     })
   )
-}
-
-References.propTypes = {
-  references: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      quote: PropTypes.shape({
-        json: PropTypes.object,
-      }).isRequired,
-      citeName: PropTypes.string.isRequired,
-      company: PropTypes.string.isRequired,
-      order: PropTypes.number,
-      emphasis: PropTypes.bool,
-    })
-  ).isRequired,
 }
 
 export default References

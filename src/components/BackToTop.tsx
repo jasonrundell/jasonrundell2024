@@ -19,7 +19,7 @@ const backToTopStyle = css`
   }
 `
 
-const BackToTop = () => {
+const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false)
 
   const toggleVisibility = () => {

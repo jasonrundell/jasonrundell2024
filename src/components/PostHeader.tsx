@@ -1,10 +1,33 @@
 import styled from '@emotion/styled'
 import { Row, Spacer } from '@jasonrundell/dropship'
-import Author from '../components/PostAuthor'
-import PostImage from '../components/PostImage'
+import Author from './PostAuthor'
+import PostImage from './PostImage'
 import { tokens } from '../data/tokens'
 
-export default function PostHeader({ title, featuredImage, date, author }) {
+export interface PostHeaderProps {
+  title: string
+  featuredImage: {
+    file: {
+      url: string
+    }
+    altText: string
+    description: string
+  }
+  date: string
+  author: {
+    name: string
+    picture: {
+      url: string
+    }
+  }
+}
+
+export default function PostHeader({
+  title,
+  featuredImage,
+  date,
+  author,
+}: PostHeaderProps) {
   const Heading = styled.h2`
     font-size: ${tokens['--size-xlarge']};
     font-weight: 700;

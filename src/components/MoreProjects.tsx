@@ -1,9 +1,24 @@
 import { Grid } from '@jasonrundell/dropship'
-import PostPreview from '../components/PostPreview'
+import ProjectPreview from './ProjectPreview'
 
-export default function MorePosts({ items }) {
+export interface MoreProjectsProps {
+  items: {
+    title: string
+    featuredImage: {
+      file: {
+        url: string
+      }
+      altText: string
+      description: string
+    }
+    excerpt: string
+    slug: string
+  }[]
+}
+
+export default function MoreProjects({ items }: MoreProjectsProps) {
   return (
-    <section id="more-posts">
+    <section id="more-projects">
       <Grid
         gridTemplateColumns="1fr"
         mediumTemplateColumns="1fr 1fr"
@@ -12,13 +27,12 @@ export default function MorePosts({ items }) {
         rowGap="2rem"
       >
         {items.map((post) => (
-          <PostPreview
+          <ProjectPreview
             key={post.slug}
             title={post.title}
             image={post.featuredImage}
-            date={post.date}
-            excerpt={post.excerpt}
             slug={post.slug}
+            excerpt={post.excerpt}
           />
         ))}
       </Grid>

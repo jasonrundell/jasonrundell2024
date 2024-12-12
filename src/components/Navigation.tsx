@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 import { tokens } from '../data/tokens'
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   const StyledNav = styled.nav`
     position: fixed;
     top: 0;

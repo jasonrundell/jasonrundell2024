@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 import Icon from './Icon'
 
-const ContactList = () => {
+const ContactList: React.FC = () => {
   const StyledList = styled.ul`
     margin: 0;
     padding: 0;

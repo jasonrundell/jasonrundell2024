@@ -8,7 +8,7 @@ import ContactList from './ContactList'
 // import Character from './Character'
 import { tokens } from '../data/tokens'
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const StyledFooter = styled.footer`
     background-color: ${tokens['--background-color-3']};
   `

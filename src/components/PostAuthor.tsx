@@ -3,7 +3,15 @@ import ContentfulImage from './ContentfulImage'
 import ContentDate from './ContentDate'
 import { tokens } from '../data/tokens'
 
-export default function PostAuthor({ name, picture, date }) {
+export interface PostAuthorProps {
+  name: string
+  picture: {
+    url: string
+  }
+  date: string
+}
+
+export default function PostAuthor({ name, picture, date }: PostAuthorProps) {
   const StyledContainer = styled.div`
     display: flex;
     flex-flow: row wrap;
@@ -30,7 +38,7 @@ export default function PostAuthor({ name, picture, date }) {
       <StyledAuthor>
         <ContentfulImage
           src={picture.url}
-          fill
+          fill={true}
           className="rounded-full"
           alt={name}
           sizes="(max-width: 48px)"

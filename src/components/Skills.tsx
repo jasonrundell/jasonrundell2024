@@ -1,15 +1,28 @@
-import PropTypes from 'prop-types'
 import { Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
 import { onlyUnique } from '../lib/onlyUnique'
 import { tokens } from '../data/tokens'
 
-const Skills = ({ items }) => {
+export interface Skill {
+  id: string
+  name: string
+  category: string
+}
+
+export interface Skills {
+  skills: Skill[]
+}
+
+export interface Categories {
+  categories: string[]
+}
+
+const Skills = ({ skills }: Skills) => {
   let categories = []
 
   // Build array of categories
-  items.forEach((category) => {
+  skills.forEach((category) => {
     categories.push(category.category)
   })
 
@@ -56,10 +69,10 @@ const Skills = ({ items }) => {
           <StyledListContainer key={index}>
             <StyledHeading>{parentCategory}</StyledHeading>
             <StyledList>
-              {items
-                .filter((item) => item.category === parentCategory)
-                .map((item) => (
-                  <StyledListItem key={item.id}>{item.name}</StyledListItem>
+              {skills
+                .filter((skill) => skill.category === parentCategory)
+                .map((skill) => (
+                  <StyledListItem key={skill.id}>{skill.name}</StyledListItem>
                 ))}
             </StyledList>
           </StyledListContainer>
@@ -67,16 +80,6 @@ const Skills = ({ items }) => {
       })}
     </Row>
   )
-}
-
-Skills.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 }
 
 export default Skills
