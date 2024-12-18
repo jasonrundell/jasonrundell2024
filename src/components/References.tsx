@@ -1,8 +1,9 @@
 import { Blockquote } from '@jasonrundell/dropship'
-// import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { Document } from '@contentful/rich-text-types'
 import styled from '@emotion/styled'
 import { tokens } from '../data/tokens'
+import { References as ReferencesDef } from '../typeDefinitions'
 
 const options = {
   // renderMark: {
@@ -13,22 +14,7 @@ const options = {
   // },
 }
 
-export interface Reference {
-  id: string
-  quote: {
-    json: any
-  }
-  citeName: string
-  company: string
-  order: number
-  emphasis: boolean
-}
-
-export interface References {
-  references: Reference[]
-}
-
-const References = ({ references }: References) => {
+const References = ({ references }: ReferencesDef) => {
   const StyledReference = styled.div`
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
@@ -52,10 +38,9 @@ const References = ({ references }: References) => {
       const { citeName, company, quote, emphasis } = reference || {}
 
       // Additional defensive checks for quote and its structure
-      const renderQuote =
-        quote && quote.json
-          ? documentToReactComponents(quote.json, options) // Make sure you access quote.json directly
-          : 'No quote available.'
+      const renderQuote = quote
+        ? documentToReactComponents(quote as Document, options) // Make sure you access quote.json directly
+        : 'No quote available.'
       return (
         <StyledReference key={index}>
           {emphasis ? (

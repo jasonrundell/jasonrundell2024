@@ -45,7 +45,12 @@ export default function PostPreview({
       {image && image.file && (
         <Row>
           <StyledImage>
-            <PostPreviewImage title={title} slug={slug} url={image.file.url} />
+            <PostPreviewImage
+              title={title}
+              slug={slug}
+              url={image.file.url}
+              altText=""
+            />
           </StyledImage>
         </Row>
       )}

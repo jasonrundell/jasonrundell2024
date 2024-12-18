@@ -1,29 +1,17 @@
+'use client'
 import { Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
+import { Skill, Skills as SkillsDef } from '../typeDefinitions'
 
 import { onlyUnique } from '../lib/onlyUnique'
 import { tokens } from '../data/tokens'
 
-export interface Skill {
-  id: string
-  name: string
-  category: string
-}
-
-export interface Skills {
-  skills: Skill[]
-}
-
-export interface Categories {
-  categories: string[]
-}
-
-const Skills = ({ skills }: Skills) => {
-  let categories = []
+const Skills = ({ skills }: SkillsDef) => {
+  let categories: string[] = []
 
   // Build array of categories
-  skills.forEach((category) => {
-    categories.push(category.category)
+  skills.forEach((skill: Skill) => {
+    categories.push(skill.category)
   })
 
   // I only want the unique categories
@@ -64,20 +52,18 @@ const Skills = ({ skills }: Skills) => {
 
   return (
     <Row>
-      {uniqueCategories.map((parentCategory, index) => {
-        return (
-          <StyledListContainer key={index}>
-            <StyledHeading>{parentCategory}</StyledHeading>
-            <StyledList>
-              {skills
-                .filter((skill) => skill.category === parentCategory)
-                .map((skill) => (
-                  <StyledListItem key={skill.id}>{skill.name}</StyledListItem>
-                ))}
-            </StyledList>
-          </StyledListContainer>
-        )
-      })}
+      {uniqueCategories.map((parentCategory, index) => (
+        <StyledListContainer key={index}>
+          <StyledHeading>{parentCategory}</StyledHeading>
+          <StyledList>
+            {skills
+              .filter((skill: Skill) => skill.category === parentCategory)
+              .map((skill: Skill) => (
+                <StyledListItem key={skill.id}>{skill.name}</StyledListItem>
+              ))}
+          </StyledList>
+        </StyledListContainer>
+      ))}
     </Row>
   )
 }

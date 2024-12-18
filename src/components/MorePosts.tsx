@@ -1,23 +1,9 @@
 import { Grid } from '@jasonrundell/dropship'
+
+import { Post, Posts } from '../typeDefinitions'
 import PostPreview from './PostPreview'
 
-export interface MorePostsProps {
-  items: {
-    title: string
-    featuredImage: {
-      file: {
-        url: string
-      }
-      altText: string
-      description: string
-    }
-    date: string
-    excerpt: string
-    slug: string
-  }[]
-}
-
-export default function MorePosts({ items }: MorePostsProps) {
+const MorePosts = ({ posts }: Posts) => {
   return (
     <section id="more-posts">
       <Grid
@@ -27,17 +13,23 @@ export default function MorePosts({ items }: MorePostsProps) {
         columnGap="2rem"
         rowGap="2rem"
       >
-        {items.map((post) => (
-          <PostPreview
-            key={post.slug}
-            title={post.title}
-            image={post.featuredImage}
-            date={post.date}
-            excerpt={post.excerpt}
-            slug={post.slug}
-          />
-        ))}
+        {posts.map((post: Post) => {
+          const { title, featuredImage, date, excerpt, slug } = post
+
+          return (
+            <PostPreview
+              key={slug}
+              title={title}
+              image={featuredImage.fields.file.fields}
+              date={date}
+              excerpt={excerpt}
+              slug={slug}
+            />
+          )
+        })}
       </Grid>
     </section>
   )
 }
+
+export default MorePosts

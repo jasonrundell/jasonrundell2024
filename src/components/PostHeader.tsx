@@ -49,7 +49,11 @@ export default function PostHeader({
       <Heading>{title}</Heading>
       {author && (
         <>
-          <Author name={author.name} picture={author.picture} date={date} />
+          <Author
+            name={author.name}
+            picture={author.fields.picture.fields.file}
+            date={date}
+          />
           <Spacer />
         </>
       )}
