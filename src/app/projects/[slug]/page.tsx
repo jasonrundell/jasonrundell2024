@@ -1,4 +1,4 @@
-import Error from '@/components/Error'
+import { notFound } from 'next/navigation'
 import Project from './Project'
 import { getEntryBySlug } from '@/lib/contentful'
 import { Project as ProjectDef } from '@/typeDefinitions/app'
@@ -14,8 +14,8 @@ export default async function Page({ params }: ProjectProps) {
 
   const project = await getEntryBySlug('project', slug)
 
-  if (!project) {
-    return <Error />
+  if (!project.title) {
+    notFound()
   }
 
   return <Project project={project as ProjectDef} />

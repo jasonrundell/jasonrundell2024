@@ -1,4 +1,4 @@
-import Error from '@/components/Error'
+import { notFound } from 'next/navigation'
 import Post from './Post'
 import { getEntryBySlug } from '@/lib/contentful'
 import { Post as PostDef } from '@/typeDefinitions/app'
@@ -14,8 +14,8 @@ export default async function Page({ params }: PostProps) {
 
   const post = await getEntryBySlug('post', slug)
 
-  if (!post) {
-    return <Error />
+  if (!post.title) {
+    notFound()
   }
 
   return <Post post={post as PostDef} />
