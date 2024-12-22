@@ -48,7 +48,7 @@ async function fetchEntryBySlug<T extends EntrySkeletonType>(
     const response = await client.getEntries<ContentfulEntry<T>>({
       content_type: contentType,
       'fields.slug': slug,
-    })
+    } as Record<string, any>)
 
     if (response.items.length === 0) {
       throw new Error(`No entry found for slug: ${slug}`)
