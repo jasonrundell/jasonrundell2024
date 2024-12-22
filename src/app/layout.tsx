@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Outfit } from 'next/font/google'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants'
 
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={outfit.className}>
+        <SpeedInsights />
         <GoogleAnalytics gaId="G-GZFPYCJVHQ" />
         <MainNav />
         <main>{children}</main>
