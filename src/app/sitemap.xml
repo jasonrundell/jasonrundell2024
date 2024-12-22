@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://jasonrundell.com/</loc>
+  <lastmod>2024-12-22T05:19:58+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://jasonrundell.com/projects/jasonrundellcom-version-2024</loc>
+  <lastmod>2024-12-22T05:19:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jasonrundell.com/projects/react-mega-menu</loc>
+  <lastmod>2024-12-22T05:19:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jasonrundell.com/projects/dropship</loc>
+  <lastmod>2024-12-22T05:19:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jasonrundell.com/posts/team-values-and-norms-document-a-guide-for-leaders</loc>
+  <lastmod>2024-12-22T05:19:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jasonrundell.com/posts/why-team-wins-are-your-wins</loc>
+  <lastmod>2024-12-22T05:19:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jasonrundell.com/posts/a-post-about-docker</loc>
+  <lastmod>2024-12-22T05:19:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jasonrundell.com/posts/earning-trust-and-building-reputation</loc>
+  <lastmod>2024-12-22T05:19:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://jasonrundell.com/posts/time-to-start-embracing-the-z</loc>
+  <lastmod>2024-12-22T05:19:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+</urlset>
