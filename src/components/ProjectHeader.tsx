@@ -28,8 +28,6 @@ const ProjectHeader = ({ project }: ProjectHeaderProps) => {
     width: 100%;
   `
 
-  console.log('ProjectHeader', project)
-
   const { title, featuredImage, link } = project
 
   return (

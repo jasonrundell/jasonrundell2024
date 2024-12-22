@@ -12,6 +12,19 @@ export interface Skill extends EntrySkeletonType {
   category: string
 }
 
+export interface Position extends EntrySkeletonType {
+  id: string
+  orderId: number
+  role: string
+  company: string
+  startDate: string
+  endDate: string
+}
+
+export interface Positions {
+  positions: Position[]
+}
+
 export interface Skills {
   skills: Skill[]
 }

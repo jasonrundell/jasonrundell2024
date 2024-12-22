@@ -1,6 +1,6 @@
 import { createClient, Entry, EntrySkeletonType, FieldsType } from 'contentful'
 
-import { Skill, Reference, Project, Post } from '@/typeDefinitions/app'
+import { Skill, Reference, Project, Position, Post } from '@/typeDefinitions/app'
 
 import { ContentfulEntry } from '@/typeDefinitions/contentful'
 
@@ -101,6 +101,16 @@ export async function getSkills(): Promise<Skill[]> {
     return mapEntriesToFields(skills)
   } catch (error) {
     console.error('Error fetching skills:', error)
+    return []
+  }
+}
+
+export async function getPositions(): Promise<Position[]> {
+  try {
+    const positions = await fetchEntries<Position>('positions')
+    return mapEntriesToFields(positions)
+  } catch (error) {
+    console.error('Error fetching positions:', error)
     return []
   }
 }

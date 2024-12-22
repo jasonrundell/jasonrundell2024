@@ -1,18 +1,9 @@
 import styled from '@emotion/styled'
 
+import { Position, Positions as PositionsDef } from '@/typeDefinitions/app'
 import { tokens } from '@/data/tokens'
 
-interface PositionsProps {
-  positions: {
-    id: string
-    role: string
-    company: string
-    startDate: string
-    endDate: string
-  }[]
-}
-
-const Positions = ({ positions }: PositionsProps) => {
+const Positions = ({ positions }: PositionsDef) => {
   const StyledList = styled.ul`
     display: flex;
     flex-direction: column;
@@ -37,8 +28,8 @@ const Positions = ({ positions }: PositionsProps) => {
 
   return (
     <StyledList>
-      {uniquePositions.map((position, index) => {
-        const { role, company, startDate, endDate } = position
+      {uniquePositions.map((position: Position, index: number) => {
+        const { company } = position
         return (
           <StyledListItem key={index}>
             {/* <Heading level={3} label={role} /> */}

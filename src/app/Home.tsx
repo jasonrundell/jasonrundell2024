@@ -7,8 +7,9 @@ import dynamic from 'next/dynamic'
 
 import {
   Skills as SkillsDef,
-  References as ReferenceDef,
   Projects as ProjectsDef,
+  References as ReferenceDef,
+  Positions as PositionsDef,
   Posts as PostsDef,
 } from '@/typeDefinitions/app'
 import { tokens } from '@/data/tokens'
@@ -16,17 +17,19 @@ import { tokens } from '@/data/tokens'
 const Skills = dynamic(() => import('@/components/Skills'))
 const ContactList = dynamic(() => import('@/components/ContactList'))
 const References = dynamic(() => import('@/components/References'))
+const Positions = dynamic(() => import('@/components/Positions'))
 const MorePosts = dynamic(() => import('@/components/MorePosts'))
 const Icon = dynamic(() => import('@/components/Icon'))
 
 export type HomeProps = {
   skills: SkillsDef
-  references: ReferenceDef
   projects: ProjectsDef
+  references: ReferenceDef
+  positions: PositionsDef
   posts: PostsDef
 }
 
-const Home = ({ skills, references, projects, posts }: HomeProps) => {
+const Home = ({ skills, projects, references, positions, posts }: HomeProps) => {
   const StyledDivBgDark = styled.div`
     background-color: ${tokens['--background-color-2']};
   `
@@ -107,11 +110,11 @@ const Home = ({ skills, references, projects, posts }: HomeProps) => {
             <h2>Skills</h2>
             <Row>{skills && <Skills skills={skills.skills} />}</Row>
           </StyledSection>
-          {/* <StyledSection id="experience">
+          <StyledSection id="experience">
             <h2>Experience</h2>
             <Row>
               {positions.positions.length > 0 && (
-                <Positions positions={positions.positions.positions} />
+                <Positions positions={positions.positions} />
               )}
             </Row>
             <Row>
@@ -127,7 +130,7 @@ const Home = ({ skills, references, projects, posts }: HomeProps) => {
                 </StyledListItem>
               </StyledList>
             </Row>
-          </StyledSection> */}
+          </StyledSection>
           <StyledSection id="projects">
             <h2>Projects</h2>
             <Row>
