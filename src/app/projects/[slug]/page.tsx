@@ -12,7 +12,7 @@ type ProjectProps = {
 export default async function Page({ params }: ProjectProps) {
   const { slug } = params
 
-  const project = await getEntryBySlug('project', slug)
+  const project = await getEntryBySlug<ProjectDef>('project', slug)
 
   if (!project.title) {
     notFound()

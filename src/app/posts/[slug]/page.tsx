@@ -12,7 +12,7 @@ type PostProps = {
 export default async function Page({ params }: PostProps) {
   const { slug } = params
 
-  const post = await getEntryBySlug('post', slug)
+  const post = await getEntryBySlug<PostDef>('post', slug)
 
   if (!post.title) {
     notFound()
