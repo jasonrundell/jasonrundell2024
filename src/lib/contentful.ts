@@ -4,9 +4,14 @@ import { Skill, Reference, Project, Position, Post } from '@/typeDefinitions/app
 
 import { ContentfulEntry } from '@/typeDefinitions/contentful'
 
+// Ensure environment variables are loaded
+if (!process.env.CONTENTFUL_SPACE_ID || !process.env.CONTENTFUL_ACCESS_TOKEN) {
+  throw new Error('Contentful space ID and access token must be provided')
+}
+
 const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID || '',
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 })
 
 async function fetchEntries<T extends EntrySkeletonType>(
