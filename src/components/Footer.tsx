@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
           <Row>
             <p>
               <small>
-                © Jason Rundell {new Date().getFullYear()}. All rights reserved.
+                © Jason Rundell 2025. All rights reserved.
                 Design consulting from{' '}
                 <a href="https://donnavitan.com">Donna Vitan</a> ❤️.
               </small>
