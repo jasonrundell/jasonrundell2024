@@ -1,7 +1,7 @@
 import { Grid } from '@jasonrundell/dropship'
 import ProjectPreview from './ProjectPreview'
 
-export interface MoreProjectsProps {
+interface MoreProjectsProps {
   items: {
     title: string
     featuredImage: {

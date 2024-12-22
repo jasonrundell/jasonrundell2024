@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-export interface HeadingAnimationProps {
+interface HeadingAnimationProps {
   steps: string[]
   speed: number
 }

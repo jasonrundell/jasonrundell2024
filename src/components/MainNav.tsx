@@ -4,16 +4,18 @@ import { useEffect } from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import HeadingAnimation from './HeadingAnimation'
-import { tokens } from '../data/tokens'
+import { tokens } from '@/data/tokens'
 
-const MainNav: React.FC = () => {
+const MainNav = () => {
   useEffect(() => {
     const handleScroll = () => {
       const menu = document.getElementById('menu')
-      if (window.scrollY > 0) {
-        menu.classList.add('scrolled')
-      } else {
-        menu.classList.remove('scrolled')
+      if (menu) {
+        if (window.scrollY > 0) {
+          menu.classList.add('scrolled')
+        } else {
+          menu.classList.remove('scrolled')
+        }
       }
     }
 

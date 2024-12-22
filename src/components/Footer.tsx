@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import BackToTop from './BackToTop'
 import ContactList from './ContactList'
 // import Character from './Character'
-import { tokens } from '../data/tokens'
+import { tokens } from '@/data/tokens'
 
 const Footer: React.FC = () => {
   const StyledFooter = styled.footer`

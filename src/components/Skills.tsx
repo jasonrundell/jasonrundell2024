@@ -1,10 +1,10 @@
 'use client'
 import { Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
-import { Skill, Skills as SkillsDef } from '../typeDefinitions'
+import { Skill, Skills as SkillsDef } from '@/typeDefinitions/app'
 
-import { onlyUnique } from '../lib/onlyUnique'
-import { tokens } from '../data/tokens'
+import { onlyUnique } from '@/lib/onlyUnique'
+import { tokens } from '@/data/tokens'
 
 const Skills = ({ skills }: SkillsDef) => {
   let categories: string[] = []

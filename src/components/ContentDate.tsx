@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 
-export interface ContentDateProps {
+interface ContentDateProps {
   dateString: string
 }
 

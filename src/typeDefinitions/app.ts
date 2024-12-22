@@ -1,31 +1,12 @@
 import { Document } from '@contentful/rich-text-types'
+import { EntrySkeletonType } from 'contentful'
+import { ContentfulContent, ContentfulSys, ContentfulAsset } from './contentful'
 
-/** Contentful */
-export type ContentfulContentTypes = 'skill' | 'post' | 'project' | 'reference'
-
-export interface ContentfulEntry<T> {
-  fields: T
-  contentTypeId: string
-}
-
-export interface ContentfulAsset {
-  file: {
-    url: string
-    details: string[]
-    fileName: string
-    contentType: string
-  }
-  altText: string
-  title: string
-  description: string
-}
-
-/** Application */
 export interface Categories {
   categories: string[]
 }
 
-export interface Skill {
+export interface Skill extends EntrySkeletonType {
   id: string
   name: string
   category: string
@@ -34,7 +15,7 @@ export interface Skill {
 export interface Skills {
   skills: Skill[]
 }
-export interface Reference {
+export interface Reference extends EntrySkeletonType {
   id: string
   company: string
   citeName: string
@@ -47,69 +28,84 @@ export interface References {
   references: Reference[]
 }
 
-export interface Project {
+export interface Project extends EntrySkeletonType {
   title: string
   slug: string
   order: number
   excerpt: string
-  description: Document
+  description: ContentfulContent
   technology: string[]
   link: string
+  featuredImage?: FeaturedImage
 }
 
 export interface Projects {
   projects: Project[]
 }
 
-export interface FeaturedPostImage {
+export interface FeaturedImage {
   metadata: {
     tags: string[]
     concepts: string[]
   }
   sys: {
-    space: { sys: string[] }
+    space: ContentfulSys
     id: string
     type: string
     createdAt: string
     updatedAt: string
-    environment: { sys: string[] }
+    environment: ContentfulSys
     publishedVersion: number
     revision: number
-    contentType: { sys: string[] }
-    locale: string
+    contentType: ContentfulSys
+    locale: string | 'en-US'
   }
   fields: {
+    title: string
+    altText?: string
+    description?: string
     file: {
       metadata: {
         tags: string[]
         concepts: string[]
       }
       sys: {
-        space: { sys: string[] }
+        space: ContentfulSys
         id: string
         type: string
         createdAt: string
         updatedAt: string
-        environment: { sys: string[] }
+        environment: ContentfulSys
         publishedVersion: number
         revision: number
         contentType: { sys: string[] }
-        locale: string
+        locale: string | 'en-US'
       }
-      fields: ContentfulAsset
+      fields: {
+        title: string
+        file: {
+          url: string
+          details: {
+            size: number
+            image: {
+              width: number
+              height: number
+            }
+          }
+          fileName: string
+          contentType: string | 'image/webp'
+        }
+      }
     }
-    altText: string
-    title: string
-    description: string
   }
 }
 
-export interface Post {
+export interface Post extends EntrySkeletonType {
   title: string
   slug: string
-  content: Document
+  content: ContentfulContent
   excerpt: string
-  featuredImage: FeaturedPostImage
+  featuredImage: FeaturedImage
   date: string
   author: {
     metadata: {

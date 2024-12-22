@@ -1,26 +1,17 @@
+'use client'
+
 import styled from '@emotion/styled'
-import { Row, Spacer } from '@jasonrundell/dropship'
+import { Row } from '@jasonrundell/dropship'
 import Link from 'next/link'
 import PostImage from './PostImage'
-import { tokens } from '../data/tokens'
+import { tokens } from '@/data/tokens'
+import { Project as ProjectDef } from '@/typeDefinitions/app'
 
-export interface ProjectHeaderProps {
-  title: string
-  featuredImage: {
-    file: {
-      url: string
-    }
-    altText: string
-    description: string
-  }
-  link?: string
+interface ProjectHeaderProps {
+  project: ProjectDef
 }
 
-export default function ProjectHeader({
-  title,
-  featuredImage,
-  link,
-}: ProjectHeaderProps) {
+const ProjectHeader = ({ project }: ProjectHeaderProps) => {
   const Heading = styled.h2`
     font-size: ${tokens['--size-xlarge']};
     font-weight: 700;
@@ -37,6 +28,10 @@ export default function ProjectHeader({
     width: 100%;
   `
 
+  console.log('ProjectHeader', project)
+
+  const { title, featuredImage, link } = project
+
   return (
     <header>
       <Heading>{title}</Heading>
@@ -50,18 +45,22 @@ export default function ProjectHeader({
           </Row>
         </>
       )}
-      {featuredImage?.file && (
+      {featuredImage?.fields?.file && (
         <Row>
           <PostImage
             title={title}
-            url={featuredImage.file.url}
-            altText={featuredImage.altText}
+            url={featuredImage.fields.file.fields.file.url}
+            altText={featuredImage.fields.altText || ''}
           />
-          {featuredImage.description && (
-            <StyledDescription>{featuredImage.description}</StyledDescription>
+          {featuredImage.fields.description && (
+            <StyledDescription>
+              {featuredImage.fields.description}
+            </StyledDescription>
           )}
         </Row>
       )}
     </header>
   )
 }
+
+export default ProjectHeader

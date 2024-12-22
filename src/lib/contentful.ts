@@ -1,18 +1,15 @@
-import { createClient, Entry } from 'contentful'
-import {
-  ContentfulEntry,
-  Skill,
-  Reference,
-  Project,
-  Post,
-} from '../typeDefinitions'
+import { createClient, Entry, EntrySkeletonType, FieldsType } from 'contentful'
+
+import { Skill, Reference, Project, Post } from '@/typeDefinitions/app'
+
+import { ContentfulEntry } from '@/typeDefinitions/contentful'
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID || '',
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
 })
 
-async function fetchEntries<T>(
+async function fetchEntries<T extends EntrySkeletonType>(
   contentType: string
 ): Promise<Entry<ContentfulEntry<T>>[]> {
   try {
@@ -31,11 +28,11 @@ async function fetchEntries<T>(
   }
 }
 
-async function fetchEntry<T>(
+async function fetchEntry<T extends EntrySkeletonType>(
   entryId: string | number
 ): Promise<Entry<ContentfulEntry<T>>> {
   try {
-    const entry = await client.getEntry<ContentfulEntry<T>>(entryId)
+    const entry = await client.getEntry<ContentfulEntry<T>>(entryId.toString())
     return entry
   } catch (error) {
     console.error(`Error fetching entry ${entryId} from Contentful:`, error)
@@ -43,7 +40,7 @@ async function fetchEntry<T>(
   }
 }
 
-async function fetchEntryBySlug<T>(
+async function fetchEntryBySlug<T extends EntrySkeletonType>(
   contentType: string,
   slug: string
 ): Promise<Entry<ContentfulEntry<T>>> {
@@ -67,31 +64,35 @@ async function fetchEntryBySlug<T>(
   }
 }
 
-export async function getEntry<T>(entryId: string | number): Promise<T> {
+export async function getEntry<T extends EntrySkeletonType>(
+  entryId: string | number
+): Promise<T> {
   try {
     const entry = await fetchEntry<T>(entryId)
-    return entry.fields
+    return entry.fields as unknown as T
   } catch (error) {
     console.error('Error fetching entry:', error)
     return {} as T
   }
 }
 
-export async function getEntryBySlug<T>(
+export async function getEntryBySlug<T extends EntrySkeletonType>(
   contentType: string,
   slug: string
 ): Promise<T> {
   try {
     const entry = await fetchEntryBySlug<T>(contentType, slug)
-    return entry.fields
+    return entry.fields as unknown as T
   } catch (error) {
     console.error('Error fetching entry by slug:', error)
     return {} as T
   }
 }
 
-function mapEntriesToFields<T>(entries: Entry<ContentfulEntry<T>>[]): T[] {
-  return entries.map((entry) => entry.fields)
+function mapEntriesToFields<T extends FieldsType>(
+  entries: Entry<ContentfulEntry<T>>[]
+): T[] {
+  return entries.map((entry) => entry.fields as unknown as T)
 }
 
 export async function getSkills(): Promise<Skill[]> {

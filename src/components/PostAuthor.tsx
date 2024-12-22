@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import ContentfulImage from './ContentfulImage'
 import ContentDate from './ContentDate'
-import { tokens } from '../data/tokens'
+import { tokens } from '@/data/tokens'
 
-export interface PostAuthorProps {
+interface PostAuthorProps {
   name: string
   picture: {
     url: string

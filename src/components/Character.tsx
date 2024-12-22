@@ -9,8 +9,8 @@ import Image from 'next/image'
 import styled from '@emotion/styled'
 import { Heading } from '@jasonrundell/dropship'
 
-import { tokens } from '../data/tokens'
-import { characters } from '../data/characters'
+import { tokens } from '@/data/tokens'
+import { characters } from '@/data/characters'
 
 // choose a random index from characters array
 const randomIndex = Math.floor(Math.random() * characters.length)
@@ -30,14 +30,18 @@ const StyledQuote = styled.div`
   display: block;
 `
 
-const Character: React.FC = () => {
-  const [randomCharacter, setRandomCharacter] = useState<{
-    image: string
-    name: string
-    visualDescription: string
-    shortBio: string
-    quotes: string[]
-  } | null>(null)
+interface CharacterProps {
+  image: string
+  name: string
+  visualDescription: string
+  shortBio: string
+  quotes: string[]
+}
+
+const Character = () => {
+  const [randomCharacter, setRandomCharacter] = useState<CharacterProps | null>(
+    null
+  )
   const [quote, setQuote] = useState('')
   const [randomQuote, setRandomQuote] = useState('')
   const [index, setIndex] = useState(0)
@@ -69,7 +73,14 @@ const Character: React.FC = () => {
   }, [index, randomQuote])
 
   // Custom loader function for the Image component with relative URL
-  const myLoader = ({ src, width, quality }) => {
+
+  type LoaderProps = {
+    src: string
+    width: number
+    quality?: number
+  }
+
+  const myLoader = ({ src, width, quality }: LoaderProps) => {
     return `${src}?w=${width}&q=${quality || 75}`
   }
 
@@ -77,11 +88,7 @@ const Character: React.FC = () => {
     <StyledContainer>
       {randomCharacter && (
         <>
-          <Heading
-            level={3}
-            label={randomCharacter.name}
-            classNames="font-bold"
-          />
+          <Heading level={3} label={randomCharacter.name} />
           <Image
             loader={myLoader}
             src={randomCharacter.image}

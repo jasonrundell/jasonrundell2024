@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import styled from '@emotion/styled'
 
-import LinkedIn from '../public/images/linkedin-mark-white.png'
-import GitHub from '../public/images/github-mark-white.svg'
-import Email from '../public/images/email-mark-white.png'
-import Calendar from '../public/images/calendar-mark-white.png'
+import LinkedIn from '@/public/images/linkedin-mark-white.png'
+import GitHub from '@/public/images/github-mark-white.svg'
+import Email from '@/public/images/email-mark-white.png'
+import Calendar from '@/public/images/calendar-mark-white.png'
 
-export interface IconProps {
+interface IconProps {
   type: 'LinkedIn' | 'GitHub' | 'Email' | 'Calendar'
 }
 

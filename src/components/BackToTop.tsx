@@ -1,23 +1,8 @@
 'use client'
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
-import { useEffect, useState } from 'react'
-import { tokens } from '../data/tokens'
 
-const backToTopStyle = css`
-  position: fixed;
-  bottom: ${tokens['--size-xlarge']};
-  right: ${tokens['--size-xlarge']};
-  background-color: #e9be62;
-  color: #000;
-  padding: 0.625rem 1.25rem;
-  border-radius: 0.3125rem;
-  cursor: pointer;
-  display: none;
-  &:hover {
-    background-color: #eee;
-  }
-`
+import styled from '@emotion/styled'
+import { useEffect, useState } from 'react'
+import { tokens } from '@/data/tokens'
 
 const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -44,12 +29,23 @@ const BackToTop: React.FC = () => {
     }
   }, [])
 
+  const BackToTopStyle = styled.div`
+    position: fixed;
+    bottom: ${tokens['--size-xlarge']};
+    right: ${tokens['--size-xlarge']};
+    background-color: #e9be62;
+    color: #000;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+    display: ${isVisible ? 'block' : 'none'};
+    &:hover {
+      background-color: #eee;
+    }
+  `
+
   return (
-    <div
-      css={css`
-        ${backToTopStyle};
-        display: ${isVisible ? 'block' : 'none'};
-      `}
+    <BackToTopStyle
       onClick={scrollToTop}
       onKeyPress={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -61,7 +57,7 @@ const BackToTop: React.FC = () => {
       aria-label="Back to top"
     >
       Back to top
-    </div>
+    </BackToTopStyle>
   )
 }
 

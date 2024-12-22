@@ -4,9 +4,9 @@ import styled from '@emotion/styled'
 
 import ContentDate from './ContentDate'
 import PostPreviewImage from './PostPreviewImage'
-import { tokens } from '../data/tokens'
+import { tokens } from '@/data/tokens'
 
-export interface PostPreviewProps {
+interface PostPreviewProps {
   title: string
   image: {
     file: {

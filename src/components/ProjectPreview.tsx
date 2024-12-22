@@ -3,9 +3,9 @@ import { Spacer, Row } from '@jasonrundell/dropship'
 import styled from '@emotion/styled'
 
 import ProjectPreviewImage from './ProjectPreviewImage'
-import { tokens } from '../data/tokens'
+import { tokens } from '@/data/tokens'
 
-export interface ProjectPreviewProps {
+interface ProjectPreviewProps {
   title: string
   image: {
     file: {

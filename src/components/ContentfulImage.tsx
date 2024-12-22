@@ -1,13 +1,16 @@
-import Image from 'next/image'
-
-export interface ContentfulImageProps {
+import Image, { ImageLoaderProps } from 'next/image'
+interface ContentfulImageProps {
   src: string
-  width: number
+  width?: number
   quality?: number
   alt?: string
+  fill?: boolean
+  className?: string
+  sizes?: string
+  style?: React.CSSProperties
 }
 
-const contentfulLoader = ({ src, width, quality }: ContentfulImageProps) => {
+const contentfulLoader = ({ src, width, quality }: ImageLoaderProps) => {
   return `${src}?w=${width}&q=${quality || 75}`
 }
 

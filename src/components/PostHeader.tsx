@@ -1,33 +1,17 @@
+'use client'
+
 import styled from '@emotion/styled'
 import { Row, Spacer } from '@jasonrundell/dropship'
 import Author from './PostAuthor'
 import PostImage from './PostImage'
-import { tokens } from '../data/tokens'
+import { tokens } from '@/data/tokens'
+import { Post as PostDef } from '@/typeDefinitions/app'
 
-export interface PostHeaderProps {
-  title: string
-  featuredImage: {
-    file: {
-      url: string
-    }
-    altText: string
-    description: string
-  }
-  date: string
-  author: {
-    name: string
-    picture: {
-      url: string
-    }
-  }
+interface PostHeaderProps {
+  post: PostDef
 }
 
-export default function PostHeader({
-  title,
-  featuredImage,
-  date,
-  author,
-}: PostHeaderProps) {
+const PostHeader = ({ post }: PostHeaderProps) => {
   const Heading = styled.h2`
     font-size: ${tokens['--size-xlarge']};
     font-weight: 700;
@@ -44,31 +28,37 @@ export default function PostHeader({
     width: 100%;
   `
 
+  const { title, date, featuredImage, author } = post
+
   return (
     <header>
       <Heading>{title}</Heading>
       {author && (
         <>
           <Author
-            name={author.name}
+            name={author.fields.name}
             picture={author.fields.picture.fields.file}
             date={date}
           />
           <Spacer />
         </>
       )}
-      {featuredImage?.file && (
+      {featuredImage?.fields.file.fields.file.url && (
         <Row>
           <PostImage
             title={title}
-            url={featuredImage.file.url}
-            altText={featuredImage.altText}
+            url={featuredImage.fields.file.fields.file.url}
+            altText={featuredImage.fields.altText || ''}
           />
-          {featuredImage.description && (
-            <StyledDescription>{featuredImage.description}</StyledDescription>
+          {featuredImage.fields.description && (
+            <StyledDescription>
+              {featuredImage.fields.description}
+            </StyledDescription>
           )}
         </Row>
       )}
     </header>
   )
 }
+
+export default PostHeader

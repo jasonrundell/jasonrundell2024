@@ -2,7 +2,7 @@ import ContentfulImage from './ContentfulImage'
 import Link from 'next/link'
 import styled from '@emotion/styled'
 
-export interface PostPreviewImageProps {
+interface PostPreviewImageProps {
   title: string
   url: string
   slug?: string

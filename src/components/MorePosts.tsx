@@ -1,6 +1,6 @@
 import { Grid } from '@jasonrundell/dropship'
 
-import { Post, Posts } from '../typeDefinitions'
+import { Post, Posts } from '@/typeDefinitions/app'
 import PostPreview from './PostPreview'
 
 const MorePosts = ({ posts }: Posts) => {

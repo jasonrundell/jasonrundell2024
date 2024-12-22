@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 
-import { tokens } from '../data/tokens'
+import { tokens } from '@/data/tokens'
 
-export interface PositionsProps {
+interface PositionsProps {
   positions: {
     id: string
     role: string

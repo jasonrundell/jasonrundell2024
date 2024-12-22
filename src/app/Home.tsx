@@ -10,7 +10,7 @@ import {
   References as ReferenceDef,
   Projects as ProjectsDef,
   Posts as PostsDef,
-} from '../typeDefinitions'
+} from '@/typeDefinitions/app'
 import { tokens } from '@/data/tokens'
 
 const Skills = dynamic(() => import('@/components/Skills'))

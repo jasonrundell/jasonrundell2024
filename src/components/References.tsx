@@ -2,8 +2,8 @@ import { Blockquote } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Document } from '@contentful/rich-text-types'
 import styled from '@emotion/styled'
-import { tokens } from '../data/tokens'
-import { References as ReferencesDef } from '../typeDefinitions'
+import { tokens } from '@/data/tokens'
+import { References as ReferencesDef } from '@/typeDefinitions/app'
 
 const options = {
   // renderMark: {

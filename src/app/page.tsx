@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Skills, References, Projects, Posts } from '../typeDefinitions'
+import { Skills, References, Projects, Posts } from '@/typeDefinitions/app'
 
 import Home from '@/app/Home'
 

@@ -1,26 +1,36 @@
 'use client'
+
 import { useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import styled from '@emotion/styled'
-import { Spacer } from '@jasonrundell/dropship'
-import PostBody from '@/components/PostBody'
+import { Spacer, Row } from '@jasonrundell/dropship'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { MARKS, Document } from '@contentful/rich-text-types'
 // import MorePosts from '@/components/MorePosts'
 import PostHeader from '@/components/PostHeader'
 import { SITE_NAME } from '@/lib/constants'
 import { tokens } from '@/data/tokens'
-import { Post as PostDef } from '@/typeDefinitions'
+import { Post as PostDef } from '@/typeDefinitions/app'
 
 interface PostProps {
   post: PostDef
 }
+
+const customMarkdownOptions = (content: PostDef['content']) => ({
+  renderMark: {
+    [MARKS.CODE]: (text: React.ReactNode) => (
+      <span dangerouslySetInnerHTML={{ __html: text as string }} />
+    ),
+  },
+})
 
 const Post = ({ post }: PostProps) => {
   useEffect(() => {
     // Apply style to the first paragraph in the content
     const firstParagraph = document.querySelector('.post-content p')
     if (firstParagraph) {
-      firstParagraph.style.fontSize = tokens['--size-large']
+      ;(firstParagraph as HTMLElement).style.fontSize = tokens['--size-large']
     }
   }, [])
 
@@ -63,9 +73,7 @@ const Post = ({ post }: PostProps) => {
     background-color: ${tokens['--background-color-2']};
   `
 
-  const { title, content, author, date, featuredImage } = post
-
-  console.log('author', author.fields.picture.fields.file)
+  const { content, featuredImage } = post
 
   return (
     <>
@@ -74,7 +82,7 @@ const Post = ({ post }: PostProps) => {
         {featuredImage && (
           <meta
             property="og:image"
-            content={featuredImage.fields.file.fields}
+            content={featuredImage.fields.file.fields.file.url}
           />
         )}
       </Head>
@@ -82,18 +90,19 @@ const Post = ({ post }: PostProps) => {
         <StyledSection id="home">
           <Breadcrumb>
             <Link href={`/`}>Home</Link> &gt; <Link href={`/#blog`}>Blog</Link>{' '}
-            &gt; {post.title}
           </Breadcrumb>
           <article>
-            <PostHeader
-              title={title}
-              featuredImage={featuredImage}
-              date={date}
-              author={author}
-            />
+            <PostHeader post={post as PostDef} />
             <Spacer />
             <StyledBody className="post-content">
-              <PostBody content={content} />
+              <section>
+                <Row>
+                  {documentToReactComponents(
+                    content as unknown as Document,
+                    customMarkdownOptions(content)
+                  )}
+                </Row>
+              </section>
             </StyledBody>
           </article>
           <Spacer />

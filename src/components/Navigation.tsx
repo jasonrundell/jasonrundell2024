@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import styled from '@emotion/styled'
 
-import { tokens } from '../data/tokens'
+import { tokens } from '@/data/tokens'
 
 const Navigation: React.FC = () => {
   const StyledNav = styled.nav`
