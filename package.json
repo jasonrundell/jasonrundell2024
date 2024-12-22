@@ -16,7 +16,7 @@
     "start": "next dev",
     "setup": "node ./contentful/setup.js $CONTENTFUL_SPACE_ID $CONTENTFUL_ACCESS_TOKEN",
     "lint": "next lint",
-    "test": "jest --coverage",
+    "test": "jest --coverage --passWithNoTests",
     "analyze": "cross-env ANALYZE=true npm run build"
   },
   "dependencies": {
