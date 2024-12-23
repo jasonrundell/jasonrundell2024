@@ -45,13 +45,12 @@ const Footer: React.FC = () => {
           <Row>
             <p>
               <small>
-                © Jason Rundell 2025. All rights reserved.
+                © Jason Rundell {new Date().getFullYear()}. All rights reserved.
                 Design consulting from{' '}
                 <a href="https://donnavitan.com">Donna Vitan</a> ❤️.
               </small>
             </p>
           </Row>
-
           <BackToTop />
         </StyledSection>
       </StyledContainer>
