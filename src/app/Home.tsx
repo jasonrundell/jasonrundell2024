@@ -29,7 +29,13 @@ export type HomeProps = {
   posts: PostsDef
 }
 
-const Home = ({ skills, projects, references, positions, posts }: HomeProps) => {
+const Home = ({
+  skills,
+  projects,
+  references,
+  positions,
+  posts,
+}: HomeProps) => {
   const StyledDivBgDark = styled.div`
     background-color: ${tokens['--background-color-2']};
   `
@@ -72,9 +78,9 @@ const Home = ({ skills, projects, references, positions, posts }: HomeProps) => 
           <Row>
             <StyledIntroParagraph>
               Hey! I&apos;m an experienced developer who loves learning and
-              using the latest in front end web development. I have a wealth of
-              experience and love for back end, dev ops, database design,
-              component driven design, design systems, and leading with empathy
+              using the latest in front-end web development. I have a wealth of
+              experience and love for back-end, DevOps, database design,
+              component-driven design, design systems, and leading with empathy
               as a manager or tech&nbsp;lead.
             </StyledIntroParagraph>
             <p>
