@@ -23,7 +23,7 @@ const ContactList: React.FC = () => {
     <StyledList>
       <StyledListItem>
         <Icon type="Email" />{' '}
-        <Link href="mailto:contact@jaosnrundell.com" label="Email me" />
+        <Link href="mailto:contact@jasonrundell.com" label="Email me" />
       </StyledListItem>
       <StyledListItem>
         <Icon type="Calendar" />{' '}
