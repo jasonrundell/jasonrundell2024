@@ -91,7 +91,7 @@ const Home = ({
               WordPress multisites, jQuery Mobile, custom CMS applications, a
               Facebook contest platform, React design systems, Jamstack
               architecture, and most recently, exploration of the possibilities
-              and limitations of automation, AI and AGI (Artificial General
+              and limitations of automation, AI, and AGI (Artificial General
               Intelligence).
             </p>
             <p>
