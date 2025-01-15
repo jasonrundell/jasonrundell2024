@@ -1,8 +1,8 @@
 import { Blockquote } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Document } from '@contentful/rich-text-types'
-import styled from '@emotion/styled'
-import { tokens } from '@/data/tokens'
+import { styled } from '@pigment-css/react'
+import Tokens from '@/lib/tokens'
 import { References as ReferencesDef } from '@/typeDefinitions/app'
 
 const options = {
@@ -14,24 +14,23 @@ const options = {
   // },
 }
 
+const StyledReference = styled('div')({
+  marginTop: `${Tokens.sizes.padding.xlarge}rem`,
+  marginBottom: `${Tokens.sizes.padding.xlarge}rem`,
+})
+
+const StyledReferenceEmphasis = styled('div')({
+  fontSize: `${Tokens.sizes.large}rem`,
+  '@media (min-width: 48rem)': {
+    fontSize: `${Tokens.sizes.xlarge}rem`,
+  },
+})
+
+const StyledCite = styled('cite')({
+  color: Tokens.colors.secondary,
+})
+
 const References = ({ references }: ReferencesDef) => {
-  const StyledReference = styled.div`
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-  `
-
-  const StyledReferenceEmphasis = styled.div`
-    font-size: ${tokens['--size-large']};
-
-    @media (min-width: 48rem) {
-      font-size: ${tokens['--size-xlarge']};
-    }
-  `
-
-  const StyledCite = styled.cite`
-    color: ${tokens['--secondary-color']};
-  `
-
   return (
     references.length > 0 &&
     references.map((reference, index) => {

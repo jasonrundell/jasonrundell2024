@@ -6,29 +6,29 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 import { Heading } from '@jasonrundell/dropship'
 
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
 import { characters } from '@/data/characters'
 
 // choose a random index from characters array
 const randomIndex = Math.floor(Math.random() * characters.length)
 
-const StyledContainer = styled.div`
-  display: block;
-  width: 20rem;
-  flex-direction: column;
-  border: 0.125rem solid ${tokens['--primary-color']};
-  padding: ${tokens['--size-xlarge']};
-  margin: ${tokens['--size-xlarge']} 0;
-`
+const StyledContainer = styled('div')({
+  display: 'block',
+  width: '20rem',
+  flexDirection: 'column',
+  border: `0.125rem solid ${Tokens.colors.primary}`,
+  padding: `${Tokens.sizes.xlarge}rem`,
+  margin: `${Tokens.sizes.xlarge} 0`,
+})
 
-const StyledQuote = styled.div`
-  font-family: Courier, monospace;
-  position: relative;
-  display: block;
-`
+const StyledQuote = styled('div')({
+  fontFamily: 'Courier, monospace',
+  position: 'relative',
+  display: 'block',
+})
 
 interface CharacterProps {
   image: string

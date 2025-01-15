@@ -1,6 +1,7 @@
-import Image from 'next/image'
-import styled from '@emotion/styled'
+'use client'
 
+import Image from 'next/image'
+import { styled } from '@pigment-css/react'
 import LinkedIn from '@/public/images/linkedin-mark-white.png'
 import GitHub from '@/public/images/github-mark-white.svg'
 import Email from '@/public/images/email-mark-white.png'
@@ -29,14 +30,15 @@ const iconMap = {
   },
 }
 
+const StyledIcon = styled(Image)({
+  width: '1.75rem',
+  height: '1.75rem',
+  display: 'inline',
+  marginRight: '0.5rem',
+})
+
 const Icon = ({ type }: IconProps) => {
   const { src, alt } = iconMap[type] || {}
-  const StyledIcon = styled(Image)`
-    width: 1.75rem;
-    height: 1.75rem;
-    display: inline;
-    margin-right: 0.5rem;
-  `
 
   if (!src) {
     return null // Return null if the type is not found in the iconMap

@@ -7,7 +7,7 @@
     "next.js",
     "contentful",
     "react",
-    "emotion"
+    "pigment-css"
   ],
   "scripts": {
     "dell": "npm run dev",
@@ -20,8 +20,7 @@
     "analyze": "cross-env ANALYZE=true npm run build"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
+    "@pigment-css/react": "^0.0.29",
     "@vercel/speed-insights": "^1.1.0",
     "contentful": "^11.3.3",
     "date-fns": "^4.1.0",
@@ -35,6 +34,7 @@
     "@jasonrundell/dropship": "^3.1.0",
     "@next/bundle-analyzer": "^15.0.2",
     "@next/third-parties": "^15.0.2",
+    "@pigment-css/nextjs-plugin": "^0.0.29",
     "@sentry/nextjs": "^8.46.0",
     "@types/react": "19.0.1",
     "autoprefixer": "^10.4.20",

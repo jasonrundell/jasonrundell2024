@@ -1,10 +1,61 @@
 'use client'
 
 import { useEffect } from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 import Link from 'next/link'
 import HeadingAnimation from './HeadingAnimation'
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
+
+const StyledMenuContainer = styled('div')({
+  width: '100%',
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  zIndex: 99,
+  backgroundColor: Tokens.colors.background,
+  transition:
+    'background 1.3s ease, --background-color-start 1.3s ease, --background-color-end 1.3s ease',
+})
+
+const StyledMenu = styled('div')({
+  display: 'flex',
+  flexDirection: 'row',
+  maxWidth: '64rem',
+  margin: '0 auto',
+  height: '4rem',
+  alignItems: 'center',
+})
+
+const StyledList = styled('ul')({
+  display: 'flex',
+  margin: 0,
+  padding: 0,
+  listStyle: 'none',
+  flexDirection: 'row',
+  alignItems: 'center',
+  '@media (min-width: 48rem)': {
+    margin: 0,
+  },
+})
+
+const StyledListItem = styled('li')({
+  display: 'flex',
+  flexDirection: 'row',
+  margin: '0 1.5rem 0 0',
+  textWrap: 'nowrap',
+  a: {
+    color: Tokens.colors.secondary,
+  },
+})
+
+const StyledNav = styled('nav')({
+  display: 'flex',
+})
+
+const StyledTitle = styled(HeadingAnimation)({
+  textWrap: 'nowrap',
+})
 
 const MainNav = () => {
   useEffect(() => {
@@ -24,71 +75,6 @@ const MainNav = () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
-
-  const StyledMenuContainer = styled.div`
-    @property --background-color-start {
-      syntax: '<color>';
-      initial-value: ${tokens['--background-color']};
-      inherits: false;
-    }
-
-    @property --background-color-end {
-      syntax: '<color>';
-      initial-value: ${tokens['--background-color']};
-      inherits: false;
-    }
-
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 99;
-    background-color: ${tokens['--background-color']};
-    transition: background 1.3s ease, --background-color-start 1.3s ease,
-      --background-color-end 1.3s ease;
-  `
-
-  const StyledMenu = styled.div`
-    display: flex;
-    flex-direction: row;
-    max-width: 64rem;
-    margin: 0 auto;
-    height: 4rem;
-    align-items: center;
-  `
-
-  const StyledList = styled.ul`
-    display: flex;
-    margin: 0 0 0 1.5rem;
-    padding: 0;
-    list-style: none;
-    flex-direction: row;
-    align-items: center;
-
-    @media (min-width: 48rem) {
-      margin: 0;
-    }
-  `
-
-  const StyledListItem = styled.li`
-    display: flex;
-    flex-flow: row nowrap;
-    margin: 0 1.5rem 0 0;
-    text-wrap: nowrap;
-
-    a {
-      color: ${tokens['--secondary-color']};
-    }
-  `
-
-  const StyledNav = styled.nav`
-    display: flex;
-  `
-
-  const StyledTitle = styled(HeadingAnimation)`
-    text-wrap: nowrap;
-  `
 
   // steps for animated heading
   const steps = [

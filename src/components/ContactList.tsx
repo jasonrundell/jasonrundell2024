@@ -1,24 +1,10 @@
 import { Link } from '@jasonrundell/dropship'
-import styled from '@emotion/styled'
 
 import Icon from './Icon'
 
-const ContactList: React.FC = () => {
-  const StyledList = styled.ul`
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  `
+import { StyledList, StyledListItem } from '@/styles/common'
 
-  const StyledListItem = styled.li`
-    display: flex;
-    margin: 0;
-    padding: 0.5rem 0;
-    align-items: center;
-  `
+const ContactList: React.FC = () => {
   return (
     <StyledList>
       <StyledListItem>

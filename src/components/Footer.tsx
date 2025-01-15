@@ -1,30 +1,17 @@
-'use client'
-
 import React from 'react'
 import { Row, Spacer } from '@jasonrundell/dropship'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 import BackToTop from './BackToTop'
 import ContactList from './ContactList'
 // import Character from './Character'
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
+import { StyledContainer, StyledSection } from '@/styles/common'
+
+const StyledFooter = styled.footer`
+  background-color: ${Tokens.colors.background3};
+`
 
 const Footer: React.FC = () => {
-  const StyledFooter = styled.footer`
-    background-color: ${tokens['--background-color-3']};
-  `
-
-  const StyledContainer = styled.div`
-    padding: 0 ${tokens['--size-large']};
-
-    @media (min-width: 48rem) {
-      margin: 0 auto;
-      max-width: 64rem;
-    }
-  `
-  const StyledSection = styled.section`
-    padding: ${tokens['--size-xlarge']} 0;
-  `
-
   return (
     <StyledFooter id="contact">
       <StyledContainer>

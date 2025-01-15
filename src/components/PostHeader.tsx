@@ -1,33 +1,31 @@
-'use client'
-
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 import { Row, Spacer } from '@jasonrundell/dropship'
 import Author from './PostAuthor'
 import PostImage from './PostImage'
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
 import { Post as PostDef } from '@/typeDefinitions/app'
 
 interface PostHeaderProps {
   post: PostDef
 }
 
+const Heading = styled('h2')`
+  font-size: ${Tokens.sizes.xlarge};
+  font-weight: 700;
+  color: ${Tokens.colors.secondary};
+  line-height: ${Tokens.sizes.xlarge};
+  margin-top: 0;
+  margin-bottom: ${Tokens.sizes.xlarge};
+`
+
+const StyledDescription = styled('p')`
+  font-size: ${Tokens.sizes.small};
+  text-transform: italic;
+  color: ${Tokens.colors.secondary};
+  width: 100%;
+`
+
 const PostHeader = ({ post }: PostHeaderProps) => {
-  const Heading = styled.h2`
-    font-size: ${tokens['--size-xlarge']};
-    font-weight: 700;
-    color: ${tokens['--secondary-color']};
-    line-height: ${tokens['--size-xlarge']};
-    margin-top: 0;
-    margin-bottom: ${tokens['--size-xlarge']};
-  `
-
-  const StyledDescription = styled.p`
-    font-size: ${tokens['--size-small']};
-    text-transform: italic;
-    color: ${tokens['--secondary-color']};
-    width: 100%;
-  `
-
   const { title, date, featuredImage, author } = post
 
   return (

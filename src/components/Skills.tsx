@@ -1,10 +1,42 @@
-'use client'
 import { Row } from '@jasonrundell/dropship'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 import { Skill, Skills as SkillsDef } from '@/typeDefinitions/app'
 
 import { onlyUnique } from '@/lib/onlyUnique'
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
+
+const StyledListContainer = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  marginTop: 0,
+  marginBottom: `${Tokens.sizes.medium}rem`,
+  listStyle: 'none',
+  paddingLeft: 0,
+  width: '100%',
+})
+
+const StyledList = styled('ul')({
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  marginTop: 0,
+  listStyle: 'none',
+  paddingLeft: 0,
+})
+
+const StyledListItem = styled('li')({
+  display: 'inline',
+  marginRight: `${Tokens.sizes.small}rem`,
+  marginLeft: 0,
+  color: Tokens.colors.text,
+  margin: `0 ${Tokens.sizes.small}rem 0 0`,
+  lineHeight: 1.6,
+})
+
+const StyledHeading = styled('h3')({
+  fontSize: `${Tokens.sizes.medium}rem`,
+  margin: 0,
+})
 
 const Skills = ({ skills }: SkillsDef) => {
   let categories: string[] = []
@@ -16,39 +48,6 @@ const Skills = ({ skills }: SkillsDef) => {
 
   // I only want the unique categories
   const uniqueCategories = categories.filter(onlyUnique)
-
-  const StyledListContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-top: 0;
-    margin-bottom: ${tokens['--size-normal']};
-    list-style: none;
-    padding-left: 0;
-    width: 100%;
-  `
-
-  const StyledList = styled.ul`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 0;
-    list-style: none;
-    padding-left: 0;
-  `
-
-  const StyledListItem = styled.li`
-    display: inline;
-    margin-right: ${tokens['--size-small']};
-    margin-left: 0;
-    color: ${tokens['--text-color']};
-    margin: 0 ${tokens['--size-small']} 0 0;
-    line-height: 1.6;
-  `
-
-  const StyledHeading = styled.h3`
-    font-size: ${tokens['--size-normal']};
-    margin: 0;
-  `
 
   return (
     <Row>

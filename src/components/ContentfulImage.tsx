@@ -1,3 +1,5 @@
+'use client'
+
 import Image, { ImageLoaderProps } from 'next/image'
 interface ContentfulImageProps {
   src: string

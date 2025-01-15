@@ -1,18 +1,19 @@
 'use client'
 
 import Link from 'next/link'
-import styled from '@emotion/styled'
-import { tokens } from '@/data/tokens'
+import { styled } from '@pigment-css/react'
+import Tokens from '@/lib/tokens'
+
+const StyledContainer = styled('div')({
+  padding: `0 ${Tokens.sizes.large}`,
+  marginBottom: `${Tokens.sizes.large}rem`,
+  '@media (min-width: 48rem)': {
+    margin: '0 auto',
+    maxWidth: `${Tokens.sizes.breakpoints.large}rem`,
+  },
+})
 
 const NotFound = () => {
-  const StyledContainer = styled.div`
-    padding: 0 ${tokens['--size-large']};
-    margin-bottom: ${tokens['--size-large']};
-    @media (min-width: 48rem) {
-      margin: 0 auto ${tokens['--size-large']} auto;
-      max-width: 64rem;
-    }
-  `
   return (
     <StyledContainer>
       <h2>404 - Page Not Found</h2>

@@ -1,7 +1,7 @@
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 import ContentfulImage from './ContentfulImage'
 import ContentDate from './ContentDate'
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
 
 interface PostAuthorProps {
   name: string
@@ -11,28 +11,28 @@ interface PostAuthorProps {
   date: string
 }
 
+const StyledContainer = styled('div')({
+  display: 'flex',
+  flexFlow: 'row wrap',
+  justifyContent: 'start',
+  justifyItems: 'start',
+  alignItems: 'center',
+})
+
+const StyledAuthor = styled('div')({
+  position: 'relative',
+  width: '3rem',
+  height: '3rem',
+  marginRight: `${Tokens.sizes.small}rem`,
+})
+
+const StyledPublished = styled('div')({
+  fontWeight: 700,
+  fontSize: `${Tokens.sizes.medium}rem`,
+  lineHeight: '1.75rem',
+})
+
 export default function PostAuthor({ name, picture, date }: PostAuthorProps) {
-  const StyledContainer = styled.div`
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: start;
-    justify-items: start;
-    align-items: center;
-  `
-
-  const StyledAuthor = styled.div`
-    position: relative;
-    width: 3rem;
-    height: 3rem;
-    margin-right: ${tokens['--size-small']};
-  `
-
-  const StyledPublished = styled.div`
-    font-weight: 700;
-    font-size: ${tokens['--size-normal']};
-    line-height: 1.75rem;
-  `
-
   return (
     <StyledContainer>
       <StyledAuthor>

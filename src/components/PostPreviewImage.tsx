@@ -1,6 +1,6 @@
 import ContentfulImage from './ContentfulImage'
 import Link from 'next/link'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 
 interface PostPreviewImageProps {
   title: string
@@ -9,28 +9,27 @@ interface PostPreviewImageProps {
   altText: string
 }
 
+// 4:3 ratio for image
+const StyledContainer = styled('div')({
+  position: 'relative',
+  width: '272px',
+  height: '204px',
+  '@media (min-width: 360px)': {
+    width: '320px',
+    height: '240px',
+  },
+  '@media (min-width: 48rem)': {
+    width: '361px',
+    height: '270px',
+  },
+})
+
 export default function PostPreviewImage({
   title,
   url,
   slug,
   altText,
 }: PostPreviewImageProps) {
-  const StyledContainer = styled.div`
-    position: relative;
-    // 4:3 ratio
-    width: 272px;
-    height: 204px;
-
-    @media (min-width: 360px) {
-      width: 320px;
-      height: 240px;
-    }
-
-    @media (min-width: 48rem) {
-      width: 361px;
-      height: 270px;
-    }
-  `
   const image = (
     <StyledContainer>
       <ContentfulImage

@@ -1,3 +1,4 @@
+import { withPigment } from '@pigment-css/nextjs-plugin'
 import { withSentryConfig } from '@sentry/nextjs'
 import withBundleAnalyzer from '@next/bundle-analyzer'
 
@@ -5,7 +6,14 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  // Other Next.js configuration options
+}
+
 export default withSentryConfig(
+  withPigment(bundleAnalyzer(nextConfig)),
   bundleAnalyzer({
     // Your existing Next.js config
   }),
