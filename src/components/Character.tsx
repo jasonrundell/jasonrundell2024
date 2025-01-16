@@ -88,7 +88,7 @@ const Character = () => {
     <StyledContainer>
       {randomCharacter && (
         <>
-          <Heading level={3} label={randomCharacter.name} />
+          <Heading level={3}>{randomCharacter.name}</Heading>
           <Image
             loader={myLoader}
             src={randomCharacter.image}

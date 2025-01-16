@@ -32,7 +32,7 @@ export default async function Positions({ positions }: PositionsDef) {
         const { company } = position
         return (
           <StyledListItem key={index}>
-            {/* <Heading level={3} label={role} /> */}
+            {/* <Heading level={3}>{role}</Heading> */}
             <StyledCompany>{company}</StyledCompany>
             {/* <br /> */}
             {/* <StyledDate>{startDate}</StyledDate> -{' '} */}
