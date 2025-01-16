@@ -7,7 +7,7 @@ import ContactList from './ContactList'
 import Tokens from '@/lib/tokens'
 import { StyledContainer, StyledSection } from '@/styles/common'
 
-const StyledFooter = styled.footer`
+const StyledFooter = styled('footer')`
   background-color: ${Tokens.colors.background3};
 `
 
@@ -16,10 +16,10 @@ const Footer: React.FC = () => {
     <StyledFooter id="contact">
       <StyledContainer>
         <StyledSection>
-          <p>
+          {/* <p>
             Sneak peak at interactive characters I&apos;m trying to integrate
             into my site to add some fun and creativity!
-          </p>
+          </p> */}
           {/* <Row>
             <Character />
           </Row> */}

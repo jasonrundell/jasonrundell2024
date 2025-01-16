@@ -15,20 +15,20 @@ import { characters } from '@/data/characters'
 // choose a random index from characters array
 const randomIndex = Math.floor(Math.random() * characters.length)
 
-const StyledContainer = styled('div')({
-  display: 'block',
-  width: '20rem',
-  flexDirection: 'column',
-  border: `0.125rem solid ${Tokens.colors.primary}`,
-  padding: `${Tokens.sizes.xlarge}rem`,
-  margin: `${Tokens.sizes.xlarge} 0`,
-})
+const StyledContainer = styled('div')`
+  display: block;
+  width: 20rem;
+  flex-direction: column;
+  border: 0.125rem solid ${Tokens.colors.primary};
+  padding: ${Tokens.sizes.xlarge}rem;
+  margin: ${Tokens.sizes.xlarge}rem 0;
+`
 
-const StyledQuote = styled('div')({
-  fontFamily: 'Courier, monospace',
-  position: 'relative',
-  display: 'block',
-})
+const StyledQuote = styled('div')`
+  font-family: Courier, monospace;
+  position: relative;
+  display: block;
+`
 
 interface CharacterProps {
   image: string

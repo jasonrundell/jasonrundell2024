@@ -6,56 +6,56 @@ import Link from 'next/link'
 import HeadingAnimation from './HeadingAnimation'
 import Tokens from '@/lib/tokens'
 
-const StyledMenuContainer = styled('div')({
-  width: '100%',
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  zIndex: 99,
-  backgroundColor: Tokens.colors.background,
-  transition:
-    'background 1.3s ease, --background-color-start 1.3s ease, --background-color-end 1.3s ease',
-})
+const StyledMenuContainer = styled('div')`
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background-color: ${Tokens.colors.background};
+  transition: background 1.3s ease, --background-color-start 1.3s ease,
+    --background-color-end 1.3s ease;
+`
 
-const StyledMenu = styled('div')({
-  display: 'flex',
-  flexDirection: 'row',
-  maxWidth: '64rem',
-  margin: '0 auto',
-  height: '4rem',
-  alignItems: 'center',
-})
+const StyledMenu = styled('div')`
+  display: flex;
+  flex-direction: row;
+  max-width: ${Tokens.sizes.breakpoints.large}rem;
+  margin: 0 auto;
+  height: 4rem;
+  align-items: center;
+`
 
-const StyledList = styled('ul')({
-  display: 'flex',
-  margin: 0,
-  padding: 0,
-  listStyle: 'none',
-  flexDirection: 'row',
-  alignItems: 'center',
-  '@media (min-width: 48rem)': {
-    margin: 0,
-  },
-})
+const StyledList = styled('ul')`
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-direction: row;
+  align-items: center;
+  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+    margin: 0;
+  }
+`
 
-const StyledListItem = styled('li')({
-  display: 'flex',
-  flexDirection: 'row',
-  margin: '0 1.5rem 0 0',
-  textWrap: 'nowrap',
-  a: {
-    color: Tokens.colors.secondary,
-  },
-})
+const StyledListItem = styled('li')`
+  display: flex;
+  flex-direction: row;
+  margin: 0 ${Tokens.sizes.large}rem 0 0;
+  text-wrap: nowrap;
+  a {
+    color: ${Tokens.colors.secondary};
+  }
+`
 
-const StyledNav = styled('nav')({
-  display: 'flex',
-})
+const StyledNav = styled('nav')`
+  display: flex;
+`
 
-const StyledTitle = styled(HeadingAnimation)({
-  textWrap: 'nowrap',
-})
+const StyledTitle = styled(HeadingAnimation)`
+  text-wrap: nowrap;
+`
 
 const MainNav = () => {
   useEffect(() => {

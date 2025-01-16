@@ -2,6 +2,8 @@ import ContentfulImage from './ContentfulImage'
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 
+import Tokens from '@/lib/tokens'
+
 interface PostImageProps {
   title: string
   url: string
@@ -10,15 +12,15 @@ interface PostImageProps {
 }
 
 // 4:3 ratio
-const StyledContainer = styled('div')({
-  position: 'relative',
-  width: '300px',
-  height: '225px',
-  '@media (min-width: 48rem)': {
-    width: '500px',
-    height: '375px',
-  },
-})
+const StyledContainer = styled('div')`
+  position: relative;
+  width: 300px;
+  height: 225px;
+  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+    width: 500px;
+    height: 375px;
+  }
+`
 
 export default function PostImage({
   title,

@@ -33,6 +33,7 @@ export default {
       medium: 1.5,
       large: 1.75,
       xlarge: 2.75,
+      base: '16px',
     },
     breakpoints: {
       small: 20,

@@ -14,21 +14,21 @@ const options = {
   // },
 }
 
-const StyledReference = styled('div')({
-  marginTop: `${Tokens.sizes.padding.xlarge}rem`,
-  marginBottom: `${Tokens.sizes.padding.xlarge}rem`,
-})
+const StyledReference = styled('div')`
+  margin-top: ${Tokens.sizes.padding.xlarge}rem;
+  margin-bottom: ${Tokens.sizes.padding.xlarge}rem;
+`
 
-const StyledReferenceEmphasis = styled('div')({
-  fontSize: `${Tokens.sizes.large}rem`,
-  '@media (min-width: 48rem)': {
-    fontSize: `${Tokens.sizes.xlarge}rem`,
-  },
-})
+const StyledReferenceEmphasis = styled('div')`
+  font-size: ${Tokens.sizes.large}rem;
+  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+    font-size: ${Tokens.sizes.xlarge}rem;
+  }
+`
 
-const StyledCite = styled('cite')({
-  color: Tokens.colors.secondary,
-})
+const StyledCite = styled('cite')`
+  color: ${Tokens.colors.secondary};
+`
 
 const References = ({ references }: ReferencesDef) => {
   return (

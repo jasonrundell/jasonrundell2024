@@ -1,10 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { Grid, Row, Spacer } from '@jasonrundell/dropship'
+import { Grid, Row, Spacer, Heading } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { MARKS, Document } from '@contentful/rich-text-types'
 import { notFound } from 'next/navigation'
-import { styled } from '@pigment-css/react'
 
 import { getEntryBySlug } from '@/lib/contentful'
 // import MoreProjects from '@/components/MoreProjects'
@@ -16,7 +15,9 @@ import {
   StyledSection,
   StyledBody,
   StyledList,
+  StyledListItem,
   StyledBreadcrumb,
+  StyledHeading3,
 } from '@/styles/common'
 
 type ProjectProps = {
@@ -33,11 +34,6 @@ const customMarkdownOptions = (content: Project['description']) => ({
   },
 })
 
-const StyledListItem = styled('li')({
-  margin: 0,
-  padding: '0 0 0.5rem 0',
-})
-
 export default async function page({ params }: ProjectProps) {
   const { slug } = params
 
@@ -48,8 +44,6 @@ export default async function page({ params }: ProjectProps) {
   }
 
   const { title, featuredImage, technology, description } = project
-
-  console.log('PROJECT title', title)
 
   return (
     <>
@@ -77,7 +71,7 @@ export default async function page({ params }: ProjectProps) {
             />
             <Grid largeTemplateColumns="1fr 3fr">
               <div>
-                <h3>Tech stack</h3>
+                <StyledHeading3 level={3}>Tech stack</StyledHeading3>
                 <Row>
                   <StyledList>
                     {technology.map((tech, index) => (
@@ -87,7 +81,7 @@ export default async function page({ params }: ProjectProps) {
                 </Row>
               </div>
               <div>
-                <h3>About</h3>
+                <StyledHeading3 level={3}>About</StyledHeading3>
                 <StyledBody>
                   <section>
                     <Row>

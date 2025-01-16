@@ -8,9 +8,6 @@ import { globalCss } from '@pigment-css/react'
 import { SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants'
 import Tokens from '@/lib/tokens'
 
-import MainNav from '@/components/MainNav'
-import Footer from '@/components/Footer'
-
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   import('react-axe').then((axe) => {
     console.log('react-axe loaded')
@@ -24,66 +21,36 @@ globalCss`
   --background-color: ${Tokens.colors.background};
   --background-color-2: ${Tokens.colors.background2};
   --background-color-3: ${Tokens.colors.background3};
-  --size-large: 1.5rem;
-  --size-normal: 1.25rem;
-  --size-small: 1rem;
-  --size-smallest: 0.25rem;
-  --primary-color: #e9be62;
-  --secondary-color: #eee;
+  --size-large: ${Tokens.sizes.large}rem;
+  --size-normal: ${Tokens.sizes.medium}rem;
+  --size-small: ${Tokens.sizes.small}rem;
+  --size-smallest: ${Tokens.sizes.xsmall}rem;
+  --primary-color: ${Tokens.colors.primary};
+  --secondary-color: ${Tokens.colors.secondary};
 }
 
 html,
 body {
-  font-size: 16px;
+  font-size: ${Tokens.sizes.fontSize.base};
   background-color: ${Tokens.colors.background};
   color: ${Tokens.colors.text};
-  margin: ${Tokens.sizes.padding.xlarge}rem 0 0 0;
+  margin: ${Tokens.sizes.padding.xlarge}rem 0 0;
 }
 
-p,
-ul {
+p {
   margin: 0 0 ${Tokens.sizes.small}rem 0;
-}
-
-a {
-  color: ${Tokens.colors.primary};
-  text-decoration: underline;
-}
-
-ul {
-  list-style-type: disc;
-}
-
-li {
-  margin: 0 0 0 ${Tokens.sizes.small}rem;
-}
-
-h1 {
-  font-size: ${Tokens.sizes.headings.h1}rem;
-  font-weight: 400;
-  margin: 0;
-  line-height: ${Tokens.sizes.lineHeight};
-}
-
-h2 {
-  font-size: ${Tokens.sizes.headings.h2}rem;
-  margin: 0 0 ${Tokens.sizes.small}rem 0;
-  color: ${Tokens.colors.secondary};
-  font-weight: 400;
-}
-
-h3 {
-  font-size: ${Tokens.sizes.headings.h3}rem;
-  font-weight: 400;
-  margin: 0 0 ${Tokens.sizes.small}rem 0;
-  color: ${Tokens.colors.primary};
 }
 
 h3,
 h4,
 time {
-  font-weight: 400;
   color: ${Tokens.colors.secondary};
+  font-weight: 400;
+}
+
+a {
+  color: ${Tokens.colors.primary};
+  text-decoration: underline;
 }
 
 @property --background-color-start {
@@ -149,6 +116,11 @@ time {
   }
 }
 `
+
+import '@jasonrundell/dropship/style.css'
+
+import MainNav from '@/components/MainNav'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: SITE_NAME,

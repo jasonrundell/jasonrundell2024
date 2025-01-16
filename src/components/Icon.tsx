@@ -30,12 +30,12 @@ const iconMap = {
   },
 }
 
-const StyledIcon = styled(Image)({
-  width: '1.75rem',
-  height: '1.75rem',
-  display: 'inline',
-  marginRight: '0.5rem',
-})
+const StyledIcon = styled(Image)`
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline;
+  margin-right: 0.5rem;
+`
 
 const Icon = ({ type }: IconProps) => {
   const { src, alt } = iconMap[type] || {}

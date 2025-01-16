@@ -1,39 +1,29 @@
 import { styled } from '@pigment-css/react'
-import { Row } from '@jasonrundell/dropship'
+import { Row, Heading } from '@jasonrundell/dropship'
 import Link from 'next/link'
+
 import PostImage from './PostImage'
 import Tokens from '@/lib/tokens'
-import { Project as ProjectDef } from '@/typeDefinitions/app'
+import { Project } from '@/typeDefinitions/app'
+import {
+  StyledHeading,
+  StyledDescription,
+  StyledHeading3,
+} from '@/styles/common'
 
 interface ProjectHeaderProps {
-  project: ProjectDef
+  project: Project
 }
 
-const Heading = styled('h2')`
-  font-size: ${Tokens.sizes.xlarge};
-  font-weight: 700;
-  color: ${Tokens.colors.secondary};
-  line-height: ${Tokens.sizes.xlarge};
-  margin-top: 0;
-  margin-bottom: ${Tokens.sizes.xlarge};
-`
-
-const StyledDescription = styled('p')`
-  font-size: ${Tokens.sizes.small};
-  text-transform: italic;
-  color: ${Tokens.colors.secondary};
-  width: 100%;
-`
-
-const ProjectHeader = ({ project }: ProjectHeaderProps) => {
+export default async function ProjectHeader({ project }: ProjectHeaderProps) {
   const { title, featuredImage, link } = project
 
   return (
     <header>
-      <Heading>{title}</Heading>
+      <StyledHeading>{title}</StyledHeading>
       {link && (
         <>
-          <h3>View</h3>
+          <StyledHeading3 level={3}>View</StyledHeading3>
           <Row>
             <Link href={link} target="_blank">
               Visit GitHub project
@@ -58,5 +48,3 @@ const ProjectHeader = ({ project }: ProjectHeaderProps) => {
     </header>
   )
 }
-
-export default ProjectHeader

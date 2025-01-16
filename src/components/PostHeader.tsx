@@ -1,36 +1,21 @@
-import { styled } from '@pigment-css/react'
 import { Row, Spacer } from '@jasonrundell/dropship'
+
 import Author from './PostAuthor'
 import PostImage from './PostImage'
 import Tokens from '@/lib/tokens'
-import { Post as PostDef } from '@/typeDefinitions/app'
+import { Post } from '@/typeDefinitions/app'
+import { StyledHeading, StyledDescription } from '@/styles/common'
 
 interface PostHeaderProps {
-  post: PostDef
+  post: Post
 }
 
-const Heading = styled('h2')`
-  font-size: ${Tokens.sizes.xlarge};
-  font-weight: 700;
-  color: ${Tokens.colors.secondary};
-  line-height: ${Tokens.sizes.xlarge};
-  margin-top: 0;
-  margin-bottom: ${Tokens.sizes.xlarge};
-`
-
-const StyledDescription = styled('p')`
-  font-size: ${Tokens.sizes.small};
-  text-transform: italic;
-  color: ${Tokens.colors.secondary};
-  width: 100%;
-`
-
-const PostHeader = ({ post }: PostHeaderProps) => {
+export default async function PostHeader({ post }: PostHeaderProps) {
   const { title, date, featuredImage, author } = post
 
   return (
     <header>
-      <Heading>{title}</Heading>
+      <StyledHeading>{title}</StyledHeading>
       {author && (
         <>
           <Author
@@ -58,5 +43,3 @@ const PostHeader = ({ post }: PostHeaderProps) => {
     </header>
   )
 }
-
-export default PostHeader

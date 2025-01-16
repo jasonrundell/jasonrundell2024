@@ -1,12 +1,21 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Heading } from '@jasonrundell/dropship'
+import { styled } from '@pigment-css/react'
 import Link from 'next/link'
+
+import Tokens from '@/lib/tokens'
 
 interface HeadingAnimationProps {
   steps: string[]
   speed: number
 }
+
+const StyledHeading = styled(Heading)`
+  font-size: 1.5rem !important;
+  font-weight: 400;
+`
 
 const HeadingAnimation = ({ steps, speed }: HeadingAnimationProps) => {
   const [currentStep, setCurrentStep] = useState(0)
@@ -25,11 +34,11 @@ const HeadingAnimation = ({ steps, speed }: HeadingAnimationProps) => {
   }, [steps.length, speed])
 
   return (
-    <h1>
+    <StyledHeading level={1}>
       <Link href="/" className="decoration--none">
         {steps[currentStep]}
       </Link>
-    </h1>
+    </StyledHeading>
   )
 }
 
