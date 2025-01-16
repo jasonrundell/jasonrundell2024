@@ -29,11 +29,12 @@ const StyledMenu = styled('div')`
 
 const StyledList = styled('ul')`
   display: flex;
-  margin: 0;
+  margin: 0 0 0 ${Tokens.sizes.large}rem;
   padding: 0;
   list-style: none;
   flex-direction: row;
   align-items: center;
+
   @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
     margin: 0;
   }
@@ -41,9 +42,10 @@ const StyledList = styled('ul')`
 
 const StyledListItem = styled('li')`
   display: flex;
-  flex-direction: row;
+  flex-flow: row nowrap;
   margin: 0 ${Tokens.sizes.large}rem 0 0;
   text-wrap: nowrap;
+
   a {
     color: ${Tokens.colors.secondary};
   }

@@ -46,6 +46,12 @@ export const StyledBody = styled('div')`
   p {
     width: 100%;
   }
+  p:first-child {
+    font-size: ${Tokens.sizes.fontSize.medium}rem;
+  }
+  li p:first-child {
+    font-size: ${Tokens.sizes.fontSize.small}rem;
+  }
   h2 {
     width: 100%;
   }

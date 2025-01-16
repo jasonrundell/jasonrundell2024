@@ -1,10 +1,9 @@
 import { Link } from '@jasonrundell/dropship'
 
 import Icon from './Icon'
-
 import { StyledList, StyledListItem } from '@/styles/common'
 
-const ContactList: React.FC = () => {
+export default async function ContactList() {
   return (
     <StyledList>
       <StyledListItem>
@@ -41,5 +40,3 @@ const ContactList: React.FC = () => {
     </StyledList>
   )
 }
-
-export default ContactList

@@ -30,7 +30,7 @@ const StyledCite = styled('cite')`
   color: ${Tokens.colors.secondary};
 `
 
-const References = ({ references }: ReferencesDef) => {
+export default async function References({ references }: ReferencesDef) {
   return (
     references.length > 0 &&
     references.map((reference, index) => {
@@ -57,5 +57,3 @@ const References = ({ references }: ReferencesDef) => {
     })
   )
 }
-
-export default References

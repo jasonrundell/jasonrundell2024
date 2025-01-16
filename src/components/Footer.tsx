@@ -9,9 +9,10 @@ import { StyledContainer, StyledSection } from '@/styles/common'
 
 const StyledFooter = styled('footer')`
   background-color: ${Tokens.colors.background3};
+  padding-bottom: 4rem;
 `
 
-const Footer: React.FC = () => {
+export default async function Footer() {
   return (
     <StyledFooter id="contact">
       <StyledContainer>
@@ -44,5 +45,3 @@ const Footer: React.FC = () => {
     </StyledFooter>
   )
 }
-
-export default Footer

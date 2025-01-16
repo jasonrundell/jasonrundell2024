@@ -38,7 +38,7 @@ const StyledHeading = styled('h3')`
   margin: 0;
 `
 
-const Skills = ({ skills }: SkillsDef) => {
+export default async function Skills({ skills }: SkillsDef) {
   let categories: string[] = []
 
   // Build array of categories
@@ -66,5 +66,3 @@ const Skills = ({ skills }: SkillsDef) => {
     </Row>
   )
 }
-
-export default Skills

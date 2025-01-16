@@ -20,7 +20,7 @@ const StyledCompany = styled('span')`
   font-style: normal;
 `
 
-const Positions = ({ positions }: PositionsDef) => {
+export default async function Positions({ positions }: PositionsDef) {
   const uniquePositions = positions.filter(
     (position, index, self) =>
       index === self.findIndex((p) => p.company === position.company)
@@ -43,5 +43,3 @@ const Positions = ({ positions }: PositionsDef) => {
     </StyledList>
   )
 }
-
-export default Positions

@@ -1,26 +1,25 @@
-'use client'
-
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
+import { Heading } from '@jasonrundell/dropship'
+
 import Tokens from '@/lib/tokens'
 
-const StyledContainer = styled('div')({
-  padding: `0 ${Tokens.sizes.large}`,
-  marginBottom: `${Tokens.sizes.large}rem`,
-  '@media (min-width: 48rem)': {
-    margin: '0 auto',
-    maxWidth: `${Tokens.sizes.breakpoints.large}rem`,
-  },
-})
+const StyledContainer = styled('div')`
+  padding: 0 ${Tokens.sizes.large}rem;
+  margin-bottom: ${Tokens.sizes.large}rem;
 
-const NotFound = () => {
+  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+    margin: 0 auto;
+    max-width: ${Tokens.sizes.breakpoints.large}rem;
+  }
+`
+
+export default async function NotFound() {
   return (
     <StyledContainer>
-      <h2>404 - Page Not Found</h2>
+      <Heading level={2}>404 - Page Not Found</Heading>
       <p>Could not find requested page.</p>
       <Link href="/">Return Home</Link>
     </StyledContainer>
   )
 }
-
-export default NotFound
