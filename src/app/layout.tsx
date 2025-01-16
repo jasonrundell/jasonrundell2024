@@ -41,6 +41,7 @@ p {
   margin: 0 0 ${Tokens.sizes.small}rem 0;
 }
 
+h2,
 h3,
 h4,
 time {
