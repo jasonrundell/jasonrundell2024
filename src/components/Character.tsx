@@ -6,25 +6,25 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 import { Heading } from '@jasonrundell/dropship'
 
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
 import { characters } from '@/data/characters'
 
 // choose a random index from characters array
 const randomIndex = Math.floor(Math.random() * characters.length)
 
-const StyledContainer = styled.div`
+const StyledContainer = styled('div')`
   display: block;
   width: 20rem;
   flex-direction: column;
-  border: 0.125rem solid ${tokens['--primary-color']};
-  padding: ${tokens['--size-xlarge']};
-  margin: ${tokens['--size-xlarge']} 0;
+  border: 0.125rem solid ${Tokens.colors.primary};
+  padding: ${Tokens.sizes.xlarge}rem;
+  margin: ${Tokens.sizes.xlarge}rem 0;
 `
 
-const StyledQuote = styled.div`
+const StyledQuote = styled('div')`
   font-family: Courier, monospace;
   position: relative;
   display: block;
@@ -88,7 +88,7 @@ const Character = () => {
     <StyledContainer>
       {randomCharacter && (
         <>
-          <Heading level={3} label={randomCharacter.name} />
+          <Heading level={3}>{randomCharacter.name}</Heading>
           <Image
             loader={myLoader}
             src={randomCharacter.image}

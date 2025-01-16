@@ -1,12 +1,44 @@
-'use client'
 import { Row } from '@jasonrundell/dropship'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 import { Skill, Skills as SkillsDef } from '@/typeDefinitions/app'
 
 import { onlyUnique } from '@/lib/onlyUnique'
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
 
-const Skills = ({ skills }: SkillsDef) => {
+const StyledListContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  margin-bottom: ${Tokens.sizes.medium}rem;
+  list-style: none;
+  padding-left: 0;
+  width: 100%;
+`
+
+const StyledList = styled('ul')`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 0;
+  list-style: none;
+  padding-left: 0;
+`
+
+const StyledListItem = styled('li')`
+  display: inline;
+  margin-right: ${Tokens.sizes.small}rem;
+  margin-left: 0;
+  color: ${Tokens.colors.text};
+  margin: 0 ${Tokens.sizes.small}rem 0 0;
+  line-height: 1.6;
+`
+
+const StyledHeading = styled('h3')`
+  font-size: ${Tokens.sizes.medium}rem;
+  margin: 0;
+`
+
+export default async function Skills({ skills }: SkillsDef) {
   let categories: string[] = []
 
   // Build array of categories
@@ -16,39 +48,6 @@ const Skills = ({ skills }: SkillsDef) => {
 
   // I only want the unique categories
   const uniqueCategories = categories.filter(onlyUnique)
-
-  const StyledListContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-top: 0;
-    margin-bottom: ${tokens['--size-normal']};
-    list-style: none;
-    padding-left: 0;
-    width: 100%;
-  `
-
-  const StyledList = styled.ul`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 0;
-    list-style: none;
-    padding-left: 0;
-  `
-
-  const StyledListItem = styled.li`
-    display: inline;
-    margin-right: ${tokens['--size-small']};
-    margin-left: 0;
-    color: ${tokens['--text-color']};
-    margin: 0 ${tokens['--size-small']} 0 0;
-    line-height: 1.6;
-  `
-
-  const StyledHeading = styled.h3`
-    font-size: ${tokens['--size-normal']};
-    margin: 0;
-  `
 
   return (
     <Row>
@@ -67,5 +66,3 @@ const Skills = ({ skills }: SkillsDef) => {
     </Row>
   )
 }
-
-export default Skills

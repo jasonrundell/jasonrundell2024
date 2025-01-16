@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 
 import ProjectPreviewImage from './ProjectPreviewImage'
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
 
 interface ProjectPreviewProps {
   title: string
@@ -16,29 +16,29 @@ interface ProjectPreviewProps {
   slug: string
 }
 
+const StyledImage = styled('div')`
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  height: 208px;
+  width: auto;
+  object-fit: cover;
+  background-color: ${Tokens.colors.background3};
+  align-items: center;
+  margin-bottom: ${Tokens.sizes.medium}rem;
+`
+
+const StyledHeading = styled('h3')`
+  font-size: ${Tokens.sizes.large}rem;
+  line-height: 1.3;
+`
+
 export default function ProjectPreview({
   title,
   image,
   slug,
   excerpt,
 }: ProjectPreviewProps) {
-  const StyledImage = styled.div`
-    position: relative;
-    display: flex;
-    margin: 0 auto;
-    height: 208px;
-    width: auto;
-    object-fit: cover;
-    background-color: ${tokens['--background-color-3']};
-    align-items: center;
-    margin-bottom: ${tokens['--size-normal']};
-  `
-
-  const StyledHeading = styled.h3`
-    font-size: ${tokens['--size-large']};
-    line-height: 1.3;
-  `
-
   return (
     <div>
       {image && image.file && (

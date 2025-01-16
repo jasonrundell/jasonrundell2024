@@ -1,41 +1,29 @@
-'use client'
-
-import styled from '@emotion/styled'
-import { Row } from '@jasonrundell/dropship'
+import { styled } from '@pigment-css/react'
+import { Row, Heading } from '@jasonrundell/dropship'
 import Link from 'next/link'
+
 import PostImage from './PostImage'
-import { tokens } from '@/data/tokens'
-import { Project as ProjectDef } from '@/typeDefinitions/app'
+import Tokens from '@/lib/tokens'
+import { Project } from '@/typeDefinitions/app'
+import {
+  StyledHeading,
+  StyledDescription,
+  StyledHeading3,
+} from '@/styles/common'
 
 interface ProjectHeaderProps {
-  project: ProjectDef
+  project: Project
 }
 
-const ProjectHeader = ({ project }: ProjectHeaderProps) => {
-  const Heading = styled.h2`
-    font-size: ${tokens['--size-xlarge']};
-    font-weight: 700;
-    color: ${tokens['--secondary-color']};
-    line-height: ${tokens['--size-xlarge']};
-    margin-top: 0;
-    margin-bottom: ${tokens['--size-xlarge']};
-  `
-
-  const StyledDescription = styled.p`
-    font-size: ${tokens['--size-small']};
-    text-transform: italic;
-    color: ${tokens['--secondary-color']};
-    width: 100%;
-  `
-
+export default async function ProjectHeader({ project }: ProjectHeaderProps) {
   const { title, featuredImage, link } = project
 
   return (
     <header>
-      <Heading>{title}</Heading>
+      <StyledHeading>{title}</StyledHeading>
       {link && (
         <>
-          <h3>View</h3>
+          <StyledHeading3 level={3}>View</StyledHeading3>
           <Row>
             <Link href={link} target="_blank">
               Visit GitHub project
@@ -60,5 +48,3 @@ const ProjectHeader = ({ project }: ProjectHeaderProps) => {
     </header>
   )
 }
-
-export default ProjectHeader

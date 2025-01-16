@@ -1,38 +1,26 @@
-'use client'
-
 import React from 'react'
 import { Row, Spacer } from '@jasonrundell/dropship'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
 import BackToTop from './BackToTop'
 import ContactList from './ContactList'
 // import Character from './Character'
-import { tokens } from '@/data/tokens'
+import Tokens from '@/lib/tokens'
+import { StyledContainer, StyledSection } from '@/styles/common'
 
-const Footer: React.FC = () => {
-  const StyledFooter = styled.footer`
-    background-color: ${tokens['--background-color-3']};
-  `
+const StyledFooter = styled('footer')`
+  background-color: ${Tokens.colors.background3};
+  padding-bottom: 4rem;
+`
 
-  const StyledContainer = styled.div`
-    padding: 0 ${tokens['--size-large']};
-
-    @media (min-width: 48rem) {
-      margin: 0 auto;
-      max-width: 64rem;
-    }
-  `
-  const StyledSection = styled.section`
-    padding: ${tokens['--size-xlarge']} 0;
-  `
-
+export default async function Footer() {
   return (
     <StyledFooter id="contact">
       <StyledContainer>
         <StyledSection>
-          <p>
+          {/* <p>
             Sneak peak at interactive characters I&apos;m trying to integrate
             into my site to add some fun and creativity!
-          </p>
+          </p> */}
           {/* <Row>
             <Character />
           </Row> */}
@@ -57,5 +45,3 @@ const Footer: React.FC = () => {
     </StyledFooter>
   )
 }
-
-export default Footer

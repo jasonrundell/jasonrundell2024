@@ -1,6 +1,8 @@
 import ContentfulImage from './ContentfulImage'
 import Link from 'next/link'
-import styled from '@emotion/styled'
+import { styled } from '@pigment-css/react'
+
+import Tokens from '@/lib/tokens'
 
 interface PostImageProps {
   title: string
@@ -9,25 +11,23 @@ interface PostImageProps {
   altText: string
 }
 
+// 4:3 ratio
+const StyledContainer = styled('div')`
+  position: relative;
+  width: 300px;
+  height: 225px;
+  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+    width: 500px;
+    height: 375px;
+  }
+`
+
 export default function PostImage({
   title,
   url,
   slug,
   altText,
 }: PostImageProps) {
-  const StyledContainer = styled.div`
-    position: relative;
-    // 4:3 ratio
-    width: 300px;
-    height: 225px;
-
-    @media (min-width: 48rem) {
-      // 4:3 ratio
-      width: 500px;
-      height: 375px;
-    }
-  `
-
   const image = (
     <StyledContainer>
       <ContentfulImage
