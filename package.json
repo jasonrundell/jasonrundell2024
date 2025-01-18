@@ -1,7 +1,7 @@
 {
   "name": "jasonrundell2024",
   "description": "Jason Rundell's personal site (2024 edition).",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Jason Rundell <jason.rundell@gmail.com>",
   "keywords": [
     "next.js",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "@contentful/rich-text-react-renderer": "^16.0.0",
     "@contentful/rich-text-types": "^17.0.0",
-    "@jasonrundell/dropship": "^3.2.0",
+    "@jasonrundell/dropship": "^3.3.0",
     "@next/bundle-analyzer": "^15.0.2",
     "@next/third-parties": "^15.0.2",
     "@pigment-css/nextjs-plugin": "^0.0.29",

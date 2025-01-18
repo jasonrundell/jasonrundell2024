@@ -35,7 +35,7 @@ const StyledList = styled('ul')`
   flex-direction: row;
   align-items: center;
 
-  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+  @media (min-width: ${Tokens.sizes.breakpoints.large}rem) {
     margin: 0;
   }
 `
