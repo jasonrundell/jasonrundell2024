@@ -29,10 +29,12 @@ type ProjectProps = {
 }
 
 const customMarkdownOptions = (content: Project['description']) => ({
-  renderNode: {
+  renderMark: {
     [MARKS.CODE]: (text: React.ReactNode) => (
       <span dangerouslySetInnerHTML={{ __html: text as string }} />
     ),
+  },
+  renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
       if (
         !node ||
