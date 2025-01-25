@@ -98,3 +98,20 @@ export const StyledDescription = styled('p')`
   color: ${Tokens.colors.secondary};
   width: 100%;
 `
+
+export const StyledEmbeddedAsset = styled('div')`
+  display: flex;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  align-items: flex-start;
+  margin: 40px auto;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    max-height: 350px;
+  }
+`

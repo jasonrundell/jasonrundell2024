@@ -14,11 +14,21 @@ interface PostImageProps {
 // 4:3 ratio
 const StyledContainer = styled('div')`
   position: relative;
-  width: 300px;
-  height: 225px;
-  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
-    width: 500px;
-    height: 375px;
+  width: 100%;
+  height: 400px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 225px;
+
+    @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+      width: 100%;
+      height: 100%;
+      max-width: 500px;
+      max-height: 375px;
+    }
   }
 `
 
@@ -30,13 +40,7 @@ export default function PostImage({
 }: PostImageProps) {
   const image = (
     <StyledContainer>
-      <ContentfulImage
-        alt={altText}
-        src={url}
-        fill={true}
-        style={{ objectFit: 'cover' }}
-        sizes="(max-width: 500px) 100vw, 375px"
-      />
+      <ContentfulImage alt={altText} src={url} fill={true} />
     </StyledContainer>
   )
 

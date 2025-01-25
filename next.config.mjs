@@ -9,7 +9,9 @@ const bundleAnalyzer = withBundleAnalyzer({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // Other Next.js configuration options
+  images: {
+    domains: ['images.ctfassets.net'], // Add the hostname here
+  },
 }
 
 export default withSentryConfig(withPigment(bundleAnalyzer(nextConfig)), {

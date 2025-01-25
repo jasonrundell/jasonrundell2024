@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { Grid, Row, Spacer, Heading } from '@jasonrundell/dropship'
+import Image from 'next/image'
+import { Grid, Row, Spacer } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { MARKS, Document } from '@contentful/rich-text-types'
+import { MARKS, Document, BLOCKS } from '@contentful/rich-text-types'
 import { notFound } from 'next/navigation'
 
 import { getEntryBySlug } from '@/lib/contentful'
 // import MoreProjects from '@/components/MoreProjects'
-import ProjectHeader from '@/components/ProjectHeader'
 import { SITE_NAME } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
 import {
@@ -17,7 +17,9 @@ import {
   StyledList,
   StyledListItem,
   StyledBreadcrumb,
+  StyledHeading,
   StyledHeading3,
+  StyledEmbeddedAsset,
 } from '@/styles/common'
 
 type ProjectProps = {
@@ -27,10 +29,36 @@ type ProjectProps = {
 }
 
 const customMarkdownOptions = (content: Project['description']) => ({
-  renderMark: {
+  renderNode: {
     [MARKS.CODE]: (text: React.ReactNode) => (
       <span dangerouslySetInnerHTML={{ __html: text as string }} />
     ),
+    [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+      if (
+        !node ||
+        !node.data ||
+        !node.data.target ||
+        !node.data.target.fields
+      ) {
+        return null
+      }
+
+      const { file, description } = node.data.target.fields
+      const imageUrl = file.url.startsWith('//')
+        ? `https:${file.url}`
+        : file.url
+      return (
+        <StyledEmbeddedAsset>
+          <Image
+            src={imageUrl}
+            alt={description}
+            layout="responsive"
+            width={500}
+            height={300}
+          />
+        </StyledEmbeddedAsset>
+      )
+    },
   },
 })
 
@@ -43,7 +71,7 @@ export default async function page({ params }: ProjectProps) {
     notFound()
   }
 
-  const { title, featuredImage, technology, description } = project
+  const { title, featuredImage, technology, description, link } = project
 
   return (
     <>
@@ -57,20 +85,32 @@ export default async function page({ params }: ProjectProps) {
         )}
       </Head>
       <StyledContainer>
-        <StyledSection id="home">
-          <StyledBreadcrumb>
-            <Link href={`/`}>Home</Link> &gt;{' '}
-            <Link href={`/#projects`}>Projects</Link> &gt; {title}
-          </StyledBreadcrumb>
+        <StyledBreadcrumb>
+          <Link href={`/`}>Home</Link> &gt;{' '}
+          <Link href={`/#projects`}>Projects</Link> &gt; {title}
+        </StyledBreadcrumb>
+        <StyledSection id="project">
           <article>
-            <ProjectHeader project={project as Project} />
-            <Spacer
-              smallScreen="medium"
-              mediumScreen="large"
-              largeScreen="xlarge"
-            />
-            <Grid largeTemplateColumns="1fr 3fr">
+            <Grid largeTemplateColumns="1fr 3fr" columnGap="3rem">
               <div>
+                <header>
+                  <StyledHeading>{title}</StyledHeading>
+                </header>
+                {link && (
+                  <>
+                    <StyledHeading3 level={3}>View</StyledHeading3>
+                    <Row>
+                      <Link href={link} target="_blank">
+                        Visit GitHub project
+                      </Link>
+                    </Row>
+                  </>
+                )}
+                <Spacer
+                  smallScreen="medium"
+                  mediumScreen="large"
+                  largeScreen="xlarge"
+                />
                 <StyledHeading3 level={3}>Tech stack</StyledHeading3>
                 <Row>
                   <StyledList>
@@ -84,12 +124,10 @@ export default async function page({ params }: ProjectProps) {
                 <StyledHeading3 level={3}>About</StyledHeading3>
                 <StyledBody>
                   <section>
-                    <Row>
-                      {documentToReactComponents(
-                        description as unknown as Document,
-                        customMarkdownOptions(description)
-                      )}
-                    </Row>
+                    {documentToReactComponents(
+                      description as unknown as Document,
+                      customMarkdownOptions(description)
+                    )}
                   </section>
                 </StyledBody>
               </div>
