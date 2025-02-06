@@ -42,8 +42,6 @@ export default async function page({ params }: PostProps) {
 
   const { title, content, featuredImage } = post
 
-  console.log('POST title', title)
-
   return (
     <>
       <Head>
