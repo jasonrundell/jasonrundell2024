@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import type { Metadata, ResolvingMetadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Grid, Row, Spacer } from '@jasonrundell/dropship'
@@ -8,7 +8,7 @@ import { notFound } from 'next/navigation'
 
 import { getEntryBySlug } from '@/lib/contentful'
 // import MoreProjects from '@/components/MoreProjects'
-import { SITE_NAME } from '@/lib/constants'
+import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
 import {
   StyledContainer,
@@ -23,9 +23,7 @@ import {
 } from '@/styles/common'
 
 type ProjectProps = {
-  params: {
-    slug: string
-  }
+  params: Promise<{ slug: string }>
 }
 
 const customMarkdownOptions = (content: Project['description']) => ({
@@ -64,8 +62,25 @@ const customMarkdownOptions = (content: Project['description']) => ({
   },
 })
 
+export async function generateMetadata(
+  { params }: ProjectProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = (await params).slug
+
+  const project = await getEntryBySlug<Project>('project', slug)
+
+  return {
+    title: `Jason Rundell | Project: ${project.title}`,
+    description: SITE_DESCRIPTION,
+    openGraph: {
+      images: [`https://${project.featuredImage?.fields.file.fields.file.url}`],
+    },
+  }
+}
+
 export default async function page({ params }: ProjectProps) {
-  const { slug } = params
+  const slug = (await params).slug
 
   const project = await getEntryBySlug<Project>('project', slug)
 
@@ -77,15 +92,6 @@ export default async function page({ params }: ProjectProps) {
 
   return (
     <>
-      <Head>
-        <title>{title ? `${title} | ${SITE_NAME}` : SITE_NAME}</title>
-        {featuredImage?.fields?.file && (
-          <meta
-            property="og:image"
-            content={featuredImage.fields.file.fields.file.url}
-          />
-        )}
-      </Head>
       <StyledContainer>
         <StyledBreadcrumb>
           <Link href={`/`}>Home</Link> &gt;{' '}

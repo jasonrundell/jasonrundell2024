@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import type { Metadata, ResolvingMetadata } from 'next'
 import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -8,7 +8,7 @@ import { notFound } from 'next/navigation'
 import { getEntryBySlug } from '@/lib/contentful'
 // import MorePosts from '@/components/MorePosts'
 import PostHeader from '@/components/PostHeader'
-import { SITE_NAME } from '@/lib/constants'
+import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Post } from '@/typeDefinitions/app'
 import {
   StyledContainer,
@@ -18,9 +18,7 @@ import {
 } from '@/styles/common'
 
 type PostProps = {
-  params: {
-    slug: string
-  }
+  params: Promise<{ slug: string }>
 }
 
 const customMarkdownOptions = (content: Post['content']) => ({
@@ -31,8 +29,25 @@ const customMarkdownOptions = (content: Post['content']) => ({
   },
 })
 
+export async function generateMetadata(
+  { params }: PostProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = (await params).slug
+
+  const post = await getEntryBySlug<Post>('post', slug)
+
+  return {
+    title: `Jason Rundell | Blog: ${post.title}`,
+    description: SITE_DESCRIPTION,
+    openGraph: {
+      images: [`https://${post.featuredImage?.fields.file.fields.file.url}`],
+    },
+  }
+}
+
 export default async function page({ params }: PostProps) {
-  const { slug } = params
+  const slug = (await params).slug
 
   const post = await getEntryBySlug<Post>('post', slug)
 
@@ -44,15 +59,6 @@ export default async function page({ params }: PostProps) {
 
   return (
     <>
-      <Head>
-        <title>{title ? `${title} | ${SITE_NAME}` : SITE_NAME}</title>
-        {featuredImage && (
-          <meta
-            property="og:image"
-            content={featuredImage.fields.file.fields.file.url}
-          />
-        )}
-      </Head>
       <StyledContainer>
         <StyledSection id="home">
           <StyledBreadcrumb>
