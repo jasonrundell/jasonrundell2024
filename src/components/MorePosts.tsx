@@ -20,7 +20,7 @@ export default async function MorePosts({ posts }: Posts) {
             <PostPreview
               key={slug}
               title={title}
-              image={featuredImage.fields.file.fields}
+              image={featuredImage?.fields.file.fields}
               date={date}
               excerpt={excerpt}
               slug={slug}

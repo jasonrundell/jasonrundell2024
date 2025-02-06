@@ -30,7 +30,7 @@ export default function MoreProjects({ items }: MoreProjectsProps) {
           <ProjectPreview
             key={post.slug}
             title={post.title}
-            image={post.featuredImage}
+            image={post?.featuredImage}
             slug={post.slug}
             excerpt={post.excerpt}
           />
