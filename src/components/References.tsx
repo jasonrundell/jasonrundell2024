@@ -15,19 +15,20 @@ const options = {
 }
 
 const StyledReference = styled('div')`
-  margin-top: ${Tokens.sizes.padding.xlarge}rem;
-  margin-bottom: ${Tokens.sizes.padding.xlarge}rem;
+  margin-top: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge.unit};
+  margin-bottom: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge.unit};
 `
 
 const StyledReferenceEmphasis = styled('div')`
-  font-size: ${Tokens.sizes.large}rem;
-  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
-    font-size: ${Tokens.sizes.xlarge}rem;
+  font-size: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+  @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
+      .breakpoints.medium.unit}) {
+    font-size: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
   }
 `
 
 const StyledCite = styled('cite')`
-  color: ${Tokens.colors.secondary};
+  color: ${Tokens.colors.secondary.value};
 `
 
 export default async function References({ references }: ReferencesDef) {

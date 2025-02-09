@@ -10,11 +10,13 @@ interface BackToTopStyleProps {
 
 const BackToTopStyle = styled('div')<BackToTopStyleProps>({
   position: 'fixed',
-  bottom: `${Tokens.sizes.xlarge}rem`,
-  right: `${Tokens.sizes.xlarge}rem`,
-  backgroundColor: '#e9be62',
-  color: '#000',
-  padding: `${10 / 16}rem ${Tokens.sizes.medium}rem`,
+  bottom: `${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit}`,
+  right: `${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit}`,
+  backgroundColor: Tokens.colors.primary.value,
+  color: Tokens.colors.surface.value,
+  padding: `${10 / 16}rem ${Tokens.sizes.medium.value}${
+    Tokens.sizes.medium.unit
+  }`,
   borderRadius: `${5 / 16}rem`,
   cursor: 'pointer',
   '&:hover': {

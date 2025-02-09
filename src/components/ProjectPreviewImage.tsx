@@ -20,7 +20,8 @@ const StyledContainer = styled('div')`
     width: 320px;
     height: 240px;
   }
-  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+  @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
+      .breakpoints.medium.unit}) {
     width: 361px;
     height: 270px;
   }

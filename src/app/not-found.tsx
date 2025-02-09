@@ -5,12 +5,13 @@ import { Heading } from '@jasonrundell/dropship'
 import Tokens from '@/lib/tokens'
 
 const StyledContainer = styled('div')`
-  padding: 0 ${Tokens.sizes.large}rem;
-  margin-bottom: ${Tokens.sizes.large}rem;
+  padding: 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+  margin-bottom: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
 
-  @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+  @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
+      .breakpoints.medium.unit}) {
     margin: 0 auto;
-    max-width: ${Tokens.sizes.breakpoints.large}rem;
+    max-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes.breakpoints.large.unit};
   }
 `
 

@@ -19,13 +19,13 @@ const StyledContainer = styled('div')`
   display: block;
   width: 20rem;
   flex-direction: column;
-  border: 0.125rem solid ${Tokens.colors.primary};
-  padding: ${Tokens.sizes.xlarge}rem;
-  margin: ${Tokens.sizes.xlarge}rem 0;
+  border: 0.125rem solid ${Tokens.colors.primary.value};
+  padding: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
+  margin: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit} 0;
 `
 
 const StyledQuote = styled('div')`
-  font-family: Courier, monospace;
+  font-family: ${Tokens.fonts.monospace.family};
   position: relative;
   display: block;
 `

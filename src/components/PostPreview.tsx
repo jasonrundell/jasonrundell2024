@@ -21,15 +21,12 @@ interface PostPreviewProps {
 const StyledImage = styled('div')`
   position: relative;
   display: flex;
-  margin: 0 auto;
   object-fit: cover;
-  background-color: ${Tokens.colors.background3};
-  align-items: center;
-  margin-bottom: ${Tokens.sizes.medium}rem;
+  background-color: ${Tokens.colors.backgroundDarker.value};
 `
 
 const StyledHeading = styled('h3')`
-  font-size: ${Tokens.sizes.large}rem;
+  font-size: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
   line-height: 1.3;
 `
 

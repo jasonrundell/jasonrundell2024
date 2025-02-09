@@ -23,12 +23,12 @@ const StyledAuthor = styled('div')`
   position: relative;
   width: 3rem;
   height: 3rem;
-  margin-right: ${Tokens.sizes.small}rem;
+  margin-right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
 `
 
 const StyledPublished = styled('div')`
   font-weight: 700;
-  font-size: ${Tokens.sizes.medium}rem;
+  font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
   line-height: 1.75rem;
 `
 

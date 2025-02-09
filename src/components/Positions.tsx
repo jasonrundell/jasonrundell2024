@@ -13,7 +13,7 @@ const StyledList = styled('ul')`
 `
 
 const StyledListItem = styled('li')`
-  margin: 0 0 ${Tokens.sizes.large}rem 0;
+  margin: 0 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit} 0;
 `
 
 const StyledCompany = styled('span')`

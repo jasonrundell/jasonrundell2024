@@ -9,7 +9,7 @@ const StyledListContainer = styled('div')`
   display: flex;
   flex-direction: column;
   margin-top: 0;
-  margin-bottom: ${Tokens.sizes.medium}rem;
+  margin-bottom: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
   list-style: none;
   padding-left: 0;
   width: 100%;
@@ -26,15 +26,15 @@ const StyledList = styled('ul')`
 
 const StyledListItem = styled('li')`
   display: inline;
-  margin-right: ${Tokens.sizes.small}rem;
+  margin-right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   margin-left: 0;
   color: ${Tokens.colors.text};
-  margin: 0 ${Tokens.sizes.small}rem 0 0;
+  margin: 0 ${Tokens.sizes.small.value}${Tokens.sizes.small.unit} 0 0;
   line-height: 1.6;
 `
 
 const StyledHeading = styled('h3')`
-  font-size: ${Tokens.sizes.medium}rem;
+  font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
   margin: 0;
 `
 
