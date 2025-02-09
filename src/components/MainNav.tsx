@@ -13,7 +13,7 @@ const StyledMenuContainer = styled('div')`
   left: 0;
   right: 0;
   z-index: 99;
-  background-color: ${Tokens.colors.background};
+  background-color: ${Tokens.colors.background.value};
   transition: background 1.3s ease, --background-color-start 1.3s ease,
     --background-color-end 1.3s ease;
 `
@@ -21,7 +21,7 @@ const StyledMenuContainer = styled('div')`
 const StyledMenu = styled('div')`
   display: flex;
   flex-direction: row;
-  max-width: ${Tokens.sizes.breakpoints.large}rem;
+  max-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes.breakpoints.large.unit};
   margin: 0 auto;
   height: 4rem;
   align-items: center;
@@ -29,13 +29,14 @@ const StyledMenu = styled('div')`
 
 const StyledList = styled('ul')`
   display: flex;
-  margin: 0 0 0 ${Tokens.sizes.large}rem;
+  margin: 0 0 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
   padding: 0;
   list-style: none;
   flex-direction: row;
   align-items: center;
 
-  @media (min-width: ${Tokens.sizes.breakpoints.large}rem) {
+  @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
+      .breakpoints.large.unit}) {
     margin: 0;
   }
 `
@@ -43,11 +44,11 @@ const StyledList = styled('ul')`
 const StyledListItem = styled('li')`
   display: flex;
   flex-flow: row nowrap;
-  margin: 0 ${Tokens.sizes.large}rem 0 0;
+  margin: 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit} 0 0;
   text-wrap: nowrap;
 
   a {
-    color: ${Tokens.colors.secondary};
+    color: ${Tokens.colors.secondary.value};
   }
 `
 

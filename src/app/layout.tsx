@@ -17,52 +17,58 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
 
 globalCss`
   :root {
-  --text-color: ${Tokens.colors.text};
-  --background-color: ${Tokens.colors.background};
-  --background-color-2: ${Tokens.colors.background2};
-  --background-color-3: ${Tokens.colors.background3};
-  --size-large: ${Tokens.sizes.large}rem;
-  --size-normal: ${Tokens.sizes.medium}rem;
-  --size-small: ${Tokens.sizes.small}rem;
-  --size-smallest: ${Tokens.sizes.xsmall}rem;
-  --primary-color: ${Tokens.colors.primary};
-  --secondary-color: ${Tokens.colors.secondary};
+  --text-color: ${Tokens.colors.textPrimary.value};
+  --background-color: ${Tokens.colors.background.value};
+  --background-color-2: ${Tokens.colors.backgroundDark.value};
+  --background-color-3: ${Tokens.colors.backgroundDarker.value};
+  --size-large: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+  --size-normal: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
+  --size-small: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+  --size-smallest: ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit};
+  --primary-color: ${Tokens.colors.primary.value};
+  --secondary-color: ${Tokens.colors.secondary.value};
 }
 
 html,
 body {
-  font-size: ${Tokens.sizes.fontSize.base};
-  background-color: ${Tokens.colors.background};
-  color: ${Tokens.colors.text};
-  margin: ${Tokens.sizes.padding.xlarge}rem 0 0;
+  font-size: ${Tokens.sizes.fonts.base.value}${Tokens.sizes.fonts.base.unit};
+  background-color: ${Tokens.colors.background.value};
+  color: ${Tokens.colors.textPrimary.value};
+  margin: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge.unit} 0 0;
 }
 
 p {
-  margin: 0 0 ${Tokens.sizes.small}rem 0;
+  margin: 0 0 ${Tokens.sizes.small.value}${Tokens.sizes.small.unit} 0;
 }
 
 h2,
 h3,
 h4,
 time {
-  color: ${Tokens.colors.secondary};
+  color: ${Tokens.colors.secondary.value};
   font-weight: 400;
 }
 
 a {
-  color: ${Tokens.colors.primary};
+  color: ${Tokens.colors.primary.value};
   text-decoration: underline;
+  word-break: break-word;
+}
+
+hr {
+  width: 100%;
+  margin-bottom: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
 }
 
 @property --background-color-start {
   syntax: '<color>';
-  initial-value: ${Tokens.colors.background};
+  initial-value: ${Tokens.colors.background.value};
   inherits: false;
 }
 
 @property --background-color-end {
   syntax: '<color>';
-  initial-value: ${Tokens.colors.background};
+  initial-value: ${Tokens.colors.background.value};
   inherits: false;
 }
 
@@ -73,7 +79,7 @@ a {
   left: 0;
   right: 0;
   z-index: 99;
-  background-color: ${Tokens.colors.background};
+  background-color: ${Tokens.colors.background.value};
   transition: background 1.3s ease, --background-color-start 1.3s ease,
     --background-color-end 1.3s ease;
 }
@@ -84,13 +90,13 @@ a {
     var(--background-color-start) 0%,
     var(--background-color-end) 100%
   );
-  --background-color-start: ${Tokens.colors.background};
-  --background-color-end: ${Tokens.colors.background3};
+  --background-color-start: ${Tokens.colors.background.value};
+  --background-color-end: ${Tokens.colors.backgroundDarker.value};
 }
 
 #menu:not(.scrolled) {
-  --background-color-start: ${Tokens.colors.background};
-  --background-color-end: ${Tokens.colors.background};
+  --background-color-start: ${Tokens.colors.background.value};
+  --background-color-end: ${Tokens.colors.background.value};
 }
 
 .decoration--none {
@@ -111,7 +117,7 @@ a {
   font-weight: bold;
 }
 
-@media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
+@media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes.breakpoints.medium.unit}) {
   .youtube-embed {
     height: 31.25rem;
   }

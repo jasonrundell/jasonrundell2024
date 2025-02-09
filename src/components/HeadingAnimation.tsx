@@ -5,8 +5,6 @@ import { Heading } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 import Link from 'next/link'
 
-import Tokens from '@/lib/tokens'
-
 interface HeadingAnimationProps {
   steps: string[]
   speed: number

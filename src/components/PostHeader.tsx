@@ -2,7 +2,6 @@ import { Row, Spacer } from '@jasonrundell/dropship'
 
 import Author from './PostAuthor'
 import PostImage from './PostImage'
-import Tokens from '@/lib/tokens'
 import { Post } from '@/typeDefinitions/app'
 import { StyledHeading, StyledDescription } from '@/styles/common'
 

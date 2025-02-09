@@ -14,18 +14,21 @@ interface PostImageProps {
 // 4:3 ratio
 const StyledContainer = styled('div')`
   position: relative;
+  display: block;
   width: 100%;
-  height: 400px;
+  height: 225px;
+
+  @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
+      .breakpoints.medium.unit}) {
+    height: 400px;
+  }
 
   img {
-    width: 100%;
-    height: 100%;
     max-width: 300px;
     max-height: 225px;
 
-    @media (min-width: ${Tokens.sizes.breakpoints.medium}rem) {
-      width: 100%;
-      height: 100%;
+    @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
+        .breakpoints.medium.unit}) {
       max-width: 500px;
       max-height: 375px;
     }

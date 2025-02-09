@@ -23,13 +23,13 @@ const StyledImage = styled('div')`
   height: 208px;
   width: auto;
   object-fit: cover;
-  background-color: ${Tokens.colors.background3};
+  background-color: ${Tokens.colors.backgroundDarker.value};
   align-items: center;
-  margin-bottom: ${Tokens.sizes.medium}rem;
+  margin-bottom: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
 `
 
 const StyledHeading = styled('h3')`
-  font-size: ${Tokens.sizes.large}rem;
+  font-size: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
   line-height: 1.3;
 `
 
