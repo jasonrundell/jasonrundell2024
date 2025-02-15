@@ -45,32 +45,42 @@ const BackToTopStyle = styled('div')<BackToTopStyleProps>({
 const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false)
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
+    if (window.scrollY > 300) {
       setIsVisible(true)
     } else {
       setIsVisible(false)
     }
   }
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
+  // Add throttle function
+  const throttle = (func: Function, limit: number) => {
+    let inThrottle: boolean
+    return function(this: any, ...args: any[]) {
+      if (!inThrottle) {
+        func.apply(this, args)
+        inThrottle = true
+        setTimeout(() => (inThrottle = false), limit)
+      }
+    }
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility)
+    const throttledToggleVisibility = throttle(toggleVisibility, 100)
+    window.addEventListener('scroll', throttledToggleVisibility)
     return () => {
-      window.removeEventListener('scroll', toggleVisibility)
+      window.removeEventListener('scroll', throttledToggleVisibility)
     }
   }, [])
 
   return (
     <BackToTopStyle
       onClick={scrollToTop}
-      onKeyPress={(e) => {
+      onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           scrollToTop()
         }
