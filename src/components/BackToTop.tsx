@@ -19,8 +19,14 @@ const BackToTopStyle = styled('div')<BackToTopStyleProps>({
   }`,
   borderRadius: `${5 / 16}rem`,
   cursor: 'pointer',
+  transition: 'opacity 0.3s ease, transform 0.3s ease',
   '&:hover': {
     backgroundColor: Tokens.colors.secondary,
+    transform: 'translateY(-2px)',
+  },
+  '&:focus': {
+    outline: `2px solid ${Tokens.colors.primary.value}`,
+    outlineOffset: '2px',
   },
   variants: [
     {
@@ -28,7 +34,8 @@ const BackToTopStyle = styled('div')<BackToTopStyleProps>({
         isVisible: true,
       },
       style: {
-        display: 'block',
+        opacity: 1,
+        visibility: 'visible',
       },
     },
     {
@@ -36,7 +43,8 @@ const BackToTopStyle = styled('div')<BackToTopStyleProps>({
         isVisible: false,
       },
       style: {
-        display: 'none',
+        opacity: 0,
+        visibility: 'hidden',
       },
     },
   ],
