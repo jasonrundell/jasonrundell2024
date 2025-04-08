@@ -146,7 +146,9 @@ export default function RootLayout({
       <body className={outfit.className}>
         <SpeedInsights />
         <GoogleAnalytics gaId="G-GZFPYCJVHQ" />
-        <MainNav />
+        <header>
+          <MainNav />
+        </header>
         <main>{children}</main>
         <Footer />
       </body>
