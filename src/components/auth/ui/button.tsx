@@ -1,56 +1,152 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import * as React from 'react'
+import { Slot } from '@radix-ui/react-slot'
+import { styled } from '@pigment-css/react'
+import Tokens from '@/lib/tokens'
 
-import { cn } from "@/lib/utils";
-
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
-);
+export type ButtonVariant =
+  | 'default'
+  | 'destructive'
+  | 'outline'
+  | 'secondary'
+  | 'ghost'
+  | 'link'
+export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon'
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  asChild?: boolean
+  variant?: ButtonVariant
+  size?: ButtonSize
 }
 
+const StyledButton = styled('button')`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  opacity: 1;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  /* Size variants */
+  &.size-default {
+    height: 2.5rem;
+    padding: 0 1.25rem;
+    font-size: 1rem;
+  }
+  &.size-sm {
+    height: 2.25rem;
+    padding: 0 1rem;
+    font-size: 0.95rem;
+  }
+  &.size-lg {
+    height: 2.75rem;
+    padding: 0 2rem;
+    font-size: 1.1rem;
+  }
+  &.size-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+    padding: 0;
+    font-size: 1.1rem;
+  }
+  /* Variant styles */
+  &.variant-default {
+    background: ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.background.value};
+  }
+  &.variant-default:hover {
+    background: ${Tokens.colors.primary.value}CC;
+  }
+  &.variant-default:focus-visible {
+    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
+  }
+  &.variant-destructive {
+    background: #e3342f;
+    color: #fff;
+  }
+  &.variant-destructive:hover {
+    background: #cc1f1a;
+  }
+  &.variant-destructive:focus-visible {
+    box-shadow: 0 0 0 2px #e3342f99;
+  }
+  &.variant-outline {
+    background: transparent;
+    color: ${Tokens.colors.primary.value};
+    border: 1.5px solid ${Tokens.colors.primary.value};
+  }
+  &.variant-outline:hover {
+    background: ${Tokens.colors.backgroundDark.value};
+  }
+  &.variant-outline:focus-visible {
+    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
+  }
+  &.variant-secondary {
+    background: ${Tokens.colors.secondary.value};
+    color: ${Tokens.colors.background.value};
+  }
+  &.variant-secondary:hover {
+    background: ${Tokens.colors.secondaryVariant.value};
+  }
+  &.variant-secondary:focus-visible {
+    box-shadow: 0 0 0 2px ${Tokens.colors.secondary.value}99;
+  }
+  &.variant-ghost {
+    background: transparent;
+    color: ${Tokens.colors.primary.value};
+  }
+  &.variant-ghost:hover {
+    background: ${Tokens.colors.backgroundDark.value};
+  }
+  &.variant-ghost:focus-visible {
+    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
+  }
+  &.variant-link {
+    background: none;
+    color: ${Tokens.colors.primary.value};
+    text-decoration: underline;
+  }
+  &.variant-link:hover {
+    color: ${Tokens.colors.primaryVariant.value};
+  }
+  &.variant-link:focus-visible {
+    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
+  }
+`
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+  (
+    {
+      asChild = false,
+      variant = 'default',
+      size = 'default',
+      className,
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : 'button'
+    const variantClass = `variant-${variant}`
+    const sizeClass = `size-${size}`
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+      <StyledButton
+        as={Comp}
         ref={ref}
+        className={[variantClass, sizeClass, className]
+          .filter(Boolean)
+          .join(' ')}
         {...props}
       />
-    );
-  },
-);
-Button.displayName = "Button";
+    )
+  }
+)
+Button.displayName = 'Button'
 
-export { Button, buttonVariants };
+export { Button }

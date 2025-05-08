@@ -1,30 +1,60 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Check } from "lucide-react";
+import * as React from 'react'
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
+import { Check } from 'lucide-react'
+import { styled } from '@pigment-css/react'
+import Tokens from '@/lib/tokens'
 
-import { cn } from "@/lib/utils";
+const StyledCheckboxRoot = styled(CheckboxPrimitive.Root)`
+  height: 1.25rem;
+  width: 1.25rem;
+  min-width: 1.25rem;
+  min-height: 1.25rem;
+  border-radius: 0.25rem;
+  border: 1.5px solid ${Tokens.colors.primary.value};
+  background: ${Tokens.colors.backgroundDark.value};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+  box-sizing: border-box;
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}55;
+    border-color: ${Tokens.colors.primary.value};
+  }
+  &[data-state='checked'] {
+    background: ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.background.value};
+    border-color: ${Tokens.colors.primary.value};
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`
+
+const StyledCheckboxIndicator = styled(CheckboxPrimitive.Indicator)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${Tokens.colors.background.value};
+  width: 100%;
+  height: 100%;
+`
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <CheckboxPrimitive.Root
-    ref={ref}
-    className={cn(
-      "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
-      className,
-    )}
-    {...props}
-  >
-    <CheckboxPrimitive.Indicator
-      className={cn("flex items-center justify-center text-current")}
-    >
-      <Check className="h-4 w-4" />
-    </CheckboxPrimitive.Indicator>
-  </CheckboxPrimitive.Root>
-));
-Checkbox.displayName = CheckboxPrimitive.Root.displayName;
+>(({ ...props }, ref) => (
+  <StyledCheckboxRoot ref={ref} {...props}>
+    <StyledCheckboxIndicator>
+      <Check style={{ width: '1rem', height: '1rem' }} />
+    </StyledCheckboxIndicator>
+  </StyledCheckboxRoot>
+))
+Checkbox.displayName = CheckboxPrimitive.Root.displayName
 
-export { Checkbox };
+export { Checkbox }

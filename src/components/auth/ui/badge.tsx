@@ -1,36 +1,68 @@
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import * as React from 'react'
+import { styled } from '@pigment-css/react'
+import Tokens from '@/lib/tokens'
 
-import { cn } from "@/lib/utils";
+export type BadgeVariant = 'default' | 'secondary' | 'destructive' | 'outline'
 
-const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  },
-);
-
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
-
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
-  );
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: BadgeVariant
 }
 
-export { Badge, badgeVariants };
+const StyledBadge = styled('div')`
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border-width: 1.5px;
+  border-style: solid;
+  padding: 0.125rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  /* Default */
+  &.variant-default {
+    border-color: transparent;
+    background: ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.background.value};
+  }
+  &.variant-default:hover {
+    background: ${Tokens.colors.primary.value}CC;
+  }
+  /* Secondary */
+  &.variant-secondary {
+    border-color: transparent;
+    background: ${Tokens.colors.secondary.value};
+    color: ${Tokens.colors.background.value};
+  }
+  &.variant-secondary:hover {
+    background: ${Tokens.colors.secondaryVariant.value};
+  }
+  /* Destructive */
+  &.variant-destructive {
+    border-color: transparent;
+    background: #e3342f;
+    color: #fff;
+  }
+  &.variant-destructive:hover {
+    background: #cc1f1a;
+  }
+  /* Outline */
+  &.variant-outline {
+    border-color: ${Tokens.colors.textPrimary.value};
+    background: transparent;
+    color: ${Tokens.colors.textPrimary.value};
+  }
+`
+
+export function Badge({
+  className,
+  variant = 'default',
+  ...props
+}: BadgeProps) {
+  const variantClass = `variant-${variant}`
+  return (
+    <StyledBadge
+      className={[variantClass, className].filter(Boolean).join(' ')}
+      {...props}
+    />
+  )
+}

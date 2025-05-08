@@ -1,44 +1,82 @@
-import { signInAction } from "@/app/actions";
-import { FormMessage, Message } from "@/components/auth/form-message";
-import { SubmitButton } from "@/components/auth/submit-button";
-import { Input } from "@/components/auth/ui/input";
-import { Label } from "@/components/auth/ui/label";
-import Link from "next/link";
+import { signInAction } from '@/app/actions'
+import { FormMessage, Message } from '@/components/auth/form-message'
+import { SubmitButton } from '@/components/auth/submit-button'
+import { Input } from '@/components/auth/ui/input'
+import { Label } from '@/components/auth/ui/label'
+import { Checkbox } from '@/components/auth/ui/checkbox'
+import { SocialAuthSection } from '@/components/auth/social-auth-section'
+import { AuthLayout } from '@/components/auth/auth-layout'
+import Link from 'next/link'
 
 export default async function Login(props: { searchParams: Promise<Message> }) {
-  const searchParams = await props.searchParams;
+  const searchParams = await props.searchParams
+
   return (
-    <form className="flex-1 flex flex-col min-w-64">
-      <h1 className="text-2xl font-medium">Sign in</h1>
-      <p className="text-sm text-foreground">
-        Don't have an account?{" "}
-        <Link className="text-foreground font-medium underline" href="/sign-up">
-          Sign up
-        </Link>
-      </p>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-        <Label htmlFor="email">Email</Label>
-        <Input name="email" placeholder="you@example.com" required />
-        <div className="flex justify-between items-center">
-          <Label htmlFor="password">Password</Label>
-          <Link
-            className="text-xs text-foreground underline"
-            href="/forgot-password"
-          >
-            Forgot Password?
-          </Link>
+    <AuthLayout
+      title="Welcome back"
+      subtitle="Sign in to your account to continue"
+    >
+      <form className="flex-1 flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            name="email"
+            type="email"
+            placeholder="you@example.com"
+            required
+          />
         </div>
-        <Input
-          type="password"
-          name="password"
-          placeholder="Your password"
-          required
-        />
-        <SubmitButton pendingText="Signing In..." formAction={signInAction}>
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between items-center">
+            <Label htmlFor="password">Password</Label>
+            <Link
+              className="text-xs text-primary hover:underline"
+              href="/forgot-password"
+            >
+              Forgot Password?
+            </Link>
+          </div>
+          <Input
+            type="password"
+            name="password"
+            placeholder="Your password"
+            required
+          />
+        </div>
+        <div className="flex items-center gap-2 mt-2 mb-2">
+          <Checkbox id="remember" name="remember" />
+          <Label
+            htmlFor="remember"
+            className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Remember me
+          </Label>
+        </div>
+        <SubmitButton
+          pendingText="Signing In..."
+          formAction={signInAction}
+          className="w-full h-12 rounded-lg text-lg font-bold mt-2 mb-2 shadow-sm"
+        >
           Sign in
         </SubmitButton>
-        <FormMessage message={searchParams} />
-      </div>
-    </form>
-  );
+        <div className="flex items-center my-4">
+          <div className="flex-grow border-t border-border" />
+          <span className="mx-4 text-text-secondary text-sm">
+            or continue with
+          </span>
+          <div className="flex-grow border-t border-border" />
+        </div>
+        <SocialAuthSection />
+        <p className="text-sm text-center text-text-secondary mt-4">
+          Don't have an account?{' '}
+          <Link
+            className="text-primary font-semibold underline underline-offset-2 hover:text-primary/80 transition-colors"
+            href="/sign-up"
+          >
+            Sign up
+          </Link>
+        </p>
+      </form>
+    </AuthLayout>
+  )
 }

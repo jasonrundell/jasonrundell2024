@@ -1,26 +1,28 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
-import { cva, type VariantProps } from "class-variance-authority";
+import * as React from 'react'
+import { styled } from '@pigment-css/react'
+import Tokens from '@/lib/tokens'
 
-import { cn } from "@/lib/utils";
+const StyledLabel = styled('label')`
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${Tokens.colors.textPrimary.value};
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  user-select: none;
+  opacity: 1;
+  &.disabled,
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`
 
-const labelVariants = cva(
-  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-);
-
-const Label = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
-    VariantProps<typeof labelVariants>
->(({ className, ...props }, ref) => (
-  <LabelPrimitive.Root
-    ref={ref}
-    className={cn(labelVariants(), className)}
-    {...props}
-  />
-));
-Label.displayName = LabelPrimitive.Root.displayName;
-
-export { Label };
+export const Label = React.forwardRef<
+  HTMLLabelElement,
+  React.LabelHTMLAttributes<HTMLLabelElement>
+>((props, ref) => <StyledLabel ref={ref} {...props} />)
+Label.displayName = 'Label'

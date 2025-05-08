@@ -5,6 +5,7 @@ import { styled } from '@pigment-css/react'
 import Link from 'next/link'
 import HeadingAnimation from './HeadingAnimation'
 import Tokens from '@/lib/tokens'
+import { Button } from '@/components/auth/ui/button'
 
 const StyledMenuContainer = styled('div')`
   width: 100%;
@@ -58,6 +59,14 @@ const StyledNav = styled('nav')`
 
 const StyledTitle = styled(HeadingAnimation)`
   text-wrap: nowrap;
+`
+
+const StyledAuthButtonGroup = styled('div')`
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+  padding-right: 2rem;
+  align-items: center;
 `
 
 const MainNav = () => {
@@ -189,6 +198,24 @@ const MainNav = () => {
             </StyledListItem>
           </StyledList>
         </StyledNav>
+        <StyledAuthButtonGroup>
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="rounded-full px-5 font-semibold transition-colors hover:bg-primary/10 focus:ring-2 focus:ring-primary"
+          >
+            <Link href="/sign-in">Login</Link>
+          </Button>
+          <Button
+            asChild
+            variant="default"
+            size="sm"
+            className="rounded-full px-5 font-semibold transition-colors hover:bg-primary/90 focus:ring-2 focus:ring-primary"
+          >
+            <Link href="/sign-up">Sign up</Link>
+          </Button>
+        </StyledAuthButtonGroup>
       </StyledMenu>
     </StyledMenuContainer>
   )

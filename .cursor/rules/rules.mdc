@@ -1,0 +1,70 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+1. Project & File Structure
+- Directory naming: lowercase‑with‑dashes (e.g. components/auth-wizard)
+- Component files:
+  1. Default export of the main component (MyComponent.tsx)
+  2. Named exports for subcomponents/hooks/helpers in the same file or co‑located files
+  3. Static assets (SVG, JSON) in a parallel ./assets folder
+  4. Types in MyComponent.types.ts (or co‑located index.d.ts)
+- Layering (e.g. atomic design):
+  src/
+    atoms/
+    molecules/
+    organisms/
+    pages/
+    hooks/
+    utils/
+    types/
+2. Import Ordering
+  1. External dependencies (React, material-ui, pigment-css)
+  2. Internal dependencies Absolute imports (@/components/...)
+  3. CSS / style imports last
+3. TypeScript & Typing
+- Functional components with React.FC<Props> or explicit return types
+- Strongly typed props
+- No any - use generics or unknown + refinement
+- Strict compiler options. Example:
+  // tsconfig.json
+  {
+    "strict": true,
+    "noImplicitAny": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true
+  }
+4. React Patterns & State
+- Hooks only (no class components)
+- Custom hooks for reusable logic (useFetchUser, useToggle)
+- Declarative data fetching: use getStaticProps / getServerSideProps / SWR / React Query
+- Error boundaries at top‑level; fallback UIs for async errors
+5. Performance & Optimization
+- Code‑splitting: dynamic import() for heavy components
+- Memoization: useMemo / useCallback only when needed
+- Tree‑shaking: avoid deep imports from large libraries
+- Image optimization: Next.js <Image> with loading="lazy"
+- Lighthouse audits as part of CI
+6. Accessibility & SEO
+- Semantic HTML: <button>, <main>, <nav>
+- ARIA roles/labels where needed
+- Keyboard focus management and visible focus states
+- Color contrast ≥ 4.5:1 (AA)
+- Next.js SEO: <Head> for title/meta, canonical links, OpenGraph tags
+7. Styling & Theming
+- CSS‑in‑JS or Pigment‑CSS variables; avoid inline styles
+- Design tokens for colors, spacing, typography
+- Theming: centralized theme file, typed theme interface
+- BEM or utility classes for overrides
+8. Testing & Quality
+- Unit tests with Jest + React Testing Library
+- E2E tests with Cypress/Playwright for critical flows
+- Type‑coverage checks and lint (ESLint, TSLint) on CI
+- Pre‑commit hooks: lint-staged, prettier --write
+9. Documentation & Collaboration
+- Storybook for interactive component demos
+- JSDoc / TSDoc comments on complex APIs
+- Conventional commits (feat:, fix:, chore:)
+- Code reviews: enforce PR size limits, check type coverage, ensure comments explain “why”
+
