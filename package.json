@@ -54,8 +54,7 @@
     "postcss-normalize": "^13.0.1",
     "prop-types": "^15.8.1",
     "react-axe": "^3.5.4",
-    "sharp": "^0.33.5",
-    "tailwind-merge": "^3.0.2"
+    "sharp": "^0.33.5"
   },
   "license": "MIT",
   "repository": {

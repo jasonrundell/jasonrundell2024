@@ -54,6 +54,7 @@ alwaysApply: true
 - Next.js SEO: <Head> for title/meta, canonical links, OpenGraph tags
 7. Styling & Theming
 - CSS‑in‑JS or Pigment‑CSS variables; avoid inline styles
+- Do not use Tailwind
 - Design tokens for colors, spacing, typography
 - Theming: centralized theme file, typed theme interface
 - BEM or utility classes for overrides
