@@ -3,7 +3,6 @@ import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 
 const StyledAuthContainer = styled('div')`
-  min-height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
   align-items: center;
