@@ -60,7 +60,7 @@ alwaysApply: true
 - BEM or utility classes for overrides
 8. Testing & Quality
 - Unit tests with Jest + React Testing Library
-- E2E tests with Cypress/Playwright for critical flows
+- E2E tests with Cypress for critical flows
 - Type‑coverage checks and lint (ESLint, TSLint) on CI
 - Pre‑commit hooks: lint-staged, prettier --write
 9. Documentation & Collaboration
@@ -68,4 +68,5 @@ alwaysApply: true
 - JSDoc / TSDoc comments on complex APIs
 - Conventional commits (feat:, fix:, chore:)
 - Code reviews: enforce PR size limits, check type coverage, ensure comments explain “why”
+- Follow Next.js docs for Data Fetching, Rendering, and Routing.
 

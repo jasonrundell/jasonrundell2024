@@ -1,11 +1,9 @@
-'use client'
-
-import { useEffect } from 'react'
 import { styled } from '@pigment-css/react'
 import Link from 'next/link'
 import HeadingAnimation from './HeadingAnimation'
 import Tokens from '@/lib/tokens'
-import { Button } from '@/components/auth/ui/button'
+import { createClient } from '@/utils/supabase/server'
+import MainNavClient from '@/components/MainNavClient'
 
 const StyledMenuContainer = styled('div')`
   width: 100%;
@@ -69,119 +67,104 @@ const StyledAuthButtonGroup = styled('div')`
   align-items: center;
 `
 
-const MainNav = () => {
-  useEffect(() => {
-    const handleScroll = () => {
-      const menu = document.getElementById('menu')
-      if (menu) {
-        if (window.scrollY > 0) {
-          menu.classList.add('scrolled')
-        } else {
-          menu.classList.remove('scrolled')
-        }
-      }
-    }
+const steps = [
+  'Jason Rundell',
+  'Jason Rundell',
+  'Jason Rundell',
+  'Jason Rundell',
+  'Jason Rundell',
+  'Jason Rundell',
+  'Jason Rundel',
+  'Jason Runde',
+  'Jason Rund',
+  'Jason Run',
+  'Jason Ru',
+  'Jason R',
+  'Jason ',
+  'Jason',
+  'Jaso',
+  'Jas',
+  'Ja',
+  'J',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  'jason$',
+  'jason$',
+  'jason$',
+  'jason$',
+  'jason$',
+  'jason$',
+  'jason$',
+  'jason$ n',
+  'jason$ np',
+  'jason$ npm',
+  'jason$ npm ',
+  'jason$ npm r',
+  'jason$ npm ru',
+  'jason$ npm run',
+  'jason$ npm run ',
+  'jason$ npm run d',
+  'jason$ npm run de',
+  'jason$ npm run dev',
+  'jason$ npm run dev',
+  'jason$ npm run dev',
+  'jason$ npm run dev',
+  'jason$ npm run dev',
+  'jason$ npm run dev',
+  'jason$ npm run dev',
+  'jason$ npm run dev',
+  'jason$ npm run de',
+  'jason$ npm run d',
+  'jason$ npm run de',
+  'jason$ npm run del',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ npm run dell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  'jason$ rundell',
+  ':)',
+  ':)',
+  ':)',
+  ':)',
+  ':)',
+  ':)',
+  ':)',
+  ':)',
+  ':)',
+  ':)',
+  ':)',
+  ':)',
+  'Jason Rundell',
+]
 
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  // steps for animated heading
-  const steps = [
-    'Jason Rundell',
-    'Jason Rundell',
-    'Jason Rundell',
-    'Jason Rundell',
-    'Jason Rundell',
-    'Jason Rundell',
-    'Jason Rundel',
-    'Jason Runde',
-    'Jason Rund',
-    'Jason Run',
-    'Jason Ru',
-    'Jason R',
-    'Jason ',
-    'Jason',
-    'Jaso',
-    'Jas',
-    'Ja',
-    'J',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    'jason$',
-    'jason$',
-    'jason$',
-    'jason$',
-    'jason$',
-    'jason$',
-    'jason$',
-    'jason$ n',
-    'jason$ np',
-    'jason$ npm',
-    'jason$ npm ',
-    'jason$ npm r',
-    'jason$ npm ru',
-    'jason$ npm run',
-    'jason$ npm run ',
-    'jason$ npm run d',
-    'jason$ npm run de',
-    'jason$ npm run dev',
-    'jason$ npm run dev',
-    'jason$ npm run dev',
-    'jason$ npm run dev',
-    'jason$ npm run dev',
-    'jason$ npm run dev',
-    'jason$ npm run dev',
-    'jason$ npm run dev',
-    'jason$ npm run de',
-    'jason$ npm run d',
-    'jason$ npm run de',
-    'jason$ npm run del',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ npm run dell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    'jason$ rundell',
-    ':)',
-    ':)',
-    ':)',
-    ':)',
-    ':)',
-    ':)',
-    ':)',
-    ':)',
-    ':)',
-    ':)',
-    ':)',
-    ':)',
-    'Jason Rundell',
-  ]
-
+export default async function MainNav() {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
   return (
     <StyledMenuContainer id="menu">
       <StyledMenu>
@@ -198,27 +181,8 @@ const MainNav = () => {
             </StyledListItem>
           </StyledList>
         </StyledNav>
-        <StyledAuthButtonGroup>
-          <Button
-            asChild
-            variant="outline"
-            size="sm"
-            className="rounded-full px-5 font-semibold transition-colors hover:bg-primary/10 focus:ring-2 focus:ring-primary"
-          >
-            <Link href="/sign-in">Login</Link>
-          </Button>
-          <Button
-            asChild
-            variant="default"
-            size="sm"
-            className="rounded-full px-5 font-semibold transition-colors hover:bg-primary/90 focus:ring-2 focus:ring-primary"
-          >
-            <Link href="/sign-up">Sign up</Link>
-          </Button>
-        </StyledAuthButtonGroup>
+        <MainNavClient user={user} />
       </StyledMenu>
     </StyledMenuContainer>
   )
 }
-
-export default MainNav
