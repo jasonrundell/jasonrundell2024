@@ -8,6 +8,54 @@ import { AuthLayout } from '@/components/auth/auth-layout'
 import { PasswordInput } from '@/components/auth/password-input'
 import Link from 'next/link'
 import { SmtpMessage } from '../smtp-message'
+import { styled } from '@pigment-css/react'
+import Tokens from '@/lib/tokens'
+
+const FormWrapper = styled('form')`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+`
+
+const FieldGroup = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+`
+
+const FullWidthButton = styled(SubmitButton)`
+  width: 100%;
+`
+
+const Divider = styled('div')`
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0 1rem 0;
+  color: ${Tokens.colors.textSecondary.value};
+  font-size: 0.95rem;
+  gap: 1rem;
+  width: 100%;
+
+  & > .line {
+    flex: 1;
+    height: 1px;
+    background: ${Tokens.colors.border.value};
+    border: none;
+  }
+`
+
+const BottomText = styled('p')`
+  text-align: center;
+  color: ${Tokens.colors.textSecondary.value};
+  font-size: 1rem;
+  margin-top: 1.5rem;
+`
+
+const SmtpWrapper = styled('div')`
+  margin-top: 2rem;
+`
 
 export default async function Signup(props: {
   searchParams: Promise<Message>
@@ -16,7 +64,7 @@ export default async function Signup(props: {
 
   if ('message' in searchParams) {
     return (
-      <div className="w-full flex-1 flex items-center h-screen sm:max-w-md justify-center gap-2 p-4">
+      <div>
         <FormMessage message={searchParams} />
       </div>
     )
@@ -24,8 +72,8 @@ export default async function Signup(props: {
 
   return (
     <AuthLayout title="Create an account" subtitle="Sign up to get started">
-      <form className="flex-1 flex flex-col gap-6">
-        <div className="flex flex-col gap-2">
+      <FormWrapper>
+        <FieldGroup>
           <Label htmlFor="email">Email</Label>
           <Input
             name="email"
@@ -33,16 +81,16 @@ export default async function Signup(props: {
             placeholder="you@example.com"
             required
           />
-        </div>
-        <div className="flex flex-col gap-2">
+        </FieldGroup>
+        <FieldGroup>
           <Label htmlFor="password">Password</Label>
           <PasswordInput
             name="password"
             placeholder="Create a password"
             required
           />
-        </div>
-        <div className="flex flex-col gap-2">
+        </FieldGroup>
+        <FieldGroup>
           <Label htmlFor="confirmPassword">Confirm Password</Label>
           <Input
             type="password"
@@ -51,33 +99,23 @@ export default async function Signup(props: {
             minLength={8}
             required
           />
-        </div>
-        <SubmitButton
-          formAction={signUpAction}
-          pendingText="Signing up..."
-          className="w-full h-12 rounded-lg text-lg font-bold mt-2 mb-2 shadow-sm"
-        >
+        </FieldGroup>
+        <FullWidthButton formAction={signUpAction} pendingText="Signing up...">
           Sign up
-        </SubmitButton>
-        <div className="flex items-center my-4">
-          <div className="flex-grow border-t border-border" />
-          <span className="mx-4 text-text-secondary text-sm">
-            or continue with
-          </span>
-          <div className="flex-grow border-t border-border" />
-        </div>
+        </FullWidthButton>
+        <Divider>
+          <div className="line" />
+          <span>or continue with</span>
+          <div className="line" />
+        </Divider>
         <SocialAuthSection />
-        <p className="text-sm text-center text-text-secondary mt-4">
-          Already have an account?{' '}
-          <Link
-            className="text-primary font-semibold underline underline-offset-2 hover:text-primary/80 transition-colors"
-            href="/sign-in"
-          >
-            Sign in
-          </Link>
-        </p>
-      </form>
-      <SmtpMessage />
+        <BottomText>
+          Already have an account? <Link href="/sign-in">Sign in</Link>
+        </BottomText>
+        <SmtpWrapper>
+          <SmtpMessage />
+        </SmtpWrapper>
+      </FormWrapper>
     </AuthLayout>
   )
 }

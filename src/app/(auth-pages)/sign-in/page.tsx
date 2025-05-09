@@ -16,8 +16,8 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
       title="Welcome back"
       subtitle="Sign in to your account to continue"
     >
-      <form className="flex-1 flex flex-col gap-6">
-        <div className="flex flex-col gap-2">
+      <form>
+        <div>
           <Label htmlFor="email">Email</Label>
           <Input
             name="email"
@@ -26,15 +26,10 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
             required
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between items-center">
+        <div>
+          <div>
             <Label htmlFor="password">Password</Label>
-            <Link
-              className="text-xs text-primary hover:underline"
-              href="/forgot-password"
-            >
-              Forgot Password?
-            </Link>
+            <Link href="/forgot-password">Forgot Password?</Link>
           </div>
           <Input
             type="password"
@@ -43,38 +38,21 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
             required
           />
         </div>
-        <div className="flex items-center gap-2 mt-2 mb-2">
+        <div>
           <Checkbox id="remember" name="remember" />
-          <Label
-            htmlFor="remember"
-            className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
-            Remember me
-          </Label>
+          <Label htmlFor="remember">Remember me</Label>
         </div>
-        <SubmitButton
-          pendingText="Signing In..."
-          formAction={signInAction}
-          className="w-full h-12 rounded-lg text-lg font-bold mt-2 mb-2 shadow-sm"
-        >
+        <SubmitButton pendingText="Signing In..." formAction={signInAction}>
           Sign in
         </SubmitButton>
-        <div className="flex items-center my-4">
-          <div className="flex-grow border-t border-border" />
-          <span className="mx-4 text-text-secondary text-sm">
-            or continue with
-          </span>
-          <div className="flex-grow border-t border-border" />
+        <div>
+          <div />
+          <span>or continue with</span>
+          <div />
         </div>
         <SocialAuthSection />
-        <p className="text-sm text-center text-text-secondary mt-4">
-          Don't have an account?{' '}
-          <Link
-            className="text-primary font-semibold underline underline-offset-2 hover:text-primary/80 transition-colors"
-            href="/sign-up"
-          >
-            Sign up
-          </Link>
+        <p>
+          Don't have an account? <Link href="/sign-up">Sign up</Link>
         </p>
       </form>
     </AuthLayout>

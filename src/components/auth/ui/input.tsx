@@ -6,6 +6,7 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const StyledInput = styled('input')`
+  box-sizing: border-box;
   width: 100%;
   height: 2.5rem;
   padding: 0.5rem 1rem;

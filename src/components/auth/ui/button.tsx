@@ -23,7 +23,7 @@ const StyledButton = styled('button')`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 9999px;
+  border-radius: 0.3125rem;
   font-weight: 600;
   border: none;
   outline: none;
