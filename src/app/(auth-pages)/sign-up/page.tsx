@@ -57,12 +57,8 @@ const SmtpWrapper = styled('div')`
   margin-top: 2rem;
 `
 
-export default async function Signup(props: {
-  searchParams: Promise<Message>
-}) {
-  const searchParams = await props.searchParams
-
-  if ('message' in searchParams) {
+export default function Signup({ searchParams }: { searchParams: Message }) {
+  if (searchParams && 'message' in searchParams) {
     return (
       <div>
         <FormMessage message={searchParams} />
