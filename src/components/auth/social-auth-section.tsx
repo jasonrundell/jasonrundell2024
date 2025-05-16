@@ -6,9 +6,10 @@ export function SocialAuthSection() {
     // TODO: Implement Google sign-in
     alert('Google sign-in not implemented')
   }
+
+  // The actual GitHub sign-in implementation is in the SocialAuth component
   const handleGithubSignIn = () => {
-    // TODO: Implement GitHub sign-in
-    alert('GitHub sign-in not implemented')
+    // This is a no-op since the actual implementation is in the SocialAuth component
   }
 
   return (
