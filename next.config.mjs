@@ -12,6 +12,28 @@ const nextConfig = {
   images: {
     domains: ['images.ctfassets.net'],
   },
+  webpack: (config, { isServer, dev }) => {
+    // Only apply these optimizations in development
+    if (dev) {
+      // Disable the filesystem cache which was causing issues
+      config.cache = false;
+      
+      // Optimize chunk splitting for better performance
+      if (config.optimization.splitChunks) {
+        config.optimization.splitChunks = {
+          ...config.optimization.splitChunks,
+          chunks: 'async',
+          minSize: 20000,
+          maxSize: 244 * 1024,
+          minChunks: 1,
+          maxAsyncRequests: 30,
+          maxInitialRequests: 30,
+          enforceSizeThreshold: 50000
+        };
+      }
+    }
+    return config;
+  },
 }
 
 export default withSentryConfig(withPigment(bundleAnalyzer(nextConfig)), {
