@@ -2,11 +2,6 @@
 trigger: always_on
 ---
 
----
-description: 
-globs: 
-alwaysApply: true
----
 1. Project & File Structure
 - Directory naming: lowercase‑with‑dashes (e.g. components/auth-wizard)
 - Component files:
