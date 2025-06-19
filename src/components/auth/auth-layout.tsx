@@ -24,7 +24,6 @@ const StyledAuthContainer = styled('div')`
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);
     pointer-events: none;
   }
 `
@@ -40,7 +39,7 @@ const StyledAuthCard = styled('div')`
   flex-direction: column;
   align-items: stretch;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
@@ -61,7 +60,11 @@ const StyledAuthTitle = styled('h1')`
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  background: linear-gradient(135deg, ${Tokens.colors.primary.value}, ${Tokens.colors.primary.value}77);
+  background: linear-gradient(
+    135deg,
+    ${Tokens.colors.primary.value},
+    ${Tokens.colors.primary.value}77
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -73,7 +76,7 @@ const StyledAuthSubtitle = styled('p')`
   margin-bottom: 0;
   opacity: 0.9;
   transition: opacity 0.3s ease;
-  
+
   ${StyledAuthCard}:hover & {
     opacity: 1;
   }
