@@ -18,7 +18,7 @@ export default async function AuthButton() {
         <div className="flex gap-4 items-center">
           <div>
             <Badge
-              variant={'default'}
+              variant="default"
               className="font-normal pointer-events-none"
             >
               Please update .env.local file with anon key and url
@@ -28,20 +28,24 @@ export default async function AuthButton() {
             <Button
               asChild
               size="sm"
-              variant={'outline'}
+              variant="outline"
               disabled
               className="opacity-75 cursor-none pointer-events-none"
             >
-              <Link href="/sign-in">Sign in</Link>
+              <Link href="/sign-in" className="link">
+                Sign in
+              </Link>
             </Button>
             <Button
               asChild
               size="sm"
-              variant={'default'}
+              variant="default"
               disabled
               className="opacity-75 cursor-none pointer-events-none"
             >
-              <Link href="/sign-up">Sign up</Link>
+              <Link href="/sign-up" className="link">
+                Sign up
+              </Link>
             </Button>
           </div>
         </div>
@@ -52,18 +56,22 @@ export default async function AuthButton() {
     <div className="flex items-center gap-4">
       Hey, {user.email}!
       <form action={signOutAction}>
-        <Button type="submit" variant={'outline'}>
+        <Button type="submit" variant="outline">
           Sign out
         </Button>
       </form>
     </div>
   ) : (
     <div className="flex gap-2">
-      <Button asChild size="sm" variant={'outline'}>
-        <Link href="/sign-in">Sign in</Link>
+      <Button asChild size="sm" variant="outline">
+        <Link href="/sign-in" className="link">
+          Sign in
+        </Link>
       </Button>
-      <Button asChild size="sm" variant={'default'}>
-        <Link href="/sign-up">Sign up</Link>
+      <Button asChild size="sm" variant="default">
+        <Link href="/sign-up" className="link">
+          Sign up
+        </Link>
       </Button>
     </div>
   )

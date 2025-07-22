@@ -127,7 +127,9 @@ export default async function Login({
             }}
           >
             <Label htmlFor="password">Password</Label>
-            <Link href="/forgot-password">Forgot Password?</Link>
+            <Link href="/forgot-password" className="link">
+              Forgot Password?
+            </Link>
           </div>
           <Input
             type="password"
@@ -150,7 +152,10 @@ export default async function Login({
         </Divider>
         <SocialAuthSection />
         <BottomText>
-          Don&apos;t have an account? <Link href="/sign-up">Sign up</Link>
+          Don&apos;t have an account?{' '}
+          <Link href="/sign-up" className="link">
+            Sign up
+          </Link>
         </BottomText>
       </FormWrapper>
     </AuthLayout>
