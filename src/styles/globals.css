@@ -31,12 +31,6 @@ time {
   font-weight: 400;
 }
 
-a {
-  color: #e9be62;
-  text-decoration: underline;
-  word-break: break-word;
-}
-
 hr {
   width: 100%;
   margin-bottom: 1.5rem;
@@ -97,6 +91,12 @@ hr {
 
 .font-bold {
   font-weight: bold;
+}
+
+.link {
+  color: #e9be62;
+  text-decoration: underline;
+  word-break: break-word;
 }
 
 @media (min-width: 48rem) {
