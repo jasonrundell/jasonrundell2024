@@ -35,7 +35,10 @@ export default async function Footer() {
               <small>
                 © Jason Rundell {new Date().getFullYear()}. All rights reserved.
                 Design consulting from{' '}
-                <a href="https://donnavitan.com">Donna Vitan</a> ❤️.
+                <a href="https://donnavitan.com" className="link">
+                  Donna Vitan
+                </a>{' '}
+                ❤️
               </small>
             </p>
           </Row>

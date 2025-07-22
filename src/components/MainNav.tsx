@@ -79,6 +79,7 @@ const StyledListItem = styled('li')`
 
 const StyledTitle = styled(HeadingAnimation)`
   text-wrap: nowrap;
+  color: ${Tokens.colors.background.value};
 `
 
 const steps = [

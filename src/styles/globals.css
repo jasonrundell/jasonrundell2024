@@ -94,9 +94,13 @@ hr {
 }
 
 .link {
-  color: #e9be62;
+  color: var(--primary-color);
   text-decoration: underline;
   word-break: break-word;
+}
+
+.primary-color {
+  color: var(--primary-color);
 }
 
 @media (min-width: 48rem) {
