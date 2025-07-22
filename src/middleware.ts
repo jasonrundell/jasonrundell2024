@@ -99,7 +99,9 @@ export async function middleware(request: NextRequest) {
     pathname === '/forgot-password' ||
     pathname === '/auth/callback/github' ||
     pathname === '/auth/callback/error' ||
-    pathname === '/'
+    pathname === '/' ||
+    pathname.startsWith('/posts/') ||
+    pathname.startsWith('/projects/')
   ) {
     return response
   }
