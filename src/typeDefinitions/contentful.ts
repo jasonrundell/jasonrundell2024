@@ -8,7 +8,7 @@ export interface ContentfulEntry<T> {
 }
 
 export interface ContentfulContent {
-  json: any
+  json: Record<string, unknown>
   links: {
     assets: {
       block: {

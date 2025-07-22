@@ -81,88 +81,6 @@ const StyledTitle = styled(HeadingAnimation)`
   text-wrap: nowrap;
 `
 
-const StyledMobileMenuButton = styled('button')`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 2rem;
-  height: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  margin-left: auto;
-  margin-right: 1rem;
-
-  span {
-    display: block;
-    width: 1.5rem;
-    height: 2px;
-    background-color: ${Tokens.colors.secondary.value};
-    margin: 2px 0;
-    transition: 0.3s;
-    transform-origin: center;
-  }
-
-  &.open {
-    span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    span:nth-child(2) {
-      opacity: 0;
-    }
-    span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-  }
-`
-
-const StyledMobileMenu = styled('div')`
-  position: absolute;
-  top: 4rem;
-  left: 0;
-  right: 0;
-  background-color: ${Tokens.colors.background.value};
-  border-top: 1px solid ${Tokens.colors.border.value};
-  padding: 1rem;
-  transform: translateY(-100%);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-
-  &.open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
-`
-
-const StyledMobileList = styled('ul')`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
-
-const StyledMobileListItem = styled('li')`
-  a {
-    color: ${Tokens.colors.secondary.value};
-    text-decoration: none;
-    font-size: 1.125rem;
-    display: block;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s ease;
-
-    &:hover {
-      border-bottom-color: ${Tokens.colors.primary.value};
-    }
-  }
-`
-
 const steps = [
   'Jason Rundell',
   'Jason Rundell',
@@ -217,8 +135,6 @@ const steps = [
   'jason$ npm run d',
   'jason$ npm run de',
   'jason$ npm run del',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
   'jason$ npm run dell',
   'jason$ npm run dell',
   'jason$ npm run dell',

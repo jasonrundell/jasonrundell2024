@@ -2,8 +2,7 @@ import * as React from 'react'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>
 
 const StyledInput = styled('input')`
   box-sizing: border-box;

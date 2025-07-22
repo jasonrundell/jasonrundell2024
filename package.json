@@ -45,7 +45,7 @@
     "@contentful/rich-text-types": "^17.0.0",
     "@jasonrundell/dropship": "^3.3.0",
     "@next/bundle-analyzer": "14.1.0",
-    "@next/third-parties": "14.1.0",
+    "@next/third-parties": "^14.2.25",
     "@pigment-css/nextjs-plugin": "^0.0.29",
     "@sentry/nextjs": "^8.46.0",
     "@supabase/supabase-js": "^2.49.4",

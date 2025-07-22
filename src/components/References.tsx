@@ -28,24 +28,26 @@ const StyledCite = styled('cite')`
   color: ${Tokens.colors.secondary.value};
 `
 
-export default async function References({ references }: ReferencesDef) {
+export default function References({ references }: ReferencesDef) {
   return (
-    references.length > 0 &&
-    references.map((reference, index) => {
-      const { citeName, company, quote } = reference || {}
+    <>
+      {references.length > 0 &&
+        references.map((reference, index) => {
+          const { citeName, company, quote } = reference || {}
 
-      // Additional defensive checks for quote and its structure
-      const renderQuote = quote
-        ? documentToReactComponents(quote as Document, options) // Make sure you access quote.json directly
-        : 'No quote available.'
-      return (
-        <StyledReference key={index}>
-          <Blockquote>{renderQuote}</Blockquote>
-          <StyledCite>
-            - {citeName || 'Unknown'} ({company || 'Unknown'})
-          </StyledCite>
-        </StyledReference>
-      )
-    })
+          // Additional defensive checks for quote and its structure
+          const renderQuote = quote
+            ? documentToReactComponents(quote as Document, options) // Make sure you access quote.json directly
+            : 'No quote available.'
+          return (
+            <StyledReference key={index}>
+              <Blockquote>{renderQuote}</Blockquote>
+              <StyledCite>
+                - {citeName || 'Unknown'} ({company || 'Unknown'})
+              </StyledCite>
+            </StyledReference>
+          )
+        })}
+    </>
   )
 }

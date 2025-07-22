@@ -6,6 +6,7 @@ import { Button } from '@/components/auth/ui/button'
 import { signOutAction } from '@/app/actions'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
+import { User } from '@supabase/supabase-js'
 
 const StyledAuthButtonGroup = styled('div')`
   display: none;
@@ -136,7 +137,7 @@ const StyledMobileAuthSection = styled('div')`
 `
 
 interface MainNavClientProps {
-  user: any
+  user: User | null
 }
 
 const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {

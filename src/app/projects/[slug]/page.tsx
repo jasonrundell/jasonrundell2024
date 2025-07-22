@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Grid, Row, Spacer } from '@jasonrundell/dropship'
@@ -26,24 +26,40 @@ type ProjectProps = {
   params: Promise<{ slug: string }>
 }
 
-const customMarkdownOptions = (content: Project['description']) => ({
+const customMarkdownOptions = () => ({
   renderMark: {
     [MARKS.CODE]: (text: React.ReactNode) => (
       <span dangerouslySetInnerHTML={{ __html: text as string }} />
     ),
   },
   renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+    [BLOCKS.EMBEDDED_ASSET]: (node: unknown) => {
+      const nodeData = node as {
+        data?: {
+          target?: {
+            fields?: {
+              file?: { url: string }
+              description?: string
+            }
+          }
+        }
+      }
+
       if (
-        !node ||
-        !node.data ||
-        !node.data.target ||
-        !node.data.target.fields
+        !nodeData ||
+        !nodeData.data ||
+        !nodeData.data.target ||
+        !nodeData.data.target.fields
       ) {
         return null
       }
 
-      const { file, description } = node.data.target.fields
+      const { file, description } = nodeData.data.target.fields
+
+      if (!file?.url) {
+        return null
+      }
+
       const imageUrl = file.url.startsWith('//')
         ? `https:${file.url}`
         : file.url
@@ -51,7 +67,7 @@ const customMarkdownOptions = (content: Project['description']) => ({
         <StyledEmbeddedAsset>
           <Image
             src={imageUrl}
-            alt={description}
+            alt={description || ''}
             layout="responsive"
             width={500}
             height={300}
@@ -62,10 +78,9 @@ const customMarkdownOptions = (content: Project['description']) => ({
   },
 })
 
-export async function generateMetadata(
-  { params }: ProjectProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProjectProps): Promise<Metadata> {
   const slug = (await params).slug
 
   const project = await getEntryBySlug<Project>('project', slug)
@@ -88,7 +103,7 @@ export default async function page({ params }: ProjectProps) {
     notFound()
   }
 
-  const { title, featuredImage, technology, description, link } = project
+  const { title, technology, description, link } = project
 
   return (
     <>
@@ -134,7 +149,7 @@ export default async function page({ params }: ProjectProps) {
                   <section>
                     {documentToReactComponents(
                       description as unknown as Document,
-                      customMarkdownOptions(description)
+                      customMarkdownOptions()
                     )}
                   </section>
                 </StyledBody>

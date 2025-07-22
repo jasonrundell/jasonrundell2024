@@ -1,6 +1,5 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
-import { cookies } from 'next/headers'
 
 export async function signUpAction(formData: FormData) {
   const email = formData.get('email') as string
@@ -10,23 +9,23 @@ export async function signUpAction(formData: FormData) {
   if (password !== confirmPassword) {
     return {
       error: 'Passwords do not match',
-      status: 400
+      status: 400,
     }
   }
 
   const supabase = await createClient()
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URL}/auth/callback`
-    }
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URL}/auth/callback`,
+    },
   })
 
   if (error) {
     return {
       error: error.message,
-      status: error.status || 400
+      status: error.status || 400,
     }
   }
 

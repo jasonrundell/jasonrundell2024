@@ -12,7 +12,7 @@ const nextConfig = {
   images: {
     domains: ['images.ctfassets.net'],
   },
-  webpack: (config, { isServer, dev }) => {
+  webpack: (config, { dev }) => {
     // Only apply these optimizations in development
     if (dev) {
       // Disable the filesystem cache which was causing issues

@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
+  const response = NextResponse.next({
     request: {
       headers: request.headers,
     },
@@ -37,15 +37,23 @@ export async function middleware(request: NextRequest) {
   )
 
   // Get the current session
-  const { data: { session } } = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
   const { pathname } = request.nextUrl
 
   // Handle CORS preflight
   if (request.method === 'OPTIONS') {
     const response = new NextResponse(null, { status: 204 })
-    response.headers.set('Access-Control-Allow-Origin', request.headers.get('origin') || '*')
+    response.headers.set(
+      'Access-Control-Allow-Origin',
+      request.headers.get('origin') || '*'
+    )
     response.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    response.headers.set(
+      'Access-Control-Allow-Headers',
+      'Content-Type, Authorization'
+    )
     response.headers.set('Access-Control-Allow-Credentials', 'true')
     return response
   }
@@ -54,16 +62,25 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith('/api/')) {
     // Add CORS headers to API responses
     const apiResponse = NextResponse.next()
-    apiResponse.headers.set('Access-Control-Allow-Origin', request.headers.get('origin') || '*')
-    apiResponse.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    apiResponse.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    apiResponse.headers.set(
+      'Access-Control-Allow-Origin',
+      request.headers.get('origin') || '*'
+    )
+    apiResponse.headers.set(
+      'Access-Control-Allow-Methods',
+      'GET, POST, OPTIONS'
+    )
+    apiResponse.headers.set(
+      'Access-Control-Allow-Headers',
+      'Content-Type, Authorization'
+    )
     apiResponse.headers.set('Access-Control-Allow-Credentials', 'true')
-    
+
     // For API routes, we don't redirect, just return the response
     if (request.method === 'OPTIONS') {
       return apiResponse
     }
-    
+
     return apiResponse
   }
 
@@ -98,7 +115,7 @@ export async function middleware(request: NextRequest) {
   if (session && (pathname === '/sign-in' || pathname === '/sign-up')) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
-  
+
   // Allow access to the homepage for all users
   if (pathname === '/') {
     return response
@@ -106,7 +123,9 @@ export async function middleware(request: NextRequest) {
 
   // Protected routes
   const protectedRoutes = ['/protected', '/dashboard']
-  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route))
+  const isProtectedRoute = protectedRoutes.some((route) =>
+    pathname.startsWith(route)
+  )
 
   if (isProtectedRoute) {
     // If there's no session, redirect to sign-in
@@ -118,16 +137,20 @@ export async function middleware(request: NextRequest) {
   }
 
   // Set CORS headers for all responses
-  response.headers.set('Access-Control-Allow-Origin', request.headers.get('origin') || '*')
+  response.headers.set(
+    'Access-Control-Allow-Origin',
+    request.headers.get('origin') || '*'
+  )
   response.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+  response.headers.set(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization'
+  )
   response.headers.set('Access-Control-Allow-Credentials', 'true')
 
   return response
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|auth/callback).*)',
-  ],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|auth/callback).*)'],
 }

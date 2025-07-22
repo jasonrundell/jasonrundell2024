@@ -3,7 +3,7 @@ import { Link } from '@jasonrundell/dropship'
 import Icon from './Icon'
 import { StyledList, StyledListItem } from '@/styles/common'
 
-export default async function ContactList() {
+export default function ContactList() {
   return (
     <StyledList>
       <StyledListItem>

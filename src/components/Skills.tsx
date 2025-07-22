@@ -38,8 +38,8 @@ const StyledHeading = styled('h3')`
   margin: 0;
 `
 
-export default async function Skills({ skills }: SkillsDef) {
-  let categories: string[] = []
+export default function Skills({ skills }: SkillsDef) {
+  const categories: string[] = []
 
   // Build array of categories
   skills.forEach((skill: Skill) => {

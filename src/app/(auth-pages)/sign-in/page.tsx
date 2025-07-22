@@ -1,5 +1,5 @@
 import { signInAction } from '@/app/actions'
-import { FormMessage, Message } from '@/components/auth/form-message'
+import { FormMessage } from '@/components/auth/form-message'
 import { SubmitButton } from '@/components/auth/submit-button'
 import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
@@ -58,51 +58,45 @@ const RememberGroup = styled('div')`
   gap: 0.5rem;
 `
 
-const ErrorWrapper = styled('div')`
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background-color: ${Tokens.colors.errorBackground.value};
-  border: 1px solid ${Tokens.colors.errorBorder.value};
-  border-radius: 0.5rem;
-  color: ${Tokens.colors.errorText.value};
-  font-size: 1rem;
-`
-
 const errorMessages: Record<string, string> = {
-  'not_authenticated': 'Please sign in to access this page',
-  'user_not_found': 'User account not found. Please sign up first.',
-  'auth_session': 'Error creating authentication session',
-  'no_auth_url': 'Authentication URL not available',
-  'server_error': 'An error occurred. Please try again.',
-  'invalid_code': 'Invalid authentication code',
-  'user_info_fetch': 'Failed to fetch user information from GitHub',
-  'invalid_user_data': 'Invalid user data received from GitHub',
-  'github_api_error': 'Error communicating with GitHub',
-};
+  not_authenticated: 'Please sign in to access this page',
+  user_not_found: 'User account not found. Please sign up first.',
+  auth_session: 'Error creating authentication session',
+  no_auth_url: 'Authentication URL not available',
+  server_error: 'An error occurred. Please try again.',
+  invalid_code: 'Invalid authentication code',
+  user_info_fetch: 'Failed to fetch user information from GitHub',
+  invalid_user_data: 'Invalid user data received from GitHub',
+  github_api_error: 'Error communicating with GitHub',
+}
 
 export default async function Login({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string; message?: string; redirectedFrom?: string }>
+  searchParams: Promise<{
+    error?: string
+    message?: string
+    redirectedFrom?: string
+  }>
 }) {
-  const params = await searchParams;
-  const errorCode = params?.error;
-  const customMessage = params?.message;
-  const redirectedFrom = params?.redirectedFrom;
+  const params = await searchParams
+  const errorCode = params?.error
+  const customMessage = params?.message
+  const redirectedFrom = params?.redirectedFrom
 
   // Construct the error message
-  let errorMessage = customMessage;
+  let errorMessage = customMessage
   if (errorCode && !customMessage) {
-    errorMessage = errorMessages[errorCode] || 'An unknown error occurred';
+    errorMessage = errorMessages[errorCode] || 'An unknown error occurred'
   }
 
   // If we have an error, log it
   if (errorCode) {
-    console.error('Auth error:', { errorCode, errorMessage, redirectedFrom });
+    console.error('Auth error:', { errorCode, errorMessage, redirectedFrom })
   }
 
   // Convert error message to Message type for FormMessage
-  const formMessage = errorMessage ? { error: errorMessage } : undefined;
+  const formMessage = errorMessage ? { error: errorMessage } : undefined
 
   return (
     <AuthLayout
@@ -156,7 +150,7 @@ export default async function Login({
         </Divider>
         <SocialAuthSection />
         <BottomText>
-          Don't have an account? <Link href="/sign-up">Sign up</Link>
+          Don&apos;t have an account? <Link href="/sign-up">Sign up</Link>
         </BottomText>
       </FormWrapper>
     </AuthLayout>
