@@ -123,7 +123,7 @@ export default async function page({ params }: ProjectProps) {
                   <>
                     <StyledHeading3 level={3}>View</StyledHeading3>
                     <Row>
-                      <Link href={link} target="_blank">
+                      <Link href={link} className="link" target="_blank">
                         Visit GitHub project
                       </Link>
                     </Row>

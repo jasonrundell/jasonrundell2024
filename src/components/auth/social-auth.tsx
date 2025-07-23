@@ -26,8 +26,7 @@ const Divider = styled('div')({
   },
   '& > span': {
     padding: `0 ${Tokens.sizes.spacing.medium.value}${Tokens.sizes.spacing.medium.unit}`,
-    backgroundColor: Tokens.colors.background.value,
-    color: Tokens.colors.textSecondary.value,
+    color: Tokens.colors.textPrimary.value,
   },
 })
 

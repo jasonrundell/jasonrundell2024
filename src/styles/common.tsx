@@ -46,6 +46,9 @@ export const StyledSection = styled('section')`
 `
 
 export const StyledBody = styled('div')`
+  a {
+    color: ${Tokens.colors.primary.value};
+  }
   p {
     width: 100%;
   }
@@ -76,6 +79,10 @@ export const StyledBody = styled('div')`
 export const StyledBreadcrumb = styled('div')`
   font-size: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   padding-bottom: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+
+  a {
+    color: ${Tokens.colors.primary.value};
+  }
 `
 
 export const StyledMorePostsHeading = styled('h2')`

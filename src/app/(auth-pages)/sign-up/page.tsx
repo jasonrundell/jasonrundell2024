@@ -7,7 +7,6 @@ import { SocialAuthSection } from '@/components/auth/social-auth-section'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { PasswordInput } from '@/components/auth/password-input'
 import Link from 'next/link'
-import { SmtpMessage } from '../smtp-message'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 
@@ -51,10 +50,6 @@ const BottomText = styled('p')`
   color: ${Tokens.colors.textSecondary.value};
   font-size: 1rem;
   margin-top: 1.5rem;
-`
-
-const SmtpWrapper = styled('div')`
-  margin-top: 2rem;
 `
 
 const SuccessWrapper = styled('div')`
@@ -127,7 +122,7 @@ export default async function Signup({
           <SuccessIcon>✓</SuccessIcon>
           <SuccessTitle>Account created successfully!</SuccessTitle>
           <SuccessMessage>
-            We&apos;ve sent a verification link to your email address. Please
+            A verification link has been sent to your email address. Please
             check your inbox and click the link to verify your account.
           </SuccessMessage>
           <ActionButton href="/sign-in">Back to Sign In</ActionButton>
@@ -177,16 +172,13 @@ export default async function Signup({
           </FullWidthButton>
           <Divider>
             <div className="line" />
-            <span>or continue with</span>
+            <span>Aor continue with</span>
             <div className="line" />
           </Divider>
           <SocialAuthSection />
           <BottomText>
             Already have an account? <Link href="/sign-in">Sign in</Link>
           </BottomText>
-          <SmtpWrapper>
-            <SmtpMessage />
-          </SmtpWrapper>
         </FormWrapper>
       </AuthLayout>
     )
@@ -225,18 +217,13 @@ export default async function Signup({
         <FullWidthButton formAction={signUpAction} pendingText="Signing up...">
           Sign up
         </FullWidthButton>
-        <Divider>
-          <div className="line" />
-          <span>or continue with</span>
-          <div className="line" />
-        </Divider>
         <SocialAuthSection />
         <BottomText>
-          Already have an account? <Link href="/sign-in">Sign in</Link>
+          Already have an account?{' '}
+          <Link href="/sign-in" className="link">
+            Sign in
+          </Link>
         </BottomText>
-        <SmtpWrapper>
-          <SmtpMessage />
-        </SmtpWrapper>
       </FormWrapper>
     </AuthLayout>
   )

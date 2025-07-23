@@ -145,11 +145,6 @@ export default async function Login({
         <FullWidthButton pendingText="Signing In..." formAction={signInAction}>
           Sign in
         </FullWidthButton>
-        <Divider>
-          <div className="line" />
-          <span>or continue with</span>
-          <div className="line" />
-        </Divider>
         <SocialAuthSection />
         <BottomText>
           Don&apos;t have an account?{' '}

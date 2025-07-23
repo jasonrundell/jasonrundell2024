@@ -7,13 +7,9 @@ const StyledAuthContainer = styled('div')`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge.unit};
-  background: linear-gradient(
-    135deg,
-    ${Tokens.colors.background.value} 0%,
-    ${Tokens.colors.backgroundDark.value} 100%
-  );
+  min-height: 80vh;
+  padding: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.large.unit};
+  background-color: ${Tokens.colors.background.value};
   position: relative;
   overflow: hidden;
 
@@ -39,11 +35,6 @@ const StyledAuthCard = styled('div')`
   flex-direction: column;
   align-items: stretch;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-  }
 `
 
 const StyledAuthHeader = styled('div')`
@@ -60,11 +51,7 @@ const StyledAuthTitle = styled('h1')`
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  background: linear-gradient(
-    135deg,
-    ${Tokens.colors.primary.value},
-    ${Tokens.colors.primary.value}77
-  );
+  background-color: ${Tokens.colors.primary.value};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

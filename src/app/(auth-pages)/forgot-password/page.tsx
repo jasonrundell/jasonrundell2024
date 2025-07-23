@@ -4,7 +4,6 @@ import { SubmitButton } from '@/components/auth/submit-button'
 import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
 import Link from 'next/link'
-import { SmtpMessage } from '../smtp-message'
 
 export default async function ForgotPassword(props: {
   searchParams: Promise<Message>
@@ -28,7 +27,6 @@ export default async function ForgotPassword(props: {
           <FormMessage message={searchParams} />
         </div>
       </form>
-      <SmtpMessage />
     </>
   )
 }
