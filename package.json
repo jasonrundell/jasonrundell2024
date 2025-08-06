@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "dell": "npm run dev",
-    "dev": "next",
+    "dev": "next --experimental-https",
     "build": "next build",
     "start": "next dev",
     "setup": "node ./contentful/setup.js $CONTENTFUL_SPACE_ID $CONTENTFUL_ACCESS_TOKEN",
