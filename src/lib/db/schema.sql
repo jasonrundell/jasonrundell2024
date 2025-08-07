@@ -31,5 +31,5 @@ create policy "Users can insert their own data"
 -- Allow users to update their own data
 create policy "Users can update their own data"
   on users for update
-  using (true);
-  with check (true);
+  using (id = auth.uid());
+  with check (id = auth.uid());

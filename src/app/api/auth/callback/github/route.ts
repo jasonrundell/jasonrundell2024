@@ -40,12 +40,12 @@ export async function GET(request: Request): Promise<NextResponse> {
         error,
         searchParams.get('error_description')
       )
-      return NextResponse.redirect(`/login?error=${encodeURIComponent(error)}`)
+      return NextResponse.redirect(`/sign-in?error=${encodeURIComponent(error)}`)
     }
 
     if (!code) {
       console.error('No code provided in callback URL')
-      return NextResponse.redirect('/login?error=no_code')
+      return NextResponse.redirect('/sign-in?error=no_code')
     }
 
     // Verify we have all required environment variables
