@@ -2,6 +2,7 @@
 
 import { encodedRedirect } from '@/utils/utils'
 import { createSafeClient } from '@/utils/supabase/safe-client'
+import { createClient } from '@/utils/supabase/server'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
