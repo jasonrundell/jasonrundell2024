@@ -18,6 +18,7 @@ import '@jasonrundell/dropship/style.css'
 
 import MainNav from '@/components/MainNav'
 import Footer from '@/components/Footer'
+import SupabaseStatusBanner from '@/components/SupabaseStatusBanner'
 
 export const metadata: Metadata = {
   title: SITE_NAME,
@@ -36,6 +37,7 @@ export default async function RootLayout({
       <body className={outfit.className}>
         <SpeedInsights />
         <GoogleAnalytics gaId="G-GZFPYCJVHQ" />
+        <SupabaseStatusBanner />
         <header>{await MainNav()}</header>
         <main>{children}</main>
         {await Footer()}

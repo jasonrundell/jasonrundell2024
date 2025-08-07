@@ -68,6 +68,8 @@ const errorMessages: Record<string, string> = {
   user_info_fetch: 'Failed to fetch user information from GitHub',
   invalid_user_data: 'Invalid user data received from GitHub',
   github_api_error: 'Error communicating with GitHub',
+  supabase_paused:
+    'Database is currently paused. Please resume your Supabase project to continue.',
 }
 
 export default async function Login({

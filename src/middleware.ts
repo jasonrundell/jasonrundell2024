@@ -9,37 +9,6 @@ export async function middleware(request: NextRequest) {
     },
   })
 
-  // Create a Supabase client configured to use cookies
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value
-        },
-        set(name: string, value: string, options: CookieOptions) {
-          response.cookies.set({
-            name,
-            value,
-            ...options,
-          })
-        },
-        remove(name: string, options: CookieOptions) {
-          response.cookies.set({
-            name,
-            value: '',
-            ...options,
-          })
-        },
-      },
-    }
-  )
-
-  // Get the current session
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
   const { pathname } = request.nextUrl
 
   // Handle CORS preflight
@@ -106,6 +75,97 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
+  // Try to create Supabase client and get session, but handle failures gracefully
+  let session = null
+  let isSupabasePaused = false
+
+  try {
+    // Create a Supabase client configured to use cookies
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          get(name: string) {
+            return request.cookies.get(name)?.value
+          },
+          set(name: string, value: string, options: CookieOptions) {
+            response.cookies.set({
+              name,
+              value,
+              ...options,
+            })
+          },
+          remove(name: string, options: CookieOptions) {
+            response.cookies.set({
+              name,
+              value: '',
+              ...options,
+            })
+          },
+        },
+      }
+    )
+
+    // Get the current session
+    const {
+      data: { session: currentSession },
+      error,
+    } = await supabase.auth.getSession()
+
+    if (error) {
+      // Check if it's a paused project error
+      if (
+        error.message.includes('paused') ||
+        error.message.includes('suspended') ||
+        error.message.includes('unavailable') ||
+        error.code === 'PGRST301' || // Service unavailable
+        error.code === 'PGRST302'
+      ) {
+        // Service paused
+        isSupabasePaused = true
+        console.warn('Supabase project is paused:', error.message)
+      } else {
+        console.error('Supabase auth error:', error)
+      }
+    } else {
+      session = currentSession
+    }
+  } catch (error) {
+    console.error('Failed to initialize Supabase client:', error)
+    // Continue without session - treat as unauthenticated
+  }
+
+  // If Supabase is paused, allow access to public routes but redirect protected routes
+  if (isSupabasePaused) {
+    // Allow access to public routes even when Supabase is paused
+    if (
+      pathname === '/' ||
+      pathname.startsWith('/posts/') ||
+      pathname.startsWith('/projects/') ||
+      pathname === '/sign-in' ||
+      pathname === '/sign-up' ||
+      pathname === '/forgot-password'
+    ) {
+      return response
+    }
+
+    // For protected routes, redirect to sign-in with a special error
+    const protectedRoutes = ['/protected', '/dashboard']
+    const isProtectedRoute = protectedRoutes.some((route) =>
+      pathname.startsWith(route)
+    )
+
+    if (isProtectedRoute) {
+      const redirectUrl = new URL('/sign-in', request.url)
+      redirectUrl.searchParams.set('error', 'supabase_paused')
+      redirectUrl.searchParams.set('redirectedFrom', pathname)
+      return NextResponse.redirect(redirectUrl)
+    }
+
+    return response
+  }
+
   // If user is not signed in and the path is not public, redirect to sign-in
   if (!session) {
     const redirectUrl = new URL('/sign-in', request.url)
@@ -115,7 +175,7 @@ export async function middleware(request: NextRequest) {
 
   // If user is signed in and trying to access auth pages, redirect to dashboard
   if (session && (pathname === '/sign-in' || pathname === '/sign-up')) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+    return NextResponse.redirect(new URL('/protected', request.url))
   }
 
   // Allow access to the homepage for all users

@@ -135,11 +135,35 @@ export async function GET(request: Request): Promise<NextResponse> {
     console.log('Looking up user with email:', userEmail)
 
     // Check if user exists in your database
-    const { data: existingUser, error: userError } = await supabase
-      .from('users')
-      .select('*')
-      .eq('email', userEmail)
-      .single()
+    let existingUser = null
+    let userError = null
+
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('email', userEmail)
+        .single()
+
+      existingUser = data
+      userError = error
+    } catch (error) {
+      // Check if it's a paused project error
+      if (error && typeof error === 'object' && 'message' in error) {
+        const errorMessage = (error as any).message
+        if (
+          errorMessage.includes('paused') ||
+          errorMessage.includes('suspended') ||
+          errorMessage.includes('unavailable')
+        ) {
+          console.error('Supabase project is paused:', errorMessage)
+          return NextResponse.redirect(
+            new URL('/sign-in?error=supabase_paused', getBaseUrl())
+          )
+        }
+      }
+      throw error
+    }
 
     if (userError) {
       if (userError.code === 'PGRST116') {
@@ -214,6 +238,24 @@ export async function GET(request: Request): Promise<NextResponse> {
       }
     } catch (dbError) {
       console.error('Database operation failed with error:', dbError)
+
+      // Check if it's a paused project error
+      if (dbError && typeof dbError === 'object' && 'message' in dbError) {
+        const errorMessage = (dbError as any).message
+        if (
+          errorMessage.includes('paused') ||
+          errorMessage.includes('suspended') ||
+          errorMessage.includes('unavailable')
+        ) {
+          console.error(
+            'Supabase project is paused during database operation:',
+            errorMessage
+          )
+          return NextResponse.redirect(
+            new URL('/sign-in?error=supabase_paused', getBaseUrl())
+          )
+        }
+      }
 
       // Log additional error details if available
       if (dbError && typeof dbError === 'object') {
