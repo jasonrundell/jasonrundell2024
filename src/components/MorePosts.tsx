@@ -3,7 +3,7 @@ import { Grid } from '@jasonrundell/dropship'
 import { Post, Posts } from '@/typeDefinitions/app'
 import PostPreview from './PostPreview'
 
-export default async function MorePosts({ posts }: Posts) {
+export default function MorePosts({ posts }: Posts) {
   return (
     <section id="more-posts">
       <Grid

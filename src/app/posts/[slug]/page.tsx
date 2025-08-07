@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -21,7 +21,7 @@ type PostProps = {
   params: Promise<{ slug: string }>
 }
 
-const customMarkdownOptions = (content: Post['content']) => ({
+const customMarkdownOptions = () => ({
   renderMark: {
     [MARKS.CODE]: (text: React.ReactNode) => (
       <span dangerouslySetInnerHTML={{ __html: text as string }} />
@@ -29,10 +29,9 @@ const customMarkdownOptions = (content: Post['content']) => ({
   },
 })
 
-export async function generateMetadata(
-  { params }: PostProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PostProps): Promise<Metadata> {
   const slug = (await params).slug
 
   const post = await getEntryBySlug<Post>('post', slug)
@@ -55,8 +54,6 @@ export default async function page({ params }: PostProps) {
     notFound()
   }
 
-  const { title, content, featuredImage } = post
-
   return (
     <>
       <StyledContainer>
@@ -71,8 +68,8 @@ export default async function page({ params }: PostProps) {
               <section>
                 <Row>
                   {documentToReactComponents(
-                    content as unknown as Document,
-                    customMarkdownOptions(content)
+                    post.content as unknown as Document,
+                    customMarkdownOptions()
                   )}
                 </Row>
               </section>

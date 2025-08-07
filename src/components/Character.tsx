@@ -12,9 +12,6 @@ import { Heading } from '@jasonrundell/dropship'
 import Tokens from '@/lib/tokens'
 import { characters } from '@/data/characters'
 
-// choose a random index from characters array
-const randomIndex = Math.floor(Math.random() * characters.length)
-
 const StyledContainer = styled('div')`
   display: block;
   width: 20rem;

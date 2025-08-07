@@ -17,13 +17,10 @@ const options = {
 const StyledReference = styled('div')`
   margin-top: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge.unit};
   margin-bottom: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge.unit};
-`
-
-const StyledReferenceEmphasis = styled('div')`
-  font-size: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+  font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
   @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
       .breakpoints.medium.unit}) {
-    font-size: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
+    font-size: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
   }
 `
 
@@ -31,30 +28,26 @@ const StyledCite = styled('cite')`
   color: ${Tokens.colors.secondary.value};
 `
 
-export default async function References({ references }: ReferencesDef) {
+export default function References({ references }: ReferencesDef) {
   return (
-    references.length > 0 &&
-    references.map((reference, index) => {
-      const { citeName, company, quote, emphasis } = reference || {}
+    <>
+      {references.length > 0 &&
+        references.map((reference, index) => {
+          const { citeName, company, quote } = reference || {}
 
-      // Additional defensive checks for quote and its structure
-      const renderQuote = quote
-        ? documentToReactComponents(quote as Document, options) // Make sure you access quote.json directly
-        : 'No quote available.'
-      return (
-        <StyledReference key={index}>
-          {emphasis ? (
-            <StyledReferenceEmphasis>
+          // Additional defensive checks for quote and its structure
+          const renderQuote = quote
+            ? documentToReactComponents(quote as Document, options) // Make sure you access quote.json directly
+            : 'No quote available.'
+          return (
+            <StyledReference key={index}>
               <Blockquote>{renderQuote}</Blockquote>
-            </StyledReferenceEmphasis>
-          ) : (
-            <Blockquote>{renderQuote}</Blockquote>
-          )}
-          <StyledCite>
-            - {citeName || 'Unknown'} ({company || 'Unknown'})
-          </StyledCite>
-        </StyledReference>
-      )
-    })
+              <StyledCite>
+                - {citeName || 'Unknown'} ({company || 'Unknown'})
+              </StyledCite>
+            </StyledReference>
+          )
+        })}
+    </>
   )
 }

@@ -9,7 +9,7 @@ interface PostHeaderProps {
   post: Post
 }
 
-export default async function PostHeader({ post }: PostHeaderProps) {
+export default function PostHeader({ post }: PostHeaderProps) {
   const { title, date, featuredImage, author } = post
 
   return (

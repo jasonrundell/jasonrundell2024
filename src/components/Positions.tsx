@@ -20,7 +20,7 @@ const StyledCompany = styled('span')`
   font-style: normal;
 `
 
-export default async function Positions({ positions }: PositionsDef) {
+export default function Positions({ positions }: PositionsDef) {
   const uniquePositions = positions.filter(
     (position, index, self) =>
       index === self.findIndex((p) => p.company === position.company)

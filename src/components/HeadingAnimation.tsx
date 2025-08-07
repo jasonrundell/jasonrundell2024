@@ -33,7 +33,7 @@ const HeadingAnimation = ({ steps, speed }: HeadingAnimationProps) => {
 
   return (
     <StyledHeading level={1}>
-      <Link href="/" className="decoration--none">
+      <Link href="/" className="decoration--none primary-color">
         {steps[currentStep]}
       </Link>
     </StyledHeading>

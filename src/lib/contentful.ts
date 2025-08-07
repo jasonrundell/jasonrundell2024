@@ -1,6 +1,12 @@
 import { createClient, Entry, EntrySkeletonType, FieldsType } from 'contentful'
 
-import { Skill, Reference, Project, Position, Post } from '@/typeDefinitions/app'
+import {
+  Skill,
+  Reference,
+  Project,
+  Position,
+  Post,
+} from '@/typeDefinitions/app'
 
 import { ContentfulEntry } from '@/typeDefinitions/contentful'
 
@@ -53,7 +59,7 @@ async function fetchEntryBySlug<T extends EntrySkeletonType>(
     const response = await client.getEntries<ContentfulEntry<T>>({
       content_type: contentType,
       'fields.slug': slug,
-    } as Record<string, any>)
+    } as Record<string, string>)
 
     if (response.items.length === 0) {
       throw new Error(`No entry found for slug: ${slug}`)

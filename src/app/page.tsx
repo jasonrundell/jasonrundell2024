@@ -1,5 +1,6 @@
 import React from 'react'
-import { Row, Link, Grid, Spacer } from '@jasonrundell/dropship'
+import Link from 'next/link'
+import { Row, Grid, Spacer } from '@jasonrundell/dropship'
 
 import {
   getSkills,
@@ -85,8 +86,11 @@ export default async function page() {
                     href="https://www.linkedin.com/in/jasonrundell/"
                     rel="noopener noreferrer"
                     target="_blank"
-                    label="See more on LinkedIn"
-                  />
+                    aria-label="See more on LinkedIn"
+                    className="link"
+                  >
+                    See more on LinkedIn
+                  </Link>
                 </StyledListItem>
               </StyledList>
             </Row>
@@ -101,8 +105,11 @@ export default async function page() {
                       <Icon type="GitHub" />{' '}
                       <Link
                         href={`/projects/${project.slug}`}
-                        label={project.title}
-                      />
+                        aria-label={project.title}
+                        className="link"
+                      >
+                        {project.title}
+                      </Link>
                     </StyledListItem>
                   ))}
               </StyledList>

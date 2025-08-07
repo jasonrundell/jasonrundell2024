@@ -53,7 +53,9 @@ export default function PostPreview({
       )}
       <Row>
         <StyledHeading>
-          <Link href={`/posts/${slug}`}>{title}</Link>
+          <Link href={`/posts/${slug}`} className="link">
+            {title}
+          </Link>
         </StyledHeading>
       </Row>
       <Row>
