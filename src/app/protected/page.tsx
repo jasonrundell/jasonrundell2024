@@ -7,7 +7,7 @@ export default async function ProtectedPage() {
 
   // Get the current user safely
   const {
-    data: user,
+    data: userResult,
     error: authError,
     isPaused,
     isAvailable,
@@ -21,13 +21,15 @@ export default async function ProtectedPage() {
     return redirect('/sign-in?error=not_authenticated')
   }
 
-  if (authError || !user) {
+  if (authError || !userResult || !userResult.user) {
     console.error('Error getting user:', authError)
     return redirect('/sign-in?error=not_authenticated')
   }
 
+  const user = userResult.user
+
   // Get the full user data from the database safely
-  const { data: userData, error: userError } = await safeClient.getUsers(
+  const { data: userDataArray, error: userError } = await safeClient.getUsers(
     user.email
   )
 
@@ -35,6 +37,15 @@ export default async function ProtectedPage() {
     console.error('Error fetching user data:', userError)
     return redirect('/sign-in?error=user_not_found')
   }
+
+  // Extract the user data from the array
+  const userData =
+    userDataArray && userDataArray.length > 0
+      ? {
+          full_name: userDataArray[0].full_name,
+          created_at: userDataArray[0].created_at,
+        }
+      : undefined
 
   // Handle sign out
   const signOut = async () => {

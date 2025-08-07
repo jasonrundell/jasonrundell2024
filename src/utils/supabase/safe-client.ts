@@ -79,7 +79,11 @@ export class SafeSupabaseClient {
   async getUser() {
     return this.execute(async () => {
       const supabase = await createClient()
-      return await supabase.auth.getUser()
+      const result = await supabase.auth.getUser()
+      return {
+        data: result.data,
+        error: result.error,
+      }
     })
   }
 
@@ -89,7 +93,11 @@ export class SafeSupabaseClient {
   async getSession() {
     return this.execute(async () => {
       const supabase = await createClient()
-      return await supabase.auth.getSession()
+      const result = await supabase.auth.getSession()
+      return {
+        data: result.data,
+        error: result.error,
+      }
     })
   }
 
@@ -99,7 +107,11 @@ export class SafeSupabaseClient {
   async signOut() {
     return this.execute(async () => {
       const supabase = await createClient()
-      return await supabase.auth.signOut()
+      const result = await supabase.auth.signOut()
+      return {
+        data: null,
+        error: result.error,
+      }
     })
   }
 

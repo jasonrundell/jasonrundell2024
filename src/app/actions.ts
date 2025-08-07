@@ -25,13 +25,17 @@ export const signUpAction = async (formData: FormData) => {
       const supabase = await import('@/utils/supabase/server').then((m) =>
         m.createClient()
       )
-      return await supabase.auth.signUp({
+      const result = await supabase.auth.signUp({
         email,
         password,
         options: {
           emailRedirectTo: `${origin}/auth/callback`,
         },
       })
+      return {
+        data: result.data,
+        error: result.error,
+      }
     }
   )
 
@@ -72,10 +76,14 @@ export const signInAction = async (formData: FormData) => {
       const supabase = await import('@/utils/supabase/server').then((m) =>
         m.createClient()
       )
-      return await supabase.auth.signInWithPassword({
+      const result = await supabase.auth.signInWithPassword({
         email,
         password,
       })
+      return {
+        data: result.data,
+        error: result.error,
+      }
     }
   )
 

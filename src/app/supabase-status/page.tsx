@@ -1,7 +1,6 @@
 import { checkSupabaseStatus } from '@/utils/supabase/status'
 import { createSafeClient } from '@/utils/supabase/safe-client'
 import { styled } from '@pigment-css/react'
-import Tokens from '@/lib/tokens'
 
 const Container = styled('div')`
   max-width: 800px;
@@ -9,23 +8,10 @@ const Container = styled('div')`
   padding: 2rem;
 `
 
-const StatusCard = styled('div')<{ $isAvailable: boolean; $isPaused: boolean }>`
+const StatusCard = styled('div')`
   padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 1rem;
-  border: 1px solid
-    ${(props) =>
-      props.$isPaused
-        ? Tokens.colors.error.value
-        : props.$isAvailable
-        ? Tokens.colors.success?.value || '#10b981'
-        : Tokens.colors.warning.value};
-  background: ${(props) =>
-    props.$isPaused
-      ? 'rgba(239, 68, 68, 0.1)'
-      : props.$isAvailable
-      ? 'rgba(16, 185, 129, 0.1)'
-      : 'rgba(245, 158, 11, 0.1)'};
 `
 
 const StatusTitle = styled('h2')`
@@ -61,7 +47,7 @@ export default async function SupabaseStatusPage() {
     <Container>
       <h1>Supabase Status Dashboard</h1>
 
-      <StatusCard $isAvailable={status.isAvailable} $isPaused={status.isPaused}>
+      <StatusCard>
         <StatusTitle>Database Status</StatusTitle>
         <StatusText>
           <strong>Available:</strong> {status.isAvailable ? 'Yes' : 'No'}
@@ -76,10 +62,7 @@ export default async function SupabaseStatusPage() {
         )}
       </StatusCard>
 
-      <StatusCard
-        $isAvailable={userResult.isAvailable}
-        $isPaused={userResult.isPaused}
-      >
+      <StatusCard>
         <StatusTitle>User Authentication Test</StatusTitle>
         <StatusText>
           <strong>Available:</strong> {userResult.isAvailable ? 'Yes' : 'No'}
@@ -92,17 +75,14 @@ export default async function SupabaseStatusPage() {
             <strong>Error:</strong> {userResult.error}
           </StatusText>
         )}
-        {userResult.data && (
+        {userResult.data && userResult.data.user && (
           <StatusText>
-            <strong>User:</strong> {userResult.data.email || 'No email'}
+            <strong>User:</strong> {userResult.data.user.email || 'No email'}
           </StatusText>
         )}
       </StatusCard>
 
-      <StatusCard
-        $isAvailable={sessionResult.isAvailable}
-        $isPaused={sessionResult.isPaused}
-      >
+      <StatusCard>
         <StatusTitle>Session Test</StatusTitle>
         <StatusText>
           <strong>Available:</strong> {sessionResult.isAvailable ? 'Yes' : 'No'}
