@@ -54,7 +54,7 @@ export async function GET() {
     )
 
     // Try a simple query to test connectivity
-    const { data, error } = await supabase.from('users').select('id').limit(1)
+    const { error } = await supabase.from('users').select('id').limit(1)
 
     if (error) {
       // Check if it's a paused project error

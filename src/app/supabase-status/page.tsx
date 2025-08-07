@@ -39,27 +39,6 @@ const StatusText = styled('p')`
   font-size: 1rem;
 `
 
-const TestButton = styled('button')`
-  background: ${Tokens.colors.primary?.value || '#3b82f6'};
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-
-  &:hover {
-    background: ${Tokens.colors.primary?.value || '#2563eb'};
-  }
-
-  &:disabled {
-    background: #6b7280;
-    cursor: not-allowed;
-  }
-`
-
 const CodeBlock = styled('pre')`
   background: #f3f4f6;
   padding: 1rem;
@@ -160,7 +139,7 @@ export default async function SupabaseStatusPage() {
         <ol>
           <li>Go to your Supabase dashboard</li>
           <li>Navigate to Settings → General</li>
-          <li>Click "Pause" to pause your project</li>
+          <li>Click &quot;Pause&quot; to pause your project</li>
           <li>Refresh this page to see the changes</li>
           <li>Try accessing protected routes</li>
           <li>Resume your project to restore functionality</li>

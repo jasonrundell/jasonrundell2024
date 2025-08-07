@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 
@@ -98,7 +98,7 @@ export default function SupabaseStatusBanner({
   const [isVisible, setIsVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  const checkStatus = async () => {
+  const checkStatus = useCallback(async () => {
     try {
       const response = await fetch('/api/supabase-status')
       const newStatus: SupabaseStatus = await response.json()
@@ -129,7 +129,7 @@ export default function SupabaseStatusBanner({
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [showWhenAvailable, autoHide, hideDuration])
 
   useEffect(() => {
     checkStatus()
@@ -138,7 +138,7 @@ export default function SupabaseStatusBanner({
     const interval = setInterval(checkStatus, 30000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [checkStatus])
 
   const handleResumeClick = () => {
     window.open('https://app.supabase.com', '_blank')

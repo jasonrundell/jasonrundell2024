@@ -28,23 +28,6 @@ const FullWidthButton = styled(SubmitButton)`
   width: 100%;
 `
 
-const Divider = styled('div')`
-  display: flex;
-  align-items: center;
-  margin: 1.5rem 0 1rem 0;
-  color: ${Tokens.colors.textSecondary.value};
-  font-size: 0.95rem;
-  gap: 1rem;
-  width: 100%;
-
-  & > .line {
-    flex: 1;
-    height: 1px;
-    background: ${Tokens.colors.border.value};
-    border: none;
-  }
-`
-
 const BottomText = styled('p')`
   text-align: center;
   color: ${Tokens.colors.textSecondary.value};
