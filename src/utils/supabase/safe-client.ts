@@ -1,7 +1,7 @@
 import { createClient } from './server'
 import { checkSupabaseStatus, type SupabaseStatus } from './status'
 
-export interface SafeSupabaseResult<T = any> {
+export interface SafeSupabaseResult<T = unknown> {
   data: T | null
   error: string | null
   isPaused: boolean
@@ -37,7 +37,7 @@ export class SafeSupabaseClient {
    * Execute a Supabase operation with pause handling
    */
   async execute<T>(
-    operation: () => Promise<{ data: T | null; error: any }>
+    operation: () => Promise<{ data: T | null; error: unknown }>
   ): Promise<SafeSupabaseResult<T>> {
     const status = await this.getStatus()
 
@@ -54,7 +54,12 @@ export class SafeSupabaseClient {
       const result = await operation()
       return {
         data: result.data,
-        error: result.error?.message || null,
+        error:
+          result.error &&
+          typeof result.error === 'object' &&
+          'message' in result.error
+            ? (result.error as { message: string }).message
+            : null,
         isPaused: false,
         isAvailable: true,
       }
@@ -117,7 +122,7 @@ export class SafeSupabaseClient {
   /**
    * Insert user safely
    */
-  async insertUser(userData: any) {
+  async insertUser(userData: Record<string, unknown>) {
     return this.execute(async () => {
       const supabase = await createClient()
       return await supabase.from('users').insert([userData]).select().single()
@@ -127,7 +132,7 @@ export class SafeSupabaseClient {
   /**
    * Update user safely
    */
-  async updateUser(email: string, userData: any) {
+  async updateUser(email: string, userData: Record<string, unknown>) {
     return this.execute(async () => {
       const supabase = await createClient()
       return await supabase

@@ -40,7 +40,9 @@ export async function GET(request: Request): Promise<NextResponse> {
         error,
         searchParams.get('error_description')
       )
-      return NextResponse.redirect(`/sign-in?error=${encodeURIComponent(error)}`)
+      return NextResponse.redirect(
+        `/sign-in?error=${encodeURIComponent(error)}`
+      )
     }
 
     if (!code) {
@@ -150,7 +152,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     } catch (error) {
       // Check if it's a paused project error
       if (error && typeof error === 'object' && 'message' in error) {
-        const errorMessage = (error as any).message
+        const errorMessage = (error as { message: string }).message
         if (
           errorMessage.includes('paused') ||
           errorMessage.includes('suspended') ||
@@ -241,7 +243,7 @@ export async function GET(request: Request): Promise<NextResponse> {
 
       // Check if it's a paused project error
       if (dbError && typeof dbError === 'object' && 'message' in dbError) {
-        const errorMessage = (dbError as any).message
+        const errorMessage = (dbError as { message: string }).message
         if (
           errorMessage.includes('paused') ||
           errorMessage.includes('suspended') ||
