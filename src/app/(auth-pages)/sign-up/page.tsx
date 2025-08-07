@@ -172,7 +172,7 @@ export default async function Signup({
           </FullWidthButton>
           <Divider>
             <div className="line" />
-            <span>Aor continue with</span>
+            <span>Or continue with</span>
             <div className="line" />
           </Divider>
           <SocialAuthSection />
