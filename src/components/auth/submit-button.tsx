@@ -1,8 +1,7 @@
 'use client'
 
 import { Button } from '@/components/auth/ui/button'
-import { type ComponentProps } from 'react'
-import { useFormStatus } from 'react-dom'
+import { type ComponentProps, useState } from 'react'
 
 type Props = ComponentProps<typeof Button> & {
   pendingText?: string
@@ -13,11 +12,20 @@ export function SubmitButton({
   pendingText = 'Submitting...',
   ...props
 }: Props) {
-  const { pending } = useFormStatus()
+  const [isPending, setIsPending] = useState(false)
+
+  const handleClick = () => {
+    setIsPending(true)
+  }
 
   return (
-    <Button type="submit" aria-disabled={pending} {...props}>
-      {pending ? pendingText : children}
+    <Button
+      type="submit"
+      aria-disabled={isPending}
+      onClick={handleClick}
+      {...props}
+    >
+      {isPending ? pendingText : children}
     </Button>
   )
 }
