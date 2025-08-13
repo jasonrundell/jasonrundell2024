@@ -8,7 +8,7 @@ import { Label } from '@/components/auth/ui/label'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { styled } from '@pigment-css/react'
 import { useState } from 'react'
-import { CheckCircle, ArrowLeft, LogIn } from 'lucide-react'
+import { CheckCircle, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import Tokens from '@/lib/tokens'
 
@@ -66,23 +66,7 @@ const ButtonGroup = styled('div')`
   justify-content: center;
 `
 
-const PrimaryButton = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: ${Tokens.colors.primary.value};
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.2s ease;
 
-  &:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-  }
-`
 
 const SecondaryButton = styled(Link)`
   display: inline-flex;
@@ -111,12 +95,12 @@ export default function ResetPassword() {
   const handleSubmit = async (formData: FormData) => {
     setIsLoading(true)
     setMessage(null)
-    
+
     try {
       // Since resetPasswordAction either redirects or throws, we'll assume success
       // if no error is thrown. The action will handle redirects automatically.
       await resetPasswordAction(formData)
-      
+
       // If we reach here without an error, the action was successful
       setIsSubmitted(true)
     } catch (error) {
@@ -177,14 +161,14 @@ export default function ResetPassword() {
             disabled={isLoading}
           />
         </FieldGroup>
-        <FullWidthButton 
-          formAction={handleSubmit} 
+        <FullWidthButton
+          formAction={handleSubmit}
           pendingText="Resetting password..."
           disabled={isLoading}
         >
           Reset password
         </FullWidthButton>
-        
+
         {message && <FormMessage message={message} />}
       </FormWrapper>
     </AuthLayout>

@@ -276,15 +276,14 @@ export async function GET(request: Request): Promise<NextResponse> {
       }
 
       throw new Error(
-        `Database operation failed: ${
-          dbError instanceof Error ? dbError.message : 'Unknown error'
+        `Database operation failed: ${dbError instanceof Error ? dbError.message : 'Unknown error'
         }`
       )
     }
 
     // Create a session for the user
     const baseUrl = getBaseUrl()
-    const redirectTo = new URL('/protected', baseUrl).toString()
+    const redirectTo = new URL('/profile', baseUrl).toString()
 
     console.log('Creating auth session with redirect to:', redirectTo)
 

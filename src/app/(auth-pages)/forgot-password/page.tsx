@@ -116,15 +116,15 @@ export default function ForgotPassword() {
   const handleSubmit = async (formData: FormData) => {
     setIsLoading(true)
     setMessage(null)
-    
+
     const email = formData.get('email')?.toString() || ''
     setSubmittedEmail(email)
-    
+
     try {
       // Since forgotPasswordAction either redirects or throws, we'll assume success
       // if no error is thrown. The action will handle redirects automatically.
       await forgotPasswordAction(formData)
-      
+
       // If we reach here without an error, the action was successful
       setIsSubmitted(true)
     } catch (error) {
@@ -140,13 +140,13 @@ export default function ForgotPassword() {
     return (
       <AuthLayout
         title="Check Your Email"
-        subtitle="We've sent you a password reset link"
+        subtitle="We&apos;ve sent you a password reset link"
       >
         <SuccessContainer>
           <SuccessIcon />
           <SuccessTitle>Reset link sent!</SuccessTitle>
           <SuccessMessage>
-            We've sent a password reset link to{' '}
+            We&apos;ve sent a password reset link to{' '}
             <strong>{submittedEmail}</strong>.
             <br />
             Please check your inbox and follow the instructions to reset your password.
@@ -173,24 +173,24 @@ export default function ForgotPassword() {
       <FormWrapper action={handleSubmit}>
         <FieldGroup>
           <Label htmlFor="email">Email</Label>
-          <Input 
-            name="email" 
+          <Input
+            name="email"
             type="email"
-            placeholder="you@example.com" 
-            required 
+            placeholder="you@example.com"
+            required
             disabled={isLoading}
           />
         </FieldGroup>
-        <FullWidthButton 
-          formAction={handleSubmit} 
+        <FullWidthButton
+          formAction={handleSubmit}
           pendingText="Sending reset link..."
           disabled={isLoading}
         >
           Reset Password
         </FullWidthButton>
-        
+
         {message && <FormMessage message={message} />}
-        
+
         <BottomText>
           Remember your password?{' '}
           <Link href="/sign-in" className="link">

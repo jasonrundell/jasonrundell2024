@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 
 // Cache for Supabase client to avoid recreating on every request
-let supabaseClient: any = null
+let supabaseClient: ReturnType<typeof createServerClient> | null = null
 let lastClientCreation = 0
 const CLIENT_CACHE_DURATION = 30000 // 30 seconds
 
@@ -84,16 +84,16 @@ export async function middleware(request: NextRequest) {
   const publicRoutes = [
     '/',
     '/sign-in',
-    '/sign-up', 
+    '/sign-up',
     '/forgot-password',
     '/auth/callback/github',
     '/auth/callback/error',
     '/supabase-status'
   ]
-  
-  if (publicRoutes.includes(pathname) || 
-      pathname.startsWith('/posts/') || 
-      pathname.startsWith('/projects/')) {
+
+  if (publicRoutes.includes(pathname) ||
+    pathname.startsWith('/posts/') ||
+    pathname.startsWith('/projects/')) {
     return NextResponse.next()
   }
 
@@ -103,7 +103,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Only check authentication for protected routes
-  const protectedRoutes = ['/protected', '/dashboard']
+  const protectedRoutes = ['/profile', '/dashboard']
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route)
   )
@@ -124,7 +124,7 @@ export async function middleware(request: NextRequest) {
             // This is a best-effort cleanup
             supabaseClient = null
           }
-        } catch (e) {
+        } catch {
           // Ignore cleanup errors
         }
       }
@@ -137,10 +137,12 @@ export async function middleware(request: NextRequest) {
             get(name: string) {
               return request.cookies.get(name)?.value
             },
-            set(name: string, value: string, options: CookieOptions) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            set(_name: string, _value: string, _options: CookieOptions) {
               // Don't set cookies in middleware for performance
             },
-            remove(name: string, options: CookieOptions) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            remove(_name: string, _options: CookieOptions) {
               // Don't remove cookies in middleware for performance
             },
           },
@@ -162,10 +164,10 @@ export async function middleware(request: NextRequest) {
 
   try {
     const sessionPromise = supabaseClient.auth.getSession()
-    const timeoutPromise = new Promise((_, reject) => 
+    const timeoutPromise = new Promise((_, reject) =>
       setTimeout(() => reject(new Error('Session timeout')), 3000)
     )
-    
+
     const { data: { session: currentSession }, error } = await Promise.race([
       sessionPromise,
       timeoutPromise

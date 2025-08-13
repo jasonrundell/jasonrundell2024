@@ -72,7 +72,7 @@ export default async function ProtectedPage() {
       } else {
         console.log('Successfully created user record:', newUser)
         if (newUser && typeof newUser === 'object') {
-          const userRecord = newUser as any // Type assertion for now
+          const userRecord = newUser as { full_name?: string; created_at?: string }
           userData = {
             full_name: userRecord.full_name || user.email.split('@')[0],
             created_at: userRecord.created_at || new Date().toISOString(),

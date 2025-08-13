@@ -1,8 +1,7 @@
 'use client';
 
-import { Button } from '@/components/auth/ui/button';
 import { Label } from '@/components/auth/ui/label';
-import { LogOut, User, Calendar, Mail, Shield, Home } from 'lucide-react';
+import { Calendar, Mail, Shield } from 'lucide-react';
 import { styled } from '@pigment-css/react';
 import Tokens from '@/lib/tokens';
 
@@ -103,19 +102,7 @@ const InfoValue = styled('div')`
   padding: 0.5rem 0;
 `;
 
-const ActionsSection = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-`;
 
-const ActionButtons = styled('div')`
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
 
 interface ProfileClientProps {
   user: {
@@ -131,7 +118,7 @@ interface ProfileClientProps {
   signOutAction: () => void;
 }
 
-export default function ProfileClient({ user, userData, signOutAction }: ProfileClientProps) {
+export default function ProfileClient({ user, userData }: ProfileClientProps) {
   const displayName = userData?.full_name || user.email?.split('@')[0] || 'User';
   const email = user.email || 'No email provided';
   const fullName = userData?.full_name || 'Not provided';
