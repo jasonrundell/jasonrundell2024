@@ -12,27 +12,42 @@ const nextConfig = {
   images: {
     domains: ['images.ctfassets.net'],
   },
-  webpack: (config, { dev }) => {
-    // Only apply these optimizations in development
+  // Optimize development mode
+  experimental: {
+    // Disable bundle analysis overhead in dev
+    bundlePagesExternals: false,
+    // Enable faster refresh
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
+  },
+  webpack: (config, { dev, isServer }) => {
     if (dev) {
-      // Disable the filesystem cache which was causing issues
-      config.cache = false;
+      // Optimize development mode
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+        ignored: ['**/node_modules', '**/.git', '**/.next', '**/public'],
+      }
       
-      // Optimize chunk splitting for better performance
-      if (config.optimization.splitChunks) {
-        config.optimization.splitChunks = {
-          ...config.optimization.splitChunks,
-          chunks: 'async',
-          minSize: 20000,
-          maxSize: 244 * 1024,
-          minChunks: 1,
-          maxAsyncRequests: 30,
-          maxInitialRequests: 30,
-          enforceSizeThreshold: 50000
-        };
+      // Use faster source maps for development
+      config.devtool = 'eval-cheap-module-source-map'
+      
+      // Reduce bundle size in development
+      config.optimization = {
+        ...config.optimization,
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
       }
     }
-    return config;
+    
+    return config
   },
 }
 

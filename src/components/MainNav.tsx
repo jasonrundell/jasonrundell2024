@@ -2,7 +2,6 @@ import { styled } from '@pigment-css/react'
 import Link from 'next/link'
 import HeadingAnimation from './HeadingAnimation'
 import Tokens from '@/lib/tokens'
-import { createClient } from '@/utils/supabase/server'
 import MainNavClient from '@/components/MainNavClient'
 
 const StyledMenuContainer = styled('div')`
@@ -173,11 +172,7 @@ const steps = [
   'Jason Rundell',
 ]
 
-export default async function MainNav() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+export default function MainNav() {
   return (
     <StyledMenuContainer id="menu">
       <StyledMenu>
@@ -201,7 +196,7 @@ export default async function MainNav() {
           <StyledTitle steps={steps} speed={100} />
         </StyledMobileNav>
 
-        <MainNavClient user={user} />
+        <MainNavClient />
       </StyledMenu>
     </StyledMenuContainer>
   )

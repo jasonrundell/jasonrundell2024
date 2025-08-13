@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@supabase/ssr'
 
 // Helper function to get the base URL
 function getBaseUrl() {
@@ -288,11 +288,24 @@ export async function GET(request: Request): Promise<NextResponse> {
 
     console.log('Creating auth session with redirect to:', redirectTo)
 
-    // Use the auth helpers to handle the session
+    // Use the modern SSR client to handle the session
     const cookieStore = cookies()
-    const supabaseAuth = createRouteHandlerClient({
-      cookies: () => cookieStore,
-    })
+    const supabaseAuth = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return cookieStore.getAll()
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            )
+          },
+        },
+      }
+    )
 
     // Sign in with OAuth
     const { data: authData, error: authError } =

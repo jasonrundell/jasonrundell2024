@@ -7,6 +7,7 @@ import { signOutAction } from '@/app/actions'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { User } from '@supabase/supabase-js'
+import { createClient } from '@/utils/supabase/client'
 
 const StyledAuthButtonGroup = styled('div')`
   display: none;
@@ -16,7 +17,7 @@ const StyledAuthButtonGroup = styled('div')`
   padding-right: 1rem;
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-      .breakpoints.large.unit}) {
+    .breakpoints.large.unit}) {
     display: flex;
     padding-right: 2rem;
   }
@@ -59,7 +60,7 @@ const StyledMobileMenuButton = styled('button')`
   }
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-      .breakpoints.large.unit}) {
+    .breakpoints.large.unit}) {
     display: none;
   }
 `
@@ -85,7 +86,7 @@ const StyledMobileMenu = styled('div')`
   }
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-      .breakpoints.large.unit}) {
+    .breakpoints.large.unit}) {
     display: none;
   }
 `
@@ -136,12 +137,39 @@ const StyledMobileAuthSection = styled('div')`
   }
 `
 
-interface MainNavClientProps {
-  user: User | null
-}
+interface MainNavClientProps { }
 
-const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {
+const MainNavClient: React.FC<MainNavClientProps> = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [user, setUser] = useState<User | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const supabase = createClient()
+
+    // Get initial session
+    const getInitialSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        setUser(session?.user || null)
+      } catch (error) {
+        console.error('Error getting session:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    getInitialSession()
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setUser(session?.user || null)
+      }
+    )
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -180,6 +208,15 @@ const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {
     }
   }, [])
 
+  // Show loading state briefly to avoid layout shift
+  if (isLoading) {
+    return (
+      <StyledAuthButtonGroup>
+        <div style={{ width: '120px', height: '32px' }} />
+      </StyledAuthButtonGroup>
+    )
+  }
+
   return (
     <>
       {/* Mobile Menu Button */}
@@ -197,11 +234,15 @@ const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {
       {/* Auth Buttons (Desktop) */}
       <StyledAuthButtonGroup>
         {user ? (
-          <form action={signOutAction}>
-            <Button type="submit" variant="outline" size="sm">
-              Log out
+          <>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/profile">Profile</Link>
             </Button>
-          </form>
+            <form action={signOutAction}>
+              <Button type="submit" variant="outline" size="sm">
+                Log out
+              </Button>
+            </form></>
         ) : (
           <>
             <Button asChild variant="outline" size="sm">

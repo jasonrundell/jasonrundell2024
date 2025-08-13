@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 
@@ -24,7 +24,7 @@ const StyledBanner = styled('div')`
   color: white;
 
   &.paused {
-    background: ${Tokens.colors.error.value};
+    background: #dc2626;
   }
 
   &.error {
@@ -32,7 +32,7 @@ const StyledBanner = styled('div')`
   }
 
   &.available {
-    background: ${Tokens.colors.success?.value || '#10b981'};
+    background: ${Tokens.colors.success.value};
   }
 
   &.hidden {
@@ -97,11 +97,32 @@ export default function SupabaseStatusBanner({
   const [status, setStatus] = useState<SupabaseStatus | null>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const lastCheckRef = useRef<number>(0)
+  const statusCacheRef = useRef<SupabaseStatus | null>(null)
+  const cacheTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  const checkStatus = useCallback(async () => {
+  const checkStatus = useCallback(async (force = false) => {
+    const now = Date.now()
+    const CACHE_DURATION = 60000 // 1 minute cache
+    
+    // Use cached status if available and not expired
+    if (!force && statusCacheRef.current && (now - lastCheckRef.current) < CACHE_DURATION) {
+      setStatus(statusCacheRef.current)
+      setIsVisible(statusCacheRef.current.isPaused || 
+        (statusCacheRef.current.isAvailable && showWhenAvailable) ||
+        (!statusCacheRef.current.isAvailable && !statusCacheRef.current.isPaused))
+      setIsLoading(false)
+      return
+    }
+
     try {
       const response = await fetch('/api/supabase-status')
       const newStatus: SupabaseStatus = await response.json()
+      
+      // Cache the status
+      statusCacheRef.current = newStatus
+      lastCheckRef.current = now
+      
       setStatus(newStatus)
 
       // Show banner if:
@@ -117,7 +138,10 @@ export default function SupabaseStatusBanner({
 
       // Auto-hide success messages
       if (autoHide && newStatus.isAvailable && showWhenAvailable) {
-        setTimeout(() => setIsVisible(false), hideDuration)
+        if (cacheTimeoutRef.current) {
+          clearTimeout(cacheTimeoutRef.current)
+        }
+        cacheTimeoutRef.current = setTimeout(() => setIsVisible(false), hideDuration)
       }
     } catch {
       setStatus({
@@ -132,12 +156,18 @@ export default function SupabaseStatusBanner({
   }, [showWhenAvailable, autoHide, hideDuration])
 
   useEffect(() => {
+    // Initial check
     checkStatus()
 
-    // Check status every 30 seconds
-    const interval = setInterval(checkStatus, 30000)
+    // Check status every 2 minutes instead of 30 seconds
+    const interval = setInterval(() => checkStatus(), 120000)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      if (cacheTimeoutRef.current) {
+        clearTimeout(cacheTimeoutRef.current)
+      }
+    }
   }, [checkStatus])
 
   const handleResumeClick = () => {
@@ -150,7 +180,7 @@ export default function SupabaseStatusBanner({
 
   const handleRetry = () => {
     setIsLoading(true)
-    checkStatus()
+    checkStatus(true) // Force refresh
   }
 
   if (isLoading || !status) {
