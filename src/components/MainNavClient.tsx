@@ -109,7 +109,7 @@ const StyledMobileListItem = styled('li')`
     padding: 0.75rem 0;
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s ease;
-    text-align: center;
+    text-align: right;
 
     &:hover {
       border-bottom-color: ${Tokens.colors.primary.value};
@@ -123,7 +123,7 @@ const StyledMobileAuthSection = styled('div')`
   flex-direction: column;
   padding-top: 1.5rem;
   border-top: 1px solid ${Tokens.colors.border.value};
-  align-items: center;
+  align-items: flex-end;
 
   form,
   a {
@@ -272,11 +272,16 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
 
         <StyledMobileAuthSection>
           {user ? (
-            <form action={signOutAction}>
-              <Button type="submit" variant="outline" size="sm">
-                Log out
+            <>
+              <Button asChild variant="outline" size="sm">
+                <Link href="/profile">Profile</Link>
               </Button>
-            </form>
+              <form action={signOutAction}>
+                <Button type="submit" variant="outline" size="sm">
+                  Log out
+                </Button>
+              </form>
+            </>
           ) : (
             <>
               <Button asChild variant="outline" size="sm">

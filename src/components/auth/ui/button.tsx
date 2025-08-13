@@ -42,7 +42,7 @@ const StyledButton = styled('button')`
   }
   &.size-sm {
     height: 2.25rem;
-    padding: 0 1rem;
+    padding: 0;
     font-size: 0.95rem;
   }
   &.size-lg {
@@ -118,6 +118,13 @@ const StyledButton = styled('button')`
   }
   &.variant-link:focus-visible {
     box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
+  }
+
+   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
+    .breakpoints.large.unit}) {
+    &.size-sm {
+      padding: 0 1rem;
+    }
   }
 `
 
