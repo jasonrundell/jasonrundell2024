@@ -236,7 +236,7 @@ export const changePasswordAction = async (formData: FormData) => {
   }
 
   const unmetRequirements = Object.entries(passwordRequirements)
-    .filter(([_, met]) => !met)
+    .filter(([, met]) => !met)
     .map(([requirement]) => {
       switch (requirement) {
         case 'length': return 'at least 8 characters'
