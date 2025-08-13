@@ -1,6 +1,6 @@
 import { createSafeClient } from '@/utils/supabase/safe-client'
 import { redirect } from 'next/navigation'
-import ProfileClient from './profile-client'
+import ProfileClient from '@/app/profile/profile-client'
 import { AuthLayout } from '@/components/auth/auth-layout'
 
 export default async function ProtectedPage() {
@@ -83,8 +83,6 @@ export default async function ProtectedPage() {
       console.error('Failed to create user record:', error)
     }
   }
-
-  console.log('Final userData for profile:', userData)
 
   // Handle sign out
   const signOut = async () => {

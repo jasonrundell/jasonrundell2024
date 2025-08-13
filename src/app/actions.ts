@@ -196,6 +196,96 @@ export const resetPasswordAction = async (formData: FormData) => {
   return encodedRedirect('success', '/reset-password', 'Password updated')
 }
 
+export const changePasswordAction = async (formData: FormData) => {
+  const currentPassword = formData.get('currentPassword')?.toString()
+  const newPassword = formData.get('newPassword')?.toString()
+  const confirmPassword = formData.get('confirmPassword')?.toString()
+  const supabase = await createClient()
+
+  if (!currentPassword || !newPassword || !confirmPassword) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'Current password, new password, and confirm password are required'
+    )
+  }
+
+  if (newPassword !== confirmPassword) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'New passwords do not match'
+    )
+  }
+
+  if (newPassword === currentPassword) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'New password must be different from current password'
+    )
+  }
+
+  // Validate password strength requirements
+  const passwordRequirements = {
+    length: newPassword.length >= 8,
+    uppercase: /[A-Z]/.test(newPassword),
+    lowercase: /[a-z]/.test(newPassword),
+    number: /[0-9]/.test(newPassword),
+    special: /[^A-Za-z0-9]/.test(newPassword),
+  }
+
+  const unmetRequirements = Object.entries(passwordRequirements)
+    .filter(([_, met]) => !met)
+    .map(([requirement]) => {
+      switch (requirement) {
+        case 'length': return 'at least 8 characters'
+        case 'uppercase': return 'at least one uppercase letter'
+        case 'lowercase': return 'at least one lowercase letter'
+        case 'number': return 'at least one number'
+        case 'special': return 'at least one special character'
+        default: return requirement
+      }
+    })
+
+  if (unmetRequirements.length > 0) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      `Password must contain: ${unmetRequirements.join(', ')}`
+    )
+  }
+
+  // Verify current password by attempting to sign in
+  const { error: signInError } = await supabase.auth.signInWithPassword({
+    email: (await supabase.auth.getUser()).data.user?.email || '',
+    password: currentPassword,
+  })
+
+  if (signInError) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'Current password is incorrect'
+    )
+  }
+
+  // Update to new password
+  const { error } = await supabase.auth.updateUser({
+    password: newPassword,
+  })
+
+  if (error) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'Password update failed'
+    )
+  }
+
+  return encodedRedirect('success', '/profile', 'Password changed successfully')
+}
+
 export const signOutAction = async () => {
   const supabase = await createClient()
   await supabase.auth.signOut()
