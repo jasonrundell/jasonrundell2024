@@ -166,7 +166,7 @@ export const resetPasswordAction = async (formData: FormData) => {
   const confirmPassword = formData.get('confirmPassword') as string
 
   if (!password || !confirmPassword) {
-    encodedRedirect(
+    return encodedRedirect(
       'error',
       '/reset-password',
       'Password and confirm password are required'
@@ -174,7 +174,7 @@ export const resetPasswordAction = async (formData: FormData) => {
   }
 
   if (password !== confirmPassword) {
-    encodedRedirect(
+    return encodedRedirect(
       'error',
       '/reset-password',
       'Passwords do not match'
@@ -186,14 +186,14 @@ export const resetPasswordAction = async (formData: FormData) => {
   })
 
   if (error) {
-    encodedRedirect(
+    return encodedRedirect(
       'error',
       '/reset-password',
       'Password update failed'
     )
   }
 
-  encodedRedirect('success', '/reset-password', 'Password updated')
+  return encodedRedirect('success', '/reset-password', 'Password updated')
 }
 
 export const signOutAction = async () => {
