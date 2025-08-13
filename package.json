@@ -23,7 +23,8 @@
     "perf-check": "node scripts/performance-check.js",
     "dev-optimized": "npm run clear-cache && npm run dev",
     "dev-safe": "node scripts/dev-safe.js",
-    "dev-memory": "npx --max-old-space-size=8192 --expose-gc next"
+    "dev-memory": "npx --max-old-space-size=8192 --expose-gc next",
+    "install-hooks": "./scripts/install-git-hooks.sh"
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.9.1",
