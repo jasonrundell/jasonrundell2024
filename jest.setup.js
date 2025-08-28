@@ -1,81 +1,56 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
 
-// Mock Next.js router
+// Mock Next.js navigation
 jest.mock('next/navigation', () => ({
-  useRouter: () => ({
+  redirect: jest.fn(),
+  useRouter: jest.fn(() => ({
     push: jest.fn(),
     replace: jest.fn(),
-    prefetch: jest.fn(),
     back: jest.fn(),
     forward: jest.fn(),
     refresh: jest.fn(),
-  }),
-  useSearchParams: () => new URLSearchParams(),
-  redirect: jest.fn(),
-}))
-
-// Mock Supabase client
-jest.mock('@/utils/supabase/client', () => ({
-  createClient: jest.fn(() => ({
-    auth: {
-      getUser: jest.fn(),
-      signInWithPassword: jest.fn(),
-      signUp: jest.fn(),
-      signOut: jest.fn(),
-      resetPasswordForEmail: jest.fn(),
-      exchangeCodeForSession: jest.fn(),
-      updateUser: jest.fn(),
-    },
+    prefetch: jest.fn(),
   })),
+  useSearchParams: jest.fn(() => new URLSearchParams()),
+  usePathname: jest.fn(() => '/'),
 }))
 
-// Mock server-side Supabase client
+// Mock Supabase clients
 jest.mock('@/utils/supabase/server', () => ({
-  createClient: jest.fn(() => ({
-    auth: {
-      getUser: jest.fn(),
-      signInWithPassword: jest.fn(),
-      signUp: jest.fn(),
-      signOut: jest.fn(),
-      resetPasswordForEmail: jest.fn(),
-      exchangeCodeForSession: jest.fn(),
-      updateUser: jest.fn(),
-    },
-  })),
+  createClient: jest.fn(),
 }))
 
-// Mock safe client
+jest.mock('@/utils/supabase/client', () => ({
+  createClient: jest.fn(),
+}))
+
 jest.mock('@/utils/supabase/safe-client', () => ({
-  createSafeClient: jest.fn(() => ({
-    execute: jest.fn(),
-    insertUser: jest.fn(),
-  })),
+  createSafeClient: jest.fn(),
 }))
 
-// Mock utils
-jest.mock('@/utils/utils', () => ({
-  encodedRedirect: jest.fn(),
-}))
-
-// Global test utilities
+// Mock browser APIs
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
   unobserve: jest.fn(),
   disconnect: jest.fn(),
 }))
 
-// Mock window.matchMedia
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: jest.fn().mockImplementation(query => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-})
+global.window.matchMedia = jest.fn().mockImplementation(query => ({
+  matches: false,
+  media: query,
+  onchange: null,
+  addListener: jest.fn(),
+  removeListener: jest.fn(),
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+  dispatchEvent: jest.fn(),
+}))
+
+// Mock console methods to reduce noise in tests
+global.console = {
+  ...console,
+  error: jest.fn(),
+  warn: jest.fn(),
+  log: jest.fn(),
+}
