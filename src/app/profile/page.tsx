@@ -34,12 +34,12 @@ export default async function ProtectedPage() {
     user.email
   )
 
-  console.log('Profile page debug:', {
-    userEmail: user.email,
-    userDataArray,
-    userError,
-    userDataArrayLength: userDataArray?.length
-  })
+  // console.log('[DEBUG] Profile page debug:', {
+  //   userEmail: user.email,
+  //   userDataArray,
+  //   userError,
+  //   userDataArrayLength: userDataArray?.length,
+  // })
 
   if (userError) {
     console.error('Error fetching user data:', userError)
@@ -50,29 +50,37 @@ export default async function ProtectedPage() {
   let userData =
     userDataArray && userDataArray.length > 0
       ? {
-        full_name: userDataArray[0].full_name,
-        created_at: userDataArray[0].created_at,
-      }
+          full_name: userDataArray[0].full_name,
+          created_at: userDataArray[0].created_at,
+        }
       : undefined
 
   // If no user data exists, create a basic user record
   if (!userData && user.email) {
-    console.log('No user data found, creating basic user record for:', user.email)
+    console.log(
+      'No user data found, creating basic user record for:',
+      user.email
+    )
     try {
-      const { data: newUser, error: createError } = await safeClient.insertUser({
-        email: user.email,
-        full_name: user.email.split('@')[0], // Use email prefix as fallback name
-        provider: 'email',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      })
+      const { data: newUser, error: createError } = await safeClient.insertUser(
+        {
+          email: user.email,
+          full_name: user.email.split('@')[0], // Use email prefix as fallback name
+          provider: 'email',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        }
+      )
 
       if (createError) {
         console.error('Error creating user record:', createError)
       } else {
         console.log('Successfully created user record:', newUser)
         if (newUser && typeof newUser === 'object') {
-          const userRecord = newUser as { full_name?: string; created_at?: string }
+          const userRecord = newUser as {
+            full_name?: string
+            created_at?: string
+          }
           userData = {
             full_name: userRecord.full_name || user.email.split('@')[0],
             created_at: userRecord.created_at || new Date().toISOString(),
@@ -99,10 +107,7 @@ export default async function ProtectedPage() {
   }
 
   return (
-    <AuthLayout
-      title="Profile"
-      subtitle="Manage your account and preferences"
-    >
+    <AuthLayout title="Profile" subtitle="Manage your account and preferences">
       <ProfileClient
         user={clientUser}
         userData={userData}
