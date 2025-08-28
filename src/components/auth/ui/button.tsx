@@ -30,6 +30,7 @@ const StyledButton = styled('button')`
   cursor: pointer;
   transition: background 0.15s, color 0.15s, box-shadow 0.15s;
   opacity: 1;
+  text-decoration: none;
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -120,8 +121,8 @@ const StyledButton = styled('button')`
     box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
   }
 
-   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-    .breakpoints.large.unit}) {
+  @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
+      .breakpoints.large.unit}) {
     &.size-sm {
       padding: 0 1rem;
     }

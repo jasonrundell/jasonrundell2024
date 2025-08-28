@@ -17,7 +17,7 @@ const StyledAuthButtonGroup = styled('div')`
   padding-right: 1rem;
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-    .breakpoints.large.unit}) {
+      .breakpoints.large.unit}) {
     display: flex;
     padding-right: 2rem;
   }
@@ -60,7 +60,7 @@ const StyledMobileMenuButton = styled('button')`
   }
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-    .breakpoints.large.unit}) {
+      .breakpoints.large.unit}) {
     display: none;
   }
 `
@@ -86,7 +86,7 @@ const StyledMobileMenu = styled('div')`
   }
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-    .breakpoints.large.unit}) {
+      .breakpoints.large.unit}) {
     display: none;
   }
 `
@@ -138,7 +138,7 @@ const StyledMobileAuthSection = styled('div')`
 `
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface MainNavClientProps { }
+interface MainNavClientProps {}
 
 const MainNavClient: React.FC<MainNavClientProps> = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -151,7 +151,9 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
     // Get initial session
     const getInitialSession = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession()
+        const {
+          data: { session },
+        } = await supabase.auth.getSession()
         setUser(session?.user || null)
       } catch (error) {
         console.error('Error getting session:', error)
@@ -163,11 +165,11 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
     getInitialSession()
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user || null)
-      }
-    )
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setUser(session?.user || null)
+    })
 
     return () => subscription.unsubscribe()
   }, [])
@@ -240,10 +242,11 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
               <Link href="/profile">Profile</Link>
             </Button>
             <form action={signOutAction}>
-              <Button type="submit" variant="outline" size="sm">
+              <Button type="submit" variant="default" size="sm">
                 Log out
               </Button>
-            </form></>
+            </form>
+          </>
         ) : (
           <>
             <Button asChild variant="outline" size="sm">

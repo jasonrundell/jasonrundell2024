@@ -185,11 +185,15 @@
       "unit": "hex"
     },
     "success": {
-      "value": "#0070f3",
+      "value": "#63db53",
       "unit": "hex"
     },
     "warning": {
       "value": "#f5a623",
+      "unit": "hex"
+    },
+    "error": {
+      "value": "#d93f3f",
       "unit": "hex"
     }
   },
@@ -223,7 +227,7 @@
   },
   "fonts": {
     "body": {
-      "family": "Arial, sans-serif"
+      "family": "Outfit, Arial, sans-serif"
     },
     "heading": {
       "family": "Georgia, serif"
