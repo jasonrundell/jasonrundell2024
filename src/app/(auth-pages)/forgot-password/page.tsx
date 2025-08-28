@@ -9,8 +9,12 @@ import { AuthLayout } from '@/components/auth/auth-layout'
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CheckCircle, ArrowLeft } from 'lucide-react'
+import React from 'react'
+import { useSearchParams } from 'next/navigation'
+import { createClient } from '@/utils/supabase/client'
+import { useRouter } from 'next/navigation'
 
 const FormWrapper = styled('form')`
   display: flex;
@@ -112,6 +116,54 @@ export default function ForgotPassword() {
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<Message | null>(null)
   const [submittedEmail, setSubmittedEmail] = useState<string>('')
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true)
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
+  // Check if user is already authenticated
+  useEffect(() => {
+    const checkAuth = async () => {
+      const supabase = createClient()
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (user) {
+        // User is already logged in, redirect to profile
+        router.push('/profile')
+        return
+      }
+
+      setIsCheckingAuth(false)
+    }
+
+    checkAuth()
+  }, [router])
+
+  // Handle error messages from URL params
+  React.useEffect(() => {
+    const error = searchParams.get('error')
+    if (error === 'invalid_token') {
+      setMessage({
+        error:
+          'The password reset link is invalid or has expired. Please request a new one.',
+      })
+    } else if (error === 'missing_token') {
+      setMessage({
+        error:
+          'Password reset token is missing. Please request a new password reset link.',
+      })
+    }
+  }, [searchParams])
+
+  // Show loading while checking authentication
+  if (isCheckingAuth) {
+    return (
+      <AuthLayout title="Checking Authentication" subtitle="Please wait...">
+        <div>Loading...</div>
+      </AuthLayout>
+    )
+  }
 
   const handleSubmit = async (formData: FormData) => {
     setIsLoading(true)
@@ -140,7 +192,7 @@ export default function ForgotPassword() {
     return (
       <AuthLayout
         title="Check Your Email"
-        subtitle="We&apos;ve sent you a password reset link"
+        subtitle="We've sent you a password reset link"
       >
         <SuccessContainer>
           <SuccessIcon />
@@ -149,7 +201,8 @@ export default function ForgotPassword() {
             We&apos;ve sent a password reset link to{' '}
             <strong>{submittedEmail}</strong>.
             <br />
-            Please check your inbox and follow the instructions to reset your password.
+            Please check your inbox and follow the instructions to reset your
+            password.
           </SuccessMessage>
           <ButtonGroup>
             <BackButton href="/sign-in">

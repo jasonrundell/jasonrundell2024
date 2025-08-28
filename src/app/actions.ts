@@ -105,21 +105,21 @@ export const signInAction = async (formData: FormData) => {
 
   if (!isAvailable) {
     if (isPaused) {
-      return encodedRedirect(
-        'error',
-        '/sign-in',
-        'Database is currently paused. Please resume your Supabase project to continue.'
-      )
+      return redirect('/sign-in?error=supabase_paused')
     }
-    return encodedRedirect(
-      'error',
-      '/sign-in',
-      'Database is unavailable. Please try again later.'
-    )
+    return redirect('/sign-in?error=supabase_unavailable')
   }
 
   if (error) {
-    return encodedRedirect('error', '/sign-in', error)
+    // Handle specific authentication errors
+    let errorCode = 'auth_error'
+    if (error.includes('Invalid login credentials')) {
+      errorCode = 'invalid_credentials'
+    } else if (error.includes('Email not confirmed')) {
+      errorCode = 'email_not_confirmed'
+    }
+
+    return redirect(`/sign-in?error=${errorCode}`)
   }
 
   return redirect('/profile')
@@ -136,7 +136,7 @@ export const forgotPasswordAction = async (formData: FormData) => {
   }
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${origin}/auth/callback?redirect_to=/reset-password`,
+    redirectTo: `${origin}/auth/callback?type=recovery`,
   })
 
   if (error) {
@@ -162,8 +162,21 @@ export const forgotPasswordAction = async (formData: FormData) => {
 export const resetPasswordAction = async (formData: FormData) => {
   const supabase = await createClient()
 
+  // Check if user is already authenticated
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  if (user) {
+    return encodedRedirect(
+      'error',
+      '/reset-password',
+      'You are already logged in. If you need to change your password, please use the change password option in your profile.'
+    )
+  }
+
   const password = formData.get('password') as string
   const confirmPassword = formData.get('confirmPassword') as string
+  const token = formData.get('token') as string
 
   if (!password || !confirmPassword) {
     return encodedRedirect(
@@ -173,27 +186,61 @@ export const resetPasswordAction = async (formData: FormData) => {
     )
   }
 
+  if (!token) {
+    return encodedRedirect(
+      'error',
+      '/reset-password',
+      'Invalid or missing reset token'
+    )
+  }
+
   if (password !== confirmPassword) {
+    return encodedRedirect('error', '/reset-password', 'Passwords do not match')
+  }
+
+  try {
+    // First, we need to exchange the recovery token for a session
+    // This creates a temporary authenticated session that allows password update
+    const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(
+      token
+    )
+
+    if (exchangeError) {
+      console.error('Token exchange error:', exchangeError)
+      return encodedRedirect(
+        'error',
+        '/forgot-password',
+        'The password reset link is invalid or has expired. Please request a new one.'
+      )
+    }
+
+    // Now update the password using the temporary session
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: password,
+    })
+
+    if (updateError) {
+      console.error('Password update error:', updateError)
+      return encodedRedirect(
+        'error',
+        '/reset-password',
+        'Password update failed. Please try again.'
+      )
+    }
+
+    // Sign out the user after successful password reset
+    await supabase.auth.signOut()
+
+    // Success - redirect to sign in page with success message
+    return redirect('/sign-in?message=password_reset_success')
+  } catch (error) {
+    console.error('Unexpected error during password reset:', error)
     return encodedRedirect(
       'error',
       '/reset-password',
-      'Passwords do not match'
+      'An unexpected error occurred. Please try again.'
     )
   }
-
-  const { error } = await supabase.auth.updateUser({
-    password: password,
-  })
-
-  if (error) {
-    return encodedRedirect(
-      'error',
-      '/reset-password',
-      'Password update failed'
-    )
-  }
-
-  return encodedRedirect('success', '/reset-password', 'Password updated')
 }
 
 export const changePasswordAction = async (formData: FormData) => {
@@ -211,11 +258,7 @@ export const changePasswordAction = async (formData: FormData) => {
   }
 
   if (newPassword !== confirmPassword) {
-    return encodedRedirect(
-      'error',
-      '/profile',
-      'New passwords do not match'
-    )
+    return encodedRedirect('error', '/profile', 'New passwords do not match')
   }
 
   if (newPassword === currentPassword) {
@@ -239,12 +282,18 @@ export const changePasswordAction = async (formData: FormData) => {
     .filter(([, met]) => !met)
     .map(([requirement]) => {
       switch (requirement) {
-        case 'length': return 'at least 8 characters'
-        case 'uppercase': return 'at least one uppercase letter'
-        case 'lowercase': return 'at least one lowercase letter'
-        case 'number': return 'at least one number'
-        case 'special': return 'at least one special character'
-        default: return requirement
+        case 'length':
+          return 'at least 8 characters'
+        case 'uppercase':
+          return 'at least one uppercase letter'
+        case 'lowercase':
+          return 'at least one lowercase letter'
+        case 'number':
+          return 'at least one number'
+        case 'special':
+          return 'at least one special character'
+        default:
+          return requirement
       }
     })
 
@@ -263,11 +312,7 @@ export const changePasswordAction = async (formData: FormData) => {
   })
 
   if (signInError) {
-    return encodedRedirect(
-      'error',
-      '/profile',
-      'Current password is incorrect'
-    )
+    return encodedRedirect('error', '/profile', 'Current password is incorrect')
   }
 
   // Update to new password
@@ -276,11 +321,7 @@ export const changePasswordAction = async (formData: FormData) => {
   })
 
   if (error) {
-    return encodedRedirect(
-      'error',
-      '/profile',
-      'Password update failed'
-    )
+    return encodedRedirect('error', '/profile', 'Password update failed')
   }
 
   return encodedRedirect('success', '/profile', 'Password changed successfully')

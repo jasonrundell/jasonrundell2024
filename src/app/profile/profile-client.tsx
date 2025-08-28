@@ -1,14 +1,23 @@
-'use client';
+'use client'
 
-import { Label } from '@/components/auth/ui/label';
-import { Input } from '@/components/auth/ui/input';
-import { SubmitButton } from '@/components/auth/submit-button';
-import { FormMessage, Message } from '@/components/auth/form-message';
-import { changePasswordAction } from '@/app/actions';
-import { Calendar, Mail, Shield, Lock, Eye, EyeOff, CheckCircle, XCircle } from 'lucide-react';
-import { styled } from '@pigment-css/react';
-import { useState, useEffect } from 'react';
-import Tokens from '@/lib/tokens';
+import { Label } from '@/components/auth/ui/label'
+import { Input } from '@/components/auth/ui/input'
+import { SubmitButton } from '@/components/auth/submit-button'
+import { FormMessage, Message } from '@/components/auth/form-message'
+import { changePasswordAction } from '@/app/actions'
+import {
+  Calendar,
+  Mail,
+  Shield,
+  Lock,
+  Eye,
+  EyeOff,
+  CheckCircle,
+  XCircle,
+} from 'lucide-react'
+import { styled } from '@pigment-css/react'
+import { useState, useEffect } from 'react'
+import Tokens from '@/lib/tokens'
 
 // Styled components using Pigment-CSS
 const ProfileContainer = styled('div')`
@@ -16,7 +25,7 @@ const ProfileContainer = styled('div')`
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-`;
+`
 
 const UserInfoSection = styled('div')`
   display: flex;
@@ -25,10 +34,14 @@ const UserInfoSection = styled('div')`
   text-align: center;
   gap: 1.5rem;
   padding: 2rem;
-  background: linear-gradient(135deg, ${Tokens.colors.primary.value}15, ${Tokens.colors.primary.value}05);
+  background: linear-gradient(
+    135deg,
+    ${Tokens.colors.primary.value}15,
+    ${Tokens.colors.primary.value}05
+  );
   border-radius: 1rem;
   border: 1px solid ${Tokens.colors.primary.value}20;
-`;
+`
 
 const UserAvatar = styled('div')`
   height: 5rem;
@@ -43,27 +56,27 @@ const UserAvatar = styled('div')`
   color: white;
   border: 4px solid ${Tokens.colors.backgroundDarker.value};
   box-shadow: 0 4px 20px rgba(233, 190, 98, 0.3);
-`;
+`
 
 const UserName = styled('h2')`
   font-size: 1.75rem;
   font-weight: 600;
   margin: 0;
   color: ${Tokens.colors.textPrimary.value};
-`;
+`
 
 const UserEmail = styled('p')`
   font-size: 1rem;
   margin: 0;
   color: ${Tokens.colors.textSecondary.value};
   opacity: 0.8;
-`;
+`
 
 const AccountInfoSection = styled('div')`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-`;
+`
 
 const SectionTitle = styled('h3')`
   font-size: 1.25rem;
@@ -71,13 +84,13 @@ const SectionTitle = styled('h3')`
   margin: 0;
   color: ${Tokens.colors.textPrimary.value};
   text-align: center;
-`;
+`
 
 const InfoGrid = styled('div')`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
-`;
+`
 
 const InfoCard = styled('div')`
   background: ${Tokens.colors.backgroundDarker.value};
@@ -90,7 +103,7 @@ const InfoCard = styled('div')`
     border-color: ${Tokens.colors.primary.value}40;
     transform: translateY(-2px);
   }
-`;
+`
 
 const InfoCardHeader = styled('div')`
   display: flex;
@@ -98,20 +111,20 @@ const InfoCardHeader = styled('div')`
   gap: 0.75rem;
   margin-bottom: 0.75rem;
   color: ${Tokens.colors.primary.value};
-`;
+`
 
 const InfoValue = styled('div')`
   font-size: 1rem;
   font-weight: 500;
   color: ${Tokens.colors.textPrimary.value};
   padding: 0.5rem 0;
-`;
+`
 
 const ChangePasswordSection = styled('div')`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-`;
+`
 
 const ChangePasswordForm = styled('form')`
   display: flex;
@@ -121,17 +134,17 @@ const ChangePasswordForm = styled('form')`
   border-radius: 0.75rem;
   padding: 1.5rem;
   border: 1px solid ${Tokens.colors.primary.value}20;
-`;
+`
 
 const FormRow = styled('div')`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-`;
+`
 
 const PasswordInputWrapper = styled('div')`
   position: relative;
-`;
+`
 
 const PasswordToggleButton = styled('button')`
   position: absolute;
@@ -151,14 +164,14 @@ const PasswordToggleButton = styled('button')`
   &:hover {
     color: ${Tokens.colors.primary.value};
   }
-`;
+`
 
 const ButtonGroup = styled('div')`
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
   margin-top: 1rem;
-`;
+`
 
 const CancelButton = styled('button')`
   background: none;
@@ -174,11 +187,11 @@ const CancelButton = styled('button')`
     border-color: ${Tokens.colors.textPrimary.value};
     color: ${Tokens.colors.textPrimary.value};
   }
-`;
+`
 
 const StyledPasswordStrength = styled('div')`
   margin-top: 0.75rem;
-`;
+`
 
 const StrengthBar = styled('div')`
   height: 0.25rem;
@@ -186,12 +199,12 @@ const StrengthBar = styled('div')`
   border-radius: 0.125rem;
   margin-bottom: 1rem;
   overflow: hidden;
-`;
+`
 
 const StrengthFill = styled('div')`
   height: 100%;
   transition: all 0.3s ease;
-`;
+`
 
 const RequirementsList = styled('ul')`
   list-style: none;
@@ -202,17 +215,17 @@ const RequirementsList = styled('ul')`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-`;
+`
 
 const RequirementItem = styled('li')`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-`;
+`
 
 const RequirementText = styled('span')`
   font-size: 0.875rem;
-`;
+`
 
 const PasswordMatchIndicator = styled('div')`
   margin-top: 0.5rem;
@@ -220,7 +233,7 @@ const PasswordMatchIndicator = styled('div')`
   display: flex;
   align-items: center;
   gap: 0.25rem;
-`;
+`
 
 const PasswordRequirementsInfo = styled('div')`
   background: ${Tokens.colors.primary.value}10;
@@ -228,58 +241,57 @@ const PasswordRequirementsInfo = styled('div')`
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1rem;
-`;
+`
 
 const RequirementsTitle = styled('h4')`
   font-size: 0.875rem;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
   color: ${Tokens.colors.primary.value};
-`;
+`
 
 const RequirementsText = styled('p')`
   font-size: 0.875rem;
   margin: 0;
   color: ${Tokens.colors.textSecondary.value};
   line-height: 1.4;
-`;
-
+`
 
 interface ProfileClientProps {
   user: {
-    email: string;
+    email: string
     app_metadata?: {
-      provider?: string;
-    };
-  };
+      provider?: string
+    }
+  }
   userData?: {
-    full_name?: string;
-    created_at?: string;
-  };
-  signOutAction: () => void;
+    full_name?: string
+    created_at?: string
+  }
+  signOutAction: () => void
 }
 
 export default function ProfileClient({ user, userData }: ProfileClientProps) {
-  const [isChangingPassword, setIsChangingPassword] = useState(false);
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [message, setMessage] = useState<Message | null>(null);
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [currentPassword, setCurrentPassword] = useState('');
+  const [isChangingPassword, setIsChangingPassword] = useState(false)
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [message, setMessage] = useState<Message | null>(null)
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [currentPassword, setCurrentPassword] = useState('')
 
-  const displayName = userData?.full_name || user.email?.split('@')[0] || 'User';
-  const email = user.email || 'No email provided';
-  const fullName = userData?.full_name || 'Not provided';
+  const displayName = userData?.full_name || user.email?.split('@')[0] || 'User'
+  const email = user.email || 'No email provided'
+  const fullName = userData?.full_name || 'Not provided'
   const accountCreated = userData?.created_at
     ? new Date(userData.created_at).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-    : 'Unknown';
-  const authMethod = user.app_metadata?.provider || 'email';
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : 'Unknown'
+  const authMethod = user.app_metadata?.provider || 'email'
 
   // Password strength validation
   const passwordRequirements = {
@@ -288,66 +300,72 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
     lowercase: /[a-z]/.test(newPassword),
     number: /[0-9]/.test(newPassword),
     special: /[^A-Za-z0-9]/.test(newPassword),
-  };
+  }
 
-  const isPasswordValid = Object.values(passwordRequirements).every(Boolean);
-  const passwordsMatch = newPassword === confirmPassword;
-  const isFormValid = currentPassword && newPassword && confirmPassword && isPasswordValid && passwordsMatch;
+  const isPasswordValid = Object.values(passwordRequirements).every(Boolean)
+  const passwordsMatch = newPassword === confirmPassword
+  const isFormValid =
+    currentPassword &&
+    newPassword &&
+    confirmPassword &&
+    isPasswordValid &&
+    passwordsMatch
 
   const handleChangePassword = async (formData: FormData) => {
     if (!isFormValid) {
-      setMessage({ error: 'Please ensure all password requirements are met and passwords match.' });
-      return;
+      setMessage({
+        error:
+          'Please ensure all password requirements are met and passwords match.',
+      })
+      return
     }
 
     try {
-      await changePasswordAction(formData);
+      await changePasswordAction(formData)
       // If successful, the action will redirect with a success message
     } catch (error) {
-      console.error('Password change error:', error);
-      setMessage({ error: 'Failed to change password. Please try again.' });
+      console.error('Password change error:', error)
+      setMessage({ error: 'Failed to change password. Please try again.' })
     }
-  };
+  }
 
   const toggleChangePassword = () => {
-    setIsChangingPassword(!isChangingPassword);
-    setMessage(null);
+    setIsChangingPassword(!isChangingPassword)
+    setMessage(null)
     // Reset form state when toggling
-    setNewPassword('');
-    setConfirmPassword('');
-    setCurrentPassword('');
-  };
+    setNewPassword('')
+    setConfirmPassword('')
+    setCurrentPassword('')
+  }
 
   const handleInputChange = (field: string, value: string) => {
     switch (field) {
       case 'currentPassword':
-        setCurrentPassword(value);
-        break;
+        setCurrentPassword(value)
+        break
       case 'newPassword':
-        setNewPassword(value);
-        break;
+        setNewPassword(value)
+        break
       case 'confirmPassword':
-        setConfirmPassword(value);
-        break;
+        setConfirmPassword(value)
+        break
     }
-  };
+  }
 
   // Debug logging
-  console.log('ProfileClient render:', {
-    user,
-    userData,
-    displayName,
-    fullName,
-    accountCreated,
-    authMethod
-  });
+  // console.log('ProfileClient render:', {
+  //   user,
+  //   userData,
+  //   displayName,
+  //   fullName,
+  //   accountCreated,
+  //   authMethod
+  // });
 
   return (
     <ProfileContainer>
       <UserInfoSection>
-        <UserAvatar>
-          {displayName.charAt(0).toUpperCase()}
-        </UserAvatar>
+        <UserAvatar>{displayName.charAt(0).toUpperCase()}</UserAvatar>
         <div>
           <UserName>Welcome, {displayName}</UserName>
           <UserEmail>{email}</UserEmail>
@@ -361,7 +379,9 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
           <InfoCard>
             <InfoCardHeader>
               <Mail size={20} />
-              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>Email Address</Label>
+              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>
+                Email Address
+              </Label>
             </InfoCardHeader>
             <InfoValue>{email}</InfoValue>
           </InfoCard>
@@ -369,7 +389,9 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
           <InfoCard>
             <InfoCardHeader>
               <Calendar size={20} />
-              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>Account Created</Label>
+              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>
+                Account Created
+              </Label>
             </InfoCardHeader>
             <InfoValue>{accountCreated}</InfoValue>
           </InfoCard>
@@ -377,21 +399,27 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
           <InfoCard>
             <InfoCardHeader>
               <Shield size={20} />
-              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>Authentication Method</Label>
+              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>
+                Authentication Method
+              </Label>
             </InfoCardHeader>
-            <InfoValue style={{ textTransform: 'capitalize' }}>{authMethod}</InfoValue>
+            <InfoValue style={{ textTransform: 'capitalize' }}>
+              {authMethod}
+            </InfoValue>
           </InfoCard>
         </InfoGrid>
       </AccountInfoSection>
 
       <ChangePasswordSection>
         <SectionTitle>Security</SectionTitle>
-        
+
         {!isChangingPassword ? (
           <InfoCard>
             <InfoCardHeader>
               <Lock size={20} />
-              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>Password</Label>
+              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>
+                Password
+              </Label>
             </InfoCardHeader>
             <InfoValue>••••••••</InfoValue>
             <ButtonGroup>
@@ -409,8 +437,9 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
             <PasswordRequirementsInfo>
               <RequirementsTitle>Password Requirements</RequirementsTitle>
               <RequirementsText>
-                Your new password must meet the following criteria: at least 8 characters, 
-                one uppercase letter, one lowercase letter, one number, and one special character.
+                Your new password must meet the following criteria: at least 8
+                characters, one uppercase letter, one lowercase letter, one
+                number, and one special character.
               </RequirementsText>
             </PasswordRequirementsInfo>
 
@@ -424,14 +453,22 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
                   placeholder="Enter current password"
                   required
                   value={currentPassword}
-                  onChange={(e) => handleInputChange('currentPassword', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange('currentPassword', e.target.value)
+                  }
                 />
                 <PasswordToggleButton
                   type="button"
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                  aria-label={showCurrentPassword ? 'Hide password' : 'Show password'}
+                  aria-label={
+                    showCurrentPassword ? 'Hide password' : 'Show password'
+                  }
                 >
-                  {showCurrentPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showCurrentPassword ? (
+                    <EyeOff size={16} />
+                  ) : (
+                    <Eye size={16} />
+                  )}
                 </PasswordToggleButton>
               </PasswordInputWrapper>
             </FormRow>
@@ -446,12 +483,16 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
                   placeholder="Enter new password"
                   required
                   value={newPassword}
-                  onChange={(e) => handleInputChange('newPassword', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange('newPassword', e.target.value)
+                  }
                 />
                 <PasswordToggleButton
                   type="button"
                   onClick={() => setShowNewPassword(!showNewPassword)}
-                  aria-label={showNewPassword ? 'Hide password' : 'Show password'}
+                  aria-label={
+                    showNewPassword ? 'Hide password' : 'Show password'
+                  }
                 >
                   {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </PasswordToggleButton>
@@ -469,22 +510,40 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
                   placeholder="Confirm new password"
                   required
                   value={confirmPassword}
-                  onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange('confirmPassword', e.target.value)
+                  }
                 />
                 <PasswordToggleButton
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                  aria-label={
+                    showConfirmPassword ? 'Hide password' : 'Show password'
+                  }
                 >
-                  {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showConfirmPassword ? (
+                    <EyeOff size={16} />
+                  ) : (
+                    <Eye size={16} />
+                  )}
                 </PasswordToggleButton>
               </PasswordInputWrapper>
               {confirmPassword && (
-                <PasswordMatchIndicator style={{ 
-                  color: passwordsMatch ? Tokens.colors.success.value : '#ef4444' 
-                }}>
-                  {passwordsMatch ? <CheckCircle size={16} /> : <XCircle size={16} />}
-                  {passwordsMatch ? 'Passwords match' : 'Passwords do not match'}
+                <PasswordMatchIndicator
+                  style={{
+                    color: passwordsMatch
+                      ? Tokens.colors.success.value
+                      : '#ef4444',
+                  }}
+                >
+                  {passwordsMatch ? (
+                    <CheckCircle size={16} />
+                  ) : (
+                    <XCircle size={16} />
+                  )}
+                  {passwordsMatch
+                    ? 'Passwords match'
+                    : 'Passwords do not match'}
                 </PasswordMatchIndicator>
               )}
             </FormRow>
@@ -495,8 +554,8 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
               <CancelButton type="button" onClick={toggleChangePassword}>
                 Cancel
               </CancelButton>
-              <SubmitButton 
-                type="submit" 
+              <SubmitButton
+                type="submit"
                 pendingText="Changing password..."
                 disabled={!isFormValid}
               >
@@ -507,19 +566,19 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
         )}
       </ChangePasswordSection>
     </ProfileContainer>
-  );
+  )
 }
 
 // Custom PasswordStrength component that matches the design system
 function PasswordStrength({ password }: { password: string }) {
-  const [strength, setStrength] = useState(0);
+  const [strength, setStrength] = useState(0)
   const [requirements, setRequirements] = useState({
     length: false,
     uppercase: false,
     lowercase: false,
     number: false,
     special: false,
-  });
+  })
 
   useEffect(() => {
     const newRequirements = {
@@ -528,27 +587,29 @@ function PasswordStrength({ password }: { password: string }) {
       lowercase: /[a-z]/.test(password),
       number: /[0-9]/.test(password),
       special: /[^A-Za-z0-9]/.test(password),
-    };
+    }
 
-    setRequirements(newRequirements);
+    setRequirements(newRequirements)
 
-    const metRequirements = Object.values(newRequirements).filter(Boolean).length;
-    const newStrength = (metRequirements / 5) * 100;
-    setStrength(newStrength);
-  }, [password]);
+    const metRequirements =
+      Object.values(newRequirements).filter(Boolean).length
+    const newStrength = (metRequirements / 5) * 100
+    setStrength(newStrength)
+  }, [password])
 
   return (
     <StyledPasswordStrength>
       <StrengthBar>
-        <StrengthFill 
-          style={{ 
+        <StrengthFill
+          style={{
             width: `${strength}%`,
-            background: strength < 33 
-              ? (Tokens.colors.warning?.value || '#f59e0b')
-              : strength < 66 
-                ? (Tokens.colors.accent?.value || '#3b82f6')
-                : Tokens.colors.success.value
-          }} 
+            background:
+              strength < 33
+                ? Tokens.colors.warning?.value || '#f59e0b'
+                : strength < 66
+                ? Tokens.colors.accent?.value || '#3b82f6'
+                : Tokens.colors.success.value,
+          }}
         />
       </StrengthBar>
       <RequirementsList>
@@ -556,7 +617,10 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.length ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle size={16} color={Tokens.colors.warning?.value || '#f59e0b'} />
+            <XCircle
+              size={16}
+              color={Tokens.colors.warning?.value || '#f59e0b'}
+            />
           )}
           <RequirementText>At least 8 characters</RequirementText>
         </RequirementItem>
@@ -564,7 +628,10 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.uppercase ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle size={16} color={Tokens.colors.warning?.value || '#f59e0b'} />
+            <XCircle
+              size={16}
+              color={Tokens.colors.warning?.value || '#f59e0b'}
+            />
           )}
           <RequirementText>At least one uppercase letter</RequirementText>
         </RequirementItem>
@@ -572,7 +639,10 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.lowercase ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle size={16} color={Tokens.colors.warning?.value || '#f59e0b'} />
+            <XCircle
+              size={16}
+              color={Tokens.colors.warning?.value || '#f59e0b'}
+            />
           )}
           <RequirementText>At least one lowercase letter</RequirementText>
         </RequirementItem>
@@ -580,7 +650,10 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.number ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle size={16} color={Tokens.colors.warning?.value || '#f59e0b'} />
+            <XCircle
+              size={16}
+              color={Tokens.colors.warning?.value || '#f59e0b'}
+            />
           )}
           <RequirementText>At least one number</RequirementText>
         </RequirementItem>
@@ -588,11 +661,14 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.special ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle size={16} color={Tokens.colors.warning?.value || '#f59e0b'} />
+            <XCircle
+              size={16}
+              color={Tokens.colors.warning?.value || '#f59e0b'}
+            />
           )}
           <RequirementText>At least one special character</RequirementText>
         </RequirementItem>
       </RequirementsList>
     </StyledPasswordStrength>
-  );
+  )
 }

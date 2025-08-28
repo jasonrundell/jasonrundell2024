@@ -53,6 +53,16 @@ const errorMessages: Record<string, string> = {
   github_api_error: 'Error communicating with GitHub',
   supabase_paused:
     'Database is currently paused. Please resume your Supabase project to continue.',
+  supabase_unavailable: 'Database is unavailable. Please try again later.',
+  invalid_credentials: 'Invalid email or password. Please try again.',
+  email_not_confirmed: 'Please confirm your email address before signing in.',
+  auth_error: 'Authentication failed. Please try again.',
+}
+
+const successMessages: Record<string, string> = {
+  password_reset_success:
+    'Your password has been successfully reset. You can now sign in with your new password.',
+  email_confirmed: 'Email confirmed successfully. Please sign in.',
 }
 
 export default async function Login({
@@ -69,19 +79,25 @@ export default async function Login({
   const customMessage = params?.message
   const redirectedFrom = params?.redirectedFrom
 
-  // Construct the error message
-  let errorMessage = customMessage
+  // Construct the error or success message
+  let message = customMessage
   if (errorCode && !customMessage) {
-    errorMessage = errorMessages[errorCode] || 'An unknown error occurred'
+    message = errorMessages[errorCode] || 'An unknown error occurred'
+  } else if (customMessage && successMessages[customMessage]) {
+    message = successMessages[customMessage]
   }
 
   // If we have an error, log it
   if (errorCode) {
-    console.error('Auth error:', { errorCode, errorMessage, redirectedFrom })
+    console.error('Auth error:', { errorCode, message, redirectedFrom })
   }
 
-  // Convert error message to Message type for FormMessage
-  const formMessage = errorMessage ? { error: errorMessage } : undefined
+  // Convert message to Message type for FormMessage
+  const formMessage = message
+    ? errorCode
+      ? { error: message }
+      : { message }
+    : undefined
 
   return (
     <AuthLayout
