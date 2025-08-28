@@ -16,19 +16,6 @@ jest.mock('next/navigation', () => ({
   usePathname: jest.fn(() => '/'),
 }))
 
-// Mock Supabase clients
-jest.mock('@/utils/supabase/server', () => ({
-  createClient: jest.fn(),
-}))
-
-jest.mock('@/utils/supabase/client', () => ({
-  createClient: jest.fn(),
-}))
-
-jest.mock('@/utils/supabase/safe-client', () => ({
-  createSafeClient: jest.fn(),
-}))
-
 // Mock browser APIs
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
