@@ -1,0 +1,50 @@
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --accent: #c69c6d;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+header, nav, main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+nav a {
+  margin-right: 1rem;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.art-list li {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.art-list li:last-child {
+  border-bottom: none;
+}
+
+.art-list img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}

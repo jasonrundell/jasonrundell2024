@@ -1,0 +1,16 @@
+{
+  "name": "kayooyoung-site",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "echo 'No tests to run'"
+  },
+  "dependencies": {
+    "next": "15.6.0-canary.1",
+    "react": "19.0.0-rc-de68d2f4-20241204",
+    "react-dom": "19.0.0-rc-de68d2f4-20241204"
+  }
+}
