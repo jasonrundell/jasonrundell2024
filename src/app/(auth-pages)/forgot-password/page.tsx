@@ -232,6 +232,7 @@ export default function ForgotPassword() {
             placeholder="you@example.com"
             required
             disabled={isLoading}
+            data-sentry-mask
           />
         </FieldGroup>
         <FullWidthButton

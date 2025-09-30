@@ -117,6 +117,7 @@ export default async function Login({
             type="email"
             placeholder="you@example.com"
             required
+            data-sentry-mask
           />
         </FieldGroup>
         <FieldGroup>
@@ -137,6 +138,7 @@ export default async function Login({
             name="password"
             placeholder="Your password"
             required
+            data-sentry-mask
           />
         </FieldGroup>
         <RememberGroup>

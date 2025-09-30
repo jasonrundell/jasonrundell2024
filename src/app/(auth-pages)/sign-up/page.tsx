@@ -144,6 +144,7 @@ export default async function Signup({
               type="email"
               placeholder="you@example.com"
               required
+              data-sentry-mask
             />
           </FieldGroup>
           <FieldGroup>
@@ -152,6 +153,7 @@ export default async function Signup({
               name="password"
               placeholder="Create a password"
               required
+              data-sentry-mask
             />
           </FieldGroup>
           <FieldGroup>
@@ -162,6 +164,7 @@ export default async function Signup({
               placeholder="Confirm your password"
               minLength={8}
               required
+              data-sentry-mask
             />
           </FieldGroup>
           <FullWidthButton
