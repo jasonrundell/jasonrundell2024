@@ -305,11 +305,17 @@ export const changePasswordAction = async (formData: FormData) => {
     )
   }
 
+  // Get current user email
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  if (userError || !userData?.user?.email) {
+    return encodedRedirect('error', '/profile', 'Unable to retrieve user information');
+  }
+
   // Verify current password by attempting to sign in
   const { error: signInError } = await supabase.auth.signInWithPassword({
-    email: (await supabase.auth.getUser()).data.user?.email || '',
+    email: userData.user.email,
     password: currentPassword,
-  })
+  });
 
   if (signInError) {
     return encodedRedirect('error', '/profile', 'Current password is incorrect')
