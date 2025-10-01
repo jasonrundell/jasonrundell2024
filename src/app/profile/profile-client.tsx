@@ -283,7 +283,6 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
 
   const displayName = userData?.full_name || user.email?.split('@')[0] || 'User'
   const email = user.email || 'No email provided'
-  const fullName = userData?.full_name || 'Not provided'
   const accountCreated = userData?.created_at
     ? new Date(userData.created_at).toLocaleDateString('en-US', {
         year: 'numeric',

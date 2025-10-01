@@ -1,8 +1,14 @@
 import { signUpAction } from './sign-up'
+import type { createClient } from '@/utils/supabase/server'
 
 // Mock the modules
 jest.mock('@/utils/supabase/server')
 jest.mock('next/navigation')
+
+// Get the mocked createClient
+const { createClient: mockCreateClient } = jest.requireMock<{
+  createClient: typeof createClient
+}>('@/utils/supabase/server')
 
 describe('Sign Up Action', () => {
   beforeEach(() => {
@@ -23,9 +29,7 @@ describe('Sign Up Action', () => {
         },
       }
 
-      require('@/utils/supabase/server').createClient.mockResolvedValue(
-        mockSupabase
-      )
+      ;(mockCreateClient as jest.Mock).mockResolvedValue(mockSupabase)
 
       // Act & Assert
       await expect(signUpAction(formData)).resolves.toBeUndefined()
@@ -91,9 +95,7 @@ describe('Sign Up Action', () => {
         },
       }
 
-      require('@/utils/supabase/server').createClient.mockResolvedValue(
-        mockSupabase
-      )
+      ;(mockCreateClient as jest.Mock).mockResolvedValue(mockSupabase)
 
       // Act
       const result = await signUpAction(formData)
@@ -120,9 +122,7 @@ describe('Sign Up Action', () => {
         },
       }
 
-      require('@/utils/supabase/server').createClient.mockResolvedValue(
-        mockSupabase
-      )
+      ;(mockCreateClient as jest.Mock).mockResolvedValue(mockSupabase)
 
       // Act
       const result = await signUpAction(formData)
@@ -149,9 +149,7 @@ describe('Sign Up Action', () => {
         },
       }
 
-      require('@/utils/supabase/server').createClient.mockResolvedValue(
-        mockSupabase
-      )
+      ;(mockCreateClient as jest.Mock).mockResolvedValue(mockSupabase)
 
       // Act
       await signUpAction(formData)
@@ -179,9 +177,7 @@ describe('Sign Up Action', () => {
         },
       }
 
-      require('@/utils/supabase/server').createClient.mockResolvedValue(
-        mockSupabase
-      )
+      ;(mockCreateClient as jest.Mock).mockResolvedValue(mockSupabase)
 
       // Act
       await signUpAction(formData)
@@ -211,9 +207,7 @@ describe('Sign Up Action', () => {
         },
       }
 
-      require('@/utils/supabase/server').createClient.mockResolvedValue(
-        mockSupabase
-      )
+      ;(mockCreateClient as jest.Mock).mockResolvedValue(mockSupabase)
 
       // Act
       await signUpAction(formData)

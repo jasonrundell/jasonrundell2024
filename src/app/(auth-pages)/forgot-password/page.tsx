@@ -9,7 +9,7 @@ import { AuthLayout } from '@/components/auth/auth-layout'
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { CheckCircle, ArrowLeft } from 'lucide-react'
 import React from 'react'
 import { useSearchParams } from 'next/navigation'
@@ -111,7 +111,7 @@ const ButtonGroup = styled('div')`
   justify-content: center;
 `
 
-export default function ForgotPassword() {
+function ForgotPasswordContent() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<Message | null>(null)
@@ -253,5 +253,19 @@ export default function ForgotPassword() {
         </BottomText>
       </FormWrapper>
     </AuthLayout>
+  )
+}
+
+export default function ForgotPassword() {
+  return (
+    <Suspense
+      fallback={
+        <AuthLayout title="Loading..." subtitle="Please wait">
+          <div>Loading...</div>
+        </AuthLayout>
+      }
+    >
+      <ForgotPasswordContent />
+    </Suspense>
   )
 }

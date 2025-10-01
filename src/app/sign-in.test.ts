@@ -1,8 +1,14 @@
 import { signInAction } from './actions'
+import type { createSafeClient } from '@/utils/supabase/safe-client'
 
 // Mock the modules
 jest.mock('@/utils/supabase/safe-client')
 jest.mock('next/navigation')
+
+// Get the mocked createSafeClient
+const { createSafeClient: mockCreateSafeClient } = jest.requireMock<{
+  createSafeClient: typeof createSafeClient
+}>('@/utils/supabase/safe-client')
 
 describe('Sign In Action', () => {
   beforeEach(() => {
@@ -25,9 +31,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should complete successfully and redirect
@@ -50,9 +54,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should handle the error and redirect with error message
@@ -73,9 +75,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should handle the error and redirect with error message
@@ -98,9 +98,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should handle the error and redirect with error message
@@ -123,9 +121,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should handle the error and redirect with error message
@@ -146,9 +142,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should handle the error and redirect with error message
@@ -169,9 +163,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should handle the error and redirect with error message
@@ -229,9 +221,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should complete successfully and redirect
@@ -255,9 +245,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should complete successfully and redirect
@@ -281,9 +269,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should complete successfully and redirect
@@ -305,9 +291,7 @@ describe('Sign In Action', () => {
         }),
       }
 
-      require('@/utils/supabase/safe-client').createSafeClient.mockReturnValue(
-        mockSafeClient
-      )
+      ;(mockCreateSafeClient as jest.Mock).mockReturnValue(mockSafeClient)
 
       // Act & Assert
       // The action should complete successfully and redirect

@@ -14,8 +14,7 @@ const nextConfig = {
   },
   // Optimize development mode
   experimental: {
-    // Disable bundle analysis overhead in dev
-    bundlePagesExternals: false,
+    bundlePagesExternals: true,
     // Enable faster refresh
     turbo: {
       rules: {
@@ -26,7 +25,7 @@ const nextConfig = {
       },
     },
   },
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev }) => {
     if (dev) {
       // Optimize development mode
       config.watchOptions = {

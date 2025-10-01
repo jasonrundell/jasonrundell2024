@@ -161,7 +161,7 @@ const MockSignup = ({
     return (
       <div data-testid="auth-layout">
         <h1>Check your email</h1>
-        <p>We've sent you a verification link</p>
+        <p>We&apos;ve sent you a verification link</p>
         <div data-testid="success-wrapper">
           <div data-testid="success-icon">✓</div>
           <h1 data-testid="success-title">Account created successfully!</h1>
@@ -517,7 +517,7 @@ describe('Registration Flow Integration Tests', () => {
       // Act & Assert
       expect(screen.getByText('Check your email')).toBeInTheDocument()
       expect(
-        screen.getByText("We've sent you a verification link")
+        screen.getByText(/We've sent you a verification link/)
       ).toBeInTheDocument()
       expect(screen.getByTestId('success-title')).toBeInTheDocument()
       expect(
