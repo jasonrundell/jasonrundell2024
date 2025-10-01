@@ -13,7 +13,7 @@ let cacheCleanupTimer: NodeJS.Timeout | null = null
 
 function cleanupCache() {
   const now = Date.now()
-  if (supabaseClient && (now - lastClientCreation) > MAX_CACHE_AGE) {
+  if (supabaseClient && now - lastClientCreation > MAX_CACHE_AGE) {
     supabaseClient = null
     lastClientCreation = 0
   }
@@ -88,12 +88,14 @@ export async function middleware(request: NextRequest) {
     '/forgot-password',
     '/auth/callback/github',
     '/auth/callback/error',
-    '/supabase-status'
+    '/supabase-status',
   ]
 
-  if (publicRoutes.includes(pathname) ||
+  if (
+    publicRoutes.includes(pathname) ||
     pathname.startsWith('/posts/') ||
-    pathname.startsWith('/projects/')) {
+    pathname.startsWith('/projects/')
+  ) {
     return NextResponse.next()
   }
 
@@ -114,13 +116,16 @@ export async function middleware(request: NextRequest) {
 
   // Create Supabase client with caching and memory management
   const now = Date.now()
-  if (!supabaseClient || (now - lastClientCreation) > CLIENT_CACHE_DURATION) {
+  if (!supabaseClient || now - lastClientCreation > CLIENT_CACHE_DURATION) {
     try {
       // Clean up old client if it exists
       if (supabaseClient) {
         try {
           // Close any open connections
-          if (supabaseClient.auth && typeof supabaseClient.auth.onAuthStateChange === 'function') {
+          if (
+            supabaseClient.auth &&
+            typeof supabaseClient.auth.onAuthStateChange === 'function'
+          ) {
             // This is a best-effort cleanup
             supabaseClient = null
           }
@@ -164,14 +169,17 @@ export async function middleware(request: NextRequest) {
 
   try {
     const sessionPromise = supabaseClient.auth.getSession()
-    const timeoutPromise = new Promise((_, reject) =>
+    const timeoutPromise = new Promise<{
+      data: { session: null }
+      error: Error
+    }>((_, reject) =>
       setTimeout(() => reject(new Error('Session timeout')), 3000)
     )
 
-    const { data: { session: currentSession }, error } = await Promise.race([
-      sessionPromise,
-      timeoutPromise
-    ])
+    const {
+      data: { session: currentSession },
+      error,
+    } = await Promise.race([sessionPromise, timeoutPromise])
 
     if (error) {
       if (
