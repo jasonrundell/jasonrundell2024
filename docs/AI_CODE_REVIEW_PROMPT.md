@@ -46,3 +46,25 @@ below:
   - Use of landmarks, headings, and appropriate labeling.
 - Provide specific, actionable recommendations and best practices for each
   accessibility concern.
+
+### 7. Testing and Code Coverage
+
+- Evaluate the current testing strategy and test coverage of the codebase.
+- Assess the quality and effectiveness of existing tests, including:
+  - Unit tests for components, functions, and utilities
+  - Integration tests for component interactions and data flow
+  - End-to-end tests for critical user workflows
+  - Test organization, naming conventions, and maintainability
+- Identify gaps in test coverage and recommend areas that need additional
+  testing.
+- Suggest improvements for:
+  - Test setup, mocking strategies, and test utilities
+  - Testing React components (rendering, user interactions, hooks)
+  - Testing TypeScript types and interfaces
+  - Performance testing and load testing where applicable
+  - Test-driven development (TDD) practices
+- Recommend code coverage targets and tools for measuring and maintaining
+  coverage.
+- Provide specific, actionable recommendations for improving test quality,
+  reducing flakiness, and ensuring tests remain maintainable as the codebase
+  evolves.

@@ -5,7 +5,7 @@ import { Grid, Row, Spacer } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { MARKS, Document, BLOCKS } from '@contentful/rich-text-types'
 import { notFound } from 'next/navigation'
-import DOMPurify from 'isomorphic-dompurify'
+import { sanitizeHTML } from '@/lib/sanitize'
 
 import { getEntryBySlug } from '@/lib/contentful'
 import { SITE_DESCRIPTION } from '@/lib/constants'
@@ -35,7 +35,7 @@ const customMarkdownOptions = () => ({
     [MARKS.CODE]: (text: React.ReactNode) => (
       <span
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(String(text)),
+          __html: sanitizeHTML(String(text)),
         }}
       />
     ),

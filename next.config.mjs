@@ -1,6 +1,12 @@
 import { withPigment } from '@pigment-css/nextjs-plugin'
 import { withSentryConfig } from '@sentry/nextjs'
 import withBundleAnalyzer from '@next/bundle-analyzer'
+import webpack from 'webpack'
+import { fileURLToPath } from 'url'
+import { dirname, resolve } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -67,7 +73,7 @@ const nextConfig = {
       },
     },
   },
-  webpack: (config, { dev }) => {
+  webpack: (config, { dev, isServer }) => {
     if (dev) {
       // Optimize development mode
       config.watchOptions = {
@@ -86,6 +92,17 @@ const nextConfig = {
         removeEmptyChunks: false,
         splitChunks: false,
       }
+    }
+    
+    // Fix for isomorphic-dompurify/jsdom default-stylesheet.css issue
+    if (isServer) {
+      // Replace default-stylesheet.css imports with an empty module
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(
+          /default-stylesheet\.css$/,
+          resolve(__dirname, 'src/lib/empty-stylesheet.js')
+        )
+      )
     }
     
     return config

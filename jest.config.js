@@ -21,6 +21,12 @@ const customJestConfig = {
     '!src/**/*.d.ts',
     '!src/**/*.test.{js,jsx,ts,tsx}',
     '!src/**/*.spec.{js,jsx,ts,tsx}',
+    '!src/__tests__/**',
+  ],
+  testPathIgnorePatterns: [
+    '<rootDir>/.next/',
+    '<rootDir>/node_modules/',
+    '<rootDir>/src/__tests__/utils/',
   ],
   coverageThreshold: {
     global: {

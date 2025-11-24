@@ -126,9 +126,9 @@ export const signInAction = async (formData: FormData) => {
   // Validate input
   const validationResult = signInSchema.safeParse(rawData)
   if (!validationResult.success) {
-    const errorMessage = validationResult.error.errors
-      .map((e) => e.message)
-      .join(', ')
+    const errorMessage =
+      validationResult.error.errors?.map((e) => e.message).join(', ') ||
+      'Validation failed'
     return redirect(
       `/sign-in?error=validation_error&message=${encodeURIComponent(
         errorMessage

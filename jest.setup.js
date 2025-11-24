@@ -1,6 +1,69 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
 
+// Polyfill Node.js globals needed by Next.js edge runtime
+if (typeof global.TextDecoder === 'undefined') {
+  const { TextDecoder, TextEncoder } = require('util')
+  global.TextDecoder = TextDecoder
+  global.TextEncoder = TextEncoder
+}
+
+if (typeof global.setImmediate === 'undefined') {
+  global.setImmediate = (fn, ...args) => setTimeout(fn, 0, ...args)
+  global.clearImmediate = clearTimeout
+}
+
+// Polyfill Next.js Request/Response APIs for testing
+// Use a simpler approach that doesn't require edge runtime
+if (typeof global.Request === 'undefined') {
+  // Use fetch API polyfill if available, otherwise create minimal mocks
+  try {
+    const { Request, Response, Headers } = require('next/dist/compiled/@edge-runtime/primitives')
+    global.Request = Request
+    global.Response = Response
+    global.Headers = Headers
+  } catch (e) {
+    // Fallback: create minimal mocks
+    global.Request = class Request {
+      constructor(input, init) {
+        this.url = typeof input === 'string' ? input : input.url
+        this.method = init?.method || 'GET'
+        this.headers = new Map()
+        if (init?.headers) {
+          Object.entries(init.headers).forEach(([k, v]) => this.headers.set(k, v))
+        }
+      }
+    }
+    global.Response = class Response {
+      constructor(body, init) {
+        this.body = body
+        this.status = init?.status || 200
+        this.headers = new Map()
+        if (init?.headers) {
+          Object.entries(init.headers).forEach(([k, v]) => this.headers.set(k, v))
+        }
+      }
+      json() {
+        return Promise.resolve(JSON.parse(this.body))
+      }
+    }
+    global.Headers = class Headers {
+      constructor(init) {
+        this.map = new Map()
+        if (init) {
+          Object.entries(init).forEach(([k, v]) => this.map.set(k, v))
+        }
+      }
+      get(name) {
+        return this.map.get(name)
+      }
+      set(name, value) {
+        this.map.set(name, value)
+      }
+    }
+  }
+}
+
 // Polyfill for HTMLFormElement.prototype.requestSubmit
 // jsdom has this method but throws "not implemented" errors
 // Override it to properly dispatch submit events in tests
@@ -70,9 +133,10 @@ global.console = {
     
     if (
       errorMessage.includes('Not implemented: HTMLFormElement.prototype.requestSubmit') ||
-      errorMessage.includes('HTMLFormElement.prototype.requestSubmit')
+      errorMessage.includes('HTMLFormElement.prototype.requestSubmit') ||
+      errorMessage.includes('Sign in error:') // Suppress expected sign-in test errors
     ) {
-      return // Suppress this specific error
+      return // Suppress these specific errors
     }
     // Call original error for everything else
     originalError(...args)

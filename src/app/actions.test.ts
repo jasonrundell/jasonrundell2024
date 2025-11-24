@@ -85,7 +85,10 @@ describe('Password Reset Actions', () => {
       formData.append('password', 'test123')
 
       // Act & Assert
-      await expect(signInAction(formData)).rejects.toThrow()
+      // The action now redirects instead of throwing
+      await expect(signInAction(formData)).resolves.toBeUndefined()
+      // Verify redirect was called (mocked in jest.setup.js)
+      expect(require('next/navigation').redirect).toHaveBeenCalled()
     })
 
     it('should handle missing password', async () => {
@@ -94,7 +97,10 @@ describe('Password Reset Actions', () => {
       formData.append('email', 'test@example.com')
 
       // Act & Assert
-      await expect(signInAction(formData)).rejects.toThrow()
+      // The action now redirects instead of throwing
+      await expect(signInAction(formData)).resolves.toBeUndefined()
+      // Verify redirect was called (mocked in jest.setup.js)
+      expect(require('next/navigation').redirect).toHaveBeenCalled()
     })
   })
 })

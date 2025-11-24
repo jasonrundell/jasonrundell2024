@@ -4,7 +4,7 @@ import { Spacer, Row } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { MARKS, Document } from '@contentful/rich-text-types'
 import { notFound } from 'next/navigation'
-import DOMPurify from 'isomorphic-dompurify'
+import { sanitizeHTML } from '@/lib/sanitize'
 
 import { getEntryBySlug } from '@/lib/contentful'
 import PostHeader from '@/components/PostHeader'
@@ -30,7 +30,7 @@ const customMarkdownOptions = () => ({
     [MARKS.CODE]: (text: React.ReactNode) => (
       <span
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(String(text)),
+          __html: sanitizeHTML(String(text)),
         }}
       />
     ),
