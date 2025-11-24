@@ -63,13 +63,6 @@ jest.mock('@/components/auth/submit-button', () => {
   }
 })
 
-jest.mock('@/components/auth/social-auth-section', () => {
-  return function MockSocialAuthSection() {
-    return (
-      <div data-testid="social-auth-section">Social Authentication Options</div>
-    )
-  }
-})
 
 jest.mock('@/components/auth/ui/input', () => {
   return function MockInput({
@@ -146,9 +139,6 @@ const MockLogin = ({
     no_auth_url: 'Authentication URL not available',
     server_error: 'An error occurred. Please try again.',
     invalid_code: 'Invalid authentication code',
-    user_info_fetch: 'Failed to fetch user information from GitHub',
-    invalid_user_data: 'Invalid user data received from GitHub',
-    github_api_error: 'Error communicating with GitHub',
     supabase_paused:
       'Database is currently paused. Please resume your Supabase project to continue.',
     supabase_unavailable: 'Database is unavailable. Please try again later.',
@@ -236,9 +226,6 @@ const MockLogin = ({
         >
           Sign in
         </button>
-        <div data-testid="social-auth-section">
-          Social Authentication Options
-        </div>
         <p>
           Don&apos;t have an account? <a href="/sign-up">Sign up</a>
         </p>
@@ -481,17 +468,6 @@ describe('Login Flow Integration Tests', () => {
       expect(signUpLink.closest('a')).toHaveAttribute('href', '/sign-up')
     })
 
-    it('should have social authentication options', async () => {
-      // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
-
-      // When I view the page
-      // Then I should see social authentication options
-      expect(screen.getByTestId('social-auth-section')).toBeInTheDocument()
-      expect(
-        screen.getByText('Social Authentication Options')
-      ).toBeInTheDocument()
-    })
   })
 
   describe('Feature: Accessibility and Mobile Experience', () => {

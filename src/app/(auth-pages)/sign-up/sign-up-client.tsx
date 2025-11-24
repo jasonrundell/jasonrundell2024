@@ -5,7 +5,6 @@ import { FormMessage } from '@/components/auth/form-message'
 import { SubmitButton } from '@/components/auth/submit-button'
 import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
-import { SocialAuthSection } from '@/components/auth/social-auth-section'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { PasswordInput } from '@/components/auth/password-input'
 import Link from 'next/link'
@@ -30,22 +29,6 @@ const FullWidthButton = styled(SubmitButton)`
   width: 100%;
 `
 
-const Divider = styled('div')`
-  display: flex;
-  align-items: center;
-  margin: 1.5rem 0 1rem 0;
-  color: ${Tokens.colors.textSecondary.value};
-  font-size: 0.95rem;
-  gap: 1rem;
-  width: 100%;
-
-  & > .line {
-    flex: 1;
-    height: 1px;
-    background: ${Tokens.colors.border.value};
-    border: none;
-  }
-`
 
 const BottomText = styled('p')`
   text-align: center;
@@ -174,12 +157,6 @@ export default function SignUpClient({ success, error }: SignUpClientProps) {
           >
             Sign up
           </FullWidthButton>
-          <Divider>
-            <div className="line" />
-            <span>Or continue with</span>
-            <div className="line" />
-          </Divider>
-          <SocialAuthSection />
           <BottomText>
             Already have an account? <Link href="/sign-in">Sign in</Link>
           </BottomText>
@@ -221,7 +198,6 @@ export default function SignUpClient({ success, error }: SignUpClientProps) {
         <FullWidthButton formAction={signUpAction} pendingText="Signing up...">
           Sign up
         </FullWidthButton>
-        <SocialAuthSection />
         <BottomText>
           Already have an account?{' '}
           <Link href="/sign-in" className="link">

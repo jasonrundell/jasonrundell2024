@@ -4,7 +4,6 @@ import { SubmitButton } from '@/components/auth/submit-button'
 import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
 import { Checkbox } from '@/components/auth/ui/checkbox'
-import { SocialAuthSection } from '@/components/auth/social-auth-section'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
@@ -48,9 +47,6 @@ const errorMessages: Record<string, string> = {
   no_auth_url: 'Authentication URL not available',
   server_error: 'An error occurred. Please try again.',
   invalid_code: 'Invalid authentication code',
-  user_info_fetch: 'Failed to fetch user information from GitHub',
-  invalid_user_data: 'Invalid user data received from GitHub',
-  github_api_error: 'Error communicating with GitHub',
   supabase_paused:
     'Database is currently paused. Please resume your Supabase project to continue.',
   supabase_unavailable: 'Database is unavailable. Please try again later.',
@@ -148,7 +144,6 @@ export default async function Login({
         <FullWidthButton pendingText="Signing In..." formAction={signInAction}>
           Sign in
         </FullWidthButton>
-        <SocialAuthSection />
         <BottomText>
           Don&apos;t have an account?{' '}
           <Link href="/sign-up" className="link">

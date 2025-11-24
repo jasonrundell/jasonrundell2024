@@ -63,13 +63,6 @@ jest.mock('@/components/auth/submit-button', () => {
   }
 })
 
-jest.mock('@/components/auth/social-auth-section', () => {
-  return function MockSocialAuthSection() {
-    return (
-      <div data-testid="social-auth-section">Social Authentication Options</div>
-    )
-  }
-})
 
 jest.mock('@/components/auth/password-input', () => {
   return function MockPasswordInput({
@@ -240,9 +233,6 @@ const MockSignup = ({
           >
             Sign up
           </button>
-          <div data-testid="social-auth-section">
-            Social Authentication Options
-          </div>
           <p>
             Already have an account? <a href="/sign-in">Sign in</a>
           </p>
@@ -308,9 +298,6 @@ const MockSignup = ({
         >
           Sign up
         </button>
-        <div data-testid="social-auth-section">
-          Social Authentication Options
-        </div>
         <p>
           Already have an account? <a href="/sign-in">Sign in</a>
         </p>
@@ -606,18 +593,7 @@ describe('Registration Flow Integration Tests', () => {
     })
   })
 
-  describe('Feature: Social Authentication and Navigation', () => {
-    it('should display social authentication options', async () => {
-      // Arrange
-      render(<MockSignup searchParams={{}} />)
-
-      // Act & Assert
-      expect(screen.getByTestId('social-auth-section')).toBeInTheDocument()
-      expect(
-        screen.getByText('Social Authentication Options')
-      ).toBeInTheDocument()
-    })
-
+  describe('Feature: Navigation', () => {
     it('should provide navigation to sign-in page', async () => {
       // Arrange
       render(<MockSignup searchParams={{}} />)

@@ -62,13 +62,6 @@ jest.mock('@/components/auth/submit-button', () => {
   }
 })
 
-jest.mock('@/components/auth/social-auth-section', () => {
-  return function MockSocialAuthSection() {
-    return (
-      <div data-testid="social-auth-section">Social Authentication Options</div>
-    )
-  }
-})
 
 jest.mock('@/components/auth/password-input', () => {
   return function MockPasswordInput({
@@ -239,9 +232,6 @@ const MockSignup = ({
           >
             Sign up
           </button>
-          <div data-testid="social-auth-section">
-            Social Authentication Options
-          </div>
           <p>
             Already have an account? <a href="/sign-in">Sign in</a>
           </p>
@@ -307,9 +297,6 @@ const MockSignup = ({
         >
           Sign up
         </button>
-        <div data-testid="social-auth-section">
-          Social Authentication Options
-        </div>
         <p>
           Already have an account? <a href="/sign-in">Sign in</a>
         </p>
@@ -353,13 +340,6 @@ describe('Sign Up Page', () => {
       ).toBeInTheDocument()
     })
 
-    it('should render social authentication section', () => {
-      // Act
-      render(<MockSignup searchParams={{}} />)
-
-      // Assert
-      expect(screen.getByTestId('social-auth-section')).toBeInTheDocument()
-    })
 
     it('should render navigation links', () => {
       // Act
@@ -578,16 +558,4 @@ describe('Sign Up Page', () => {
     })
   })
 
-  describe('Social Authentication', () => {
-    it('should display social authentication options', () => {
-      // Act
-      render(<MockSignup searchParams={{}} />)
-
-      // Assert
-      expect(screen.getByTestId('social-auth-section')).toBeInTheDocument()
-      expect(
-        screen.getByText('Social Authentication Options')
-      ).toBeInTheDocument()
-    })
-  })
 })

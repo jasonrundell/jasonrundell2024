@@ -100,7 +100,6 @@ export async function middleware(request: NextRequest) {
     '/sign-in',
     '/sign-up',
     '/forgot-password',
-    '/auth/callback/github',
     '/auth/callback/error',
     '/supabase-status',
   ]
