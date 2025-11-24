@@ -72,6 +72,7 @@ const StyledMobileMenu = styled('div')`
   right: 0;
   background-color: ${Tokens.colors.background.value};
   border-top: 1px solid ${Tokens.colors.border.value};
+  border-bottom: 1px solid ${Tokens.colors.border.value};
   padding: 1.5rem;
   transform: translateY(-100%);
   opacity: 0;
@@ -101,7 +102,8 @@ const StyledMobileList = styled('ul')`
 `
 
 const StyledMobileListItem = styled('li')`
-  a {
+  a,
+  button {
     color: ${Tokens.colors.secondary.value};
     text-decoration: none;
     font-size: 1.125rem;
@@ -110,30 +112,25 @@ const StyledMobileListItem = styled('li')`
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s ease;
     text-align: right;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+    width: 100%;
+    font-family: inherit;
 
     &:hover {
       border-bottom-color: ${Tokens.colors.primary.value};
     }
   }
-`
 
-const StyledMobileAuthSection = styled('div')`
-  display: flex;
-  gap: 0.75rem;
-  flex-direction: column;
-  padding-top: 1.5rem;
-  border-top: 1px solid ${Tokens.colors.border.value};
-  align-items: flex-end;
-
-  form,
-  a {
+  form {
     width: 100%;
-    max-width: 200px;
   }
 
-  button {
+  form button {
     width: 100%;
-    justify-content: center;
   }
 `
 
@@ -287,35 +284,32 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
               Projects
             </Link>
           </StyledMobileListItem>
-        </StyledMobileList>
-
-        <StyledMobileAuthSection>
           {user ? (
             <>
-              <Button asChild variant="outline" size="sm">
+              <StyledMobileListItem>
                 <Link href="/profile">Profile</Link>
-              </Button>
-              <form action={signOutAction}>
-                <Button type="submit" variant="outline" size="sm">
-                  Log out
-                </Button>
-              </form>
+              </StyledMobileListItem>
+              <StyledMobileListItem>
+                <form action={signOutAction}>
+                  <button type="submit">Log out</button>
+                </form>
+              </StyledMobileListItem>
             </>
           ) : (
             <>
-              <Button asChild variant="outline" size="sm">
+              <StyledMobileListItem>
                 <Link href="/sign-in" onClick={closeMobileMenu}>
                   Login
                 </Link>
-              </Button>
-              <Button asChild variant="default" size="sm">
+              </StyledMobileListItem>
+              <StyledMobileListItem>
                 <Link href="/sign-up" onClick={closeMobileMenu}>
                   Sign up
                 </Link>
-              </Button>
+              </StyledMobileListItem>
             </>
           )}
-        </StyledMobileAuthSection>
+        </StyledMobileList>
       </StyledMobileMenu>
     </>
   )
