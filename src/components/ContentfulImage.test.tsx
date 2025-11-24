@@ -12,7 +12,6 @@ jest.mock('next/image', () => {
     fill,
     className,
     sizes,
-    style,
     quality,
   }: {
     src: string
@@ -23,7 +22,6 @@ jest.mock('next/image', () => {
     fill?: boolean
     className?: string
     sizes?: string
-    style?: React.CSSProperties
     quality?: number
   }) {
     const loaderResult = loader

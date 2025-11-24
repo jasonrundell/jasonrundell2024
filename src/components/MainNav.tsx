@@ -174,7 +174,7 @@ const NAVIGATION_STEPS = [
   ':)',
   ':)',
   'Jason Rundell',
-] as const
+] satisfies string[]
 
 /**
  * Main navigation component with responsive desktop and mobile layouts.

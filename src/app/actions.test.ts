@@ -3,6 +3,7 @@ import {
   resetPasswordAction,
   signInAction,
 } from './actions'
+import * as navigation from 'next/navigation'
 
 // Mock the modules
 jest.mock('@/utils/supabase/server')
@@ -88,7 +89,7 @@ describe('Password Reset Actions', () => {
       // The action now redirects instead of throwing
       await expect(signInAction(formData)).resolves.toBeUndefined()
       // Verify redirect was called (mocked in jest.setup.js)
-      expect(require('next/navigation').redirect).toHaveBeenCalled()
+      expect(navigation.redirect).toHaveBeenCalled()
     })
 
     it('should handle missing password', async () => {
@@ -100,7 +101,7 @@ describe('Password Reset Actions', () => {
       // The action now redirects instead of throwing
       await expect(signInAction(formData)).resolves.toBeUndefined()
       // Verify redirect was called (mocked in jest.setup.js)
-      expect(require('next/navigation').redirect).toHaveBeenCalled()
+      expect(navigation.redirect).toHaveBeenCalled()
     })
   })
 })

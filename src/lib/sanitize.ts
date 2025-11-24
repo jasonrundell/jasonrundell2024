@@ -17,6 +17,20 @@ if (typeof process !== 'undefined') {
 let DOMPurify: typeof import('isomorphic-dompurify').default | null = null
 let useFallback = false
 
+// Initialize DOMPurify at module load time
+// Using dynamic import to avoid ESLint require() error
+void import('isomorphic-dompurify')
+  .then((mod) => {
+    DOMPurify = mod.default
+  })
+  .catch((error) => {
+    console.warn(
+      'Failed to load DOMPurify, using fallback sanitization:',
+      error
+    )
+    useFallback = true
+  })
+
 /**
  * Safely sanitize HTML content.
  * Falls back to basic sanitization if DOMPurify fails to initialize.
@@ -28,18 +42,10 @@ export function sanitizeHTML(html: string): string {
   }
 
   try {
-    // Lazy load DOMPurify to avoid initialization issues
+    // If DOMPurify is not loaded yet, use fallback
+    // (This can happen on first call before async import completes)
     if (!DOMPurify) {
-      try {
-        DOMPurify = require('isomorphic-dompurify').default
-      } catch (error) {
-        console.warn(
-          'Failed to load DOMPurify, using fallback sanitization:',
-          error
-        )
-        useFallback = true
-        return basicSanitize(html)
-      }
+      return basicSanitize(html)
     }
 
     return DOMPurify.sanitize(html)

@@ -71,7 +71,9 @@ describe('Icon Component', () => {
 
   it('should return null for invalid icon type', () => {
     // Act
-    const { container } = render(<Icon type={'Invalid' as any} />)
+    const { container } = render(
+      <Icon type={'Invalid' as 'LinkedIn' | 'GitHub' | 'Email' | 'Calendar'} />
+    )
 
     // Assert
     expect(container.firstChild).toBeNull()

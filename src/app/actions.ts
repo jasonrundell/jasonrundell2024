@@ -40,7 +40,7 @@ export const signUpAction = async (formData: FormData) => {
   // Validate input
   const validationResult = signUpSchema.safeParse(rawData)
   if (!validationResult.success) {
-    const errorMessage = validationResult.error.errors
+    const errorMessage = validationResult.error.issues
       .map((e) => e.message)
       .join(', ')
     return encodedRedirect('error', '/sign-up', errorMessage)
@@ -86,8 +86,7 @@ export const signUpAction = async (formData: FormData) => {
 
   if (error) {
     console.error('Sign up error:', error)
-    const errorMessage = error instanceof Error ? error.message : String(error)
-    return encodedRedirect('error', '/sign-up', errorMessage)
+    return encodedRedirect('error', '/sign-up', error)
   } else {
     // Create a user record in the users table
     try {
@@ -127,7 +126,7 @@ export const signInAction = async (formData: FormData) => {
   const validationResult = signInSchema.safeParse(rawData)
   if (!validationResult.success) {
     const errorMessage =
-      validationResult.error.errors?.map((e) => e.message).join(', ') ||
+      validationResult.error.issues.map((e) => e.message).join(', ') ||
       'Validation failed'
     return redirect(
       `/sign-in?error=validation_error&message=${encodeURIComponent(

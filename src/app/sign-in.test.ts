@@ -1,5 +1,6 @@
 import { signInAction } from './actions'
 import type { createSafeClient } from '@/utils/supabase/safe-client'
+import * as navigation from 'next/navigation'
 
 // Mock the modules
 jest.mock('@/utils/supabase/safe-client')
@@ -184,7 +185,7 @@ describe('Sign In Action', () => {
       try {
         await signInAction(formData)
         // If it doesn't throw, verify redirect was called
-        expect(require('next/navigation').redirect).toHaveBeenCalled()
+        expect(navigation.redirect).toHaveBeenCalled()
       } catch (error) {
         // If it throws, that's also acceptable - the validation failed
         expect(error).toBeDefined()
@@ -202,7 +203,7 @@ describe('Sign In Action', () => {
       try {
         await signInAction(formData)
         // If it doesn't throw, verify redirect was called
-        expect(require('next/navigation').redirect).toHaveBeenCalled()
+        expect(navigation.redirect).toHaveBeenCalled()
       } catch (error) {
         // If it throws, that's also acceptable - the validation failed
         expect(error).toBeDefined()
@@ -219,7 +220,7 @@ describe('Sign In Action', () => {
       try {
         await signInAction(formData)
         // If it doesn't throw, verify redirect was called
-        expect(require('next/navigation').redirect).toHaveBeenCalled()
+        expect(navigation.redirect).toHaveBeenCalled()
       } catch (error) {
         // If it throws, that's also acceptable - the validation failed
         expect(error).toBeDefined()

@@ -15,13 +15,7 @@ jest.mock('next/link', () => {
 })
 
 jest.mock('./HeadingAnimation', () => {
-  return function MockHeadingAnimation({
-    steps,
-    speed,
-  }: {
-    steps: readonly string[]
-    speed: number
-  }) {
+  return function MockHeadingAnimation() {
     return <div data-testid="heading-animation">Jason Rundell</div>
   }
 })
