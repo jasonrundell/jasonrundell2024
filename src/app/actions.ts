@@ -1,24 +1,54 @@
 'use server'
 
+import { z } from 'zod'
 import { encodedRedirect } from '@/utils/utils'
 import { createSafeClient } from '@/utils/supabase/safe-client'
 import { createClient } from '@/utils/supabase/server'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
+// Validation schemas
+const emailSchema = z.string().email('Invalid email address')
+const passwordSchema = z
+  .string()
+  .min(8, 'Password must be at least 8 characters')
+  .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+  .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+  .regex(/[0-9]/, 'Password must contain at least one number')
+  .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character')
+
+const signUpSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema,
+})
+
+const signInSchema = z.object({
+  email: emailSchema,
+  password: z.string().min(1, 'Password is required'),
+})
+
+/**
+ * Server action for user sign up.
+ * Validates input and creates a new user account.
+ */
 export const signUpAction = async (formData: FormData) => {
-  const email = formData.get('email')?.toString()
-  const password = formData.get('password')?.toString()
+  const rawData = {
+    email: formData.get('email')?.toString(),
+    password: formData.get('password')?.toString(),
+  }
+
+  // Validate input
+  const validationResult = signUpSchema.safeParse(rawData)
+  if (!validationResult.success) {
+    const errorMessage = validationResult.error.errors
+      .map((e) => e.message)
+      .join(', ')
+    return encodedRedirect('error', '/sign-up', errorMessage)
+  }
+
+  const { email, password } = validationResult.data
   const safeClient = createSafeClient()
   const origin = (await headers()).get('origin')
-
-  if (!email || !password) {
-    return encodedRedirect(
-      'error',
-      '/sign-up',
-      'Email and password are required'
-    )
-  }
 
   const { error, isPaused, isAvailable } = await safeClient.execute(
     async () => {
@@ -56,7 +86,8 @@ export const signUpAction = async (formData: FormData) => {
 
   if (error) {
     console.error('Sign up error:', error)
-    return encodedRedirect('error', '/sign-up', error)
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    return encodedRedirect('error', '/sign-up', errorMessage)
   } else {
     // Create a user record in the users table
     try {
@@ -82,9 +113,30 @@ export const signUpAction = async (formData: FormData) => {
   }
 }
 
+/**
+ * Server action for user sign in.
+ * Validates input and authenticates the user.
+ */
 export const signInAction = async (formData: FormData) => {
-  const email = formData.get('email') as string
-  const password = formData.get('password') as string
+  const rawData = {
+    email: formData.get('email')?.toString(),
+    password: formData.get('password')?.toString(),
+  }
+
+  // Validate input
+  const validationResult = signInSchema.safeParse(rawData)
+  if (!validationResult.success) {
+    const errorMessage = validationResult.error.errors
+      .map((e) => e.message)
+      .join(', ')
+    return redirect(
+      `/sign-in?error=validation_error&message=${encodeURIComponent(
+        errorMessage
+      )}`
+    )
+  }
+
+  const { email, password } = validationResult.data
   const safeClient = createSafeClient()
 
   const { error, isPaused, isAvailable } = await safeClient.execute(
@@ -111,15 +163,9 @@ export const signInAction = async (formData: FormData) => {
   }
 
   if (error) {
-    // Handle specific authentication errors
-    let errorCode = 'auth_error'
-    if (error.includes('Invalid login credentials')) {
-      errorCode = 'invalid_credentials'
-    } else if (error.includes('Email not confirmed')) {
-      errorCode = 'email_not_confirmed'
-    }
-
-    return redirect(`/sign-in?error=${errorCode}`)
+    // Use generic error message for security (don't leak specific error details)
+    console.error('Sign in error:', error)
+    return redirect('/sign-in?error=auth_error')
   }
 
   return redirect('/profile')
@@ -306,16 +352,20 @@ export const changePasswordAction = async (formData: FormData) => {
   }
 
   // Get current user email
-  const { data: userData, error: userError } = await supabase.auth.getUser();
+  const { data: userData, error: userError } = await supabase.auth.getUser()
   if (userError || !userData?.user?.email) {
-    return encodedRedirect('error', '/profile', 'Unable to retrieve user information');
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'Unable to retrieve user information'
+    )
   }
 
   // Verify current password by attempting to sign in
   const { error: signInError } = await supabase.auth.signInWithPassword({
     email: userData.user.email,
     password: currentPassword,
-  });
+  })
 
   if (signInError) {
     return encodedRedirect('error', '/profile', 'Current password is incorrect')

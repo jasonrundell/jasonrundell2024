@@ -1,19 +1,24 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { CACHE_DURATIONS, ALLOWED_ORIGINS } from '@/lib/constants'
 
 // Cache for Supabase client to avoid recreating on every request
 let supabaseClient: ReturnType<typeof createServerClient> | null = null
 let lastClientCreation = 0
-const CLIENT_CACHE_DURATION = 30000 // 30 seconds
 
 // Memory management
-const MAX_CACHE_AGE = 5 * 60 * 1000 // 5 minutes
 let cacheCleanupTimer: NodeJS.Timeout | null = null
 
+/**
+ * Cleans up cached Supabase client if it's older than MAX_CACHE_AGE.
+ */
 function cleanupCache() {
   const now = Date.now()
-  if (supabaseClient && now - lastClientCreation > MAX_CACHE_AGE) {
+  if (
+    supabaseClient &&
+    now - lastClientCreation > CACHE_DURATIONS.MAX_CACHE_AGE
+  ) {
     supabaseClient = null
     lastClientCreation = 0
   }
@@ -24,7 +29,10 @@ if (typeof global !== 'undefined') {
   if (cacheCleanupTimer) {
     clearInterval(cacheCleanupTimer)
   }
-  cacheCleanupTimer = setInterval(cleanupCache, 60000) // Clean every minute
+  cacheCleanupTimer = setInterval(
+    cleanupCache,
+    CACHE_DURATIONS.CLEANUP_INTERVAL
+  )
 }
 
 export async function middleware(request: NextRequest) {
@@ -42,19 +50,22 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Handle CORS preflight
+  // Handle CORS preflight with origin whitelist
   if (request.method === 'OPTIONS') {
+    const origin = request.headers.get('origin')
+    const allowedOrigin =
+      origin && ALLOWED_ORIGINS.includes(origin) ? origin : null
+
     const response = new NextResponse(null, { status: 204 })
-    response.headers.set(
-      'Access-Control-Allow-Origin',
-      request.headers.get('origin') || '*'
-    )
-    response.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    response.headers.set(
-      'Access-Control-Allow-Headers',
-      'Content-Type, Authorization'
-    )
-    response.headers.set('Access-Control-Allow-Credentials', 'true')
+    if (allowedOrigin) {
+      response.headers.set('Access-Control-Allow-Origin', allowedOrigin)
+      response.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+      response.headers.set(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+      )
+      response.headers.set('Access-Control-Allow-Credentials', 'true')
+    }
     return response
   }
 
@@ -63,19 +74,22 @@ export async function middleware(request: NextRequest) {
     const apiResponse = NextResponse.next()
     // Only add CORS headers for non-OPTIONS requests
     if (request.method !== 'OPTIONS') {
-      apiResponse.headers.set(
-        'Access-Control-Allow-Origin',
-        request.headers.get('origin') || '*'
-      )
-      apiResponse.headers.set(
-        'Access-Control-Allow-Methods',
-        'GET, POST, OPTIONS'
-      )
-      apiResponse.headers.set(
-        'Access-Control-Allow-Headers',
-        'Content-Type, Authorization'
-      )
-      apiResponse.headers.set('Access-Control-Allow-Credentials', 'true')
+      const origin = request.headers.get('origin')
+      const allowedOrigin =
+        origin && ALLOWED_ORIGINS.includes(origin) ? origin : null
+
+      if (allowedOrigin) {
+        apiResponse.headers.set('Access-Control-Allow-Origin', allowedOrigin)
+        apiResponse.headers.set(
+          'Access-Control-Allow-Methods',
+          'GET, POST, OPTIONS'
+        )
+        apiResponse.headers.set(
+          'Access-Control-Allow-Headers',
+          'Content-Type, Authorization'
+        )
+        apiResponse.headers.set('Access-Control-Allow-Credentials', 'true')
+      }
     }
     return apiResponse
   }
@@ -116,7 +130,10 @@ export async function middleware(request: NextRequest) {
 
   // Create Supabase client with caching and memory management
   const now = Date.now()
-  if (!supabaseClient || now - lastClientCreation > CLIENT_CACHE_DURATION) {
+  if (
+    !supabaseClient ||
+    now - lastClientCreation > CACHE_DURATIONS.CLIENT_CACHE
+  ) {
     try {
       // Clean up old client if it exists
       if (supabaseClient) {
@@ -173,7 +190,10 @@ export async function middleware(request: NextRequest) {
       data: { session: null }
       error: Error
     }>((_, reject) =>
-      setTimeout(() => reject(new Error('Session timeout')), 3000)
+      setTimeout(
+        () => reject(new Error('Session timeout')),
+        CACHE_DURATIONS.SESSION_TIMEOUT
+      )
     )
 
     const {

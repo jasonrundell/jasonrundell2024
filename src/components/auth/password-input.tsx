@@ -11,6 +11,10 @@ interface PasswordInputProps {
   minLength?: number
 }
 
+/**
+ * Password input component with strength indicator.
+ * Includes proper label for accessibility.
+ */
 export function PasswordInput({
   name,
   placeholder,
@@ -21,7 +25,11 @@ export function PasswordInput({
 
   return (
     <div className="flex flex-col gap-2">
+      <label htmlFor={name} className="sr-only">
+        {placeholder}
+      </label>
       <Input
+        id={name}
         type="password"
         name={name}
         placeholder={placeholder}
@@ -29,6 +37,7 @@ export function PasswordInput({
         required={required}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        aria-label={placeholder}
       />
       <PasswordStrength password={password} />
     </div>

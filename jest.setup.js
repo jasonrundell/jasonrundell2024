@@ -1,6 +1,30 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
 
+// Polyfill for HTMLFormElement.prototype.requestSubmit
+// jsdom has this method but throws "not implemented" errors
+// Override it to properly dispatch submit events in tests
+HTMLFormElement.prototype.requestSubmit = function (submitter) {
+  if (submitter) {
+    if (!this.contains(submitter)) {
+      throw new DOMException(
+        "Failed to execute 'requestSubmit' on 'HTMLFormElement': The specified element is not a submit button.",
+      )
+    }
+    if (submitter.type !== 'submit') {
+      throw new DOMException(
+        "Failed to execute 'requestSubmit' on 'HTMLFormElement': The specified element is not a submit button.",
+      )
+    }
+  }
+  // Trigger submit event
+  const submitEvent = new Event('submit', {
+    bubbles: true,
+    cancelable: true,
+  })
+  this.dispatchEvent(submitEvent)
+}
+
 // Mock Next.js navigation
 jest.mock('next/navigation', () => ({
   redirect: jest.fn(),
@@ -35,9 +59,24 @@ global.window.matchMedia = jest.fn().mockImplementation(query => ({
 }))
 
 // Mock console methods to reduce noise in tests
+const originalError = console.error
 global.console = {
   ...console,
-  error: jest.fn(),
+  error: jest.fn((...args) => {
+    // Filter out the jsdom "Not implemented: HTMLFormElement.prototype.requestSubmit" errors
+    // These are harmless warnings from jsdom not supporting this feature
+    const firstArg = args[0]
+    const errorMessage = firstArg?.message || firstArg?.toString() || ''
+    
+    if (
+      errorMessage.includes('Not implemented: HTMLFormElement.prototype.requestSubmit') ||
+      errorMessage.includes('HTMLFormElement.prototype.requestSubmit')
+    ) {
+      return // Suppress this specific error
+    }
+    // Call original error for everything else
+    originalError(...args)
+  }),
   warn: jest.fn(),
   log: jest.fn(),
 }

@@ -81,7 +81,11 @@ const StyledTitle = styled(HeadingAnimation)`
   color: ${Tokens.colors.background.value};
 `
 
-const steps = [
+/**
+ * Animation steps for the navigation title.
+ * Moved outside component to avoid recreation on every render.
+ */
+const NAVIGATION_STEPS = [
   'Jason Rundell',
   'Jason Rundell',
   'Jason Rundell',
@@ -170,30 +174,34 @@ const steps = [
   ':)',
   ':)',
   'Jason Rundell',
-]
+] as const
 
+/**
+ * Main navigation component with responsive desktop and mobile layouts.
+ * Includes animated title and navigation links.
+ */
 export default function MainNav() {
   return (
     <StyledMenuContainer id="menu">
       <StyledMenu>
         {/* Desktop Navigation */}
-        <StyledDesktopNav aria-label="Main Navigation" role="navigation">
-          <StyledList aria-label="Main Menu" role="menubar">
-            <StyledListItem role="menuitem">
-              <StyledTitle steps={steps} speed={100} />
+        <StyledDesktopNav aria-label="Main Navigation">
+          <StyledList>
+            <StyledListItem>
+              <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
             </StyledListItem>
-            <StyledListItem role="menuitem">
+            <StyledListItem>
               <Link href="/#blog">Blog</Link>
             </StyledListItem>
-            <StyledListItem role="menuitem">
+            <StyledListItem>
               <Link href="/#projects">Projects</Link>
             </StyledListItem>
           </StyledList>
         </StyledDesktopNav>
 
         {/* Mobile Navigation */}
-        <StyledMobileNav aria-label="Main Navigation" role="navigation">
-          <StyledTitle steps={steps} speed={100} />
+        <StyledMobileNav aria-label="Main Navigation">
+          <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
         </StyledMobileNav>
 
         <MainNavClient />

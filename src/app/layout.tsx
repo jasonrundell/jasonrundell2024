@@ -27,6 +27,11 @@ export const metadata: Metadata = {
 
 const outfit = Outfit({ subsets: ['latin'] })
 
+/**
+ * Root layout component for the application.
+ * Provides the HTML structure, metadata, and global components.
+ * @param children - The page content to render
+ */
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -35,11 +40,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={outfit.className}>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <SpeedInsights />
         <GoogleAnalytics gaId="G-GZFPYCJVHQ" />
         <SupabaseStatusBanner />
         <header>{await MainNav()}</header>
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         {await Footer()}
       </body>
     </html>

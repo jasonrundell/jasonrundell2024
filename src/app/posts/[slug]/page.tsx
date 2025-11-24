@@ -4,9 +4,9 @@ import { Spacer, Row } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { MARKS, Document } from '@contentful/rich-text-types'
 import { notFound } from 'next/navigation'
+import DOMPurify from 'isomorphic-dompurify'
 
 import { getEntryBySlug } from '@/lib/contentful'
-// import MorePosts from '@/components/MorePosts'
 import PostHeader from '@/components/PostHeader'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Post } from '@/typeDefinitions/app'
@@ -21,10 +21,18 @@ type PostProps = {
   params: Promise<{ slug: string }>
 }
 
+/**
+ * Custom markdown options for rendering Contentful rich text.
+ * Sanitizes HTML content to prevent XSS attacks.
+ */
 const customMarkdownOptions = () => ({
   renderMark: {
     [MARKS.CODE]: (text: React.ReactNode) => (
-      <span dangerouslySetInnerHTML={{ __html: text as string }} />
+      <span
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(String(text)),
+        }}
+      />
     ),
   },
 })
@@ -36,11 +44,15 @@ export async function generateMetadata({
 
   const post = await getEntryBySlug<Post>('post', slug)
 
+  const imageUrl = post.featuredImage?.fields?.file?.fields?.file?.url
+    ? `https://${post.featuredImage.fields.file.fields.file.url}`
+    : undefined
+
   return {
     title: `Jason Rundell | Blog: ${post.title}`,
     description: SITE_DESCRIPTION,
     openGraph: {
-      images: [`https://${post.featuredImage?.fields.file.fields.file.url}`],
+      images: imageUrl ? [imageUrl] : [],
     },
   }
 }
@@ -78,19 +90,6 @@ export default async function page({ params }: PostProps) {
           <Spacer />
         </StyledSection>
       </StyledContainer>
-      {/* {posts && posts.length > 0 && (
-        <StyledDivBgDark>
-          <StyledContainer>
-            <StyledSection>
-              <StyledMorePostsHeading>More posts</StyledMorePostsHeading>
-              <Spacer />
-              <MorePosts items={posts} />
-            </StyledSection>
-          </StyledContainer>
-        </StyledDivBgDark>
-      )} */}
     </>
   )
-
-  // return <Post post={post as PostDef} />
 }

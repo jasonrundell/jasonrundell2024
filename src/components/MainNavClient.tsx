@@ -164,11 +164,16 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
 
     getInitialSession()
 
-    // Listen for auth changes
+    // Listen for auth changes - only update if user actually changed
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setUser(session?.user || null)
+      const newUser = session?.user || null
+      setUser((prev) => {
+        // Only update if user ID actually changed
+        if (prev?.id === newUser?.id) return prev
+        return newUser
+      })
     })
 
     return () => subscription.unsubscribe()
@@ -214,9 +219,14 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
   // Show loading state briefly to avoid layout shift
   if (isLoading) {
     return (
-      <StyledAuthButtonGroup>
-        <div style={{ width: '120px', height: '32px' }} />
-      </StyledAuthButtonGroup>
+      <>
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
+          Loading navigation
+        </div>
+        <StyledAuthButtonGroup>
+          <div style={{ width: '120px', height: '32px' }} />
+        </StyledAuthButtonGroup>
+      </>
     )
   }
 
@@ -228,6 +238,7 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
         onClick={toggleMobileMenu}
         aria-label="Toggle mobile menu"
         aria-expanded={isMobileMenuOpen}
+        aria-controls="mobile-menu"
       >
         <span></span>
         <span></span>
@@ -260,7 +271,11 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
       </StyledAuthButtonGroup>
 
       {/* Mobile Menu */}
-      <StyledMobileMenu className={isMobileMenuOpen ? 'open' : ''}>
+      <StyledMobileMenu
+        id="mobile-menu"
+        className={isMobileMenuOpen ? 'open' : ''}
+        aria-hidden={!isMobileMenuOpen}
+      >
         <StyledMobileList>
           <StyledMobileListItem>
             <Link href="/#blog" onClick={closeMobileMenu}>

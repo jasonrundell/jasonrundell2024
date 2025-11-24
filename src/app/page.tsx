@@ -26,17 +26,25 @@ import Positions from '@/components/Positions'
 import MorePosts from '@/components/MorePosts'
 import Icon from '@/components/Icon'
 
+/**
+ * Home page component that displays skills, projects, experience, references, and blog posts.
+ * Fetches data from Contentful in parallel for optimal performance.
+ */
 export default async function page() {
-  const skills = await getSkills()
-  const projects = await getProjects()
-  const references = await getReferences()
-  const positions = await getPositions()
-  const posts = await getPosts()
+  // Parallelize Contentful queries for better performance
+  const [skills, projects, references, positions, posts] = await Promise.all([
+    getSkills(),
+    getProjects(),
+    getReferences(),
+    getPositions(),
+    getPosts(),
+  ])
 
   return (
     <>
       <StyledContainer>
         <StyledSection id="home">
+          <h1>Jason Rundell</h1>
           <Row>
             <StyledIntroParagraph>
               Hey! I&apos;m an experienced developer who loves learning and
