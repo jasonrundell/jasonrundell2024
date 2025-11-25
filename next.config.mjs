@@ -73,7 +73,7 @@ const nextConfig = {
       },
     },
   },
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev }) => {
     if (dev) {
       // Optimize development mode
       config.watchOptions = {
@@ -95,14 +95,18 @@ const nextConfig = {
     }
     
     // Fix for isomorphic-dompurify/jsdom default-stylesheet.css issue
-    if (isServer) {
-      // Replace default-stylesheet.css imports with an empty module
-      config.plugins.push(
-        new webpack.NormalModuleReplacementPlugin(
-          /default-stylesheet\.css$/,
-          resolve(__dirname, 'src/lib/empty-stylesheet.js')
-        )
+    // Apply to both server and client bundles since jsdom can be used in both
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(
+        /default-stylesheet\.css$/,
+        resolve(__dirname, 'src/lib/empty-stylesheet.js')
       )
+    )
+    
+    // Also add a resolve alias as a fallback
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'default-stylesheet.css': resolve(__dirname, 'src/lib/empty-stylesheet.js'),
     }
     
     return config
