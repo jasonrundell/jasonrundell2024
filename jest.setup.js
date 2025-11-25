@@ -123,6 +123,7 @@ global.window.matchMedia = jest.fn().mockImplementation(query => ({
 
 // Mock console methods to reduce noise in tests
 const originalError = console.error
+const originalWarn = console.warn
 global.console = {
   ...console,
   error: jest.fn((...args) => {
@@ -134,13 +135,31 @@ global.console = {
     if (
       errorMessage.includes('Not implemented: HTMLFormElement.prototype.requestSubmit') ||
       errorMessage.includes('HTMLFormElement.prototype.requestSubmit') ||
-      errorMessage.includes('Sign in error:') // Suppress expected sign-in test errors
+      errorMessage.includes('Sign in error:') || // Suppress expected sign-in test errors
+      errorMessage.includes('Invalid value for prop `formAction`') || // Suppress Next.js server action warnings
+      errorMessage.includes('Invalid value for prop `action`') || // Suppress Next.js server action warnings
+      errorMessage.includes('Either remove it from the element, or pass a string or number value') // Suppress Next.js server action warnings
     ) {
       return // Suppress these specific errors
     }
     // Call original error for everything else
     originalError(...args)
   }),
-  warn: jest.fn(),
+  warn: jest.fn((...args) => {
+    // Suppress React warnings about invalid form props (formAction, action)
+    // Next.js server actions pass functions as these props, which is expected behavior
+    const firstArg = args[0]
+    const warningMessage = typeof firstArg === 'string' ? firstArg : firstArg?.toString() || ''
+    
+    if (
+      warningMessage.includes('Invalid value for prop `formAction`') ||
+      warningMessage.includes('Invalid value for prop `action`') ||
+      warningMessage.includes('Either remove it from the element, or pass a string or number value')
+    ) {
+      return // Suppress these expected Next.js server action warnings
+    }
+    // Call original warn for everything else
+    originalWarn(...args)
+  }),
   log: jest.fn(),
 }

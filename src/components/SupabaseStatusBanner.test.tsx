@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import SupabaseStatusBanner from './SupabaseStatusBanner'
 
@@ -174,7 +174,9 @@ describe('SupabaseStatusBanner Component', () => {
       })
 
       // Fast-forward time
-      jest.advanceTimersByTime(1000)
+      act(() => {
+        jest.advanceTimersByTime(1000)
+      })
 
       await waitFor(() => {
         const banner = container.querySelector('[class*="hidden"]')
@@ -320,7 +322,9 @@ describe('SupabaseStatusBanner Component', () => {
       })
 
       // Fast-forward time but not past cache duration
-      jest.advanceTimersByTime(30000)
+      act(() => {
+        jest.advanceTimersByTime(30000)
+      })
 
       // Should still only have been called once
       expect(global.fetch).toHaveBeenCalledTimes(1)

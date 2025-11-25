@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import MainNavClient from './MainNavClient'
 
@@ -335,7 +335,9 @@ describe('MainNavClient Component', () => {
         configurable: true,
         value: 1024,
       })
-      window.dispatchEvent(new Event('resize'))
+      act(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
 
       // Assert
       await waitFor(() => {
