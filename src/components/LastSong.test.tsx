@@ -1,6 +1,6 @@
 import { render, screen, waitFor, act, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import LastSong, { LastSongProps } from './LastSong'
+import LastSong from './LastSong'
 import { LastSong as LastSongType } from '@/typeDefinitions/app'
 
 // Mock Next.js Link
@@ -28,13 +28,11 @@ jest.mock('next/link', () => {
 
 // Mock lucide-react icons
 jest.mock('lucide-react', () => ({
-  Play: ({ size }: { size: number }) => <span data-testid="play-icon">Play</span>,
-  ExternalLink: ({ size }: { size: number }) => (
+  Play: () => <span data-testid="play-icon">Play</span>,
+  ExternalLink: () => (
     <span data-testid="external-link-icon">ExternalLink</span>
   ),
-  Music: ({ size, style }: { size: number; style?: React.CSSProperties }) => (
-    <span data-testid="music-icon">Music</span>
-  ),
+  Music: () => <span data-testid="music-icon">Music</span>,
 }))
 
 // Don't mock react-dom - use actual createPortal
@@ -45,7 +43,9 @@ describe('LastSong Component', () => {
     artist: 'Test Artist',
     url: 'https://music.youtube.com/watch?v=test123',
     youtubeId: 'test123',
-  }
+    fields: {},
+    contentTypeId: 'lastSong',
+  } as LastSongType
 
   beforeEach(() => {
     // Reset body overflow
@@ -400,4 +400,3 @@ describe('LastSong Component', () => {
     })
   })
 })
-

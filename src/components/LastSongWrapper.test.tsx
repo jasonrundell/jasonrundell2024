@@ -29,7 +29,9 @@ describe('LastSongWrapper Component', () => {
     artist: 'Test Artist',
     url: 'https://music.youtube.com/watch?v=test123',
     youtubeId: 'test123',
-  }
+    fields: {},
+    contentTypeId: 'lastSong',
+  } as LastSongType
 
   beforeEach(() => {
     jest.clearAllMocks()
@@ -68,7 +70,9 @@ describe('LastSongWrapper Component', () => {
       // Assert
       await waitFor(() => {
         expect(screen.getByTestId('last-song')).toBeInTheDocument()
-        expect(screen.getByText(/test song by test artist/i)).toBeInTheDocument()
+        expect(
+          screen.getByText(/test song by test artist/i)
+        ).toBeInTheDocument()
       })
       expect(global.fetch).toHaveBeenCalledWith('/api/last-song')
     })
@@ -101,7 +105,9 @@ describe('LastSongWrapper Component', () => {
 
       // Assert
       await waitFor(() => {
-        expect(screen.queryByTestId('last-song-skeleton')).not.toBeInTheDocument()
+        expect(
+          screen.queryByTestId('last-song-skeleton')
+        ).not.toBeInTheDocument()
       })
       expect(screen.queryByTestId('last-song')).not.toBeInTheDocument()
     })
@@ -118,7 +124,9 @@ describe('LastSongWrapper Component', () => {
 
       // Assert
       await waitFor(() => {
-        expect(screen.queryByTestId('last-song-skeleton')).not.toBeInTheDocument()
+        expect(
+          screen.queryByTestId('last-song-skeleton')
+        ).not.toBeInTheDocument()
       })
       expect(screen.queryByTestId('last-song')).not.toBeInTheDocument()
     })
@@ -135,7 +143,9 @@ describe('LastSongWrapper Component', () => {
 
       // Assert
       await waitFor(() => {
-        expect(screen.queryByTestId('last-song-skeleton')).not.toBeInTheDocument()
+        expect(
+          screen.queryByTestId('last-song-skeleton')
+        ).not.toBeInTheDocument()
       })
       expect(screen.queryByTestId('last-song')).not.toBeInTheDocument()
     })
@@ -155,7 +165,9 @@ describe('LastSongWrapper Component', () => {
 
       // Assert
       await waitFor(() => {
-        expect(screen.queryByTestId('last-song-skeleton')).not.toBeInTheDocument()
+        expect(
+          screen.queryByTestId('last-song-skeleton')
+        ).not.toBeInTheDocument()
       })
       expect(screen.queryByTestId('last-song')).not.toBeInTheDocument()
     })
@@ -164,8 +176,8 @@ describe('LastSongWrapper Component', () => {
   describe('Component Cleanup', () => {
     it('should not update state if component is unmounted', async () => {
       // Arrange
-      let resolveFetch: (value: any) => void
-      const fetchPromise = new Promise((resolve) => {
+      let resolveFetch: (value: Response) => void
+      const fetchPromise = new Promise<Response>((resolve) => {
         resolveFetch = resolve
       })
       ;(global.fetch as jest.Mock).mockReturnValue(fetchPromise)
@@ -178,7 +190,7 @@ describe('LastSongWrapper Component', () => {
       resolveFetch!({
         ok: true,
         json: async () => mockSong,
-      })
+      } as Response)
 
       // Wait a bit to ensure no state updates
       await new Promise((resolve) => setTimeout(resolve, 100))
@@ -188,4 +200,3 @@ describe('LastSongWrapper Component', () => {
     })
   })
 })
-

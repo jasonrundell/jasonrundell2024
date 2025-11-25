@@ -1,5 +1,4 @@
 import { GET } from './route'
-import { getLastSong } from '@/lib/contentful'
 import { LastSong } from '@/typeDefinitions/app'
 
 // Mock contentful
@@ -24,7 +23,9 @@ describe('GET /api/last-song', () => {
         artist: 'Test Artist',
         url: 'https://music.youtube.com/watch?v=test123',
         youtubeId: 'test123',
-      }
+        fields: {},
+        contentTypeId: 'lastSong',
+      } as LastSong
       mockGetLastSong.mockResolvedValue(mockSong)
 
       // Act
@@ -81,4 +82,3 @@ describe('GET /api/last-song', () => {
     })
   })
 })
-
