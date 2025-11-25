@@ -16,6 +16,9 @@ const customJestConfig = {
     'node_modules/(?!(lucide-react|@pigment-css|@pigment-css/react)/)',
   ],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  // Suppress console output for expected errors during tests
+  silent: false,
+  verbose: false,
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
