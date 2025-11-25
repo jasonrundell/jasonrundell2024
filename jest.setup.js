@@ -3,6 +3,7 @@ import '@testing-library/jest-dom'
 
 // Polyfill Node.js globals needed by Next.js edge runtime
 if (typeof global.TextDecoder === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { TextDecoder, TextEncoder } = require('util')
   global.TextDecoder = TextDecoder
   global.TextEncoder = TextEncoder
@@ -18,11 +19,12 @@ if (typeof global.setImmediate === 'undefined') {
 if (typeof global.Request === 'undefined') {
   // Use fetch API polyfill if available, otherwise create minimal mocks
   try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { Request, Response, Headers } = require('next/dist/compiled/@edge-runtime/primitives')
     global.Request = Request
     global.Response = Response
     global.Headers = Headers
-  } catch (e) {
+  } catch {
     // Fallback: create minimal mocks
     global.Request = class Request {
       constructor(input, init) {
@@ -71,7 +73,7 @@ if (typeof HTMLFormElement !== 'undefined' && HTMLFormElement.prototype) {
   // Delete the existing method first to ensure we completely replace it
   try {
     delete HTMLFormElement.prototype.requestSubmit
-  } catch (e) {
+  } catch {
     // Ignore if delete fails
   }
   
@@ -213,13 +215,23 @@ global.console = {
     // Next.js server actions pass functions as these props, which is expected behavior
     const firstArg = args[0]
     const warningMessage = typeof firstArg === 'string' ? firstArg : firstArg?.toString() || ''
+    const fullMessage = args.map(arg => 
+      typeof arg === 'string' ? arg : arg?.toString() || ''
+    ).join(' ')
+    
+    // Check if this is a Contentful warning (expected during tests)
+    const isContentfulWarning = 
+      fullMessage.includes('found in Contentful') ||
+      warningMessage.includes('found in Contentful') ||
+      (fullMessage.includes('No') && fullMessage.includes('Contentful'))
     
     if (
       warningMessage.includes('Invalid value for prop `formAction`') ||
       warningMessage.includes('Invalid value for prop `action`') ||
-      warningMessage.includes('Either remove it from the element, or pass a string or number value')
+      warningMessage.includes('Either remove it from the element, or pass a string or number value') ||
+      isContentfulWarning // Suppress expected Contentful warnings during tests
     ) {
-      return // Suppress these expected Next.js server action warnings
+      return // Suppress these expected warnings
     }
     // Call original warn for everything else
     originalWarn(...args)
