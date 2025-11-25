@@ -1,4 +1,4 @@
-import { createClient } from './server'
+import { createClient } from '@/utils/supabase/server'
 
 export interface SupabaseStatus {
   isAvailable: boolean
@@ -52,42 +52,4 @@ export async function checkSupabaseStatus(): Promise<SupabaseStatus> {
       error: error instanceof Error ? error.message : 'Unknown error',
     }
   }
-}
-
-/**
- * Check if Supabase is available with a timeout
- */
-export async function checkSupabaseStatusWithTimeout(
-  timeoutMs: number = 5000
-): Promise<SupabaseStatus> {
-  try {
-    const timeoutPromise = new Promise<SupabaseStatus>((_, reject) => {
-      setTimeout(() => reject(new Error('Timeout')), timeoutMs)
-    })
-
-    const statusPromise = checkSupabaseStatus()
-
-    return await Promise.race([statusPromise, timeoutPromise])
-  } catch (error) {
-    return {
-      isAvailable: false,
-      isPaused: false,
-      error: error instanceof Error ? error.message : 'Connection timeout',
-    }
-  }
-}
-
-/**
- * Get a user-friendly message for Supabase status
- */
-export function getSupabaseStatusMessage(status: SupabaseStatus): string {
-  if (status.isAvailable) {
-    return 'Database is available'
-  }
-
-  if (status.isPaused) {
-    return 'Database is currently paused. Please resume your Supabase project to continue.'
-  }
-
-  return status.error || 'Database is unavailable'
 }

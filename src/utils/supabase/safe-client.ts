@@ -1,5 +1,5 @@
-import { createClient } from './server'
-import { checkSupabaseStatus, type SupabaseStatus } from './status'
+import { createClient } from '@/utils/supabase/server'
+import { checkSupabaseStatus, type SupabaseStatus } from '@/utils/supabase/status'
 
 export interface SafeSupabaseResult<T = unknown> {
   data: T | null

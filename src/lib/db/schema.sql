@@ -14,22 +14,23 @@ create table if not exists users (
 -- Create indexes
 create index if not exists idx_users_github_id on users(github_id);
 create index if not exists idx_users_provider on users(provider);
+create index if not exists idx_users_email on users(email);
 
 -- Create RLS policies
 alter table users enable row level security;
 
--- Allow users to view their own data
+-- Allow users to view their own data by email
 create policy "Users can view their own data"
   on users for select
-  using (true);
+  using (email = auth.jwt() ->> 'email');
 
 -- Allow users to insert their own data
 create policy "Users can insert their own data"
   on users for insert
-  with check (true);
+  with check (email = auth.jwt() ->> 'email');
 
--- Allow users to update their own data
+-- Allow users to update their own data by email
 create policy "Users can update their own data"
   on users for update
-  using (id = auth.uid());
-  with check (id = auth.uid());
+  using (email = auth.jwt() ->> 'email')
+  with check (email = auth.jwt() ->> 'email');

@@ -4,7 +4,6 @@ import { SubmitButton } from '@/components/auth/submit-button'
 import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
 import { Checkbox } from '@/components/auth/ui/checkbox'
-import { SocialAuthSection } from '@/components/auth/social-auth-section'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
@@ -48,11 +47,18 @@ const errorMessages: Record<string, string> = {
   no_auth_url: 'Authentication URL not available',
   server_error: 'An error occurred. Please try again.',
   invalid_code: 'Invalid authentication code',
-  user_info_fetch: 'Failed to fetch user information from GitHub',
-  invalid_user_data: 'Invalid user data received from GitHub',
-  github_api_error: 'Error communicating with GitHub',
   supabase_paused:
     'Database is currently paused. Please resume your Supabase project to continue.',
+  supabase_unavailable: 'Database is unavailable. Please try again later.',
+  invalid_credentials: 'Invalid email or password. Please try again.',
+  email_not_confirmed: 'Please confirm your email address before signing in.',
+  auth_error: 'Authentication failed. Please try again.',
+}
+
+const successMessages: Record<string, string> = {
+  password_reset_success:
+    'Your password has been successfully reset. You can now sign in with your new password.',
+  email_confirmed: 'Email confirmed successfully. Please sign in.',
 }
 
 export default async function Login({
@@ -69,19 +75,25 @@ export default async function Login({
   const customMessage = params?.message
   const redirectedFrom = params?.redirectedFrom
 
-  // Construct the error message
-  let errorMessage = customMessage
+  // Construct the error or success message
+  let message = customMessage
   if (errorCode && !customMessage) {
-    errorMessage = errorMessages[errorCode] || 'An unknown error occurred'
+    message = errorMessages[errorCode] || 'An unknown error occurred'
+  } else if (customMessage && successMessages[customMessage]) {
+    message = successMessages[customMessage]
   }
 
   // If we have an error, log it
   if (errorCode) {
-    console.error('Auth error:', { errorCode, errorMessage, redirectedFrom })
+    console.error('Auth error:', { errorCode, message, redirectedFrom })
   }
 
-  // Convert error message to Message type for FormMessage
-  const formMessage = errorMessage ? { error: errorMessage } : undefined
+  // Convert message to Message type for FormMessage
+  const formMessage = message
+    ? errorCode
+      ? { error: message }
+      : { message }
+    : undefined
 
   return (
     <AuthLayout
@@ -101,6 +113,7 @@ export default async function Login({
             type="email"
             placeholder="you@example.com"
             required
+            data-sentry-mask
           />
         </FieldGroup>
         <FieldGroup>
@@ -121,6 +134,7 @@ export default async function Login({
             name="password"
             placeholder="Your password"
             required
+            data-sentry-mask
           />
         </FieldGroup>
         <RememberGroup>
@@ -130,7 +144,6 @@ export default async function Login({
         <FullWidthButton pendingText="Signing In..." formAction={signInAction}>
           Sign in
         </FullWidthButton>
-        <SocialAuthSection />
         <BottomText>
           Don&apos;t have an account?{' '}
           <Link href="/sign-up" className="link">

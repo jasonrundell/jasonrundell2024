@@ -13,7 +13,24 @@ optimized performance.
 - **Accessible and Inclusive**: Designed with accessibility in mind, including
   semantic HTML and contrast adjustments.
 - **SEO-Friendly**: Configured for search engines with proper metadata.
-- **Image Optimization**: Next.js’s `next/image` is used to optimize images.
+- **Image Optimization**: Next.js's `next/image` is used to optimize images.
+
+## Development
+
+### Git Hooks
+
+This repository includes Git hooks to ensure code quality:
+
+- **Pre-push Hook**: Automatically runs `npm run build` before pushing and prevents broken builds from being committed
+- **Installation**: Run `./scripts/install-git-hooks.sh` after cloning to set up the hooks
+- **Documentation**: See [GIT_HOOKS.md](./GIT_HOOKS.md) for detailed information
+
+### Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Install Git hooks: `./scripts/install-git-hooks.sh`
+4. Run the development server: `npm run dev`
 
 ## Technologies
 

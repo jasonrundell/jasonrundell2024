@@ -7,6 +7,7 @@ import { signOutAction } from '@/app/actions'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { User } from '@supabase/supabase-js'
+import { createClient } from '@/utils/supabase/client'
 
 const StyledAuthButtonGroup = styled('div')`
   display: none;
@@ -71,6 +72,7 @@ const StyledMobileMenu = styled('div')`
   right: 0;
   background-color: ${Tokens.colors.background.value};
   border-top: 1px solid ${Tokens.colors.border.value};
+  border-bottom: 1px solid ${Tokens.colors.border.value};
   padding: 1.5rem;
   transform: translateY(-100%);
   opacity: 0;
@@ -100,7 +102,8 @@ const StyledMobileList = styled('ul')`
 `
 
 const StyledMobileListItem = styled('li')`
-  a {
+  a,
+  button {
     color: ${Tokens.colors.secondary.value};
     text-decoration: none;
     font-size: 1.125rem;
@@ -108,40 +111,70 @@ const StyledMobileListItem = styled('li')`
     padding: 0.75rem 0;
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s ease;
-    text-align: center;
+    text-align: right;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+    width: 100%;
+    font-family: inherit;
 
     &:hover {
       border-bottom-color: ${Tokens.colors.primary.value};
     }
   }
-`
 
-const StyledMobileAuthSection = styled('div')`
-  display: flex;
-  gap: 0.75rem;
-  flex-direction: column;
-  padding-top: 1.5rem;
-  border-top: 1px solid ${Tokens.colors.border.value};
-  align-items: center;
-
-  form,
-  a {
+  form {
     width: 100%;
-    max-width: 200px;
   }
 
-  button {
+  form button {
     width: 100%;
-    justify-content: center;
   }
 `
 
-interface MainNavClientProps {
-  user: User | null
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface MainNavClientProps {}
 
-const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {
+const MainNavClient: React.FC<MainNavClientProps> = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [user, setUser] = useState<User | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const supabase = createClient()
+
+    // Get initial session
+    const getInitialSession = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession()
+        setUser(session?.user || null)
+      } catch (error) {
+        console.error('Error getting session:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    getInitialSession()
+
+    // Listen for auth changes - only update if user actually changed
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      const newUser = session?.user || null
+      setUser((prev) => {
+        // Only update if user ID actually changed
+        if (prev?.id === newUser?.id) return prev
+        return newUser
+      })
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -180,6 +213,20 @@ const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {
     }
   }, [])
 
+  // Show loading state briefly to avoid layout shift
+  if (isLoading) {
+    return (
+      <>
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
+          Loading navigation
+        </div>
+        <StyledAuthButtonGroup>
+          <div style={{ width: '120px', height: '32px' }} />
+        </StyledAuthButtonGroup>
+      </>
+    )
+  }
+
   return (
     <>
       {/* Mobile Menu Button */}
@@ -188,6 +235,7 @@ const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {
         onClick={toggleMobileMenu}
         aria-label="Toggle mobile menu"
         aria-expanded={isMobileMenuOpen}
+        aria-controls="mobile-menu"
       >
         <span></span>
         <span></span>
@@ -197,11 +245,16 @@ const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {
       {/* Auth Buttons (Desktop) */}
       <StyledAuthButtonGroup>
         {user ? (
-          <form action={signOutAction}>
-            <Button type="submit" variant="outline" size="sm">
-              Log out
+          <>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/profile">Profile</Link>
             </Button>
-          </form>
+            <form action={signOutAction}>
+              <Button type="submit" variant="default" size="sm">
+                Log out
+              </Button>
+            </form>
+          </>
         ) : (
           <>
             <Button asChild variant="outline" size="sm">
@@ -215,7 +268,11 @@ const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {
       </StyledAuthButtonGroup>
 
       {/* Mobile Menu */}
-      <StyledMobileMenu className={isMobileMenuOpen ? 'open' : ''}>
+      <StyledMobileMenu
+        id="mobile-menu"
+        className={isMobileMenuOpen ? 'open' : ''}
+        aria-hidden={!isMobileMenuOpen}
+      >
         <StyledMobileList>
           <StyledMobileListItem>
             <Link href="/#blog" onClick={closeMobileMenu}>
@@ -227,30 +284,32 @@ const MainNavClient: React.FC<MainNavClientProps> = ({ user }) => {
               Projects
             </Link>
           </StyledMobileListItem>
-        </StyledMobileList>
-
-        <StyledMobileAuthSection>
           {user ? (
-            <form action={signOutAction}>
-              <Button type="submit" variant="outline" size="sm">
-                Log out
-              </Button>
-            </form>
+            <>
+              <StyledMobileListItem>
+                <Link href="/profile">Profile</Link>
+              </StyledMobileListItem>
+              <StyledMobileListItem>
+                <form action={signOutAction}>
+                  <button type="submit">Log out</button>
+                </form>
+              </StyledMobileListItem>
+            </>
           ) : (
             <>
-              <Button asChild variant="outline" size="sm">
+              <StyledMobileListItem>
                 <Link href="/sign-in" onClick={closeMobileMenu}>
                   Login
                 </Link>
-              </Button>
-              <Button asChild variant="default" size="sm">
+              </StyledMobileListItem>
+              <StyledMobileListItem>
                 <Link href="/sign-up" onClick={closeMobileMenu}>
                   Sign up
                 </Link>
-              </Button>
+              </StyledMobileListItem>
             </>
           )}
-        </StyledMobileAuthSection>
+        </StyledMobileList>
       </StyledMobileMenu>
     </>
   )

@@ -23,12 +23,6 @@ Provides utilities to check if Supabase is available and detect paused states:
 ```typescript
 // Check if Supabase is available
 const status = await checkSupabaseStatus()
-
-// Check with timeout
-const status = await checkSupabaseStatusWithTimeout(5000)
-
-// Get user-friendly message
-const message = getSupabaseStatusMessage(status)
 ```
 
 ### 2. Safe Supabase Client (`src/utils/supabase/safe-client.ts`)

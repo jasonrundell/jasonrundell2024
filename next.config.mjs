@@ -1,6 +1,12 @@
 import { withPigment } from '@pigment-css/nextjs-plugin'
 import { withSentryConfig } from '@sentry/nextjs'
 import withBundleAnalyzer from '@next/bundle-analyzer'
+import webpack from 'webpack'
+import { fileURLToPath } from 'url'
+import { dirname, resolve } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -12,27 +18,98 @@ const nextConfig = {
   images: {
     domains: ['images.ctfassets.net'],
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: https: blob:",
+              "font-src 'self' data:",
+              "connect-src 'self' https://*.supabase.co https://*.supabase.in https://www.google-analytics.com",
+              "frame-src 'self' https://www.youtube.com",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'none'",
+              "upgrade-insecure-requests",
+            ].join('; '),
+          },
+        ],
+      },
+    ]
+  },
+  // Optimize development mode
+  experimental: {
+    bundlePagesExternals: true,
+    // Enable faster refresh
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
+  },
   webpack: (config, { dev }) => {
-    // Only apply these optimizations in development
     if (dev) {
-      // Disable the filesystem cache which was causing issues
-      config.cache = false;
+      // Optimize development mode
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+        ignored: ['**/node_modules', '**/.git', '**/.next', '**/public'],
+      }
       
-      // Optimize chunk splitting for better performance
-      if (config.optimization.splitChunks) {
-        config.optimization.splitChunks = {
-          ...config.optimization.splitChunks,
-          chunks: 'async',
-          minSize: 20000,
-          maxSize: 244 * 1024,
-          minChunks: 1,
-          maxAsyncRequests: 30,
-          maxInitialRequests: 30,
-          enforceSizeThreshold: 50000
-        };
+      // Use faster source maps for development
+      config.devtool = 'eval-cheap-module-source-map'
+      
+      // Reduce bundle size in development
+      config.optimization = {
+        ...config.optimization,
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
       }
     }
-    return config;
+    
+    // Fix for isomorphic-dompurify/jsdom default-stylesheet.css issue
+    // Apply to both server and client bundles since jsdom can be used in both
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(
+        /default-stylesheet\.css$/,
+        resolve(__dirname, 'src/lib/empty-stylesheet.js')
+      )
+    )
+    
+    // Also add a resolve alias as a fallback
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'default-stylesheet.css': resolve(__dirname, 'src/lib/empty-stylesheet.js'),
+    }
+    
+    return config
   },
 }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 
@@ -18,10 +18,10 @@ const StyledBanner = styled('div')`
   z-index: 1000;
   padding: 1rem;
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
   transition: transform 0.3s ease-in-out;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  color: white;
+  color: ${Tokens.colors.surface.value};
 
   &.paused {
     background: ${Tokens.colors.error.value};
@@ -32,7 +32,7 @@ const StyledBanner = styled('div')`
   }
 
   &.available {
-    background: ${Tokens.colors.success?.value || '#10b981'};
+    background: ${Tokens.colors.success.value};
   }
 
   &.hidden {
@@ -50,15 +50,17 @@ const Message = styled('p')`
 `
 
 const ActionButton = styled('button')`
-  background: rgba(255, 255, 255, 0.2);
+  background: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
+  color: ${Tokens.colors.surface.value};
   padding: 0.5rem 1rem;
   border-radius: 4px;
   margin-left: 1rem;
   cursor: pointer;
+  font-family: var(--font-outfit), Arial, sans-serif;
   font-size: 0.8rem;
   transition: background 0.2s ease;
+  font-weight: 500;
 
   &:hover {
     background: rgba(255, 255, 255, 0.3);
@@ -70,12 +72,11 @@ const CloseButton = styled('button')`
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
+  background: white;
   border: none;
-  color: white;
+  color: ${Tokens.colors.surface.value};
   cursor: pointer;
   font-size: 1.2rem;
-  opacity: 0.7;
   transition: opacity 0.2s ease;
 
   &:hover {
@@ -97,47 +98,90 @@ export default function SupabaseStatusBanner({
   const [status, setStatus] = useState<SupabaseStatus | null>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const lastCheckRef = useRef<number>(0)
+  const statusCacheRef = useRef<SupabaseStatus | null>(null)
+  const cacheTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  const checkStatus = useCallback(async () => {
-    try {
-      const response = await fetch('/api/supabase-status')
-      const newStatus: SupabaseStatus = await response.json()
-      setStatus(newStatus)
+  const checkStatus = useCallback(
+    async (force = false) => {
+      const now = Date.now()
+      const CACHE_DURATION = 60000 // 1 minute cache
 
-      // Show banner if:
-      // 1. Supabase is paused (always show)
-      // 2. Supabase is available and showWhenAvailable is true
-      // 3. There's an error (but not paused)
-      const shouldShow =
-        newStatus.isPaused ||
-        (newStatus.isAvailable && showWhenAvailable) ||
-        (!newStatus.isAvailable && !newStatus.isPaused)
-
-      setIsVisible(shouldShow)
-
-      // Auto-hide success messages
-      if (autoHide && newStatus.isAvailable && showWhenAvailable) {
-        setTimeout(() => setIsVisible(false), hideDuration)
+      // Use cached status if available and not expired
+      if (
+        !force &&
+        statusCacheRef.current &&
+        now - lastCheckRef.current < CACHE_DURATION
+      ) {
+        setStatus(statusCacheRef.current)
+        setIsVisible(
+          statusCacheRef.current.isPaused ||
+            (statusCacheRef.current.isAvailable && showWhenAvailable) ||
+            (!statusCacheRef.current.isAvailable &&
+              !statusCacheRef.current.isPaused)
+        )
+        setIsLoading(false)
+        return
       }
-    } catch {
-      setStatus({
-        isAvailable: false,
-        isPaused: false,
-        error: 'Failed to check database status',
-      })
-      setIsVisible(true)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [showWhenAvailable, autoHide, hideDuration])
+
+      try {
+        const response = await fetch('/api/supabase-status')
+        const newStatus: SupabaseStatus = await response.json()
+
+        // Cache the status
+        statusCacheRef.current = newStatus
+        lastCheckRef.current = now
+
+        setStatus(newStatus)
+
+        // Show banner if:
+        // 1. Supabase is paused (always show)
+        // 2. Supabase is available and showWhenAvailable is true
+        // 3. There's an error (but not paused)
+        const shouldShow =
+          newStatus.isPaused ||
+          (newStatus.isAvailable && showWhenAvailable) ||
+          (!newStatus.isAvailable && !newStatus.isPaused)
+
+        setIsVisible(shouldShow)
+
+        // Auto-hide success messages
+        if (autoHide && newStatus.isAvailable && showWhenAvailable) {
+          if (cacheTimeoutRef.current) {
+            clearTimeout(cacheTimeoutRef.current)
+          }
+          cacheTimeoutRef.current = setTimeout(
+            () => setIsVisible(false),
+            hideDuration
+          )
+        }
+      } catch {
+        setStatus({
+          isAvailable: false,
+          isPaused: false,
+          error: 'Failed to check database status',
+        })
+        setIsVisible(true)
+      } finally {
+        setIsLoading(false)
+      }
+    },
+    [showWhenAvailable, autoHide, hideDuration]
+  )
 
   useEffect(() => {
+    // Initial check
     checkStatus()
 
-    // Check status every 30 seconds
-    const interval = setInterval(checkStatus, 30000)
+    // Check status every 2 minutes instead of 30 seconds
+    const interval = setInterval(() => checkStatus(), 120000)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      if (cacheTimeoutRef.current) {
+        clearTimeout(cacheTimeoutRef.current)
+      }
+    }
   }, [checkStatus])
 
   const handleResumeClick = () => {
@@ -150,7 +194,7 @@ export default function SupabaseStatusBanner({
 
   const handleRetry = () => {
     setIsLoading(true)
-    checkStatus()
+    checkStatus(true) // Force refresh
   }
 
   if (isLoading || !status) {

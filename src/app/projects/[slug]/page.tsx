@@ -5,9 +5,9 @@ import { Grid, Row, Spacer } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { MARKS, Document, BLOCKS } from '@contentful/rich-text-types'
 import { notFound } from 'next/navigation'
+import { sanitizeHTML } from '@/lib/sanitize'
 
 import { getEntryBySlug } from '@/lib/contentful'
-// import MoreProjects from '@/components/MoreProjects'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
 import {
@@ -26,10 +26,18 @@ type ProjectProps = {
   params: Promise<{ slug: string }>
 }
 
+/**
+ * Custom markdown options for rendering Contentful rich text.
+ * Sanitizes HTML content to prevent XSS attacks.
+ */
 const customMarkdownOptions = () => ({
   renderMark: {
     [MARKS.CODE]: (text: React.ReactNode) => (
-      <span dangerouslySetInnerHTML={{ __html: text as string }} />
+      <span
+        dangerouslySetInnerHTML={{
+          __html: sanitizeHTML(String(text)),
+        }}
+      />
     ),
   },
   renderNode: {
@@ -67,10 +75,10 @@ const customMarkdownOptions = () => ({
         <StyledEmbeddedAsset>
           <Image
             src={imageUrl}
-            alt={description || ''}
-            layout="responsive"
+            alt={description || 'Project image'}
             width={500}
             height={300}
+            style={{ width: '100%', height: 'auto' }}
           />
         </StyledEmbeddedAsset>
       )
@@ -85,11 +93,15 @@ export async function generateMetadata({
 
   const project = await getEntryBySlug<Project>('project', slug)
 
+  const imageUrl = project.featuredImage?.fields?.file?.fields?.file?.url
+    ? `https://${project.featuredImage.fields.file.fields.file.url}`
+    : undefined
+
   return {
     title: `Jason Rundell | Project: ${project.title}`,
     description: SITE_DESCRIPTION,
     openGraph: {
-      images: [`https://${project.featuredImage?.fields.file.fields.file.url}`],
+      images: imageUrl ? [imageUrl] : [],
     },
   }
 }
@@ -123,7 +135,12 @@ export default async function page({ params }: ProjectProps) {
                   <>
                     <StyledHeading3 level={3}>View</StyledHeading3>
                     <Row>
-                      <Link href={link} className="link" target="_blank">
+                      <Link
+                        href={link}
+                        className="link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         Visit GitHub project
                       </Link>
                     </Row>
@@ -159,17 +176,6 @@ export default async function page({ params }: ProjectProps) {
           <Spacer />
         </StyledSection>
       </StyledContainer>
-      {/* {projects && projects.length > 0 && (
-        <StyledDivBgDark>
-          <StyledContainer>
-            <StyledSection>
-              <StyledMorePostsHeading>More projects</StyledMorePostsHeading>
-              <Spacer />
-              <MoreProjects items={projects} />
-            </StyledSection>
-          </StyledContainer>
-        </StyledDivBgDark>
-      )} */}
     </>
   )
 }
