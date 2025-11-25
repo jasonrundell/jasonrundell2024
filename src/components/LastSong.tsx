@@ -196,7 +196,7 @@ export default function LastSong({ song }: LastSongProps) {
       setIsModalOpen(true)
     } else {
       // If no video ID, open the URL directly
-      window.open(song.url, '_blank', 'noopener,noreferrer')
+      window.open(song.url, '_blank', 'noopener noreferrer')
     }
   }
 
