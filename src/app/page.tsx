@@ -25,6 +25,7 @@ import References from '@/components/References'
 import Positions from '@/components/Positions'
 import MorePosts from '@/components/MorePosts'
 import Icon from '@/components/Icon'
+import LastSongWrapper from '@/components/LastSongWrapper'
 
 /**
  * Home page component that displays skills, projects, experience, references, and blog posts.
@@ -72,10 +73,16 @@ export default async function page() {
               industry. After 20 years, I still love working on the web!
             </p>
           </Row>
-          <Row>
+          <Grid
+            gridTemplateColumns="1fr"
+            largeTemplateColumns="1fr 1fr"
+            columnGap="2rem"
+          >
             <ContactList />
-          </Row>
+            <LastSongWrapper />
+          </Grid>
         </StyledSection>
+
         <Grid columnGap="2rem">
           <StyledSection id="skills">
             <h2>Skills</h2>

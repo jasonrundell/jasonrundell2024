@@ -3,6 +3,7 @@ import '@testing-library/jest-dom'
 
 // Polyfill Node.js globals needed by Next.js edge runtime
 if (typeof global.TextDecoder === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { TextDecoder, TextEncoder } = require('util')
   global.TextDecoder = TextDecoder
   global.TextEncoder = TextEncoder
@@ -18,11 +19,12 @@ if (typeof global.setImmediate === 'undefined') {
 if (typeof global.Request === 'undefined') {
   // Use fetch API polyfill if available, otherwise create minimal mocks
   try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { Request, Response, Headers } = require('next/dist/compiled/@edge-runtime/primitives')
     global.Request = Request
     global.Response = Response
     global.Headers = Headers
-  } catch (e) {
+  } catch {
     // Fallback: create minimal mocks
     global.Request = class Request {
       constructor(input, init) {
@@ -66,26 +68,40 @@ if (typeof global.Request === 'undefined') {
 
 // Polyfill for HTMLFormElement.prototype.requestSubmit
 // jsdom has this method but throws "not implemented" errors
-// Override it to properly dispatch submit events in tests
-HTMLFormElement.prototype.requestSubmit = function (submitter) {
-  if (submitter) {
-    if (!this.contains(submitter)) {
-      throw new DOMException(
-        "Failed to execute 'requestSubmit' on 'HTMLFormElement': The specified element is not a submit button.",
-      )
-    }
-    if (submitter.type !== 'submit') {
-      throw new DOMException(
-        "Failed to execute 'requestSubmit' on 'HTMLFormElement': The specified element is not a submit button.",
-      )
-    }
+// Completely replace it to prevent errors from being thrown
+if (typeof HTMLFormElement !== 'undefined' && HTMLFormElement.prototype) {
+  // Delete the existing method first to ensure we completely replace it
+  try {
+    delete HTMLFormElement.prototype.requestSubmit
+  } catch {
+    // Ignore if delete fails
   }
-  // Trigger submit event
-  const submitEvent = new Event('submit', {
-    bubbles: true,
-    cancelable: true,
+  
+  // Define our own implementation that never throws "not implemented" errors
+  Object.defineProperty(HTMLFormElement.prototype, 'requestSubmit', {
+    value: function (submitter) {
+      if (submitter) {
+        if (!this.contains(submitter)) {
+          throw new DOMException(
+            "Failed to execute 'requestSubmit' on 'HTMLFormElement': The specified element is not a submit button.",
+          )
+        }
+        if (submitter.type !== 'submit') {
+          throw new DOMException(
+            "Failed to execute 'requestSubmit' on 'HTMLFormElement': The specified element is not a submit button.",
+          )
+        }
+      }
+      // Trigger submit event
+      const submitEvent = new Event('submit', {
+        bubbles: true,
+        cancelable: true,
+      })
+      this.dispatchEvent(submitEvent)
+    },
+    writable: true,
+    configurable: true,
   })
-  this.dispatchEvent(submitEvent)
 }
 
 // Mock Next.js navigation
@@ -122,41 +138,100 @@ global.window.matchMedia = jest.fn().mockImplementation(query => ({
 }))
 
 // Mock console methods to reduce noise in tests
+// Use jest.spyOn for better control over what gets logged
 const originalError = console.error
 const originalWarn = console.warn
-global.console = {
-  ...console,
-  error: jest.fn((...args) => {
-    // Filter out the jsdom "Not implemented: HTMLFormElement.prototype.requestSubmit" errors
-    // These are harmless warnings from jsdom not supporting this feature
+
+// Create a custom error function that filters expected errors
+const filteredError = (...args) => {
+    // Filter out expected errors during tests
     const firstArg = args[0]
     const errorMessage = firstArg?.message || firstArg?.toString() || ''
+    const errorStack = firstArg?.stack || ''
+    
+    // Build full message from all arguments
+    const fullMessage = args.map(arg => {
+      if (typeof arg === 'string') return arg
+      if (arg?.message) return arg.message
+      if (arg?.stack) return arg.stack
+      if (arg?.toString) return arg.toString()
+      return String(arg)
+    }).join(' ')
+    
+    // Check if this is a Contentful error (expected during tests)
+    const isContentfulError = 
+      fullMessage.includes('Error fetching') && (
+        fullMessage.includes('Contentful') ||
+        fullMessage.includes('from Contentful') ||
+        fullMessage.includes('Error fetching skills:') ||
+        fullMessage.includes('Error fetching projects:') ||
+        fullMessage.includes('Error fetching references:') ||
+        fullMessage.includes('Error fetching positions:') ||
+        fullMessage.includes('Error fetching posts:') ||
+        fullMessage.includes('Error fetching entry') ||
+        fullMessage.includes('Error fetching entry by slug:') ||
+        fullMessage.includes('Error fetching last song:')
+      )
+    
+    // Check if this is the HTMLFormElement.requestSubmit error
+    // Check both message and stack trace, and also check if it's from jsdom
+    // Also check the stack trace for jsdom-specific paths
+    const isRequestSubmitError = 
+      fullMessage.includes('Not implemented: HTMLFormElement.prototype.requestSubmit') ||
+      fullMessage.includes('HTMLFormElement.prototype.requestSubmit') ||
+      errorMessage.includes('Not implemented: HTMLFormElement.prototype.requestSubmit') ||
+      errorMessage === 'Not implemented: HTMLFormElement.prototype.requestSubmit' ||
+      errorMessage.includes('HTMLFormElement.prototype.requestSubmit') ||
+      errorStack.includes('HTMLFormElement.prototype.requestSubmit') ||
+      errorStack.includes('not-implemented.js') ||
+      errorStack.includes('HTMLFormElement-impl.js') ||
+      (firstArg instanceof Error && 
+       (firstArg.message === 'Not implemented: HTMLFormElement.prototype.requestSubmit' ||
+        firstArg.message.includes('HTMLFormElement.prototype.requestSubmit')))
     
     if (
-      errorMessage.includes('Not implemented: HTMLFormElement.prototype.requestSubmit') ||
-      errorMessage.includes('HTMLFormElement.prototype.requestSubmit') ||
+      isRequestSubmitError ||
       errorMessage.includes('Sign in error:') || // Suppress expected sign-in test errors
       errorMessage.includes('Invalid value for prop `formAction`') || // Suppress Next.js server action warnings
       errorMessage.includes('Invalid value for prop `action`') || // Suppress Next.js server action warnings
-      errorMessage.includes('Either remove it from the element, or pass a string or number value') // Suppress Next.js server action warnings
+      errorMessage.includes('Either remove it from the element, or pass a string or number value') || // Suppress Next.js server action warnings
+      isContentfulError // Suppress expected Contentful error logs during tests
     ) {
-      return // Suppress these specific errors
+      // Completely suppress - don't call original, don't log anything
+      return
     }
     // Call original error for everything else
     originalError(...args)
-  }),
+}
+
+// Replace console.error with our filtered version
+global.console.error = filteredError
+
+global.console = {
+  ...console,
+  error: filteredError,
   warn: jest.fn((...args) => {
     // Suppress React warnings about invalid form props (formAction, action)
     // Next.js server actions pass functions as these props, which is expected behavior
     const firstArg = args[0]
     const warningMessage = typeof firstArg === 'string' ? firstArg : firstArg?.toString() || ''
+    const fullMessage = args.map(arg => 
+      typeof arg === 'string' ? arg : arg?.toString() || ''
+    ).join(' ')
+    
+    // Check if this is a Contentful warning (expected during tests)
+    const isContentfulWarning = 
+      fullMessage.includes('found in Contentful') ||
+      warningMessage.includes('found in Contentful') ||
+      (fullMessage.includes('No') && fullMessage.includes('Contentful'))
     
     if (
       warningMessage.includes('Invalid value for prop `formAction`') ||
       warningMessage.includes('Invalid value for prop `action`') ||
-      warningMessage.includes('Either remove it from the element, or pass a string or number value')
+      warningMessage.includes('Either remove it from the element, or pass a string or number value') ||
+      isContentfulWarning // Suppress expected Contentful warnings during tests
     ) {
-      return // Suppress these expected Next.js server action warnings
+      return // Suppress these expected warnings
     }
     // Call original warn for everything else
     originalWarn(...args)

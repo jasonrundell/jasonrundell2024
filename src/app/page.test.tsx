@@ -56,6 +56,18 @@ jest.mock('@/components/Icon', () => {
   }
 })
 
+jest.mock('@/components/LastSongWrapper', () => {
+  return function MockLastSongWrapper() {
+    return <div data-testid="last-song-wrapper">Last Song</div>
+  }
+})
+
+jest.mock('lucide-react', () => ({
+  Play: () => <span data-testid="play-icon">Play</span>,
+  ExternalLink: () => <span data-testid="external-link-icon">ExternalLink</span>,
+  Music: () => <span data-testid="music-icon">Music</span>,
+}))
+
 jest.mock('next/link', () => {
   return function MockLink({
     children,
