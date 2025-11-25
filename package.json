@@ -22,13 +22,7 @@
     "test:ci": "jest --ci --coverage --maxWorkers=2",
     "test:unit": "jest --testPathIgnorePatterns=integration",
     "analyze": "cross-env ANALYZE=true npm run build",
-    "clear-cache": "rimraf .next node_modules/.cache",
-    "fix-permissions": "node scripts/fix-permissions.js",
-    "perf-check": "node scripts/performance-check.js",
-    "dev-optimized": "npm run clear-cache && npm run dev",
-    "dev-safe": "node scripts/dev-safe.js",
-    "dev-memory": "npx --max-old-space-size=8192 --expose-gc next",
-    "install-hooks": "./scripts/install-git-hooks.sh"
+    "clear-cache": "rimraf .next node_modules/.cache"
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.9.1",
