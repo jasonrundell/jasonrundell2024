@@ -224,12 +224,10 @@ export default function LastSong({ song }: LastSongProps) {
           </StyledArtist>
         </StyledSongInfo>
         <StyledActions>
-          {embedUrl && (
-            <StyledPlayButton onClick={handlePlay} aria-label="Play song">
-              <Play size={18} />
-              Play
-            </StyledPlayButton>
-          )}
+          <StyledPlayButton onClick={handlePlay} aria-label="Play song">
+            <Play size={18} />
+            Play
+          </StyledPlayButton>
           <StyledLink
             href={song.url}
             target="_blank"
