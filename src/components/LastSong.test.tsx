@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LastSong, { LastSongProps } from './LastSong'
 import { LastSong as LastSongType } from '@/typeDefinitions/app'
