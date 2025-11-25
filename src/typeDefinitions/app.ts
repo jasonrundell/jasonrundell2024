@@ -165,3 +165,10 @@ export interface Post extends EntrySkeletonType {
 export interface Posts {
   posts: Post[]
 }
+
+export interface LastSong extends EntrySkeletonType {
+  title: string
+  artist: string
+  url: string
+  youtubeId?: string
+}

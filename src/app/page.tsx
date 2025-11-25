@@ -8,6 +8,7 @@ import {
   getReferences,
   getPositions,
   getPosts,
+  getLastSong,
 } from '@/lib/contentful'
 
 import {
@@ -25,6 +26,7 @@ import References from '@/components/References'
 import Positions from '@/components/Positions'
 import MorePosts from '@/components/MorePosts'
 import Icon from '@/components/Icon'
+import LastSong from '@/components/LastSong'
 
 /**
  * Home page component that displays skills, projects, experience, references, and blog posts.
@@ -32,13 +34,15 @@ import Icon from '@/components/Icon'
  */
 export default async function page() {
   // Parallelize Contentful queries for better performance
-  const [skills, projects, references, positions, posts] = await Promise.all([
-    getSkills(),
-    getProjects(),
-    getReferences(),
-    getPositions(),
-    getPosts(),
-  ])
+  const [skills, projects, references, positions, posts, lastSong] =
+    await Promise.all([
+      getSkills(),
+      getProjects(),
+      getReferences(),
+      getPositions(),
+      getPosts(),
+      getLastSong(),
+    ])
 
   return (
     <>
@@ -72,10 +76,16 @@ export default async function page() {
               industry. After 20 years, I still love working on the web!
             </p>
           </Row>
-          <Row>
+          <Grid
+            gridTemplateColumns="1fr"
+            largeTemplateColumns="1fr 1fr"
+            columnGap="2rem"
+          >
             <ContactList />
-          </Row>
+            {lastSong && <LastSong song={lastSong} />}
+          </Grid>
         </StyledSection>
+
         <Grid columnGap="2rem">
           <StyledSection id="skills">
             <h2>Skills</h2>

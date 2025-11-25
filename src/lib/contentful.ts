@@ -6,6 +6,7 @@ import {
   Project,
   Position,
   Post,
+  LastSong,
 } from '@/typeDefinitions/app'
 
 import { ContentfulEntry } from '@/typeDefinitions/contentful'
@@ -218,5 +219,24 @@ export async function getPosts(): Promise<Post[]> {
   } catch (error) {
     console.error('Error fetching posts:', error)
     return []
+  }
+}
+
+/**
+ * Fetches the last song entry from Contentful.
+ * Returns the most recent entry if multiple exist.
+ * @returns LastSong object or null if not found
+ */
+export async function getLastSong(): Promise<LastSong | null> {
+  try {
+    const songs = await fetchEntries<LastSong>('lastSong')
+    if (songs.length === 0) {
+      return null
+    }
+    // Return the first entry (most recent if sorted by updatedAt)
+    return songs[0].fields as unknown as LastSong
+  } catch (error) {
+    console.error('Error fetching last song:', error)
+    return null
   }
 }
