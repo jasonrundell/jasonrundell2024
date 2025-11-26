@@ -28,6 +28,7 @@ import Positions from '@/components/Positions'
 import MorePosts from '@/components/MorePosts'
 import Icon from '@/components/Icon'
 import LastSongWrapper from '@/components/LastSongWrapper'
+import HeroImage from '@/public/images/ai-powered-developer.webp'
 
 /**
  * Home page component that displays skills, projects, experience, references, and blog posts.
@@ -50,7 +51,7 @@ export default async function page() {
           <h1>Jason Rundell</h1>
           <StyledImageContainer>
             <Image
-              src="/images/ai-powered-developer.webp"
+              src={HeroImage}
               alt="AI-powered developer"
               fill={true}
               style={{ objectFit: 'cover', objectPosition: 'center' }}
