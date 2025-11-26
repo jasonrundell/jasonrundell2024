@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Row, Grid, Spacer } from '@jasonrundell/dropship'
 
 import {
@@ -17,6 +18,7 @@ import {
   StyledList,
   StyledListItem,
   StyledSection,
+  StyledImageContainer,
 } from '@/styles/common'
 
 import Skills from '@/components/Skills'
@@ -46,6 +48,15 @@ export default async function page() {
       <StyledContainer>
         <StyledSection id="home">
           <h1>Jason Rundell</h1>
+          <StyledImageContainer>
+            <Image
+              src="/images/ai-powered-developer.webp"
+              alt="AI-powered developer"
+              fill={true}
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              priority
+            />
+          </StyledImageContainer>
           <Row>
             <StyledIntroParagraph>
               Hey! I&apos;m an experienced developer who loves learning and

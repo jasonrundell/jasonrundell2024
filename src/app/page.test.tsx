@@ -64,7 +64,9 @@ jest.mock('@/components/LastSongWrapper', () => {
 
 jest.mock('lucide-react', () => ({
   Play: () => <span data-testid="play-icon">Play</span>,
-  ExternalLink: () => <span data-testid="external-link-icon">ExternalLink</span>,
+  ExternalLink: () => (
+    <span data-testid="external-link-icon">ExternalLink</span>
+  ),
   Music: () => <span data-testid="music-icon">Music</span>,
 }))
 
@@ -77,6 +79,39 @@ jest.mock('next/link', () => {
     href: string
   }) {
     return <a href={href}>{children}</a>
+  }
+})
+
+jest.mock('next/image', () => {
+  return function MockImage({
+    src,
+    alt,
+    style,
+    ...props
+  }: {
+    src: string
+    alt: string
+    fill?: boolean
+    priority?: boolean
+    style?: React.CSSProperties
+    [key: string]: unknown
+  }) {
+    // Filter out Next.js-specific props that aren't valid HTML attributes
+    const htmlProps = { ...props }
+    delete htmlProps.fill
+    delete htmlProps.priority
+
+    // Using <img> in test mock is intentional - Next.js Image component is mocked
+    // eslint-disable-next-line @next/next/no-img-element
+    return (
+      <img
+        src={src}
+        alt={alt}
+        data-testid="next-image"
+        style={style}
+        {...htmlProps}
+      />
+    )
   }
 })
 
@@ -106,6 +141,9 @@ jest.mock('@/styles/common', () => ({
     <section data-testid="section" id={id}>
       {children}
     </section>
+  ),
+  StyledImageContainer: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="image-container">{children}</div>
   ),
 }))
 
