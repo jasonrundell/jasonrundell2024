@@ -21,8 +21,10 @@ optimized performance.
 
 This repository includes Git hooks to ensure code quality:
 
-- **Pre-push Hook**: Automatically runs `npm run build` before pushing and prevents broken builds from being committed
-- **Installation**: Run `./scripts/install-git-hooks.sh` after cloning to set up the hooks
+- **Pre-push Hook**: Automatically runs `npm run build` before pushing and
+  prevents broken builds from being committed
+- **Installation**: Run `./scripts/install-git-hooks.sh` after cloning to set up
+  the hooks
 - **Documentation**: See [GIT_HOOKS.md](./GIT_HOOKS.md) for detailed information
 
 ### Getting Started
@@ -36,7 +38,10 @@ This repository includes Git hooks to ensure code quality:
 
 ### Contentful Webhooks
 
-To enable incremental builds when content is published in Contentful, set up webhooks to trigger automatic revalidation. See [docs/WEBHOOK_SETUP.md](./docs/WEBHOOK_SETUP.md) for complete setup instructions.
+To enable incremental builds when content is published in Contentful, set up
+webhooks to trigger automatic revalidation. See
+[docs/WEBHOOK_SETUP.md](./docs/WEBHOOK_SETUP.md) for complete setup
+instructions.
 
 ## Technologies
 
