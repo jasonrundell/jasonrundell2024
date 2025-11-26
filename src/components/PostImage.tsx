@@ -11,27 +11,30 @@ interface PostImageProps {
   altText: string
 }
 
-// 4:3 ratio
+// Hero-style full-width featured image
 const StyledContainer = styled('div')`
   position: relative;
   display: block;
   width: 100%;
-  height: 225px;
+  height: 250px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
+  background-color: ${Tokens.colors.backgroundDarker.value};
 
   @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
       .breakpoints.medium.unit}) {
-    height: 400px;
+    height: 450px;
+  }
+
+  @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
+      .breakpoints.large.unit}) {
+    height: 550px;
   }
 
   img {
-    max-width: 300px;
-    max-height: 225px;
-
-    @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
-        .breakpoints.medium.unit}) {
-      max-width: 500px;
-      max-height: 375px;
-    }
+    object-fit: cover;
+    object-position: center;
   }
 `
 
