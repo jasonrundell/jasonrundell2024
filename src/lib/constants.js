@@ -1,4 +1,4 @@
-export const SITE_NAME = 'Jason Rundell - Full Stack Developer'
+export const SITE_NAME = 'Full Stack Developer | Jason Rundell'
 export const SITE_DESCRIPTION =
   'The official web site of Jason Rundell: A full stack web developer that loves the web!'
 export const SITE_DOMAIN = 'https://jasonrundell.com'

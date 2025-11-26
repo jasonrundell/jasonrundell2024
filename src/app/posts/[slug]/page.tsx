@@ -49,7 +49,7 @@ export async function generateMetadata({
     : undefined
 
   return {
-    title: `Jason Rundell | Blog: ${post.title}`,
+    title: `${post.title} | Jason Rundell`,
     description: SITE_DESCRIPTION,
     openGraph: {
       images: imageUrl ? [imageUrl] : [],

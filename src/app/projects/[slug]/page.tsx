@@ -98,7 +98,7 @@ export async function generateMetadata({
     : undefined
 
   return {
-    title: `Jason Rundell | Project: ${project.title}`,
+    title: `${project.title} | Jason Rundell`,
     description: SITE_DESCRIPTION,
     openGraph: {
       images: imageUrl ? [imageUrl] : [],
