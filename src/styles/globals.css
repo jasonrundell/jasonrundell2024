@@ -46,6 +46,26 @@ time {
   font-weight: 400;
 }
 
+h1 {
+  font-size: var(--size-large);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--size-normal);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: var(--size-small);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: var(--size-smallest);
+  font-weight: 700;
+}
+
 hr {
   width: 100%;
   margin-bottom: 1.5rem;
