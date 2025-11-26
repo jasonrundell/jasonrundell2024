@@ -48,7 +48,7 @@ export default async function page() {
     <>
       <StyledContainer>
         <StyledSection id="home">
-          <h1>Jason Rundell</h1>
+          <h1>Full Stack Developer</h1>
           <StyledImageContainer>
             <Image
               src={HeroImage}
