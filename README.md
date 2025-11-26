@@ -32,6 +32,12 @@ This repository includes Git hooks to ensure code quality:
 3. Install Git hooks: `./scripts/install-git-hooks.sh`
 4. Run the development server: `npm run dev`
 
+## Deployment
+
+### Contentful Webhooks
+
+To enable incremental builds when content is published in Contentful, set up webhooks to trigger automatic revalidation. See [docs/WEBHOOK_SETUP.md](./docs/WEBHOOK_SETUP.md) for complete setup instructions.
+
 ## Technologies
 
 - **Next.js**: A powerful React framework for server-rendered applications.
