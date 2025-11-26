@@ -58,6 +58,7 @@ export default async function page() {
               priority
             />
           </StyledImageContainer>
+          <Spacer />
           <Row>
             <StyledIntroParagraph>
               Hey! I&apos;m an experienced developer who loves learning and
