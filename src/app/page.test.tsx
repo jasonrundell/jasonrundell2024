@@ -179,7 +179,7 @@ describe('Home Page', () => {
 
     // Assert
     expect(
-      screen.getByRole('heading', { name: /jason rundell/i })
+      screen.getByRole('heading', { name: /full stack developer/i })
     ).toBeInTheDocument()
   })
 

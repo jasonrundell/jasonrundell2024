@@ -25,7 +25,7 @@
     "clear-cache": "rimraf .next node_modules/.cache"
   },
   "dependencies": {
-    "@pigment-css/react": "^0.0.29",
+    "@pigment-css/react": "^0.0.30",
     "@radix-ui/react-checkbox": "^1.1.4",
     "@radix-ui/react-slot": "^1.1.2",
     "@supabase/ssr": "^0.6.1",
@@ -45,7 +45,7 @@
     "@jasonrundell/dropship": "^3.3.0",
     "@next/bundle-analyzer": "14.1.0",
     "@next/third-parties": "^14.2.25",
-    "@pigment-css/nextjs-plugin": "^0.0.29",
+    "@pigment-css/nextjs-plugin": "^0.0.30",
     "@sentry/nextjs": "^8.46.0",
     "@supabase/supabase-js": "^2.49.4",
     "@testing-library/jest-dom": "^6.8.0",
@@ -59,7 +59,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.5.0",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^14.2.25",
+    "eslint-config-next": "^14.2.35",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^30.1.1",
@@ -76,5 +76,10 @@
   },
   "bugs": {
     "url": "https://github.com/jasonrundell/jasonrundell2024/issues"
+  },
+  "overrides": {
+    "happy-dom": ">=20.0.0",
+    "glob": ">=10.5.0",
+    "test-exclude": ">=7.0.0"
   }
 }
