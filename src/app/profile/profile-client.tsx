@@ -120,6 +120,15 @@ const InfoValue = styled('div')`
   padding: 0.5rem 0;
 `
 
+const StyledInfoLabel = styled(Label)`
+  color: ${Tokens.colors.primary.value} !important;
+  margin: 0 !important;
+`
+
+const StyledInfoValueCapitalize = styled(InfoValue)`
+  text-transform: capitalize;
+`
+
 const ChangePasswordSection = styled('div')`
   display: flex;
   flex-direction: column;
@@ -378,9 +387,7 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
           <InfoCard>
             <InfoCardHeader>
               <Mail size={20} />
-              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>
-                Email Address
-              </Label>
+              <StyledInfoLabel>Email Address</StyledInfoLabel>
             </InfoCardHeader>
             <InfoValue>{email}</InfoValue>
           </InfoCard>
@@ -388,9 +395,7 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
           <InfoCard>
             <InfoCardHeader>
               <Calendar size={20} />
-              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>
-                Account Created
-              </Label>
+              <StyledInfoLabel>Account Created</StyledInfoLabel>
             </InfoCardHeader>
             <InfoValue>{accountCreated}</InfoValue>
           </InfoCard>
@@ -398,13 +403,11 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
           <InfoCard>
             <InfoCardHeader>
               <Shield size={20} />
-              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>
-                Authentication Method
-              </Label>
+              <StyledInfoLabel>Authentication Method</StyledInfoLabel>
             </InfoCardHeader>
-            <InfoValue style={{ textTransform: 'capitalize' }}>
+            <StyledInfoValueCapitalize>
               {authMethod}
-            </InfoValue>
+            </StyledInfoValueCapitalize>
           </InfoCard>
         </InfoGrid>
       </AccountInfoSection>
@@ -416,9 +419,7 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
           <InfoCard>
             <InfoCardHeader>
               <Lock size={20} />
-              <Label style={{ color: Tokens.colors.primary.value, margin: 0 }}>
-                Password
-              </Label>
+              <StyledInfoLabel>Password</StyledInfoLabel>
             </InfoCardHeader>
             <InfoValue>••••••••</InfoValue>
             <ButtonGroup>

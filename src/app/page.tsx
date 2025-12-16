@@ -31,6 +31,12 @@ import Icon from '@/components/Icon'
 import LastSongWrapper from '@/components/LastSongWrapper'
 import HeroImage from '@/public/images/ai-powered-developer.webp'
 
+// Image style constants
+const imageCoverStyle: React.CSSProperties = {
+  objectFit: 'cover',
+  objectPosition: 'center',
+}
+
 /**
  * Home page component that displays skills, projects, experience, references, and blog posts.
  * Fetches data from Contentful in parallel for optimal performance.
@@ -55,7 +61,7 @@ export default async function page() {
               src={HeroImage}
               alt="AI-powered developer"
               fill={true}
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              style={imageCoverStyle}
               priority
             />
           </StyledImageContainer>

@@ -4,6 +4,11 @@ import { styled } from '@pigment-css/react'
 
 import Tokens from '@/lib/tokens'
 
+// Image style constants
+const imageCoverStyle: React.CSSProperties = {
+  objectFit: 'cover',
+}
+
 interface PostPreviewImageProps {
   title: string
   url: string
@@ -39,7 +44,7 @@ export default function PostPreviewImage({
         alt={altText}
         src={url}
         fill={true}
-        style={{ objectFit: 'cover' }}
+        style={imageCoverStyle}
         sizes="(max-width: 272px) 100vw"
       />
     </StyledContainer>

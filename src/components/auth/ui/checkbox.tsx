@@ -45,13 +45,18 @@ const StyledCheckboxIndicator = styled(CheckboxPrimitive.Indicator)`
   height: 100%;
 `
 
+const StyledCheckIcon = styled(Check)`
+  width: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+  height: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+`
+
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
 >(({ ...props }, ref) => (
   <StyledCheckboxRoot ref={ref} {...props}>
     <StyledCheckboxIndicator>
-      <Check style={{ width: '1rem', height: '1rem' }} />
+      <StyledCheckIcon />
     </StyledCheckboxIndicator>
   </StyledCheckboxRoot>
 ))

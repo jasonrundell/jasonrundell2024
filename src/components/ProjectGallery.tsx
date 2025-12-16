@@ -9,6 +9,16 @@ import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 
+// Image style constants
+const imageCoverNoPointerStyle: React.CSSProperties = {
+  objectFit: 'cover',
+  pointerEvents: 'none',
+}
+
+const imageContainStyle: React.CSSProperties = {
+  objectFit: 'contain',
+}
+
 const StyledGalleryItem = styled('div')`
   position: relative;
   width: 100%;
@@ -177,6 +187,22 @@ const StyledImageInfo = styled('div')`
   max-width: 80%;
 `
 
+const StyledImageTitle = styled('div')`
+  font-weight: 600;
+  margin-bottom: ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit};
+`
+
+const StyledImageDescription = styled('div')`
+  font-size: ${Tokens.sizes.fonts.small.value}${Tokens.sizes.fonts.small.unit};
+  opacity: 0.9;
+`
+
+const StyledImageCounter = styled('div')`
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+`
+
 interface ProjectGalleryProps {
   images: GalleryImage[]
 }
@@ -290,7 +316,7 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                 }
                 fill={true}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                style={{ objectFit: 'cover', pointerEvents: 'none' }}
+                style={imageCoverNoPointerStyle}
               />
             </StyledGalleryItem>
           )
@@ -346,7 +372,7 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                       fill={true}
                       quality={90}
                       sizes="90vw"
-                      style={{ objectFit: 'contain' }}
+                      style={imageContainStyle}
                     />
                   </StyledModalImage>
 
@@ -354,26 +380,18 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                     selectedImage.fields.description) && (
                     <StyledImageInfo>
                       {selectedImage.fields.title && (
-                        <div
-                          style={{ fontWeight: 600, marginBottom: '0.25rem' }}
-                        >
+                        <StyledImageTitle>
                           {selectedImage.fields.title}
-                        </div>
+                        </StyledImageTitle>
                       )}
                       {selectedImage.fields.description && (
-                        <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>
+                        <StyledImageDescription>
                           {selectedImage.fields.description}
-                        </div>
+                        </StyledImageDescription>
                       )}
-                      <div
-                        style={{
-                          fontSize: '0.75rem',
-                          opacity: 0.7,
-                          marginTop: '0.5rem',
-                        }}
-                      >
+                      <StyledImageCounter>
                         {selectedIndex + 1} of {validImages.length}
-                      </div>
+                      </StyledImageCounter>
                     </StyledImageInfo>
                   )}
                 </>

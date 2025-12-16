@@ -24,6 +24,11 @@ const StyledSongInfo = styled('div')`
   gap: 0.5rem;
 `
 
+const StyledIconWrapper = styled('span')`
+  display: inline;
+  margin-right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+`
+
 const StyledTitle = styled('h3')`
   margin: 0;
   font-size: ${Tokens.sizes.fonts.large.value}${Tokens.sizes.fonts.large.unit};
@@ -193,10 +198,9 @@ export default function LastSong({ song }: LastSongProps) {
       <StyledSection>
         <StyledSongInfo>
           <StyledTitle>
-            <Music
-              size={20}
-              style={{ display: 'inline', marginRight: '0.5rem' }}
-            />
+            <StyledIconWrapper>
+              <Music size={20} />
+            </StyledIconWrapper>
             Listening to:
           </StyledTitle>
           <StyledArtist>

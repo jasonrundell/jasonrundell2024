@@ -7,6 +7,12 @@ import { MARKS, Document, BLOCKS } from '@contentful/rich-text-types'
 import { notFound } from 'next/navigation'
 import { sanitizeHTML } from '@/lib/sanitize'
 
+// Image style constants
+const imageFullWidthStyle: React.CSSProperties = {
+  width: '100%',
+  height: 'auto',
+}
+
 import { getEntryBySlug } from '@/lib/contentful'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
@@ -80,7 +86,7 @@ const customMarkdownOptions = () => ({
             alt={description || 'Project image'}
             width={500}
             height={300}
-            style={{ width: '100%', height: 'auto' }}
+            style={imageFullWidthStyle}
           />
         </StyledEmbeddedAsset>
       )
