@@ -145,6 +145,15 @@ jest.mock('@/styles/common', () => ({
   StyledImageContainer: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="image-container">{children}</div>
   ),
+  StyledLink: ({
+    children,
+    href,
+    ...props
+  }: {
+    children: React.ReactNode
+    href: string
+    [key: string]: unknown
+  }) => <a href={href} {...props}>{children}</a>,
 }))
 
 describe('Home Page', () => {
@@ -191,7 +200,7 @@ describe('Home Page', () => {
     // Assert
     expect(screen.getByTestId('intro-paragraph')).toBeInTheDocument()
     expect(
-      screen.getByText(/hey! i'm an experienced developer/i)
+      screen.getByText(/hey! i'm an experienced full-stack developer/i)
     ).toBeInTheDocument()
   })
 
@@ -242,6 +251,8 @@ describe('Home Page', () => {
       'href',
       'https://www.linkedin.com/in/jasonrundell/'
     )
+    // Verify ExternalLink icon is present
+    expect(screen.getByTestId('external-link-icon')).toBeInTheDocument()
   })
 
   it('should render projects section', async () => {

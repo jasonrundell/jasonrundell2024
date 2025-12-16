@@ -1,56 +1,55 @@
-import Link from 'next/link'
-
 import Icon from './Icon'
-import { StyledList, StyledListItem } from '@/styles/common'
+import { ExternalLink } from 'lucide-react'
+import { StyledList, StyledListItem, StyledLink } from '@/styles/common'
 
 export default function ContactList() {
   return (
     <StyledList>
       <StyledListItem>
         <Icon type="Email" />{' '}
-        <Link
+        <StyledLink
           href="mailto:contact@jasonrundell.com"
           aria-label="Email me"
           className="link"
         >
           Email me
-        </Link>
+        </StyledLink>
       </StyledListItem>
       <StyledListItem>
         <Icon type="Calendar" />{' '}
-        <Link
+        <StyledLink
           href="https://calendly.com/jason-rundell/60-minute-meeting"
           rel="noopener noreferrer"
           target="_blank"
           aria-label="Book time with me"
           className="link"
         >
-          Book time with me
-        </Link>
+          <ExternalLink size={18} /> Book time with me
+        </StyledLink>
       </StyledListItem>
       <StyledListItem>
         <Icon type="GitHub" />{' '}
-        <Link
+        <StyledLink
           href="https://github.com/jasonrundell?tab=repositories&q=&type=&language=&sort="
           rel="noopener noreferrer"
           target="_blank"
           aria-label="My open-source work on GitHub"
           className="link"
         >
-          My open-source work on GitHub
-        </Link>
+          <ExternalLink size={18} /> My open-source work on GitHub
+        </StyledLink>
       </StyledListItem>
       <StyledListItem>
         <Icon type="LinkedIn" />{' '}
-        <Link
+        <StyledLink
           href="https://www.linkedin.com/in/jasonrundell/"
           rel="noopener noreferrer"
           target="_blank"
           aria-label="Connect on LinkedIn"
           className="link"
         >
-          Connect on LinkedIn
-        </Link>
+          <ExternalLink size={18} /> Connect on LinkedIn
+        </StyledLink>
       </StyledListItem>
     </StyledList>
   )

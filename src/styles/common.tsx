@@ -1,5 +1,6 @@
 import { styled } from '@pigment-css/react'
 import { Heading } from '@jasonrundell/dropship'
+import Link from 'next/link'
 import Tokens from '@/lib/tokens'
 
 export const StyledDivBgDark = styled('div')`
@@ -150,4 +151,14 @@ export const StyledImageContainer = styled('div')`
     object-fit: cover;
     object-position: center;
   }
+`
+
+export const StyledLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: ${Tokens.colors.primary.value};
+  text-decoration: none;
+  transition: color 0.15s;
+  text-decoration: underline;
 `

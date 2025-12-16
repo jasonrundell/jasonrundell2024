@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+import { ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import { Row, Grid, Spacer } from '@jasonrundell/dropship'
 
@@ -19,6 +19,7 @@ import {
   StyledListItem,
   StyledSection,
   StyledImageContainer,
+  StyledLink,
 } from '@/styles/common'
 
 import Skills from '@/components/Skills'
@@ -107,15 +108,15 @@ export default async function page() {
               <StyledList>
                 <StyledListItem>
                   <Icon type="LinkedIn" />{' '}
-                  <Link
+                  <StyledLink
                     href="https://www.linkedin.com/in/jasonrundell/"
                     rel="noopener noreferrer"
                     target="_blank"
                     aria-label="See more on LinkedIn"
                     className="link"
                   >
-                    See more on LinkedIn
-                  </Link>
+                    <ExternalLink size={18} /> See more on LinkedIn
+                  </StyledLink>
                 </StyledListItem>
               </StyledList>
             </Row>
@@ -128,13 +129,13 @@ export default async function page() {
                   projects.map((project) => (
                     <StyledListItem key={project.slug}>
                       <Icon type="GitHub" />{' '}
-                      <Link
+                      <StyledLink
                         href={`/projects/${project.slug}`}
                         aria-label={project.title}
                         className="link"
                       >
                         {project.title}
-                      </Link>
+                      </StyledLink>
                     </StyledListItem>
                   ))}
               </StyledList>
