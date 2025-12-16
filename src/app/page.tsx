@@ -61,10 +61,8 @@ export default async function page() {
           <Spacer />
           <Row>
             <StyledIntroParagraph>
-              Hey! I&apos;m an experienced developer who loves learning and
-              using the latest in front-end web development. I have a wealth of
-              experience and love for back-end, DevOps, database design,
-              component-driven design, design systems, and leading with empathy
+              Hey! I&apos;m an experienced full-stack developer passionate about
+              modern web development, design systems, and leading with empathy
               as a manager or tech&nbsp;lead.
             </StyledIntroParagraph>
             <p>
@@ -75,8 +73,7 @@ export default async function page() {
               WordPress multisites, jQuery Mobile, custom CMS applications, a
               Facebook contest platform, React design systems, Jamstack
               architecture, and most recently, exploration of the possibilities
-              and limitations of automation, AI, and AGI (Artificial General
-              Intelligence).
+              and limitations of automation, and AI.
             </p>
             <p>
               I&apos;m constantly exploring new trends and experimenting with

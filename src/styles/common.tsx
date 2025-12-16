@@ -129,7 +129,7 @@ export const StyledImageContainer = styled('div')`
   position: relative;
   display: block;
   width: 100%;
-  height: 250px;
+  height: 150px;
   margin: 0;
   overflow: hidden;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
@@ -137,13 +137,13 @@ export const StyledImageContainer = styled('div')`
 
   @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
       .breakpoints.medium.unit}) {
-    height: 450px;
+    height: 350px;
     margin-bottom: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
   }
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
       .breakpoints.large.unit}) {
-    height: 550px;
+    height: 400px;
   }
 
   img {

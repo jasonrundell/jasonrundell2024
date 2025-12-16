@@ -84,15 +84,15 @@
         "unit": "rem"
       },
       "medium": {
-        "value": 1.5,
+        "value": 1.25,
         "unit": "rem"
       },
       "large": {
-        "value": 1.75,
+        "value": 1.5,
         "unit": "rem"
       },
       "xlarge": {
-        "value": 2.75,
+        "value": 1.75,
         "unit": "rem"
       },
       "base": {
