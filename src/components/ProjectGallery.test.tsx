@@ -109,7 +109,12 @@ jest.mock('@jasonrundell/dropship', () => ({
       {children}
     </div>
   ),
-  Heading: ({ children, ...props }: { children: React.ReactNode; [key: string]: any }) => (
+  Heading: ({
+    children,
+    ...props
+  }: {
+    children: React.ReactNode
+  } & React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1 {...props}>{children}</h1>
   ),
 }))
