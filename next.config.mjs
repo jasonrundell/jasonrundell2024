@@ -18,6 +18,15 @@ const nextConfig = {
   images: {
     domains: ['images.ctfassets.net'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/projects/arcline',
+        destination: '/projects/arcline-twilio-hackathon',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {
