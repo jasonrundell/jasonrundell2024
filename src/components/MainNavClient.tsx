@@ -11,15 +11,15 @@ import { createClient } from '@/utils/supabase/client'
 
 const StyledAuthButtonGroup = styled('div')`
   display: none;
-  gap: 0.5rem;
+  gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
   margin-left: auto;
   align-items: center;
-  padding-right: 1rem;
+  padding-right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
       .breakpoints.large.unit}) {
     display: flex;
-    padding-right: 2rem;
+    padding-right: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
   }
 `
 
@@ -39,7 +39,7 @@ const StyledMobileMenuButton = styled('button')`
 
   span {
     display: block;
-    width: 1.5rem;
+    width: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
     height: 2px;
     background-color: ${Tokens.colors.secondary.value};
     margin: 2px 0;
@@ -73,12 +73,12 @@ const StyledMobileMenu = styled('div')`
   background-color: ${Tokens.colors.background.value};
   border-top: 1px solid ${Tokens.colors.border.value};
   border-bottom: 1px solid ${Tokens.colors.border.value};
-  padding: 1.5rem;
+  padding: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
   transform: translateY(-100%);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  z-index: 98;
+  z-index: ${Tokens.zIndex.base.value};
 
   &.open {
     transform: translateY(0);
@@ -94,7 +94,7 @@ const StyledMobileMenu = styled('div')`
 
 const StyledMobileList = styled('ul')`
   list-style: none;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit} 0;
   padding: 0;
   display: flex;
   flex-direction: column;

@@ -27,10 +27,12 @@ const StyledAuthContainer = styled('div')`
 const StyledAuthCard = styled('div')`
   width: 100%;
   max-width: 420px;
-  padding: 3rem 2.5rem;
+  padding: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge
+      .unit} 2.5rem;
   background-color: ${Tokens.colors.backgroundDarker.value};
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 30px ${Tokens.colors.surface.value}33, 0 4px 8px ${Tokens.colors.surface.value}1A;
+  border-radius: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
+  box-shadow: ${Tokens.shadows.large.value} ${Tokens.colors.surface.value}33,
+    0 4px 8px ${Tokens.colors.surface.value}1A;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -40,7 +42,7 @@ const StyledAuthCard = styled('div')`
 const StyledAuthHeader = styled('div')`
   text-align: center;
   margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
   border-bottom: 1px solid ${Tokens.colors.secondary.value}1A;
 `
 
@@ -48,20 +50,20 @@ const StyledAuthTitle = styled('h1')`
   color: ${Tokens.colors.primary.value};
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
   letter-spacing: -0.02em;
   line-height: 1.2;
   background-color: ${Tokens.colors.primary.value};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 4px ${Tokens.colors.surface.value}1A;
+  text-shadow: ${Tokens.shadows.text.value} ${Tokens.colors.surface.value}1A;
 `
 
 const StyledAuthSubtitle = styled('p')`
   color: ${Tokens.colors.textPrimary.value};
   font-size: 1.15rem;
   margin-bottom: 0;
-  opacity: 0.9;
+  opacity: ${Tokens.opacity.higher.value};
   transition: opacity 0.3s ease;
 
   ${StyledAuthCard}:hover & {

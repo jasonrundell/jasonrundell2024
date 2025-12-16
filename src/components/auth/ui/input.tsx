@@ -8,7 +8,8 @@ const StyledInput = styled('input')`
   box-sizing: border-box;
   width: 100%;
   height: 2.5rem;
-  padding: 0.5rem 1rem;
+  padding: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall
+      .unit} ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   background: ${Tokens.colors.background.value}D9;
   color: ${Tokens.colors.textPrimary.value};
@@ -16,7 +17,7 @@ const StyledInput = styled('input')`
   font-size: 1rem;
   font-weight: 500;
   transition: box-shadow 0.15s, border-color 0.15s;
-  box-shadow: 0 1px 2px 0 ${Tokens.colors.surface.value}08;
+  box-shadow: ${Tokens.shadows.small.value} 0 ${Tokens.colors.surface.value}08;
 
   &::placeholder {
     color: ${Tokens.colors.textPrimary.value};

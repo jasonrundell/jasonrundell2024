@@ -16,7 +16,7 @@ const shimmer = keyframes`
 const StyledSongInfo = styled('div')`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
 `
 
 const StyledSkeleton = styled('div')`
@@ -32,18 +32,18 @@ const StyledSkeleton = styled('div')`
 `
 
 const StyledTitleSkeleton = styled(StyledSkeleton)`
-  height: 1.5rem;
+  height: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
   width: 8rem;
 `
 
 const StyledArtistSkeleton = styled(StyledSkeleton)`
-  height: 1.25rem;
+  height: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
   width: 12rem;
 `
 
 const StyledActions = styled('div')`
   display: flex;
-  gap: 1rem;
+  gap: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   align-items: center;
 `
 
@@ -54,7 +54,7 @@ const StyledButtonSkeleton = styled(StyledSkeleton)`
 `
 
 const StyledLinkSkeleton = styled(StyledSkeleton)`
-  height: 1.5rem;
+  height: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
   width: 10rem;
 `
 
@@ -72,4 +72,3 @@ export default function LastSongSkeleton() {
     </StyledFlexSection>
   )
 }
-

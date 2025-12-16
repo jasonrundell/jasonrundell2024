@@ -156,7 +156,7 @@ export const StyledImageContainer = styled('div')`
 export const StyledLink = styled(Link)`
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
   color: ${Tokens.colors.primary.value};
   text-decoration: none;
   transition: color 0.15s;
@@ -166,7 +166,7 @@ export const StyledLink = styled(Link)`
 export const StyledFlexSection = styled('div')`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
 `
 
 export const StyledModal = styled('div')`
@@ -176,11 +176,11 @@ export const StyledModal = styled('div')`
   right: 0;
   bottom: 0;
   background: ${Tokens.colors.surface.value};
-  z-index: 9999;
+  z-index: ${Tokens.zIndex.modal.value};
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
 `
 
 export const StyledModalContent = styled('div')`
@@ -195,8 +195,8 @@ export const StyledModalContent = styled('div')`
 
 export const StyledCloseButton = styled('button')`
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+  right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   background: ${Tokens.colors.white.value}36;
   border: none;
   color: ${Tokens.colors.primary.value};
@@ -208,7 +208,7 @@ export const StyledCloseButton = styled('button')`
   justify-content: center;
   border-radius: 50%;
   transition: background 0.2s ease-in-out;
-  z-index: 10000;
+  z-index: ${Tokens.zIndex.modalContent.value};
 
   &:hover {
     background: ${Tokens.colors.primaryVariant.value}E6;

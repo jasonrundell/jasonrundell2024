@@ -10,7 +10,7 @@ const StyledMenuContainer = styled('div')`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 99;
+  z-index: ${Tokens.zIndex.nav.value};
   background-color: ${Tokens.colors.background.value};
   transition: background 1.3s ease, --background-color-start 1.3s ease,
     --background-color-end 1.3s ease;

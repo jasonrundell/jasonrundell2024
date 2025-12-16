@@ -15,12 +15,12 @@ const StyledBanner = styled('div')`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
-  padding: 1rem;
+  z-index: ${Tokens.zIndex.banner.value};
+  padding: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   text-align: center;
   font-weight: 400;
   transition: transform 0.3s ease-in-out;
-  box-shadow: 0 2px 8px ${Tokens.colors.surface.value}1A;
+  box-shadow: ${Tokens.shadows.medium.value} ${Tokens.colors.surface.value}1A;
   color: ${Tokens.colors.surface.value};
 
   &.paused {
@@ -53,9 +53,9 @@ const ActionButton = styled('button')`
   background: white;
   border: 1px solid ${Tokens.colors.secondary.value}4D;
   color: ${Tokens.colors.surface.value};
-  padding: 0.5rem 1rem;
+  padding: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit} ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
-  margin-left: 1rem;
+  margin-left: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   cursor: pointer;
   font-family: var(--font-outfit), Arial, sans-serif;
   font-size: 0.8rem;
@@ -69,7 +69,7 @@ const ActionButton = styled('button')`
 
 const CloseButton = styled('button')`
   position: absolute;
-  right: 1rem;
+  right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   top: 50%;
   transform: translateY(-50%);
   background: white;

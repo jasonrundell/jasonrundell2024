@@ -25,6 +25,10 @@
       "unit": "rem"
     },
     "spacing": {
+      "xsmall": {
+        "value": 0.5,
+        "unit": "rem"
+      },
       "small": {
         "value": 1,
         "unit": "rem"
@@ -216,6 +220,10 @@
     }
   },
   "borderRadius": {
+    "xsmall": {
+      "value": 0.3125,
+      "unit": "rem"
+    },
     "small": {
       "value": 0.25,
       "unit": "rem"
@@ -227,6 +235,72 @@
     "large": {
       "value": 0.75,
       "unit": "rem"
+    }
+  },
+  "opacity": {
+    "low": {
+      "value": 0.3,
+      "unit": ""
+    },
+    "medium": {
+      "value": 0.7,
+      "unit": ""
+    },
+    "high": {
+      "value": 0.8,
+      "unit": ""
+    },
+    "higher": {
+      "value": 0.9,
+      "unit": ""
+    },
+    "highest": {
+      "value": 0.95,
+      "unit": ""
+    }
+  },
+  "shadows": {
+    "small": {
+      "value": "0 1px 2px 0",
+      "unit": ""
+    },
+    "medium": {
+      "value": "0 2px 8px",
+      "unit": ""
+    },
+    "large": {
+      "value": "0 10px 30px",
+      "unit": ""
+    },
+    "text": {
+      "value": "0 2px 4px",
+      "unit": ""
+    }
+  },
+  "zIndex": {
+    "base": {
+      "value": 98,
+      "unit": ""
+    },
+    "nav": {
+      "value": 99,
+      "unit": ""
+    },
+    "overlay": {
+      "value": 100,
+      "unit": ""
+    },
+    "banner": {
+      "value": 1000,
+      "unit": ""
+    },
+    "modal": {
+      "value": 9999,
+      "unit": ""
+    },
+    "modalContent": {
+      "value": 10000,
+      "unit": ""
     }
   },
   "fonts": {

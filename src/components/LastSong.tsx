@@ -21,7 +21,7 @@ export interface LastSongProps {
 const StyledSongInfo = styled('div')`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
 `
 
 const StyledIconWrapper = styled('span')`
@@ -43,15 +43,16 @@ const StyledArtist = styled('p')`
 
 const StyledActions = styled('div')`
   display: flex;
-  gap: 1rem;
+  gap: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   align-items: center;
 `
 
 const StyledPlayButton = styled('button')`
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
+  padding: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall
+      .unit} ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   background: ${Tokens.colors.primary.value};
   color: ${Tokens.colors.background.value};
   border: none;
@@ -75,7 +76,7 @@ const StyledVideoModalContent = styled(StyledModalContent)`
   max-width: 800px;
   background: ${Tokens.colors.background.value};
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
-  padding: 1rem;
+  padding: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
 `
 
 const StyledIframe = styled('iframe')`

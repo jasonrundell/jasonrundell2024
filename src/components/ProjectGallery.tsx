@@ -64,7 +64,7 @@ const StyledModalImage = styled('div')`
 
 const StyledNavButtonLeft = styled('button')`
   position: absolute;
-  left: 1rem;
+  left: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   top: 50%;
   transform: translateY(-50%);
   background: ${Tokens.colors.white.value}36;
@@ -78,7 +78,7 @@ const StyledNavButtonLeft = styled('button')`
   justify-content: center;
   border-radius: 50%;
   transition: background 0.2s ease-in-out;
-  z-index: 10000;
+  z-index: ${Tokens.zIndex.modalContent.value};
 
   &:hover {
     background: ${Tokens.colors.primaryVariant.value}E6;
@@ -90,14 +90,14 @@ const StyledNavButtonLeft = styled('button')`
   }
 
   &:disabled {
-    opacity: 0.3;
+    opacity: ${Tokens.opacity.low.value};
     cursor: not-allowed;
   }
 `
 
 const StyledNavButtonRight = styled('button')`
   position: absolute;
-  right: 1rem;
+  right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   top: 50%;
   transform: translateY(-50%);
   background: ${Tokens.colors.white.value}36;
@@ -111,7 +111,7 @@ const StyledNavButtonRight = styled('button')`
   justify-content: center;
   border-radius: 50%;
   transition: background 0.2s ease-in-out;
-  z-index: 10000;
+  z-index: ${Tokens.zIndex.modalContent.value};
 
   &:hover {
     background: ${Tokens.colors.primaryVariant.value}E6;
@@ -123,19 +123,19 @@ const StyledNavButtonRight = styled('button')`
   }
 
   &:disabled {
-    opacity: 0.3;
+    opacity: ${Tokens.opacity.low.value};
     cursor: not-allowed;
   }
 `
 
 const StyledImageInfo = styled('div')`
   position: absolute;
-  bottom: 1rem;
+  bottom: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   left: 50%;
   transform: translateX(-50%);
   background: ${Tokens.colors.surface.value}b3;
   color: ${Tokens.colors.primary.value};
-  padding: 0.75rem 1.5rem;
+  padding: ${Tokens.sizes.padding.xsmall.value}${Tokens.sizes.padding.xsmall.unit} ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   text-align: center;
   max-width: 80%;
@@ -148,12 +148,12 @@ const StyledImageTitle = styled('div')`
 
 const StyledImageDescription = styled('div')`
   font-size: ${Tokens.sizes.fonts.small.value}${Tokens.sizes.fonts.small.unit};
-  opacity: 0.9;
+  opacity: ${Tokens.opacity.higher.value};
 `
 
 const StyledImageCounter = styled('div')`
   font-size: 0.75rem;
-  opacity: 0.7;
+  opacity: ${Tokens.opacity.medium.value};
   margin-top: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
 `
 

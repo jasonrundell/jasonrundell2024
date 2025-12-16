@@ -48,7 +48,7 @@ const StyledButton = styled('button')`
   }
   &.size-lg {
     height: 2.75rem;
-    padding: 0 2rem;
+    padding: 0 ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
     font-size: 1.1rem;
   }
   &.size-icon {

@@ -9,14 +9,14 @@ const StyledLabel = styled('label')`
   font-size: 1rem;
   font-weight: 600;
   color: ${Tokens.colors.textPrimary.value};
-  margin-bottom: 0.25rem;
+  margin-bottom: ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit};
   letter-spacing: 0.01em;
   cursor: pointer;
   user-select: none;
   opacity: 1;
   &.disabled,
   &:disabled {
-    opacity: 0.7;
+    opacity: ${Tokens.opacity.medium.value};
     cursor: not-allowed;
   }
 `
