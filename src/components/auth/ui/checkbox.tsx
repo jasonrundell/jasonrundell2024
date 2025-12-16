@@ -11,7 +11,7 @@ const StyledCheckboxRoot = styled(CheckboxPrimitive.Root)`
   width: 1.25rem;
   min-width: 1.25rem;
   min-height: 1.25rem;
-  border-radius: 0.25rem;
+  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
   border: 1.5px solid ${Tokens.colors.primary.value};
   background: ${Tokens.colors.backgroundDark.value};
   display: flex;

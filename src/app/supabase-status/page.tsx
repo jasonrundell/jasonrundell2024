@@ -1,6 +1,7 @@
 import { checkSupabaseStatus } from '@/utils/supabase/status'
 import { createSafeClient } from '@/utils/supabase/safe-client'
 import { styled } from '@pigment-css/react'
+import Tokens from '@/lib/tokens'
 
 const Container = styled('div')`
   max-width: 800px;
@@ -26,9 +27,9 @@ const StatusText = styled('p')`
 `
 
 const CodeBlock = styled('pre')`
-  background: #f3f4f6;
+  background: ${Tokens.colors.muted.value};
   padding: 1rem;
-  border-radius: 6px;
+  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   overflow-x: auto;
   font-size: 0.875rem;
   margin: 1rem 0;

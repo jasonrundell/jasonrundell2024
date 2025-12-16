@@ -30,7 +30,7 @@ const StyledAuthCard = styled('div')`
   padding: 3rem 2.5rem;
   background-color: ${Tokens.colors.backgroundDarker.value};
   border-radius: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px ${Tokens.colors.surface.value}33, 0 4px 8px ${Tokens.colors.surface.value}1A;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -41,7 +41,7 @@ const StyledAuthHeader = styled('div')`
   text-align: center;
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid ${Tokens.colors.secondary.value}1A;
 `
 
 const StyledAuthTitle = styled('h1')`
@@ -54,7 +54,7 @@ const StyledAuthTitle = styled('h1')`
   background-color: ${Tokens.colors.primary.value};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 4px ${Tokens.colors.surface.value}1A;
 `
 
 const StyledAuthSubtitle = styled('p')`

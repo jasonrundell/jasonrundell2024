@@ -45,7 +45,7 @@ const StyledModal = styled('div')`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: ${Tokens.colors.surface.value}F2;
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -85,7 +85,7 @@ const StyledCloseButton = styled('button')`
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(0, 0, 0, 0.7);
+  background: ${Tokens.colors.surface.value}B3;
   border: none;
   color: ${Tokens.colors.primary.value};
   cursor: pointer;
@@ -99,7 +99,7 @@ const StyledCloseButton = styled('button')`
   z-index: 10000;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.9);
+    background: ${Tokens.colors.surface.value}E6;
   }
 
   &:focus-visible {
@@ -113,7 +113,7 @@ const StyledNavButtonLeft = styled('button')`
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.7);
+  background: ${Tokens.colors.surface.value}B3;
   border: none;
   color: ${Tokens.colors.primary.value};
   cursor: pointer;
@@ -127,7 +127,7 @@ const StyledNavButtonLeft = styled('button')`
   z-index: 10000;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.9);
+    background: ${Tokens.colors.surface.value}E6;
   }
 
   &:focus-visible {
@@ -146,7 +146,7 @@ const StyledNavButtonRight = styled('button')`
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.7);
+  background: ${Tokens.colors.surface.value}B3;
   border: none;
   color: ${Tokens.colors.primary.value};
   cursor: pointer;
@@ -160,7 +160,7 @@ const StyledNavButtonRight = styled('button')`
   z-index: 10000;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.9);
+    background: ${Tokens.colors.surface.value}E6;
   }
 
   &:focus-visible {
@@ -179,7 +179,7 @@ const StyledImageInfo = styled('div')`
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
+  background: ${Tokens.colors.surface.value}B3;
   color: ${Tokens.colors.primary.value};
   padding: 0.75rem 1.5rem;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};

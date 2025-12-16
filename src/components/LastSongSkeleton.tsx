@@ -33,7 +33,7 @@ const StyledSkeleton = styled('div')`
   );
   background-size: 2000px 100%;
   animation: ${shimmer} 2s infinite;
-  border-radius: 0.25rem;
+  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
 `
 
 const StyledTitleSkeleton = styled(StyledSkeleton)`
@@ -55,7 +55,7 @@ const StyledActions = styled('div')`
 const StyledButtonSkeleton = styled(StyledSkeleton)`
   height: 2.5rem;
   width: 5rem;
-  border-radius: 0.3125rem;
+  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
 `
 
 const StyledLinkSkeleton = styled(StyledSkeleton)`

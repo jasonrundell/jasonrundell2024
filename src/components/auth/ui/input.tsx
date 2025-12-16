@@ -9,14 +9,14 @@ const StyledInput = styled('input')`
   width: 100%;
   height: 2.5rem;
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  background: rgba(36, 47, 62, 0.85);
+  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
+  background: ${Tokens.colors.background.value}D9;
   color: ${Tokens.colors.textPrimary.value};
-  border: 1px solid rgba(154, 174, 198, 0.12);
+  border: 1px solid ${Tokens.colors.textPrimary.value}1F;
   font-size: 1rem;
   font-weight: 500;
   transition: box-shadow 0.15s, border-color 0.15s;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 2px 0 ${Tokens.colors.surface.value}08;
 
   &::placeholder {
     color: ${Tokens.colors.textPrimary.value};

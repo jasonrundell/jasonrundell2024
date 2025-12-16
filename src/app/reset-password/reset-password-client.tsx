@@ -3,6 +3,7 @@
 import { resetPasswordAction } from '@/app/actions'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { useState } from 'react'
+import Tokens from '@/lib/tokens'
 
 export default function ResetPasswordClient({ token }: { token: string }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -93,10 +94,10 @@ export default function ResetPasswordClient({ token }: { token: string }) {
           disabled={isLoading}
           style={{
             padding: '0.75rem 1.5rem',
-            backgroundColor: '#0070f3',
+            backgroundColor: Tokens.colors.link.value,
             color: 'white',
             border: 'none',
-            borderRadius: '0.5rem',
+            borderRadius: `${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit}`,
             cursor: isLoading ? 'not-allowed' : 'pointer',
             width: '100%',
             opacity: isLoading ? 0.7 : 1,

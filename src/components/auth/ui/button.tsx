@@ -23,7 +23,7 @@ const StyledButton = styled('button')`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.3125rem;
+  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
   font-weight: 600;
   border: none;
   outline: none;
@@ -69,14 +69,14 @@ const StyledButton = styled('button')`
     box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
   }
   &.variant-destructive {
-    background: #e3342f;
+    background: ${Tokens.colors.error.value};
     color: #fff;
   }
   &.variant-destructive:hover {
-    background: #cc1f1a;
+    background: ${Tokens.colors.error.value}CC;
   }
   &.variant-destructive:focus-visible {
-    box-shadow: 0 0 0 2px #e3342f99;
+    box-shadow: 0 0 0 2px ${Tokens.colors.error.value}99;
   }
   &.variant-outline {
     background: transparent;

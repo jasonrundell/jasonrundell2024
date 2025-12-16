@@ -29,7 +29,6 @@ const FullWidthButton = styled(SubmitButton)`
   width: 100%;
 `
 
-
 const BottomText = styled('p')`
   text-align: center;
   color: ${Tokens.colors.textSecondary.value};
@@ -73,13 +72,13 @@ const SuccessMessage = styled('p')`
   max-width: 400px;
 `
 
-const ActionButton = styled(Link)`
+const ActionButton = styled(StyledLink)`
   display: inline-block;
   padding: 0.75rem 1.5rem;
   background: ${Tokens.colors.primary.value};
   color: white;
   text-decoration: none;
-  border-radius: 0.5rem;
+  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   font-weight: 500;
   transition: background-color 0.2s;
 
@@ -158,7 +157,8 @@ export default function SignUpClient({ success, error }: SignUpClientProps) {
             Sign up
           </FullWidthButton>
           <BottomText>
-            Already have an account? <Link href="/sign-in">Sign in</Link>
+            Already have an account?{' '}
+            <StyledLink href="/sign-in">Sign in</StyledLink>
           </BottomText>
         </FormWrapper>
       </AuthLayout>
@@ -200,9 +200,7 @@ export default function SignUpClient({ success, error }: SignUpClientProps) {
         </FullWidthButton>
         <BottomText>
           Already have an account?{' '}
-          <StyledLink href="/sign-in">
-            Sign in
-          </StyledLink>
+          <StyledLink href="/sign-in">Sign in</StyledLink>
         </BottomText>
       </FormWrapper>
     </AuthLayout>

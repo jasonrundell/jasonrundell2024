@@ -20,7 +20,7 @@ const StyledBanner = styled('div')`
   text-align: center;
   font-weight: 400;
   transition: transform 0.3s ease-in-out;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px ${Tokens.colors.surface.value}1A;
   color: ${Tokens.colors.surface.value};
 
   &.paused {
@@ -51,10 +51,10 @@ const Message = styled('p')`
 
 const ActionButton = styled('button')`
   background: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid ${Tokens.colors.secondary.value}4D;
   color: ${Tokens.colors.surface.value};
   padding: 0.5rem 1rem;
-  border-radius: 4px;
+  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
   margin-left: 1rem;
   cursor: pointer;
   font-family: var(--font-outfit), Arial, sans-serif;
@@ -63,7 +63,7 @@ const ActionButton = styled('button')`
   font-weight: 500;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: ${Tokens.colors.secondary.value}4D;
   }
 `
 

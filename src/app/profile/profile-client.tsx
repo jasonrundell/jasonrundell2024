@@ -55,7 +55,7 @@ const UserAvatar = styled('div')`
   font-weight: bold;
   color: white;
   border: 4px solid ${Tokens.colors.backgroundDarker.value};
-  box-shadow: 0 4px 20px rgba(233, 190, 98, 0.3);
+  box-shadow: 0 4px 20px ${Tokens.colors.primary.value}4D;
 `
 
 const UserName = styled('h2')`
@@ -94,7 +94,7 @@ const InfoGrid = styled('div')`
 
 const InfoCard = styled('div')`
   background: ${Tokens.colors.backgroundDarker.value};
-  border-radius: 0.75rem;
+  border-radius: ${Tokens.borderRadius.large.value}${Tokens.borderRadius.large.unit};
   padding: 1.25rem;
   border: 1px solid ${Tokens.colors.primary.value}20;
   transition: all 0.2s ease;
@@ -140,7 +140,7 @@ const ChangePasswordForm = styled('form')`
   flex-direction: column;
   gap: 1.5rem;
   background: ${Tokens.colors.backgroundDarker.value};
-  border-radius: 0.75rem;
+  border-radius: ${Tokens.borderRadius.large.value}${Tokens.borderRadius.large.unit};
   padding: 1.5rem;
   border: 1px solid ${Tokens.colors.primary.value}20;
 `
@@ -187,7 +187,7 @@ const CancelButton = styled('button')`
   border: 1px solid ${Tokens.colors.textSecondary.value};
   color: ${Tokens.colors.textSecondary.value};
   padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -205,7 +205,7 @@ const StyledPasswordStrength = styled('div')`
 const StrengthBar = styled('div')`
   height: 0.25rem;
   background: ${Tokens.colors.backgroundDarker.value};
-  border-radius: 0.125rem;
+  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
   margin-bottom: 1rem;
   overflow: hidden;
 `
@@ -247,7 +247,7 @@ const PasswordMatchIndicator = styled('div')`
 const PasswordRequirementsInfo = styled('div')`
   background: ${Tokens.colors.primary.value}10;
   border: 1px solid ${Tokens.colors.primary.value}30;
-  border-radius: 0.5rem;
+  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   padding: 1rem;
   margin-bottom: 1rem;
 `
@@ -533,7 +533,7 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
                   style={{
                     color: passwordsMatch
                       ? Tokens.colors.success.value
-                      : '#ef4444',
+                      : Tokens.colors.error.value,
                   }}
                 >
                   {passwordsMatch ? (
@@ -605,9 +605,9 @@ function PasswordStrength({ password }: { password: string }) {
             width: `${strength}%`,
             background:
               strength < 33
-                ? Tokens.colors.warning?.value || '#f59e0b'
+                ? Tokens.colors.warning.value
                 : strength < 66
-                ? Tokens.colors.accent?.value || '#3b82f6'
+                ? Tokens.colors.accent.value
                 : Tokens.colors.success.value,
           }}
         />
@@ -617,10 +617,7 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.length ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle
-              size={16}
-              color={Tokens.colors.warning?.value || '#f59e0b'}
-            />
+            <XCircle size={16} color={Tokens.colors.warning.value} />
           )}
           <RequirementText>At least 8 characters</RequirementText>
         </RequirementItem>
@@ -628,10 +625,7 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.uppercase ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle
-              size={16}
-              color={Tokens.colors.warning?.value || '#f59e0b'}
-            />
+            <XCircle size={16} color={Tokens.colors.warning.value} />
           )}
           <RequirementText>At least one uppercase letter</RequirementText>
         </RequirementItem>
@@ -639,10 +633,7 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.lowercase ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle
-              size={16}
-              color={Tokens.colors.warning?.value || '#f59e0b'}
-            />
+            <XCircle size={16} color={Tokens.colors.warning.value} />
           )}
           <RequirementText>At least one lowercase letter</RequirementText>
         </RequirementItem>
@@ -650,10 +641,7 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.number ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle
-              size={16}
-              color={Tokens.colors.warning?.value || '#f59e0b'}
-            />
+            <XCircle size={16} color={Tokens.colors.warning.value} />
           )}
           <RequirementText>At least one number</RequirementText>
         </RequirementItem>
@@ -661,10 +649,7 @@ function PasswordStrength({ password }: { password: string }) {
           {requirements.special ? (
             <CheckCircle size={16} color={Tokens.colors.success.value} />
           ) : (
-            <XCircle
-              size={16}
-              color={Tokens.colors.warning?.value || '#f59e0b'}
-            />
+            <XCircle size={16} color={Tokens.colors.warning.value} />
           )}
           <RequirementText>At least one special character</RequirementText>
         </RequirementItem>

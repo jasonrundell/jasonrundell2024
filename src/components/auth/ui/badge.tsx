@@ -39,11 +39,11 @@ const StyledBadge = styled('div')`
   /* Destructive */
   &.variant-destructive {
     border-color: transparent;
-    background: #e3342f;
+    background: ${Tokens.colors.error.value};
     color: #fff;
   }
   &.variant-destructive:hover {
-    background: #cc1f1a;
+    background: ${Tokens.colors.error.value}CC;
   }
   /* Outline */
   &.variant-outline {

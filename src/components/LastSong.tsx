@@ -55,7 +55,7 @@ const StyledPlayButton = styled('button')`
   background: ${Tokens.colors.primary.value};
   color: ${Tokens.colors.background.value};
   border: none;
-  border-radius: 0.3125rem;
+  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
   cursor: pointer;
   font-weight: 600;
   transition: background 0.15s;
@@ -77,7 +77,7 @@ const StyledModal = styled('div')`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: ${Tokens.colors.surface.value}CC;
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@ const StyledModalContent = styled('div')`
   width: 100%;
   max-width: 800px;
   background: ${Tokens.colors.background.value};
-  border-radius: 0.5rem;
+  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   padding: 1rem;
 `
 
@@ -108,7 +108,7 @@ const StyledCloseButton = styled('button')`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.25rem;
+  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
 
   &:hover {
     background: ${Tokens.colors.backgroundDark.value};
@@ -124,7 +124,7 @@ const StyledIframe = styled('iframe')`
   width: 100%;
   aspect-ratio: 16 / 9;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
 `
 
 /**

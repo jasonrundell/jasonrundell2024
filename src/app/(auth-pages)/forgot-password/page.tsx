@@ -93,7 +93,7 @@ const TryAgainButton = styled('button')`
   border: 1px solid ${Tokens.colors.primary.value};
   color: ${Tokens.colors.primary.value};
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
