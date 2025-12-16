@@ -137,7 +137,7 @@
       "unit": "hex"
     },
     "secondary": {
-      "value": "#eee",
+      "value": "#eeeeee",
       "unit": "hex"
     },
     "secondaryVariant": {
@@ -161,7 +161,7 @@
       "unit": "hex"
     },
     "surface": {
-      "value": "#000",
+      "value": "#000000",
       "unit": "hex"
     },
     "textPrimary": {
@@ -173,7 +173,7 @@
       "unit": "hex"
     },
     "border": {
-      "value": "#ddd",
+      "value": "#dddddd",
       "unit": "hex"
     },
     "link": {
@@ -194,6 +194,10 @@
     },
     "error": {
       "value": "#d93f3f",
+      "unit": "hex"
+    },
+    "white": {
+      "value": "#ffffff",
       "unit": "hex"
     }
   },
