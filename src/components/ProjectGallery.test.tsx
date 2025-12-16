@@ -81,7 +81,7 @@ jest.mock('./ContentfulImage', () => {
   }
 })
 
-// Mock Grid component from dropship
+// Mock Grid and Heading components from dropship
 jest.mock('@jasonrundell/dropship', () => ({
   Grid: ({
     children,
@@ -108,6 +108,9 @@ jest.mock('@jasonrundell/dropship', () => ({
     >
       {children}
     </div>
+  ),
+  Heading: ({ children, ...props }: { children: React.ReactNode; [key: string]: any }) => (
+    <h1 {...props}>{children}</h1>
   ),
 }))
 

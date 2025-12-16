@@ -162,3 +162,60 @@ export const StyledLink = styled(Link)`
   transition: color 0.15s;
   text-decoration: underline;
 `
+
+export const StyledFlexSection = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
+
+export const StyledModal = styled('div')`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: ${Tokens.colors.surface.value};
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+`
+
+export const StyledModalContent = styled('div')`
+  position: relative;
+  width: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const StyledCloseButton = styled('button')`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: ${Tokens.colors.white.value}36;
+  border: none;
+  color: ${Tokens.colors.primary.value};
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease-in-out;
+  z-index: 10000;
+
+  &:hover {
+    background: ${Tokens.colors.primaryVariant.value}E6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${Tokens.colors.primary.value}99;
+    outline-offset: 2px;
+  }
+`

@@ -6,17 +6,17 @@ import { Play, ExternalLink, Music } from 'lucide-react'
 import { styled } from '@pigment-css/react'
 import { LastSong as LastSongType } from '@/typeDefinitions/app'
 import Tokens from '@/lib/tokens'
-import { StyledLink } from '@/styles/common'
+import {
+  StyledLink,
+  StyledFlexSection,
+  StyledModal,
+  StyledModalContent,
+  StyledCloseButton,
+} from '@/styles/common'
 
 export interface LastSongProps {
   song: LastSongType
 }
-
-const StyledSection = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
 
 const StyledSongInfo = styled('div')`
   display: flex;
@@ -71,53 +71,11 @@ const StyledPlayButton = styled('button')`
   }
 `
 
-const StyledModal = styled('div')`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: ${Tokens.colors.surface.value}CC;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-`
-
-const StyledModalContent = styled('div')`
-  position: relative;
-  width: 100%;
+const StyledVideoModalContent = styled(StyledModalContent)`
   max-width: 800px;
   background: ${Tokens.colors.background.value};
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   padding: 1rem;
-`
-
-const StyledCloseButton = styled('button')`
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: transparent;
-  border: none;
-  color: ${Tokens.colors.secondary.value};
-  cursor: pointer;
-  font-size: 1.5rem;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
-
-  &:hover {
-    background: ${Tokens.colors.backgroundDark.value};
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${Tokens.colors.primary.value}99;
-    outline-offset: 2px;
-  }
 `
 
 const StyledIframe = styled('iframe')`
@@ -195,7 +153,7 @@ export default function LastSong({ song }: LastSongProps) {
 
   return (
     <>
-      <StyledSection>
+      <StyledFlexSection>
         <StyledSongInfo>
           <StyledTitle>
             <StyledIconWrapper>
@@ -222,7 +180,7 @@ export default function LastSong({ song }: LastSongProps) {
             Open on YouTube Music
           </StyledLink>
         </StyledActions>
-      </StyledSection>
+      </StyledFlexSection>
 
       {mounted &&
         embedUrl &&
@@ -234,7 +192,7 @@ export default function LastSong({ song }: LastSongProps) {
             role="dialog"
             aria-modal="true"
           >
-            <StyledModalContent onClick={(e) => e.stopPropagation()}>
+            <StyledVideoModalContent onClick={(e) => e.stopPropagation()}>
               <StyledCloseButton
                 onClick={handleCloseModal}
                 aria-label="Close video player"
@@ -247,7 +205,7 @@ export default function LastSong({ song }: LastSongProps) {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
-            </StyledModalContent>
+            </StyledVideoModalContent>
           </StyledModal>,
           document.body
         )}

@@ -8,6 +8,11 @@ import ContentfulImage from './ContentfulImage'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import {
+  StyledModal,
+  StyledModalContent,
+  StyledCloseButton,
+} from '@/styles/common'
 
 // Image style constants
 const imageCoverNoPointerStyle: React.CSSProperties = {
@@ -39,30 +44,6 @@ const StyledGalleryItem = styled('div')`
   }
 `
 
-const StyledModal = styled('div')`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: ${Tokens.colors.surface.value};
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-`
-
-const StyledModalContent = styled('div')`
-  position: relative;
-  width: 100%;
-  max-width: 90vw;
-  max-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
 const StyledModalImage = styled('div')`
   position: relative;
   width: 100%;
@@ -78,33 +59,6 @@ const StyledModalImage = styled('div')`
     max-height: 90vh;
     object-fit: contain;
     border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
-  }
-`
-
-const StyledCloseButton = styled('button')`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: ${Tokens.colors.white.value}36;
-  border: none;
-  color: ${Tokens.colors.primary.value};
-  cursor: pointer;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background 0.2s ease-in-out;
-  z-index: 10000;
-
-  &:hover {
-    background: ${Tokens.colors.primaryVariant.value}E6;
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${Tokens.colors.primary.value}99;
-    outline-offset: 2px;
   }
 `
 

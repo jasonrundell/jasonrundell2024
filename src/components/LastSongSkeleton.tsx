@@ -2,6 +2,7 @@
 
 import { styled, keyframes } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
+import { StyledFlexSection } from '@/styles/common'
 
 const shimmer = keyframes`
   0% {
@@ -10,12 +11,6 @@ const shimmer = keyframes`
   100% {
     background-position: 1000px 0;
   }
-`
-
-const StyledSection = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 `
 
 const StyledSongInfo = styled('div')`
@@ -65,7 +60,7 @@ const StyledLinkSkeleton = styled(StyledSkeleton)`
 
 export default function LastSongSkeleton() {
   return (
-    <StyledSection>
+    <StyledFlexSection>
       <StyledSongInfo>
         <StyledTitleSkeleton aria-hidden="true" />
         <StyledArtistSkeleton aria-hidden="true" />
@@ -74,7 +69,7 @@ export default function LastSongSkeleton() {
         <StyledButtonSkeleton aria-hidden="true" />
         <StyledLinkSkeleton aria-hidden="true" />
       </StyledActions>
-    </StyledSection>
+    </StyledFlexSection>
   )
 }
 
