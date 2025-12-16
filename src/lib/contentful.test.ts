@@ -324,6 +324,7 @@ describe('Contentful Utilities', () => {
       expect(mockClient.getEntries).toHaveBeenCalledWith({
         content_type: 'post',
         'fields.slug': 'test-entry',
+        include: 10,
       })
     })
 

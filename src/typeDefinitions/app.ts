@@ -51,6 +51,7 @@ export interface Project extends EntrySkeletonType {
   link?: string
   siteLink?: string
   featuredImage?: FeaturedImage
+  gallery?: GalleryImage[]
 }
 
 export interface Projects {
@@ -110,6 +111,40 @@ export interface FeaturedImage {
           contentType: string | 'image/webp'
         }
       }
+    }
+  }
+}
+
+export interface GalleryImage {
+  metadata: {
+    tags: string[]
+    concepts: string[]
+  }
+  sys: {
+    space: ContentfulSys
+    id: string
+    type: string
+    createdAt: string
+    updatedAt: string
+    environment: ContentfulSys
+    publishedVersion: number
+    revision: number
+    locale: string | 'en-US'
+  }
+  fields: {
+    title: string
+    description?: string
+    file: {
+      url: string
+      details: {
+        size: number
+        image?: {
+          width: number
+          height: number
+        }
+      }
+      fileName: string
+      contentType: string
     }
   }
 }

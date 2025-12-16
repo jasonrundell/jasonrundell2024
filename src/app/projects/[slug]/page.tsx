@@ -10,6 +10,7 @@ import { sanitizeHTML } from '@/lib/sanitize'
 import { getEntryBySlug } from '@/lib/contentful'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
+import ProjectGallery from '@/components/ProjectGallery'
 import {
   StyledContainer,
   StyledSection,
@@ -115,7 +116,7 @@ export default async function page({ params }: ProjectProps) {
     notFound()
   }
 
-  const { title, technology, description, link, siteLink } = project
+  const { title, technology, description, link, siteLink, gallery } = project
 
   return (
     <>
@@ -184,11 +185,17 @@ export default async function page({ params }: ProjectProps) {
                       customMarkdownOptions()
                     )}
                   </section>
+                  {gallery && gallery.length > 0 && (
+                    <>
+                      <Spacer />
+                      <StyledHeading3 level={3}>Gallery</StyledHeading3>
+                      <ProjectGallery images={gallery} />
+                    </>
+                  )}
                 </StyledBody>
               </div>
             </Grid>
           </article>
-          <Spacer />
         </StyledSection>
       </StyledContainer>
     </>
