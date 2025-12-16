@@ -115,7 +115,7 @@ export default async function page({ params }: ProjectProps) {
     notFound()
   }
 
-  const { title, technology, description, link } = project
+  const { title, technology, description, link, siteLink } = project
 
   return (
     <>
@@ -133,7 +133,6 @@ export default async function page({ params }: ProjectProps) {
                 </header>
                 {link && (
                   <>
-                    <StyledHeading3 level={3}>View</StyledHeading3>
                     <Row>
                       <Link
                         href={link}
@@ -144,8 +143,24 @@ export default async function page({ params }: ProjectProps) {
                         Visit GitHub project
                       </Link>
                     </Row>
+                    {siteLink && (
+                      <>
+                        <Spacer />
+                        <Row>
+                          <Link
+                            href={siteLink}
+                            className="link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Visit Project&apos;s Website
+                          </Link>
+                        </Row>
+                      </>
+                    )}
                   </>
                 )}
+
                 <Spacer
                   smallScreen="medium"
                   mediumScreen="large"

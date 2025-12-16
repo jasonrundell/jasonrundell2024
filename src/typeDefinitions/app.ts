@@ -48,7 +48,8 @@ export interface Project extends EntrySkeletonType {
   excerpt: string
   description: ContentfulContent
   technology: string[]
-  link: string
+  link?: string
+  siteLink?: string
   featuredImage?: FeaturedImage
 }
 
