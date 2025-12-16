@@ -73,17 +73,7 @@ const StyledLink = styled(Link)`
   color: ${Tokens.colors.primary.value};
   text-decoration: none;
   transition: color 0.15s;
-
-  &:hover {
-    color: ${Tokens.colors.primaryVariant.value};
-    text-decoration: underline;
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${Tokens.colors.primary.value}99;
-    outline-offset: 2px;
-    border-radius: 0.25rem;
-  }
+  text-decoration: underline;
 `
 
 const StyledModal = styled('div')`
