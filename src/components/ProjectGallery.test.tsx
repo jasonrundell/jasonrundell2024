@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import ProjectGallery from './ProjectGallery'
 import { GalleryImage } from '@/typeDefinitions/app'
 import { ContentfulSys } from '@/typeDefinitions/contentful'
@@ -11,12 +12,16 @@ jest.mock('next/image', () => {
     fill,
     sizes,
     style,
+    width,
+    quality,
   }: {
     src: string
     alt: string
     fill?: boolean
     sizes?: string
     style?: React.CSSProperties
+    width?: number
+    quality?: number
   }) {
     return (
       <img
@@ -25,11 +30,22 @@ jest.mock('next/image', () => {
         data-fill={fill}
         data-sizes={sizes}
         data-style={JSON.stringify(style)}
+        data-width={width}
+        data-quality={quality}
         data-testid="gallery-image"
       />
     )
   }
 })
+
+// Mock lucide-react icons
+jest.mock('lucide-react', () => ({
+  ChevronLeft: () => <span data-testid="chevron-left-icon">ChevronLeft</span>,
+  ChevronRight: () => (
+    <span data-testid="chevron-right-icon">ChevronRight</span>
+  ),
+  X: () => <span data-testid="close-icon">X</span>,
+}))
 
 // Mock ContentfulImage component
 jest.mock('./ContentfulImage', () => {
@@ -39,12 +55,16 @@ jest.mock('./ContentfulImage', () => {
     fill,
     sizes,
     style,
+    width,
+    quality,
   }: {
     src: string
     alt: string
     fill?: boolean
     sizes?: string
     style?: React.CSSProperties
+    width?: number
+    quality?: number
   }) {
     return (
       <img
@@ -53,6 +73,8 @@ jest.mock('./ContentfulImage', () => {
         data-fill={fill}
         data-sizes={sizes}
         data-style={JSON.stringify(style)}
+        data-width={width}
+        data-quality={quality}
         data-testid="contentful-image"
       />
     )
@@ -167,18 +189,9 @@ describe('ProjectGallery Component', () => {
       // Assert
       const grid = screen.getByTestId('gallery-grid')
       expect(grid).toBeInTheDocument()
-      expect(grid).toHaveAttribute(
-        'data-grid-template-columns',
-        '1fr'
-      )
-      expect(grid).toHaveAttribute(
-        'data-medium-template-columns',
-        '1fr 1fr'
-      )
-      expect(grid).toHaveAttribute(
-        'data-large-template-columns',
-        '1fr 1fr 1fr'
-      )
+      expect(grid).toHaveAttribute('data-grid-template-columns', '1fr')
+      expect(grid).toHaveAttribute('data-medium-template-columns', '1fr 1fr')
+      expect(grid).toHaveAttribute('data-large-template-columns', '1fr 1fr 1fr')
       expect(grid).toHaveAttribute('data-column-gap', '1.5rem')
       expect(grid).toHaveAttribute('data-row-gap', '1.5rem')
 
@@ -434,7 +447,7 @@ describe('ProjectGallery Component', () => {
         '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
       )
       const style = JSON.parse(image.getAttribute('data-style') || '{}')
-      expect(style).toEqual({ objectFit: 'cover' })
+      expect(style).toEqual({ objectFit: 'cover', pointerEvents: 'none' })
     })
   })
 
@@ -457,7 +470,9 @@ describe('ProjectGallery Component', () => {
       // Check that images are rendered (keys are used internally by React)
       const galleryImages = screen.getAllByTestId('contentful-image')
       expect(galleryImages).toHaveLength(2)
-      expect(container.querySelectorAll('[data-testid="contentful-image"]')).toHaveLength(2)
+      expect(
+        container.querySelectorAll('[data-testid="contentful-image"]')
+      ).toHaveLength(2)
     })
 
     it('should use index as key fallback when sys.id is not available', () => {
@@ -539,5 +554,583 @@ describe('ProjectGallery Component', () => {
       )
     })
   })
-})
 
+  describe('Modal Functionality', () => {
+    beforeEach(() => {
+      // Reset body overflow before each test
+      document.body.style.overflow = ''
+    })
+
+    afterEach(() => {
+      // Clean up body overflow after each test
+      document.body.style.overflow = ''
+    })
+
+    it('should open modal when gallery image is clicked', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            title: 'Image 1',
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view image 1 in full screen/i,
+      })
+      await user.click(galleryItem)
+
+      // Assert
+      await waitFor(() => {
+        const modal = screen.getByRole('dialog')
+        expect(modal).toBeInTheDocument()
+        expect(modal).toHaveAttribute('aria-modal', 'true')
+      })
+    })
+
+    it('should open modal when clicking directly on the image element', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            title: 'Image 1',
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      // Get the image element directly (not the parent button)
+      const galleryImages = screen.getAllByTestId('contentful-image')
+      const thumbnailImage = galleryImages.find(
+        (img) => img.getAttribute('data-fill') === 'true'
+      )
+
+      if (!thumbnailImage) {
+        throw new Error('Thumbnail image not found')
+      }
+
+      // Click directly on the image element
+      await user.click(thumbnailImage)
+
+      // Assert
+      await waitFor(() => {
+        const modal = screen.getByRole('dialog')
+        expect(modal).toBeInTheDocument()
+        expect(modal).toHaveAttribute('aria-modal', 'true')
+      })
+    })
+
+    it('should close modal when close button is clicked', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItem)
+
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+      })
+
+      const closeButton = screen.getByRole('button', {
+        name: /close image gallery/i,
+      })
+      await user.click(closeButton)
+
+      // Assert
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+      })
+    })
+
+    it('should close modal when clicking outside modal content', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItem)
+
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+      })
+
+      const modal = screen.getByRole('dialog')
+      await user.click(modal)
+
+      // Assert
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+      })
+    })
+
+    it('should not close modal when clicking inside modal content', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItem)
+
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+      })
+
+      const modalImage = screen
+        .getAllByTestId('contentful-image')
+        .find((img) => img.getAttribute('data-sizes') === '90vw')
+      if (modalImage) {
+        await user.click(modalImage)
+      }
+
+      // Assert
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+    })
+
+    it('should close modal when Escape key is pressed', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItem)
+
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+      })
+
+      await user.keyboard('{Escape}')
+
+      // Assert
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+      })
+    })
+
+    it('should navigate to next image when right arrow key is pressed', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            title: 'Image 1',
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-2' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            title: 'Image 2',
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image2.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view image 1 in full screen/i,
+      })
+      await user.click(galleryItem)
+
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+      })
+
+      await user.keyboard('{ArrowRight}')
+
+      // Assert
+      await waitFor(() => {
+        const modalImages = screen.getAllByTestId('contentful-image')
+        const modalImage = modalImages.find(
+          (img) => img.getAttribute('data-sizes') === '90vw'
+        )
+        expect(modalImage).toBeDefined()
+        expect(modalImage).toHaveAttribute(
+          'src',
+          'https://images.ctfassets.net/test/image2.jpg'
+        )
+      })
+    })
+
+    it('should navigate to previous image when left arrow key is pressed', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            title: 'Image 1',
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-2' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            title: 'Image 2',
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image2.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItems = screen.getAllByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItems[1]) // Click second image
+
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+      })
+
+      await user.keyboard('{ArrowLeft}')
+
+      // Assert
+      await waitFor(() => {
+        const modalImages = screen.getAllByTestId('contentful-image')
+        const modalImage = modalImages.find(
+          (img) => img.getAttribute('data-sizes') === '90vw'
+        )
+        expect(modalImage).toBeDefined()
+        expect(modalImage).toHaveAttribute(
+          'src',
+          'https://images.ctfassets.net/test/image1.jpg'
+        )
+      })
+    })
+
+    it('should navigate to next image when next button is clicked', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-2' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image2.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItems = screen.getAllByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItems[0])
+
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+      })
+
+      const nextButton = screen.getByRole('button', { name: /next image/i })
+      await user.click(nextButton)
+
+      // Assert
+      await waitFor(() => {
+        const modalImages = screen.getAllByTestId('contentful-image')
+        const modalImage = modalImages.find(
+          (img) => img.getAttribute('data-sizes') === '90vw'
+        )
+        expect(modalImage).toBeDefined()
+        expect(modalImage).toHaveAttribute(
+          'src',
+          'https://images.ctfassets.net/test/image2.jpg'
+        )
+      })
+    })
+
+    it('should navigate to previous image when previous button is clicked', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-2' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image2.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItems = screen.getAllByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItems[1]) // Click second image
+
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+      })
+
+      const prevButton = screen.getByRole('button', {
+        name: /previous image/i,
+      })
+      await user.click(prevButton)
+
+      // Assert
+      await waitFor(() => {
+        const modalImages = screen.getAllByTestId('contentful-image')
+        const modalImage = modalImages.find(
+          (img) => img.getAttribute('data-sizes') === '90vw'
+        )
+        expect(modalImage).toBeDefined()
+        expect(modalImage).toHaveAttribute(
+          'src',
+          'https://images.ctfassets.net/test/image1.jpg'
+        )
+      })
+    })
+
+    it('should lock body scroll when modal is open', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItem)
+
+      // Assert
+      await waitFor(() => {
+        expect(document.body.style.overflow).toBe('hidden')
+      })
+    })
+
+    it('should unlock body scroll when modal is closed', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItem)
+
+      await waitFor(() => {
+        expect(document.body.style.overflow).toBe('hidden')
+      })
+
+      await user.keyboard('{Escape}')
+
+      // Assert
+      await waitFor(() => {
+        expect(document.body.style.overflow).toBe('unset')
+      })
+    })
+
+    it('should display image info in modal when available', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            title: 'Test Image Title',
+            description: 'Test Image Description',
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      await user.click(galleryItem)
+
+      // Assert
+      await waitFor(() => {
+        expect(screen.getByText('Test Image Title')).toBeInTheDocument()
+        expect(screen.getByText('Test Image Description')).toBeInTheDocument()
+        expect(screen.getByText('1 of 1')).toBeInTheDocument()
+      })
+    })
+
+    it('should open modal when Enter key is pressed on gallery item', async () => {
+      // Arrange
+      const user = userEvent.setup()
+      const images: GalleryImage[] = [
+        createMockGalleryImage({
+          sys: { ...createMockGalleryImage().sys, id: 'image-1' },
+          fields: {
+            ...createMockGalleryImage().fields,
+            file: {
+              ...createMockGalleryImage().fields.file,
+              url: '//images.ctfassets.net/test/image1.jpg',
+            },
+          },
+        }),
+      ]
+
+      // Act
+      render(<ProjectGallery images={images} />)
+      const galleryItem = screen.getByRole('button', {
+        name: /view.*in full screen/i,
+      })
+      galleryItem.focus()
+      await user.keyboard('{Enter}')
+
+      // Assert
+      await waitFor(() => {
+        const modal = screen.getByRole('dialog')
+        expect(modal).toBeInTheDocument()
+      })
+    })
+  })
+})
