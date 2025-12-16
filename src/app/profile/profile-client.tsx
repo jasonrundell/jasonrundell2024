@@ -205,7 +205,7 @@ const StyledPasswordStrength = styled('div')`
 const StrengthBar = styled('div')`
   height: 0.25rem;
   background: ${Tokens.colors.backgroundDarker.value};
-  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
+  border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
   margin-bottom: 1rem;
   overflow: hidden;
 `

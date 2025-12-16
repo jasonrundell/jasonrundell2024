@@ -56,7 +56,7 @@ const StyledPlayButton = styled('button')`
   background: ${Tokens.colors.primary.value};
   color: ${Tokens.colors.background.value};
   border: none;
-  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
+  border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
   cursor: pointer;
   font-weight: 600;
   transition: background 0.15s;
@@ -83,7 +83,7 @@ const StyledIframe = styled('iframe')`
   width: 100%;
   aspect-ratio: 16 / 9;
   border: none;
-  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
+  border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
 `
 
 /**

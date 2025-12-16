@@ -54,7 +54,7 @@ const ActionButton = styled('button')`
   border: 1px solid ${Tokens.colors.secondary.value}4D;
   color: ${Tokens.colors.surface.value};
   padding: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit} ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
-  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
+  border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
   margin-left: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   cursor: pointer;
   font-family: var(--font-outfit), Arial, sans-serif;
