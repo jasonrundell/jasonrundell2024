@@ -113,7 +113,6 @@ export default async function page() {
                     rel="noopener noreferrer"
                     target="_blank"
                     aria-label="See more on LinkedIn"
-                    className="link"
                   >
                     <ExternalLink size={18} /> See more on LinkedIn
                   </StyledLink>
@@ -132,7 +131,6 @@ export default async function page() {
                       <StyledLink
                         href={`/projects/${project.slug}`}
                         aria-label={project.title}
-                        className="link"
                       >
                         {project.title}
                       </StyledLink>

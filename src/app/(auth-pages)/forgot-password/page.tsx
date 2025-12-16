@@ -9,6 +9,7 @@ import { AuthLayout } from '@/components/auth/auth-layout'
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
+import { StyledLink } from '@/styles/common'
 import { useState, useEffect, Suspense } from 'react'
 import { CheckCircle, ArrowLeft } from 'lucide-react'
 import React from 'react'
@@ -247,9 +248,9 @@ function ForgotPasswordContent() {
 
         <BottomText>
           Remember your password?{' '}
-          <Link href="/sign-in" className="link">
+          <StyledLink href="/sign-in">
             Sign in
-          </Link>
+          </StyledLink>
         </BottomText>
       </FormWrapper>
     </AuthLayout>

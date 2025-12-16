@@ -4,7 +4,7 @@ import { styled } from '@pigment-css/react'
 import BackToTop from './BackToTop'
 import ContactList from './ContactList'
 import Tokens from '@/lib/tokens'
-import { StyledContainer, StyledSection } from '@/styles/common'
+import { StyledContainer, StyledSection, StyledLink } from '@/styles/common'
 
 const StyledFooter = styled('footer')`
   background-color: ${Tokens.colors.backgroundDarker.value};
@@ -30,9 +30,9 @@ export default async function Footer() {
               <small>
                 © Jason Rundell {new Date().getFullYear()}. All rights reserved.
                 Design consulting from{' '}
-                <a href="https://donnavitan.com" className="link">
+                <StyledLink href="https://donnavitan.com" target="_blank" rel="noopener noreferrer">
                   Donna Vitan
-                </a>{' '}
+                </StyledLink>{' '}
                 ❤️
               </small>
             </p>

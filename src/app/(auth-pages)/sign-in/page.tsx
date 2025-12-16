@@ -5,9 +5,9 @@ import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
 import { Checkbox } from '@/components/auth/ui/checkbox'
 import { AuthLayout } from '@/components/auth/auth-layout'
-import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
+import { StyledLink } from '@/styles/common'
 
 const FormWrapper = styled('form')`
   display: flex;
@@ -125,9 +125,9 @@ export default async function Login({
             }}
           >
             <Label htmlFor="password">Password</Label>
-            <Link href="/forgot-password" className="link">
+            <StyledLink href="/forgot-password">
               Forgot Password?
-            </Link>
+            </StyledLink>
           </div>
           <Input
             type="password"
@@ -146,9 +146,9 @@ export default async function Login({
         </FullWidthButton>
         <BottomText>
           Don&apos;t have an account?{' '}
-          <Link href="/sign-up" className="link">
+          <StyledLink href="/sign-up">
             Sign up
-          </Link>
+          </StyledLink>
         </BottomText>
       </FormWrapper>
     </AuthLayout>

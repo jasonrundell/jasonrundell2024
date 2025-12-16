@@ -129,12 +129,6 @@ hr {
   font-weight: bold;
 }
 
-.link {
-  color: var(--primary-color);
-  text-decoration: underline;
-  word-break: break-word;
-}
-
 .primary-color {
   color: var(--primary-color);
 }

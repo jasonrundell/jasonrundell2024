@@ -10,7 +10,6 @@ export default function ContactList() {
         <StyledLink
           href="mailto:contact@jasonrundell.com"
           aria-label="Email me"
-          className="link"
         >
           Email me
         </StyledLink>
@@ -22,7 +21,6 @@ export default function ContactList() {
           rel="noopener noreferrer"
           target="_blank"
           aria-label="Book time with me"
-          className="link"
         >
           <ExternalLink size={18} /> Book time with me
         </StyledLink>
@@ -34,7 +32,6 @@ export default function ContactList() {
           rel="noopener noreferrer"
           target="_blank"
           aria-label="My open-source work on GitHub"
-          className="link"
         >
           <ExternalLink size={18} /> My open-source work on GitHub
         </StyledLink>
@@ -46,7 +43,6 @@ export default function ContactList() {
           rel="noopener noreferrer"
           target="_blank"
           aria-label="Connect on LinkedIn"
-          className="link"
         >
           <ExternalLink size={18} /> Connect on LinkedIn
         </StyledLink>

@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 
 import ContentDate from './ContentDate'
 import PostPreviewImage from './PostPreviewImage'
 import Tokens from '@/lib/tokens'
+import { StyledLink } from '@/styles/common'
 
 interface PostPreviewProps {
   title: string
@@ -53,9 +53,9 @@ export default function PostPreview({
       )}
       <Row>
         <StyledHeading>
-          <Link href={`/posts/${slug}`} className="link">
+          <StyledLink href={`/posts/${slug}`}>
             {title}
-          </Link>
+          </StyledLink>
         </StyledHeading>
       </Row>
       <Row>

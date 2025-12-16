@@ -21,6 +21,19 @@ jest.mock('@/styles/common', () => ({
   StyledSection: ({ children }: { children: React.ReactNode }) => (
     <section data-testid="section">{children}</section>
   ),
+  StyledLink: ({
+    children,
+    href,
+    ...props
+  }: {
+    children: React.ReactNode
+    href: string
+    [key: string]: unknown
+  }) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  ),
 }))
 
 describe('Footer Component', () => {
@@ -75,7 +88,8 @@ describe('Footer Component', () => {
     const link = screen.getByRole('link', { name: /donna vitan/i })
     expect(link).toBeInTheDocument()
     expect(link).toHaveAttribute('href', 'https://donnavitan.com')
-    expect(link).toHaveClass('link')
+    expect(link).toHaveAttribute('target', '_blank')
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
   it('should render BackToTop component', async () => {

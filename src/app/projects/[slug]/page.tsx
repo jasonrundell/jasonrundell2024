@@ -21,6 +21,7 @@ import {
   StyledHeading,
   StyledHeading3,
   StyledEmbeddedAsset,
+  StyledLink,
 } from '@/styles/common'
 
 type ProjectProps = {
@@ -135,27 +136,25 @@ export default async function page({ params }: ProjectProps) {
                 {link && (
                   <>
                     <Row>
-                      <Link
+                      <StyledLink
                         href={link}
-                        className="link"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         Visit GitHub project
-                      </Link>
+                      </StyledLink>
                     </Row>
                     {siteLink && (
                       <>
                         <Spacer />
                         <Row>
-                          <Link
+                          <StyledLink
                             href={siteLink}
-                            className="link"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
                             Visit Project&apos;s Website
-                          </Link>
+                          </StyledLink>
                         </Row>
                       </>
                     )}

@@ -7,9 +7,9 @@ import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { PasswordInput } from '@/components/auth/password-input'
-import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
+import { StyledLink } from '@/styles/common'
 
 const FormWrapper = styled('form')`
   display: flex;
@@ -200,9 +200,9 @@ export default function SignUpClient({ success, error }: SignUpClientProps) {
         </FullWidthButton>
         <BottomText>
           Already have an account?{' '}
-          <Link href="/sign-in" className="link">
+          <StyledLink href="/sign-in">
             Sign in
-          </Link>
+          </StyledLink>
         </BottomText>
       </FormWrapper>
     </AuthLayout>
