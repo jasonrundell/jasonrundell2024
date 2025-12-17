@@ -25,7 +25,10 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
 }
 
-const outfit = Outfit({ subsets: ['latin'] })
+const outfit = Outfit({
+  subsets: ['latin'],
+  display: 'swap', // Prevents invisible text during font load
+})
 
 /**
  * Root layout component for the application.
