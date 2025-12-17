@@ -66,24 +66,45 @@ export async function GET() {
         error.code === 'PGRST302'
       ) {
         // Service paused
-        return NextResponse.json({
-          isAvailable: false,
-          isPaused: true,
-          error: 'Supabase project is currently paused',
-        })
+        return NextResponse.json(
+          {
+            isAvailable: false,
+            isPaused: true,
+            error: 'Supabase project is currently paused',
+          },
+          {
+            headers: {
+              'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
+            },
+          }
+        )
       }
 
-      return NextResponse.json({
-        isAvailable: false,
-        isPaused: false,
-        error: error.message,
-      })
+      return NextResponse.json(
+        {
+          isAvailable: false,
+          isPaused: false,
+          error: error.message,
+        },
+        {
+          headers: {
+            'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
+          },
+        }
+      )
     }
 
-    return NextResponse.json({
-      isAvailable: true,
-      isPaused: false,
-    })
+    return NextResponse.json(
+      {
+        isAvailable: true,
+        isPaused: false,
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+        },
+      }
+    )
   } catch (error) {
     return NextResponse.json(
       {
