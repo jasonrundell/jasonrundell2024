@@ -21,6 +21,7 @@ import { Project } from '@/typeDefinitions/app'
 // Lazy-load ProjectGallery to reduce initial bundle size
 const ProjectGallery = dynamic(() => import('@/components/ProjectGallery'), {
   loading: () => <div>Loading gallery...</div>,
+  ssr: false, // Modal doesn't need SSR
 })
 import {
   StyledContainer,
