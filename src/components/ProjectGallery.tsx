@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { Grid } from '@jasonrundell/dropship'
 import { GalleryImage } from '@/typeDefinitions/app'
@@ -197,27 +197,33 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
     }
   }, [selectedIndex, validImages.length])
 
-  const handleImageClick = (index: number) => {
+  const handleImageClick = useCallback((index: number) => {
     setSelectedIndex(index)
-  }
+  }, [])
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setSelectedIndex(null)
-  }
+  }, [])
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (selectedIndex !== null && selectedIndex > 0) {
-      setSelectedIndex(selectedIndex - 1)
-    }
-  }
+  const handlePrev = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation()
+      if (selectedIndex !== null && selectedIndex > 0) {
+        setSelectedIndex(selectedIndex - 1)
+      }
+    },
+    [selectedIndex]
+  )
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (selectedIndex !== null && selectedIndex < validImages.length - 1) {
-      setSelectedIndex(selectedIndex + 1)
-    }
-  }
+  const handleNext = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation()
+      if (selectedIndex !== null && selectedIndex < validImages.length - 1) {
+        setSelectedIndex(selectedIndex + 1)
+      }
+    },
+    [selectedIndex, validImages.length]
+  )
 
   if (!images || validImages.length === 0) {
     return null

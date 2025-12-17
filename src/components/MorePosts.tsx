@@ -1,9 +1,10 @@
+import React from 'react'
 import { Grid } from '@jasonrundell/dropship'
 
 import { Post, Posts } from '@/typeDefinitions/app'
 import PostPreview from './PostPreview'
 
-export default function MorePosts({ posts }: Posts) {
+function MorePosts({ posts }: Posts) {
   return (
     <section id="more-posts">
       <Grid
@@ -31,3 +32,5 @@ export default function MorePosts({ posts }: Posts) {
     </section>
   )
 }
+
+export default React.memo(MorePosts)

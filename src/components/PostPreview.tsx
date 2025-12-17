@@ -1,3 +1,4 @@
+import React from 'react'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 
@@ -30,7 +31,7 @@ const StyledHeading = styled('h3')`
   line-height: 1.3;
 `
 
-export default function PostPreview({
+function PostPreview({
   title,
   image,
   date,
@@ -68,3 +69,5 @@ export default function PostPreview({
     </div>
   )
 }
+
+export default React.memo(PostPreview)
