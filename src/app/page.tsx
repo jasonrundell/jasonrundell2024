@@ -79,9 +79,13 @@ export default async function page() {
           <Spacer />
           <Row>
             <StyledIntroParagraph>
-              Hey! I&apos;m an experienced full-stack developer passionate about
-              modern web development, design systems, and leading with empathy
-              as a manager or tech&nbsp;lead.
+              Hi! I&apos;m an AI-first Application Development Manager and
+              Senior Full Stack Web Developer with 20+ years building and
+              leading high-impact web platforms. Specializes in modernizing
+              legacy systems into scalable, cloud-ready web applications,
+              integrating AI into development workflows and product features,
+              and mentoring teams to deliver reliably in fast-paced
+              environments.
             </StyledIntroParagraph>
             <p>
               My passion for creating web experiences began in my high
