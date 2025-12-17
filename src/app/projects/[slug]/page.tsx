@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { Grid, Row, Spacer } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { MARKS, Document, BLOCKS } from '@contentful/rich-text-types'
@@ -16,7 +17,11 @@ const imageFullWidthStyle: React.CSSProperties = {
 import { getEntryBySlug } from '@/lib/contentful'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
-import ProjectGallery from '@/components/ProjectGallery'
+
+// Lazy-load ProjectGallery to reduce initial bundle size
+const ProjectGallery = dynamic(() => import('@/components/ProjectGallery'), {
+  loading: () => <div>Loading gallery...</div>,
+})
 import {
   StyledContainer,
   StyledSection,

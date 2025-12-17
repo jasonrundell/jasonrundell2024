@@ -1,6 +1,7 @@
 import React from 'react'
 import { ExternalLink } from 'lucide-react'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { Row, Grid, Spacer } from '@jasonrundell/dropship'
 
 import {
@@ -28,8 +29,12 @@ import References from '@/components/References'
 import Positions from '@/components/Positions'
 import MorePosts from '@/components/MorePosts'
 import Icon from '@/components/Icon'
-import LastSongWrapper from '@/components/LastSongWrapper'
 import HeroImage from '@/public/images/ai-powered-developer.webp'
+
+// Lazy-load LastSongWrapper to reduce initial bundle size (below the fold)
+const LastSongWrapper = dynamic(() => import('@/components/LastSongWrapper'), {
+  loading: () => <div>Loading...</div>,
+})
 
 // Image style constants
 const imageCoverStyle: React.CSSProperties = {
