@@ -6,7 +6,7 @@ import { MARKS, Document } from '@contentful/rich-text-types'
 import { notFound } from 'next/navigation'
 import { sanitizeHTML } from '@/lib/sanitize'
 
-import { getEntryBySlug } from '@/lib/contentful'
+import { getEntryBySlug, getPosts } from '@/lib/contentful'
 import PostHeader from '@/components/PostHeader'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Post } from '@/typeDefinitions/app'
@@ -36,6 +36,15 @@ const customMarkdownOptions = () => ({
     ),
   },
 })
+
+// Revalidate every day (ISR - Incremental Static Regeneration)
+export const revalidate = 86400
+
+// Generate static params for all posts at build time
+export async function generateStaticParams() {
+  const posts = await getPosts()
+  return posts.map((post) => ({ slug: post.slug }))
+}
 
 export async function generateMetadata({
   params,

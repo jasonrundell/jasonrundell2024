@@ -46,6 +46,10 @@ const imageCoverStyle: React.CSSProperties = {
  * Home page component that displays skills, projects, experience, references, and blog posts.
  * Fetches data from Contentful in parallel for optimal performance.
  */
+
+// Revalidate every day (ISR - Incremental Static Regeneration)
+export const revalidate = 86400
+
 export default async function page() {
   // Parallelize Contentful queries for better performance
   const [skills, projects, references, positions, posts] = await Promise.all([

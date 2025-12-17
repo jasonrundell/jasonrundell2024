@@ -14,7 +14,7 @@ const imageFullWidthStyle: React.CSSProperties = {
   height: 'auto',
 }
 
-import { getEntryBySlug } from '@/lib/contentful'
+import { getEntryBySlug, getProjects } from '@/lib/contentful'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
 
@@ -100,6 +100,15 @@ const customMarkdownOptions = () => ({
     },
   },
 })
+
+// Revalidate every day (ISR - Incremental Static Regeneration)
+export const revalidate = 86400
+
+// Generate static params for all projects at build time
+export async function generateStaticParams() {
+  const projects = await getProjects()
+  return projects.map((project) => ({ slug: project.slug }))
+}
 
 export async function generateMetadata({
   params,
