@@ -18,7 +18,12 @@ export default function PostImage({
 }: PostImageProps) {
   const image = (
     <StyledImageContainer>
-      <ContentfulImage alt={altText} src={url} fill={true} />
+      <ContentfulImage
+        alt={altText}
+        src={url}
+        fill={true}
+        sizes="(max-width: 768px) 100vw, 50vw"
+      />
     </StyledImageContainer>
   )
 

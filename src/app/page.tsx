@@ -68,6 +68,8 @@ export default async function page() {
               fill={true}
               style={imageCoverStyle}
               priority
+              quality={90}
+              sizes="100vw"
             />
           </StyledImageContainer>
           <Spacer />

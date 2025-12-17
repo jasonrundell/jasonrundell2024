@@ -91,6 +91,7 @@ const customMarkdownOptions = () => ({
             alt={description || 'Project image'}
             width={500}
             height={300}
+            sizes="(max-width: 768px) 100vw, 500px"
             style={imageFullWidthStyle}
           />
         </StyledEmbeddedAsset>

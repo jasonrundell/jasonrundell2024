@@ -45,7 +45,7 @@ export default function PostPreviewImage({
         src={url}
         fill={true}
         style={imageCoverStyle}
-        sizes="(max-width: 272px) 100vw"
+        sizes="(max-width: 272px) 100vw, (max-width: 768px) 50vw, 361px"
       />
     </StyledContainer>
   )
