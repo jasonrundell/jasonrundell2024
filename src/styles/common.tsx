@@ -148,7 +148,7 @@ export const StyledImageContainer = styled('div')`
   }
 
   img {
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
   }
 `
