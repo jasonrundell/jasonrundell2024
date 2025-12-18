@@ -64,7 +64,7 @@ export default async function page() {
     <>
       <StyledContainer>
         <StyledSection id="home">
-          <h1>Full Stack Developer</h1>
+          <h1>Manager / Full Stack Developer</h1>
           <StyledImageContainer>
             <Image
               src={HeroImage}
@@ -80,12 +80,10 @@ export default async function page() {
           <Row>
             <StyledIntroParagraph>
               Hi! I&apos;m an AI-first Application Development Manager and
-              Senior Full Stack Web Developer with 20+ years building and
-              leading high-impact web platforms. Specializes in modernizing
-              legacy systems into scalable, cloud-ready web applications,
-              integrating AI into development workflows and product features,
-              and mentoring teams to deliver reliably in fast-paced
-              environments.
+              Senior Full Stack Web Developer with 20+ years leading high-impact
+              web platforms and engineering teams. Skilled at modernizing legacy
+              systems into scalable web applications, integrating AI into
+              workflows and products, and aligning delivery with business goals.
             </StyledIntroParagraph>
             <p>
               My passion for creating web experiences began in my high
