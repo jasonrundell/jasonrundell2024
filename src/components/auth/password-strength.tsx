@@ -1,36 +1,16 @@
 import { CheckCircle, XCircle } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import {
+  getPasswordRequirements,
+  getPasswordStrength,
+} from '@/lib/password-validation'
 
 interface PasswordStrengthProps {
   password: string
 }
 
 export function PasswordStrength({ password }: PasswordStrengthProps) {
-  const [strength, setStrength] = useState(0)
-  const [requirements, setRequirements] = useState({
-    length: false,
-    uppercase: false,
-    lowercase: false,
-    number: false,
-    special: false,
-  })
-
-  useEffect(() => {
-    const newRequirements = {
-      length: password.length >= 8,
-      uppercase: /[A-Z]/.test(password),
-      lowercase: /[a-z]/.test(password),
-      number: /[0-9]/.test(password),
-      special: /[^A-Za-z0-9]/.test(password),
-    }
-
-    setRequirements(newRequirements)
-
-    const metRequirements =
-      Object.values(newRequirements).filter(Boolean).length
-    const newStrength = (metRequirements / 5) * 100
-    setStrength(newStrength)
-  }, [password])
+  const requirements = getPasswordRequirements(password)
+  const strength = getPasswordStrength(password)
 
   const getStrengthColor = (strength: number) => {
     if (strength < 33) return 'bg-warning'

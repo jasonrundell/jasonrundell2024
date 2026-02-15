@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getLastSong } from '@/lib/contentful'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   try {
     const lastSong = await getLastSong()

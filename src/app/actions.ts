@@ -4,6 +4,11 @@ import { z } from 'zod'
 import { encodedRedirect } from '@/utils/utils'
 import { createSafeClient } from '@/utils/supabase/safe-client'
 import { createClient } from '@/utils/supabase/server'
+import {
+  MIN_PASSWORD_LENGTH,
+  PASSWORD_PATTERNS,
+  getUnmetPasswordRequirementLabels,
+} from '@/lib/password-validation'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
@@ -11,11 +16,23 @@ import { redirect } from 'next/navigation'
 const emailSchema = z.string().email('Invalid email address')
 const passwordSchema = z
   .string()
-  .min(8, 'Password must be at least 8 characters')
-  .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-  .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-  .regex(/[0-9]/, 'Password must contain at least one number')
-  .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character')
+  .min(
+    MIN_PASSWORD_LENGTH,
+    `Password must be at least ${MIN_PASSWORD_LENGTH} characters`
+  )
+  .regex(
+    PASSWORD_PATTERNS.uppercase,
+    'Password must contain at least one uppercase letter'
+  )
+  .regex(
+    PASSWORD_PATTERNS.lowercase,
+    'Password must contain at least one lowercase letter'
+  )
+  .regex(PASSWORD_PATTERNS.number, 'Password must contain at least one number')
+  .regex(
+    PASSWORD_PATTERNS.special,
+    'Password must contain at least one special character'
+  )
 
 const signUpSchema = z.object({
   email: emailSchema,
@@ -314,33 +331,7 @@ export const changePasswordAction = async (formData: FormData) => {
     )
   }
 
-  // Validate password strength requirements
-  const passwordRequirements = {
-    length: newPassword.length >= 8,
-    uppercase: /[A-Z]/.test(newPassword),
-    lowercase: /[a-z]/.test(newPassword),
-    number: /[0-9]/.test(newPassword),
-    special: /[^A-Za-z0-9]/.test(newPassword),
-  }
-
-  const unmetRequirements = Object.entries(passwordRequirements)
-    .filter(([, met]) => !met)
-    .map(([requirement]) => {
-      switch (requirement) {
-        case 'length':
-          return 'at least 8 characters'
-        case 'uppercase':
-          return 'at least one uppercase letter'
-        case 'lowercase':
-          return 'at least one lowercase letter'
-        case 'number':
-          return 'at least one number'
-        case 'special':
-          return 'at least one special character'
-        default:
-          return requirement
-      }
-    })
+  const unmetRequirements = getUnmetPasswordRequirementLabels(newPassword)
 
   if (unmetRequirements.length > 0) {
     return encodedRedirect(

@@ -4,6 +4,7 @@ import { Label } from '@/components/auth/ui/label'
 import { Input } from '@/components/auth/ui/input'
 import { SubmitButton } from '@/components/auth/submit-button'
 import { FormMessage, Message } from '@/components/auth/form-message'
+import { PasswordStrength } from '@/components/auth/password-strength'
 import { changePasswordAction } from '@/app/actions'
 import {
   Calendar,
@@ -16,8 +17,9 @@ import {
   XCircle,
 } from 'lucide-react'
 import { styled } from '@pigment-css/react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Tokens from '@/lib/tokens'
+import { isPasswordValid } from '@/lib/password-validation'
 
 // Styled components using Pigment-CSS
 const ProfileContainer = styled('div')`
@@ -198,44 +200,6 @@ const CancelButton = styled('button')`
   }
 `
 
-const StyledPasswordStrength = styled('div')`
-  margin-top: 0.75rem;
-`
-
-const StrengthBar = styled('div')`
-  height: 0.25rem;
-  background: ${Tokens.colors.backgroundDarker.value};
-  border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
-  margin-bottom: 1rem;
-  overflow: hidden;
-`
-
-const StrengthFill = styled('div')`
-  height: 100%;
-  transition: all 0.3s ease;
-`
-
-const RequirementsList = styled('ul')`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 0.875rem;
-  color: ${Tokens.colors.textSecondary.value};
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-`
-
-const RequirementItem = styled('li')`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`
-
-const RequirementText = styled('span')`
-  font-size: 0.875rem;
-`
-
 const PasswordMatchIndicator = styled('div')`
   margin-top: 0.5rem;
   font-size: 0.875rem;
@@ -301,22 +265,13 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
     : 'Unknown'
   const authMethod = user.app_metadata?.provider || 'email'
 
-  // Password strength validation
-  const passwordRequirements = {
-    length: newPassword.length >= 8,
-    uppercase: /[A-Z]/.test(newPassword),
-    lowercase: /[a-z]/.test(newPassword),
-    number: /[0-9]/.test(newPassword),
-    special: /[^A-Za-z0-9]/.test(newPassword),
-  }
-
-  const isPasswordValid = Object.values(passwordRequirements).every(Boolean)
+  const hasValidPasswordStrength = isPasswordValid(newPassword)
   const passwordsMatch = newPassword === confirmPassword
   const isFormValid =
     currentPassword &&
     newPassword &&
     confirmPassword &&
-    isPasswordValid &&
+    hasValidPasswordStrength &&
     passwordsMatch
 
   const handleChangePassword = async (formData: FormData) => {
@@ -566,94 +521,5 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
         )}
       </ChangePasswordSection>
     </ProfileContainer>
-  )
-}
-
-// Custom PasswordStrength component that matches the design system
-function PasswordStrength({ password }: { password: string }) {
-  const [strength, setStrength] = useState(0)
-  const [requirements, setRequirements] = useState({
-    length: false,
-    uppercase: false,
-    lowercase: false,
-    number: false,
-    special: false,
-  })
-
-  useEffect(() => {
-    const newRequirements = {
-      length: password.length >= 8,
-      uppercase: /[A-Z]/.test(password),
-      lowercase: /[a-z]/.test(password),
-      number: /[0-9]/.test(password),
-      special: /[^A-Za-z0-9]/.test(password),
-    }
-
-    setRequirements(newRequirements)
-
-    const metRequirements =
-      Object.values(newRequirements).filter(Boolean).length
-    const newStrength = (metRequirements / 5) * 100
-    setStrength(newStrength)
-  }, [password])
-
-  return (
-    <StyledPasswordStrength>
-      <StrengthBar>
-        <StrengthFill
-          style={{
-            width: `${strength}%`,
-            background:
-              strength < 33
-                ? Tokens.colors.warning.value
-                : strength < 66
-                ? Tokens.colors.accent.value
-                : Tokens.colors.success.value,
-          }}
-        />
-      </StrengthBar>
-      <RequirementsList>
-        <RequirementItem>
-          {requirements.length ? (
-            <CheckCircle size={16} color={Tokens.colors.success.value} />
-          ) : (
-            <XCircle size={16} color={Tokens.colors.warning.value} />
-          )}
-          <RequirementText>At least 8 characters</RequirementText>
-        </RequirementItem>
-        <RequirementItem>
-          {requirements.uppercase ? (
-            <CheckCircle size={16} color={Tokens.colors.success.value} />
-          ) : (
-            <XCircle size={16} color={Tokens.colors.warning.value} />
-          )}
-          <RequirementText>At least one uppercase letter</RequirementText>
-        </RequirementItem>
-        <RequirementItem>
-          {requirements.lowercase ? (
-            <CheckCircle size={16} color={Tokens.colors.success.value} />
-          ) : (
-            <XCircle size={16} color={Tokens.colors.warning.value} />
-          )}
-          <RequirementText>At least one lowercase letter</RequirementText>
-        </RequirementItem>
-        <RequirementItem>
-          {requirements.number ? (
-            <CheckCircle size={16} color={Tokens.colors.success.value} />
-          ) : (
-            <XCircle size={16} color={Tokens.colors.warning.value} />
-          )}
-          <RequirementText>At least one number</RequirementText>
-        </RequirementItem>
-        <RequirementItem>
-          {requirements.special ? (
-            <CheckCircle size={16} color={Tokens.colors.success.value} />
-          ) : (
-            <XCircle size={16} color={Tokens.colors.warning.value} />
-          )}
-          <RequirementText>At least one special character</RequirementText>
-        </RequirementItem>
-      </RequirementsList>
-    </StyledPasswordStrength>
   )
 }
