@@ -132,20 +132,20 @@ export const signUpAction = async (formData: FormData) => {
     console.error('Sign up error:', error)
     return encodedRedirect('error', '/sign-up', error)
   } else {
-    // Create a user record in the users table
+    console.info(
+      JSON.stringify({ event: 'auth.signup', email, ip, ts: new Date().toISOString() })
+    )
+
     try {
       await safeClient.insertUser({
         email,
-        full_name: email.split('@')[0], // Use email prefix as fallback name
+        full_name: email.split('@')[0],
         provider: 'email',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       })
-      console.log('User record created successfully for:', email)
     } catch (userError) {
       console.error('Failed to create user record:', userError)
-      // Don't fail the signup if user record creation fails
-      // The user can still sign in, and we'll create the record when they visit profile
     }
 
     return encodedRedirect(
@@ -212,11 +212,13 @@ export const signInAction = async (formData: FormData) => {
   }
 
   if (error) {
-    // Use generic error message for security (don't leak specific error details)
     console.error('Sign in error:', error)
     return redirect('/sign-in?error=auth_error')
   }
 
+  console.info(
+    JSON.stringify({ event: 'auth.signin', email, ip, ts: new Date().toISOString() })
+  )
   return redirect('/profile')
 }
 
@@ -255,6 +257,10 @@ export const forgotPasswordAction = async (formData: FormData) => {
       'Could not reset password'
     )
   }
+
+  console.info(
+    JSON.stringify({ event: 'auth.forgot_password', email, ip, ts: new Date().toISOString() })
+  )
 
   if (callbackUrl) {
     return redirect(callbackUrl)
@@ -349,10 +355,11 @@ export const resetPasswordAction = async (formData: FormData) => {
       )
     }
 
-    // Sign out the user after successful password reset
     await supabase.auth.signOut()
 
-    // Success - redirect to sign in page with success message
+    console.info(
+      JSON.stringify({ event: 'auth.reset_password', ip, ts: new Date().toISOString() })
+    )
     return redirect('/sign-in?message=password_reset_success')
   } catch (error) {
     console.error('Unexpected error during password reset:', error)
@@ -442,11 +449,23 @@ export const changePasswordAction = async (formData: FormData) => {
     return encodedRedirect('error', '/profile', 'Password update failed')
   }
 
+  console.info(
+    JSON.stringify({
+      event: 'auth.change_password',
+      email: userData.user.email,
+      ip,
+      ts: new Date().toISOString(),
+    })
+  )
   return encodedRedirect('success', '/profile', 'Password changed successfully')
 }
 
 export const signOutAction = async () => {
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
   await supabase.auth.signOut()
+  console.info(
+    JSON.stringify({ event: 'auth.signout', email: user?.email, ts: new Date().toISOString() })
+  )
   return redirect('/sign-in')
 }

@@ -411,7 +411,9 @@ describe('safe-client', () => {
         isAvailable: true,
       })
       expect(mockSupabaseClient.from).toHaveBeenCalledWith('users')
-      expect(mockQuery.select).toHaveBeenCalledWith('*')
+      expect(mockQuery.select).toHaveBeenCalledWith(
+        'id, email, full_name, provider, created_at, updated_at'
+      )
     })
 
     it('should filter users by email when provided', async () => {

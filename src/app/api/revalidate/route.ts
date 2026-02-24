@@ -1,3 +1,4 @@
+import { timingSafeEqual } from 'crypto'
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 
@@ -23,7 +24,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (authHeader !== `Bearer ${expectedSecret}`) {
+    const expected = Buffer.from(`Bearer ${expectedSecret}`)
+    const actual = Buffer.from(authHeader ?? '')
+    if (
+      expected.length !== actual.length ||
+      !timingSafeEqual(expected, actual)
+    ) {
       console.error('Invalid webhook secret')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }

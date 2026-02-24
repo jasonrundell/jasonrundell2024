@@ -15,8 +15,11 @@ const bundleAnalyzer = withBundleAnalyzer({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  poweredByHeader: false,
   images: {
-    domains: ['images.ctfassets.net'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.ctfassets.net' },
+    ],
   },
   async redirects() {
     return [
@@ -49,10 +52,19 @@ const nextConfig = {
             value: 'camera=(), microphone=(), geolocation=()',
           },
           {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+              // 'unsafe-inline' is required by Next.js 14 for hydration/routing inline scripts.
+              // 'unsafe-eval' is only included in development for webpack HMR source maps.
+              process.env.NODE_ENV === 'development'
+                ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com"
+                : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+              // 'unsafe-inline' is required by Pigment CSS (CSS-in-JS).
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
@@ -72,6 +84,7 @@ const nextConfig = {
   // Optimize development mode
   experimental: {
     bundlePagesExternals: true,
+    serverComponentsExternalPackages: ['isomorphic-dompurify', 'jsdom', 'dompurify'],
     // Enable faster refresh
     turbo: {
       rules: {
@@ -104,15 +117,14 @@ const nextConfig = {
     }
     
     // Fix for isomorphic-dompurify/jsdom default-stylesheet.css issue
-    // Apply to both server and client bundles since jsdom can be used in both
+    // in client bundles (server-side is handled by serverComponentsExternalPackages).
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(
         /default-stylesheet\.css$/,
         resolve(__dirname, 'src/lib/empty-stylesheet.js')
       )
     )
-    
-    // Also add a resolve alias as a fallback
+
     config.resolve.alias = {
       ...config.resolve.alias,
       'default-stylesheet.css': resolve(__dirname, 'src/lib/empty-stylesheet.js'),

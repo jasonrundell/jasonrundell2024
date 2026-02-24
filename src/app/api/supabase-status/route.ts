@@ -80,11 +80,12 @@ export async function GET() {
         )
       }
 
+      console.error('Supabase status check error:', error.message)
       return NextResponse.json(
         {
           isAvailable: false,
           isPaused: false,
-          error: error.message,
+          error: 'Database connectivity error',
         },
         {
           headers: {
@@ -106,11 +107,12 @@ export async function GET() {
       }
     )
   } catch (error) {
+    console.error('Supabase status check exception:', error)
     return NextResponse.json(
       {
         isAvailable: false,
         isPaused: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: 'Internal server error',
       },
       { status: 500 }
     )

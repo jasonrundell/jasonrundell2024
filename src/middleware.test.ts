@@ -18,7 +18,7 @@ describe('middleware', () => {
   let mockCreateServerClient: jest.Mock
   let mockSupabaseClient: {
     auth: {
-      getSession: jest.Mock
+      getUser: jest.Mock
     }
   }
 
@@ -28,7 +28,7 @@ describe('middleware', () => {
     // Setup default mock Supabase client
     mockSupabaseClient = {
       auth: {
-        getSession: jest.fn(),
+        getUser: jest.fn(),
       },
     }
 
@@ -281,8 +281,8 @@ describe('middleware', () => {
     it('should redirect to sign-in when accessing protected route without session', async () => {
       // Arrange
       const request = createMockRequest('/profile')
-      mockSupabaseClient.auth.getSession.mockResolvedValue({
-        data: { session: null },
+      mockSupabaseClient.auth.getUser.mockResolvedValue({
+        data: { user: null },
         error: null,
       })
 
@@ -301,17 +301,12 @@ describe('middleware', () => {
     it('should allow access to protected route with valid session', async () => {
       // Arrange
       const request = createMockRequest('/profile')
-      // Mock the session promise to resolve successfully
-      const sessionPromise = Promise.resolve({
+      mockSupabaseClient.auth.getUser.mockResolvedValue({
         data: {
-          session: {
-            user: { id: 'test-user-id' },
-            access_token: 'test-token',
-          },
+          user: { id: 'test-user-id', email: 'test@example.com' },
         },
         error: null,
       })
-      mockSupabaseClient.auth.getSession.mockReturnValue(sessionPromise)
 
       // Act
       const response = await middleware(request)
@@ -331,14 +326,12 @@ describe('middleware', () => {
     it('should redirect to sign-in with supabase_paused error when Supabase is paused', async () => {
       // Arrange
       const request = createMockRequest('/profile')
-      // The middleware checks for specific error codes/messages in the error object
-      // The error needs to be returned from getSession and then checked in Promise.race
       const errorObj = {
         message: 'Project is paused',
-        code: 'PGRST301', // This is the code the middleware checks for
+        code: 'PGRST301',
       }
-      mockSupabaseClient.auth.getSession.mockResolvedValue({
-        data: { session: null },
+      mockSupabaseClient.auth.getUser.mockResolvedValue({
+        data: { user: null },
         error: errorObj,
       })
 
@@ -364,7 +357,7 @@ describe('middleware', () => {
     it('should handle session check timeout', async () => {
       // Arrange
       const request = createMockRequest('/profile')
-      mockSupabaseClient.auth.getSession.mockImplementation(
+      mockSupabaseClient.auth.getUser.mockImplementation(
         () =>
           new Promise((_, reject) =>
             setTimeout(() => reject(new Error('Session timeout')), 100)
@@ -419,8 +412,8 @@ describe('middleware', () => {
     it('should protect dashboard routes', async () => {
       // Arrange
       const request = createMockRequest('/dashboard')
-      mockSupabaseClient.auth.getSession.mockResolvedValue({
-        data: { session: null },
+      mockSupabaseClient.auth.getUser.mockResolvedValue({
+        data: { user: null },
         error: null,
       })
 

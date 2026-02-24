@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { CACHE_DURATIONS, ALLOWED_ORIGINS } from '@/lib/constants'
+import { rateLimit } from '@/lib/rate-limit'
+
+const API_RATE_LIMIT = { maxAttempts: 30, windowMs: 60_000 }
 
 // Cache for Supabase client to avoid recreating on every request
 let supabaseClient: ReturnType<typeof createServerClient> | null = null
@@ -69,8 +72,19 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
-  // Handle API routes with minimal overhead
+  // Handle API routes with rate limiting
   if (pathname.startsWith('/api/')) {
+    const clientIp =
+      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+      '127.0.0.1'
+    const { success } = rateLimit(`api:${clientIp}`, API_RATE_LIMIT)
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Too many requests' },
+        { status: 429, headers: { 'Retry-After': '60' } }
+      )
+    }
+
     const apiResponse = NextResponse.next()
     // Only add CORS headers for non-OPTIONS requests
     if (request.method !== 'OPTIONS') {
@@ -179,26 +193,29 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Check session with timeout and memory protection
-  let session = null
+  // Verify user server-side with timeout protection.
+  // getUser() sends the JWT to Supabase for verification, ensuring
+  // revoked sessions are rejected (unlike getSession() which only
+  // validates the JWT locally).
+  let authenticatedUser = null
   let isSupabasePaused = false
 
   try {
-    const sessionPromise = supabaseClient.auth.getSession()
+    const userPromise = supabaseClient.auth.getUser()
     const timeoutPromise = new Promise<{
-      data: { session: null }
+      data: { user: null }
       error: Error
     }>((_, reject) =>
       setTimeout(
-        () => reject(new Error('Session timeout')),
+        () => reject(new Error('Auth verification timeout')),
         CACHE_DURATIONS.SESSION_TIMEOUT
       )
     )
 
     const {
-      data: { session: currentSession },
+      data: { user },
       error,
-    } = await Promise.race([sessionPromise, timeoutPromise])
+    } = await Promise.race([userPromise, timeoutPromise])
 
     if (error) {
       if (
@@ -211,11 +228,11 @@ export async function middleware(request: NextRequest) {
         isSupabasePaused = true
       }
     } else {
-      session = currentSession
+      authenticatedUser = user
     }
   } catch (error) {
-    console.error('Session check failed:', error)
-    // Continue without session - treat as unauthenticated
+    console.error('Auth verification failed:', error)
+    // Continue without user - treat as unauthenticated
   }
 
   // Handle Supabase paused state
@@ -226,8 +243,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(redirectUrl)
   }
 
-  // Redirect to sign-in if no session
-  if (!session) {
+  // Redirect to sign-in if user not verified
+  if (!authenticatedUser) {
     const redirectUrl = new URL('/sign-in', request.url)
     redirectUrl.searchParams.set('redirectedFrom', pathname)
     return NextResponse.redirect(redirectUrl)

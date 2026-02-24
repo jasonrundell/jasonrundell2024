@@ -121,7 +121,9 @@ export class SafeSupabaseClient {
   async getUsers(email?: string) {
     return this.execute(async () => {
       const supabase = await createClient()
-      let query = supabase.from('users').select('*')
+      let query = supabase
+        .from('users')
+        .select('id, email, full_name, provider, created_at, updated_at')
 
       if (email) {
         query = query.eq('email', email)
