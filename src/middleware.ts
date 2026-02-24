@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { CACHE_DURATIONS, ALLOWED_ORIGINS } from '@/lib/constants'
+import { rateLimit } from '@/lib/rate-limit'
+
+const API_RATE_LIMIT = { maxAttempts: 30, windowMs: 60_000 }
 
 // Cache for Supabase client to avoid recreating on every request
 let supabaseClient: ReturnType<typeof createServerClient> | null = null
@@ -69,8 +72,19 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
-  // Handle API routes with minimal overhead
+  // Handle API routes with rate limiting
   if (pathname.startsWith('/api/')) {
+    const clientIp =
+      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+      '127.0.0.1'
+    const { success } = rateLimit(`api:${clientIp}`, API_RATE_LIMIT)
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Too many requests' },
+        { status: 429, headers: { 'Retry-After': '60' } }
+      )
+    }
+
     const apiResponse = NextResponse.next()
     // Only add CORS headers for non-OPTIONS requests
     if (request.method !== 'OPTIONS') {

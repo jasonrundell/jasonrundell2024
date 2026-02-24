@@ -205,6 +205,7 @@ export default function LastSong({ song }: LastSongProps) {
                 title={`${song.title} by ${song.artist}`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
+                sandbox="allow-scripts allow-same-origin allow-presentation"
               />
             </StyledVideoModalContent>
           </StyledModal>,

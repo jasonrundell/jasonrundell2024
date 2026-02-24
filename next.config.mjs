@@ -15,8 +15,11 @@ const bundleAnalyzer = withBundleAnalyzer({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  poweredByHeader: false,
   images: {
-    domains: ['images.ctfassets.net'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.ctfassets.net' },
+    ],
   },
   async redirects() {
     return [
@@ -47,6 +50,10 @@ const nextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
           {
             key: 'Content-Security-Policy',

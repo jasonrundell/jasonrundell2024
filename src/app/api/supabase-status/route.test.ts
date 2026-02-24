@@ -211,7 +211,7 @@ describe('GET /api/supabase-status', () => {
       expect(data).toEqual({
         isAvailable: false,
         isPaused: false,
-        error: 'Connection timeout',
+        error: 'Database connectivity error',
       })
     })
 
@@ -230,7 +230,7 @@ describe('GET /api/supabase-status', () => {
       expect(data).toEqual({
         isAvailable: false,
         isPaused: false,
-        error: 'Failed to create client',
+        error: 'Internal server error',
       })
     })
 
@@ -249,7 +249,7 @@ describe('GET /api/supabase-status', () => {
       expect(data).toEqual({
         isAvailable: false,
         isPaused: false,
-        error: 'Unknown error',
+        error: 'Internal server error',
       })
     })
   })
