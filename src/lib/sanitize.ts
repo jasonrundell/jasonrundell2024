@@ -1,16 +1,11 @@
 /**
  * Safe HTML sanitization utility for server and client environments.
  * Uses isomorphic-dompurify for robust, standards-compliant sanitization.
+ *
+ * The jsdom default-stylesheet.css issue is handled by webpack plugins
+ * in next.config.mjs that emit an empty CSS file to the output directory
+ * and replace the require() call with an empty module.
  */
-
-if (typeof process !== 'undefined') {
-  if (!process.env.JSDOM_CSS) {
-    process.env.JSDOM_CSS = 'false'
-  }
-  if (!process.env.JSDOM_RESOURCE_LOADER) {
-    process.env.JSDOM_RESOURCE_LOADER = 'false'
-  }
-}
 
 import DOMPurify from 'isomorphic-dompurify'
 

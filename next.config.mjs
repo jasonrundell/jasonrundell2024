@@ -84,6 +84,7 @@ const nextConfig = {
   // Optimize development mode
   experimental: {
     bundlePagesExternals: true,
+    serverComponentsExternalPackages: ['isomorphic-dompurify', 'jsdom', 'dompurify'],
     // Enable faster refresh
     turbo: {
       rules: {
@@ -116,15 +117,14 @@ const nextConfig = {
     }
     
     // Fix for isomorphic-dompurify/jsdom default-stylesheet.css issue
-    // Apply to both server and client bundles since jsdom can be used in both
+    // in client bundles (server-side is handled by serverComponentsExternalPackages).
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(
         /default-stylesheet\.css$/,
         resolve(__dirname, 'src/lib/empty-stylesheet.js')
       )
     )
-    
-    // Also add a resolve alias as a fallback
+
     config.resolve.alias = {
       ...config.resolve.alias,
       'default-stylesheet.css': resolve(__dirname, 'src/lib/empty-stylesheet.js'),
