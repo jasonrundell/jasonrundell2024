@@ -1,10 +1,20 @@
 import { signInAction } from './actions'
 import type { createSafeClient } from '@/utils/supabase/safe-client'
 import * as navigation from 'next/navigation'
+import { _clearStore } from '@/lib/rate-limit'
 
 // Mock the modules
 jest.mock('@/utils/supabase/safe-client')
 jest.mock('next/navigation')
+jest.mock('next/headers', () => ({
+  headers: jest.fn().mockResolvedValue({
+    get: jest.fn((name: string) => {
+      if (name === 'x-forwarded-for') return '127.0.0.1'
+      if (name === 'origin') return 'http://localhost:3000'
+      return null
+    }),
+  }),
+}))
 
 // Get the mocked createSafeClient
 const { createSafeClient: mockCreateSafeClient } = jest.requireMock<{
@@ -14,6 +24,7 @@ const { createSafeClient: mockCreateSafeClient } = jest.requireMock<{
 describe('Sign In Action', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    _clearStore()
   })
 
   describe('Successful Login with Valid Credentials', () => {
