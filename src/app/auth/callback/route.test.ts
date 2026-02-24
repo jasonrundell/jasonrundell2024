@@ -134,5 +134,59 @@ describe('Auth Callback Route', () => {
         'http://localhost:3000/profile'
       )
     })
+
+    it('should reject protocol-relative redirect_to (open redirect)', async () => {
+      const url =
+        'http://localhost:3000/auth/callback?code=auth-code&redirect_to=//evil.com'
+      const request = new Request(url)
+
+      mockSupabase.auth.exchangeCodeForSession.mockResolvedValue({
+        data: { user: { id: '123' } },
+        error: null,
+      })
+
+      await GET(request)
+
+      const { NextResponse } = await import('next/server')
+      expect(NextResponse.redirect).toHaveBeenCalledWith(
+        'http://localhost:3000/profile'
+      )
+    })
+
+    it('should reject absolute URL in redirect_to', async () => {
+      const url =
+        'http://localhost:3000/auth/callback?code=auth-code&redirect_to=https://evil.com'
+      const request = new Request(url)
+
+      mockSupabase.auth.exchangeCodeForSession.mockResolvedValue({
+        data: { user: { id: '123' } },
+        error: null,
+      })
+
+      await GET(request)
+
+      const { NextResponse } = await import('next/server')
+      expect(NextResponse.redirect).toHaveBeenCalledWith(
+        'http://localhost:3000/profile'
+      )
+    })
+
+    it('should reject redirect_to with userinfo trick', async () => {
+      const url =
+        'http://localhost:3000/auth/callback?code=auth-code&redirect_to=@evil.com'
+      const request = new Request(url)
+
+      mockSupabase.auth.exchangeCodeForSession.mockResolvedValue({
+        data: { user: { id: '123' } },
+        error: null,
+      })
+
+      await GET(request)
+
+      const { NextResponse } = await import('next/server')
+      expect(NextResponse.redirect).toHaveBeenCalledWith(
+        'http://localhost:3000/profile'
+      )
+    })
   })
 })
