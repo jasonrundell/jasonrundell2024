@@ -16,15 +16,32 @@ import { ContentfulEntry } from '@/typeDefinitions/contentful'
  * Provides type-safe functions for fetching content from Contentful.
  */
 
-// Ensure environment variables are loaded
-if (!process.env.CONTENTFUL_SPACE_ID || !process.env.CONTENTFUL_ACCESS_TOKEN) {
-  throw new Error('Contentful space ID and access token must be provided')
-}
+let contentfulClient:
+  | ReturnType<typeof createClient>
+  | null = null
 
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-})
+function getContentfulClient() {
+  if (contentfulClient) {
+    return contentfulClient
+  }
+
+  const space = process.env.CONTENTFUL_SPACE_ID
+  const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN
+
+  if (!space || !accessToken) {
+    const errorMessage =
+      'Contentful space ID and access token must be provided'
+    console.error(errorMessage)
+    throw new Error(errorMessage)
+  }
+
+  contentfulClient = createClient({
+    space,
+    accessToken,
+  })
+
+  return contentfulClient
+}
 
 /**
  * Fetches all entries of a specific content type from Contentful.
@@ -36,6 +53,7 @@ async function fetchEntries<T extends EntrySkeletonType>(
   contentType: string
 ): Promise<Entry<ContentfulEntry<T>>[]> {
   try {
+    const client = getContentfulClient()
     const response = await client.getEntries<ContentfulEntry<T>>({
       content_type: contentType,
     })
@@ -61,6 +79,7 @@ async function fetchEntry<T extends EntrySkeletonType>(
   entryId: string | number
 ): Promise<Entry<ContentfulEntry<T>>> {
   try {
+    const client = getContentfulClient()
     const entry = await client.getEntry<ContentfulEntry<T>>(entryId.toString())
     return entry
   } catch (error) {
@@ -81,6 +100,7 @@ async function fetchEntryBySlug<T extends EntrySkeletonType>(
   slug: string
 ): Promise<Entry<ContentfulEntry<T>>> {
   try {
+    const client = getContentfulClient()
     const response = await client.getEntries<ContentfulEntry<T>>({
       content_type: contentType,
       'fields.slug': slug,

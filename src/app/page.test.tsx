@@ -200,7 +200,7 @@ describe('Home Page', () => {
     // Assert
     expect(screen.getByTestId('intro-paragraph')).toBeInTheDocument()
     expect(
-      screen.getByText(/hey! i'm an experienced full-stack developer/i)
+      screen.getByText(/hi! i'm an ai-first application development manager/i)
     ).toBeInTheDocument()
   })
 

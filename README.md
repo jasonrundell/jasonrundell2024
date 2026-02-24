@@ -17,6 +17,11 @@ optimized performance.
 
 ## Development
 
+### Project Documentation
+
+- Project index: [docs/PROJECT_INDEX.md](./docs/PROJECT_INDEX.md)
+- Keep the index updated whenever routes, integrations, folder structure, or test locations change.
+
 ### Git Hooks
 
 This repository includes Git hooks to ensure code quality:
