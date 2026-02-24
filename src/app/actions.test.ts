@@ -4,17 +4,28 @@ import {
   signInAction,
 } from './actions'
 import * as navigation from 'next/navigation'
+import { encodedRedirect } from '@/utils/utils'
+import { _clearStore } from '@/lib/rate-limit'
 
 // Mock the modules
 jest.mock('@/utils/supabase/server')
 jest.mock('@/utils/supabase/safe-client')
 jest.mock('@/utils/utils')
 jest.mock('next/navigation')
-jest.mock('next/headers')
+jest.mock('next/headers', () => ({
+  headers: jest.fn().mockResolvedValue({
+    get: jest.fn((name: string) => {
+      if (name === 'x-forwarded-for') return '127.0.0.1'
+      if (name === 'origin') return 'http://localhost:3000'
+      return null
+    }),
+  }),
+}))
 
 describe('Password Reset Actions', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    _clearStore()
   })
 
   describe('forgotPasswordAction', () => {
@@ -22,8 +33,15 @@ describe('Password Reset Actions', () => {
       // Arrange
       const formData = new FormData()
 
-      // Act & Assert
-      await expect(forgotPasswordAction(formData)).rejects.toThrow()
+      // Act
+      await forgotPasswordAction(formData)
+
+      // Assert — redirects with error when email is missing
+      expect(encodedRedirect).toHaveBeenCalledWith(
+        'error',
+        '/forgot-password',
+        'Email is required'
+      )
     })
 
     it('should handle missing email value', async () => {
@@ -31,8 +49,15 @@ describe('Password Reset Actions', () => {
       const formData = new FormData()
       formData.append('email', '')
 
-      // Act & Assert
-      await expect(forgotPasswordAction(formData)).rejects.toThrow()
+      // Act
+      await forgotPasswordAction(formData)
+
+      // Assert — empty string is falsy, so treated as missing
+      expect(encodedRedirect).toHaveBeenCalledWith(
+        'error',
+        '/forgot-password',
+        'Email is required'
+      )
     })
   })
 

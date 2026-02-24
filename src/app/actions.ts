@@ -6,6 +6,23 @@ import { createSafeClient } from '@/utils/supabase/safe-client'
 import { createClient } from '@/utils/supabase/server'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { rateLimit, type RateLimitConfig } from '@/lib/rate-limit'
+
+// Rate limit configurations (per IP)
+const AUTH_RATE_LIMITS = {
+  signIn: { maxAttempts: 5, windowMs: 60_000 } satisfies RateLimitConfig,
+  signUp: { maxAttempts: 3, windowMs: 600_000 } satisfies RateLimitConfig,
+  forgotPassword: { maxAttempts: 3, windowMs: 600_000 } satisfies RateLimitConfig,
+  resetPassword: { maxAttempts: 3, windowMs: 600_000 } satisfies RateLimitConfig,
+  changePassword: { maxAttempts: 3, windowMs: 600_000 } satisfies RateLimitConfig,
+}
+
+async function getClientIp(): Promise<string> {
+  const headersList = await headers()
+  return (
+    headersList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1'
+  )
+}
 
 // Validation schemas
 const emailSchema = z.string().email('Invalid email address')
@@ -32,6 +49,16 @@ const signInSchema = z.object({
  * Validates input and creates a new user account.
  */
 export const signUpAction = async (formData: FormData) => {
+  const ip = await getClientIp()
+  const { success } = rateLimit(`signUp:${ip}`, AUTH_RATE_LIMITS.signUp)
+  if (!success) {
+    return encodedRedirect(
+      'error',
+      '/sign-up',
+      'Too many sign-up attempts. Please try again later.'
+    )
+  }
+
   const rawData = {
     email: formData.get('email')?.toString(),
     password: formData.get('password')?.toString(),
@@ -117,6 +144,12 @@ export const signUpAction = async (formData: FormData) => {
  * Validates input and authenticates the user.
  */
 export const signInAction = async (formData: FormData) => {
+  const ip = await getClientIp()
+  const { success } = rateLimit(`signIn:${ip}`, AUTH_RATE_LIMITS.signIn)
+  if (!success) {
+    return redirect('/sign-in?error=rate_limited')
+  }
+
   const rawData = {
     email: formData.get('email')?.toString(),
     password: formData.get('password')?.toString(),
@@ -171,6 +204,19 @@ export const signInAction = async (formData: FormData) => {
 }
 
 export const forgotPasswordAction = async (formData: FormData) => {
+  const ip = await getClientIp()
+  const { success } = rateLimit(
+    `forgotPassword:${ip}`,
+    AUTH_RATE_LIMITS.forgotPassword
+  )
+  if (!success) {
+    return encodedRedirect(
+      'error',
+      '/forgot-password',
+      'Too many attempts. Please try again later.'
+    )
+  }
+
   const email = formData.get('email')?.toString()
   const supabase = await createClient()
   const origin = (await headers()).get('origin')
@@ -205,6 +251,19 @@ export const forgotPasswordAction = async (formData: FormData) => {
 }
 
 export const resetPasswordAction = async (formData: FormData) => {
+  const ip = await getClientIp()
+  const { success } = rateLimit(
+    `resetPassword:${ip}`,
+    AUTH_RATE_LIMITS.resetPassword
+  )
+  if (!success) {
+    return encodedRedirect(
+      'error',
+      '/reset-password',
+      'Too many attempts. Please try again later.'
+    )
+  }
+
   const supabase = await createClient()
 
   // Check if user is already authenticated
@@ -289,6 +348,19 @@ export const resetPasswordAction = async (formData: FormData) => {
 }
 
 export const changePasswordAction = async (formData: FormData) => {
+  const ip = await getClientIp()
+  const { success } = rateLimit(
+    `changePassword:${ip}`,
+    AUTH_RATE_LIMITS.changePassword
+  )
+  if (!success) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'Too many attempts. Please try again later.'
+    )
+  }
+
   const currentPassword = formData.get('currentPassword')?.toString()
   const newPassword = formData.get('newPassword')?.toString()
   const confirmPassword = formData.get('confirmPassword')?.toString()
