@@ -14,10 +14,8 @@ const BackToTopStyle = styled('div')<BackToTopStyleProps>({
   right: `${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit}`,
   backgroundColor: Tokens.colors.primary.value,
   color: Tokens.colors.surface.value,
-  padding: `${10 / 16}rem ${Tokens.sizes.medium.value}${
-    Tokens.sizes.medium.unit
-  }`,
-  borderRadius: `${5 / 16}rem`,
+  padding: `${Tokens.sizes.padding.small.value}${Tokens.sizes.padding.small.unit} ${Tokens.sizes.padding.large.value}${Tokens.sizes.padding.large.unit}`,
+  borderRadius: `${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit}`,
   cursor: 'pointer',
   transition: 'opacity 0.3s ease, transform 0.3s ease',
   '&:hover': {

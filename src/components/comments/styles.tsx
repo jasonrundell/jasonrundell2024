@@ -137,11 +137,11 @@ export const CharCount = styled('span')`
 `
 
 export const SubmitCommentButton = styled('button')`
-  padding: 0.5rem 1.25rem;
+  padding: ${Tokens.sizes.padding.small.value}${Tokens.sizes.padding.small.unit} ${Tokens.sizes.padding.large.value}${Tokens.sizes.padding.large.unit};
   background: ${Tokens.colors.primary.value};
   color: ${Tokens.colors.backgroundDarker.value};
   border: none;
-  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
+  border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.15s;
