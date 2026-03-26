@@ -9,8 +9,8 @@ describe('stripHtmlTags', () => {
     expect(stripHtmlTags('<b>bold</b>')).toBe('bold')
   })
 
-  it('strips script tags and their content markers', () => {
-    expect(stripHtmlTags('<script>alert("xss")</script>')).toBe('alert("xss")')
+  it('removes script elements and their inner content (DOMPurify parity)', () => {
+    expect(stripHtmlTags('<script>alert("xss")</script>')).toBe('')
   })
 
   it('strips nested tags', () => {
@@ -49,19 +49,31 @@ describe('stripHtmlTags', () => {
   })
 
   it('strips tags that only appear after entity decode (XSS via encoded angle brackets)', () => {
-    expect(stripHtmlTags('&lt;script&gt;alert(1)&lt;/script&gt;')).toBe('alert(1)')
+    expect(stripHtmlTags('&lt;script&gt;alert(1)&lt;/script&gt;')).toBe('')
   })
 
   it('handles double-encoded entities that would become tags after one decode', () => {
-    expect(stripHtmlTags('&amp;lt;script&amp;gt;x&amp;lt;/script&amp;gt;')).toBe('x')
+    expect(stripHtmlTags('&amp;lt;script&amp;gt;x&amp;lt;/script&amp;gt;')).toBe('')
   })
 
   it('strips tags expressed with numeric character references', () => {
-    expect(stripHtmlTags('&#60;script&#62;y&#60;/script&#62;')).toBe('y')
+    expect(stripHtmlTags('&#60;script&#62;y&#60;/script&#62;')).toBe('')
   })
 
   it('strips script tags when there is whitespace after the opening bracket', () => {
-    expect(stripHtmlTags('< script>alert(1)< /script>')).toBe('alert(1)')
+    expect(stripHtmlTags('< script>alert(1)< /script>')).toBe('')
+  })
+
+  it('removes style elements and their inner content', () => {
+    expect(stripHtmlTags('a<style>.x{color:red}</style>b')).toBe('ab')
+  })
+
+  it('preserves text around removed script blocks', () => {
+    expect(stripHtmlTags('hello<script>x</script>world')).toBe('helloworld')
+  })
+
+  it('drops text after an unclosed script start tag', () => {
+    expect(stripHtmlTags('before<script>never closed')).toBe('before')
   })
 
   it('leaves invalid numeric decimal references unchanged (e.g. out of Unicode range)', () => {

@@ -9,6 +9,25 @@
 /** Tag-like sequences only (not bare `<` / `>`); allows whitespace around `/`. */
 const HTML_TAG_RE = /<\s*\/?\s*[A-Za-z][^>]*>/g
 
+/** Paired script/style: remove element and inner content (DOMPurify does not KEEP_CONTENT for these). */
+const SCRIPT_BLOCK_RE = /<\s*script\b[^>]*>[\s\S]*?<\s*\/\s*script\s*>/gi
+const STYLE_BLOCK_RE = /<\s*style\b[^>]*>[\s\S]*?<\s*\/\s*style\s*>/gi
+/** Unclosed opening script/style: drop the rest of the string (matches browser/DOMPurify recovery). */
+const SCRIPT_TAIL_RE = /<\s*script\b[^>]*>[\s\S]*/gi
+const STYLE_TAIL_RE = /<\s*style\b[^>]*>[\s\S]*/gi
+
+function removeScriptAndStyleBlocks(s: string): string {
+  let out = s
+  let prev = ''
+  while (out !== prev) {
+    prev = out
+    out = out
+      .replace(SCRIPT_BLOCK_RE, '')
+      .replace(STYLE_BLOCK_RE, '')
+  }
+  return out.replace(SCRIPT_TAIL_RE, '').replace(STYLE_TAIL_RE, '')
+}
+
 const ENTITY_MAP: Record<string, string> = {
   '&amp;': '&',
   '&lt;': '<',
@@ -50,7 +69,8 @@ function decodeHtmlEntitiesOnce(s: string): string {
 
 /**
  * Strip every HTML/XML tag from the input and decode common HTML entities.
- * Equivalent to `DOMPurify.sanitize(input, { ALLOWED_TAGS: [] })`.
+ * Matches `DOMPurify.sanitize(input, { ALLOWED_TAGS: [] })` for script/style:
+ * those elements and their inner content are removed, not only the tags.
  *
  * Decodes entities (iteratively) before stripping tags each round so entity-
  * encoded markup cannot survive as active tags after decode.
@@ -66,7 +86,7 @@ export function stripHtmlTags(input: string): string {
       dprev = decoded
       decoded = decodeHtmlEntitiesOnce(decoded)
     }
-    s = decoded.replace(HTML_TAG_RE, '')
+    s = removeScriptAndStyleBlocks(decoded).replace(HTML_TAG_RE, '')
   }
   return s
 }

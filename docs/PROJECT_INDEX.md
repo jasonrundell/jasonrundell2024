@@ -6,7 +6,7 @@ This index maps the repository structure, key runtime entry points, integrations
 ## Repository Map
 - `src/app`: Next.js App Router pages and API route handlers.
 - `src/components`: Reusable UI components.
-- `src/lib`: Shared libraries and integration clients (Contentful, tokens, utilities). `src/lib/strip-html-tags.ts`: `stripHtmlTags` for plain text (API routes, no jsdom). `src/lib/sanitize.ts`: `sanitizeHTML` via `isomorphic-dompurify` for safe markup with `dangerouslySetInnerHTML` (e.g. Contentful code marks). Side-import `dompurify-config` sets Node/jsdom env before DOMPurify loads.
+- `src/lib`: Shared libraries and integration clients (Contentful, tokens, utilities). `src/lib/strip-html-tags.ts`: `stripHtmlTags` for plain text (API routes, no jsdom); removes `script`/`style` blocks and inner content, then strips remaining tags and decodes entities. `src/lib/sanitize.ts`: `sanitizeHTML` via `isomorphic-dompurify` for safe markup with `dangerouslySetInnerHTML` (e.g. Contentful code marks). Side-import `dompurify-config` sets Node/jsdom env before DOMPurify loads.
 - `src/utils`: Cross-cutting helpers, including Supabase server/browser utilities.
 - `src/styles`: Global styles and style modules.
 - `src/data`: Static/local data modules.
