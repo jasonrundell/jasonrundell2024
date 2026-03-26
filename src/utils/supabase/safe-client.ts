@@ -123,7 +123,9 @@ export class SafeSupabaseClient {
       const supabase = await createClient()
       let query = supabase
         .from('users')
-        .select('id, email, full_name, provider, created_at, updated_at')
+        .select(
+          'id, email, full_name, provider, created_at, updated_at, auth_user_id, profile_slug, profile_slug_changed_at'
+        )
 
       if (email) {
         query = query.eq('email', email)
@@ -154,6 +156,59 @@ export class SafeSupabaseClient {
         .update(userData)
         .eq('email', email)
         .select()
+        .single()
+    })
+  }
+
+  /**
+   * Look up a user by their auth.users ID
+   */
+  async getUserByAuthId(authUserId: string) {
+    return this.execute(async () => {
+      const supabase = await createClient()
+      return await supabase
+        .from('users')
+        .select(
+          'id, auth_user_id, full_name, created_at, profile_slug, profile_slug_changed_at'
+        )
+        .eq('auth_user_id', authUserId)
+        .single()
+    })
+  }
+
+  /**
+   * Update a user's display name by their auth.users ID
+   */
+  async updateDisplayName(authUserId: string, displayName: string) {
+    return this.execute(async () => {
+      const supabase = await createClient()
+      return await supabase
+        .from('users')
+        .update({
+          full_name: displayName,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('auth_user_id', authUserId)
+        .select('id, auth_user_id, full_name')
+        .single()
+    })
+  }
+
+  /**
+   * Update profile slug (URL segment) for the authenticated user row
+   */
+  async updateProfileSlug(authUserId: string, profileSlug: string) {
+    return this.execute(async () => {
+      const supabase = await createClient()
+      return await supabase
+        .from('users')
+        .update({
+          profile_slug: profileSlug,
+          profile_slug_changed_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        })
+        .eq('auth_user_id', authUserId)
+        .select('profile_slug, profile_slug_changed_at')
         .single()
     })
   }

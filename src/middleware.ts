@@ -121,7 +121,9 @@ export async function middleware(request: NextRequest) {
   if (
     publicRoutes.includes(pathname) ||
     pathname.startsWith('/posts/') ||
-    pathname.startsWith('/projects/')
+    pathname.startsWith('/projects/') ||
+    pathname.startsWith('/users/') ||
+    pathname.startsWith('/u/')
   ) {
     return NextResponse.next()
   }

@@ -2,6 +2,7 @@ import { createSafeClient } from '@/utils/supabase/safe-client'
 import { redirect } from 'next/navigation'
 import ProfileClient from '@/app/profile/profile-client'
 import { AuthLayout } from '@/components/auth/auth-layout'
+import { generateInitialProfileSlug } from '@/lib/profile-slug'
 
 export default async function ProtectedPage() {
   const safeClient = createSafeClient()
@@ -52,8 +53,24 @@ export default async function ProtectedPage() {
       ? {
           full_name: userDataArray[0].full_name,
           created_at: userDataArray[0].created_at,
+          profile_slug: userDataArray[0].profile_slug as string | undefined,
+          profile_slug_changed_at: userDataArray[0].profile_slug_changed_at as
+            | string
+            | null
+            | undefined,
         }
       : undefined
+
+  // Backfill auth_user_id if missing on existing record
+  if (userData && userDataArray && userDataArray.length > 0) {
+    const existingAuthUserId = userDataArray[0].auth_user_id as
+      | string
+      | null
+      | undefined
+    if (!existingAuthUserId && user.email) {
+      await safeClient.updateUser(user.email, { auth_user_id: user.id })
+    }
+  }
 
   // If no user data exists, create a basic user record
   if (!userData && user.email) {
@@ -66,6 +83,12 @@ export default async function ProtectedPage() {
         {
           email: user.email,
           full_name: user.email.split('@')[0], // Use email prefix as fallback name
+          auth_user_id: user.id,
+          profile_slug: generateInitialProfileSlug(
+            user.email.split('@')[0] || 'user',
+            user.id
+          ),
+          profile_slug_changed_at: new Date().toISOString(),
           provider: 'email',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
@@ -80,10 +103,14 @@ export default async function ProtectedPage() {
           const userRecord = newUser as {
             full_name?: string
             created_at?: string
+            profile_slug?: string
+            profile_slug_changed_at?: string | null
           }
           userData = {
             full_name: userRecord.full_name || user.email.split('@')[0],
             created_at: userRecord.created_at || new Date().toISOString(),
+            profile_slug: userRecord.profile_slug,
+            profile_slug_changed_at: userRecord.profile_slug_changed_at ?? null,
           }
         }
       }
@@ -104,6 +131,7 @@ export default async function ProtectedPage() {
   const clientUser = {
     email: user.email || '',
     app_metadata: user.app_metadata || {},
+    id: user.id,
   }
 
   return (

@@ -35,6 +35,7 @@ import {
   StyledEmbeddedAsset,
   StyledLink,
 } from '@/styles/common'
+import CommentsSection from '@/components/comments/CommentsSection'
 
 type ProjectProps = {
   params: Promise<{ slug: string }>
@@ -217,6 +218,7 @@ export default async function page({ params }: ProjectProps) {
               </div>
             </Grid>
           </article>
+          <CommentsSection contentType="project" contentSlug={slug} />
         </StyledSection>
       </StyledContainer>
     </>

@@ -10,7 +10,7 @@ jest.mock('./ContactList', () => {
 
 jest.mock('./BackToTop', () => {
   return function MockBackToTop() {
-    return <button data-testid="back-to-top">Back to Top</button>
+    return <button data-testid="back-to-top">Back to top</button>
   }
 })
 
