@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/utils/supabase/server'
 import { rateLimit } from '@/lib/rate-limit'
-import DOMPurify from 'isomorphic-dompurify'
+import { stripHtmlTags } from '@/lib/sanitize'
 
 const COMMENT_FIELDS =
   'id, user_id, display_name, content_type, content_slug, body, created_at, updated_at'
@@ -156,7 +156,7 @@ export async function POST(request: NextRequest) {
     }
 
     const { contentType, slug, body } = parsed.data
-    const sanitizedBody = DOMPurify.sanitize(body, { ALLOWED_TAGS: [] })
+    const sanitizedBody = stripHtmlTags(body)
 
     if (!sanitizedBody.trim()) {
       return NextResponse.json(

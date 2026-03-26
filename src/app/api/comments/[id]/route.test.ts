@@ -20,8 +20,8 @@ jest.mock('@/lib/rate-limit', () => ({
   rateLimit: jest.fn(() => ({ success: true, remaining: 4 })),
 }))
 
-jest.mock('isomorphic-dompurify', () => ({
-  sanitize: jest.fn((input: string) => input),
+jest.mock('@/lib/sanitize', () => ({
+  stripHtmlTags: jest.fn((input: string) => input),
 }))
 
 const VALID_UUID = '123e4567-e89b-12d3-a456-426614174000'
