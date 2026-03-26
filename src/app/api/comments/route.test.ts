@@ -22,7 +22,7 @@ jest.mock('@/lib/rate-limit', () => ({
   rateLimit: jest.fn(() => ({ success: true, remaining: 4 })),
 }))
 
-jest.mock('@/lib/sanitize', () => ({
+jest.mock('@/lib/strip-html-tags', () => ({
   stripHtmlTags: jest.fn((input: string) => input),
 }))
 

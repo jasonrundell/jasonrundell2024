@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/utils/supabase/server'
 import { rateLimit } from '@/lib/rate-limit'
-import { stripHtmlTags } from '@/lib/sanitize'
+import { stripHtmlTags } from '@/lib/strip-html-tags'
 
 const COMMENT_FIELDS =
   'id, user_id, display_name, content_type, content_slug, body, created_at, updated_at'
