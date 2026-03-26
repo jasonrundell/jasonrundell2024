@@ -1,12 +1,16 @@
 /**
- * Lightweight plain-text sanitizer for server and serverless environments.
+ * HTML utilities for server-side use.
  *
- * Strips all HTML/XML tags and decodes common HTML entities so the stored
- * value is safe to render as text content (React JSX escapes by default).
+ * - stripHtmlTags: removes all tags and decodes common entities (plain text).
+ *   Use for APIs and anywhere markup must not appear.
+ * - sanitizeHTML: DOMPurify default allowlist; use with dangerouslySetInnerHTML
+ *   when safe markup (e.g. Contentful code marks: b, i, a) must be preserved.
  *
- * Replaces isomorphic-dompurify which requires jsdom and breaks in
- * Vercel serverless functions.
+ * Load dompurify-config before isomorphic-dompurify so Node/jsdom skips
+ * default-stylesheet.css in Next.js server environments.
  */
+import './dompurify-config'
+import DOMPurify from 'isomorphic-dompurify'
 
 const HTML_TAG_RE = /<[^>]*>/g
 
@@ -33,9 +37,9 @@ export function stripHtmlTags(input: string): string {
 }
 
 /**
- * Sanitize HTML — currently strips all tags (plain-text only).
- * Kept for backward-compatibility with any callers using the old API.
+ * Sanitize HTML for injection into the DOM: safe tags/attributes kept,
+ * dangerous content removed (same behavior as DOMPurify.sanitize with default config).
  */
 export function sanitizeHTML(html: string): string {
-  return stripHtmlTags(html)
+  return DOMPurify.sanitize(html)
 }
