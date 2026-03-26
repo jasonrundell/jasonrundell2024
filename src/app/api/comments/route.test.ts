@@ -22,8 +22,8 @@ jest.mock('@/lib/rate-limit', () => ({
   rateLimit: jest.fn(() => ({ success: true, remaining: 4 })),
 }))
 
-jest.mock('isomorphic-dompurify', () => ({
-  sanitize: jest.fn((input: string) => input),
+jest.mock('@/lib/strip-html-tags', () => ({
+  stripHtmlTags: jest.fn((input: string) => input),
 }))
 
 function makeRequest(url: string, init?: RequestInit): NextRequest {

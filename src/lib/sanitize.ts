@@ -1,14 +1,22 @@
 /**
- * Safe HTML sanitization utility for server and client environments.
- * Uses isomorphic-dompurify for robust, standards-compliant sanitization.
+ * HTML sanitization for server-side use with `dangerouslySetInnerHTML`.
  *
- * The jsdom default-stylesheet.css issue is handled by webpack plugins
- * in next.config.mjs that emit an empty CSS file to the output directory
- * and replace the require() call with an empty module.
+ * - sanitizeHTML: DOMPurify default allowlist; use when safe markup (e.g.
+ *   Contentful code marks: b, i, a) must be preserved.
+ *
+ * For plain text / API bodies without markup, import `stripHtmlTags` from
+ * `@/lib/strip-html-tags` so serverless routes do not load jsdom.
+ *
+ * Load dompurify-config before isomorphic-dompurify so Node/jsdom skips
+ * default-stylesheet.css in Next.js server environments.
  */
-
+import './dompurify-config'
 import DOMPurify from 'isomorphic-dompurify'
 
+/**
+ * Sanitize HTML for injection into the DOM: safe tags/attributes kept,
+ * dangerous content removed (same behavior as DOMPurify.sanitize with default config).
+ */
 export function sanitizeHTML(html: string): string {
   return DOMPurify.sanitize(html)
 }

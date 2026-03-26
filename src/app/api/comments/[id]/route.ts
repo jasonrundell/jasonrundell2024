@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { z } from 'zod'
 import { createClient } from '@/utils/supabase/server'
 import { rateLimit } from '@/lib/rate-limit'
-import DOMPurify from 'isomorphic-dompurify'
+import { stripHtmlTags } from '@/lib/strip-html-tags'
 
 const COMMENT_FIELDS =
   'id, user_id, display_name, content_type, content_slug, body, created_at, updated_at'
@@ -78,9 +78,7 @@ export async function PATCH(
       return NextResponse.json({ error: 'Invalid input' }, { status: 400 })
     }
 
-    const sanitizedBody = DOMPurify.sanitize(parsed.data.body, {
-      ALLOWED_TAGS: [],
-    })
+    const sanitizedBody = stripHtmlTags(parsed.data.body)
 
     if (!sanitizedBody.trim()) {
       return NextResponse.json(
