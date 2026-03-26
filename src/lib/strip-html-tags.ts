@@ -189,6 +189,16 @@ const MARK_LT = '\uE000'
 const MARK_GT = '\uE001'
 
 /**
+ * Remove PUA sentinels only from raw user input. They must never appear in the
+ * incoming string: otherwise they survive tag stripping and `unshieldAngleBrackets`
+ * turns them into real `<` / `>` (XSS if stored HTML is ever rendered).
+ * Stripping here does not affect entity-based shielding (`&lt;` has no U+E000 until decoded).
+ */
+function stripUserPrivateUseSentinels(s: string): string {
+  return s.replaceAll(MARK_LT, '').replaceAll(MARK_GT, '')
+}
+
+/**
  * Replace entity-encoded `<` / `>` with placeholders so tag stripping only
  * sees literally typed angle brackets. Matches HTML parsing: `&lt;div&gt;` is
  * text, not a `<div>` element.
@@ -263,7 +273,7 @@ function decodeHtmlEntitiesOnce(s: string): string {
  * stays harmless text through the strip phase (DOMPurify keeps it encoded).
  */
 export function stripHtmlTags(input: string): string {
-  let s = input
+  let s = stripUserPrivateUseSentinels(input)
   let prev = ''
   while (s !== prev) {
     prev = s

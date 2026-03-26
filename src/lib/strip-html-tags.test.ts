@@ -117,4 +117,10 @@ describe('stripHtmlTags', () => {
     expect(stripHtmlTags('&#xdfff;')).toBe('&#xdfff;')
   })
 
+  it('strips internal PUA sentinels from raw input so they cannot become angle brackets after unshield', () => {
+    const forged =
+      '\uE000script\uE001alert(1)\uE000/script\uE001'
+    expect(stripHtmlTags(forged)).toBe('scriptalert(1)/script')
+  })
+
 })
