@@ -18,7 +18,7 @@ const ENTITY_MAP: Record<string, string> = {
   '&#39;': "'",
   '&#x27;': "'",
   '&apos;': "'",
-  '&#x2F;': '/',
+  '&#x2f;': '/',
   '&#47;': '/',
 }
 const ENTITY_RE = new RegExp(Object.keys(ENTITY_MAP).join('|'), 'gi')

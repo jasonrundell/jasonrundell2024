@@ -27,6 +27,11 @@ describe('stripHtmlTags', () => {
     expect(stripHtmlTags('&amp; &lt; &gt; &quot; &#39;')).toBe('& < > " \'')
   })
 
+  it('decodes numeric hex slash entity regardless of hex digit casing', () => {
+    expect(stripHtmlTags('a&#x2F;b')).toBe('a/b')
+    expect(stripHtmlTags('a&#x2f;b')).toBe('a/b')
+  })
+
   it('handles mixed tags and entities', () => {
     expect(stripHtmlTags('<p>A &amp; B</p>')).toBe('A & B')
   })
