@@ -48,6 +48,18 @@ describe('stripHtmlTags', () => {
     expect(stripHtmlTags('<a href="https://evil.com">click</a>')).toBe('click')
   })
 
+  it('strips full tags when `>` appears inside a double-quoted attribute', () => {
+    expect(stripHtmlTags('<img src=">" onerror="alert(1)">')).toBe('')
+  })
+
+  it('strips full tags when `>` appears inside a single-quoted attribute', () => {
+    expect(stripHtmlTags("<img src='>' alt='x'>")).toBe('')
+  })
+
+  it('removes script blocks when opening tag has `>` inside a quoted attribute', () => {
+    expect(stripHtmlTags('<script type=">">alert(1)</script>')).toBe('')
+  })
+
   it('strips tags that only appear after entity decode (XSS via encoded angle brackets)', () => {
     expect(stripHtmlTags('&lt;script&gt;alert(1)&lt;/script&gt;')).toBe('')
   })

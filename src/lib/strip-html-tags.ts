@@ -6,26 +6,156 @@
  * `sanitizeHTML` from `@/lib/sanitize`.
  */
 
-/** Tag-like sequences only (not bare `<` / `>`); allows whitespace around `/`. */
-const HTML_TAG_RE = /<\s*\/?\s*[A-Za-z][^>]*>/g
+/**
+ * Index after `>` for a tag starting at `lt` (`<`), or -1 if not a tag-like
+ * sequence (`<` + optional `/` + name starting with a letter). Respects `"` and
+ * `'` so `>` inside quoted attributes does not end the tag.
+ */
+function findOpeningTagEnd(s: string, lt: number): number {
+  const n = s.length
+  let i = lt + 1
+  while (i < n && /\s/.test(s[i])) i++
+  if (i < n && s[i] === '/') i++
+  while (i < n && /\s/.test(s[i])) i++
+  if (i >= n || !/[A-Za-z]/.test(s[i])) return -1
+  i++
+  while (i < n && /[A-Za-z0-9-]/.test(s[i])) i++
+  while (i < n) {
+    const c = s[i]
+    if (c === '>') return i + 1
+    if (c === '"' || c === "'") {
+      const q = c
+      i++
+      while (i < n && s[i] !== q) i++
+      if (i < n) i++
+      continue
+    }
+    i++
+  }
+  return -1
+}
 
-/** Paired script/style: remove element and inner content (DOMPurify does not KEEP_CONTENT for these). */
-const SCRIPT_BLOCK_RE = /<\s*script\b[^>]*>[\s\S]*?<\s*\/\s*script\s*>/gi
-const STYLE_BLOCK_RE = /<\s*style\b[^>]*>[\s\S]*?<\s*\/\s*style\s*>/gi
-/** Unclosed opening script/style: drop the rest of the string (matches browser/DOMPurify recovery). */
-const SCRIPT_TAIL_RE = /<\s*script\b[^>]*>[\s\S]*/gi
-const STYLE_TAIL_RE = /<\s*style\b[^>]*>[\s\S]*/gi
+function removeGenericHtmlTags(s: string): string {
+  const parts: string[] = []
+  let pos = 0
+  while (pos < s.length) {
+    const lt = s.indexOf('<', pos)
+    if (lt === -1) {
+      parts.push(s.slice(pos))
+      break
+    }
+    parts.push(s.slice(pos, lt))
+    const end = findOpeningTagEnd(s, lt)
+    if (end === -1) {
+      parts.push('<')
+      pos = lt + 1
+    } else {
+      pos = end
+    }
+  }
+  return parts.join('')
+}
+
+const SCRIPT_NAME = 'script' as const
+const STYLE_NAME = 'style' as const
+
+/** Opening `<script` / `<style` only; returns index after `>`, or -1. */
+function findSpecialElementOpenEnd(
+  s: string,
+  lt: number,
+  tag: typeof SCRIPT_NAME | typeof STYLE_NAME
+): number {
+  const n = s.length
+  let i = lt + 1
+  while (i < n && /\s/.test(s[i])) i++
+  if (i < n && s[i] === '/') return -1
+  const frag = s.slice(i, i + tag.length).toLowerCase()
+  if (frag !== tag) return -1
+  i += tag.length
+  if (i < n && /[A-Za-z0-9]/.test(s[i])) return -1
+  while (i < n) {
+    const c = s[i]
+    if (c === '>') return i + 1
+    if (c === '"' || c === "'") {
+      const q = c
+      i++
+      while (i < n && s[i] !== q) i++
+      if (i < n) i++
+      continue
+    }
+    i++
+  }
+  return -1
+}
+
+/** First `</tag>` after `from` (case-insensitive; allows whitespace like `< / script >`). */
+function findClosingSpecialTag(
+  s: string,
+  from: number,
+  tag: typeof SCRIPT_NAME | typeof STYLE_NAME
+): number {
+  const n = s.length
+  let i = from
+  while (i < n) {
+    const lt = s.indexOf('<', i)
+    if (lt === -1) return -1
+    let j = lt + 1
+    while (j < n && /\s/.test(s[j])) j++
+    if (j >= n || s[j] !== '/') {
+      i = lt + 1
+      continue
+    }
+    j++
+    while (j < n && /\s/.test(s[j])) j++
+    if (j + tag.length > n) return -1
+    if (s.slice(j, j + tag.length).toLowerCase() !== tag) {
+      i = lt + 1
+      continue
+    }
+    j += tag.length
+    if (j < n && /[A-Za-z0-9]/.test(s[j])) {
+      i = lt + 1
+      continue
+    }
+    while (j < n && /\s/.test(s[j])) j++
+    if (j < n && s[j] === '>') return j + 1
+    i = lt + 1
+  }
+  return -1
+}
 
 function removeScriptAndStyleBlocks(s: string): string {
-  let out = s
-  let prev = ''
-  while (out !== prev) {
-    prev = out
-    out = out
-      .replace(SCRIPT_BLOCK_RE, '')
-      .replace(STYLE_BLOCK_RE, '')
+  const buf: string[] = []
+  let pos = 0
+  while (pos < s.length) {
+    const lt = s.indexOf('<', pos)
+    if (lt === -1) {
+      buf.push(s.slice(pos))
+      break
+    }
+    buf.push(s.slice(pos, lt))
+    const scriptEnd = findSpecialElementOpenEnd(s, lt, SCRIPT_NAME)
+    if (scriptEnd !== -1) {
+      const close = findClosingSpecialTag(s, scriptEnd, SCRIPT_NAME)
+      if (close !== -1) {
+        pos = close
+        continue
+      }
+      return buf.join('')
+    }
+    const styleEnd = findSpecialElementOpenEnd(s, lt, STYLE_NAME)
+    if (styleEnd !== -1) {
+      const close = findClosingSpecialTag(s, styleEnd, STYLE_NAME)
+      if (close !== -1) {
+        pos = close
+        continue
+      }
+      return buf.join('')
+    }
+    buf.push('<')
+    pos = lt + 1
   }
-  return out.replace(SCRIPT_TAIL_RE, '').replace(STYLE_TAIL_RE, '')
+  return buf.join('')
 }
 
 const ENTITY_MAP: Record<string, string> = {
@@ -96,7 +226,7 @@ export function stripHtmlTags(input: string): string {
       dprev = decoded
       decoded = decodeHtmlEntitiesOnce(decoded)
     }
-    s = removeScriptAndStyleBlocks(decoded).replace(HTML_TAG_RE, '')
+    s = removeGenericHtmlTags(removeScriptAndStyleBlocks(decoded))
   }
   return s
 }
