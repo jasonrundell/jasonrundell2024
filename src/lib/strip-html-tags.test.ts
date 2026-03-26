@@ -60,16 +60,23 @@ describe('stripHtmlTags', () => {
     expect(stripHtmlTags('<script type=">">alert(1)</script>')).toBe('')
   })
 
-  it('strips tags that only appear after entity decode (XSS via encoded angle brackets)', () => {
-    expect(stripHtmlTags('&lt;script&gt;alert(1)&lt;/script&gt;')).toBe('')
+  it('preserves entity-encoded angle brackets as text (DOMPurify parity; e.g. discussing HTML)', () => {
+    expect(stripHtmlTags('&lt;div&gt;')).toBe('<div>')
+    expect(stripHtmlTags('&lt;script&gt;alert(1)&lt;/script&gt;')).toBe(
+      '<script>alert(1)</script>'
+    )
   })
 
-  it('handles double-encoded entities that would become tags after one decode', () => {
-    expect(stripHtmlTags('&amp;lt;script&amp;gt;x&amp;lt;/script&amp;gt;')).toBe('')
+  it('keeps double-encoded markup as text after decode (no silent loss)', () => {
+    expect(stripHtmlTags('&amp;lt;script&amp;gt;x&amp;lt;/script&amp;gt;')).toBe(
+      '<script>x</script>'
+    )
   })
 
-  it('strips tags expressed with numeric character references', () => {
-    expect(stripHtmlTags('&#60;script&#62;y&#60;/script&#62;')).toBe('')
+  it('preserves angle brackets from numeric character references as text', () => {
+    expect(stripHtmlTags('&#60;script&#62;y&#60;/script&#62;')).toBe(
+      '<script>y</script>'
+    )
   })
 
   it('strips script tags when there is whitespace after the opening bracket', () => {

@@ -184,9 +184,53 @@ function isUnicodeScalarValue(code: number): boolean {
   )
 }
 
+/** Placeholders for angle brackets that came from character references (DOMPurify keeps these as text). */
+const MARK_LT = '\uE000'
+const MARK_GT = '\uE001'
+
 /**
- * Decode HTML entities (named + numeric) until stable so double-encoded
- * payloads like `&amp;lt;` cannot become tags after tag stripping.
+ * Replace entity-encoded `<` / `>` with placeholders so tag stripping only
+ * sees literally typed angle brackets. Matches HTML parsing: `&lt;div&gt;` is
+ * text, not a `<div>` element.
+ */
+function shieldEncodedAngleBrackets(s: string): string {
+  let out = s
+  let prev = ''
+  while (out !== prev) {
+    prev = out
+    out = out
+      .replace(/&lt;/gi, MARK_LT)
+      .replace(/&gt;/gi, MARK_GT)
+    out = out.replace(/&#(\d+);/g, (full, digits: string) => {
+      const n = Number.parseInt(digits, 10)
+      if (n === 60) {
+        return MARK_LT
+      }
+      if (n === 62) {
+        return MARK_GT
+      }
+      return full
+    })
+    out = out.replace(/&#x([0-9a-f]+);/gi, (full, hex: string) => {
+      const n = Number.parseInt(hex, 16)
+      if (n === 60) {
+        return MARK_LT
+      }
+      if (n === 62) {
+        return MARK_GT
+      }
+      return full
+    })
+  }
+  return out
+}
+
+function unshieldAngleBrackets(s: string): string {
+  return s.replaceAll(MARK_LT, '<').replaceAll(MARK_GT, '>')
+}
+
+/**
+ * Decode HTML entities (named + numeric) once. Caller loops until stable.
  */
 function decodeHtmlEntitiesOnce(s: string): string {
   let out = s.replace(ENTITY_RE, (match) => ENTITY_MAP[match.toLowerCase()] ?? match)
@@ -209,24 +253,28 @@ function decodeHtmlEntitiesOnce(s: string): string {
 
 /**
  * Strip every HTML/XML tag from the input and decode common HTML entities.
- * Matches `DOMPurify.sanitize(input, { ALLOWED_TAGS: [] })` for script/style:
+ * Aligns with `DOMPurify.sanitize(input, { ALLOWED_TAGS: [] })` for script/style:
  * those elements and their inner content are removed, not only the tags.
  *
- * Decodes entities (iteratively) before stripping tags each round so entity-
- * encoded markup cannot survive as active tags after decode.
+ * Entity-encoded angle brackets (`&lt;div&gt;`, etc.) are treated as text
+ * (like the HTML tokenizer), not as tag delimiters: they are shielded before
+ * stripping, then restored. Literally typed `<script>...</script>` is still
+ * removed. Double-encoded `&amp;lt;` is not unfolded during shielding, so it
+ * stays harmless text through the strip phase (DOMPurify keeps it encoded).
  */
 export function stripHtmlTags(input: string): string {
   let s = input
   let prev = ''
   while (s !== prev) {
     prev = s
-    let decoded = s
-    let dprev = ''
-    while (decoded !== dprev) {
-      dprev = decoded
-      decoded = decodeHtmlEntitiesOnce(decoded)
-    }
-    s = removeGenericHtmlTags(removeScriptAndStyleBlocks(decoded))
+    const shielded = shieldEncodedAngleBrackets(s)
+    s = removeGenericHtmlTags(removeScriptAndStyleBlocks(shielded))
+  }
+  s = unshieldAngleBrackets(s)
+  prev = ''
+  while (s !== prev) {
+    prev = s
+    s = decodeHtmlEntitiesOnce(s)
   }
   return s
 }
