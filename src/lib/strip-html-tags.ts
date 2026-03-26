@@ -44,6 +44,16 @@ const ENTITY_RE = new RegExp(Object.keys(ENTITY_MAP).join('|'), 'gi')
 const NUMERIC_DEC_RE = /&#(\d+);/g
 const NUMERIC_HEX_RE = /&#x([0-9a-f]+);/gi
 
+/** Valid for `String.fromCodePoint`: in range and not a lone surrogate (U+D800–U+DFFF). */
+function isUnicodeScalarValue(code: number): boolean {
+  return (
+    Number.isFinite(code) &&
+    code >= 0 &&
+    code <= 0x10ffff &&
+    (code < 0xd800 || code > 0xdfff)
+  )
+}
+
 /**
  * Decode HTML entities (named + numeric) until stable so double-encoded
  * payloads like `&amp;lt;` cannot become tags after tag stripping.
@@ -52,14 +62,14 @@ function decodeHtmlEntitiesOnce(s: string): string {
   let out = s.replace(ENTITY_RE, (match) => ENTITY_MAP[match.toLowerCase()] ?? match)
   out = out.replace(NUMERIC_DEC_RE, (full, digits: string) => {
     const code = Number.parseInt(digits, 10)
-    if (!Number.isFinite(code) || code < 0 || code > 0x10ffff) {
+    if (!isUnicodeScalarValue(code)) {
       return full
     }
     return String.fromCodePoint(code)
   })
   out = out.replace(NUMERIC_HEX_RE, (full, hex: string) => {
     const code = Number.parseInt(hex, 16)
-    if (!Number.isFinite(code) || code < 0 || code > 0x10ffff) {
+    if (!isUnicodeScalarValue(code)) {
       return full
     }
     return String.fromCodePoint(code)

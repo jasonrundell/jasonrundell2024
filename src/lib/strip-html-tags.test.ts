@@ -88,4 +88,14 @@ describe('stripHtmlTags', () => {
     expect(stripHtmlTags('&#x10FFFF;')).toBe('\u{10FFFF}')
   })
 
+  it('leaves surrogate lone code points as decimal NCRs (avoids RangeError)', () => {
+    expect(stripHtmlTags('&#55296;')).toBe('&#55296;')
+    expect(stripHtmlTags('&#57343;')).toBe('&#57343;')
+  })
+
+  it('leaves surrogate lone code points as hex NCRs (avoids RangeError)', () => {
+    expect(stripHtmlTags('&#xD800;')).toBe('&#xD800;')
+    expect(stripHtmlTags('&#xdfff;')).toBe('&#xdfff;')
+  })
+
 })
