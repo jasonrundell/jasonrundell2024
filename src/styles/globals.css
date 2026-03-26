@@ -63,7 +63,17 @@ h3 {
 }
 
 h4 {
-  font-size: var(--size-smallest);
+  font-size: var(--size-small);
+  font-weight: 700;
+}
+
+h5 {
+  font-size: var(--size-small);
+  font-weight: 700;
+}
+
+h6 {
+  font-size: var(--size-small);
   font-weight: 700;
 }
 
