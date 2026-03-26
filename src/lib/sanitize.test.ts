@@ -47,6 +47,22 @@ describe('stripHtmlTags', () => {
   it('handles attributes in tags', () => {
     expect(stripHtmlTags('<a href="https://evil.com">click</a>')).toBe('click')
   })
+
+  it('strips tags that only appear after entity decode (XSS via encoded angle brackets)', () => {
+    expect(stripHtmlTags('&lt;script&gt;alert(1)&lt;/script&gt;')).toBe('alert(1)')
+  })
+
+  it('handles double-encoded entities that would become tags after one decode', () => {
+    expect(stripHtmlTags('&amp;lt;script&amp;gt;x&amp;lt;/script&amp;gt;')).toBe('x')
+  })
+
+  it('strips tags expressed with numeric character references', () => {
+    expect(stripHtmlTags('&#60;script&#62;y&#60;/script&#62;')).toBe('y')
+  })
+
+  it('strips script tags when there is whitespace after the opening bracket', () => {
+    expect(stripHtmlTags('< script>alert(1)< /script>')).toBe('alert(1)')
+  })
 })
 
 describe('sanitizeHTML', () => {
