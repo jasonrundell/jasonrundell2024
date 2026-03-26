@@ -12,6 +12,11 @@ import {
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { rateLimit, type RateLimitConfig } from '@/lib/rate-limit'
+import {
+  profileSlugSchema as profileSlugFieldSchema,
+  normalizeProfileSlug,
+  getSlugChangeEligibility,
+} from '@/lib/profile-slug'
 
 // Rate limit configurations (per IP)
 const AUTH_RATE_LIMITS = {
@@ -20,6 +25,7 @@ const AUTH_RATE_LIMITS = {
   forgotPassword: { maxAttempts: 3, windowMs: 600_000 } satisfies RateLimitConfig,
   resetPassword: { maxAttempts: 3, windowMs: 600_000 } satisfies RateLimitConfig,
   changePassword: { maxAttempts: 3, windowMs: 600_000 } satisfies RateLimitConfig,
+  updateProfileSlug: { maxAttempts: 5, windowMs: 60_000 } satisfies RateLimitConfig,
 }
 
 async function getClientIp(): Promise<string> {
@@ -51,7 +57,15 @@ const passwordSchema = z
     'Password must contain at least one special character'
   )
 
+const displayNameSchema = z
+  .string()
+  .min(2, 'Display name must be at least 2 characters')
+  .max(50, 'Display name must be at most 50 characters')
+  .trim()
+
 const signUpSchema = z.object({
+  displayName: displayNameSchema,
+  profileSlug: profileSlugFieldSchema,
   email: emailSchema,
   password: passwordSchema,
 })
@@ -77,6 +91,10 @@ export const signUpAction = async (formData: FormData) => {
   }
 
   const rawData = {
+    displayName: formData.get('displayName')?.toString(),
+    profileSlug: normalizeProfileSlug(
+      formData.get('profileSlug')?.toString() ?? ''
+    ),
     email: formData.get('email')?.toString(),
     password: formData.get('password')?.toString(),
   }
@@ -90,11 +108,30 @@ export const signUpAction = async (formData: FormData) => {
     return encodedRedirect('error', '/sign-up', errorMessage)
   }
 
-  const { email, password } = validationResult.data
+  const { displayName, profileSlug, email, password } = validationResult.data
   const safeClient = createSafeClient()
   const origin = (await headers()).get('origin')
 
-  const { error, isPaused, isAvailable } = await safeClient.execute(
+  const slugTakenCheck = await safeClient.execute(async () => {
+    const supabase = await import('@/utils/supabase/server').then((m) =>
+      m.createClient()
+    )
+    return await supabase
+      .from('users')
+      .select('id')
+      .eq('profile_slug', profileSlug)
+      .maybeSingle()
+  })
+
+  if (slugTakenCheck.isAvailable && slugTakenCheck.data) {
+    return encodedRedirect(
+      'error',
+      '/sign-up',
+      'That profile URL is already taken. Please choose another.'
+    )
+  }
+
+  const { data: signUpData, error, isPaused, isAvailable } = await safeClient.execute(
     async () => {
       const supabase = await import('@/utils/supabase/server').then((m) =>
         m.createClient()
@@ -136,10 +173,17 @@ export const signUpAction = async (formData: FormData) => {
       JSON.stringify({ event: 'auth.signup', email, ip, ts: new Date().toISOString() })
     )
 
+    const authUserId = signUpData && typeof signUpData === 'object' && 'user' in signUpData
+      ? (signUpData as { user?: { id?: string } }).user?.id
+      : undefined
+
     try {
       await safeClient.insertUser({
         email,
-        full_name: email.split('@')[0],
+        full_name: displayName,
+        auth_user_id: authUserId || null,
+        profile_slug: profileSlug,
+        profile_slug_changed_at: new Date().toISOString(),
         provider: 'email',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
@@ -458,6 +502,174 @@ export const changePasswordAction = async (formData: FormData) => {
     })
   )
   return encodedRedirect('success', '/profile', 'Password changed successfully')
+}
+
+export const updateDisplayNameAction = async (formData: FormData) => {
+  const ip = await getClientIp()
+  const { success } = rateLimit(
+    `updateDisplayName:${ip}`,
+    AUTH_RATE_LIMITS.changePassword
+  )
+  if (!success) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'Too many attempts. Please try again later.'
+    )
+  }
+
+  const rawName = formData.get('displayName')?.toString()
+  const parseResult = displayNameSchema.safeParse(rawName)
+  if (!parseResult.success) {
+    const errorMessage = parseResult.error.issues
+      .map((e) => e.message)
+      .join(', ')
+    return encodedRedirect('error', '/profile', errorMessage)
+  }
+
+  const supabase = await createClient()
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser()
+
+  if (authError || !user) {
+    return encodedRedirect('error', '/profile', 'Unable to verify identity')
+  }
+
+  const safeClient = createSafeClient()
+  const { error } = await safeClient.updateDisplayName(
+    user.id,
+    parseResult.data
+  )
+
+  if (error) {
+    console.error('Display name update error:', error)
+    return encodedRedirect('error', '/profile', 'Failed to update display name')
+  }
+
+  console.info(
+    JSON.stringify({
+      event: 'profile.update_display_name',
+      userId: user.id,
+      ip,
+      ts: new Date().toISOString(),
+    })
+  )
+  return encodedRedirect(
+    'success',
+    '/profile',
+    'Display name updated successfully'
+  )
+}
+
+export const updateProfileSlugAction = async (formData: FormData) => {
+  const ip = await getClientIp()
+  const { success } = rateLimit(
+    `updateProfileSlug:${ip}`,
+    AUTH_RATE_LIMITS.updateProfileSlug
+  )
+  if (!success) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'Too many attempts. Please try again later.'
+    )
+  }
+
+  const raw = normalizeProfileSlug(formData.get('profileSlug')?.toString() ?? '')
+  const parsed = profileSlugFieldSchema.safeParse(raw)
+  if (!parsed.success) {
+    const errorMessage = parsed.error.issues.map((e) => e.message).join(', ')
+    return encodedRedirect('error', '/profile', errorMessage)
+  }
+
+  const supabase = await createClient()
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser()
+
+  if (authError || !user) {
+    return encodedRedirect('error', '/profile', 'Unable to verify identity')
+  }
+
+  const safeClient = createSafeClient()
+  const { data: row, error: fetchError } = await safeClient.getUserByAuthId(
+    user.id
+  )
+
+  if (fetchError || !row || typeof row !== 'object') {
+    return encodedRedirect('error', '/profile', 'Could not load profile')
+  }
+
+  const profileRow = row as {
+    profile_slug: string
+    profile_slug_changed_at: string | null
+  }
+
+  if (parsed.data === profileRow.profile_slug) {
+    return encodedRedirect(
+      'success',
+      '/profile',
+      'Profile URL is already set to that value.'
+    )
+  }
+
+  const { allowed, nextChangeAt } = getSlugChangeEligibility(
+    profileRow.profile_slug_changed_at
+  )
+  if (!allowed && nextChangeAt) {
+    const when = nextChangeAt.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+    return encodedRedirect(
+      'error',
+      '/profile',
+      `You can change your profile URL again on ${when}.`
+    )
+  }
+
+  const { data: conflict } = await supabase
+    .from('users')
+    .select('auth_user_id')
+    .eq('profile_slug', parsed.data)
+    .maybeSingle()
+
+  if (conflict && 'auth_user_id' in conflict && conflict.auth_user_id !== user.id) {
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'That profile URL is already taken.'
+    )
+  }
+
+  const { error } = await safeClient.updateProfileSlug(user.id, parsed.data)
+
+  if (error) {
+    console.error('Profile slug update error:', error)
+    return encodedRedirect(
+      'error',
+      '/profile',
+      'Failed to update profile URL. It may already be taken.'
+    )
+  }
+
+  console.info(
+    JSON.stringify({
+      event: 'profile.update_profile_slug',
+      userId: user.id,
+      ip,
+      ts: new Date().toISOString(),
+    })
+  )
+  return encodedRedirect(
+    'success',
+    '/profile',
+    'Profile URL updated successfully.'
+  )
 }
 
 export const signOutAction = async () => {

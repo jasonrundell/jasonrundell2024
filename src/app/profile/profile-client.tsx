@@ -5,7 +5,13 @@ import { Input } from '@/components/auth/ui/input'
 import { SubmitButton } from '@/components/auth/submit-button'
 import { FormMessage, Message } from '@/components/auth/form-message'
 import { PasswordStrength } from '@/components/auth/password-strength'
-import { changePasswordAction } from '@/app/actions'
+import {
+  changePasswordAction,
+  updateDisplayNameAction,
+  updateProfileSlugAction,
+} from '@/app/actions'
+import { getSlugChangeEligibility } from '@/lib/profile-slug'
+import Link from 'next/link'
 import {
   Calendar,
   Mail,
@@ -15,6 +21,7 @@ import {
   EyeOff,
   CheckCircle,
   XCircle,
+  User,
 } from 'lucide-react'
 import { styled } from '@pigment-css/react'
 import { useState } from 'react'
@@ -233,6 +240,7 @@ const RequirementsText = styled('p')`
 interface ProfileClientProps {
   user: {
     email: string
+    id: string
     app_metadata?: {
       provider?: string
     }
@@ -240,12 +248,17 @@ interface ProfileClientProps {
   userData?: {
     full_name?: string
     created_at?: string
+    profile_slug?: string
+    profile_slug_changed_at?: string | null
   }
   signOutAction: () => void
 }
 
 export default function ProfileClient({ user, userData }: ProfileClientProps) {
   const [isChangingPassword, setIsChangingPassword] = useState(false)
+  const [isEditingName, setIsEditingName] = useState(false)
+  const [editedName, setEditedName] = useState(userData?.full_name || '')
+  const [nameMessage, setNameMessage] = useState<Message | null>(null)
   const [showCurrentPassword, setShowCurrentPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -264,6 +277,10 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
       })
     : 'Unknown'
   const authMethod = user.app_metadata?.provider || 'email'
+
+  const profileSlug = userData?.profile_slug
+  const { allowed: canChangeProfileSlug, nextChangeAt } =
+    getSlugChangeEligibility(userData?.profile_slug_changed_at ?? null)
 
   const hasValidPasswordStrength = isPasswordValid(newPassword)
   const passwordsMatch = newPassword === confirmPassword
@@ -365,6 +382,156 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
             </StyledInfoValueCapitalize>
           </InfoCard>
         </InfoGrid>
+      </AccountInfoSection>
+
+      <AccountInfoSection>
+        <SectionTitle>Display Name</SectionTitle>
+        {!isEditingName ? (
+          <InfoCard>
+            <InfoCardHeader>
+              <User size={20} />
+              <StyledInfoLabel>Public Display Name</StyledInfoLabel>
+            </InfoCardHeader>
+            <InfoValue>{displayName}</InfoValue>
+            <ButtonGroup>
+              <SubmitButton
+                onClick={() => {
+                  setIsEditingName(true)
+                  setEditedName(displayName)
+                  setNameMessage(null)
+                }}
+                variant="outline"
+                size="sm"
+              >
+                Edit
+              </SubmitButton>
+            </ButtonGroup>
+          </InfoCard>
+        ) : (
+          <ChangePasswordForm
+            action={async (formData: FormData) => {
+              const name = formData.get('displayName')?.toString()?.trim()
+              if (!name || name.length < 2 || name.length > 50) {
+                setNameMessage({
+                  error: 'Display name must be between 2 and 50 characters.',
+                })
+                return
+              }
+              try {
+                await updateDisplayNameAction(formData)
+              } catch (err) {
+                console.error('Display name update error:', err)
+                setNameMessage({
+                  error: 'Failed to update display name. Please try again.',
+                })
+              }
+            }}
+          >
+            <FormRow>
+              <Label htmlFor="displayName">Display Name</Label>
+              <Input
+                type="text"
+                name="displayName"
+                id="displayName"
+                placeholder="Your public display name"
+                required
+                minLength={2}
+                maxLength={50}
+                value={editedName}
+                onChange={(e) => setEditedName(e.target.value)}
+              />
+            </FormRow>
+            {nameMessage && <FormMessage message={nameMessage} />}
+            <ButtonGroup>
+              <CancelButton
+                type="button"
+                onClick={() => {
+                  setIsEditingName(false)
+                  setNameMessage(null)
+                }}
+              >
+                Cancel
+              </CancelButton>
+              <SubmitButton
+                type="submit"
+                pendingText="Saving..."
+                disabled={
+                  !editedName.trim() ||
+                  editedName.trim().length < 2 ||
+                  editedName.trim().length > 50
+                }
+              >
+                Save
+              </SubmitButton>
+            </ButtonGroup>
+          </ChangePasswordForm>
+        )}
+      </AccountInfoSection>
+
+      <AccountInfoSection>
+        <SectionTitle>Profile URL</SectionTitle>
+        <PasswordRequirementsInfo>
+          <RequirementsTitle>Public profile link</RequirementsTitle>
+          <RequirementsText>
+            3–30 characters: lowercase letters, numbers, and hyphens only. You
+            can change this at most once every 90 days.
+          </RequirementsText>
+        </PasswordRequirementsInfo>
+        {profileSlug ? (
+          <>
+            <InfoCard>
+              <InfoCardHeader>
+                <User size={20} />
+                <StyledInfoLabel>Current link</StyledInfoLabel>
+              </InfoCardHeader>
+              <InfoValue>
+                <Link href={`/u/${profileSlug}`} style={{ color: 'inherit' }}>
+                  /u/{profileSlug}
+                </Link>
+              </InfoValue>
+            </InfoCard>
+            <ChangePasswordForm action={updateProfileSlugAction}>
+              <FormRow>
+                <Label htmlFor="profileSlug">Profile URL slug</Label>
+                <Input
+                  type="text"
+                  name="profileSlug"
+                  id="profileSlug"
+                  defaultValue={profileSlug}
+                  disabled={!canChangeProfileSlug}
+                  minLength={3}
+                  maxLength={30}
+                  autoComplete="off"
+                />
+              </FormRow>
+              {!canChangeProfileSlug && nextChangeAt && (
+                <RequirementsText>
+                  Next change available on{' '}
+                  {nextChangeAt.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                  .
+                </RequirementsText>
+              )}
+              <ButtonGroup>
+                <SubmitButton
+                  type="submit"
+                  pendingText="Saving..."
+                  disabled={!canChangeProfileSlug}
+                >
+                  Save profile URL
+                </SubmitButton>
+              </ButtonGroup>
+            </ChangePasswordForm>
+          </>
+        ) : (
+          <RequirementsText>
+            Your profile URL is not available yet. Refresh the page or contact
+            support if this persists.
+          </RequirementsText>
+        )}
       </AccountInfoSection>
 
       <ChangePasswordSection>

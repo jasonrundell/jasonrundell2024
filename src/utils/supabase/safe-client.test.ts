@@ -412,7 +412,7 @@ describe('safe-client', () => {
       })
       expect(mockSupabaseClient.from).toHaveBeenCalledWith('users')
       expect(mockQuery.select).toHaveBeenCalledWith(
-        'id, email, full_name, provider, created_at, updated_at'
+        'id, email, full_name, provider, created_at, updated_at, auth_user_id, profile_slug, profile_slug_changed_at'
       )
     })
 

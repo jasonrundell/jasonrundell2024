@@ -121,6 +121,35 @@ export default function SignUpClient({ success, error }: SignUpClientProps) {
         <FormWrapper action={signUpAction}>
           <FormMessage message={{ error }} />
           <FieldGroup>
+            <Label htmlFor="displayName">Display Name</Label>
+            <Input
+              name="displayName"
+              type="text"
+              placeholder="How others will see you"
+              minLength={2}
+              maxLength={50}
+              required
+            />
+          </FieldGroup>
+          <FieldGroup>
+            <Label htmlFor="profileSlug">Profile URL</Label>
+            <Input
+              name="profileSlug"
+              id="profileSlug"
+              type="text"
+              placeholder="your-name"
+              minLength={3}
+              maxLength={30}
+              required
+              autoComplete="off"
+              aria-describedby="profileSlug-hint"
+            />
+            <BottomText id="profileSlug-hint" style={{ marginTop: 0 }}>
+              Your public profile will be at /u/your-name. Use 3–30 lowercase
+              letters, numbers, and hyphens only.
+            </BottomText>
+          </FieldGroup>
+          <FieldGroup>
             <Label htmlFor="email">Email</Label>
             <Input
               name="email"
@@ -168,6 +197,35 @@ export default function SignUpClient({ success, error }: SignUpClientProps) {
   return (
     <AuthLayout title="Create an account" subtitle="Sign up to get started">
       <FormWrapper action={signUpAction}>
+        <FieldGroup>
+          <Label htmlFor="displayName">Display Name</Label>
+          <Input
+            name="displayName"
+            type="text"
+            placeholder="How others will see you"
+            minLength={2}
+            maxLength={50}
+            required
+          />
+        </FieldGroup>
+        <FieldGroup>
+          <Label htmlFor="profileSlug">Profile URL</Label>
+          <Input
+            name="profileSlug"
+            id="profileSlug"
+            type="text"
+            placeholder="your-name"
+            minLength={3}
+            maxLength={30}
+            required
+            autoComplete="off"
+            aria-describedby="profileSlug-hint-default"
+          />
+          <BottomText id="profileSlug-hint-default" style={{ marginTop: 0 }}>
+            Your public profile will be at /u/your-name. Use 3–30 lowercase
+            letters, numbers, and hyphens only.
+          </BottomText>
+        </FieldGroup>
         <FieldGroup>
           <Label htmlFor="email">Email</Label>
           <Input

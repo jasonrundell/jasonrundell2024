@@ -208,3 +208,23 @@ export interface LastSong extends EntrySkeletonType {
   url: string
   youtubeId?: string
 }
+
+export interface Comment {
+  id: string
+  user_id: string
+  display_name: string
+  /** Public profile path segment; links to /u/{profile_slug} */
+  profile_slug: string
+  content_type: 'post' | 'project'
+  content_slug: string
+  body: string
+  created_at: string
+  updated_at: string
+}
+
+export interface PublicProfile {
+  auth_user_id: string
+  full_name: string
+  profile_slug: string
+  created_at: string
+}

@@ -16,6 +16,7 @@ import {
   StyledBody,
   StyledBreadcrumb,
 } from '@/styles/common'
+import CommentsSection from '@/components/comments/CommentsSection'
 
 type PostProps = {
   params: Promise<{ slug: string }>
@@ -97,6 +98,7 @@ export default async function page({ params }: PostProps) {
             </StyledBody>
           </article>
           <Spacer />
+          <CommentsSection contentType="post" contentSlug={slug} />
         </StyledSection>
       </StyledContainer>
     </>
