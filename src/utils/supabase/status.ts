@@ -14,7 +14,10 @@ export async function checkSupabaseStatus(): Promise<SupabaseStatus> {
     const supabase = await createClient()
 
     // Try a simple query to test connectivity
-    const { error } = await supabase.from('users').select('id').limit(1)
+    const { error } = await supabase
+      .from('public_user_profiles')
+      .select('profile_slug')
+      .limit(1)
 
     if (error) {
       // Check if it's a paused project error

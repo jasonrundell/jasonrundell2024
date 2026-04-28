@@ -50,7 +50,7 @@ function setupGetCommentsSuccess(
 ) {
   const rows = [comment]
   mockFrom.mockImplementation((table: string) => {
-    if (table === 'users') {
+    if (table === 'public_user_profiles') {
       return {
         select: jest.fn().mockReturnValue({
           in: jest.fn().mockResolvedValue({
@@ -124,7 +124,7 @@ describe('GET /api/comments', () => {
 
   it('returns 500 on database error', async () => {
     mockFrom.mockImplementation((table: string) => {
-      if (table === 'users') {
+      if (table === 'public_user_profiles') {
         return {
           select: jest.fn().mockReturnValue({
             in: jest.fn().mockResolvedValue({ data: null, error: null }),

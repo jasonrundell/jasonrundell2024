@@ -55,7 +55,7 @@ This index is the first stop for contributors and agents. It maps the current mo
 
 ## Core Integrations
 - Contentful: `src/lib/contentful.ts`, configured by `CONTENTFUL_SPACE_ID` and `CONTENTFUL_ACCESS_TOKEN`.
-- Supabase: `src/utils/supabase/**`, schema reference in `src/lib/db/schema.sql`.
+- Supabase: `src/utils/supabase/**`, schema reference in `src/lib/db/schema.sql`. Anonymous or session-scoped reads of public profile fields use the `public_user_profiles` view (not `users`), because RLS on `users` cannot limit columns.
 - Sentry: `sentry.client.config.js`, `sentry.edge.config.js`, `sentry.server.config.js`, and `next.config.mjs`.
 - Design tokens: `src/lib/tokens.ts` generated from `src/lib/common.tokens.json`.
 

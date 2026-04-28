@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const supabase = await createClient()
   const { data: profile } = await supabase
-    .from('users')
+    .from('public_user_profiles')
     .select('full_name')
     .eq('profile_slug', parsed.data)
     .single()
@@ -80,7 +80,7 @@ export default async function PublicProfileBySlugPage({ params }: PageProps) {
   const supabase = await createClient()
 
   const { data: profile, error: profileError } = await supabase
-    .from('users')
+    .from('public_user_profiles')
     .select('full_name, auth_user_id, created_at')
     .eq('profile_slug', parsed.data)
     .single()

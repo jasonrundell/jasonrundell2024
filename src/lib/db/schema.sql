@@ -40,9 +40,9 @@ create policy "Users can view their own data"
   on public.users for select
   using (auth_user_id = auth.uid() or email = auth.jwt() ->> 'email');
 
-create policy "Public profiles are readable"
-  on public.users for select
-  using (profile_slug is not null);
+-- Anonymous read paths must use public.public_user_profiles (see below), not
+-- public.users: RLS is row-level, so any SELECT policy on users would expose
+-- every column (email, github_id, avatar_url, auth_user_id, etc.).
 
 create policy "Users can insert their own data"
   on public.users for insert
@@ -52,6 +52,21 @@ create policy "Users can update their own data"
   on public.users for update
   using (auth_user_id = auth.uid() or email = auth.jwt() ->> 'email')
   with check (auth_user_id = auth.uid() or email = auth.jwt() ->> 'email');
+
+create or replace view public.public_user_profiles
+  with (security_invoker = false) as
+select
+  profile_slug,
+  full_name,
+  auth_user_id,
+  created_at
+from public.users
+where profile_slug is not null;
+
+comment on view public.public_user_profiles is
+  'Public read surface for profiles with a slug; avoids exposing email, github_id, etc.';
+
+grant select on public.public_user_profiles to anon, authenticated;
 
 create table if not exists public.comments (
   id uuid default uuid_generate_v4() primary key,
