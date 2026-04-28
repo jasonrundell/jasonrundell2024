@@ -22,9 +22,9 @@ const StyledSongInfo = styled('div')`
 const StyledSkeleton = styled('div')`
   background: linear-gradient(
     90deg,
-    ${Tokens.colors.backgroundDark.value} 0%,
-    ${Tokens.colors.background.value} 50%,
-    ${Tokens.colors.backgroundDark.value} 100%
+    ${Tokens.colors.surfaceElevated.var} 0%,
+    ${Tokens.colors.surfaceBase.var} 50%,
+    ${Tokens.colors.surfaceElevated.var} 100%
   );
   background-size: 2000px 100%;
   animation: ${shimmer} 2s infinite;

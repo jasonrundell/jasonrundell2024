@@ -56,14 +56,14 @@ const UserAvatar = styled('div')`
   height: 5rem;
   width: 5rem;
   border-radius: 50%;
-  background: ${Tokens.colors.primary.value};
+  background: ${Tokens.colors.rolePrompt.var};
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
   font-weight: bold;
   color: white;
-  border: 4px solid ${Tokens.colors.backgroundDarker.value};
+  border: 4px solid ${Tokens.colors.surfaceDeepest.var};
   box-shadow: 0 4px 20px ${Tokens.colors.primary.value}4D;
 `
 
@@ -71,13 +71,13 @@ const UserName = styled('h2')`
   font-size: 1.75rem;
   font-weight: 600;
   margin: 0;
-  color: ${Tokens.colors.textPrimary.value};
+  color: ${Tokens.colors.roleBody.var};
 `
 
 const UserEmail = styled('p')`
   font-size: 1rem;
   margin: 0;
-  color: ${Tokens.colors.textSecondary.value};
+  color: ${Tokens.colors.textSecondary.var};
   opacity: 0.8;
 `
 
@@ -91,7 +91,7 @@ const SectionTitle = styled('h3')`
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
-  color: ${Tokens.colors.textPrimary.value};
+  color: ${Tokens.colors.roleBody.var};
   text-align: center;
 `
 
@@ -102,7 +102,7 @@ const InfoGrid = styled('div')`
 `
 
 const InfoCard = styled('div')`
-  background: ${Tokens.colors.backgroundDarker.value};
+  background: ${Tokens.colors.surfaceDeepest.var};
   border-radius: ${Tokens.borderRadius.large.value}${Tokens.borderRadius.large.unit};
   padding: 1.25rem;
   border: 1px solid ${Tokens.colors.primary.value}20;
@@ -119,18 +119,18 @@ const InfoCardHeader = styled('div')`
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 0.75rem;
-  color: ${Tokens.colors.primary.value};
+  color: ${Tokens.colors.rolePrompt.var};
 `
 
 const InfoValue = styled('div')`
   font-size: 1rem;
   font-weight: 500;
-  color: ${Tokens.colors.textPrimary.value};
+  color: ${Tokens.colors.roleBody.var};
   padding: 0.5rem 0;
 `
 
 const StyledInfoLabel = styled(Label)`
-  color: ${Tokens.colors.primary.value} !important;
+  color: ${Tokens.colors.rolePrompt.var} !important;
   margin: 0 !important;
 `
 
@@ -148,7 +148,7 @@ const ChangePasswordForm = styled('form')`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  background: ${Tokens.colors.backgroundDarker.value};
+  background: ${Tokens.colors.surfaceDeepest.var};
   border-radius: ${Tokens.borderRadius.large.value}${Tokens.borderRadius.large.unit};
   padding: 1.5rem;
   border: 1px solid ${Tokens.colors.primary.value}20;
@@ -171,7 +171,7 @@ const PasswordToggleButton = styled('button')`
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: ${Tokens.colors.textSecondary.value};
+  color: ${Tokens.colors.textSecondary.var};
   cursor: pointer;
   padding: 0.25rem;
   display: flex;
@@ -180,7 +180,7 @@ const PasswordToggleButton = styled('button')`
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.rolePrompt.var};
   }
 `
 
@@ -193,8 +193,8 @@ const ButtonGroup = styled('div')`
 
 const CancelButton = styled('button')`
   background: none;
-  border: 1px solid ${Tokens.colors.textSecondary.value};
-  color: ${Tokens.colors.textSecondary.value};
+  border: 1px solid ${Tokens.colors.textSecondary.var};
+  color: ${Tokens.colors.textSecondary.var};
   padding: 0.75rem 1.5rem;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   cursor: pointer;
@@ -202,8 +202,8 @@ const CancelButton = styled('button')`
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: ${Tokens.colors.textPrimary.value};
-    color: ${Tokens.colors.textPrimary.value};
+    border-color: ${Tokens.colors.roleBody.var};
+    color: ${Tokens.colors.roleBody.var};
   }
 `
 
@@ -227,13 +227,13 @@ const RequirementsTitle = styled('h4')`
   font-size: 0.875rem;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
-  color: ${Tokens.colors.primary.value};
+  color: ${Tokens.colors.rolePrompt.var};
 `
 
 const RequirementsText = styled('p')`
   font-size: 0.875rem;
   margin: 0;
-  color: ${Tokens.colors.textSecondary.value};
+  color: ${Tokens.colors.textSecondary.var};
   line-height: 1.4;
 `
 
@@ -654,8 +654,8 @@ export default function ProfileClient({ user, userData }: ProfileClientProps) {
                 <PasswordMatchIndicator
                   style={{
                     color: passwordsMatch
-                      ? Tokens.colors.success.value
-                      : Tokens.colors.error.value,
+                      ? Tokens.colors.roleSuccess.var
+                      : Tokens.colors.roleDanger.var,
                   }}
                 >
                   {passwordsMatch ? (

@@ -59,8 +59,8 @@ const StyledButton = styled('button')`
   }
   /* Variant styles */
   &.variant-default {
-    background: ${Tokens.colors.primary.value};
-    color: ${Tokens.colors.background.value};
+    background: ${Tokens.colors.rolePrompt.var};
+    color: ${Tokens.colors.surfaceBase.var};
   }
   &.variant-default:hover {
     background: ${Tokens.colors.primary.value}CC;
@@ -69,7 +69,7 @@ const StyledButton = styled('button')`
     box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
   }
   &.variant-destructive {
-    background: ${Tokens.colors.error.value};
+    background: ${Tokens.colors.roleDanger.var};
     color: #fff;
   }
   &.variant-destructive:hover {
@@ -80,42 +80,42 @@ const StyledButton = styled('button')`
   }
   &.variant-outline {
     background: transparent;
-    color: ${Tokens.colors.primary.value};
-    border: 1.5px solid ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.rolePrompt.var};
+    border: 1.5px solid ${Tokens.colors.rolePrompt.var};
   }
   &.variant-outline:hover {
-    background: ${Tokens.colors.backgroundDark.value};
+    background: ${Tokens.colors.surfaceElevated.var};
   }
   &.variant-outline:focus-visible {
     box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
   }
   &.variant-secondary {
-    background: ${Tokens.colors.secondary.value};
-    color: ${Tokens.colors.background.value};
+    background: ${Tokens.colors.roleHeading.var};
+    color: ${Tokens.colors.surfaceBase.var};
   }
   &.variant-secondary:hover {
-    background: ${Tokens.colors.secondaryVariant.value};
+    background: ${Tokens.colors.secondaryVariant.var};
   }
   &.variant-secondary:focus-visible {
     box-shadow: 0 0 0 2px ${Tokens.colors.secondary.value}99;
   }
   &.variant-ghost {
     background: transparent;
-    color: ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.rolePrompt.var};
   }
   &.variant-ghost:hover {
-    background: ${Tokens.colors.backgroundDark.value};
+    background: ${Tokens.colors.surfaceElevated.var};
   }
   &.variant-ghost:focus-visible {
     box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
   }
   &.variant-link {
     background: none;
-    color: ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.rolePrompt.var};
     text-decoration: underline;
   }
   &.variant-link:hover {
-    color: ${Tokens.colors.primaryVariant.value};
+    color: ${Tokens.colors.primaryVariant.var};
   }
   &.variant-link:focus-visible {
     box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;

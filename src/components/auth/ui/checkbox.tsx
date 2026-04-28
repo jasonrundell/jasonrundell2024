@@ -12,8 +12,8 @@ const StyledCheckboxRoot = styled(CheckboxPrimitive.Root)`
   min-width: 1.25rem;
   min-height: 1.25rem;
   border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
-  border: 1.5px solid ${Tokens.colors.primary.value};
-  background: ${Tokens.colors.backgroundDark.value};
+  border: 1.5px solid ${Tokens.colors.rolePrompt.var};
+  background: ${Tokens.colors.surfaceElevated.var};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,12 +23,12 @@ const StyledCheckboxRoot = styled(CheckboxPrimitive.Root)`
   &:focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}55;
-    border-color: ${Tokens.colors.primary.value};
+    border-color: ${Tokens.colors.rolePrompt.var};
   }
   &[data-state='checked'] {
-    background: ${Tokens.colors.primary.value};
-    color: ${Tokens.colors.background.value};
-    border-color: ${Tokens.colors.primary.value};
+    background: ${Tokens.colors.rolePrompt.var};
+    color: ${Tokens.colors.surfaceBase.var};
+    border-color: ${Tokens.colors.rolePrompt.var};
   }
   &:disabled {
     opacity: 0.5;
@@ -40,7 +40,7 @@ const StyledCheckboxIndicator = styled(CheckboxPrimitive.Indicator)`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${Tokens.colors.background.value};
+  color: ${Tokens.colors.surfaceBase.var};
   width: 100%;
   height: 100%;
 `

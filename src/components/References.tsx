@@ -28,14 +28,14 @@ const StyledReferencesGrid = styled('section')`
 `
 
 const StyledReferenceCard = styled('article')`
-  background: ${Tokens.colors.backgroundDarker.value};
-  border: 1px solid ${Tokens.colors.background.value};
+  background: ${Tokens.colors.surfaceDeepest.var};
+  border: 1px solid ${Tokens.colors.surfaceBase.var};
   border-radius: ${borderRadiusMedium};
   padding: ${paddingLarge};
   display: flex;
   flex-direction: column;
   gap: ${spacingMedium};
-  color: ${Tokens.colors.secondary.value};
+  color: ${Tokens.colors.roleHeading.var};
   box-shadow: ${Tokens.shadows.small.value} ${Tokens.colors.background.value}33;
 `
 
@@ -44,7 +44,7 @@ const StyledQuote = styled(Blockquote)`
   font-family: ${Tokens.fonts.body.family};
   font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
   line-height: ${Tokens.sizes.lineHeight.value}${Tokens.sizes.lineHeight.unit};
-  color: ${Tokens.colors.textPrimary.value};
+  color: ${Tokens.colors.roleBody.var};
 
   &::before {
     top: -0.5rem !important;
@@ -64,7 +64,7 @@ const StyledReferenceMeta = styled('div')`
 
 const StyledCite = styled('span')`
   font-weight: 600;
-  color: ${Tokens.colors.white.value};
+  color: ${Tokens.colors.white.var};
   font-size: ${Tokens.fontSizes.base.value}${Tokens.fontSizes.base.unit};
 `
 
@@ -72,7 +72,7 @@ const StyledCompany = styled('span')`
   font-size: ${Tokens.fontSizes.sm.value}${Tokens.fontSizes.sm.unit};
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: ${Tokens.colors.textSecondary.value};
+  color: ${Tokens.colors.textSecondary.var};
 `
 
 function ensureField<Value>(value: Value, label: string, index: number): Value {

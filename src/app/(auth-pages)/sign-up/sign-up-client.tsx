@@ -31,7 +31,7 @@ const FullWidthButton = styled(SubmitButton)`
 
 const BottomText = styled('p')`
   text-align: center;
-  color: ${Tokens.colors.textSecondary.value};
+  color: ${Tokens.colors.textSecondary.var};
   font-size: 1rem;
   margin-top: 1.5rem;
 `
@@ -49,7 +49,7 @@ const SuccessIcon = styled('div')`
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: ${Tokens.colors.primary.value};
+  background: ${Tokens.colors.rolePrompt.var};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,14 +58,14 @@ const SuccessIcon = styled('div')`
 `
 
 const SuccessTitle = styled('h1')`
-  color: ${Tokens.colors.secondary.value};
+  color: ${Tokens.colors.roleHeading.var};
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
 `
 
 const SuccessMessage = styled('p')`
-  color: ${Tokens.colors.textSecondary.value};
+  color: ${Tokens.colors.textSecondary.var};
   font-size: 1rem;
   line-height: 1.5;
   margin: 0;
@@ -75,7 +75,7 @@ const SuccessMessage = styled('p')`
 const ActionButton = styled(StyledLink)`
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background: ${Tokens.colors.primary.value};
+  background: ${Tokens.colors.rolePrompt.var};
   color: white;
   text-decoration: none;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
@@ -83,8 +83,7 @@ const ActionButton = styled(StyledLink)`
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${Tokens.colors.primaryHover?.value ||
-    Tokens.colors.primary.value};
+    background: ${Tokens.colors.primaryVariant.var};
   }
 `
 

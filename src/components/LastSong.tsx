@@ -32,13 +32,13 @@ const StyledIconWrapper = styled('span')`
 const StyledTitle = styled('h3')`
   margin: 0;
   font-size: ${Tokens.sizes.fonts.large.value}${Tokens.sizes.fonts.large.unit};
-  color: ${Tokens.colors.secondary.value};
+  color: ${Tokens.colors.roleHeading.var};
 `
 
 const StyledArtist = styled('p')`
   margin: 0;
   font-size: ${Tokens.sizes.fonts.medium.value}${Tokens.sizes.fonts.medium.unit};
-  color: ${Tokens.colors.secondary.value};
+  color: ${Tokens.colors.roleHeading.var};
 `
 
 const StyledActions = styled('div')`
@@ -53,8 +53,8 @@ const StyledPlayButton = styled('button')`
   gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
   padding: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall
       .unit} ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
-  background: ${Tokens.colors.primary.value};
-  color: ${Tokens.colors.background.value};
+  background: ${Tokens.colors.rolePrompt.var};
+  color: ${Tokens.colors.surfaceBase.var};
   border: none;
   border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
   cursor: pointer;
@@ -74,7 +74,7 @@ const StyledPlayButton = styled('button')`
 
 const StyledVideoModalContent = styled(StyledModalContent)`
   max-width: 800px;
-  background: ${Tokens.colors.background.value};
+  background: ${Tokens.colors.surfaceBase.var};
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   padding: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
 `

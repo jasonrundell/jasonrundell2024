@@ -23,7 +23,7 @@ const StyledImage = styled('div')`
   position: relative;
   display: flex;
   object-fit: cover;
-  background-color: ${Tokens.colors.backgroundDarker.value};
+  background-color: ${Tokens.colors.surfaceDeepest.var};
 `
 
 const StyledHeading = styled('h3')`

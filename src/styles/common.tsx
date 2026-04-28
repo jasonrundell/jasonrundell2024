@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Tokens from '@/lib/tokens'
 
 export const StyledDivBgDark = styled('div')`
-  background-color: ${Tokens.colors.backgroundDark.value};
+  background-color: ${Tokens.colors.surfaceElevated.var};
 `
 
 export const StyledIntroParagraph = styled('p')`
@@ -48,7 +48,7 @@ export const StyledSection = styled('section')`
 
 export const StyledBody = styled('div')`
   a {
-    color: ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.rolePrompt.var};
   }
   p {
     width: 100%;
@@ -64,7 +64,7 @@ export const StyledBody = styled('div')`
   }
   h3 {
     width: 100%;
-    color: ${Tokens.colors.secondary.value};
+    color: ${Tokens.colors.roleHeading.var};
   }
   h4 {
     width: 100%;
@@ -82,19 +82,19 @@ export const StyledBreadcrumb = styled('div')`
   padding-bottom: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
 
   a {
-    color: ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.rolePrompt.var};
   }
 `
 
 export const StyledMorePostsHeading = styled('h2')`
   font-size: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
   font-weight: 700;
-  color: ${Tokens.colors.secondary.value};
+  color: ${Tokens.colors.roleHeading.var};
 `
 
 export const StyledHeading = styled(Heading)`
   font-weight: 700;
-  color: ${Tokens.colors.secondary.value};
+  color: ${Tokens.colors.roleHeading.var};
   margin-bottom: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit} !important;
 `
 
@@ -106,7 +106,7 @@ export const StyledHeading3 = styled(Heading)`
 export const StyledDescription = styled('p')`
   font-size: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   text-transform: italic;
-  color: ${Tokens.colors.secondary.value};
+  color: ${Tokens.colors.roleHeading.var};
   width: 100%;
 `
 
@@ -134,7 +134,7 @@ export const StyledImageContainer = styled('div')`
   margin: 0;
   overflow: hidden;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
-  background-color: ${Tokens.colors.backgroundDarker.value};
+  background-color: ${Tokens.colors.surfaceDeepest.var};
 
   @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
       .breakpoints.medium.unit}) {
@@ -157,7 +157,7 @@ export const StyledLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
-  color: ${Tokens.colors.primary.value};
+  color: ${Tokens.colors.rolePrompt.var};
   text-decoration: none;
   transition: color 0.15s;
   text-decoration: underline;
@@ -175,7 +175,7 @@ export const StyledModal = styled('div')`
   left: 0;
   right: 0;
   bottom: 0;
-  background: ${Tokens.colors.surface.value};
+  background: ${Tokens.colors.surfaceOverlay.var};
   z-index: ${Tokens.zIndex.modal.value};
   display: flex;
   align-items: center;
@@ -199,7 +199,7 @@ export const StyledCloseButton = styled('button')`
   right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   background: ${Tokens.colors.white.value}36;
   border: none;
-  color: ${Tokens.colors.primary.value};
+  color: ${Tokens.colors.rolePrompt.var};
   cursor: pointer;
   width: 3rem;
   height: 3rem;

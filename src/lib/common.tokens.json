@@ -203,6 +203,46 @@
     "white": {
       "value": "#ffffff",
       "unit": "hex"
+    },
+    "rolePrompt": {
+      "value": "#e9be62",
+      "unit": "hex"
+    },
+    "roleSuccess": {
+      "value": "#63db53",
+      "unit": "hex"
+    },
+    "roleInfo": {
+      "value": "#7dd3c0",
+      "unit": "hex"
+    },
+    "roleDanger": {
+      "value": "#d93f3f",
+      "unit": "hex"
+    },
+    "roleBody": {
+      "value": "#9aaec6",
+      "unit": "hex"
+    },
+    "roleHeading": {
+      "value": "#eeeeee",
+      "unit": "hex"
+    },
+    "surfaceBase": {
+      "value": "#232f3e",
+      "unit": "hex"
+    },
+    "surfaceElevated": {
+      "value": "#1c2531",
+      "unit": "hex"
+    },
+    "surfaceDeepest": {
+      "value": "#151c25",
+      "unit": "hex"
+    },
+    "surfaceOverlay": {
+      "value": "#000000",
+      "unit": "hex"
     }
   },
   "fontSizes": {
