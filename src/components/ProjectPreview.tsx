@@ -7,7 +7,7 @@ import Tokens from '@/lib/tokens'
 
 interface ProjectPreviewProps {
   title: string
-  image: {
+  image?: {
     file: {
       url: string
     }
@@ -41,7 +41,7 @@ export default function ProjectPreview({
 }: ProjectPreviewProps) {
   return (
     <div>
-      {image && image.file && (
+      {image?.file?.url && (
         <Row>
           <StyledImage>
             <ProjectPreviewImage

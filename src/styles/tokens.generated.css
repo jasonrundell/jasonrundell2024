@@ -43,28 +43,28 @@
   --color-secondary: #eeeeee;
   --color-secondary-variant: #018786;
   --color-accent: #ff4081;
-  --color-background: #232f3e;
-  --color-background-dark: #1c2531;
-  --color-background-darker: #151c25;
+  --color-background: #151c25;
+  --color-background-dark: #0e131a;
+  --color-background-darker: #0e131a;
   --color-surface: #000000;
-  --color-text-primary: #9aaec6;
+  --color-text-primary: #b8c5d6;
   --color-text-secondary: #757575;
   --color-border: #dddddd;
   --color-link: #0070f3;
   --color-muted: #f6f6f6;
-  --color-success: #63db53;
+  --color-success: #9ece6a;
   --color-warning: #f5a623;
-  --color-error: #d93f3f;
+  --color-error: #f7768e;
   --color-white: #ffffff;
   --color-role-prompt: #e9be62;
-  --color-role-success: #63db53;
+  --color-role-success: #9ece6a;
   --color-role-info: #7dd3c0;
-  --color-role-danger: #d93f3f;
-  --color-role-body: #9aaec6;
+  --color-role-danger: #f7768e;
+  --color-role-body: #b8c5d6;
   --color-role-heading: #eeeeee;
-  --color-surface-base: #232f3e;
-  --color-surface-elevated: #1c2531;
-  --color-surface-deepest: #151c25;
+  --color-surface-base: #151c25;
+  --color-surface-elevated: #232f3e;
+  --color-surface-deepest: #0e131a;
   --color-surface-overlay: #000000;
 
   /* fontSizes */
@@ -100,8 +100,8 @@
   --z-index-modal-content: 10000;
 
   /* fonts */
-  --font-family-body: Outfit, Arial, sans-serif;
-  --font-family-heading: Georgia, serif;
-  --font-family-monospace: Courier New, monospace;
-  --font-family-quotes: 'Times New Roman', Times, serif;
+  --font-family-body: var(--font-geist-sans), Geist, system-ui, sans-serif;
+  --font-family-heading: var(--font-geist-sans), Geist, system-ui, sans-serif;
+  --font-family-monospace: var(--font-geist-mono), 'Geist Mono', ui-monospace, 'Courier New', monospace;
+  --font-family-quotes: var(--font-geist-sans), Geist, system-ui, sans-serif;
 }

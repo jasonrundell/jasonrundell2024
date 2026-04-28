@@ -153,15 +153,15 @@
       "unit": "hex"
     },
     "background": {
-      "value": "#232f3e",
+      "value": "#151c25",
       "unit": "hex"
     },
     "backgroundDark": {
-      "value": "#1c2531",
+      "value": "#0e131a",
       "unit": "hex"
     },
     "backgroundDarker": {
-      "value": "#151c25",
+      "value": "#0e131a",
       "unit": "hex"
     },
     "surface": {
@@ -169,7 +169,7 @@
       "unit": "hex"
     },
     "textPrimary": {
-      "value": "#9aaec6",
+      "value": "#b8c5d6",
       "unit": "hex"
     },
     "textSecondary": {
@@ -189,7 +189,7 @@
       "unit": "hex"
     },
     "success": {
-      "value": "#63db53",
+      "value": "#9ece6a",
       "unit": "hex"
     },
     "warning": {
@@ -197,7 +197,7 @@
       "unit": "hex"
     },
     "error": {
-      "value": "#d93f3f",
+      "value": "#f7768e",
       "unit": "hex"
     },
     "white": {
@@ -209,7 +209,7 @@
       "unit": "hex"
     },
     "roleSuccess": {
-      "value": "#63db53",
+      "value": "#9ece6a",
       "unit": "hex"
     },
     "roleInfo": {
@@ -217,11 +217,11 @@
       "unit": "hex"
     },
     "roleDanger": {
-      "value": "#d93f3f",
+      "value": "#f7768e",
       "unit": "hex"
     },
     "roleBody": {
-      "value": "#9aaec6",
+      "value": "#b8c5d6",
       "unit": "hex"
     },
     "roleHeading": {
@@ -229,15 +229,15 @@
       "unit": "hex"
     },
     "surfaceBase": {
-      "value": "#232f3e",
+      "value": "#151c25",
       "unit": "hex"
     },
     "surfaceElevated": {
-      "value": "#1c2531",
+      "value": "#232f3e",
       "unit": "hex"
     },
     "surfaceDeepest": {
-      "value": "#151c25",
+      "value": "#0e131a",
       "unit": "hex"
     },
     "surfaceOverlay": {
@@ -345,16 +345,16 @@
   },
   "fonts": {
     "body": {
-      "family": "Outfit, Arial, sans-serif"
+      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif"
     },
     "heading": {
-      "family": "Georgia, serif"
+      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif"
     },
     "monospace": {
-      "family": "Courier New, monospace"
+      "family": "var(--font-geist-mono), 'Geist Mono', ui-monospace, 'Courier New', monospace"
     },
     "quotes": {
-      "family": "'Times New Roman', Times, serif"
+      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif"
     }
   },
   "### NOTES ###": {

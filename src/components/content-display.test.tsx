@@ -346,27 +346,49 @@ describe('content display components', () => {
     expect(screen.getByText('By: Post Author')).toBeInTheDocument()
   })
 
-  it('advances heading animation until the last step', () => {
+  it('advances heading animation until the last step while keeping a stable accessible name', () => {
     jest.useFakeTimers()
 
     render(<HeadingAnimation steps={['J', 'Ja', 'Jason']} speed={100} />)
 
-    expect(screen.getByRole('link', { name: 'J' })).toHaveAttribute('href', '/')
+    // The link's accessible name is stable across ticks (defaults to steps[0])
+    // so screen readers do not announce every typewriter frame.
+    const link = screen.getByRole('link', { name: 'J' })
+    expect(link).toHaveAttribute('href', '/')
+    expect(link).toHaveAttribute('aria-label', 'J')
+    expect(screen.getByText('J')).toHaveAttribute('aria-hidden', 'true')
 
     act(() => {
       jest.advanceTimersByTime(100)
     })
-    expect(screen.getByRole('link', { name: 'Ja' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'J' })).toBeInTheDocument()
+    expect(screen.getByText('Ja')).toHaveAttribute('aria-hidden', 'true')
 
     act(() => {
       jest.advanceTimersByTime(100)
     })
-    expect(screen.getByRole('link', { name: 'Jason' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'J' })).toBeInTheDocument()
+    expect(screen.getByText('Jason')).toHaveAttribute('aria-hidden', 'true')
 
     act(() => {
       jest.advanceTimersByTime(100)
     })
-    expect(screen.getByRole('link', { name: 'Jason' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'J' })).toBeInTheDocument()
+    expect(screen.getByText('Jason')).toHaveAttribute('aria-hidden', 'true')
+  })
+
+  it('uses the explicit ariaLabel prop when provided so consumers control the accessible name', () => {
+    render(
+      <HeadingAnimation
+        steps={['J', 'Ja', 'Jason']}
+        speed={100}
+        ariaLabel="Jason Rundell home"
+      />
+    )
+
+    const link = screen.getByRole('link', { name: 'Jason Rundell home' })
+    expect(link).toHaveAttribute('href', '/')
+    expect(link).toHaveAttribute('aria-label', 'Jason Rundell home')
   })
 
   it('scrolls back to top by click and keyboard activation', () => {

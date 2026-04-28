@@ -52,22 +52,18 @@ describe('toProjectCardItem', () => {
     })
   })
 
-  it('falls back to empty strings when featuredImage is undefined', () => {
+  it('omits featuredImage when the source project has no image', () => {
     const result = toProjectCardItem(baseProject)
 
     expect(result).toEqual({
       title: 'Test Project',
       excerpt: 'A test excerpt',
       slug: 'test-project',
-      featuredImage: {
-        file: { url: '' },
-        altText: '',
-        description: '',
-      },
     })
+    expect(result.featuredImage).toBeUndefined()
   })
 
-  it('falls back to empty strings when featuredImage fields are missing optional properties', () => {
+  it('defaults missing alt text and description to empty strings when an image url is present', () => {
     const project: Project = {
       ...baseProject,
       featuredImage: {
@@ -94,12 +90,14 @@ describe('toProjectCardItem', () => {
 
     const result = toProjectCardItem(project)
 
-    expect(result.featuredImage.altText).toBe('')
-    expect(result.featuredImage.description).toBe('')
-    expect(result.featuredImage.file.url).toBe('https://example.com/image.webp')
+    expect(result.featuredImage).toEqual({
+      file: { url: 'https://example.com/image.webp' },
+      altText: '',
+      description: '',
+    })
   })
 
-  it('falls back to empty url when file fields are missing', () => {
+  it('omits featuredImage when the file fields are missing', () => {
     const project: Project = {
       ...baseProject,
       featuredImage: {
@@ -116,8 +114,6 @@ describe('toProjectCardItem', () => {
 
     const result = toProjectCardItem(project)
 
-    expect(result.featuredImage.file.url).toBe('')
-    expect(result.featuredImage.altText).toBe('Alt text')
-    expect(result.featuredImage.description).toBe('Desc')
+    expect(result.featuredImage).toBeUndefined()
   })
 })

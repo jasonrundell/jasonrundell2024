@@ -9,7 +9,7 @@ import { StyledLink } from '@/styles/common'
 
 interface PostPreviewProps {
   title: string
-  image: {
+  image?: {
     file: {
       url: string
     }
@@ -40,7 +40,7 @@ function PostPreview({
 }: PostPreviewProps) {
   return (
     <div>
-      {image && image.file && (
+      {image?.file?.url && (
         <Row>
           <StyledImage>
             <PostPreviewImage

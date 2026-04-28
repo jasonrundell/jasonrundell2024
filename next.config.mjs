@@ -61,14 +61,21 @@ const nextConfig = {
               "default-src 'self'",
               // 'unsafe-inline' is required by Next.js 14 for hydration/routing inline scripts.
               // 'unsafe-eval' is only included in development for webpack HMR source maps.
+              // va.vercel-scripts.com hosts the @vercel/speed-insights runtime.
               process.env.NODE_ENV === 'development'
-                ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com"
-                : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+                ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com"
+                : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
+              // Sentry's session replay integration spawns a Web Worker from
+              // a blob: URL. Without an explicit worker-src the browser falls
+              // back to script-src and blocks it.
+              "worker-src 'self' blob:",
               // 'unsafe-inline' is required by Pigment CSS (CSS-in-JS).
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://*.supabase.co https://*.supabase.in https://www.google-analytics.com",
+              // Sentry posts events to *.ingest.sentry.io (region-prefixed).
+              // va.vercel-scripts.com receives Speed Insights vitals beacons.
+              "connect-src 'self' https://*.supabase.co https://*.supabase.in https://www.google-analytics.com https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://va.vercel-scripts.com",
               "frame-src 'self' https://www.youtube.com",
               "object-src 'none'",
               "base-uri 'self'",
