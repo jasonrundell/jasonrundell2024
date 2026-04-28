@@ -58,10 +58,6 @@ async function fetchEntries<T extends EntrySkeletonType>(
       content_type: contentType,
     })
 
-    if (response.items.length === 0) {
-      console.warn(`No ${contentType} found in Contentful.`)
-    }
-
     return response.items
   } catch (error) {
     console.error(`Error fetching ${contentType} from Contentful:`, error)
@@ -191,13 +187,8 @@ function requireEntries<T extends FieldsType>(
  * @returns Array of skill entries
  */
 export async function getSkills(): Promise<Skill[]> {
-  try {
-    const skills = await fetchEntries<Skill>('skill')
-    return requireEntries('skill', skills)
-  } catch (error) {
-    console.error('Error fetching skills:', error)
-    throw error
-  }
+  const skills = await fetchEntries<Skill>('skill')
+  return requireEntries('skill', skills)
 }
 
 /**
@@ -205,13 +196,8 @@ export async function getSkills(): Promise<Skill[]> {
  * @returns Array of position entries
  */
 export async function getPositions(): Promise<Position[]> {
-  try {
-    const positions = await fetchEntries<Position>('positions')
-    return requireEntries('positions', positions)
-  } catch (error) {
-    console.error('Error fetching positions:', error)
-    throw error
-  }
+  const positions = await fetchEntries<Position>('positions')
+  return requireEntries('positions', positions)
 }
 
 /**
@@ -219,13 +205,8 @@ export async function getPositions(): Promise<Position[]> {
  * @returns Array of reference entries
  */
 export async function getReferences(): Promise<Reference[]> {
-  try {
-    const references = await fetchEntries<Reference>('reference')
-    return requireEntries('reference', references)
-  } catch (error) {
-    console.error('Error fetching references:', error)
-    throw error
-  }
+  const references = await fetchEntries<Reference>('reference')
+  return requireEntries('reference', references)
 }
 
 /**
@@ -233,13 +214,8 @@ export async function getReferences(): Promise<Reference[]> {
  * @returns Array of project entries
  */
 export async function getProjects(): Promise<Project[]> {
-  try {
-    const projects = await fetchEntries<Project>('project')
-    return requireEntries('project', projects)
-  } catch (error) {
-    console.error('Error fetching projects:', error)
-    throw error
-  }
+  const projects = await fetchEntries<Project>('project')
+  return requireEntries('project', projects)
 }
 
 /**
@@ -247,13 +223,8 @@ export async function getProjects(): Promise<Project[]> {
  * @returns Array of post entries
  */
 export async function getPosts(): Promise<Post[]> {
-  try {
-    const posts = await fetchEntries<Post>('post')
-    return requireEntries('post', posts)
-  } catch (error) {
-    console.error('Error fetching posts:', error)
-    throw error
-  }
+  const posts = await fetchEntries<Post>('post')
+  return requireEntries('post', posts)
 }
 
 /**
@@ -262,15 +233,10 @@ export async function getPosts(): Promise<Post[]> {
  * @returns LastSong object or null if not found
  */
 export async function getLastSong(): Promise<LastSong | null> {
-  try {
-    const songs = await fetchEntries<LastSong>('lastSong')
-    if (songs.length === 0) {
-      return null
-    }
-    // Return the first entry (most recent if sorted by updatedAt)
-    return songs[0].fields as unknown as LastSong
-  } catch (error) {
-    console.error('Error fetching last song:', error)
-    throw error
+  const songs = await fetchEntries<LastSong>('lastSong')
+  if (songs.length === 0) {
+    return null
   }
+  // Return the first entry (most recent if sorted by updatedAt)
+  return songs[0].fields as unknown as LastSong
 }

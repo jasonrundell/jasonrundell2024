@@ -16,7 +16,7 @@ This index is the first stop for contributors and agents. It maps the current mo
 - `.cursor`: Project rules and reusable audit command playbooks for AI-assisted work.
 
 ## Module Boundaries
-- Contentful reads belong in `src/lib/contentful.ts`; consumers should call exported fetch functions instead of creating Contentful clients directly.
+- Contentful reads belong in `src/lib/contentful.ts`; consumers should call exported fetch functions instead of creating Contentful clients directly. `fetchEntries` logs Contentful API failures once; `requireEntries` logs and throws when a required collection content type returns zero items (optional collections such as last song return null without that log).
 - Supabase browser/server construction belongs in `src/utils/supabase/client.ts` and `src/utils/supabase/server.ts`.
 - Supabase availability handling belongs in `src/utils/supabase/status.ts` and `src/utils/supabase/safe-client.ts`.
 - Auth and profile mutations are currently centralized in `src/app/actions.ts`. Keep new validation and rate-limit behavior near the action it protects until this file is split.
