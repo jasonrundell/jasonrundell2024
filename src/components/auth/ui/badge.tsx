@@ -21,35 +21,35 @@ const StyledBadge = styled('div')`
   /* Default */
   &.variant-default {
     border-color: transparent;
-    background: ${Tokens.colors.primary.value};
-    color: ${Tokens.colors.background.value};
+    background: ${Tokens.colors.rolePrompt.var};
+    color: ${Tokens.colors.surfaceBase.var};
   }
   &.variant-default:hover {
-    background: ${Tokens.colors.primary.value}CC;
+    background: color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 80%, transparent);
   }
   /* Secondary */
   &.variant-secondary {
     border-color: transparent;
-    background: ${Tokens.colors.secondary.value};
-    color: ${Tokens.colors.background.value};
+    background: ${Tokens.colors.roleHeading.var};
+    color: ${Tokens.colors.surfaceBase.var};
   }
   &.variant-secondary:hover {
-    background: ${Tokens.colors.secondaryVariant.value};
+    background: ${Tokens.colors.secondaryVariant.var};
   }
   /* Destructive */
   &.variant-destructive {
     border-color: transparent;
-    background: ${Tokens.colors.error.value};
+    background: ${Tokens.colors.roleDanger.var};
     color: #fff;
   }
   &.variant-destructive:hover {
-    background: ${Tokens.colors.error.value}CC;
+    background: color-mix(in srgb, ${Tokens.colors.roleDanger.var} 80%, transparent);
   }
   /* Outline */
   &.variant-outline {
-    border-color: ${Tokens.colors.textPrimary.value};
+    border-color: ${Tokens.colors.roleBody.var};
     background: transparent;
-    color: ${Tokens.colors.textPrimary.value};
+    color: ${Tokens.colors.roleBody.var};
   }
 `
 

@@ -16,7 +16,7 @@ const StyledContainer = styled('div')`
   display: block;
   width: 20rem;
   flex-direction: column;
-  border: 0.125rem solid ${Tokens.colors.primary.value};
+  border: 0.125rem solid ${Tokens.colors.rolePrompt.var};
   padding: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
   margin: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit} 0;
 `

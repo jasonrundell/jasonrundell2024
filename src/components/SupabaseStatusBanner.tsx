@@ -21,18 +21,18 @@ const StyledBanner = styled('div')`
   font-weight: 400;
   transition: transform 0.3s ease-in-out;
   box-shadow: ${Tokens.shadows.medium.value} ${Tokens.colors.surface.value}1A;
-  color: ${Tokens.colors.surface.value};
+  color: ${Tokens.colors.surface.var};
 
   &.paused {
-    background: ${Tokens.colors.error.value};
+    background: ${Tokens.colors.roleDanger.var};
   }
 
   &.error {
-    background: ${Tokens.colors.warning.value};
+    background: ${Tokens.colors.warning.var};
   }
 
   &.available {
-    background: ${Tokens.colors.success.value};
+    background: ${Tokens.colors.roleSuccess.var};
   }
 
   &.hidden {
@@ -52,7 +52,7 @@ const Message = styled('p')`
 const ActionButton = styled('button')`
   background: white;
   border: 1px solid ${Tokens.colors.secondary.value}4D;
-  color: ${Tokens.colors.surface.value};
+  color: ${Tokens.colors.surface.var};
   padding: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit} ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
   margin-left: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
@@ -74,7 +74,7 @@ const CloseButton = styled('button')`
   transform: translateY(-50%);
   background: white;
   border: none;
-  color: ${Tokens.colors.surface.value};
+  color: ${Tokens.colors.surface.var};
   cursor: pointer;
   font-size: 1.2rem;
   transition: opacity 0.2s ease;

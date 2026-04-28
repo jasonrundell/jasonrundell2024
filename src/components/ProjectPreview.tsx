@@ -23,7 +23,7 @@ const StyledImage = styled('div')`
   height: 208px;
   width: auto;
   object-fit: cover;
-  background-color: ${Tokens.colors.backgroundDarker.value};
+  background-color: ${Tokens.colors.surfaceDeepest.var};
   align-items: center;
   margin-bottom: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
 `

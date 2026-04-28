@@ -1,21 +1,10 @@
-:root {
-  --text-color: #9aaec6;
-  --background-color: #232f3e;
-  --background-color-2: #1c2531;
-  --background-color-3: #151c25;
-  --size-large: 1.5rem;
-  --size-normal: 1.25rem;
-  --size-small: 1rem;
-  --size-smallest: 0.25rem;
-  --primary-color: #e9be62;
-  --secondary-color: #eeeeee;
-}
+@import './tokens.generated.css';
 
 html,
 body {
   font-size: 16px;
-  background-color: #232f3e;
-  color: #9aaec6;
+  background-color: var(--color-surface-base);
+  color: var(--color-role-body);
   margin: 3rem 0 0;
 }
 
@@ -43,7 +32,7 @@ h2,
 h3,
 h4,
 time {
-  color: #eee;
+  color: var(--color-role-heading);
   font-weight: 400;
 }
 
@@ -53,7 +42,7 @@ h1 {
 }
 
 h2 {
-  font-size: var(--size-normal);
+  font-size: var(--size-medium);
   font-weight: 700;
 }
 
@@ -101,7 +90,7 @@ hr {
   left: 0;
   right: 0;
   z-index: 99;
-  background-color: #232f3e;
+  background-color: var(--color-surface-base);
   transition: background 1.3s ease, --background-color-start 1.3s ease,
     --background-color-end 1.3s ease;
 }
@@ -140,7 +129,7 @@ hr {
 }
 
 .primary-color {
-  color: var(--primary-color);
+  color: var(--color-role-prompt);
 }
 
 /* Screen reader only class for accessibility */
@@ -162,7 +151,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--color-role-prompt);
   outline-offset: 2px;
 }
 

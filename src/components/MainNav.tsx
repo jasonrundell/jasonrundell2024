@@ -11,7 +11,7 @@ const StyledMenuContainer = styled('div')`
   left: 0;
   right: 0;
   z-index: ${Tokens.zIndex.nav.value};
-  background-color: ${Tokens.colors.background.value};
+  background-color: ${Tokens.colors.surfaceBase.var};
   transition: background 1.3s ease, --background-color-start 1.3s ease,
     --background-color-end 1.3s ease;
 `
@@ -72,13 +72,13 @@ const StyledListItem = styled('li')`
   text-wrap: nowrap;
 
   a {
-    color: ${Tokens.colors.secondary.value};
+    color: ${Tokens.colors.roleHeading.var};
   }
 `
 
 const StyledTitle = styled(HeadingAnimation)`
   text-wrap: nowrap;
-  color: ${Tokens.colors.background.value};
+  color: ${Tokens.colors.surfaceBase.var};
 `
 
 /**

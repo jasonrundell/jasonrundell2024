@@ -12,7 +12,7 @@ const StyledInput = styled('input')`
       .unit} ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   background: ${Tokens.colors.background.value}D9;
-  color: ${Tokens.colors.textPrimary.value};
+  color: ${Tokens.colors.roleBody.var};
   border: 1px solid ${Tokens.colors.textPrimary.value}1F;
   font-size: 1rem;
   font-weight: 500;
@@ -20,13 +20,13 @@ const StyledInput = styled('input')`
   box-shadow: ${Tokens.shadows.small.value} 0 ${Tokens.colors.surface.value}08;
 
   &::placeholder {
-    color: ${Tokens.colors.textPrimary.value};
+    color: ${Tokens.colors.roleBody.var};
     opacity: 0.6;
   }
   &:focus {
     outline: none;
-    border-color: ${Tokens.colors.primary.value};
-    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}33;
+    border-color: ${Tokens.colors.rolePrompt.var};
+    box-shadow: 0 0 0 2px color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 20%, transparent);
   }
   &:disabled {
     opacity: 0.5;

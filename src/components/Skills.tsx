@@ -28,7 +28,7 @@ const StyledListItem = styled('li')`
   display: inline;
   margin-right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   margin-left: 0;
-  color: ${Tokens.colors.text};
+  color: ${Tokens.colors.roleBody.var};
   margin: 0 ${Tokens.sizes.small.value}${Tokens.sizes.small.unit} 0 0;
   line-height: 1.6;
 `
