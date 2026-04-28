@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
 
     if (userIds.length > 0) {
       const { data: userRows, error: usersError } = await supabase
-        .from('users')
+        .from('public_user_profiles')
         .select('auth_user_id, profile_slug')
         .in('auth_user_id', userIds)
 

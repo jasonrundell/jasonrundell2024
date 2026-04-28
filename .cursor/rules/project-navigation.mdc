@@ -1,0 +1,30 @@
+# Project Navigation For Agents
+
+Start with `docs/PROJECT_INDEX.md` before broad searches. It is the maintained map of routes, module boundaries, integrations, validation commands, and expected build/test noise.
+
+## Context Hygiene
+
+- Prefer targeted reads and `rg` searches over reading whole directories.
+- Keep changes inside the smallest owning module. If the owner is unclear, update `docs/PROJECT_INDEX.md` as part of the work.
+- Do not paste large generated reports into chat when a focused doc update or test would create a better feedback loop.
+
+## Boundaries
+
+- App routes, route handlers, and server actions live in `src/app`.
+- Reusable UI belongs in `src/components`; feature UI should stay in feature subfolders such as `auth` and `comments`.
+- Contentful access belongs behind `src/lib/contentful.ts`.
+- Supabase access belongs behind `src/utils/supabase/**`.
+- Shared domain helpers belong in `src/lib`; generic utilities belong in `src/utils`.
+- Shared styles belong in `src/styles/common.tsx`; local styles should stay in the component file.
+
+## Feedback Loop
+
+- Use `npm run lint` for static validation.
+- Use `npm run test:unit` for quick local feedback and `npm run test:ci` before finishing test-related work.
+- Use `npm run build` after route, config, data-fetching, or integration changes.
+- The project target is 70% unit coverage. Add focused tests at module boundaries when changing behavior.
+
+## Data Rules
+
+- Required Contentful, Supabase, and profile/comment data should log and throw or return an explicit error response. Do not introduce silent fallback data.
+- Supabase tables must have RLS enabled, and `src/lib/db/schema.sql` must be updated when table shape or policy expectations change.

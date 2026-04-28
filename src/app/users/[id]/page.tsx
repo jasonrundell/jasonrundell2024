@@ -22,7 +22,7 @@ export default async function LegacyUserProfileRedirect({
 
   const supabase = await createClient()
   const { data: profile } = await supabase
-    .from('users')
+    .from('public_user_profiles')
     .select('profile_slug')
     .eq('auth_user_id', id)
     .maybeSingle()

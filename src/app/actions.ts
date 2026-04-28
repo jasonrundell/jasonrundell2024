@@ -117,8 +117,8 @@ export const signUpAction = async (formData: FormData) => {
       m.createClient()
     )
     return await supabase
-      .from('users')
-      .select('id')
+      .from('public_user_profiles')
+      .select('profile_slug')
       .eq('profile_slug', profileSlug)
       .maybeSingle()
   })
@@ -633,7 +633,7 @@ export const updateProfileSlugAction = async (formData: FormData) => {
   }
 
   const { data: conflict } = await supabase
-    .from('users')
+    .from('public_user_profiles')
     .select('auth_user_id')
     .eq('profile_slug', parsed.data)
     .maybeSingle()

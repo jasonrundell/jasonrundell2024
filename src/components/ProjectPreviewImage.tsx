@@ -53,7 +53,7 @@ export default function ProjectPreviewImage({
   return (
     <>
       {slug ? (
-        <Link href={`/project/${slug}`} aria-label={title}>
+        <Link href={`/projects/${slug}`} aria-label={title}>
           {image}
         </Link>
       ) : (

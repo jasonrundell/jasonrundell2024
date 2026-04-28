@@ -103,7 +103,9 @@ describe('GET /api/supabase-status', () => {
         isAvailable: true,
         isPaused: false,
       })
-      expect(mockSupabaseClient.from).toHaveBeenCalledWith('users')
+      expect(mockSupabaseClient.from).toHaveBeenCalledWith(
+        'public_user_profiles'
+      )
     })
   })
 
