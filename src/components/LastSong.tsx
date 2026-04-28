@@ -63,11 +63,11 @@ const StyledPlayButton = styled('button')`
   text-decoration: none;
 
   &:hover {
-    background: ${Tokens.colors.primary.value}CC;
+    background: color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 80%, transparent);
   }
 
   &:focus-visible {
-    outline: 2px solid ${Tokens.colors.primary.value}99;
+    outline: 2px solid color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 60%, transparent);
     outline-offset: 2px;
   }
 `

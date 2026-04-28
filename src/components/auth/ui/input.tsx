@@ -26,7 +26,7 @@ const StyledInput = styled('input')`
   &:focus {
     outline: none;
     border-color: ${Tokens.colors.rolePrompt.var};
-    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}33;
+    box-shadow: 0 0 0 2px color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 20%, transparent);
   }
   &:disabled {
     opacity: 0.5;

@@ -22,7 +22,7 @@ const StyledCheckboxRoot = styled(CheckboxPrimitive.Root)`
   box-sizing: border-box;
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}55;
+    box-shadow: 0 0 0 2px color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 33%, transparent);
     border-color: ${Tokens.colors.rolePrompt.var};
   }
   &[data-state='checked'] {

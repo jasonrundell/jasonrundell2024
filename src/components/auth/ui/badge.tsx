@@ -25,7 +25,7 @@ const StyledBadge = styled('div')`
     color: ${Tokens.colors.surfaceBase.var};
   }
   &.variant-default:hover {
-    background: ${Tokens.colors.primary.value}CC;
+    background: color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 80%, transparent);
   }
   /* Secondary */
   &.variant-secondary {
@@ -43,7 +43,7 @@ const StyledBadge = styled('div')`
     color: #fff;
   }
   &.variant-destructive:hover {
-    background: ${Tokens.colors.error.value}CC;
+    background: color-mix(in srgb, ${Tokens.colors.roleDanger.var} 80%, transparent);
   }
   /* Outline */
   &.variant-outline {
