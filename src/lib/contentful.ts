@@ -173,6 +173,19 @@ function mapEntriesToFields<T extends FieldsType>(
   return entries.map((entry) => entry.fields as unknown as T)
 }
 
+function requireEntries<T extends FieldsType>(
+  contentType: string,
+  entries: Entry<ContentfulEntry<T>>[]
+): T[] {
+  if (entries.length === 0) {
+    const errorMessage = `No required ${contentType} entries found in Contentful.`
+    console.error(errorMessage)
+    throw new Error(errorMessage)
+  }
+
+  return mapEntriesToFields(entries)
+}
+
 /**
  * Fetches all skills from Contentful.
  * @returns Array of skill entries
@@ -180,10 +193,10 @@ function mapEntriesToFields<T extends FieldsType>(
 export async function getSkills(): Promise<Skill[]> {
   try {
     const skills = await fetchEntries<Skill>('skill')
-    return mapEntriesToFields(skills)
+    return requireEntries('skill', skills)
   } catch (error) {
     console.error('Error fetching skills:', error)
-    return []
+    throw error
   }
 }
 
@@ -194,10 +207,10 @@ export async function getSkills(): Promise<Skill[]> {
 export async function getPositions(): Promise<Position[]> {
   try {
     const positions = await fetchEntries<Position>('positions')
-    return mapEntriesToFields(positions)
+    return requireEntries('positions', positions)
   } catch (error) {
     console.error('Error fetching positions:', error)
-    return []
+    throw error
   }
 }
 
@@ -208,10 +221,10 @@ export async function getPositions(): Promise<Position[]> {
 export async function getReferences(): Promise<Reference[]> {
   try {
     const references = await fetchEntries<Reference>('reference')
-    return mapEntriesToFields(references)
+    return requireEntries('reference', references)
   } catch (error) {
     console.error('Error fetching references:', error)
-    return []
+    throw error
   }
 }
 
@@ -222,10 +235,10 @@ export async function getReferences(): Promise<Reference[]> {
 export async function getProjects(): Promise<Project[]> {
   try {
     const projects = await fetchEntries<Project>('project')
-    return mapEntriesToFields(projects)
+    return requireEntries('project', projects)
   } catch (error) {
     console.error('Error fetching projects:', error)
-    return []
+    throw error
   }
 }
 
@@ -236,10 +249,10 @@ export async function getProjects(): Promise<Project[]> {
 export async function getPosts(): Promise<Post[]> {
   try {
     const posts = await fetchEntries<Post>('post')
-    return mapEntriesToFields(posts)
+    return requireEntries('post', posts)
   } catch (error) {
     console.error('Error fetching posts:', error)
-    return []
+    throw error
   }
 }
 
@@ -258,6 +271,6 @@ export async function getLastSong(): Promise<LastSong | null> {
     return songs[0].fields as unknown as LastSong
   } catch (error) {
     console.error('Error fetching last song:', error)
-    return null
+    throw error
   }
 }

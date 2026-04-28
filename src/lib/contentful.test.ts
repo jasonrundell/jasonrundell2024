@@ -33,6 +33,7 @@ import {
   getReferences,
   getPositions,
   getPosts,
+  getLastSong,
   getEntry,
   getEntryBySlug,
 } from './contentful'
@@ -89,28 +90,24 @@ describe('Contentful Utilities', () => {
       })
     })
 
-    it('should return empty array on error', async () => {
+    it('should throw on fetch errors', async () => {
       // Arrange
       mockClient.getEntries.mockRejectedValue(new Error('Network error'))
 
-      // Act
-      const result = await getSkills()
-
-      // Assert
-      expect(result).toEqual([])
+      // Act & Assert
+      await expect(getSkills()).rejects.toThrow('Network error')
     })
 
-    it('should handle empty results', async () => {
+    it('should throw when required skills are missing', async () => {
       // Arrange
       mockClient.getEntries.mockResolvedValue({
         items: [],
       })
 
-      // Act
-      const result = await getSkills()
-
-      // Assert
-      expect(result).toEqual([])
+      // Act & Assert
+      await expect(getSkills()).rejects.toThrow(
+        'No required skill entries found in Contentful.'
+      )
     })
   })
 
@@ -136,15 +133,12 @@ describe('Contentful Utilities', () => {
       })
     })
 
-    it('should return empty array on error', async () => {
+    it('should throw on fetch errors', async () => {
       // Arrange
       mockClient.getEntries.mockRejectedValue(new Error('Network error'))
 
-      // Act
-      const result = await getProjects()
-
-      // Assert
-      expect(result).toEqual([])
+      // Act & Assert
+      await expect(getProjects()).rejects.toThrow('Network error')
     })
   })
 
@@ -170,15 +164,12 @@ describe('Contentful Utilities', () => {
       })
     })
 
-    it('should return empty array on error', async () => {
+    it('should throw on fetch errors', async () => {
       // Arrange
       mockClient.getEntries.mockRejectedValue(new Error('Network error'))
 
-      // Act
-      const result = await getReferences()
-
-      // Assert
-      expect(result).toEqual([])
+      // Act & Assert
+      await expect(getReferences()).rejects.toThrow('Network error')
     })
   })
 
@@ -206,15 +197,12 @@ describe('Contentful Utilities', () => {
       })
     })
 
-    it('should return empty array on error', async () => {
+    it('should throw on fetch errors', async () => {
       // Arrange
       mockClient.getEntries.mockRejectedValue(new Error('Network error'))
 
-      // Act
-      const result = await getPositions()
-
-      // Assert
-      expect(result).toEqual([])
+      // Act & Assert
+      await expect(getPositions()).rejects.toThrow('Network error')
     })
   })
 
@@ -240,15 +228,57 @@ describe('Contentful Utilities', () => {
       })
     })
 
-    it('should return empty array on error', async () => {
+    it('should throw on fetch errors', async () => {
       // Arrange
       mockClient.getEntries.mockRejectedValue(new Error('Network error'))
 
+      // Act & Assert
+      await expect(getPosts()).rejects.toThrow('Network error')
+    })
+  })
+
+  describe('getLastSong', () => {
+    it('should return the first last song entry', async () => {
+      // Arrange
+      mockClient.getEntries.mockResolvedValue({
+        items: [
+          {
+            fields: { title: 'Song', artist: 'Artist', url: 'https://example.com' },
+          },
+        ],
+      })
+
       // Act
-      const result = await getPosts()
+      const result = await getLastSong()
 
       // Assert
-      expect(result).toEqual([])
+      expect(result).toEqual({
+        title: 'Song',
+        artist: 'Artist',
+        url: 'https://example.com',
+      })
+      expect(mockClient.getEntries).toHaveBeenCalledWith({
+        content_type: 'lastSong',
+      })
+    })
+
+    it('should return null when no last song exists', async () => {
+      // Arrange
+      mockClient.getEntries.mockResolvedValue({ items: [] })
+
+      // Act
+      const result = await getLastSong()
+
+      // Assert
+      expect(result).toBeNull()
+    })
+
+    it('should throw on fetch errors', async () => {
+      // Arrange
+      mockClient.getEntries.mockRejectedValue(new Error('Network error'))
+
+      // Act & Assert
+      await expect(getLastSong()).rejects.toThrow('Network error')
     })
   })
 

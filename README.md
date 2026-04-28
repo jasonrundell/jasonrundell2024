@@ -22,21 +22,22 @@ optimized performance.
 - Project index: [docs/PROJECT_INDEX.md](./docs/PROJECT_INDEX.md)
 - Keep the index updated whenever routes, integrations, folder structure, or test locations change.
 
-### Git Hooks
+### Validation
 
-This repository includes Git hooks to ensure code quality:
+The same npm commands work in Windows PowerShell, Windows Command Prompt, macOS
+Terminal, and Linux shells.
 
-- **Pre-push Hook**: Automatically runs `npm run build` before pushing and
-  prevents broken builds from being committed
-- **Installation**: Run `./scripts/install-git-hooks.sh` after cloning to set up
-  the hooks
-- **Documentation**: See [GIT_HOOKS.md](./GIT_HOOKS.md) for detailed information
+- Lint: `npm run lint`
+- Tests with enforced coverage gates: `npm run test:ci`
+- Production build: `npm run build`
+
+Coverage is enforced by `scripts/check-coverage.js`.
 
 ### Getting Started
 
 1. Clone the repository
 2. Install dependencies: `npm install`
-3. Install Git hooks: `./scripts/install-git-hooks.sh`
+3. Run validation: `npm run lint` and `npm run test:ci`
 4. Run the development server: `npm run dev`
 
 ## Deployment
