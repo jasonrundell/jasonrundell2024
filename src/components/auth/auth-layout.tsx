@@ -9,7 +9,7 @@ const StyledAuthContainer = styled('div')`
   justify-content: center;
   min-height: 80vh;
   padding: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.large.unit};
-  background-color: ${Tokens.colors.background.var};
+  background-color: ${Tokens.colors.surfaceBase.var};
   position: relative;
   overflow: hidden;
 
