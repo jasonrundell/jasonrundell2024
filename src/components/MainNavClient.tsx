@@ -275,13 +275,23 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
       >
         <StyledMobileList>
           <StyledMobileListItem>
-            <Link href="/#blog" onClick={closeMobileMenu}>
+            <Link href="/about" onClick={closeMobileMenu}>
+              About
+            </Link>
+          </StyledMobileListItem>
+          <StyledMobileListItem>
+            <Link href="/projects" onClick={closeMobileMenu}>
+              Projects
+            </Link>
+          </StyledMobileListItem>
+          <StyledMobileListItem>
+            <Link href="/posts" onClick={closeMobileMenu}>
               Blog
             </Link>
           </StyledMobileListItem>
           <StyledMobileListItem>
-            <Link href="/#projects" onClick={closeMobileMenu}>
-              Projects
+            <Link href="/contact" onClick={closeMobileMenu}>
+              Contact
             </Link>
           </StyledMobileListItem>
           {user ? (

@@ -9,6 +9,7 @@ import { sanitizeHTML } from '@/lib/sanitize'
 import { getEntryBySlug, getPosts } from '@/lib/contentful'
 import PostHeader from '@/components/PostHeader'
 import { SITE_DESCRIPTION } from '@/lib/constants'
+import { buildBlogPostingJsonLd } from '@/lib/jsonld'
 import { Post } from '@/typeDefinitions/app'
 import {
   StyledContainer,
@@ -76,12 +77,20 @@ export default async function page({ params }: PostProps) {
     notFound()
   }
 
+  const blogPostingJsonLd = buildBlogPostingJsonLd(post as Post, slug)
+
   return (
     <>
       <StyledContainer>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(blogPostingJsonLd),
+          }}
+        />
         <StyledSection id="home">
           <StyledBreadcrumb>
-            <Link href={`/`}>Home</Link> &gt; <Link href={`/#blog`}>Blog</Link>{' '}
+            <Link href={`/`}>Home</Link> &gt; <Link href={`/posts`}>Blog</Link>{' '}
           </StyledBreadcrumb>
           <article>
             <PostHeader post={post as Post} />
