@@ -191,10 +191,16 @@ export default function MainNav() {
               <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
             </StyledListItem>
             <StyledListItem>
-              <Link href="/#blog">Blog</Link>
+              <Link href="/about">About</Link>
             </StyledListItem>
             <StyledListItem>
-              <Link href="/#projects">Projects</Link>
+              <Link href="/projects">Projects</Link>
+            </StyledListItem>
+            <StyledListItem>
+              <Link href="/posts">Blog</Link>
+            </StyledListItem>
+            <StyledListItem>
+              <Link href="/contact">Contact</Link>
             </StyledListItem>
           </StyledList>
         </StyledDesktopNav>
