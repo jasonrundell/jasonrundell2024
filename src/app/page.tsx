@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { Row, Spacer, Grid } from '@jasonrundell/dropship'
 
 import { getProjects, getPosts } from '@/lib/contentful'
-import { Project } from '@/typeDefinitions/app'
+import { toProjectCardItem } from '@/lib/projectUtils'
 
 import {
   StyledDivBgDark,
@@ -48,33 +48,6 @@ const HUB_DOORS: ReadonlyArray<HubDoor> = [
 
 const HOMEPAGE_PROJECT_LIMIT = 3
 const HOMEPAGE_POST_LIMIT = 3
-
-type ProjectCardItem = {
-  title: string
-  featuredImage: {
-    file: { url: string }
-    altText: string
-    description: string
-  }
-  excerpt: string
-  slug: string
-}
-
-function toProjectCardItem(project: Project): ProjectCardItem {
-  const fields = project.featuredImage?.fields
-  const file = fields?.file?.fields?.file
-
-  return {
-    title: project.title,
-    excerpt: project.excerpt,
-    slug: project.slug,
-    featuredImage: {
-      file: { url: file?.url ?? '' },
-      altText: fields?.altText ?? '',
-      description: fields?.description ?? '',
-    },
-  }
-}
 
 export const metadata = {
   title: 'Manager / Full Stack Developer | Jason Rundell',

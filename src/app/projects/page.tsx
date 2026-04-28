@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Row, Spacer } from '@jasonrundell/dropship'
 
 import { getProjects } from '@/lib/contentful'
-import { Project } from '@/typeDefinitions/app'
+import { toProjectCardItem } from '@/lib/projectUtils'
 import {
   StyledContainer,
   StyledSection,
@@ -18,33 +18,6 @@ export const metadata = {
 }
 
 export const revalidate = 86400
-
-type ProjectCardItem = {
-  title: string
-  featuredImage: {
-    file: { url: string }
-    altText: string
-    description: string
-  }
-  excerpt: string
-  slug: string
-}
-
-function toCardItem(project: Project): ProjectCardItem {
-  const fields = project.featuredImage?.fields
-  const file = fields?.file?.fields?.file
-
-  return {
-    title: project.title,
-    excerpt: project.excerpt,
-    slug: project.slug,
-    featuredImage: {
-      file: { url: file?.url ?? '' },
-      altText: fields?.altText ?? '',
-      description: fields?.description ?? '',
-    },
-  }
-}
 
 export default async function ProjectsPage() {
   const projects = await getProjects()
@@ -70,7 +43,7 @@ export default async function ProjectsPage() {
         </Row>
         <Spacer />
         <Row>
-          <MoreProjects items={sortedProjects.map(toCardItem)} />
+          <MoreProjects items={sortedProjects.map(toProjectCardItem)} />
         </Row>
       </StyledSection>
     </StyledContainer>
