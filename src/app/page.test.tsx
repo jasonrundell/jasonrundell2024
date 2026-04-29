@@ -29,20 +29,28 @@ jest.mock('@/components/LastSongWrapper', () => {
   }
 })
 
-jest.mock('@/components/HubDoors', () => {
-  return function MockHubDoors({
+jest.mock('@/components/HeroTerminal', () => {
+  return function MockHeroTerminal({
     doors,
+    heading,
+    pitch,
   }: {
     doors: { href: string; label: string }[]
+    heading: string
+    pitch: string
   }) {
     return (
-      <nav data-testid="hub-doors" aria-label="Site sections">
-        {doors.map((d) => (
-          <a key={d.href} href={d.href}>
-            {d.label}
-          </a>
-        ))}
-      </nav>
+      <section data-testid="hero-terminal" aria-label="Hero">
+        <h1>{heading}</h1>
+        <p>{pitch}</p>
+        <nav data-testid="hub-doors" aria-label="Site sections">
+          {doors.map((d) => (
+            <a key={d.href} href={d.href}>
+              {d.label}
+            </a>
+          ))}
+        </nav>
+      </section>
     )
   }
 })
@@ -144,7 +152,7 @@ describe('Home page (hub)', () => {
     getPosts.mockResolvedValue(fakePosts)
   })
 
-  it('renders a single h1 with the role + title', async () => {
+  it('renders a single h1 with the role + title (delegated to HeroTerminal)', async () => {
     const pageComponent = await Page()
     render(pageComponent)
 
@@ -153,16 +161,28 @@ describe('Home page (hub)', () => {
     expect(headings[0]).toHaveTextContent(/manager \/ full stack developer/i)
   })
 
-  it('renders three door cards linking to /about, /projects, /posts', async () => {
+  it('renders the hero terminal with the doors nav', async () => {
     const pageComponent = await Page()
     render(pageComponent)
 
+    expect(screen.getByTestId('hero-terminal')).toBeInTheDocument()
     expect(
-      screen.getByRole('link', { name: /about/i })
-    ).toHaveAttribute('href', '/about')
-    expect(
-      screen.getByRole('link', { name: /projects/i })
-    ).toHaveAttribute('href', '/projects')
+      screen.getByRole('navigation', { name: /site sections/i })
+    ).toBeInTheDocument()
+  })
+
+  it('renders three door links to /about, /projects, /posts', async () => {
+    const pageComponent = await Page()
+    render(pageComponent)
+
+    expect(screen.getByRole('link', { name: /about/i })).toHaveAttribute(
+      'href',
+      '/about'
+    )
+    expect(screen.getByRole('link', { name: /projects/i })).toHaveAttribute(
+      'href',
+      '/projects'
+    )
     expect(screen.getByRole('link', { name: /blog/i })).toHaveAttribute(
       'href',
       '/posts'
