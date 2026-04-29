@@ -29,10 +29,11 @@ const StyledIconWrapper = styled('span')`
   margin-right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
 `
 
-const StyledTitle = styled('h3')`
+const StyledTitle = styled('p')`
   margin: 0;
   font-size: ${Tokens.sizes.fonts.large.value}${Tokens.sizes.fonts.large.unit};
   color: ${Tokens.colors.roleHeading.var};
+  font-weight: 700;
 `
 
 const StyledArtist = styled('p')`

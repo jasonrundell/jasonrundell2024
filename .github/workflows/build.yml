@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - feature/design-update
 
 jobs:
   build:
@@ -16,12 +17,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies and run build
         run: |

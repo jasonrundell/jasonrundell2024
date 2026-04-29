@@ -118,7 +118,7 @@ const StyledPre = styled('pre')`
 `
 
 const StyledComment = styled('span')`
-  color: ${Tokens.colors.textSecondary.var};
+  color: ${Tokens.colors.roleInfo.var};
 `
 
 const StyledKeyword = styled('span')`
