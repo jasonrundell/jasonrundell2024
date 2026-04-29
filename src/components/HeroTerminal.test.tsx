@@ -26,9 +26,11 @@ jest.mock('next/link', () => {
   }
 })
 
-import HeroTerminal, { HERO_TERMINAL_SKIP_KEY } from './HeroTerminal'
+import HeroTerminal, {
+  HERO_TERMINAL_SKIP_KEY,
+  type HeroConstField,
+} from './HeroTerminal'
 import type { HubDoor } from './HubDoors'
-import type { HeroConstField } from './chrome/HeroConstDeclaration'
 
 const fields: ReadonlyArray<HeroConstField> = [
   { key: 'name', value: 'Jason Rundell' },

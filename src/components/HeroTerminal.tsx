@@ -5,7 +5,11 @@ import { styled, keyframes } from '@pigment-css/react'
 
 import Tokens from '@/lib/tokens'
 import HubDoors, { type HubDoor } from '@/components/HubDoors'
-import type { HeroConstField } from '@/components/chrome/HeroConstDeclaration'
+
+export interface HeroConstField {
+  key: string
+  value: string
+}
 
 /**
  * In-session "user already chose to skip" flag. Set when a visitor cancels

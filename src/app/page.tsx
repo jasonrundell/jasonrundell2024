@@ -16,9 +16,9 @@ import {
 
 import MorePosts from '@/components/MorePosts'
 import MoreProjects from '@/components/MoreProjects'
-import HeroTerminal from '@/components/HeroTerminal'
+import HeroTerminal, { type HeroConstField } from '@/components/HeroTerminal'
 import { type HubDoor } from '@/components/HubDoors'
-import { SectionHeading, type HeroConstField } from '@/components/chrome'
+import { SectionHeading } from '@/components/chrome'
 import HeroImage from '@/public/images/ai-powered-developer.webp'
 
 const LastSongWrapper = dynamic(() => import('@/components/LastSongWrapper'), {
