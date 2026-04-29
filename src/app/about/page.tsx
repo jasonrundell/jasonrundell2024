@@ -12,8 +12,6 @@ import {
 import {
   StyledContainer,
   StyledIntroParagraph,
-  StyledList,
-  StyledListItem,
   StyledSection,
   StyledLink,
   StyledBreadcrumb,
@@ -23,6 +21,7 @@ import Skills from '@/components/Skills'
 import References from '@/components/References'
 import Positions from '@/components/Positions'
 import Icon from '@/components/Icon'
+import { SectionHeading, PromptList } from '@/components/chrome'
 import { buildPersonJsonLd } from '@/lib/jsonld'
 
 export const metadata = {
@@ -82,19 +81,19 @@ export default async function AboutPage() {
       </StyledSection>
 
       <StyledSection id="skills">
-        <h2>Skills</h2>
+        <SectionHeading comment="skills.tsx">Skills</SectionHeading>
         <Row>{skills && <Skills skills={skills} />}</Row>
       </StyledSection>
 
       <StyledSection id="experience">
-        <h2>Experience</h2>
+        <SectionHeading comment="experience.tsx">Experience</SectionHeading>
         <Row>
           {positions.length > 0 && <Positions positions={positions} />}
         </Row>
         <Spacer />
         <Row>
-          <StyledList>
-            <StyledListItem>
+          <PromptList aria-label="More experience links">
+            <PromptList.Item>
               <Icon type="LinkedIn" />{' '}
               <StyledLink
                 href="https://www.linkedin.com/in/jasonrundell/"
@@ -104,13 +103,15 @@ export default async function AboutPage() {
               >
                 <ExternalLink size={18} /> See more on LinkedIn
               </StyledLink>
-            </StyledListItem>
-          </StyledList>
+            </PromptList.Item>
+          </PromptList>
         </Row>
       </StyledSection>
 
       <StyledSection id="recommendations">
-        <h2>Recommendations</h2>
+        <SectionHeading comment="recommendations.tsx">
+          Recommendations
+        </SectionHeading>
         <Row>
           {references.length > 0 && <References references={references} />}
         </Row>

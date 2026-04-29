@@ -17,6 +17,11 @@ import {
 import MorePosts from '@/components/MorePosts'
 import MoreProjects from '@/components/MoreProjects'
 import HubDoors, { HubDoor } from '@/components/HubDoors'
+import {
+  SectionHeading,
+  HeroConstDeclaration,
+  HeroConstField,
+} from '@/components/chrome'
 import HeroImage from '@/public/images/ai-powered-developer.webp'
 
 const LastSongWrapper = dynamic(() => import('@/components/LastSongWrapper'), {
@@ -43,6 +48,16 @@ const HUB_DOORS: ReadonlyArray<HubDoor> = [
     href: '/posts',
     label: 'Blog',
     description: 'Notes on the web, engineering, and AI-assisted work.',
+  },
+] as const
+
+const HERO_FIELDS: ReadonlyArray<HeroConstField> = [
+  { key: 'name', value: 'Jason Rundell' },
+  { key: 'role', value: 'Manager / Full Stack Developer' },
+  {
+    key: 'pitch',
+    value:
+      'AI-first ADM and Senior Full Stack Web Developer with 20+ years leading high-impact web platforms.',
   },
 ] as const
 
@@ -83,6 +98,9 @@ export default async function HomePage() {
       <StyledContainer>
         <StyledSection id="home">
           <h1>Manager / Full Stack Developer</h1>
+          <Spacer />
+          <HeroConstDeclaration fields={HERO_FIELDS} />
+          <Spacer />
           <StyledImageContainer>
             <Image
               src={HeroImage}
@@ -122,7 +140,9 @@ export default async function HomePage() {
         </StyledSection>
 
         <StyledSection id="selected-projects">
-          <h2>Selected projects</h2>
+          <SectionHeading comment="selected-projects.tsx">
+            Selected projects
+          </SectionHeading>
           <Row>
             <MoreProjects items={selectedProjects.map(toProjectCardItem)} />
           </Row>
@@ -133,7 +153,9 @@ export default async function HomePage() {
         <StyledContainer>
           <StyledSection id="latest-posts">
             <Spacer />
-            <h2>Latest posts</h2>
+            <SectionHeading comment="latest-posts.tsx">
+              Latest posts
+            </SectionHeading>
             <Spacer />
             <Row>
               <MorePosts posts={latestPosts} />

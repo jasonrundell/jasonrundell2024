@@ -1,24 +1,5 @@
-import { styled } from '@pigment-css/react'
-
 import { Position, Positions as PositionsDef } from '@/typeDefinitions/app'
-import Tokens from '@/lib/tokens'
-
-const StyledList = styled('ul')`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-`
-
-const StyledListItem = styled('li')`
-  margin: 0 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit} 0;
-`
-
-const StyledCompany = styled('span')`
-  font-style: normal;
-`
+import PromptList from '@/components/chrome/PromptList'
 
 export default function Positions({ positions }: PositionsDef) {
   const uniquePositions = positions.filter(
@@ -27,19 +8,10 @@ export default function Positions({ positions }: PositionsDef) {
   )
 
   return (
-    <StyledList>
-      {uniquePositions.map((position: Position, index: number) => {
-        const { company } = position
-        return (
-          <StyledListItem key={index}>
-            {/* <Heading level={3}>{role}</Heading> */}
-            <StyledCompany>{company}</StyledCompany>
-            {/* <br /> */}
-            {/* <StyledDate>{startDate}</StyledDate> -{' '} */}
-            {/* <StyledDate>{endDate}</StyledDate> */}
-          </StyledListItem>
-        )
-      })}
-    </StyledList>
+    <PromptList aria-label="Companies">
+      {uniquePositions.map((position: Position, index: number) => (
+        <PromptList.Item key={index}>{position.company}</PromptList.Item>
+      ))}
+    </PromptList>
   )
 }

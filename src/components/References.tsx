@@ -69,10 +69,14 @@ const StyledCite = styled('span')`
 `
 
 const StyledCompany = styled('span')`
+  font-family: ${Tokens.fonts.monospace.family};
   font-size: ${Tokens.fontSizes.sm.value}${Tokens.fontSizes.sm.unit};
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: ${Tokens.colors.textSecondary.var};
+  letter-spacing: 0.04em;
+  color: ${Tokens.colors.roleInfo.var};
+
+  &::before {
+    content: '// ';
+  }
 `
 
 function ensureField<Value>(value: Value, label: string, index: number): Value {

@@ -1,9 +1,9 @@
-import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 
 import ProjectPreviewImage from './ProjectPreviewImage'
 import Tokens from '@/lib/tokens'
+import { StyledLink } from '@/styles/common'
 
 interface ProjectPreviewProps {
   title: string
@@ -55,7 +55,7 @@ export default function ProjectPreview({
       <Spacer />
       <Row>
         <StyledHeading>
-          <Link href={`/projects/${slug}`}>{title}</Link>
+          <StyledLink href={`/projects/${slug}`}>{title}</StyledLink>
         </StyledHeading>
       </Row>
       <Spacer />
