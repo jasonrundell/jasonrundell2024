@@ -16,12 +16,9 @@ import {
 
 import MorePosts from '@/components/MorePosts'
 import MoreProjects from '@/components/MoreProjects'
-import HubDoors, { HubDoor } from '@/components/HubDoors'
-import {
-  SectionHeading,
-  HeroConstDeclaration,
-  HeroConstField,
-} from '@/components/chrome'
+import HeroTerminal from '@/components/HeroTerminal'
+import { type HubDoor } from '@/components/HubDoors'
+import { SectionHeading, type HeroConstField } from '@/components/chrome'
 import HeroImage from '@/public/images/ai-powered-developer.webp'
 
 const LastSongWrapper = dynamic(() => import('@/components/LastSongWrapper'), {
@@ -50,6 +47,11 @@ const HUB_DOORS: ReadonlyArray<HubDoor> = [
     description: 'Notes on the web, engineering, and AI-assisted work.',
   },
 ] as const
+
+const HERO_HEADING = 'Manager / Full Stack Developer'
+
+const HERO_PITCH =
+  "Hi! I'm an AI-first Application Development Manager and Senior Full Stack Web Developer with 20+ years leading high-impact web platforms and engineering teams."
 
 const HERO_FIELDS: ReadonlyArray<HeroConstField> = [
   { key: 'name', value: 'Jason Rundell' },
@@ -97,9 +99,12 @@ export default async function HomePage() {
     <>
       <StyledContainer>
         <StyledSection id="home">
-          <h1>Manager / Full Stack Developer</h1>
-          <Spacer />
-          <HeroConstDeclaration fields={HERO_FIELDS} />
+          <HeroTerminal
+            fields={HERO_FIELDS}
+            doors={HUB_DOORS}
+            heading={HERO_HEADING}
+            pitch={HERO_PITCH}
+          />
           <Spacer />
           <StyledImageContainer>
             <Image
@@ -133,10 +138,6 @@ export default async function HomePage() {
               <LastSongWrapper />
             </Row>
           </Grid>
-        </StyledSection>
-
-        <StyledSection id="doors">
-          <HubDoors doors={HUB_DOORS} />
         </StyledSection>
 
         <StyledSection id="selected-projects">
