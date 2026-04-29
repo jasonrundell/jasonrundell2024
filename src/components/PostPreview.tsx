@@ -2,10 +2,10 @@ import React from 'react'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 
-import ContentDate from './ContentDate'
 import PostPreviewImage from './PostPreviewImage'
 import Tokens from '@/lib/tokens'
 import { StyledLink } from '@/styles/common'
+import MetaDate from '@/components/chrome/MetaDate'
 
 interface PostPreviewProps {
   title: string
@@ -54,13 +54,11 @@ function PostPreview({
       )}
       <Row>
         <StyledHeading>
-          <StyledLink href={`/posts/${slug}`}>
-            {title}
-          </StyledLink>
+          <StyledLink href={`/posts/${slug}`}>{title}</StyledLink>
         </StyledHeading>
       </Row>
       <Row>
-        <ContentDate dateString={date} />
+        <MetaDate dateString={date} />
       </Row>
       <Row>
         <p>{excerpt}</p>
