@@ -1,12 +1,11 @@
 import Icon from './Icon'
 import { ExternalLink } from 'lucide-react'
-import { StyledLink } from '@/styles/common'
-import PromptList from '@/components/chrome/PromptList'
+import { StyledList, StyledListItem, StyledLink } from '@/styles/common'
 
 export default function ContactList() {
   return (
-    <PromptList aria-label="Ways to reach me">
-      <PromptList.Item>
+    <StyledList>
+      <StyledListItem>
         <Icon type="Email" />{' '}
         <StyledLink
           href="mailto:contact@jasonrundell.com"
@@ -14,8 +13,8 @@ export default function ContactList() {
         >
           Email me
         </StyledLink>
-      </PromptList.Item>
-      <PromptList.Item>
+      </StyledListItem>
+      <StyledListItem>
         <Icon type="Calendar" />{' '}
         <StyledLink
           href="https://calendly.com/jason-rundell/60-minute-meeting"
@@ -25,8 +24,8 @@ export default function ContactList() {
         >
           <ExternalLink size={18} /> Book time with me
         </StyledLink>
-      </PromptList.Item>
-      <PromptList.Item>
+      </StyledListItem>
+      <StyledListItem>
         <Icon type="GitHub" />{' '}
         <StyledLink
           href="https://github.com/jasonrundell?tab=repositories&q=&type=&language=&sort="
@@ -36,8 +35,8 @@ export default function ContactList() {
         >
           <ExternalLink size={18} /> My open-source work on GitHub
         </StyledLink>
-      </PromptList.Item>
-      <PromptList.Item>
+      </StyledListItem>
+      <StyledListItem>
         <Icon type="LinkedIn" />{' '}
         <StyledLink
           href="https://www.linkedin.com/in/jasonrundell/"
@@ -47,7 +46,7 @@ export default function ContactList() {
         >
           <ExternalLink size={18} /> Connect on LinkedIn
         </StyledLink>
-      </PromptList.Item>
-    </PromptList>
+      </StyledListItem>
+    </StyledList>
   )
 }

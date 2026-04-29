@@ -27,7 +27,7 @@ const StatusText = styled('p')`
 `
 
 const CodeBlock = styled('pre')`
-  background: ${Tokens.colors.muted.var};
+  background: ${Tokens.colors.muted.value};
   padding: 1rem;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   overflow-x: auto;

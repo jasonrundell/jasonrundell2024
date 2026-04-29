@@ -147,7 +147,7 @@ export default async function page({ params }: ProjectProps) {
       <StyledContainer>
         <StyledBreadcrumb>
           <Link href={`/`}>Home</Link> &gt;{' '}
-          <Link href={`/projects`}>Projects</Link> &gt; {title}
+          <Link href={`/#projects`}>Projects</Link> &gt; {title}
         </StyledBreadcrumb>
         <StyledSection id="project">
           <article>

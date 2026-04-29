@@ -29,7 +29,7 @@ const FullWidthButton = styled(SubmitButton)`
 
 const BottomText = styled('p')`
   text-align: center;
-  color: ${Tokens.colors.textSecondary.var};
+  color: ${Tokens.colors.textSecondary.value};
   font-size: 1rem;
   margin-top: 1.5rem;
 `

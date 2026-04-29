@@ -94,7 +94,7 @@ export default function ResetPasswordClient({ token }: { token: string }) {
           disabled={isLoading}
           style={{
             padding: '0.75rem 1.5rem',
-            backgroundColor: Tokens.colors.link.var,
+            backgroundColor: Tokens.colors.link.value,
             color: 'white',
             border: 'none',
             borderRadius: `${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit}`,

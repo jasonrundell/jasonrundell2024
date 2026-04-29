@@ -11,15 +11,11 @@
   ],
   "scripts": {
     "dell": "npm run dev",
-    "predev": "npm run tokens:build",
     "dev": "next",
-    "prebuild": "npm run tokens:build",
     "build": "next build",
     "start": "next dev",
     "setup": "node ./contentful/setup.js $CONTENTFUL_SPACE_ID $CONTENTFUL_ACCESS_TOKEN",
     "lint": "next lint",
-    "tokens:build": "node ./scripts/build-tokens.js",
-    "tokens:check": "npm run tokens:build && git diff --exit-code -- src/lib/tokens.generated.ts src/styles/tokens.generated.css",
     "test": "jest --coverage --passWithNoTests",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --coverageReporters=json-summary --coverageReporters=text && node ./scripts/check-coverage.js",
@@ -36,7 +32,6 @@
     "@vercel/speed-insights": "^1.1.0",
     "contentful": "^11.3.3",
     "date-fns": "^4.1.0",
-    "geist": "^1.7.0",
     "isomorphic-dompurify": "^2.30.0",
     "lucide-react": "^0.475.0",
     "next": "^14.2.25",
@@ -53,7 +48,6 @@
     "@pigment-css/nextjs-plugin": "^0.0.30",
     "@sentry/nextjs": "^8.46.0",
     "@supabase/supabase-js": "^2.49.4",
-    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
@@ -73,8 +67,7 @@
     "postcss-normalize": "^13.0.1",
     "react-axe": "^3.5.4",
     "sharp": "^0.33.5",
-    "typescript": "^5.8.3",
-    "webpack": "^5.106.2"
+    "typescript": "^5.8.3"
   },
   "license": "MIT",
   "repository": {
