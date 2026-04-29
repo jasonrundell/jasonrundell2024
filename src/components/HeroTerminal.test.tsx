@@ -8,44 +8,18 @@ jest.mock('@pigment-css/react', () => {
   }
 })
 
-jest.mock('next/link', () => {
-  return function MockLink({
-    children,
-    href,
-    'aria-label': ariaLabel,
-  }: {
-    children: React.ReactNode
-    href: string
-    'aria-label'?: string
-  }) {
-    return (
-      <a href={href} aria-label={ariaLabel}>
-        {children}
-      </a>
-    )
-  }
-})
-
 import HeroTerminal, {
   HERO_TERMINAL_SKIP_KEY,
   type HeroConstField,
 } from './HeroTerminal'
-import type { HubDoor } from './HubDoors'
 
 const fields: ReadonlyArray<HeroConstField> = [
   { key: 'name', value: 'Jason Rundell' },
   { key: 'role', value: 'Manager / Full Stack Developer' },
 ]
 
-const doors: ReadonlyArray<HubDoor> = [
-  { href: '/about', label: 'About', description: 'about d' },
-  { href: '/projects', label: 'Projects', description: 'projects d' },
-  { href: '/posts', label: 'Blog', description: 'posts d' },
-]
-
 const baseProps = {
   fields,
-  doors,
   heading: 'Manager / Full Stack Developer',
   pitch: 'AI-first ADM and Senior Full Stack Web Developer with 20+ years.',
 }
@@ -103,18 +77,16 @@ describe('HeroTerminal', () => {
       expect(pre).toHaveAttribute('aria-hidden', 'true')
     })
 
-    it('renders the doors nav landmark with the canonical aria-label', () => {
+    it('does not render the 3-doors hub navigation (now composed by the page)', () => {
       setReducedMotion(true)
       render(<HeroTerminal {...baseProps} />)
 
-      expect(
-        screen.getByRole('navigation', { name: /site sections/i })
-      ).toBeInTheDocument()
+      expect(screen.queryByRole('navigation')).not.toBeInTheDocument()
     })
   })
 
   describe('reduced-motion bypass', () => {
-    it('renders fully settled (all chars + visible doors + blinking cursor) when prefers-reduced-motion is set', () => {
+    it('renders fully settled (all chars + blinking cursor) when prefers-reduced-motion is set', () => {
       setReducedMotion(true)
       const { container } = render(<HeroTerminal {...baseProps} />)
 
@@ -124,9 +96,6 @@ describe('HeroTerminal', () => {
 
       const cursor = container.querySelector('[data-blink]')
       expect(cursor).toHaveAttribute('data-blink', 'true')
-
-      const doorsWrapper = container.querySelector('[data-visible]')
-      expect(doorsWrapper).toHaveAttribute('data-visible', 'true')
     })
 
     it('does NOT persist a skip flag when honouring prefers-reduced-motion', () => {
@@ -146,36 +115,23 @@ describe('HeroTerminal', () => {
       const cursor = container.querySelector('[data-blink]')
       expect(cursor).toHaveAttribute('data-blink', 'true')
 
-      const doorsWrapper = container.querySelector('[data-visible]')
-      expect(doorsWrapper).toHaveAttribute('data-visible', 'true')
-
       const pre = container.querySelector('pre')
       expect(pre?.textContent).toContain("'Jason Rundell'")
     })
   })
 
   describe('typing animation', () => {
-    it('starts typing from zero on mount, then completes and reveals doors', () => {
+    it('starts typing from zero on mount, then completes with a blinking cursor', () => {
       jest.useFakeTimers()
       const { container } = render(
         <HeroTerminal {...baseProps} typeIntervalMs={10} />
       )
 
-      // Immediately after mount: cursor is not yet blinking and doors hidden.
       const cursor = container.querySelector('[data-blink]')
-      const doorsWrapper = container.querySelector('[data-visible]')
       expect(cursor).toHaveAttribute('data-blink', 'false')
-      expect(doorsWrapper).toHaveAttribute('data-visible', 'false')
 
-      // Phase 1: advance past the typing window. Settles the typewriter and
-      // schedules the doors-fade timeout from within a post-commit effect.
       act(() => {
         jest.advanceTimersByTime(5_000)
-      })
-
-      // Phase 2: flush the doors-fade timeout that was scheduled in phase 1.
-      act(() => {
-        jest.advanceTimersByTime(500)
       })
 
       const pre = container.querySelector('pre')
@@ -183,9 +139,7 @@ describe('HeroTerminal', () => {
       expect(pre?.textContent).toContain("'Manager / Full Stack Developer'")
 
       const settledCursor = container.querySelector('[data-blink]')
-      const settledDoors = container.querySelector('[data-visible]')
       expect(settledCursor).toHaveAttribute('data-blink', 'true')
-      expect(settledDoors).toHaveAttribute('data-visible', 'true')
     })
 
     it('renders a partial mid-segment slice while typing is still in progress', () => {
@@ -221,9 +175,6 @@ describe('HeroTerminal', () => {
       act(() => {
         jest.advanceTimersByTime(5_000)
       })
-      act(() => {
-        jest.advanceTimersByTime(500)
-      })
 
       expect(window.sessionStorage.getItem(HERO_TERMINAL_SKIP_KEY)).toBeNull()
     })
@@ -236,7 +187,6 @@ describe('HeroTerminal', () => {
         <HeroTerminal {...baseProps} typeIntervalMs={1000} />
       )
 
-      // Mid-animation: cursor not blinking yet.
       expect(container.querySelector('[data-blink]')).toHaveAttribute(
         'data-blink',
         'false'
@@ -246,18 +196,8 @@ describe('HeroTerminal', () => {
         fireEvent.keyDown(window, { key: 'Enter' })
       })
 
-      // Cursor immediately settles.
       expect(container.querySelector('[data-blink]')).toHaveAttribute(
         'data-blink',
-        'true'
-      )
-
-      // Doors fade-in is scheduled; advance past the delay.
-      act(() => {
-        jest.advanceTimersByTime(500)
-      })
-      expect(container.querySelector('[data-visible]')).toHaveAttribute(
-        'data-visible',
         'true'
       )
 

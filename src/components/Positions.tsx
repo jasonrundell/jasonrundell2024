@@ -1,5 +1,5 @@
 import { Position, Positions as PositionsDef } from '@/typeDefinitions/app'
-import PromptList from '@/components/chrome/PromptList'
+import PromptList, { PromptItem } from '@/components/chrome/PromptList'
 
 export default function Positions({ positions }: PositionsDef) {
   const uniquePositions = positions.filter(
@@ -10,7 +10,7 @@ export default function Positions({ positions }: PositionsDef) {
   return (
     <PromptList aria-label="Companies">
       {uniquePositions.map((position: Position, index: number) => (
-        <PromptList.Item key={index}>{position.company}</PromptList.Item>
+        <PromptItem key={index}>{position.company}</PromptItem>
       ))}
     </PromptList>
   )

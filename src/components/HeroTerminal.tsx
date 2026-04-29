@@ -4,7 +4,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { styled, keyframes } from '@pigment-css/react'
 
 import Tokens from '@/lib/tokens'
-import HubDoors, { type HubDoor } from '@/components/HubDoors'
 
 export interface HeroConstField {
   key: string
@@ -26,9 +25,6 @@ export const HERO_TERMINAL_SKIP_KEY = 'jr:hero-terminal:skip'
  */
 const DEFAULT_TYPE_INTERVAL_MS = 40
 
-/** Pause between typewriter settle and the doors fade-in (Tier 2 motion). */
-const DOORS_FADE_DELAY_MS = 150
-
 type Role = 'comment' | 'keyword' | 'identifier' | 'key' | 'string' | 'plain'
 
 interface Segment {
@@ -38,7 +34,6 @@ interface Segment {
 
 interface HeroTerminalProps {
   fields: ReadonlyArray<HeroConstField>
-  doors: ReadonlyArray<HubDoor>
   /** Canonical, SR-only `<h1>` announced by assistive tech. */
   heading: string
   /** SR-only pitch sentence announced by assistive tech. */
@@ -152,17 +147,6 @@ const StyledCursor = styled('span')`
   }
 `
 
-const StyledDoorsWrapper = styled('div')`
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
-
-  &[data-visible='true'] {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`
-
 function renderSegment(segment: Segment, index: number) {
   switch (segment.role) {
     case 'comment':
@@ -182,21 +166,25 @@ function renderSegment(segment: Segment, index: number) {
 }
 
 /**
- * Animated terminal hero. Owns the entire hero motion pipeline so the rest
- * of the homepage can stay declarative:
+ * Animated terminal hero. Owns the typewriter session so the rest of the
+ * homepage can stay declarative:
  *
  * - Types out a syntax-highlighted `const session = { ... }` block, then
  *   parks a blinking cursor at the prompt.
- * - Fades the 3-doors row in once the typewriter settles.
  * - Cancels to settled state on any keypress / pointer / wheel / scroll /
  *   touch input and persists an in-session skip flag in `sessionStorage`.
  * - Bypasses motion entirely when `prefers-reduced-motion: reduce` is set.
  * - Always renders an SR-only `<h1>` + pitch in static DOM so assistive
  *   tech sees a stable, canonical heading regardless of animation phase.
+ *
+ * The 3-doors row is intentionally NOT part of this component. The
+ * homepage composes the layout (image → terminal → intro → doors) so the
+ * doors can sit below the intro paragraph that prompts the visitor to
+ * "pick a door". The doors get their own Tier 2 scroll reveal in
+ * `src/app/page.tsx`.
  */
 export default function HeroTerminal({
   fields,
-  doors,
   heading,
   pitch,
   identifier = 'session',
@@ -213,7 +201,6 @@ export default function HeroTerminal({
   // hydration both see the canonical end-state. The mount effect below
   // decides whether to wind back into the typing animation.
   const [charsTyped, setCharsTyped] = useState<number>(total)
-  const [doorsVisible, setDoorsVisible] = useState<boolean>(true)
   const [isAnimating, setIsAnimating] = useState<boolean>(false)
   const skippedRef = useRef(false)
 
@@ -234,12 +221,10 @@ export default function HeroTerminal({
     }
 
     if (reducedMotion || sessionSkip) {
-      // Stay settled.
       return
     }
 
     setCharsTyped(0)
-    setDoorsVisible(false)
     setIsAnimating(true)
     // `total` is captured once on mount; intentionally not in deps so the
     // animation isn't restarted if `fields` re-render-equal.
@@ -295,16 +280,6 @@ export default function HeroTerminal({
     }
   }, [charsTyped, total, isAnimating])
 
-  // Fade doors in shortly after the typewriter settles.
-  useEffect(() => {
-    if (isAnimating || doorsVisible) return
-    const t = window.setTimeout(
-      () => setDoorsVisible(true),
-      DOORS_FADE_DELAY_MS
-    )
-    return () => window.clearTimeout(t)
-  }, [isAnimating, doorsVisible])
-
   const visibleSegments = sliceSegments(segments, charsTyped)
   const isSettled = !isAnimating && charsTyped >= total
 
@@ -319,9 +294,6 @@ export default function HeroTerminal({
             {'\u25AE'}
           </StyledCursor>
         </StyledPre>
-        <StyledDoorsWrapper data-visible={doorsVisible ? 'true' : 'false'}>
-          <HubDoors doors={doors} ariaLabel="Site sections" />
-        </StyledDoorsWrapper>
       </StyledFigure>
     </section>
   )

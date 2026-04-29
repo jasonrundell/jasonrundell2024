@@ -31,11 +31,9 @@ jest.mock('@/components/LastSongWrapper', () => {
 
 jest.mock('@/components/HeroTerminal', () => {
   return function MockHeroTerminal({
-    doors,
     heading,
     pitch,
   }: {
-    doors: { href: string; label: string }[]
     heading: string
     pitch: string
   }) {
@@ -43,17 +41,48 @@ jest.mock('@/components/HeroTerminal', () => {
       <section data-testid="hero-terminal" aria-label="Hero">
         <h1>{heading}</h1>
         <p>{pitch}</p>
-        <nav data-testid="hub-doors" aria-label="Site sections">
-          {doors.map((d) => (
-            <a key={d.href} href={d.href}>
-              {d.label}
-            </a>
-          ))}
-        </nav>
       </section>
     )
   }
 })
+
+jest.mock('@/components/HubDoors', () => {
+  return function MockHubDoors({
+    doors,
+    ariaLabel,
+  }: {
+    doors: { href: string; label: string }[]
+    ariaLabel?: string
+  }) {
+    return (
+      <nav data-testid="hub-doors" aria-label={ariaLabel}>
+        {doors.map((d) => (
+          <a key={d.href} href={d.href}>
+            {d.label}
+          </a>
+        ))}
+      </nav>
+    )
+  }
+})
+
+jest.mock('@/styles/motion', () => ({
+  useReveal: () => [{ current: null }, 'ready'],
+  Reveal: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  RevealStaggerGroup: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  RevealStaggerItem: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  fadeUpKeyframes: 'mocked-fade-up',
+  slideInKeyframes: 'mocked-slide-in',
+  typeInKeyframes: 'mocked-type-in',
+  REVEAL_FADE_DURATION_MS: 350,
+  REVEAL_TYPE_DURATION_MS: 250,
+  REVEAL_SLIDE_DURATION_MS: 300,
+  REVEAL_STAGGER_INTERVAL_MS: 50,
+}))
 
 jest.mock('next/link', () => {
   return function MockLink({

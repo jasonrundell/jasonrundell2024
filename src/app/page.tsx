@@ -17,8 +17,9 @@ import {
 import MorePosts from '@/components/MorePosts'
 import MoreProjects from '@/components/MoreProjects'
 import HeroTerminal, { type HeroConstField } from '@/components/HeroTerminal'
-import { type HubDoor } from '@/components/HubDoors'
+import HubDoors, { type HubDoor } from '@/components/HubDoors'
 import { SectionHeading } from '@/components/chrome'
+import { Reveal } from '@/styles/motion'
 import HeroImage from '@/public/images/ai-powered-developer.webp'
 
 const LastSongWrapper = dynamic(() => import('@/components/LastSongWrapper'), {
@@ -99,13 +100,6 @@ export default async function HomePage() {
     <>
       <StyledContainer>
         <StyledSection id="home">
-          <HeroTerminal
-            fields={HERO_FIELDS}
-            doors={HUB_DOORS}
-            heading={HERO_HEADING}
-            pitch={HERO_PITCH}
-          />
-          <Spacer />
           <StyledImageContainer>
             <Image
               src={HeroImage}
@@ -117,6 +111,12 @@ export default async function HomePage() {
               sizes="100vw"
             />
           </StyledImageContainer>
+          <Spacer />
+          <HeroTerminal
+            fields={HERO_FIELDS}
+            heading={HERO_HEADING}
+            pitch={HERO_PITCH}
+          />
           <Spacer />
           <Grid
             gridTemplateColumns="1fr"
@@ -138,6 +138,10 @@ export default async function HomePage() {
               <LastSongWrapper />
             </Row>
           </Grid>
+          <Spacer />
+          <Reveal>
+            <HubDoors doors={HUB_DOORS} ariaLabel="Site sections" />
+          </Reveal>
         </StyledSection>
 
         <StyledSection id="selected-projects">

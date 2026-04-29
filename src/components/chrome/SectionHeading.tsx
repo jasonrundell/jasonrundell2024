@@ -1,7 +1,16 @@
+'use client'
+
 import React from 'react'
 import { styled } from '@pigment-css/react'
 
 import Tokens from '@/lib/tokens'
+import {
+  REVEAL_FADE_DURATION_MS,
+  REVEAL_TYPE_DURATION_MS,
+  fadeUpKeyframes,
+  typeInKeyframes,
+  useReveal,
+} from '@/styles/motion'
 
 const StyledSectionComment = styled('span')`
   display: block;
@@ -20,6 +29,28 @@ const StyledHeadingWrapper = styled('div')`
   h2,
   h3 {
     margin: 0;
+  }
+
+  &[data-reveal-state='hidden'] > [data-section-comment] {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  &[data-reveal-state='hidden'] > h2,
+  &[data-reveal-state='hidden'] > h3 {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  &[data-reveal-state='visible'] > [data-section-comment] {
+    animation: ${typeInKeyframes} ${REVEAL_TYPE_DURATION_MS}ms steps(20, end)
+      forwards;
+  }
+
+  &[data-reveal-state='visible'] > h2,
+  &[data-reveal-state='visible'] > h3 {
+    animation: ${fadeUpKeyframes} ${REVEAL_FADE_DURATION_MS}ms ease-out
+      forwards;
+    animation-delay: ${REVEAL_TYPE_DURATION_MS}ms;
   }
 `
 
@@ -44,8 +75,15 @@ interface SectionHeadingProps {
 
 /**
  * Section heading with the refined-terminal "// section.tsx" comment header
- * sitting above an h2/h3. Phase 4 syntax-highlight chrome — applied at every
- * h2 across pages so prose still reads like a calm IDE.
+ * sitting above an h2/h3.
+ *
+ * Phase 4 introduced the static syntax-highlight chrome. Phase 6 layers the
+ * Tier 2 reveal on top: when the heading scrolls into view for the first
+ * time, the comment line "types in" via a clip-path keyframe and the
+ * heading itself fades up after the comment finishes. Already-onscreen
+ * headings (e.g. above-the-fold ones at page load) skip the animation and
+ * render in their settled state, and reduced-motion users bypass it
+ * entirely.
  */
 export default function SectionHeading({
   comment,
@@ -55,10 +93,11 @@ export default function SectionHeading({
   ...rest
 }: SectionHeadingProps) {
   const Heading = level === 3 ? 'h3' : 'h2'
+  const [ref, state] = useReveal<HTMLDivElement>()
 
   return (
-    <StyledHeadingWrapper>
-      <StyledSectionComment aria-hidden="true">
+    <StyledHeadingWrapper ref={ref} data-reveal-state={state}>
+      <StyledSectionComment data-section-comment aria-hidden="true">
         {`// ${comment}`}
       </StyledSectionComment>
       <Heading id={id} {...rest}>
