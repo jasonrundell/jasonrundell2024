@@ -48,8 +48,7 @@ const StyledHeadingWrapper = styled('div')`
 
   &[data-reveal-state='visible'] > h2,
   &[data-reveal-state='visible'] > h3 {
-    animation: ${fadeUpKeyframes} ${REVEAL_FADE_DURATION_MS}ms ease-out
-      forwards;
+    animation: ${fadeUpKeyframes} ${REVEAL_FADE_DURATION_MS}ms ease-out both;
     animation-delay: ${REVEAL_TYPE_DURATION_MS}ms;
   }
 `

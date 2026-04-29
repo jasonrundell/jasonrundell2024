@@ -44,8 +44,7 @@ const StyledPromptItem = styled('li')`
   }
 
   [data-reveal-state='visible'] > & {
-    animation: ${slideInKeyframes} ${REVEAL_SLIDE_DURATION_MS}ms ease-out
-      forwards;
+    animation: ${slideInKeyframes} ${REVEAL_SLIDE_DURATION_MS}ms ease-out both;
     animation-delay: calc(
       var(--stagger-index, 0) * ${REVEAL_STAGGER_INTERVAL_MS}ms
     );

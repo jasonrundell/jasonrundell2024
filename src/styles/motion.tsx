@@ -178,8 +178,7 @@ const StyledReveal = styled('div')`
   }
 
   &[data-reveal-state='visible'] {
-    animation: ${fadeUpKeyframes} ${REVEAL_FADE_DURATION_MS}ms ease-out
-      forwards;
+    animation: ${fadeUpKeyframes} ${REVEAL_FADE_DURATION_MS}ms ease-out both;
     animation-delay: var(--reveal-delay, 0ms);
   }
 `
@@ -257,8 +256,7 @@ const StyledStaggerItem = styled('div')`
   }
 
   &[data-reveal-state='visible'] {
-    animation: ${fadeUpKeyframes} ${REVEAL_FADE_DURATION_MS}ms ease-out
-      forwards;
+    animation: ${fadeUpKeyframes} ${REVEAL_FADE_DURATION_MS}ms ease-out both;
     animation-delay: calc(
       var(--stagger-index, 0) * ${REVEAL_STAGGER_INTERVAL_MS}ms
     );
