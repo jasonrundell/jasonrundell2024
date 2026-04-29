@@ -70,6 +70,9 @@ jest.mock('next/image', () => {
 })
 
 jest.mock('@/lib/contentful', () => ({
+  getFeaturedProjects: jest.fn(),
+  getLatestPosts: jest.fn(),
+  getLastSong: jest.fn(),
   getProjects: jest.fn(),
   getPosts: jest.fn(),
   getSkills: jest.fn(),
@@ -143,8 +146,8 @@ jest.mock('@/components/MorePosts', () => {
   }
 })
 
-jest.mock('@/components/LastSongWrapper', () => {
-  return function MockLastSongWrapper() {
+jest.mock('@/components/LastSong', () => {
+  return function MockLastSong() {
     return <aside aria-label="Last song">Last song</aside>
   }
 })
@@ -223,12 +226,18 @@ jest.mock('@/components/chrome', () => ({
 }))
 
 const {
+  getFeaturedProjects,
+  getLatestPosts,
+  getLastSong,
   getProjects,
   getPosts,
   getSkills,
   getReferences,
   getPositions,
 } = jest.requireMock<{
+  getFeaturedProjects: jest.Mock
+  getLatestPosts: jest.Mock
+  getLastSong: jest.Mock
   getProjects: jest.Mock
   getPosts: jest.Mock
   getSkills: jest.Mock
@@ -281,16 +290,25 @@ async function expectNoAxeViolations(container: HTMLElement) {
 
 describe('route accessibility audit', () => {
   beforeEach(() => {
-    getProjects.mockResolvedValue([
+    const projects = [
       { slug: 'project-a', title: 'Project A', excerpt: 'Project excerpt' },
       { slug: 'project-b', title: 'Project B', excerpt: 'Project excerpt' },
       { slug: 'project-c', title: 'Project C', excerpt: 'Project excerpt' },
-    ])
-    getPosts.mockResolvedValue([
+    ]
+    const posts = [
       { slug: 'post-a', title: 'Post A', date: '2025-01-01' },
       { slug: 'post-b', title: 'Post B', date: '2024-01-01' },
       { slug: 'post-c', title: 'Post C', date: '2023-01-01' },
-    ])
+    ]
+    getFeaturedProjects.mockResolvedValue(projects)
+    getLatestPosts.mockResolvedValue(posts)
+    getLastSong.mockResolvedValue({
+      title: 'Song',
+      artist: 'Artist',
+      url: 'https://music.youtube.com/watch?v=test',
+    })
+    getProjects.mockResolvedValue(projects)
+    getPosts.mockResolvedValue(posts)
     getSkills.mockResolvedValue([{ name: 'React' }, { name: 'TypeScript' }])
     getReferences.mockResolvedValue([{ citeName: 'Jane Doe' }])
     getPositions.mockResolvedValue([{ company: 'Example Co' }])

@@ -12,7 +12,7 @@ const getCommentsSchema = z.object({
   contentType: z.enum(['post', 'project']),
   slug: z.string().min(1).max(200).trim(),
   limit: z.coerce.number().int().min(1).max(50).default(20),
-  cursor: z.string().uuid().optional(),
+  cursor: z.string().datetime().optional(),
 })
 
 const createCommentSchema = z.object({
@@ -48,22 +48,14 @@ export async function GET(request: NextRequest) {
       .select(COMMENT_FIELDS)
       .eq('content_type', contentType)
       .eq('content_slug', slug)
-      .order('created_at', { ascending: false })
-      .limit(limit)
 
     if (cursor) {
-      const { data: cursorComment } = await supabase
-        .from('comments')
-        .select('created_at')
-        .eq('id', cursor)
-        .single()
-
-      if (cursorComment) {
-        query = query.lt('created_at', cursorComment.created_at)
-      }
+      query = query.lt('created_at', cursor)
     }
 
     const { data, error } = await query
+      .order('created_at', { ascending: false })
+      .limit(limit)
 
     if (error) {
       console.error('Error fetching comments:', error)

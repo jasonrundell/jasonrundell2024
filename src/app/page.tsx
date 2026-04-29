@@ -1,9 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
 import { Row, Spacer, Grid } from '@jasonrundell/dropship'
 
-import { getProjects, getPosts } from '@/lib/contentful'
+import {
+  getFeaturedProjects,
+  getLastSong,
+  getLatestPosts,
+} from '@/lib/contentful'
 import { toProjectCardItem } from '@/lib/projectUtils'
 
 import {
@@ -18,13 +21,10 @@ import MorePosts from '@/components/MorePosts'
 import MoreProjects from '@/components/MoreProjects'
 import HeroTerminal, { type HeroConstField } from '@/components/HeroTerminal'
 import HubDoors, { type HubDoor } from '@/components/HubDoors'
+import LastSong from '@/components/LastSong'
 import { SectionHeading } from '@/components/chrome'
 import { Reveal } from '@/styles/motion'
 import HeroImage from '@/public/images/ai-powered-developer.webp'
-
-const LastSongWrapper = dynamic(() => import('@/components/LastSongWrapper'), {
-  loading: () => <div>Loading...</div>,
-})
 
 const imageCoverStyle: React.CSSProperties = {
   objectFit: 'cover',
@@ -76,7 +76,11 @@ export const metadata = {
 export const revalidate = 86400
 
 export default async function HomePage() {
-  const [projects, posts] = await Promise.all([getProjects(), getPosts()])
+  const [projects, posts, lastSong] = await Promise.all([
+    getFeaturedProjects(HOMEPAGE_PROJECT_LIMIT),
+    getLatestPosts(HOMEPAGE_POST_LIMIT),
+    getLastSong(),
+  ])
 
   const selectedProjects = [...projects]
     .sort((a, b) => {
@@ -135,7 +139,7 @@ export default async function HomePage() {
               </p>
             </Row>
             <Row>
-              <LastSongWrapper />
+              {lastSong && <LastSong song={lastSong} />}
             </Row>
           </Grid>
           <Spacer />

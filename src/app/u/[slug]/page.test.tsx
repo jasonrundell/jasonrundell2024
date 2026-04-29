@@ -9,8 +9,8 @@ const eq = jest.fn(() => ({ single, order }))
 const select = jest.fn(() => ({ eq }))
 const from = jest.fn(() => ({ select }))
 
-jest.mock('@/utils/supabase/server', () => ({
-  createClient: jest.fn(async () => ({ from })),
+jest.mock('@/utils/supabase/public-client', () => ({
+  createPublicClient: jest.fn(() => ({ from })),
 }))
 
 jest.mock('next/navigation', () => ({

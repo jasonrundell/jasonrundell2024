@@ -30,9 +30,11 @@ jest.mock('./contentful', () => {
 import {
   getSkills,
   getProjects,
+  getFeaturedProjects,
   getReferences,
   getPositions,
   getPosts,
+  getLatestPosts,
   getLastSong,
   getEntry,
   getEntryBySlug,
@@ -140,6 +142,28 @@ describe('Contentful Utilities', () => {
       // Act & Assert
       await expect(getProjects()).rejects.toThrow('Network error')
     })
+
+    it('should fetch ordered featured projects with a limit', async () => {
+      const mockEntries = [
+        {
+          fields: { slug: 'project-1', title: 'Project 1', order: 1 },
+        },
+      ]
+      mockClient.getEntries.mockResolvedValue({
+        items: mockEntries,
+      })
+
+      const result = await getFeaturedProjects(3)
+
+      expect(result).toEqual([
+        { slug: 'project-1', title: 'Project 1', order: 1 },
+      ])
+      expect(mockClient.getEntries).toHaveBeenCalledWith({
+        content_type: 'project',
+        limit: 3,
+        order: 'fields.order',
+      })
+    })
   })
 
   describe('getReferences', () => {
@@ -234,6 +258,28 @@ describe('Contentful Utilities', () => {
 
       // Act & Assert
       await expect(getPosts()).rejects.toThrow('Network error')
+    })
+
+    it('should fetch latest posts with a limit', async () => {
+      const mockEntries = [
+        {
+          fields: { slug: 'post-1', title: 'Post 1', date: '2025-01-01' },
+        },
+      ]
+      mockClient.getEntries.mockResolvedValue({
+        items: mockEntries,
+      })
+
+      const result = await getLatestPosts(3)
+
+      expect(result).toEqual([
+        { slug: 'post-1', title: 'Post 1', date: '2025-01-01' },
+      ])
+      expect(mockClient.getEntries).toHaveBeenCalledWith({
+        content_type: 'post',
+        limit: 3,
+        order: '-fields.date',
+      })
     })
   })
 

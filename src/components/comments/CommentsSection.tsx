@@ -30,26 +30,33 @@ export default function CommentsSection({
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  const fetchComments = useCallback(async () => {
+  const loadComments = useCallback(async () => {
     try {
       const res = await fetch(
         `/api/comments?contentType=${encodeURIComponent(contentType)}&slug=${encodeURIComponent(contentSlug)}`
       )
       if (res.ok) {
         const data = await res.json()
-        setComments(data.comments)
+        return data.comments as Comment[]
       }
     } catch (err) {
       console.error('Failed to fetch comments:', err)
     }
+
+    return []
   }, [contentType, contentSlug])
 
   useEffect(() => {
     const init = async () => {
       const supabase = createClient()
+      const [authResult, fetchedComments] = await Promise.all([
+        supabase.auth.getUser(),
+        loadComments(),
+      ])
+
       const {
         data: { user },
-      } = await supabase.auth.getUser()
+      } = authResult
 
       if (user) {
         setCurrentUserId(user.id)
@@ -57,12 +64,12 @@ export default function CommentsSection({
         setIsAdmin(user.app_metadata?.role === 'admin')
       }
 
-      await fetchComments()
+      setComments(fetchedComments)
       setIsLoading(false)
     }
 
     init()
-  }, [fetchComments])
+  }, [loadComments])
 
   const handleCommentCreated = (comment: Comment) => {
     setComments((prev) => [comment, ...prev])

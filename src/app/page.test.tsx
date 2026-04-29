@@ -2,13 +2,15 @@ import { render, screen } from '@testing-library/react'
 import Page from './page'
 
 jest.mock('@/lib/contentful', () => ({
-  getProjects: jest.fn(),
-  getPosts: jest.fn(),
+  getFeaturedProjects: jest.fn(),
+  getLatestPosts: jest.fn(),
+  getLastSong: jest.fn(),
 }))
 
-const { getProjects, getPosts } = jest.requireMock<{
-  getProjects: jest.Mock
-  getPosts: jest.Mock
+const { getFeaturedProjects, getLatestPosts, getLastSong } = jest.requireMock<{
+  getFeaturedProjects: jest.Mock
+  getLatestPosts: jest.Mock
+  getLastSong: jest.Mock
 }>('@/lib/contentful')
 
 jest.mock('@/components/MorePosts', () => {
@@ -23,9 +25,9 @@ jest.mock('@/components/MoreProjects', () => {
   }
 })
 
-jest.mock('@/components/LastSongWrapper', () => {
-  return function MockLastSongWrapper() {
-    return <div data-testid="last-song-wrapper">Last Song</div>
+jest.mock('@/components/LastSong', () => {
+  return function MockLastSong() {
+    return <div data-testid="last-song">Last Song</div>
   }
 })
 
@@ -174,11 +176,18 @@ const fakePosts = [
   { slug: 'd', title: 'D', date: '2023-01-01' },
 ]
 
+const fakeLastSong = {
+  title: 'Song',
+  artist: 'Artist',
+  url: 'https://music.youtube.com/watch?v=test',
+}
+
 describe('Home page (hub)', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    getProjects.mockResolvedValue(fakeProjects)
-    getPosts.mockResolvedValue(fakePosts)
+    getFeaturedProjects.mockResolvedValue(fakeProjects)
+    getLatestPosts.mockResolvedValue(fakePosts)
+    getLastSong.mockResolvedValue(fakeLastSong)
   })
 
   it('renders a single h1 with the role + title (delegated to HeroTerminal)', async () => {
@@ -222,7 +231,7 @@ describe('Home page (hub)', () => {
     const pageComponent = await Page()
     render(pageComponent)
 
-    expect(screen.getByTestId('last-song-wrapper')).toBeInTheDocument()
+    expect(screen.getByTestId('last-song')).toBeInTheDocument()
   })
 
   it('limits selected projects to three (sorted by order)', async () => {
@@ -244,7 +253,8 @@ describe('Home page (hub)', () => {
   it('fetches projects and posts in parallel', async () => {
     await Page()
 
-    expect(getProjects).toHaveBeenCalled()
-    expect(getPosts).toHaveBeenCalled()
+    expect(getFeaturedProjects).toHaveBeenCalledWith(3)
+    expect(getLatestPosts).toHaveBeenCalledWith(3)
+    expect(getLastSong).toHaveBeenCalled()
   })
 })

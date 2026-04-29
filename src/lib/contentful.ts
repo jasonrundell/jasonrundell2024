@@ -20,6 +20,15 @@ let contentfulClient:
   | ReturnType<typeof createClient>
   | null = null
 
+const SLUG_LOOKUP_CACHE_TTL_MS = 1000
+const slugLookupCache = new Map<
+  string,
+  {
+    createdAt: number
+    promise: Promise<Entry<ContentfulEntry<EntrySkeletonType>>>
+  }
+>()
+
 function getContentfulClient() {
   if (contentfulClient) {
     return contentfulClient
@@ -50,13 +59,15 @@ function getContentfulClient() {
  * @throws Error if fetch fails
  */
 async function fetchEntries<T extends EntrySkeletonType>(
-  contentType: string
+  contentType: string,
+  query: Record<string, string | number> = {}
 ): Promise<Entry<ContentfulEntry<T>>[]> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries<ContentfulEntry<T>>({
       content_type: contentType,
-    })
+      ...query,
+    } as Record<string, string | number>)
 
     return response.items
   } catch (error) {
@@ -117,6 +128,31 @@ async function fetchEntryBySlug<T extends EntrySkeletonType>(
   }
 }
 
+async function cachedFetchEntryBySlug<T extends EntrySkeletonType>(
+  contentType: string,
+  slug: string
+): Promise<Entry<ContentfulEntry<T>>> {
+  const cacheKey = `${contentType}:${slug}`
+  const now = Date.now()
+  const cached = slugLookupCache.get(cacheKey)
+
+  if (cached && now - cached.createdAt < SLUG_LOOKUP_CACHE_TTL_MS) {
+    return cached.promise as Promise<Entry<ContentfulEntry<T>>>
+  }
+
+  const promise = fetchEntryBySlug<T>(contentType, slug)
+  slugLookupCache.set(cacheKey, {
+    createdAt: now,
+    promise: promise as Promise<Entry<ContentfulEntry<EntrySkeletonType>>>,
+  })
+
+  promise.catch(() => {
+    slugLookupCache.delete(cacheKey)
+  })
+
+  return promise
+}
+
 /**
  * Fetches a single entry from Contentful by entry ID.
  * @param entryId - The Contentful entry ID
@@ -151,7 +187,7 @@ export async function getEntryBySlug<T extends EntrySkeletonType>(
   slug: string
 ): Promise<T> {
   try {
-    const entry = await fetchEntryBySlug<T>(contentType, slug)
+    const entry = await cachedFetchEntryBySlug<T>(contentType, slug)
     return entry.fields as unknown as T
   } catch (error) {
     console.error('Error fetching entry by slug:', error)
@@ -219,11 +255,33 @@ export async function getProjects(): Promise<Project[]> {
 }
 
 /**
+ * Fetches the top ordered projects for compact route surfaces like the home page.
+ */
+export async function getFeaturedProjects(limit: number): Promise<Project[]> {
+  const projects = await fetchEntries<Project>('project', {
+    limit,
+    order: 'fields.order',
+  })
+  return requireEntries('project', projects)
+}
+
+/**
  * Fetches all blog post entries from Contentful.
  * @returns Array of post entries
  */
 export async function getPosts(): Promise<Post[]> {
   const posts = await fetchEntries<Post>('post')
+  return requireEntries('post', posts)
+}
+
+/**
+ * Fetches the latest posts without downloading the full archive.
+ */
+export async function getLatestPosts(limit: number): Promise<Post[]> {
+  const posts = await fetchEntries<Post>('post', {
+    limit,
+    order: '-fields.date',
+  })
   return requireEntries('post', posts)
 }
 
