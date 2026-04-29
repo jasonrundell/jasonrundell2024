@@ -195,17 +195,17 @@ const Tokens = {
       "var": "var(--color-accent)"
     },
     "background": {
-      "value": "#232f3e",
+      "value": "#151c25",
       "unit": "hex",
       "var": "var(--color-background)"
     },
     "backgroundDark": {
-      "value": "#1c2531",
+      "value": "#0e131a",
       "unit": "hex",
       "var": "var(--color-background-dark)"
     },
     "backgroundDarker": {
-      "value": "#151c25",
+      "value": "#0e131a",
       "unit": "hex",
       "var": "var(--color-background-darker)"
     },
@@ -215,7 +215,7 @@ const Tokens = {
       "var": "var(--color-surface)"
     },
     "textPrimary": {
-      "value": "#9aaec6",
+      "value": "#b8c5d6",
       "unit": "hex",
       "var": "var(--color-text-primary)"
     },
@@ -240,7 +240,7 @@ const Tokens = {
       "var": "var(--color-muted)"
     },
     "success": {
-      "value": "#63db53",
+      "value": "#9ece6a",
       "unit": "hex",
       "var": "var(--color-success)"
     },
@@ -250,7 +250,7 @@ const Tokens = {
       "var": "var(--color-warning)"
     },
     "error": {
-      "value": "#d93f3f",
+      "value": "#f7768e",
       "unit": "hex",
       "var": "var(--color-error)"
     },
@@ -265,7 +265,7 @@ const Tokens = {
       "var": "var(--color-role-prompt)"
     },
     "roleSuccess": {
-      "value": "#63db53",
+      "value": "#9ece6a",
       "unit": "hex",
       "var": "var(--color-role-success)"
     },
@@ -275,12 +275,12 @@ const Tokens = {
       "var": "var(--color-role-info)"
     },
     "roleDanger": {
-      "value": "#d93f3f",
+      "value": "#f7768e",
       "unit": "hex",
       "var": "var(--color-role-danger)"
     },
     "roleBody": {
-      "value": "#9aaec6",
+      "value": "#b8c5d6",
       "unit": "hex",
       "var": "var(--color-role-body)"
     },
@@ -290,17 +290,17 @@ const Tokens = {
       "var": "var(--color-role-heading)"
     },
     "surfaceBase": {
-      "value": "#232f3e",
+      "value": "#151c25",
       "unit": "hex",
       "var": "var(--color-surface-base)"
     },
     "surfaceElevated": {
-      "value": "#1c2531",
+      "value": "#232f3e",
       "unit": "hex",
       "var": "var(--color-surface-elevated)"
     },
     "surfaceDeepest": {
-      "value": "#151c25",
+      "value": "#0e131a",
       "unit": "hex",
       "var": "var(--color-surface-deepest)"
     },
@@ -432,19 +432,19 @@ const Tokens = {
   },
   "fonts": {
     "body": {
-      "family": "Outfit, Arial, sans-serif",
+      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif",
       "var": "var(--font-family-body)"
     },
     "heading": {
-      "family": "Georgia, serif",
+      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif",
       "var": "var(--font-family-heading)"
     },
     "monospace": {
-      "family": "Courier New, monospace",
+      "family": "var(--font-geist-mono), 'Geist Mono', ui-monospace, 'Courier New', monospace",
       "var": "var(--font-family-monospace)"
     },
     "quotes": {
-      "family": "'Times New Roman', Times, serif",
+      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif",
       "var": "var(--font-family-quotes)"
     }
   }

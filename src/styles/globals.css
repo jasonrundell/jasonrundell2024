@@ -73,13 +73,13 @@ hr {
 
 @property --background-color-start {
   syntax: '<color>';
-  initial-value: #232f3e;
+  initial-value: #151c25;
   inherits: false;
 }
 
 @property --background-color-end {
   syntax: '<color>';
-  initial-value: #232f3e;
+  initial-value: #151c25;
   inherits: false;
 }
 
@@ -101,13 +101,13 @@ hr {
     var(--background-color-start) 0%,
     var(--background-color-end) 100%
   );
-  --background-color-start: #232f3e;
-  --background-color-end: #151c25;
+  --background-color-start: #151c25;
+  --background-color-end: #0e131a;
 }
 
 #menu:not(.scrolled) {
-  --background-color-start: #232f3e;
-  --background-color-end: #232f3e;
+  --background-color-start: #151c25;
+  --background-color-end: #151c25;
 }
 
 .decoration--none {
@@ -158,5 +158,24 @@ select:focus-visible {
 @media (min-width: 48rem) {
   .youtube-embed {
     height: 31.25rem;
+  }
+}
+
+/*
+ * Global motion guard. Honours users who request reduced motion at the OS
+ * level so every animation/transition collapses to a near-instant settled
+ * state. Components with motion logic (HeroTerminal, Tier 2 reveals) read
+ * the same media query and bypass their effects accordingly.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -60,7 +60,7 @@ export interface Projects {
 
 export type ProjectCardItem = {
   title: string
-  featuredImage: {
+  featuredImage?: {
     file: { url: string }
     altText: string
     description: string

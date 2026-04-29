@@ -1,7 +1,8 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { GoogleAnalytics } from '@next/third-parties/google'
-import { Outfit } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants'
@@ -25,11 +26,6 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
 }
 
-const outfit = Outfit({
-  subsets: ['latin'],
-  display: 'swap', // Prevents invisible text during font load
-})
-
 /**
  * Root layout component for the application.
  * Provides the HTML structure, metadata, and global components.
@@ -41,8 +37,8 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={outfit.className}>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className={GeistSans.className}>
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
