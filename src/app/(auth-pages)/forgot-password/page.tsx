@@ -37,7 +37,7 @@ const FullWidthButton = styled(SubmitButton)`
 
 const BottomText = styled('p')`
   text-align: center;
-  color: ${Tokens.colors.textSecondary.value};
+  color: ${Tokens.colors.textSecondary.var};
   font-size: 1rem;
   margin-top: 1.5rem;
 `
@@ -52,20 +52,20 @@ const SuccessContainer = styled('div')`
 `
 
 const SuccessIcon = styled(CheckCircle)`
-  color: ${Tokens.colors.success.value};
+  color: ${Tokens.colors.roleSuccess.var};
   width: 4rem;
   height: 4rem;
 `
 
 const SuccessTitle = styled('h2')`
-  color: ${Tokens.colors.textPrimary.value};
+  color: ${Tokens.colors.roleBody.var};
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
 `
 
 const SuccessMessage = styled('p')`
-  color: ${Tokens.colors.textSecondary.value};
+  color: ${Tokens.colors.textSecondary.var};
   font-size: 1rem;
   margin: 0;
   line-height: 1.5;
@@ -75,7 +75,7 @@ const BackButton = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: ${Tokens.colors.primary.value};
+  color: ${Tokens.colors.rolePrompt.var};
   text-decoration: none;
   font-weight: 500;
   transition: opacity 0.2s ease;
@@ -90,8 +90,8 @@ const TryAgainButton = styled('button')`
   align-items: center;
   gap: 0.5rem;
   background: none;
-  border: 1px solid ${Tokens.colors.primary.value};
-  color: ${Tokens.colors.primary.value};
+  border: 1px solid ${Tokens.colors.rolePrompt.var};
+  color: ${Tokens.colors.rolePrompt.var};
   padding: 0.5rem 1rem;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   font-size: 0.875rem;
@@ -100,7 +100,7 @@ const TryAgainButton = styled('button')`
   transition: all 0.2s ease;
 
   &:hover {
-    background: ${Tokens.colors.primary.value};
+    background: ${Tokens.colors.rolePrompt.var};
     color: white;
   }
 `

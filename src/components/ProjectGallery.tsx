@@ -30,7 +30,7 @@ const StyledGalleryItem = styled('div')`
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
-  background-color: ${Tokens.colors.backgroundDarker.value};
+  background-color: ${Tokens.colors.surfaceDeepest.var};
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 
@@ -69,7 +69,7 @@ const StyledNavButtonLeft = styled('button')`
   transform: translateY(-50%);
   background: ${Tokens.colors.white.value}36;
   border: none;
-  color: ${Tokens.colors.primary.value};
+  color: ${Tokens.colors.rolePrompt.var};
   cursor: pointer;
   width: 3rem;
   height: 3rem;
@@ -102,7 +102,7 @@ const StyledNavButtonRight = styled('button')`
   transform: translateY(-50%);
   background: ${Tokens.colors.white.value}36;
   border: none;
-  color: ${Tokens.colors.primary.value};
+  color: ${Tokens.colors.rolePrompt.var};
   cursor: pointer;
   width: 3rem;
   height: 3rem;
@@ -134,7 +134,7 @@ const StyledImageInfo = styled('div')`
   left: 50%;
   transform: translateX(-50%);
   background: ${Tokens.colors.surface.value}b3;
-  color: ${Tokens.colors.primary.value};
+  color: ${Tokens.colors.rolePrompt.var};
   padding: ${Tokens.sizes.padding.xsmall.value}${Tokens.sizes.padding.xsmall.unit} ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   text-align: center;

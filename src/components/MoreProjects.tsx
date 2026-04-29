@@ -1,19 +1,9 @@
 import { Grid } from '@jasonrundell/dropship'
 import ProjectPreview from './ProjectPreview'
+import { ProjectCardItem } from '@/typeDefinitions/app'
 
 interface MoreProjectsProps {
-  items: {
-    title: string
-    featuredImage: {
-      file: {
-        url: string
-      }
-      altText: string
-      description: string
-    }
-    excerpt: string
-    slug: string
-  }[]
+  items: ProjectCardItem[]
 }
 
 export default function MoreProjects({ items }: MoreProjectsProps) {

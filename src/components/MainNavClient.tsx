@@ -41,7 +41,7 @@ const StyledMobileMenuButton = styled('button')`
     display: block;
     width: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
     height: 2px;
-    background-color: ${Tokens.colors.secondary.value};
+    background-color: ${Tokens.colors.roleHeading.var};
     margin: 2px 0;
     transition: 0.3s;
     transform-origin: center;
@@ -70,9 +70,9 @@ const StyledMobileMenu = styled('div')`
   top: 4rem;
   left: 0;
   right: 0;
-  background-color: ${Tokens.colors.background.value};
-  border-top: 1px solid ${Tokens.colors.border.value};
-  border-bottom: 1px solid ${Tokens.colors.border.value};
+  background-color: ${Tokens.colors.surfaceBase.var};
+  border-top: 1px solid ${Tokens.colors.border.var};
+  border-bottom: 1px solid ${Tokens.colors.border.var};
   padding: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
   transform: translateY(-100%);
   opacity: 0;
@@ -104,7 +104,7 @@ const StyledMobileList = styled('ul')`
 const StyledMobileListItem = styled('li')`
   a,
   button {
-    color: ${Tokens.colors.secondary.value};
+    color: ${Tokens.colors.roleHeading.var};
     text-decoration: none;
     font-size: 1.125rem;
     display: block;
@@ -121,7 +121,7 @@ const StyledMobileListItem = styled('li')`
     font-family: inherit;
 
     &:hover {
-      border-bottom-color: ${Tokens.colors.primary.value};
+      border-bottom-color: ${Tokens.colors.rolePrompt.var};
     }
   }
 
@@ -275,13 +275,23 @@ const MainNavClient: React.FC<MainNavClientProps> = () => {
       >
         <StyledMobileList>
           <StyledMobileListItem>
-            <Link href="/#blog" onClick={closeMobileMenu}>
+            <Link href="/about" onClick={closeMobileMenu}>
+              About
+            </Link>
+          </StyledMobileListItem>
+          <StyledMobileListItem>
+            <Link href="/projects" onClick={closeMobileMenu}>
+              Projects
+            </Link>
+          </StyledMobileListItem>
+          <StyledMobileListItem>
+            <Link href="/posts" onClick={closeMobileMenu}>
               Blog
             </Link>
           </StyledMobileListItem>
           <StyledMobileListItem>
-            <Link href="/#projects" onClick={closeMobileMenu}>
-              Projects
+            <Link href="/contact" onClick={closeMobileMenu}>
+              Contact
             </Link>
           </StyledMobileListItem>
           {user ? (

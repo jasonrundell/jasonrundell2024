@@ -1,21 +1,10 @@
-:root {
-  --text-color: #9aaec6;
-  --background-color: #232f3e;
-  --background-color-2: #1c2531;
-  --background-color-3: #151c25;
-  --size-large: 1.5rem;
-  --size-normal: 1.25rem;
-  --size-small: 1rem;
-  --size-smallest: 0.25rem;
-  --primary-color: #e9be62;
-  --secondary-color: #eeeeee;
-}
+@import './tokens.generated.css';
 
 html,
 body {
   font-size: 16px;
-  background-color: #232f3e;
-  color: #9aaec6;
+  background-color: var(--color-surface-base);
+  color: var(--color-role-body);
   margin: 3rem 0 0;
 }
 
@@ -43,7 +32,7 @@ h2,
 h3,
 h4,
 time {
-  color: #eee;
+  color: var(--color-role-heading);
   font-weight: 400;
 }
 
@@ -53,7 +42,7 @@ h1 {
 }
 
 h2 {
-  font-size: var(--size-normal);
+  font-size: var(--size-medium);
   font-weight: 700;
 }
 
@@ -84,13 +73,13 @@ hr {
 
 @property --background-color-start {
   syntax: '<color>';
-  initial-value: #232f3e;
+  initial-value: #151c25;
   inherits: false;
 }
 
 @property --background-color-end {
   syntax: '<color>';
-  initial-value: #232f3e;
+  initial-value: #151c25;
   inherits: false;
 }
 
@@ -101,7 +90,7 @@ hr {
   left: 0;
   right: 0;
   z-index: 99;
-  background-color: #232f3e;
+  background-color: var(--color-surface-base);
   transition: background 1.3s ease, --background-color-start 1.3s ease,
     --background-color-end 1.3s ease;
 }
@@ -112,13 +101,13 @@ hr {
     var(--background-color-start) 0%,
     var(--background-color-end) 100%
   );
-  --background-color-start: #232f3e;
-  --background-color-end: #151c25;
+  --background-color-start: #151c25;
+  --background-color-end: #0e131a;
 }
 
 #menu:not(.scrolled) {
-  --background-color-start: #232f3e;
-  --background-color-end: #232f3e;
+  --background-color-start: #151c25;
+  --background-color-end: #151c25;
 }
 
 .decoration--none {
@@ -140,7 +129,7 @@ hr {
 }
 
 .primary-color {
-  color: var(--primary-color);
+  color: var(--color-role-prompt);
 }
 
 /* Screen reader only class for accessibility */
@@ -162,12 +151,31 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--color-role-prompt);
   outline-offset: 2px;
 }
 
 @media (min-width: 48rem) {
   .youtube-embed {
     height: 31.25rem;
+  }
+}
+
+/*
+ * Global motion guard. Honours users who request reduced motion at the OS
+ * level so every animation/transition collapses to a near-instant settled
+ * state. Components with motion logic (HeroTerminal, Tier 2 reveals) read
+ * the same media query and bypass their effects accordingly.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
   }
 }

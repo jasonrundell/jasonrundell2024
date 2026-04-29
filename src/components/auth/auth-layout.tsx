@@ -9,7 +9,7 @@ const StyledAuthContainer = styled('div')`
   justify-content: center;
   min-height: 80vh;
   padding: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.large.unit};
-  background-color: ${Tokens.colors.background.value};
+  background-color: ${Tokens.colors.surfaceBase.var};
   position: relative;
   overflow: hidden;
 
@@ -29,7 +29,7 @@ const StyledAuthCard = styled('div')`
   max-width: 420px;
   padding: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge
       .unit} 2.5rem;
-  background-color: ${Tokens.colors.backgroundDarker.value};
+  background-color: ${Tokens.colors.surfaceDeepest.var};
   border-radius: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
   box-shadow: ${Tokens.shadows.large.value} ${Tokens.colors.surface.value}33,
     0 4px 8px ${Tokens.colors.surface.value}1A;
@@ -47,20 +47,20 @@ const StyledAuthHeader = styled('div')`
 `
 
 const StyledAuthTitle = styled('h1')`
-  color: ${Tokens.colors.primary.value};
+  color: ${Tokens.colors.rolePrompt.var};
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
   letter-spacing: -0.02em;
   line-height: 1.2;
-  background-color: ${Tokens.colors.primary.value};
+  background-color: ${Tokens.colors.rolePrompt.var};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: ${Tokens.shadows.text.value} ${Tokens.colors.surface.value}1A;
 `
 
 const StyledAuthSubtitle = styled('p')`
-  color: ${Tokens.colors.textPrimary.value};
+  color: ${Tokens.colors.roleBody.var};
   font-size: 1.15rem;
   margin-bottom: 0;
   opacity: ${Tokens.opacity.higher.value};

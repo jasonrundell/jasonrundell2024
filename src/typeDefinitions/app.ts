@@ -58,6 +58,17 @@ export interface Projects {
   projects: Project[]
 }
 
+export type ProjectCardItem = {
+  title: string
+  featuredImage?: {
+    file: { url: string }
+    altText: string
+    description: string
+  }
+  excerpt: string
+  slug: string
+}
+
 export interface FeaturedImage {
   metadata: {
     tags: string[]

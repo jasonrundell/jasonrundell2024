@@ -1,70 +1,111 @@
 import React from 'react'
-import { ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import { Row, Grid, Spacer } from '@jasonrundell/dropship'
+import { Row, Spacer, Grid } from '@jasonrundell/dropship'
 
-import {
-  getSkills,
-  getProjects,
-  getReferences,
-  getPositions,
-  getPosts,
-} from '@/lib/contentful'
+import { getProjects, getPosts } from '@/lib/contentful'
+import { toProjectCardItem } from '@/lib/projectUtils'
 
 import {
   StyledDivBgDark,
   StyledIntroParagraph,
   StyledContainer,
-  StyledList,
-  StyledListItem,
   StyledSection,
   StyledImageContainer,
-  StyledLink,
 } from '@/styles/common'
 
-import Skills from '@/components/Skills'
-import ContactList from '@/components/ContactList'
-import References from '@/components/References'
-import Positions from '@/components/Positions'
 import MorePosts from '@/components/MorePosts'
-import Icon from '@/components/Icon'
+import MoreProjects from '@/components/MoreProjects'
+import HeroTerminal, { type HeroConstField } from '@/components/HeroTerminal'
+import { type HubDoor } from '@/components/HubDoors'
+import { SectionHeading } from '@/components/chrome'
 import HeroImage from '@/public/images/ai-powered-developer.webp'
 
-// Lazy-load LastSongWrapper to reduce initial bundle size (below the fold)
 const LastSongWrapper = dynamic(() => import('@/components/LastSongWrapper'), {
   loading: () => <div>Loading...</div>,
 })
 
-// Image style constants
 const imageCoverStyle: React.CSSProperties = {
   objectFit: 'cover',
   objectPosition: 'center',
 }
 
-/**
- * Home page component that displays skills, projects, experience, references, and blog posts.
- * Fetches data from Contentful in parallel for optimal performance.
- */
+const HUB_DOORS: ReadonlyArray<HubDoor> = [
+  {
+    href: '/about',
+    label: 'About',
+    description: 'Bio, skills, experience, and recommendations.',
+  },
+  {
+    href: '/projects',
+    label: 'Projects',
+    description: 'A complete index of shipped and side projects.',
+  },
+  {
+    href: '/posts',
+    label: 'Blog',
+    description: 'Notes on the web, engineering, and AI-assisted work.',
+  },
+] as const
 
-// Revalidate every day (ISR - Incremental Static Regeneration)
+const HERO_HEADING = 'Manager / Full Stack Developer'
+
+const HERO_PITCH =
+  "Hi! I'm an AI-first Application Development Manager and Senior Full Stack Web Developer with 20+ years leading high-impact web platforms and engineering teams."
+
+const HERO_FIELDS: ReadonlyArray<HeroConstField> = [
+  { key: 'name', value: 'Jason Rundell' },
+  { key: 'role', value: 'Manager / Full Stack Developer' },
+  {
+    key: 'pitch',
+    value:
+      'AI-first ADM and Senior Full Stack Web Developer with 20+ years leading high-impact web platforms.',
+  },
+] as const
+
+const HOMEPAGE_PROJECT_LIMIT = 3
+const HOMEPAGE_POST_LIMIT = 3
+
+export const metadata = {
+  title: 'Manager / Full Stack Developer | Jason Rundell',
+  description:
+    'Jason Rundell — AI-first Application Development Manager and Senior Full Stack Web Developer.',
+}
+
 export const revalidate = 86400
 
-export default async function page() {
-  // Parallelize Contentful queries for better performance
-  const [skills, projects, references, positions, posts] = await Promise.all([
-    getSkills(),
-    getProjects(),
-    getReferences(),
-    getPositions(),
-    getPosts(),
-  ])
+export default async function HomePage() {
+  const [projects, posts] = await Promise.all([getProjects(), getPosts()])
+
+  const selectedProjects = [...projects]
+    .sort((a, b) => {
+      const orderA =
+        typeof a.order === 'number' ? a.order : Number.MAX_SAFE_INTEGER
+      const orderB =
+        typeof b.order === 'number' ? b.order : Number.MAX_SAFE_INTEGER
+      return orderA - orderB
+    })
+    .slice(0, HOMEPAGE_PROJECT_LIMIT)
+
+  const latestPosts = [...posts]
+    .sort((a, b) => {
+      const dateA = a.date ? new Date(a.date).getTime() : 0
+      const dateB = b.date ? new Date(b.date).getTime() : 0
+      return dateB - dateA
+    })
+    .slice(0, HOMEPAGE_POST_LIMIT)
 
   return (
     <>
       <StyledContainer>
         <StyledSection id="home">
-          <h1>Manager / Full Stack Developer</h1>
+          <HeroTerminal
+            fields={HERO_FIELDS}
+            doors={HUB_DOORS}
+            heading={HERO_HEADING}
+            pitch={HERO_PITCH}
+          />
+          <Spacer />
           <StyledImageContainer>
             <Image
               src={HeroImage}
@@ -77,103 +118,49 @@ export default async function page() {
             />
           </StyledImageContainer>
           <Spacer />
-          <Row>
-            <StyledIntroParagraph>
-              Hi! I&apos;m an AI-first Application Development Manager and
-              Senior Full Stack Web Developer with 20+ years leading high-impact
-              web platforms and engineering teams. Skilled at modernizing legacy
-              systems into scalable web applications, integrating AI into
-              workflows and products, and aligning delivery with business goals.
-            </StyledIntroParagraph>
-            <p>
-              My passion for creating web experiences began in my high
-              school&apos;s library back in 1997 when I discovered GeoCities.
-              Since then, I&apos;ve been fortunate to work on a diverse range of
-              projects spanning multiple technologies, including iframes, Flash,
-              WordPress multisites, jQuery Mobile, custom CMS applications, a
-              Facebook contest platform, React design systems, Jamstack
-              architecture, and most recently, exploration of the possibilities
-              and limitations of automation, and AI.
-            </p>
-            <p>
-              I&apos;m constantly exploring new trends and experimenting with
-              emerging technologies in my spare time to expand my skills and
-              knowledge. As a lifelong learner, I embrace change, seek out
-              challenges, and thrive on the fast-paced nature of the tech
-              industry. After 20 years, I still love working on the web!
-            </p>
-          </Row>
           <Grid
             gridTemplateColumns="1fr"
-            largeTemplateColumns="1fr 1fr"
+            largeTemplateColumns="2fr 1fr"
             columnGap="2rem"
           >
-            <ContactList />
-            <LastSongWrapper />
+            <Row>
+              <StyledIntroParagraph>
+                Hi! I&apos;m an AI-first Application Development Manager and
+                Senior Full Stack Web Developer with 20+ years leading
+                high-impact web platforms and engineering teams.
+              </StyledIntroParagraph>
+              <p>
+                Looking for the long version, my work, or my writing? Pick a
+                door.
+              </p>
+            </Row>
+            <Row>
+              <LastSongWrapper />
+            </Row>
           </Grid>
         </StyledSection>
 
-        <Grid columnGap="2rem">
-          <StyledSection id="skills">
-            <h2>Skills</h2>
-            <Row>{skills && <Skills skills={skills} />}</Row>
-          </StyledSection>
-          <StyledSection id="experience">
-            <h2>Experience</h2>
-            <Row>
-              {positions.length > 0 && <Positions positions={positions} />}
-            </Row>
-            <Row>
-              <StyledList>
-                <StyledListItem>
-                  <Icon type="LinkedIn" />{' '}
-                  <StyledLink
-                    href="https://www.linkedin.com/in/jasonrundell/"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    aria-label="See more on LinkedIn"
-                  >
-                    <ExternalLink size={18} /> See more on LinkedIn
-                  </StyledLink>
-                </StyledListItem>
-              </StyledList>
-            </Row>
-          </StyledSection>
-          <StyledSection id="projects">
-            <h2>Projects</h2>
-            <Row>
-              <StyledList>
-                {projects.length > 0 &&
-                  projects.map((project) => (
-                    <StyledListItem key={project.slug}>
-                      <Icon type="GitHub" />{' '}
-                      <StyledLink
-                        href={`/projects/${project.slug}`}
-                        aria-label={project.title}
-                      >
-                        {project.title}
-                      </StyledLink>
-                    </StyledListItem>
-                  ))}
-              </StyledList>
-            </Row>
-          </StyledSection>
-        </Grid>
-        <StyledSection id="recommendations">
-          <h2>Recommendations</h2>
+        <StyledSection id="selected-projects">
+          <SectionHeading comment="selected-projects.tsx">
+            Selected projects
+          </SectionHeading>
           <Row>
-            {references.length > 0 && <References references={references} />}
+            <MoreProjects items={selectedProjects.map(toProjectCardItem)} />
           </Row>
         </StyledSection>
       </StyledContainer>
 
       <StyledDivBgDark>
         <StyledContainer>
-          <StyledSection id="blog">
+          <StyledSection id="latest-posts">
             <Spacer />
-            <h2>Blog</h2>
+            <SectionHeading comment="latest-posts.tsx">
+              Latest posts
+            </SectionHeading>
             <Spacer />
-            <Row>{posts.length > 0 && <MorePosts posts={posts} />}</Row>
+            <Row>
+              <MorePosts posts={latestPosts} />
+            </Row>
           </StyledSection>
         </StyledContainer>
       </StyledDivBgDark>

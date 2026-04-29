@@ -1,48 +1,15 @@
 import { render, screen } from '@testing-library/react'
 import Page from './page'
 
-// Mock Contentful functions
 jest.mock('@/lib/contentful', () => ({
-  getSkills: jest.fn(),
   getProjects: jest.fn(),
-  getReferences: jest.fn(),
-  getPositions: jest.fn(),
   getPosts: jest.fn(),
 }))
 
-const { getSkills, getProjects, getReferences, getPositions, getPosts } =
-  jest.requireMock<{
-    getSkills: jest.Mock
-    getProjects: jest.Mock
-    getReferences: jest.Mock
-    getPositions: jest.Mock
-    getPosts: jest.Mock
-  }>('@/lib/contentful')
-
-// Mock components
-jest.mock('@/components/Skills', () => {
-  return function MockSkills({ skills }: { skills: unknown[] }) {
-    return <div data-testid="skills">Skills: {skills.length}</div>
-  }
-})
-
-jest.mock('@/components/ContactList', () => {
-  return function MockContactList() {
-    return <div data-testid="contact-list">Contact List</div>
-  }
-})
-
-jest.mock('@/components/References', () => {
-  return function MockReferences({ references }: { references: unknown[] }) {
-    return <div data-testid="references">References: {references.length}</div>
-  }
-})
-
-jest.mock('@/components/Positions', () => {
-  return function MockPositions({ positions }: { positions: unknown[] }) {
-    return <div data-testid="positions">Positions: {positions.length}</div>
-  }
-})
+const { getProjects, getPosts } = jest.requireMock<{
+  getProjects: jest.Mock
+  getPosts: jest.Mock
+}>('@/lib/contentful')
 
 jest.mock('@/components/MorePosts', () => {
   return function MockMorePosts({ posts }: { posts: unknown[] }) {
@@ -50,9 +17,9 @@ jest.mock('@/components/MorePosts', () => {
   }
 })
 
-jest.mock('@/components/Icon', () => {
-  return function MockIcon({ type }: { type: string }) {
-    return <span data-testid={`icon-${type}`}>{type}</span>
+jest.mock('@/components/MoreProjects', () => {
+  return function MockMoreProjects({ items }: { items: unknown[] }) {
+    return <div data-testid="more-projects">Projects: {items.length}</div>
   }
 })
 
@@ -62,23 +29,47 @@ jest.mock('@/components/LastSongWrapper', () => {
   }
 })
 
-jest.mock('lucide-react', () => ({
-  Play: () => <span data-testid="play-icon">Play</span>,
-  ExternalLink: () => (
-    <span data-testid="external-link-icon">ExternalLink</span>
-  ),
-  Music: () => <span data-testid="music-icon">Music</span>,
-}))
+jest.mock('@/components/HeroTerminal', () => {
+  return function MockHeroTerminal({
+    doors,
+    heading,
+    pitch,
+  }: {
+    doors: { href: string; label: string }[]
+    heading: string
+    pitch: string
+  }) {
+    return (
+      <section data-testid="hero-terminal" aria-label="Hero">
+        <h1>{heading}</h1>
+        <p>{pitch}</p>
+        <nav data-testid="hub-doors" aria-label="Site sections">
+          {doors.map((d) => (
+            <a key={d.href} href={d.href}>
+              {d.label}
+            </a>
+          ))}
+        </nav>
+      </section>
+    )
+  }
+})
 
 jest.mock('next/link', () => {
   return function MockLink({
     children,
     href,
+    ...rest
   }: {
     children: React.ReactNode
     href: string
+    [key: string]: unknown
   }) {
-    return <a href={href}>{children}</a>
+    return (
+      <a href={href} {...rest}>
+        {children}
+      </a>
+    )
   }
 })
 
@@ -96,16 +87,13 @@ jest.mock('next/image', () => {
     style?: React.CSSProperties
     [key: string]: unknown
   }) {
-    // Filter out Next.js-specific props that aren't valid HTML attributes
     const htmlProps = { ...props }
     delete htmlProps.fill
     delete htmlProps.priority
-
-    // Using <img> in test mock is intentional - Next.js Image component is mocked
     // eslint-disable-next-line @next/next/no-img-element
     return (
       <img
-        src={src}
+        src={typeof src === 'string' ? src : ''}
         alt={alt}
         data-testid="next-image"
         style={style}
@@ -125,251 +113,109 @@ jest.mock('@/styles/common', () => ({
   StyledContainer: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="container">{children}</div>
   ),
-  StyledList: ({ children }: { children: React.ReactNode }) => (
-    <ul data-testid="list">{children}</ul>
-  ),
-  StyledListItem: ({ children }: { children: React.ReactNode }) => (
-    <li data-testid="list-item">{children}</li>
-  ),
   StyledSection: ({
     children,
     id,
+    'aria-label': ariaLabel,
   }: {
     children: React.ReactNode
     id?: string
+    'aria-label'?: string
   }) => (
-    <section data-testid="section" id={id}>
+    <section data-testid="section" id={id} aria-label={ariaLabel}>
       {children}
     </section>
   ),
   StyledImageContainer: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="image-container">{children}</div>
   ),
-  StyledLink: ({
-    children,
-    href,
-    ...props
-  }: {
-    children: React.ReactNode
-    href: string
-    [key: string]: unknown
-  }) => <a href={href} {...props}>{children}</a>,
 }))
 
-describe('Home Page', () => {
+const fakeProjects = [
+  { slug: 'p1', title: 'Project 1', order: 2, excerpt: 'e1' },
+  { slug: 'p2', title: 'Project 2', order: 1, excerpt: 'e2' },
+  { slug: 'p3', title: 'Project 3', order: 3, excerpt: 'e3' },
+  { slug: 'p4', title: 'Project 4', order: 4, excerpt: 'e4' },
+]
+
+const fakePosts = [
+  { slug: 'a', title: 'A', date: '2024-01-01' },
+  { slug: 'b', title: 'B', date: '2025-06-01' },
+  { slug: 'c', title: 'C', date: '2025-01-01' },
+  { slug: 'd', title: 'D', date: '2023-01-01' },
+]
+
+describe('Home page (hub)', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-
-    // Setup default mock data
-    getSkills.mockResolvedValue([
-      { name: 'React', level: 'Expert' },
-      { name: 'TypeScript', level: 'Expert' },
-    ])
-    getProjects.mockResolvedValue([
-      { slug: 'project-1', title: 'Project 1' },
-      { slug: 'project-2', title: 'Project 2' },
-    ])
-    getReferences.mockResolvedValue([
-      { citeName: 'John Doe', company: 'Acme Corp' },
-    ])
-    getPositions.mockResolvedValue([
-      { title: 'Senior Developer', company: 'Tech Corp' },
-    ])
-    getPosts.mockResolvedValue([
-      { slug: 'post-1', title: 'Post 1' },
-      { slug: 'post-2', title: 'Post 2' },
-    ])
+    getProjects.mockResolvedValue(fakeProjects)
+    getPosts.mockResolvedValue(fakePosts)
   })
 
-  it('should render main heading', async () => {
-    // Act
+  it('renders a single h1 with the role + title (delegated to HeroTerminal)', async () => {
     const pageComponent = await Page()
     render(pageComponent)
 
-    // Assert
+    const headings = screen.getAllByRole('heading', { level: 1 })
+    expect(headings).toHaveLength(1)
+    expect(headings[0]).toHaveTextContent(/manager \/ full stack developer/i)
+  })
+
+  it('renders the hero terminal with the doors nav', async () => {
+    const pageComponent = await Page()
+    render(pageComponent)
+
+    expect(screen.getByTestId('hero-terminal')).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: /full stack developer/i })
+      screen.getByRole('navigation', { name: /site sections/i })
     ).toBeInTheDocument()
   })
 
-  it('should render intro paragraph', async () => {
-    // Act
+  it('renders three door links to /about, /projects, /posts', async () => {
     const pageComponent = await Page()
     render(pageComponent)
 
-    // Assert
-    expect(screen.getByTestId('intro-paragraph')).toBeInTheDocument()
-    expect(
-      screen.getByText(/hi! i'm an ai-first application development manager/i)
-    ).toBeInTheDocument()
-  })
-
-  it('should render contact list', async () => {
-    // Act
-    const pageComponent = await Page()
-    render(pageComponent)
-
-    // Assert
-    expect(screen.getByTestId('contact-list')).toBeInTheDocument()
-  })
-
-  it('should render skills section', async () => {
-    // Act
-    const pageComponent = await Page()
-    render(pageComponent)
-
-    // Assert
-    expect(screen.getByRole('heading', { name: /skills/i })).toBeInTheDocument()
-    expect(screen.getByTestId('skills')).toBeInTheDocument()
-    expect(screen.getByText(/skills: 2/i)).toBeInTheDocument()
-  })
-
-  it('should render experience section with positions', async () => {
-    // Act
-    const pageComponent = await Page()
-    render(pageComponent)
-
-    // Assert
-    expect(
-      screen.getByRole('heading', { name: /experience/i })
-    ).toBeInTheDocument()
-    expect(screen.getByTestId('positions')).toBeInTheDocument()
-    expect(screen.getByText(/positions: 1/i)).toBeInTheDocument()
-  })
-
-  it('should render LinkedIn link in experience section', async () => {
-    // Act
-    const pageComponent = await Page()
-    render(pageComponent)
-
-    // Assert
-    const linkedInLink = screen.getByRole('link', {
-      name: /see more on linkedin/i,
-    })
-    expect(linkedInLink).toBeInTheDocument()
-    expect(linkedInLink).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /about/i })).toHaveAttribute(
       'href',
-      'https://www.linkedin.com/in/jasonrundell/'
+      '/about'
     )
-    // Verify ExternalLink icon is present
-    expect(screen.getByTestId('external-link-icon')).toBeInTheDocument()
-  })
-
-  it('should render projects section', async () => {
-    // Act
-    const pageComponent = await Page()
-    render(pageComponent)
-
-    // Assert
-    expect(
-      screen.getByRole('heading', { name: /projects/i })
-    ).toBeInTheDocument()
-    const projectLinks = screen.getAllByRole('link')
-    const project1Link = projectLinks.find(
-      (link) => link.getAttribute('href') === '/projects/project-1'
+    expect(screen.getByRole('link', { name: /projects/i })).toHaveAttribute(
+      'href',
+      '/projects'
     )
-    expect(project1Link).toBeInTheDocument()
-    expect(project1Link).toHaveTextContent('Project 1')
+    expect(screen.getByRole('link', { name: /blog/i })).toHaveAttribute(
+      'href',
+      '/posts'
+    )
   })
 
-  it('should render recommendations section with references', async () => {
-    // Act
+  it('renders the LastSong card', async () => {
     const pageComponent = await Page()
     render(pageComponent)
 
-    // Assert
-    expect(
-      screen.getByRole('heading', { name: /recommendations/i })
-    ).toBeInTheDocument()
-    expect(screen.getByTestId('references')).toBeInTheDocument()
-    expect(screen.getByText(/references: 1/i)).toBeInTheDocument()
+    expect(screen.getByTestId('last-song-wrapper')).toBeInTheDocument()
   })
 
-  it('should render blog section with posts', async () => {
-    // Act
+  it('limits selected projects to three (sorted by order)', async () => {
     const pageComponent = await Page()
     render(pageComponent)
 
-    // Assert
-    expect(screen.getByRole('heading', { name: /blog/i })).toBeInTheDocument()
-    expect(screen.getByTestId('more-posts')).toBeInTheDocument()
-    expect(screen.getByText(/posts: 2/i)).toBeInTheDocument()
+    expect(screen.getByTestId('more-projects')).toHaveTextContent(
+      'Projects: 3'
+    )
   })
 
-  it('should fetch all data in parallel', async () => {
-    // Act
+  it('limits latest posts to three (sorted by date desc)', async () => {
+    const pageComponent = await Page()
+    render(pageComponent)
+
+    expect(screen.getByTestId('more-posts')).toHaveTextContent('Posts: 3')
+  })
+
+  it('fetches projects and posts in parallel', async () => {
     await Page()
 
-    // Assert
-    expect(getSkills).toHaveBeenCalled()
     expect(getProjects).toHaveBeenCalled()
-    expect(getReferences).toHaveBeenCalled()
-    expect(getPositions).toHaveBeenCalled()
     expect(getPosts).toHaveBeenCalled()
-
-    // All should be called (parallel execution)
-    const allCalls = [
-      getSkills.mock.invocationCallOrder[0],
-      getProjects.mock.invocationCallOrder[0],
-      getReferences.mock.invocationCallOrder[0],
-      getPositions.mock.invocationCallOrder[0],
-      getPosts.mock.invocationCallOrder[0],
-    ]
-    // They should all be called around the same time (within same tick)
-    const maxCallOrder = Math.max(...allCalls)
-    const minCallOrder = Math.min(...allCalls)
-    // All calls should be very close together (within 5 calls)
-    expect(maxCallOrder - minCallOrder).toBeLessThan(5)
-  })
-
-  it('should handle empty data gracefully', async () => {
-    // Arrange
-    getSkills.mockResolvedValue([])
-    getProjects.mockResolvedValue([])
-    getReferences.mockResolvedValue([])
-    getPositions.mockResolvedValue([])
-    getPosts.mockResolvedValue([])
-
-    // Act
-    const pageComponent = await Page()
-    render(pageComponent)
-
-    // Assert
-    // When data is empty, components may not render, so check what's actually rendered
-    const skillsElement = screen.queryByTestId('skills')
-    if (skillsElement) {
-      expect(skillsElement).toHaveTextContent(/skills: 0/i)
-    }
-    // Positions component may not render with empty array
-    const positionsElement = screen.queryByTestId('positions')
-    if (positionsElement) {
-      expect(positionsElement).toHaveTextContent(/positions: 0/i)
-    }
-    const referencesElement = screen.queryByTestId('references')
-    if (referencesElement) {
-      expect(referencesElement).toHaveTextContent(/references: 0/i)
-    }
-    const postsElement = screen.queryByTestId('more-posts')
-    if (postsElement) {
-      expect(postsElement).toHaveTextContent(/posts: 0/i)
-    }
-  })
-
-  it('should have correct section IDs for navigation', async () => {
-    // Act
-    const pageComponent = await Page()
-    render(pageComponent)
-
-    // Assert
-    const sections = screen.getAllByTestId('section')
-    const sectionIds = sections
-      .map((section) => section.getAttribute('id'))
-      .filter(Boolean)
-    expect(sectionIds).toContain('home')
-    expect(sectionIds).toContain('skills')
-    expect(sectionIds).toContain('experience')
-    expect(sectionIds).toContain('projects')
-    expect(sectionIds).toContain('recommendations')
-    expect(sectionIds).toContain('blog')
   })
 })
