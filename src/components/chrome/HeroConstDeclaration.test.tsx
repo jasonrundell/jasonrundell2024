@@ -59,6 +59,23 @@ describe('HeroConstDeclaration', () => {
     expect(pre?.textContent).toContain("'Hello'")
   })
 
+  it('omits the trailing comma after the last field and keeps commas on preceding fields', () => {
+    const { container } = render(
+      <HeroConstDeclaration
+        fields={[
+          { key: 'first', value: 'A' },
+          { key: 'last', value: 'B' },
+        ]}
+      />
+    )
+
+    const text = container.querySelector('pre')?.textContent ?? ''
+    // The text contains "first: 'A'," followed by a newline
+    expect(text).toMatch(/'A',/)
+    // The final field value is NOT followed by a comma before the closing brace
+    expect(text).toMatch(/'B'\n}/)
+  })
+
   it('renders one key/value entry per field', () => {
     const { container } = render(
       <HeroConstDeclaration

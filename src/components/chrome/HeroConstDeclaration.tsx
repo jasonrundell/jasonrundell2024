@@ -77,7 +77,7 @@ export default function HeroConstDeclaration({
           <StyledKey>{field.key}</StyledKey>
           {': '}
           <StyledString>{`'${field.value}'`}</StyledString>
-          {index < fields.length - 1 ? ',\n' : ',\n'}
+          {index < fields.length - 1 ? ',\n' : '\n'}
         </React.Fragment>
       ))}
       {'}'}
