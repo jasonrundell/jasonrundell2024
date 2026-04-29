@@ -6,6 +6,19 @@ jest.mock('@sentry/nextjs', () => ({
   captureException: jest.fn(),
 }))
 
+jest.mock('geist/font/sans', () => ({
+  GeistSans: {
+    className: 'geist-sans',
+    variable: 'geist-sans-variable',
+  },
+}))
+
+jest.mock('geist/font/mono', () => ({
+  GeistMono: {
+    variable: 'geist-mono-variable',
+  },
+}))
+
 jest.mock('@/components/TerminalErrorPage', () => {
   return function MockTerminalErrorPage({
     statusCode,

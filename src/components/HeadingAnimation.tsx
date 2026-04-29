@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Heading } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 import Link from 'next/link'
 
@@ -17,7 +16,8 @@ interface HeadingAnimationProps {
   ariaLabel?: string
 }
 
-const StyledHeading = styled(Heading)`
+const StyledBrand = styled('span')`
+  display: inline-block;
   font-size: 1.5rem !important;
   font-weight: 400;
 `
@@ -44,7 +44,7 @@ const HeadingAnimation = ({
   }, [steps.length, speed])
 
   return (
-    <StyledHeading level={1}>
+    <StyledBrand>
       <Link
         href="/"
         className="decoration--none primary-color"
@@ -52,7 +52,7 @@ const HeadingAnimation = ({
       >
         <span aria-hidden="true">{steps[currentStep]}</span>
       </Link>
-    </StyledHeading>
+    </StyledBrand>
   )
 }
 

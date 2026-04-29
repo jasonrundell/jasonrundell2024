@@ -2,6 +2,8 @@
 
 import * as Sentry from '@sentry/nextjs'
 import { useEffect } from 'react'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 
 import TerminalErrorPage from '@/components/TerminalErrorPage'
 
@@ -17,8 +19,8 @@ export default function GlobalError({
   }, [error])
 
   return (
-    <html>
-      <body>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className={GeistSans.className}>
         <TerminalErrorPage
           statusCode="500"
           title="Runtime Error"
