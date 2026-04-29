@@ -21,7 +21,7 @@ import Skills from '@/components/Skills'
 import References from '@/components/References'
 import Positions from '@/components/Positions'
 import Icon from '@/components/Icon'
-import { SectionHeading, PromptList } from '@/components/chrome'
+import { SectionHeading, PromptList, PromptItem } from '@/components/chrome'
 import { buildPersonJsonLd } from '@/lib/jsonld'
 
 export const metadata = {
@@ -93,7 +93,7 @@ export default async function AboutPage() {
         <Spacer />
         <Row>
           <PromptList aria-label="More experience links">
-            <PromptList.Item>
+            <PromptItem>
               <Icon type="LinkedIn" />{' '}
               <StyledLink
                 href="https://www.linkedin.com/in/jasonrundell/"
@@ -103,7 +103,7 @@ export default async function AboutPage() {
               >
                 <ExternalLink size={18} /> See more on LinkedIn
               </StyledLink>
-            </PromptList.Item>
+            </PromptItem>
           </PromptList>
         </Row>
       </StyledSection>

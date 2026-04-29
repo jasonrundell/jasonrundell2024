@@ -13,6 +13,7 @@ import {
   StyledModalContent,
   StyledCloseButton,
 } from '@/styles/common'
+import { RevealStaggerGroup, RevealStaggerItem } from '@/styles/motion'
 
 // Image style constants
 const imageCoverNoPointerStyle: React.CSSProperties = {
@@ -240,48 +241,56 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
 
   return (
     <>
-      <Grid
-        gridTemplateColumns="1fr"
-        mediumTemplateColumns="1fr 1fr"
-        largeTemplateColumns="1fr 1fr 1fr"
-        columnGap="1.5rem"
-        rowGap="1.5rem"
-      >
-        {validImages.map((image, index) => {
-          const imageUrl = image.fields.file.url
-          const url = imageUrl.startsWith('//') ? `https:${imageUrl}` : imageUrl
+      <RevealStaggerGroup>
+        <Grid
+          gridTemplateColumns="1fr"
+          mediumTemplateColumns="1fr 1fr"
+          largeTemplateColumns="1fr 1fr 1fr"
+          columnGap="1.5rem"
+          rowGap="1.5rem"
+        >
+          {validImages.map((image, index) => {
+            const imageUrl = image.fields.file.url
+            const url = imageUrl.startsWith('//')
+              ? `https:${imageUrl}`
+              : imageUrl
 
-          return (
-            <StyledGalleryItem
-              key={image.sys.id || index}
-              onClick={() => handleImageClick(index)}
-              role="button"
-              tabIndex={0}
-              aria-label={`View ${
-                image.fields.title || `Gallery image ${index + 1}`
-              } in full screen`}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  handleImageClick(index)
-                }
-              }}
-            >
-              <ContentfulImage
-                src={url}
-                alt={
-                  image.fields.description ||
-                  image.fields.title ||
-                  `Gallery image ${index + 1}`
-                }
-                fill={true}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                style={imageCoverNoPointerStyle}
-              />
-            </StyledGalleryItem>
-          )
-        })}
-      </Grid>
+            return (
+              <RevealStaggerItem
+                key={image.sys.id || index}
+                index={index}
+              >
+                <StyledGalleryItem
+                  onClick={() => handleImageClick(index)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${
+                    image.fields.title || `Gallery image ${index + 1}`
+                  } in full screen`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      handleImageClick(index)
+                    }
+                  }}
+                >
+                  <ContentfulImage
+                    src={url}
+                    alt={
+                      image.fields.description ||
+                      image.fields.title ||
+                      `Gallery image ${index + 1}`
+                    }
+                    fill={true}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    style={imageCoverNoPointerStyle}
+                  />
+                </StyledGalleryItem>
+              </RevealStaggerItem>
+            )
+          })}
+        </Grid>
+      </RevealStaggerGroup>
 
       {mounted &&
         selectedIndex !== null &&

@@ -4,7 +4,7 @@ import { Skill, Skills as SkillsDef } from '@/typeDefinitions/app'
 
 import { onlyUnique } from '@/lib/onlyUnique'
 import Tokens from '@/lib/tokens'
-import PromptList from '@/components/chrome/PromptList'
+import PromptList, { PromptItem } from '@/components/chrome/PromptList'
 
 const StyledListContainer = styled('div')`
   display: flex;
@@ -39,7 +39,7 @@ export default function Skills({ skills }: SkillsDef) {
             {skills
               .filter((skill: Skill) => skill.category === parentCategory)
               .map((skill: Skill) => (
-                <PromptList.Item key={skill.id}>{skill.name}</PromptList.Item>
+                <PromptItem key={skill.id}>{skill.name}</PromptItem>
               ))}
           </PromptList>
         </StyledListContainer>

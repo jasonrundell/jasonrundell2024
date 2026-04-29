@@ -18,13 +18,12 @@ interface ProjectPreviewProps {
 
 const StyledImage = styled('div')`
   position: relative;
-  display: flex;
+  display: block;
   margin: 0 auto;
-  height: 208px;
-  width: auto;
-  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
   background-color: ${Tokens.colors.surfaceDeepest.var};
-  align-items: center;
   margin-bottom: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
 `
 
@@ -41,17 +40,15 @@ export default function ProjectPreview({
 }: ProjectPreviewProps) {
   return (
     <div>
-      {image?.file?.url && (
-        <Row>
-          <StyledImage>
-            <ProjectPreviewImage
-              title={title}
-              slug={slug}
-              url={image.file.url}
-            />
-          </StyledImage>
-        </Row>
-      )}
+      <Row>
+        <StyledImage>
+          <ProjectPreviewImage
+            title={title}
+            slug={slug}
+            url={image?.file?.url}
+          />
+        </StyledImage>
+      </Row>
       <Spacer />
       <Row>
         <StyledHeading>

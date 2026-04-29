@@ -1,17 +1,23 @@
-import ContentfulImage from './ContentfulImage'
+import Image from 'next/image'
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 
-import Tokens from '@/lib/tokens'
+import ContentfulImage from './ContentfulImage'
+import ProjectPlaceholder from '@/public/images/project-placeholder.webp'
 
-// Image style constants
 const imageCoverStyle: React.CSSProperties = {
   objectFit: 'cover',
 }
 
-interface PostPreviewImageProps {
+interface ProjectPreviewImageProps {
   title: string
-  url: string
+  /**
+   * Contentful image URL. When omitted (project has no thumbnail in
+   * Contentful), `ProjectPreviewImage` falls back to the local
+   * refined-terminal placeholder so the preview tile keeps its 4:3 chrome
+   * and visual rhythm in the grid.
+   */
+  url?: string
   slug?: string
   altText?: string
 }
@@ -19,17 +25,9 @@ interface PostPreviewImageProps {
 // 4:3 ratio
 const StyledContainer = styled('div')`
   position: relative;
-  width: 272px;
-  height: 204px;
-  @media (min-width: 360px) {
-    width: 320px;
-    height: 240px;
-  }
-  @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
-      .breakpoints.medium.unit}) {
-    width: 361px;
-    height: 270px;
-  }
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
 `
 
 export default function ProjectPreviewImage({
@@ -37,16 +35,26 @@ export default function ProjectPreviewImage({
   url,
   slug,
   altText,
-}: PostPreviewImageProps) {
+}: ProjectPreviewImageProps) {
   const image = (
     <StyledContainer>
-      <ContentfulImage
-        alt={altText}
-        src={url}
-        fill={true}
-        style={imageCoverStyle}
-        sizes="(max-width: 272px) 100vw"
-      />
+      {url ? (
+        <ContentfulImage
+          alt={altText ?? ''}
+          src={url}
+          fill={true}
+          style={imageCoverStyle}
+          sizes="(max-width: 272px) 100vw"
+        />
+      ) : (
+        <Image
+          src={ProjectPlaceholder}
+          alt=""
+          fill={true}
+          style={imageCoverStyle}
+          sizes="(max-width: 272px) 100vw"
+        />
+      )}
     </StyledContainer>
   )
 

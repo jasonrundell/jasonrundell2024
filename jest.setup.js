@@ -104,6 +104,20 @@ if (typeof HTMLFormElement !== 'undefined' && HTMLFormElement.prototype) {
   })
 }
 
+// Mock @pigment-css/react keyframes globally.
+// motion.tsx and HeroTerminal.tsx both call `keyframes` at module load. Without
+// the bundler plugin (which Jest does not run) the real implementation throws,
+// so any test file that transitively imports those modules would fail to load.
+// We replace `keyframes` with a stable string returner; styled() interpolation
+// of the result still produces valid (test-irrelevant) CSS.
+jest.mock('@pigment-css/react', () => {
+  const actual = jest.requireActual('@pigment-css/react')
+  return {
+    ...actual,
+    keyframes: jest.fn(() => 'mocked-keyframes'),
+  }
+})
+
 // Mock Next.js navigation
 jest.mock('next/navigation', () => ({
   redirect: jest.fn(),
