@@ -16,7 +16,7 @@ const StyledSectionComment = styled('span')`
   display: block;
   font-family: ${Tokens.fonts.monospace.family};
   font-size: ${Tokens.sizes.fonts.small.value}${Tokens.sizes.fonts.small.unit};
-  color: ${Tokens.colors.textSecondary.var};
+  color: ${Tokens.colors.roleInfo.var};
   margin-bottom: ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit};
   letter-spacing: 0.02em;
 `

@@ -351,6 +351,8 @@ describe('content display components', () => {
 
     render(<HeadingAnimation steps={['J', 'Ja', 'Jason']} speed={100} />)
 
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument()
+
     // The link's accessible name is stable across ticks (defaults to steps[0])
     // so screen readers do not announce every typewriter frame.
     const link = screen.getByRole('link', { name: 'J' })
