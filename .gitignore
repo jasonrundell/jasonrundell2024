@@ -41,6 +41,3 @@ next-env.d.ts
 # vscode
 .vscode
 certificates
-
-# cursor
-.cursor/debug-*.log

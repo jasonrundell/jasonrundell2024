@@ -1,13 +1,13 @@
+import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 
 import ProjectPreviewImage from './ProjectPreviewImage'
 import Tokens from '@/lib/tokens'
-import { StyledLink } from '@/styles/common'
 
 interface ProjectPreviewProps {
   title: string
-  image?: {
+  image: {
     file: {
       url: string
     }
@@ -23,7 +23,7 @@ const StyledImage = styled('div')`
   height: 208px;
   width: auto;
   object-fit: cover;
-  background-color: ${Tokens.colors.surfaceDeepest.var};
+  background-color: ${Tokens.colors.backgroundDarker.value};
   align-items: center;
   margin-bottom: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
 `
@@ -41,7 +41,7 @@ export default function ProjectPreview({
 }: ProjectPreviewProps) {
   return (
     <div>
-      {image?.file?.url && (
+      {image && image.file && (
         <Row>
           <StyledImage>
             <ProjectPreviewImage
@@ -55,7 +55,7 @@ export default function ProjectPreview({
       <Spacer />
       <Row>
         <StyledHeading>
-          <StyledLink href={`/projects/${slug}`}>{title}</StyledLink>
+          <Link href={`/projects/${slug}`}>{title}</Link>
         </StyledHeading>
       </Row>
       <Spacer />

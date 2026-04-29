@@ -59,66 +59,66 @@ const StyledButton = styled('button')`
   }
   /* Variant styles */
   &.variant-default {
-    background: ${Tokens.colors.rolePrompt.var};
-    color: ${Tokens.colors.surfaceBase.var};
+    background: ${Tokens.colors.primary.value};
+    color: ${Tokens.colors.background.value};
   }
   &.variant-default:hover {
-    background: color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 80%, transparent);
+    background: ${Tokens.colors.primary.value}CC;
   }
   &.variant-default:focus-visible {
-    box-shadow: 0 0 0 2px color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 60%, transparent);
+    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
   }
   &.variant-destructive {
-    background: ${Tokens.colors.roleDanger.var};
+    background: ${Tokens.colors.error.value};
     color: #fff;
   }
   &.variant-destructive:hover {
-    background: color-mix(in srgb, ${Tokens.colors.roleDanger.var} 80%, transparent);
+    background: ${Tokens.colors.error.value}CC;
   }
   &.variant-destructive:focus-visible {
-    box-shadow: 0 0 0 2px color-mix(in srgb, ${Tokens.colors.roleDanger.var} 60%, transparent);
+    box-shadow: 0 0 0 2px ${Tokens.colors.error.value}99;
   }
   &.variant-outline {
     background: transparent;
-    color: ${Tokens.colors.rolePrompt.var};
-    border: 1.5px solid ${Tokens.colors.rolePrompt.var};
+    color: ${Tokens.colors.primary.value};
+    border: 1.5px solid ${Tokens.colors.primary.value};
   }
   &.variant-outline:hover {
-    background: ${Tokens.colors.surfaceElevated.var};
+    background: ${Tokens.colors.backgroundDark.value};
   }
   &.variant-outline:focus-visible {
-    box-shadow: 0 0 0 2px color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 60%, transparent);
+    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
   }
   &.variant-secondary {
-    background: ${Tokens.colors.roleHeading.var};
-    color: ${Tokens.colors.surfaceBase.var};
+    background: ${Tokens.colors.secondary.value};
+    color: ${Tokens.colors.background.value};
   }
   &.variant-secondary:hover {
-    background: ${Tokens.colors.secondaryVariant.var};
+    background: ${Tokens.colors.secondaryVariant.value};
   }
   &.variant-secondary:focus-visible {
-    box-shadow: 0 0 0 2px color-mix(in srgb, ${Tokens.colors.roleHeading.var} 60%, transparent);
+    box-shadow: 0 0 0 2px ${Tokens.colors.secondary.value}99;
   }
   &.variant-ghost {
     background: transparent;
-    color: ${Tokens.colors.rolePrompt.var};
+    color: ${Tokens.colors.primary.value};
   }
   &.variant-ghost:hover {
-    background: ${Tokens.colors.surfaceElevated.var};
+    background: ${Tokens.colors.backgroundDark.value};
   }
   &.variant-ghost:focus-visible {
-    box-shadow: 0 0 0 2px color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 60%, transparent);
+    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
   }
   &.variant-link {
     background: none;
-    color: ${Tokens.colors.rolePrompt.var};
+    color: ${Tokens.colors.primary.value};
     text-decoration: underline;
   }
   &.variant-link:hover {
-    color: ${Tokens.colors.primaryVariant.var};
+    color: ${Tokens.colors.primaryVariant.value};
   }
   &.variant-link:focus-visible {
-    box-shadow: 0 0 0 2px color-mix(in srgb, ${Tokens.colors.rolePrompt.var} 60%, transparent);
+    box-shadow: 0 0 0 2px ${Tokens.colors.primary.value}99;
   }
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes

@@ -4,7 +4,6 @@ import { Skill, Skills as SkillsDef } from '@/typeDefinitions/app'
 
 import { onlyUnique } from '@/lib/onlyUnique'
 import Tokens from '@/lib/tokens'
-import PromptList from '@/components/chrome/PromptList'
 
 const StyledListContainer = styled('div')`
   display: flex;
@@ -16,18 +15,38 @@ const StyledListContainer = styled('div')`
   width: 100%;
 `
 
+const StyledList = styled('ul')`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 0;
+  list-style: none;
+  padding-left: 0;
+`
+
+const StyledListItem = styled('li')`
+  display: inline;
+  margin-right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+  margin-left: 0;
+  color: ${Tokens.colors.text};
+  margin: 0 ${Tokens.sizes.small.value}${Tokens.sizes.small.unit} 0 0;
+  line-height: 1.6;
+`
+
 const StyledHeading = styled('h3')`
   font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
-  margin: 0 0 ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit} 0;
+  margin: 0;
 `
 
 export default function Skills({ skills }: SkillsDef) {
   const categories: string[] = []
 
+  // Build array of categories
   skills.forEach((skill: Skill) => {
     categories.push(skill.category)
   })
 
+  // I only want the unique categories
   const uniqueCategories = categories.filter(onlyUnique)
 
   return (
@@ -35,13 +54,13 @@ export default function Skills({ skills }: SkillsDef) {
       {uniqueCategories.map((parentCategory, index) => (
         <StyledListContainer key={index}>
           <StyledHeading>{parentCategory}</StyledHeading>
-          <PromptList aria-label={`${parentCategory} skills`}>
+          <StyledList>
             {skills
               .filter((skill: Skill) => skill.category === parentCategory)
               .map((skill: Skill) => (
-                <PromptList.Item key={skill.id}>{skill.name}</PromptList.Item>
+                <StyledListItem key={skill.id}>{skill.name}</StyledListItem>
               ))}
-          </PromptList>
+          </StyledList>
         </StyledListContainer>
       ))}
     </Row>

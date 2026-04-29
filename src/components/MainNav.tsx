@@ -11,7 +11,7 @@ const StyledMenuContainer = styled('div')`
   left: 0;
   right: 0;
   z-index: ${Tokens.zIndex.nav.value};
-  background-color: ${Tokens.colors.surfaceBase.var};
+  background-color: ${Tokens.colors.background.value};
   transition: background 1.3s ease, --background-color-start 1.3s ease,
     --background-color-end 1.3s ease;
 `
@@ -72,13 +72,13 @@ const StyledListItem = styled('li')`
   text-wrap: nowrap;
 
   a {
-    color: ${Tokens.colors.roleHeading.var};
+    color: ${Tokens.colors.secondary.value};
   }
 `
 
 const StyledTitle = styled(HeadingAnimation)`
   text-wrap: nowrap;
-  color: ${Tokens.colors.surfaceBase.var};
+  color: ${Tokens.colors.background.value};
 `
 
 /**
@@ -191,16 +191,10 @@ export default function MainNav() {
               <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
             </StyledListItem>
             <StyledListItem>
-              <Link href="/about">About</Link>
+              <Link href="/#blog">Blog</Link>
             </StyledListItem>
             <StyledListItem>
-              <Link href="/projects">Projects</Link>
-            </StyledListItem>
-            <StyledListItem>
-              <Link href="/posts">Blog</Link>
-            </StyledListItem>
-            <StyledListItem>
-              <Link href="/contact">Contact</Link>
+              <Link href="/#projects">Projects</Link>
             </StyledListItem>
           </StyledList>
         </StyledDesktopNav>

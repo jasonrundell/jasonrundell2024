@@ -7,7 +7,7 @@ import Tokens from '@/lib/tokens'
 import { StyledContainer, StyledSection, StyledLink } from '@/styles/common'
 
 const StyledFooter = styled('footer')`
-  background-color: ${Tokens.colors.surfaceDeepest.var};
+  background-color: ${Tokens.colors.backgroundDarker.value};
   padding-bottom: 4rem;
 `
 

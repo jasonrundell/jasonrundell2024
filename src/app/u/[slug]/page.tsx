@@ -23,13 +23,13 @@ import { formatDistanceToNow } from 'date-fns'
 import { profileSlugSchema } from '@/lib/profile-slug'
 
 const MemberSince = styled('p')`
-  color: ${Tokens.colors.textSecondary.var};
+  color: ${Tokens.colors.textSecondary.value};
   font-size: ${Tokens.fontSizes.sm.value}${Tokens.fontSizes.sm.unit};
   margin: 0 0 ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit} 0;
 `
 
 const CommentMeta = styled(Link)`
-  color: ${Tokens.colors.rolePrompt.var};
+  color: ${Tokens.colors.primary.value};
   font-size: ${Tokens.fontSizes.sm.value}${Tokens.fontSizes.sm.unit};
   text-decoration: none;
 
@@ -40,7 +40,7 @@ const CommentMeta = styled(Link)`
 
 const SectionHeading = styled('h3')`
   font-size: ${Tokens.sizes.fonts.medium.value}${Tokens.sizes.fonts.medium.unit};
-  color: ${Tokens.colors.roleHeading.var};
+  color: ${Tokens.colors.secondary.value};
   margin: 0 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit} 0;
 `
 

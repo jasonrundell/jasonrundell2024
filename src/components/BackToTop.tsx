@@ -12,18 +12,18 @@ const BackToTopStyle = styled('div')<BackToTopStyleProps>({
   position: 'fixed',
   bottom: `${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit}`,
   right: `${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit}`,
-  backgroundColor: Tokens.colors.rolePrompt.var,
-  color: Tokens.colors.surfaceOverlay.var,
+  backgroundColor: Tokens.colors.primary.value,
+  color: Tokens.colors.surface.value,
   padding: `${Tokens.sizes.padding.small.value}${Tokens.sizes.padding.small.unit} ${Tokens.sizes.padding.large.value}${Tokens.sizes.padding.large.unit}`,
   borderRadius: `${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit}`,
   cursor: 'pointer',
   transition: 'opacity 0.3s ease, transform 0.3s ease',
   '&:hover': {
-    backgroundColor: Tokens.colors.roleHeading.var,
+    backgroundColor: Tokens.colors.secondary,
     transform: 'translateY(-2px)',
   },
   '&:focus': {
-    outline: `2px solid ${Tokens.colors.rolePrompt.var}`,
+    outline: `2px solid ${Tokens.colors.primary.value}`,
     outlineOffset: '2px',
   },
   variants: [

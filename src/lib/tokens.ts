@@ -1,10 +1,6 @@
-/**
- * Re-export of the generated typed token tree. Components should always
- * import from this module, never from `tokens.generated.ts` directly.
- *
- * Source of truth: `src/lib/common.tokens.json`.
- * To regenerate after editing the JSON: `npm run tokens:build`.
- */
-import Tokens from './tokens.generated'
+import tokensFile from './common.tokens.json'
+
+// Ensure the tokens are properly parsed and have fallbacks
+const Tokens = JSON.parse(JSON.stringify(tokensFile))
 
 export default Tokens
