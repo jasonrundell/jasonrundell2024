@@ -3,6 +3,8 @@ import { createSafeClient } from '@/utils/supabase/safe-client'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 
+export const dynamic = 'force-dynamic'
+
 const Container = styled('div')`
   max-width: 800px;
   margin: 0 auto;

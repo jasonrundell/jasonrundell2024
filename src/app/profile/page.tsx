@@ -4,6 +4,8 @@ import ProfileClient from '@/app/profile/profile-client'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { generateInitialProfileSlug } from '@/lib/profile-slug'
 
+export const dynamic = 'force-dynamic'
+
 export default async function ProtectedPage() {
   const safeClient = createSafeClient()
 
