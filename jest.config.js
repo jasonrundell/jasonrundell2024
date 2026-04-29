@@ -11,6 +11,7 @@ const customJestConfig = {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   moduleNameMapper: {
+    '^@jasonrundell/dropship$': '<rootDir>/src/components/dropship.tsx',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transformIgnorePatterns: [

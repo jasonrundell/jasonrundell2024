@@ -28,42 +28,88 @@ if (typeof global.Request === 'undefined') {
     // Fallback: create minimal mocks
     global.Request = class Request {
       constructor(input, init) {
-        this.url = typeof input === 'string' ? input : input.url
+        Object.defineProperty(this, 'url', {
+          configurable: true,
+          value: typeof input === 'string' ? input : input.url,
+        })
         this.method = init?.method || 'GET'
-        this.headers = new Map()
-        if (init?.headers) {
-          Object.entries(init.headers).forEach(([k, v]) => this.headers.set(k, v))
-        }
+        this.headers = new global.Headers(init?.headers)
+        this.body = init?.body
+      }
+      json() {
+        return Promise.resolve(JSON.parse(this.body))
+      }
+      text() {
+        return Promise.resolve(this.body ?? '')
       }
     }
     global.Response = class Response {
       constructor(body, init) {
         this.body = body
         this.status = init?.status || 200
-        this.headers = new Map()
-        if (init?.headers) {
-          Object.entries(init.headers).forEach(([k, v]) => this.headers.set(k, v))
-        }
+        this.headers = new global.Headers(init?.headers)
       }
       json() {
         return Promise.resolve(JSON.parse(this.body))
+      }
+      static json(data, init) {
+        return new Response(JSON.stringify(data), init)
       }
     }
     global.Headers = class Headers {
       constructor(init) {
         this.map = new Map()
-        if (init) {
-          Object.entries(init).forEach(([k, v]) => this.map.set(k, v))
+        if (!init) {
+          return
         }
+
+        if (typeof init.forEach === 'function') {
+          init.forEach((value, key) => this.set(key, value))
+          return
+        }
+
+        if (Array.isArray(init)) {
+          init.forEach(([key, value]) => this.set(key, value))
+          return
+        }
+
+        Object.entries(init).forEach(([key, value]) => this.set(key, value))
       }
       get(name) {
-        return this.map.get(name)
+        return this.map.get(name.toLowerCase()) ?? null
       }
       set(name, value) {
-        this.map.set(name, value)
+        this.map.set(name.toLowerCase(), String(value))
+      }
+      append(name, value) {
+        const key = name.toLowerCase()
+        const currentValue = this.map.get(key)
+        this.map.set(key, currentValue ? `${currentValue}, ${value}` : String(value))
+      }
+      has(name) {
+        return this.map.has(name.toLowerCase())
+      }
+      delete(name) {
+        this.map.delete(name.toLowerCase())
+      }
+      forEach(callback) {
+        this.map.forEach((value, key) => callback(value, key, this))
+      }
+      entries() {
+        return this.map.entries()
+      }
+      [Symbol.iterator]() {
+        return this.entries()
       }
     }
   }
+}
+
+if (typeof global.Response !== 'undefined' && !global.Response.json) {
+  Object.defineProperty(global.Response, 'json', {
+    configurable: true,
+    value: (data, init) => new global.Response(JSON.stringify(data), init),
+  })
 }
 
 // Polyfill for HTMLFormElement.prototype.requestSubmit

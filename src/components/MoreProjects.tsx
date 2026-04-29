@@ -1,3 +1,5 @@
+'use client'
+
 import { Grid } from '@jasonrundell/dropship'
 import ProjectPreview from './ProjectPreview'
 import { ProjectCardItem } from '@/typeDefinitions/app'

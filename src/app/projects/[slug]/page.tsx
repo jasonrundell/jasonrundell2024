@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
 import { Grid, Row, Spacer } from '@jasonrundell/dropship'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { MARKS, Document, BLOCKS } from '@contentful/rich-text-types'
@@ -17,12 +16,7 @@ const imageFullWidthStyle: React.CSSProperties = {
 import { getEntryBySlug, getProjects } from '@/lib/contentful'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
-
-// Lazy-load ProjectGallery to reduce initial bundle size
-const ProjectGallery = dynamic(() => import('@/components/ProjectGallery'), {
-  loading: () => <div>Loading gallery...</div>,
-  ssr: false, // Modal doesn't need SSR
-})
+import ProjectGalleryLazy from '@/components/ProjectGalleryLazy'
 import {
   StyledContainer,
   StyledSection,
@@ -211,7 +205,7 @@ export default async function page({ params }: ProjectProps) {
                     <>
                       <Spacer />
                       <StyledHeading3 level={3}>Gallery</StyledHeading3>
-                      <ProjectGallery images={gallery} />
+                      <ProjectGalleryLazy images={gallery} />
                     </>
                   )}
                 </StyledBody>

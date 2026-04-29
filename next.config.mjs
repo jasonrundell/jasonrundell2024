@@ -14,8 +14,10 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   poweredByHeader: false,
+  outputFileTracingRoot: __dirname,
+  bundlePagesRouterDependencies: true,
+  serverExternalPackages: ['isomorphic-dompurify', 'jsdom', 'dompurify'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.ctfassets.net' },
@@ -59,7 +61,7 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              // 'unsafe-inline' is required by Next.js 14 for hydration/routing inline scripts.
+              // 'unsafe-inline' is required by Next.js for hydration/routing inline scripts.
               // 'unsafe-eval' is only included in development for webpack HMR source maps.
               // va.vercel-scripts.com hosts the @vercel/speed-insights runtime.
               process.env.NODE_ENV === 'development'
@@ -88,17 +90,12 @@ const nextConfig = {
       },
     ]
   },
-  // Optimize development mode
-  experimental: {
-    bundlePagesExternals: true,
-    serverComponentsExternalPackages: ['isomorphic-dompurify', 'jsdom', 'dompurify'],
-    // Enable faster refresh
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  // Enable faster refresh
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
@@ -134,6 +131,7 @@ const nextConfig = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
+      '@jasonrundell/dropship$': resolve(__dirname, 'src/components/dropship.tsx'),
       'default-stylesheet.css': resolve(__dirname, 'src/lib/empty-stylesheet.js'),
     }
     
@@ -166,12 +164,17 @@ export default withSentryConfig(withPigment(bundleAnalyzer(nextConfig)), {
   // Hides source maps from generated client bundles
   hideSourceMaps: true,
 
-  // Automatically tree-shake Sentry logger statements to reduce bundle size
-  disableLogger: true,
+  webpack: {
+    // Automatically tree-shake Sentry logger statements to reduce bundle size
+    treeshake: {
+      removeDebugLogging: true,
+    },
 
-  // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
-  // See the following for more information:
-  // https://docs.sentry.io/product/crons/
-  // https://vercel.com/docs/cron-jobs
-  automaticVercelMonitors: true,
+    // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
+    // See the following for more information:
+    // https://docs.sentry.io/product/crons/
+    // https://vercel.com/docs/cron-jobs
+    automaticVercelMonitors: true,
+  },
+
 })
