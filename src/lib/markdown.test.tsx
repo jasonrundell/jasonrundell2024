@@ -63,7 +63,7 @@ jest.mock('react-markdown', () => {
 
 jest.mock('remark-gfm', () => () => {})
 
-import RenderedMDX from './markdown'
+import RenderedMDX from '@/components/markdown/RenderedMDX'
 
 describe('RenderedMDX', () => {
   it('renders plain text', () => {

@@ -2,7 +2,6 @@
 
 import { forgotPasswordAction } from '@/app/actions'
 import { FormMessage, Message } from '@/components/auth/form-message'
-import { SubmitButton } from '@/components/auth/submit-button'
 import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
 import { AuthLayout } from '@/components/auth/auth-layout'
@@ -10,37 +9,18 @@ import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { StyledLink } from '@/styles/common'
+import {
+  AuthFormWrapper as FormWrapper,
+  AuthFieldGroup as FieldGroup,
+  AuthFullWidthButton as FullWidthButton,
+  AuthFooterText as BottomText,
+} from '@/components/auth/auth-form-shell'
 import { useState, useEffect, Suspense } from 'react'
 import { CheckCircle, ArrowLeft } from 'lucide-react'
 import React from 'react'
 import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
-
-const FormWrapper = styled('form')`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-`
-
-const FieldGroup = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-`
-
-const FullWidthButton = styled(SubmitButton)`
-  width: 100%;
-`
-
-const BottomText = styled('p')`
-  text-align: center;
-  color: ${Tokens.colors.textSecondary.var};
-  font-size: 1rem;
-  margin-top: 1.5rem;
-`
 
 const SuccessContainer = styled('div')`
   display: flex;

@@ -20,13 +20,13 @@ export default function MoreProjects({ items }: MoreProjectsProps) {
           columnGap="2rem"
           rowGap="2rem"
         >
-          {items.map((post, index) => (
-            <RevealStaggerItem key={post.slug} index={index}>
+          {items.map((project, index) => (
+            <RevealStaggerItem key={project.slug} index={index}>
               <ProjectPreview
-                title={post.title}
-                image={post?.featuredImage}
-                slug={post.slug}
-                excerpt={post.excerpt}
+                title={project.title}
+                image={project?.featuredImage}
+                slug={project.slug}
+                excerpt={project.excerpt}
               />
             </RevealStaggerItem>
           ))}

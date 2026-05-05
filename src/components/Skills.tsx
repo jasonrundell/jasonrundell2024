@@ -1,7 +1,6 @@
 import { styled } from '@pigment-css/react'
 import { Skill, Skills as SkillsDef } from '@/typeDefinitions/app'
 
-import { onlyUnique } from '@/lib/onlyUnique'
 import Tokens from '@/lib/tokens'
 import PromptList, { PromptItem } from '@/components/chrome/PromptList'
 
@@ -46,7 +45,7 @@ export default function Skills({ skills }: SkillsDef) {
     categories.push(skill.category)
   })
 
-  const uniqueCategories = categories.filter(onlyUnique)
+  const uniqueCategories = [...new Set(categories)]
 
   return (
     <StyledColumns>

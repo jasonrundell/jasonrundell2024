@@ -4,6 +4,12 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { styled, keyframes } from '@pigment-css/react'
 
 import Tokens from '@/lib/tokens'
+import {
+  buildSegments,
+  totalLength,
+  sliceSegments,
+  type Segment,
+} from './hero-terminal.helpers'
 
 export interface HeroConstField {
   key: string
@@ -25,13 +31,6 @@ export const HERO_TERMINAL_SKIP_KEY = 'jr:hero-terminal:skip'
  */
 const DEFAULT_TYPE_INTERVAL_MS = 40
 
-type Role = 'comment' | 'keyword' | 'identifier' | 'key' | 'string' | 'plain'
-
-interface Segment {
-  text: string
-  role: Role
-}
-
 interface HeroTerminalProps {
   fields: ReadonlyArray<HeroConstField>
   /** Canonical, SR-only `<h1>` announced by assistive tech. */
@@ -46,48 +45,6 @@ interface HeroTerminalProps {
   typeIntervalMs?: number
 }
 
-function buildSegments(
-  comment: string,
-  identifier: string,
-  fields: ReadonlyArray<HeroConstField>
-): Segment[] {
-  const out: Segment[] = []
-  out.push({ text: `// ${comment}\n`, role: 'comment' })
-  out.push({ text: 'const', role: 'keyword' })
-  out.push({ text: ' ', role: 'plain' })
-  out.push({ text: identifier, role: 'identifier' })
-  out.push({ text: ' = {\n', role: 'plain' })
-  fields.forEach((field, index) => {
-    out.push({ text: '  ', role: 'plain' })
-    out.push({ text: field.key, role: 'key' })
-    out.push({ text: ': ', role: 'plain' })
-    out.push({ text: `'${field.value}'`, role: 'string' })
-    out.push({ text: index < fields.length - 1 ? ',\n' : '\n', role: 'plain' })
-  })
-  out.push({ text: '}', role: 'plain' })
-  return out
-}
-
-function totalLength(all: ReadonlyArray<Segment>): number {
-  return all.reduce((sum, seg) => sum + seg.text.length, 0)
-}
-
-function sliceSegments(all: ReadonlyArray<Segment>, n: number): Segment[] {
-  if (n <= 0) return []
-  const out: Segment[] = []
-  let remaining = n
-  for (const seg of all) {
-    if (remaining <= 0) break
-    if (seg.text.length <= remaining) {
-      out.push(seg)
-      remaining -= seg.text.length
-    } else {
-      out.push({ text: seg.text.slice(0, remaining), role: seg.role })
-      remaining = 0
-    }
-  }
-  return out
-}
 
 const cursorBlink = keyframes`
   0%, 49% { opacity: 1; }

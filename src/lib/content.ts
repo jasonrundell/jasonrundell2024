@@ -122,17 +122,17 @@ export async function getLatestPosts(limit: number): Promise<Post[]> {
     .slice(0, limit)
 }
 
-export async function getEntryBySlug<T>(
+export async function getEntryBySlug(contentType: 'post', slug: string): Promise<Post>
+export async function getEntryBySlug(contentType: 'project', slug: string): Promise<Project>
+export async function getEntryBySlug(
   contentType: 'post' | 'project',
   slug: string
-): Promise<T> {
+): Promise<Post | Project> {
   if (contentType === 'post') {
-    const post = parsePost(slug)
-    return post as unknown as T
+    return parsePost(slug)
   }
   if (contentType === 'project') {
-    const project = parseProject(slug)
-    return project as unknown as T
+    return parseProject(slug)
   }
   const msg = `Unknown content type for getEntryBySlug: ${contentType}`
   console.error(msg)

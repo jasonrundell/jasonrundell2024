@@ -219,3 +219,41 @@ export const StyledCloseButton = styled('button')`
     outline-offset: 2px;
   }
 `
+
+/** Shared `<h3>` heading for preview cards (ProjectPreview, PostPreview, Skills). */
+export const StyledPreviewHeading = styled('h3')`
+  font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
+  margin: 0 0 ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit} 0;
+`
+
+/**
+ * Circular translucent icon button shared by GalleryModal nav arrows and
+ * StyledCloseButton descendants. Extend for positional variants.
+ */
+export const StyledIconCircleButton = styled('button')`
+  background: ${Tokens.colors.white.value}36;
+  border: none;
+  color: ${Tokens.colors.rolePrompt.var};
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease-in-out;
+
+  &:hover {
+    background: ${Tokens.colors.primaryVariant.value}E6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${Tokens.colors.primary.value}99;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: ${Tokens.opacity.low.value};
+    cursor: not-allowed;
+  }
+`

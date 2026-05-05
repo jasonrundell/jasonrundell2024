@@ -1,27 +1,18 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { createPortal } from 'react-dom'
 import { Grid } from '@jasonrundell/dropship'
 import { ContentImage } from '@/typeDefinitions/app'
 import ContentImageComponent from './ContentImage'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
-import {
-  StyledModal,
-  StyledModalContent,
-  StyledCloseButton,
-} from '@/styles/common'
 import { RevealStaggerGroup, RevealStaggerItem } from '@/styles/motion'
+import { useGalleryKeyboard } from './useGalleryKeyboard'
+import GalleryModal from './GalleryModal'
 
 const imageCoverNoPointerStyle: React.CSSProperties = {
   objectFit: 'cover',
   pointerEvents: 'none',
-}
-
-const imageContainStyle: React.CSSProperties = {
-  objectFit: 'contain',
 }
 
 const StyledGalleryItem = styled('div')`
@@ -44,119 +35,6 @@ const StyledGalleryItem = styled('div')`
   }
 `
 
-const StyledModalImage = styled('div')`
-  position: relative;
-  width: 100%;
-  height: 80vh;
-  max-width: 100%;
-  max-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    max-width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
-  }
-`
-
-const StyledNavButtonLeft = styled('button')`
-  position: absolute;
-  left: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
-  top: 50%;
-  transform: translateY(-50%);
-  background: ${Tokens.colors.white.value}36;
-  border: none;
-  color: ${Tokens.colors.rolePrompt.var};
-  cursor: pointer;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background 0.2s ease-in-out;
-  z-index: ${Tokens.zIndex.modalContent.value};
-
-  &:hover {
-    background: ${Tokens.colors.primaryVariant.value}E6;
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${Tokens.colors.primary.value}99;
-    outline-offset: 2px;
-  }
-
-  &:disabled {
-    opacity: ${Tokens.opacity.low.value};
-    cursor: not-allowed;
-  }
-`
-
-const StyledNavButtonRight = styled('button')`
-  position: absolute;
-  right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
-  top: 50%;
-  transform: translateY(-50%);
-  background: ${Tokens.colors.white.value}36;
-  border: none;
-  color: ${Tokens.colors.rolePrompt.var};
-  cursor: pointer;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background 0.2s ease-in-out;
-  z-index: ${Tokens.zIndex.modalContent.value};
-
-  &:hover {
-    background: ${Tokens.colors.primaryVariant.value}E6;
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${Tokens.colors.primary.value}99;
-    outline-offset: 2px;
-  }
-
-  &:disabled {
-    opacity: ${Tokens.opacity.low.value};
-    cursor: not-allowed;
-  }
-`
-
-const StyledImageInfo = styled('div')`
-  position: absolute;
-  bottom: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
-  left: 50%;
-  transform: translateX(-50%);
-  background: ${Tokens.colors.surface.value}b3;
-  color: ${Tokens.colors.rolePrompt.var};
-  padding: ${Tokens.sizes.padding.xsmall.value}${Tokens.sizes.padding.xsmall.unit} ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
-  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
-  text-align: center;
-  max-width: 80%;
-`
-
-const StyledImageTitle = styled('div')`
-  font-weight: 600;
-  margin-bottom: ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit};
-`
-
-const StyledImageDescription = styled('div')`
-  font-size: ${Tokens.sizes.fonts.small.value}${Tokens.sizes.fonts.small.unit};
-  opacity: ${Tokens.opacity.higher.value};
-`
-
-const StyledImageCounter = styled('div')`
-  font-size: 0.75rem;
-  opacity: ${Tokens.opacity.medium.value};
-  margin-top: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
-`
-
 interface ProjectGalleryProps {
   images: ContentImage[]
 }
@@ -171,62 +49,33 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
     setMounted(true)
   }, [])
 
-  useEffect(() => {
-    if (selectedIndex === null) return
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setSelectedIndex(null)
-      } else if (e.key === 'ArrowLeft' && selectedIndex > 0) {
-        setSelectedIndex(selectedIndex - 1)
-      } else if (
-        e.key === 'ArrowRight' &&
-        selectedIndex < validImages.length - 1
-      ) {
-        setSelectedIndex(selectedIndex + 1)
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    document.body.style.overflow = 'hidden'
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = 'unset'
-    }
-  }, [selectedIndex, validImages.length])
-
-  const handleImageClick = useCallback((index: number) => {
-    setSelectedIndex(index)
-  }, [])
-
-  const handleClose = useCallback(() => {
-    setSelectedIndex(null)
-  }, [])
-
+  const handleClose = useCallback(() => setSelectedIndex(null), [])
   const handlePrev = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation()
-      if (selectedIndex !== null && selectedIndex > 0) {
-        setSelectedIndex(selectedIndex - 1)
-      }
+    (e?: React.MouseEvent) => {
+      e?.stopPropagation()
+      setSelectedIndex((i) => (i !== null && i > 0 ? i - 1 : i))
     },
-    [selectedIndex]
+    []
   )
-
   const handleNext = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation()
-      if (selectedIndex !== null && selectedIndex < validImages.length - 1) {
-        setSelectedIndex(selectedIndex + 1)
-      }
+    (e?: React.MouseEvent) => {
+      e?.stopPropagation()
+      setSelectedIndex((i) =>
+        i !== null && i < validImages.length - 1 ? i + 1 : i
+      )
     },
-    [selectedIndex, validImages.length]
+    [validImages.length]
   )
 
-  if (!images || validImages.length === 0) {
-    return null
-  }
+  useGalleryKeyboard({
+    selectedIndex,
+    totalImages: validImages.length,
+    onClose: handleClose,
+    onPrev: () => handlePrev(),
+    onNext: () => handleNext(),
+  })
+
+  if (!images || validImages.length === 0) return null
 
   const selectedImage =
     selectedIndex !== null ? validImages[selectedIndex] : null
@@ -244,20 +93,24 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
           {validImages.map((image, index) => (
             <RevealStaggerItem key={image.src || index} index={index}>
               <StyledGalleryItem
-                onClick={() => handleImageClick(index)}
+                onClick={() => setSelectedIndex(index)}
                 role="button"
                 tabIndex={0}
                 aria-label={`View ${image.alt || `Gallery image ${index + 1}`} in full screen`}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault()
-                    handleImageClick(index)
+                    setSelectedIndex(index)
                   }
                 }}
               >
                 <ContentImageComponent
                   src={image.src}
-                  alt={image.description || image.alt || `Gallery image ${index + 1}`}
+                  alt={
+                    image.description ||
+                    image.alt ||
+                    `Gallery image ${index + 1}`
+                  }
                   fill={true}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   style={imageCoverNoPointerStyle}
@@ -268,76 +121,16 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
         </Grid>
       </RevealStaggerGroup>
 
-      {mounted &&
-        selectedIndex !== null &&
-        selectedImage?.src &&
-        createPortal(
-          <StyledModal
-            onClick={handleClose}
-            aria-label="Image gallery modal"
-            role="dialog"
-            aria-modal="true"
-          >
-            <StyledModalContent onClick={(e) => e.stopPropagation()}>
-              <StyledCloseButton
-                onClick={handleClose}
-                aria-label="Close image gallery"
-              >
-                <X size={24} />
-              </StyledCloseButton>
-
-              {selectedIndex > 0 && (
-                <StyledNavButtonLeft
-                  onClick={handlePrev}
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft size={24} />
-                </StyledNavButtonLeft>
-              )}
-
-              {selectedIndex < validImages.length - 1 && (
-                <StyledNavButtonRight
-                  onClick={handleNext}
-                  aria-label="Next image"
-                >
-                  <ChevronRight size={24} />
-                </StyledNavButtonRight>
-              )}
-
-              {selectedImage && (
-                <>
-                  <StyledModalImage>
-                    <ContentImageComponent
-                      src={selectedImage.src}
-                      alt={selectedImage.description || selectedImage.alt || `Gallery image ${selectedIndex + 1}`}
-                      fill={true}
-                      quality={90}
-                      sizes="90vw"
-                      style={imageContainStyle}
-                    />
-                  </StyledModalImage>
-
-                  {(selectedImage.alt || selectedImage.description) && (
-                    <StyledImageInfo>
-                      {selectedImage.alt && (
-                        <StyledImageTitle>{selectedImage.alt}</StyledImageTitle>
-                      )}
-                      {selectedImage.description && (
-                        <StyledImageDescription>
-                          {selectedImage.description}
-                        </StyledImageDescription>
-                      )}
-                      <StyledImageCounter>
-                        {selectedIndex + 1} of {validImages.length}
-                      </StyledImageCounter>
-                    </StyledImageInfo>
-                  )}
-                </>
-              )}
-            </StyledModalContent>
-          </StyledModal>,
-          document.body
-        )}
+      {mounted && selectedIndex !== null && selectedImage?.src && (
+        <GalleryModal
+          selectedIndex={selectedIndex}
+          totalImages={validImages.length}
+          image={selectedImage}
+          onClose={handleClose}
+          onPrev={handlePrev}
+          onNext={handleNext}
+        />
+      )}
     </>
   )
 }

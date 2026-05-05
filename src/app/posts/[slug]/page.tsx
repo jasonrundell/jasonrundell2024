@@ -4,7 +4,7 @@ import { Spacer, Row } from '@jasonrundell/dropship'
 import { notFound } from 'next/navigation'
 
 import { getEntryBySlug, getPosts } from '@/lib/content'
-import RenderedMDX from '@/lib/markdown'
+import RenderedMDX from '@/components/markdown/RenderedMDX'
 import PostHeader from '@/components/PostHeader'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { buildBlogPostingJsonLd } from '@/lib/jsonld'

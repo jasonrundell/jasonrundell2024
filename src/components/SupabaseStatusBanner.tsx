@@ -3,12 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
-
-interface SupabaseStatus {
-  isAvailable: boolean
-  isPaused: boolean
-  error?: string
-}
+import type { SupabaseStatus } from '@/utils/supabase/status'
 
 const StyledBanner = styled('div')`
   position: fixed;

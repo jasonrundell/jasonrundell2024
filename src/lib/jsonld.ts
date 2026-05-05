@@ -1,18 +1,20 @@
 import { Post } from '@/typeDefinitions/app'
 import { SITE_DESCRIPTION, SITE_DOMAIN } from '@/lib/constants'
+import AUTHOR from '@/lib/author'
 
 /**
  * Builds a schema.org `Person` object for the /about page.
+ * Identity data is sourced from `src/lib/author.ts` — single source of truth.
  */
 export function buildPersonJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Jason Rundell',
+    name: AUTHOR.name,
     jobTitle: 'Manager / Full Stack Developer',
     url: `${SITE_DOMAIN}/about`,
     sameAs: [
-      'https://www.linkedin.com/in/jasonrundell/',
+      AUTHOR.url,
       'https://github.com/jasonrundell',
     ],
     description:

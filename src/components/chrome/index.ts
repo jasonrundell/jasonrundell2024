@@ -7,7 +7,6 @@
  *   import { SectionHeading, PromptList, MetaDate, TerminalButtonLink } from '@/components/chrome'
  */
 export { default as SectionHeading } from './SectionHeading'
-export type { SectionHeadingLevel } from './SectionHeading'
 export { default as PromptList, PromptItem } from './PromptList'
 export { default as MetaDate } from './MetaDate'
 export { default as TerminalButtonLink } from './TerminalButtonLink'

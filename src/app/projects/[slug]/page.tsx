@@ -4,7 +4,7 @@ import { Grid, Row, Spacer } from '@jasonrundell/dropship'
 import { notFound } from 'next/navigation'
 
 import { getEntryBySlug, getProjects } from '@/lib/content'
-import RenderedMDX from '@/lib/markdown'
+import RenderedMDX from '@/components/markdown/RenderedMDX'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
 import ProjectGalleryLazy from '@/components/ProjectGalleryLazy'

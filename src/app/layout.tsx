@@ -9,10 +9,12 @@ import { SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants'
 import '@/styles/globals.css'
 
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
-  import('react-axe').then((axe) => {
-    console.log('react-axe loaded')
-    axe.default(React, window, 1000)
-  })
+  import('react-axe')
+    .then((axe) => {
+      console.log('react-axe loaded')
+      axe.default(React, window, 1000)
+    })
+    .catch(console.error)
 }
 
 import '@jasonrundell/dropship/style.css'
@@ -45,7 +47,7 @@ export default async function RootLayout({
         <SpeedInsights />
         <GoogleAnalytics gaId="G-GZFPYCJVHQ" />
         <SupabaseStatusBanner />
-        <header>{await MainNav()}</header>
+        <header>{MainNav()}</header>
         <main id="main-content">{children}</main>
         {await Footer()}
       </body>

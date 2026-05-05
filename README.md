@@ -21,6 +21,8 @@ optimized performance.
 
 - Project index: [docs/PROJECT_INDEX.md](./docs/PROJECT_INDEX.md)
 - Keep the index updated whenever routes, integrations, folder structure, or test locations change.
+- Codebase conventions: [CONVENTIONS.md](./CONVENTIONS.md)
+- Latest audit: [docs/audits/2026-05-codebase-audit.md](./docs/audits/2026-05-codebase-audit.md)
 
 ### Validation
 
