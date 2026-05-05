@@ -34,6 +34,8 @@ const StyledMenu = styled('div')`
 const StyledDesktopNav = styled('nav')`
   display: none;
   flex: 1;
+  align-items: center;
+  justify-content: space-between;
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
       .breakpoints.large.unit}) {
@@ -62,6 +64,7 @@ const StyledList = styled('ul')`
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
       .breakpoints.large.unit}) {
     margin: 0;
+    margin-left: auto;
   }
 `
 
@@ -186,10 +189,8 @@ export default function MainNav() {
       <StyledMenu>
         {/* Desktop Navigation */}
         <StyledDesktopNav aria-label="Main Navigation">
+          <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
           <StyledList>
-            <StyledListItem>
-              <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
-            </StyledListItem>
             <StyledListItem>
               <Link href="/about">About</Link>
             </StyledListItem>
