@@ -85,6 +85,16 @@ const StyledTitle = styled(HeadingAnimation)`
 `
 
 /**
+ * Serializable matcher passed to HeadingAnimation so terminal-style
+ * steps render in the monospace font. Kept outside the component to
+ * preserve referential stability.
+ */
+const TERMINAL_MONO_MATCHER = {
+  prefixes: ['jason$'],
+  exact: [':)'],
+}
+
+/**
  * Animation steps for the navigation title.
  * Moved outside component to avoid recreation on every render.
  */
@@ -189,7 +199,11 @@ export default function MainNav() {
       <StyledMenu>
         {/* Desktop Navigation */}
         <StyledDesktopNav aria-label="Main Navigation">
-          <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
+          <StyledTitle
+            steps={NAVIGATION_STEPS}
+            speed={100}
+            monoStepMatcher={TERMINAL_MONO_MATCHER}
+          />
           <StyledList>
             <StyledListItem>
               <Link href="/about">About</Link>
@@ -208,7 +222,11 @@ export default function MainNav() {
 
         {/* Mobile Navigation */}
         <StyledMobileNav aria-label="Main Navigation">
-          <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
+          <StyledTitle
+            steps={NAVIGATION_STEPS}
+            speed={100}
+            monoStepMatcher={TERMINAL_MONO_MATCHER}
+          />
         </StyledMobileNav>
 
         <MainNavClient />
