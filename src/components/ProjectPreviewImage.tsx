@@ -13,9 +13,9 @@ interface ProjectPreviewImageProps {
   title: string
   /**
    * Contentful image URL. When omitted (project has no thumbnail in
-   * Contentful), `ProjectPreviewImage` falls back to the local
-   * refined-terminal placeholder so the preview tile keeps its 4:3 chrome
-   * and visual rhythm in the grid.
+   * Contentful), `ProjectPreviewImage` falls back to the local 3D-style
+   * placeholder so the preview tile keeps its 4:3 chrome and visual rhythm
+   * in the grid.
    */
   url?: string
   slug?: string

@@ -1,4 +1,3 @@
-import { Row } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 import { Skill, Skills as SkillsDef } from '@/typeDefinitions/app'
 
@@ -6,7 +5,26 @@ import { onlyUnique } from '@/lib/onlyUnique'
 import Tokens from '@/lib/tokens'
 import PromptList, { PromptItem } from '@/components/chrome/PromptList'
 
+const StyledColumns = styled('div')`
+  column-gap: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+  column-count: 1;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    column-count: 2;
+  }
+
+  @media (min-width: 1024px) {
+    column-count: 3;
+  }
+
+  @media (min-width: 1360px) {
+    column-count: 4;
+  }
+`
+
 const StyledListContainer = styled('div')`
+  break-inside: avoid;
   display: flex;
   flex-direction: column;
   margin-top: 0;
@@ -31,7 +49,7 @@ export default function Skills({ skills }: SkillsDef) {
   const uniqueCategories = categories.filter(onlyUnique)
 
   return (
-    <Row>
+    <StyledColumns>
       {uniqueCategories.map((parentCategory, index) => (
         <StyledListContainer key={index}>
           <StyledHeading>{parentCategory}</StyledHeading>
@@ -44,6 +62,6 @@ export default function Skills({ skills }: SkillsDef) {
           </PromptList>
         </StyledListContainer>
       ))}
-    </Row>
+    </StyledColumns>
   )
 }
