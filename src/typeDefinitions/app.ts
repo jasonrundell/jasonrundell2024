@@ -1,18 +1,14 @@
-import { Document } from '@contentful/rich-text-types'
-import { EntrySkeletonType } from 'contentful'
-import { ContentfulContent, ContentfulSys, ContentfulAsset } from './contentful'
-
 export interface Categories {
   categories: string[]
 }
 
-export interface Skill extends EntrySkeletonType {
+export interface Skill {
   id: string
   name: string
   category: string
 }
 
-export interface Position extends EntrySkeletonType {
+export interface Position {
   id: string
   orderId: number
   role: string
@@ -28,30 +24,41 @@ export interface Positions {
 export interface Skills {
   skills: Skill[]
 }
-export interface Reference extends EntrySkeletonType {
+
+export interface Reference {
   id: string
   company: string
   citeName: string
   order: number
   emphasis: boolean
-  quote: Document
+  /** Plain markdown string (converted from Contentful rich text during migration) */
+  quote: string
 }
 
 export interface References {
   references: Reference[]
 }
 
-export interface Project extends EntrySkeletonType {
+export interface ContentImage {
+  src: string
+  alt: string
+  description?: string
+  width?: number
+  height?: number
+}
+
+export interface Project {
   title: string
   slug: string
   order: number
   excerpt: string
-  description: ContentfulContent
+  /** Raw MDX source string rendered by <RenderedMDX /> */
+  description: string
   technology: string[]
   link?: string
   siteLink?: string
-  featuredImage?: FeaturedImage
-  gallery?: GalleryImage[]
+  featuredImage?: ContentImage
+  gallery?: ContentImage[]
 }
 
 export interface Projects {
@@ -69,151 +76,23 @@ export type ProjectCardItem = {
   slug: string
 }
 
-export interface FeaturedImage {
-  metadata: {
-    tags: string[]
-    concepts: string[]
-  }
-  sys: {
-    space: ContentfulSys
-    id: string
-    type: string
-    createdAt: string
-    updatedAt: string
-    environment: ContentfulSys
-    publishedVersion: number
-    revision: number
-    contentType: ContentfulSys
-    locale: string | 'en-US'
-  }
-  fields: {
-    title: string
-    altText?: string
-    description?: string
-    file: {
-      metadata: {
-        tags: string[]
-        concepts: string[]
-      }
-      sys: {
-        space: ContentfulSys
-        id: string
-        type: string
-        createdAt: string
-        updatedAt: string
-        environment: ContentfulSys
-        publishedVersion: number
-        revision: number
-        contentType: { sys: string[] }
-        locale: string | 'en-US'
-      }
-      fields: {
-        title: string
-        file: {
-          url: string
-          details: {
-            size: number
-            image: {
-              width: number
-              height: number
-            }
-          }
-          fileName: string
-          contentType: string | 'image/webp'
-        }
-      }
-    }
-  }
-}
-
-export interface GalleryImage {
-  metadata: {
-    tags: string[]
-    concepts: string[]
-  }
-  sys: {
-    space: ContentfulSys
-    id: string
-    type: string
-    createdAt: string
-    updatedAt: string
-    environment: ContentfulSys
-    publishedVersion: number
-    revision: number
-    locale: string | 'en-US'
-  }
-  fields: {
-    title: string
-    description?: string
-    file: {
-      url: string
-      details: {
-        size: number
-        image?: {
-          width: number
-          height: number
-        }
-      }
-      fileName: string
-      contentType: string
-    }
-  }
-}
-
-export interface Post extends EntrySkeletonType {
+export interface Post {
   title: string
   slug: string
-  content: ContentfulContent
+  /** Raw MDX source string rendered by <RenderedMDX /> */
+  content: string
   excerpt: string
-  featuredImage: FeaturedImage
+  featuredImage?: ContentImage
   date: string
-  author: {
-    metadata: {
-      tags: string[]
-      concepts: string[]
-    }
-    sys: {
-      space: { sys: string[] }
-      id: string
-      type: string
-      createdAt: string
-      updatedAt: string
-      environment: { sys: string[] }
-      publishedVersion: number
-      revision: number
-      contentType: { sys: string[] }
-      locale: string
-    }
-    fields: {
-      name: string
-      picture: {
-        metadata: {
-          tags: string[]
-          concepts: string[]
-        }
-        sys: {
-          space: { sys: string[] }
-          id: string
-          type: string
-          createdAt: string
-          updatedAt: string
-          environment: { sys: string[] }
-          publishedVersion: number
-          revision: number
-          contentType: { sys: string[] }
-          locale: string
-        }
-        fields: ContentfulAsset
-      }
-    }
-  }
+  /** Author name (resolved from shared author identity) */
+  author: string
 }
 
 export interface Posts {
   posts: Post[]
 }
 
-export interface LastSong extends EntrySkeletonType {
+export interface LastSong {
   title: string
   artist: string
   url: string

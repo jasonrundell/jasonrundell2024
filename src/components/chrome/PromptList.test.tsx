@@ -69,6 +69,18 @@ describe('PromptList', () => {
     expect(screen.getAllByRole('listitem')).toHaveLength(2)
   })
 
+  it('passes through non-React-element children unchanged (string child)', () => {
+    // This covers the `if (!React.isValidElement(child)) return child` branch in PromptList
+    render(
+      <PromptList aria-label="Mixed">
+        {'plain text'}
+        <PromptItem>React element</PromptItem>
+      </PromptList>
+    )
+    expect(screen.getByText('plain text')).toBeInTheDocument()
+    expect(screen.getByText('React element')).toBeInTheDocument()
+  })
+
   it('exports PromptItem as a named export (server-component-friendly, no static property)', () => {
     expect(PromptItem).toBeDefined()
     expect((PromptList as unknown as { Item?: unknown }).Item).toBeUndefined()

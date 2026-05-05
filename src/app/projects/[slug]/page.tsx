@@ -1,19 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Grid, Row, Spacer } from '@jasonrundell/dropship'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { MARKS, Document, BLOCKS } from '@contentful/rich-text-types'
 import { notFound } from 'next/navigation'
-import { sanitizeHTML } from '@/lib/sanitize'
 
-// Image style constants
-const imageFullWidthStyle: React.CSSProperties = {
-  width: '100%',
-  height: 'auto',
-}
-
-import { getEntryBySlug, getProjects } from '@/lib/contentful'
+import { getEntryBySlug, getProjects } from '@/lib/content'
+import RenderedMDX from '@/lib/markdown'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { Project } from '@/typeDefinitions/app'
 import ProjectGalleryLazy from '@/components/ProjectGalleryLazy'
@@ -26,7 +17,6 @@ import {
   StyledBreadcrumb,
   StyledHeading,
   StyledHeading3,
-  StyledEmbeddedAsset,
   StyledLink,
 } from '@/styles/common'
 import CommentsSection from '@/components/comments/CommentsSection'
@@ -35,71 +25,8 @@ type ProjectProps = {
   params: Promise<{ slug: string }>
 }
 
-/**
- * Custom markdown options for rendering Contentful rich text.
- * Sanitizes HTML content to prevent XSS attacks.
- */
-const customMarkdownOptions = () => ({
-  renderMark: {
-    [MARKS.CODE]: (text: React.ReactNode) => (
-      <span
-        dangerouslySetInnerHTML={{
-          __html: sanitizeHTML(String(text)),
-        }}
-      />
-    ),
-  },
-  renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node: unknown) => {
-      const nodeData = node as {
-        data?: {
-          target?: {
-            fields?: {
-              file?: { url: string }
-              description?: string
-            }
-          }
-        }
-      }
-
-      if (
-        !nodeData ||
-        !nodeData.data ||
-        !nodeData.data.target ||
-        !nodeData.data.target.fields
-      ) {
-        return null
-      }
-
-      const { file, description } = nodeData.data.target.fields
-
-      if (!file?.url) {
-        return null
-      }
-
-      const imageUrl = file.url.startsWith('//')
-        ? `https:${file.url}`
-        : file.url
-      return (
-        <StyledEmbeddedAsset>
-          <Image
-            src={imageUrl}
-            alt={description || 'Project image'}
-            width={500}
-            height={300}
-            sizes="(max-width: 768px) 100vw, 500px"
-            style={imageFullWidthStyle}
-          />
-        </StyledEmbeddedAsset>
-      )
-    },
-  },
-})
-
-// Revalidate every day (ISR - Incremental Static Regeneration)
 export const revalidate = 86400
 
-// Generate static params for all projects at build time
 export async function generateStaticParams() {
   const projects = await getProjects()
   return projects.map((project) => ({ slug: project.slug }))
@@ -109,25 +36,19 @@ export async function generateMetadata({
   params,
 }: ProjectProps): Promise<Metadata> {
   const slug = (await params).slug
-
   const project = await getEntryBySlug<Project>('project', slug)
-
-  const imageUrl = project.featuredImage?.fields?.file?.fields?.file?.url
-    ? `https://${project.featuredImage.fields.file.fields.file.url}`
-    : undefined
 
   return {
     title: `${project.title} | Jason Rundell`,
     description: SITE_DESCRIPTION,
     openGraph: {
-      images: imageUrl ? [imageUrl] : [],
+      images: project.featuredImage?.src ? [project.featuredImage.src] : [],
     },
   }
 }
 
 export default async function page({ params }: ProjectProps) {
   const slug = (await params).slug
-
   const project = await getEntryBySlug<Project>('project', slug)
 
   if (!project.title) {
@@ -196,10 +117,7 @@ export default async function page({ params }: ProjectProps) {
                 <StyledHeading3 level={3}>About</StyledHeading3>
                 <StyledBody>
                   <section>
-                    {documentToReactComponents(
-                      description as unknown as Document,
-                      customMarkdownOptions()
-                    )}
+                    <RenderedMDX source={description} />
                   </section>
                   {gallery && gallery.length > 0 && (
                     <>

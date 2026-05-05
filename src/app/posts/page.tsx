@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Row, Spacer } from '@jasonrundell/dropship'
 
-import { getPosts } from '@/lib/contentful'
+import { getPosts } from '@/lib/content'
 import {
   StyledContainer,
   StyledSection,

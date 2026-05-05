@@ -1,0 +1,39 @@
+---
+title: "I WON! All about ARC Line and Building a Hotline for a Twilio Hackathon"
+slug: "arc-raiders-twilio-hackathon-arcline"
+excerpt: "I entered a hackathon contest from Twilio... and I WON!!"
+date: "2025-12-17T12:45-04:00"
+author: "Jason Rundell"
+featuredImage: "./featured.webp"
+featuredImageAlt: ""
+featuredImageDescription: ""
+---
+When I heard about the [Twilio Hotline Challenge](https://codetv.dev/blog/web-dev-challenge-hackathon-s2e11-code-powered-phone-hotline), an idea sprung into my mind very quickly. I wanted to leverage the hype and momentum of the [ARC Raiders video game](https://arcraiders.com/) release by creating something that uses Twilio's ConversationRelay. The result? [**ARC Line**](https://arcline.vercel.app/) - a voice-based hotline system inspired by the ARC Raiders universe that lets users call a single phone number and access several automated features.
+
+### The Concept
+
+**NOTE:** If you're not a gamer or aware at all of the game [ARC Raiders](https://arcraiders.com/), by Embark Studios, the following concept might not make much sense to you, or even sound like a great idea. I took the risk of submitting something I knew had a chance of being misunderstood, but there was also the chance that if there was a least one gamer on the judging panel, I was surely going to have a strong submission. The submission was a little bit befuddling to [Jason Lengstorf](https://jason.energy/) and [Alex Goldman](https://www.linkedin.com/in/agoldman66/) during [this live cast on CodeTV (starting at 10:40)](https://www.youtube.com/watch?v=Y_cVkDuCQjM), which made me start laughing out loud when I was watching live. At least my guy, Jason, knew it was an online video game.
+
+Shout-out to [Chris "ToeFrog"](https://toefrog.com/) at Twilio who is doing a bang-up job with community coms and is a fellow raider.
+
+So, anyway, the concept is: **ARC Line** transforms a single Twilio phone number into a gateway to multiple services. Instead of requiring separate numbers for each service, users simply call one number and navigate through an intuitive voice menu system. The project was built specifically to showcase the power of [Twilio's ConversationRelay](https://twil.io/cr).
+
+### How It Works
+
+When a user calls the Twilio phone number +1 (872) 282-LINE, Shani, a character familiar to players of ARC Raiders, answers and lets the user know very quickly what actions they can take:
+
+**"Extract"** will get Shani to pretend to initiate an extraction which is familiar to players of ARC Raiders.
+
+**"Loot"** will have Shani ask what kind of items or resources the user is looking for and give an answer based on the user's prompt.
+
+"Scrappy" will allow the user to leave a message for Scrappy - the loot collecting rooster of ARC Raiders. These messages are moderated and then published on the arcline.vercel.app site.
+
+"Submit" will allow the use to send a message to ARC Line which is then approved by a human moderator (me) - again for the same reasons as stated above. Intel would be something interesting of note in the game - such as advice, or a joke, or something creative that relates to the ARC Raiders game.
+
+"Intel" will have Shani read back a saved intel message to the user.
+
+I had a lot of fun working on this project and had no issues with Twilio's tech (I did hit some creative limitations that I describe on the [project page](<Twilio + CodeTV Web Dev Challenge>)). Thanks to Twilio and CodeTV for hosting the contest!
+
+* * *
+
+If you want a more technically focused run-down on this project and it's features, please go to the [project page I've made for it](https://jasonrundell.com/projects/arcline-twilio-hackathon).

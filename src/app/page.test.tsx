@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import Page from './page'
 
-jest.mock('@/lib/contentful', () => ({
+jest.mock('@/lib/content', () => ({
   getFeaturedProjects: jest.fn(),
   getLatestPosts: jest.fn(),
   getLastSong: jest.fn(),
@@ -11,7 +11,7 @@ const { getFeaturedProjects, getLatestPosts, getLastSong } = jest.requireMock<{
   getFeaturedProjects: jest.Mock
   getLatestPosts: jest.Mock
   getLastSong: jest.Mock
-}>('@/lib/contentful')
+}>('@/lib/content')
 
 jest.mock('@/components/MorePosts', () => {
   return function MockMorePosts({ posts }: { posts: unknown[] }) {

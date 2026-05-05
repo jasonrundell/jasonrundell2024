@@ -53,8 +53,8 @@ jest.mock('next/link', () => {
   }
 })
 
-jest.mock('./ContentfulImage', () => {
-  return function MockContentfulImage({
+jest.mock('./ContentImage', () => {
+  return function MockContentImage({
     src,
     alt,
   }: {
@@ -62,36 +62,36 @@ jest.mock('./ContentfulImage', () => {
     alt?: string
   }) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt={alt ?? ''} data-testid="contentful-image" />
+    return <img src={src} alt={alt ?? ''} data-testid="content-image" />
   }
 })
 
 describe('ProjectPreviewImage', () => {
-  describe('Contentful URL provided', () => {
-    it('renders the Contentful image at the given URL', () => {
+  describe('Local URL provided', () => {
+    it('renders the content image at the given URL', () => {
       render(
         <ProjectPreviewImage
           title="Matter Ops"
           slug="matter-ops"
-          url="//images.ctfassets.net/test/matter.jpg"
+          url="/content/projects/matter-ops/featured.webp"
           altText="Matter Ops dashboard"
         />
       )
 
-      const img = screen.getByTestId('contentful-image')
+      const img = screen.getByTestId('content-image')
       expect(img).toHaveAttribute(
         'src',
-        '//images.ctfassets.net/test/matter.jpg'
+        '/content/projects/matter-ops/featured.webp'
       )
       expect(img).toHaveAttribute('alt', 'Matter Ops dashboard')
     })
 
-    it('does NOT render the local placeholder when Contentful URL is provided', () => {
+    it('does NOT render the local placeholder when URL is provided', () => {
       render(
         <ProjectPreviewImage
           title="Matter Ops"
           slug="matter-ops"
-          url="//images.ctfassets.net/test/matter.jpg"
+          url="/content/projects/matter-ops/featured.webp"
         />
       )
 
@@ -99,12 +99,12 @@ describe('ProjectPreviewImage', () => {
     })
   })
 
-  describe('Contentful URL missing — placeholder fallback', () => {
+  describe('URL missing — placeholder fallback', () => {
     it('renders the local placeholder Image when no URL is provided', () => {
       render(<ProjectPreviewImage title="ARC Line" slug="arcline" />)
 
       expect(screen.getByTestId('next-image')).toBeInTheDocument()
-      expect(screen.queryByTestId('contentful-image')).not.toBeInTheDocument()
+      expect(screen.queryByTestId('content-image')).not.toBeInTheDocument()
     })
 
     it('renders the placeholder with an empty alt (purely decorative)', () => {
@@ -120,7 +120,7 @@ describe('ProjectPreviewImage', () => {
         <ProjectPreviewImage
           title="Matter Ops"
           slug="matter-ops"
-          url="//images.ctfassets.net/test/matter.jpg"
+          url="/content/projects/matter-ops/featured.webp"
         />
       )
 

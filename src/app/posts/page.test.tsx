@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import PostsPage from './page'
 
-jest.mock('@/lib/contentful', () => ({
+jest.mock('@/lib/content', () => ({
   getPosts: jest.fn(),
 }))
 
 const { getPosts } = jest.requireMock<{
   getPosts: jest.Mock
-}>('@/lib/contentful')
+}>('@/lib/content')
 
 jest.mock('@/components/MorePosts', () => {
   return function MockMorePosts({

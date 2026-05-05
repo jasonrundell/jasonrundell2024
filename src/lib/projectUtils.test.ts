@@ -6,7 +6,7 @@ const baseProject: Project = {
   slug: 'test-project',
   order: 1,
   excerpt: 'A test excerpt',
-  description: null as never,
+  description: '',
   technology: ['TypeScript'],
 }
 
@@ -15,26 +15,9 @@ describe('toProjectCardItem', () => {
     const project: Project = {
       ...baseProject,
       featuredImage: {
-        metadata: { tags: [], concepts: [] },
-        sys: {} as never,
-        fields: {
-          title: 'Image Title',
-          altText: 'Alt text',
-          description: 'Image description',
-          file: {
-            metadata: { tags: [], concepts: [] },
-            sys: {} as never,
-            fields: {
-              title: 'File Title',
-              file: {
-                url: 'https://example.com/image.webp',
-                details: { size: 1000, image: { width: 800, height: 600 } },
-                fileName: 'image.webp',
-                contentType: 'image/webp',
-              },
-            },
-          },
-        },
+        src: '/content/projects/test-project/featured.webp',
+        alt: 'Alt text',
+        description: 'Image description',
       },
     }
 
@@ -45,7 +28,7 @@ describe('toProjectCardItem', () => {
       excerpt: 'A test excerpt',
       slug: 'test-project',
       featuredImage: {
-        file: { url: 'https://example.com/image.webp' },
+        file: { url: '/content/projects/test-project/featured.webp' },
         altText: 'Alt text',
         description: 'Image description',
       },
@@ -63,57 +46,42 @@ describe('toProjectCardItem', () => {
     expect(result.featuredImage).toBeUndefined()
   })
 
-  it('defaults missing alt text and description to empty strings when an image url is present', () => {
+  it('defaults missing alt text and description to empty strings when a src is present', () => {
     const project: Project = {
       ...baseProject,
       featuredImage: {
-        metadata: { tags: [], concepts: [] },
-        sys: {} as never,
-        fields: {
-          title: 'Image Title',
-          file: {
-            metadata: { tags: [], concepts: [] },
-            sys: {} as never,
-            fields: {
-              title: 'File Title',
-              file: {
-                url: 'https://example.com/image.webp',
-                details: { size: 1000, image: { width: 800, height: 600 } },
-                fileName: 'image.webp',
-                contentType: 'image/webp',
-              },
-            },
-          },
-        },
+        src: '/content/projects/test-project/featured.webp',
+        alt: '',
       },
     }
 
     const result = toProjectCardItem(project)
 
     expect(result.featuredImage).toEqual({
-      file: { url: 'https://example.com/image.webp' },
+      file: { url: '/content/projects/test-project/featured.webp' },
       altText: '',
       description: '',
     })
   })
 
-  it('omits featuredImage when the file fields are missing', () => {
+  it('omits featuredImage when src is empty', () => {
     const project: Project = {
       ...baseProject,
-      featuredImage: {
-        metadata: { tags: [], concepts: [] },
-        sys: {} as never,
-        fields: {
-          title: 'Image Title',
-          altText: 'Alt text',
-          description: 'Desc',
-          file: undefined as never,
-        },
-      },
+      featuredImage: { src: '', alt: 'Alt' },
     }
 
     const result = toProjectCardItem(project)
-
     expect(result.featuredImage).toBeUndefined()
+  })
+
+  it('defaults undefined alt and description to empty strings via nullish coalescing', () => {
+    const project: Project = {
+      ...baseProject,
+      featuredImage: { src: '/content/projects/test-project/featured.webp' },
+    }
+
+    const result = toProjectCardItem(project)
+    expect(result.featuredImage?.altText).toBe('')
+    expect(result.featuredImage?.description).toBe('')
   })
 })

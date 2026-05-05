@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Row, Spacer } from '@jasonrundell/dropship'
 
-import { getProjects } from '@/lib/contentful'
+import { getProjects } from '@/lib/content'
 import { toProjectCardItem } from '@/lib/projectUtils'
 import {
   StyledContainer,

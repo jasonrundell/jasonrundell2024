@@ -1,8 +1,8 @@
 import { Spacer } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 
-import Author from './PostAuthor'
 import PostImage from './PostImage'
+import ContentDate from './ContentDate'
 import { Post } from '@/typeDefinitions/app'
 import { StyledHeading, StyledDescription } from '@/styles/common'
 import Tokens from '@/lib/tokens'
@@ -39,39 +39,38 @@ const StyledImageDescription = styled('div')`
   text-align: center;
 `
 
+const StyledByline = styled('div')`
+  font-weight: 700;
+  font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
+  line-height: 1.75rem;
+`
+
 export default function PostHeader({ post }: PostHeaderProps) {
   const { title, date, featuredImage, author } = post
 
   return (
     <StyledHeader>
-      {/* Featured image at the top */}
-      {featuredImage?.fields.file.fields.file.url && (
+      {featuredImage?.src && (
         <StyledImageWrapper>
           <PostImage
             title={title}
-            url={featuredImage.fields.file.fields.file.url}
-            altText={featuredImage.fields.altText || ''}
+            url={featuredImage.src}
+            altText={featuredImage.alt ?? ''}
           />
-          {featuredImage.fields.description && (
+          {featuredImage.description && (
             <StyledImageDescription>
-              <StyledDescription>
-                {featuredImage.fields.description}
-              </StyledDescription>
+              <StyledDescription>{featuredImage.description}</StyledDescription>
             </StyledImageDescription>
           )}
         </StyledImageWrapper>
       )}
 
-      {/* Title and author info below the image */}
       <StyledContentWrapper>
         <StyledHeading>{title}</StyledHeading>
         {author && (
           <>
-            <Author
-              name={author.fields.name}
-              picture={author.fields.picture.fields.file}
-              date={date}
-            />
+            <StyledByline>By: {author}</StyledByline>
+            Published: <ContentDate dateString={date} />
             <Spacer />
           </>
         )}

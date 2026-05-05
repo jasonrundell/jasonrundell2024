@@ -6,7 +6,7 @@ import {
   getFeaturedProjects,
   getLastSong,
   getLatestPosts,
-} from '@/lib/contentful'
+} from '@/lib/content'
 import { toProjectCardItem } from '@/lib/projectUtils'
 
 import {

@@ -1,7 +1,6 @@
 import { withPigment } from '@pigment-css/nextjs-plugin'
 import { withSentryConfig } from '@sentry/nextjs'
 import withBundleAnalyzer from '@next/bundle-analyzer'
-import webpack from 'webpack'
 import { fileURLToPath } from 'url'
 import { dirname, resolve } from 'path'
 
@@ -17,11 +16,8 @@ const nextConfig = {
   poweredByHeader: false,
   outputFileTracingRoot: __dirname,
   bundlePagesRouterDependencies: true,
-  serverExternalPackages: ['isomorphic-dompurify', 'jsdom', 'dompurify'],
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'images.ctfassets.net' },
-    ],
+    remotePatterns: [],
   },
   async redirects() {
     return [
@@ -120,19 +116,9 @@ const nextConfig = {
       }
     }
     
-    // Fix for isomorphic-dompurify/jsdom default-stylesheet.css issue
-    // in client bundles (server-side is handled by serverComponentsExternalPackages).
-    config.plugins.push(
-      new webpack.NormalModuleReplacementPlugin(
-        /default-stylesheet\.css$/,
-        resolve(__dirname, 'src/lib/empty-stylesheet.js')
-      )
-    )
-
     config.resolve.alias = {
       ...config.resolve.alias,
       '@jasonrundell/dropship$': resolve(__dirname, 'src/components/dropship.tsx'),
-      'default-stylesheet.css': resolve(__dirname, 'src/lib/empty-stylesheet.js'),
     }
     
     return config

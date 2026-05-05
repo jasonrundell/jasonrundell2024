@@ -1,18 +1,7 @@
 import { Blockquote } from '@jasonrundell/dropship'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { Document } from '@contentful/rich-text-types'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { References as ReferencesDef } from '@/typeDefinitions/app'
-
-const options = {
-  // renderMark: {
-  //   [MARKS.BOLD]: (text) => <strong>{text}</strong>,
-  // },
-  // renderNode: {
-  //   [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
-  // },
-}
 
 const spacingSmall = `${Tokens.sizes.spacing.small.value}${Tokens.sizes.spacing.small.unit}`
 const spacingMedium = `${Tokens.sizes.spacing.medium.value}${Tokens.sizes.spacing.medium.unit}`
@@ -105,14 +94,9 @@ export default function References({ references }: ReferencesDef) {
         const quote = ensureField(reference.quote, 'Reference quote', index)
         const company = reference.company
 
-        const renderQuote = documentToReactComponents(
-          quote as Document,
-          options
-        )
-
         return (
           <StyledReferenceCard key={`${citeName}-${index}`}>
-            <StyledQuote>{renderQuote}</StyledQuote>
+            <StyledQuote>{quote}</StyledQuote>
             <StyledReferenceMeta>
               <StyledCite>{citeName}</StyledCite>
               {company && <StyledCompany>{company}</StyledCompany>}

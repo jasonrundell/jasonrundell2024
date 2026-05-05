@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 
-import ContentfulImage from './ContentfulImage'
+import ContentImage from './ContentImage'
 import ProjectPlaceholder from '@/public/images/project-placeholder.webp'
 
 const imageCoverStyle: React.CSSProperties = {
@@ -11,12 +11,7 @@ const imageCoverStyle: React.CSSProperties = {
 
 interface ProjectPreviewImageProps {
   title: string
-  /**
-   * Contentful image URL. When omitted (project has no thumbnail in
-   * Contentful), `ProjectPreviewImage` falls back to the local 3D-style
-   * placeholder so the preview tile keeps its 4:3 chrome and visual rhythm
-   * in the grid.
-   */
+  /** Local /content/... path. When omitted, falls back to the placeholder. */
   url?: string
   slug?: string
   altText?: string
@@ -39,7 +34,7 @@ export default function ProjectPreviewImage({
   const image = (
     <StyledContainer>
       {url ? (
-        <ContentfulImage
+        <ContentImage
           alt={altText ?? ''}
           src={url}
           fill={true}

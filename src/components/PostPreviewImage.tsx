@@ -1,10 +1,9 @@
-import ContentfulImage from './ContentfulImage'
+import ContentImage from './ContentImage'
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 
 import Tokens from '@/lib/tokens'
 
-// Image style constants
 const imageCoverStyle: React.CSSProperties = {
   objectFit: 'cover',
 }
@@ -40,7 +39,7 @@ export default function PostPreviewImage({
 }: PostPreviewImageProps) {
   const image = (
     <StyledContainer>
-      <ContentfulImage
+      <ContentImage
         alt={altText}
         src={url}
         fill={true}

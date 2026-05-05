@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import type { GalleryImage } from '@/typeDefinitions/app'
+import type { ContentImage } from '@/typeDefinitions/app'
 
 const ProjectGallery = dynamic(() => import('@/components/ProjectGallery'), {
   loading: () => <div>Loading gallery...</div>,
@@ -11,7 +11,7 @@ const ProjectGallery = dynamic(() => import('@/components/ProjectGallery'), {
 export default function ProjectGalleryLazy({
   images,
 }: {
-  images: GalleryImage[]
+  images: ContentImage[]
 }) {
   return <ProjectGallery images={images} />
 }

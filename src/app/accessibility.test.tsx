@@ -69,7 +69,7 @@ jest.mock('next/image', () => {
   }
 })
 
-jest.mock('@/lib/contentful', () => ({
+jest.mock('@/lib/content', () => ({
   getFeaturedProjects: jest.fn(),
   getLatestPosts: jest.fn(),
   getLastSong: jest.fn(),
@@ -243,7 +243,7 @@ const {
   getSkills: jest.Mock
   getReferences: jest.Mock
   getPositions: jest.Mock
-}>('@/lib/contentful')
+}>('@/lib/content')
 
 const { usePathname } = jest.requireMock<{
   usePathname: jest.Mock

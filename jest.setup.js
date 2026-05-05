@@ -218,20 +218,7 @@ const filteredError = (...args) => {
       return String(arg)
     }).join(' ')
     
-    // Check if this is a Contentful error (expected during tests)
-    const isContentfulError = 
-      fullMessage.includes('Error fetching') && (
-        fullMessage.includes('Contentful') ||
-        fullMessage.includes('from Contentful') ||
-        fullMessage.includes('Error fetching skills:') ||
-        fullMessage.includes('Error fetching projects:') ||
-        fullMessage.includes('Error fetching references:') ||
-        fullMessage.includes('Error fetching positions:') ||
-        fullMessage.includes('Error fetching posts:') ||
-        fullMessage.includes('Error fetching entry') ||
-        fullMessage.includes('Error fetching entry by slug:') ||
-        fullMessage.includes('Error fetching last song:')
-      )
+    const isContentfulError = false // Contentful removed; placeholder for filter chain
     
     // Check if this is the HTMLFormElement.requestSubmit error
     // Check both message and stack trace, and also check if it's from jsdom
@@ -279,17 +266,10 @@ global.console = {
       typeof arg === 'string' ? arg : arg?.toString() || ''
     ).join(' ')
     
-    // Check if this is a Contentful warning (expected during tests)
-    const isContentfulWarning = 
-      fullMessage.includes('found in Contentful') ||
-      warningMessage.includes('found in Contentful') ||
-      (fullMessage.includes('No') && fullMessage.includes('Contentful'))
-    
     if (
       warningMessage.includes('Invalid value for prop `formAction`') ||
       warningMessage.includes('Invalid value for prop `action`') ||
-      warningMessage.includes('Either remove it from the element, or pass a string or number value') ||
-      isContentfulWarning // Suppress expected Contentful warnings during tests
+      warningMessage.includes('Either remove it from the element, or pass a string or number value')
     ) {
       return // Suppress these expected warnings
     }

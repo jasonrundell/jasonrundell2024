@@ -24,16 +24,7 @@ export function buildPersonJsonLd() {
  * Builds a schema.org `BlogPosting` object for a single post detail page.
  */
 export function buildBlogPostingJsonLd(post: Post, slug: string) {
-  const rawUrl = post.featuredImage?.fields?.file?.fields?.file?.url
-  const imageUrl = rawUrl
-    ? rawUrl.startsWith('//')
-      ? `https:${rawUrl}`
-      : rawUrl.startsWith('http')
-        ? rawUrl
-        : `https:${rawUrl}`
-    : undefined
-
-  const authorName = post.author?.fields?.name
+  const imageUrl = post.featuredImage?.src
 
   return {
     '@context': 'https://schema.org',
@@ -46,8 +37,6 @@ export function buildBlogPostingJsonLd(post: Post, slug: string) {
       '@id': `${SITE_DOMAIN}/posts/${slug}`,
     },
     ...(imageUrl ? { image: imageUrl } : {}),
-    ...(authorName
-      ? { author: { '@type': 'Person', name: authorName } }
-      : {}),
+    ...(post.author ? { author: { '@type': 'Person', name: post.author } } : {}),
   }
 }

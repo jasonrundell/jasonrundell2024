@@ -35,6 +35,12 @@ const customJestConfig = {
     '!src/**/loading.tsx',
     '!src/data/**',
     '!src/styles/**',
+    // Infrastructure files that run outside Jest's module scope
+    '!src/instrumentation.ts',
+    '!src/lib/dompurify-config.ts',
+    '!src/lib/empty-stylesheet.js',
+    '!src/app/api/test/**',
+    '!src/utils/supabase/public-client.ts',
   ],
   testPathIgnorePatterns: [
     '<rootDir>/.next/',

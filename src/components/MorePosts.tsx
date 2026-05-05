@@ -23,7 +23,7 @@ function MorePosts({ posts }: Posts) {
               <RevealStaggerItem key={slug} index={index}>
                 <PostPreview
                   title={title}
-                  image={featuredImage?.fields.file.fields}
+                  image={featuredImage ? { file: { url: featuredImage.src } } : undefined}
                   date={date}
                   excerpt={excerpt}
                   slug={slug}

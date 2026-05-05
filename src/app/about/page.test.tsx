@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import AboutPage from './page'
 
-jest.mock('@/lib/contentful', () => ({
+jest.mock('@/lib/content', () => ({
   getSkills: jest.fn(),
   getReferences: jest.fn(),
   getPositions: jest.fn(),
@@ -11,7 +11,7 @@ const { getSkills, getReferences, getPositions } = jest.requireMock<{
   getSkills: jest.Mock
   getReferences: jest.Mock
   getPositions: jest.Mock
-}>('@/lib/contentful')
+}>('@/lib/content')
 
 jest.mock('@/components/Skills', () => {
   return function MockSkills({ skills }: { skills: unknown[] }) {

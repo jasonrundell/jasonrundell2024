@@ -45,3 +45,5 @@ certificates
 
 # cursor
 .cursor/debug-*.log
+# Content images (synced from content/ at build time)
+/public/content/

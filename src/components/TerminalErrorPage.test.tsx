@@ -30,6 +30,21 @@ describe('TerminalErrorPage', () => {
     usePathname.mockReturnValue('/missing-route')
   })
 
+  it('falls back to "/" when usePathname returns null', () => {
+    usePathname.mockReturnValue(null)
+    render(
+      <TerminalErrorPage
+        statusCode="404"
+        title="Page Not Found"
+        comment="not-found.tsx"
+        message="No route matched."
+      />
+    )
+    expect(screen.getByText(/command not found:/i)).toHaveTextContent(
+      '$ command not found: /'
+    )
+  })
+
   it('renders the terminal command failure for the current path', () => {
     render(
       <TerminalErrorPage

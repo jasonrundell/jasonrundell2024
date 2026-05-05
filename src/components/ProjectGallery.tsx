@@ -3,8 +3,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { Grid } from '@jasonrundell/dropship'
-import { GalleryImage } from '@/typeDefinitions/app'
-import ContentfulImage from './ContentfulImage'
+import { ContentImage } from '@/typeDefinitions/app'
+import ContentImageComponent from './ContentImage'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
@@ -15,7 +15,6 @@ import {
 } from '@/styles/common'
 import { RevealStaggerGroup, RevealStaggerItem } from '@/styles/motion'
 
-// Image style constants
 const imageCoverNoPointerStyle: React.CSSProperties = {
   objectFit: 'cover',
   pointerEvents: 'none',
@@ -159,15 +158,14 @@ const StyledImageCounter = styled('div')`
 `
 
 interface ProjectGalleryProps {
-  images: GalleryImage[]
+  images: ContentImage[]
 }
 
 export default function ProjectGallery({ images }: ProjectGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [mounted, setMounted] = useState(false)
 
-  // Filter out images without URLs
-  const validImages = (images || []).filter((image) => image?.fields?.file?.url)
+  const validImages = (images || []).filter((image) => image?.src)
 
   useEffect(() => {
     setMounted(true)
@@ -232,12 +230,6 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
 
   const selectedImage =
     selectedIndex !== null ? validImages[selectedIndex] : null
-  const imageUrl = selectedImage?.fields?.file?.url
-  const modalImageUrl = imageUrl
-    ? imageUrl.startsWith('//')
-      ? `https:${imageUrl}`
-      : imageUrl
-    : null
 
   return (
     <>
@@ -249,52 +241,36 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
           columnGap="1.5rem"
           rowGap="1.5rem"
         >
-          {validImages.map((image, index) => {
-            const imageUrl = image.fields.file.url
-            const url = imageUrl.startsWith('//')
-              ? `https:${imageUrl}`
-              : imageUrl
-
-            return (
-              <RevealStaggerItem
-                key={image.sys.id || index}
-                index={index}
+          {validImages.map((image, index) => (
+            <RevealStaggerItem key={image.src || index} index={index}>
+              <StyledGalleryItem
+                onClick={() => handleImageClick(index)}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${image.alt || `Gallery image ${index + 1}`} in full screen`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handleImageClick(index)
+                  }
+                }}
               >
-                <StyledGalleryItem
-                  onClick={() => handleImageClick(index)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`View ${
-                    image.fields.title || `Gallery image ${index + 1}`
-                  } in full screen`}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      handleImageClick(index)
-                    }
-                  }}
-                >
-                  <ContentfulImage
-                    src={url}
-                    alt={
-                      image.fields.description ||
-                      image.fields.title ||
-                      `Gallery image ${index + 1}`
-                    }
-                    fill={true}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    style={imageCoverNoPointerStyle}
-                  />
-                </StyledGalleryItem>
-              </RevealStaggerItem>
-            )
-          })}
+                <ContentImageComponent
+                  src={image.src}
+                  alt={image.description || image.alt || `Gallery image ${index + 1}`}
+                  fill={true}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={imageCoverNoPointerStyle}
+                />
+              </StyledGalleryItem>
+            </RevealStaggerItem>
+          ))}
         </Grid>
       </RevealStaggerGroup>
 
       {mounted &&
         selectedIndex !== null &&
-        modalImageUrl &&
+        selectedImage?.src &&
         createPortal(
           <StyledModal
             onClick={handleClose}
@@ -331,13 +307,9 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
               {selectedImage && (
                 <>
                   <StyledModalImage>
-                    <ContentfulImage
-                      src={modalImageUrl || ''}
-                      alt={
-                        selectedImage.fields.description ||
-                        selectedImage.fields.title ||
-                        `Gallery image ${selectedIndex + 1}`
-                      }
+                    <ContentImageComponent
+                      src={selectedImage.src}
+                      alt={selectedImage.description || selectedImage.alt || `Gallery image ${selectedIndex + 1}`}
                       fill={true}
                       quality={90}
                       sizes="90vw"
@@ -345,17 +317,14 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                     />
                   </StyledModalImage>
 
-                  {(selectedImage.fields.title ||
-                    selectedImage.fields.description) && (
+                  {(selectedImage.alt || selectedImage.description) && (
                     <StyledImageInfo>
-                      {selectedImage.fields.title && (
-                        <StyledImageTitle>
-                          {selectedImage.fields.title}
-                        </StyledImageTitle>
+                      {selectedImage.alt && (
+                        <StyledImageTitle>{selectedImage.alt}</StyledImageTitle>
                       )}
-                      {selectedImage.fields.description && (
+                      {selectedImage.description && (
                         <StyledImageDescription>
-                          {selectedImage.fields.description}
+                          {selectedImage.description}
                         </StyledImageDescription>
                       )}
                       <StyledImageCounter>

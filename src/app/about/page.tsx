@@ -7,7 +7,7 @@ import {
   getSkills,
   getReferences,
   getPositions,
-} from '@/lib/contentful'
+} from '@/lib/content'
 
 import {
   StyledContainer,

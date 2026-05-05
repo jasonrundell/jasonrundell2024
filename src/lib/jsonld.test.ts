@@ -20,12 +20,14 @@ describe('buildPersonJsonLd', () => {
 })
 
 describe('buildBlogPostingJsonLd', () => {
-  const basePost = {
+  const basePost: Post = {
     title: 'Hello world',
     slug: 'hello-world',
     excerpt: 'A short excerpt',
     date: '2025-04-01',
-  } as unknown as Post
+    content: '',
+    author: '',
+  }
 
   it('returns a BlogPosting with the canonical url', () => {
     const ld = buildBlogPostingJsonLd(basePost, 'hello-world')
@@ -41,54 +43,29 @@ describe('buildBlogPostingJsonLd', () => {
   })
 
   it('falls back to site description when excerpt is empty', () => {
-    const ld = buildBlogPostingJsonLd(
-      { ...basePost, excerpt: '' } as Post,
-      'hello-world'
-    )
+    const ld = buildBlogPostingJsonLd({ ...basePost, excerpt: '' }, 'hello-world')
 
     expect(ld.description).toBeTruthy()
     expect(ld.description).not.toBe('')
   })
 
-  it('embeds protocol-relative image urls as https', () => {
-    const post = {
+  it('includes featuredImage src in the JSON-LD image field', () => {
+    const post: Post = {
       ...basePost,
-      featuredImage: {
-        fields: {
-          file: { fields: { file: { url: '//images.ctfassets.net/x.jpg' } } },
-        },
-      },
-    } as unknown as Post
-
-    const ld = buildBlogPostingJsonLd(post, 'hello-world') as {
-      image?: string
+      featuredImage: { src: '/content/posts/hello-world/featured.webp', alt: '' },
     }
-    expect(ld.image).toBe('https://images.ctfassets.net/x.jpg')
+
+    const ld = buildBlogPostingJsonLd(post, 'hello-world') as { image?: string }
+    expect(ld.image).toBe('/content/posts/hello-world/featured.webp')
   })
 
-  it('keeps absolute https image urls untouched', () => {
-    const post = {
-      ...basePost,
-      featuredImage: {
-        fields: {
-          file: {
-            fields: { file: { url: 'https://images.example.com/x.jpg' } },
-          },
-        },
-      },
-    } as unknown as Post
-
-    const ld = buildBlogPostingJsonLd(post, 'hello-world') as {
-      image?: string
-    }
-    expect(ld.image).toBe('https://images.example.com/x.jpg')
+  it('omits image when featuredImage is absent', () => {
+    const ld = buildBlogPostingJsonLd(basePost, 'hello-world') as { image?: string }
+    expect(ld.image).toBeUndefined()
   })
 
   it('includes author when provided', () => {
-    const post = {
-      ...basePost,
-      author: { fields: { name: 'Jane Doe' } },
-    } as unknown as Post
+    const post: Post = { ...basePost, author: 'Jane Doe' }
 
     const ld = buildBlogPostingJsonLd(post, 'hello-world') as {
       author?: { '@type': string; name: string }
@@ -96,7 +73,7 @@ describe('buildBlogPostingJsonLd', () => {
     expect(ld.author).toEqual({ '@type': 'Person', name: 'Jane Doe' })
   })
 
-  it('omits author when missing', () => {
+  it('omits author when author is an empty string', () => {
     const ld = buildBlogPostingJsonLd(basePost, 'hello-world') as {
       author?: unknown
     }
