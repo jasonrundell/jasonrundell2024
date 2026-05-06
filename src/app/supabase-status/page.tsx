@@ -3,6 +3,8 @@ import { createSafeClient } from '@/utils/supabase/safe-client'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 
+export const dynamic = 'force-dynamic'
+
 const Container = styled('div')`
   max-width: 800px;
   margin: 0 auto;
@@ -27,7 +29,7 @@ const StatusText = styled('p')`
 `
 
 const CodeBlock = styled('pre')`
-  background: ${Tokens.colors.muted.value};
+  background: ${Tokens.colors.muted.var};
   padding: 1rem;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   overflow-x: auto;

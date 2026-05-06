@@ -1,11 +1,29 @@
-import { Row } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 import { Skill, Skills as SkillsDef } from '@/typeDefinitions/app'
 
-import { onlyUnique } from '@/lib/onlyUnique'
 import Tokens from '@/lib/tokens'
+import PromptList, { PromptItem } from '@/components/chrome/PromptList'
+
+const StyledColumns = styled('div')`
+  column-gap: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+  column-count: 1;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    column-count: 2;
+  }
+
+  @media (min-width: 1024px) {
+    column-count: 3;
+  }
+
+  @media (min-width: 1360px) {
+    column-count: 4;
+  }
+`
 
 const StyledListContainer = styled('div')`
+  break-inside: avoid;
   display: flex;
   flex-direction: column;
   margin-top: 0;
@@ -15,54 +33,34 @@ const StyledListContainer = styled('div')`
   width: 100%;
 `
 
-const StyledList = styled('ul')`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-top: 0;
-  list-style: none;
-  padding-left: 0;
-`
-
-const StyledListItem = styled('li')`
-  display: inline;
-  margin-right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
-  margin-left: 0;
-  color: ${Tokens.colors.text};
-  margin: 0 ${Tokens.sizes.small.value}${Tokens.sizes.small.unit} 0 0;
-  line-height: 1.6;
-`
-
 const StyledHeading = styled('h3')`
   font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
-  margin: 0;
+  margin: 0 0 ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit} 0;
 `
 
 export default function Skills({ skills }: SkillsDef) {
   const categories: string[] = []
 
-  // Build array of categories
   skills.forEach((skill: Skill) => {
     categories.push(skill.category)
   })
 
-  // I only want the unique categories
-  const uniqueCategories = categories.filter(onlyUnique)
+  const uniqueCategories = [...new Set(categories)]
 
   return (
-    <Row>
+    <StyledColumns>
       {uniqueCategories.map((parentCategory, index) => (
         <StyledListContainer key={index}>
           <StyledHeading>{parentCategory}</StyledHeading>
-          <StyledList>
+          <PromptList aria-label={`${parentCategory} skills`}>
             {skills
               .filter((skill: Skill) => skill.category === parentCategory)
               .map((skill: Skill) => (
-                <StyledListItem key={skill.id}>{skill.name}</StyledListItem>
+                <PromptItem key={skill.id}>{skill.name}</PromptItem>
               ))}
-          </StyledList>
+          </PromptList>
         </StyledListContainer>
       ))}
-    </Row>
+    </StyledColumns>
   )
 }

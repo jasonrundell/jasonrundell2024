@@ -40,10 +40,6 @@ jest.mock('@jasonrundell/dropship', () => ({
   Spacer: () => <div data-testid="spacer" />,
 }))
 
-jest.mock('@contentful/rich-text-react-renderer', () => ({
-  documentToReactComponents: (document: { text?: string }) => document.text,
-}))
-
 jest.mock('lucide-react', () => ({
   ExternalLink: () => <span data-testid="external-link-icon" />,
 }))
@@ -66,8 +62,8 @@ jest.mock('next/link', () => {
   }
 })
 
-jest.mock('./ContentfulImage', () => {
-  return function MockContentfulImage({
+jest.mock('./ContentImage', () => {
+  return function MockContentImage({
     alt,
     src,
   }: {
@@ -85,24 +81,12 @@ jest.mock('./Icon', () => {
   }
 })
 
-const imageFields = {
-  file: {
-    fields: {
-      file: {
-        url: 'https://images.ctfassets.net/post-image.jpg',
-      },
-    },
-  },
-  altText: 'Post image alt',
-  description: 'A useful image description',
-}
-
 describe('content display components', () => {
   afterEach(() => {
     jest.useRealTimers()
   })
 
-  it('renders a formatted Contentful date', () => {
+  it('renders a formatted date', () => {
     render(<ContentDate dateString="2025-01-15T12:00:00.000Z" />)
 
     expect(screen.getByText(/January\s+15, 2025/)).toHaveAttribute(
@@ -173,7 +157,7 @@ describe('content display components', () => {
             company: 'Acme',
             order: 1,
             emphasis: true,
-            quote: { text: 'Great collaborator.' } as never,
+            quote: 'Great collaborator.',
           },
         ]}
       />
@@ -193,7 +177,7 @@ describe('content display components', () => {
   it('renders post preview content with and without images', () => {
     const postProps = {
       title: 'AI Development Notes',
-      image: { file: { url: 'https://images.ctfassets.net/post.jpg' } },
+      image: { file: { url: '/content/posts/ai-development-notes/featured.webp' } },
       date: '2025-01-15T00:00:00.000Z',
       excerpt: 'How the workflow fits together.',
       slug: 'ai-development-notes',
@@ -205,7 +189,7 @@ describe('content display components', () => {
       .toHaveLength(2)
     expect(screen.getByAltText('')).toHaveAttribute(
       'src',
-      'https://images.ctfassets.net/post.jpg'
+      '/content/posts/ai-development-notes/featured.webp'
     )
     expect(screen.getByText('How the workflow fits together.')).toBeInTheDocument()
 
@@ -220,7 +204,7 @@ describe('content display components', () => {
     render(
       <ProjectPreview
         title="Matter Ops"
-        image={{ file: { url: 'https://images.ctfassets.net/project.jpg' } }}
+        image={{ file: { url: '/content/projects/matter-ops/featured.webp' } }}
         slug="matter-ops"
         excerpt="An operational dashboard."
       />
@@ -229,7 +213,7 @@ describe('content display components', () => {
     expect(screen.getAllByRole('link', { name: 'Matter Ops' })).toHaveLength(2)
     expect(screen.getByAltText('')).toHaveAttribute(
       'src',
-      'https://images.ctfassets.net/project.jpg'
+      '/content/projects/matter-ops/featured.webp'
     )
     expect(screen.getByText('An operational dashboard.')).toBeInTheDocument()
   })
@@ -244,8 +228,10 @@ describe('content display components', () => {
               slug: 'first-post',
               date: '2025-01-15T00:00:00.000Z',
               excerpt: 'Post excerpt',
-              featuredImage: { fields: { file: { fields: { file: { url: 'post.jpg' } } } } },
-            } as never,
+              content: '',
+              author: 'Jason Rundell',
+              featuredImage: { src: '/content/posts/first-post/featured.webp', alt: 'First post image' },
+            },
           ]}
         />
         <MoreProjects
@@ -255,7 +241,7 @@ describe('content display components', () => {
               slug: 'first-project',
               excerpt: 'Project excerpt',
               featuredImage: {
-                file: { url: 'project.jpg' },
+                file: { url: '/content/projects/first-project/featured.webp' },
                 altText: 'Project image',
                 description: 'Project image description',
               },
@@ -274,19 +260,19 @@ describe('content display components', () => {
       <>
         <PostImage
           title="Post detail"
-          url="https://images.ctfassets.net/detail.jpg"
+          url="/content/posts/post-detail/featured.webp"
           slug="post-detail"
           altText="Detail image"
         />
         <PostPreviewImage
           title="Post preview"
-          url="https://images.ctfassets.net/preview.jpg"
+          url="/content/posts/post-preview/featured.webp"
           slug="post-preview"
           altText="Preview image"
         />
         <ProjectPreviewImage
           title="Project preview"
-          url="https://images.ctfassets.net/project-preview.jpg"
+          url="/content/projects/project-preview/featured.webp"
           slug="project-preview"
         />
       </>
@@ -311,62 +297,75 @@ describe('content display components', () => {
       <>
         <PostAuthor
           name="Jason Rundell"
-          picture={{ url: 'https://images.ctfassets.net/avatar.jpg' }}
           date="2025-01-15T00:00:00.000Z"
         />
         <PostHeader
-          post={
-            {
-              title: 'Post Header Title',
-              date: '2025-01-15T00:00:00.000Z',
-              featuredImage: { fields: imageFields },
-              author: {
-                fields: {
-                  name: 'Post Author',
-                  picture: {
-                    fields: {
-                      file: { url: 'https://images.ctfassets.net/author.jpg' },
-                    },
-                  },
-                },
-              },
-            } as never
-          }
+          post={{
+            title: 'Post Header Title',
+            slug: 'post-header-title',
+            date: '2025-01-15T00:00:00.000Z',
+            content: '',
+            excerpt: '',
+            author: 'Post Author',
+            featuredImage: {
+              src: '/content/posts/post-header-title/featured.webp',
+              alt: 'Post image alt',
+              description: 'A useful image description',
+            },
+          }}
         />
       </>
     )
 
     expect(screen.getByText('By: Jason Rundell')).toBeInTheDocument()
-    expect(screen.getByAltText('Jason Rundell')).toHaveAttribute(
-      'src',
-      'https://images.ctfassets.net/avatar.jpg'
-    )
     expect(screen.getByRole('heading', { name: 'Post Header Title' })).toBeInTheDocument()
     expect(screen.getByText('A useful image description')).toBeInTheDocument()
     expect(screen.getByText('By: Post Author')).toBeInTheDocument()
   })
 
-  it('advances heading animation until the last step', () => {
+  it('advances heading animation until the last step while keeping a stable accessible name', () => {
     jest.useFakeTimers()
 
     render(<HeadingAnimation steps={['J', 'Ja', 'Jason']} speed={100} />)
 
-    expect(screen.getByRole('link', { name: 'J' })).toHaveAttribute('href', '/')
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument()
+
+    const link = screen.getByRole('link', { name: 'J' })
+    expect(link).toHaveAttribute('href', '/')
+    expect(link).toHaveAttribute('aria-label', 'J')
+    expect(screen.getByText('J')).toHaveAttribute('aria-hidden', 'true')
 
     act(() => {
       jest.advanceTimersByTime(100)
     })
-    expect(screen.getByRole('link', { name: 'Ja' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'J' })).toBeInTheDocument()
+    expect(screen.getByText('Ja')).toHaveAttribute('aria-hidden', 'true')
 
     act(() => {
       jest.advanceTimersByTime(100)
     })
-    expect(screen.getByRole('link', { name: 'Jason' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'J' })).toBeInTheDocument()
+    expect(screen.getByText('Jason')).toHaveAttribute('aria-hidden', 'true')
 
     act(() => {
       jest.advanceTimersByTime(100)
     })
-    expect(screen.getByRole('link', { name: 'Jason' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'J' })).toBeInTheDocument()
+    expect(screen.getByText('Jason')).toHaveAttribute('aria-hidden', 'true')
+  })
+
+  it('uses the explicit ariaLabel prop when provided so consumers control the accessible name', () => {
+    render(
+      <HeadingAnimation
+        steps={['J', 'Ja', 'Jason']}
+        speed={100}
+        ariaLabel="Jason Rundell home"
+      />
+    )
+
+    const link = screen.getByRole('link', { name: 'Jason Rundell home' })
+    expect(link).toHaveAttribute('href', '/')
+    expect(link).toHaveAttribute('aria-label', 'Jason Rundell home')
   })
 
   it('scrolls back to top by click and keyboard activation', () => {

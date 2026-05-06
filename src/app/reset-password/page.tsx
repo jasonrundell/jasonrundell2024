@@ -5,10 +5,12 @@ import ResetPasswordClient from '@/app/reset-password/reset-password-client'
 export default async function ResetPassword({
   searchParams,
 }: {
-  searchParams: { token?: string }
+  searchParams: Promise<{ token?: string }>
 }) {
+  const params = await searchParams
+
   // Check if we have a valid token for password reset
-  if (!searchParams.token) {
+  if (!params.token) {
     redirect('/forgot-password?error=missing_token')
   }
 
@@ -23,5 +25,5 @@ export default async function ResetPassword({
     redirect('/profile')
   }
 
-  return <ResetPasswordClient token={searchParams.token} />
+  return <ResetPasswordClient token={params.token} />
 }

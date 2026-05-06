@@ -8,7 +8,7 @@ const StyledLabel = styled('label')`
   display: block;
   font-size: 1rem;
   font-weight: 600;
-  color: ${Tokens.colors.textPrimary.value};
+  color: ${Tokens.colors.roleBody.var};
   margin-bottom: ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit};
   letter-spacing: 0.01em;
   cursor: pointer;

@@ -2,8 +2,7 @@
  * Plain-text HTML stripping for APIs and server routes.
  *
  * No DOMPurify/jsdom — safe to import from serverless handlers that must stay
- * lightweight. For safe markup with `dangerouslySetInnerHTML`, use
- * `sanitizeHTML` from `@/lib/sanitize`.
+ * lightweight.
  */
 
 /**

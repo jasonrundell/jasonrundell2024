@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/.lighthouseci
 
 # next.js
 /.next/
@@ -41,3 +42,8 @@ next-env.d.ts
 # vscode
 .vscode
 certificates
+
+# cursor
+.cursor/debug-*.log
+# Content images (synced from content/ at build time)
+/public/content/

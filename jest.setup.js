@@ -28,42 +28,90 @@ if (typeof global.Request === 'undefined') {
     // Fallback: create minimal mocks
     global.Request = class Request {
       constructor(input, init) {
-        this.url = typeof input === 'string' ? input : input.url
+        Object.defineProperty(this, 'url', {
+          configurable: true,
+          value: typeof input === 'string' ? input : input.url,
+        })
         this.method = init?.method || 'GET'
-        this.headers = new Map()
-        if (init?.headers) {
-          Object.entries(init.headers).forEach(([k, v]) => this.headers.set(k, v))
-        }
+        this.headers = new global.Headers(init?.headers)
+        this.body = init?.body
+      }
+      json() {
+        return Promise.resolve(JSON.parse(this.body))
+      }
+      text() {
+        return Promise.resolve(this.body ?? '')
       }
     }
     global.Response = class Response {
       constructor(body, init) {
         this.body = body
         this.status = init?.status || 200
-        this.headers = new Map()
-        if (init?.headers) {
-          Object.entries(init.headers).forEach(([k, v]) => this.headers.set(k, v))
-        }
+        this.headers = new global.Headers(init?.headers)
       }
       json() {
         return Promise.resolve(JSON.parse(this.body))
+      }
+      static json(data, init) {
+        return new Response(JSON.stringify(data), init)
       }
     }
     global.Headers = class Headers {
       constructor(init) {
         this.map = new Map()
-        if (init) {
-          Object.entries(init).forEach(([k, v]) => this.map.set(k, v))
+        if (!init) {
+          return
         }
+
+        // Arrays have forEach; must branch on Array.isArray first so [['k','v']]
+        // is not treated as iterable (value, index) pairs.
+        if (Array.isArray(init)) {
+          init.forEach(([key, value]) => this.set(key, value))
+          return
+        }
+
+        if (typeof init.forEach === 'function') {
+          init.forEach((value, key) => this.set(key, value))
+          return
+        }
+
+        Object.entries(init).forEach(([key, value]) => this.set(key, value))
       }
       get(name) {
-        return this.map.get(name)
+        return this.map.get(name.toLowerCase()) ?? null
       }
       set(name, value) {
-        this.map.set(name, value)
+        this.map.set(name.toLowerCase(), String(value))
+      }
+      append(name, value) {
+        const key = name.toLowerCase()
+        const currentValue = this.map.get(key)
+        this.map.set(key, currentValue ? `${currentValue}, ${value}` : String(value))
+      }
+      has(name) {
+        return this.map.has(name.toLowerCase())
+      }
+      delete(name) {
+        this.map.delete(name.toLowerCase())
+      }
+      forEach(callback) {
+        this.map.forEach((value, key) => callback(value, key, this))
+      }
+      entries() {
+        return this.map.entries()
+      }
+      [Symbol.iterator]() {
+        return this.entries()
       }
     }
   }
+}
+
+if (typeof global.Response !== 'undefined' && !global.Response.json) {
+  Object.defineProperty(global.Response, 'json', {
+    configurable: true,
+    value: (data, init) => new global.Response(JSON.stringify(data), init),
+  })
 }
 
 // Polyfill for HTMLFormElement.prototype.requestSubmit
@@ -103,6 +151,20 @@ if (typeof HTMLFormElement !== 'undefined' && HTMLFormElement.prototype) {
     configurable: true,
   })
 }
+
+// Mock @pigment-css/react keyframes globally.
+// motion.tsx and HeroTerminal.tsx both call `keyframes` at module load. Without
+// the bundler plugin (which Jest does not run) the real implementation throws,
+// so any test file that transitively imports those modules would fail to load.
+// We replace `keyframes` with a stable string returner; styled() interpolation
+// of the result still produces valid (test-irrelevant) CSS.
+jest.mock('@pigment-css/react', () => {
+  const actual = jest.requireActual('@pigment-css/react')
+  return {
+    ...actual,
+    keyframes: jest.fn(() => 'mocked-keyframes'),
+  }
+})
 
 // Mock Next.js navigation
 jest.mock('next/navigation', () => ({
@@ -158,21 +220,6 @@ const filteredError = (...args) => {
       return String(arg)
     }).join(' ')
     
-    // Check if this is a Contentful error (expected during tests)
-    const isContentfulError = 
-      fullMessage.includes('Error fetching') && (
-        fullMessage.includes('Contentful') ||
-        fullMessage.includes('from Contentful') ||
-        fullMessage.includes('Error fetching skills:') ||
-        fullMessage.includes('Error fetching projects:') ||
-        fullMessage.includes('Error fetching references:') ||
-        fullMessage.includes('Error fetching positions:') ||
-        fullMessage.includes('Error fetching posts:') ||
-        fullMessage.includes('Error fetching entry') ||
-        fullMessage.includes('Error fetching entry by slug:') ||
-        fullMessage.includes('Error fetching last song:')
-      )
-    
     // Check if this is the HTMLFormElement.requestSubmit error
     // Check both message and stack trace, and also check if it's from jsdom
     // Also check the stack trace for jsdom-specific paths
@@ -194,8 +241,7 @@ const filteredError = (...args) => {
       errorMessage.includes('Sign in error:') || // Suppress expected sign-in test errors
       errorMessage.includes('Invalid value for prop `formAction`') || // Suppress Next.js server action warnings
       errorMessage.includes('Invalid value for prop `action`') || // Suppress Next.js server action warnings
-      errorMessage.includes('Either remove it from the element, or pass a string or number value') || // Suppress Next.js server action warnings
-      isContentfulError // Suppress expected Contentful error logs during tests
+      errorMessage.includes('Either remove it from the element, or pass a string or number value') // Suppress Next.js server action warnings
     ) {
       // Completely suppress - don't call original, don't log anything
       return
@@ -215,21 +261,11 @@ global.console = {
     // Next.js server actions pass functions as these props, which is expected behavior
     const firstArg = args[0]
     const warningMessage = typeof firstArg === 'string' ? firstArg : firstArg?.toString() || ''
-    const fullMessage = args.map(arg => 
-      typeof arg === 'string' ? arg : arg?.toString() || ''
-    ).join(' ')
-    
-    // Check if this is a Contentful warning (expected during tests)
-    const isContentfulWarning = 
-      fullMessage.includes('found in Contentful') ||
-      warningMessage.includes('found in Contentful') ||
-      (fullMessage.includes('No') && fullMessage.includes('Contentful'))
-    
+
     if (
       warningMessage.includes('Invalid value for prop `formAction`') ||
       warningMessage.includes('Invalid value for prop `action`') ||
-      warningMessage.includes('Either remove it from the element, or pass a string or number value') ||
-      isContentfulWarning // Suppress expected Contentful warnings during tests
+      warningMessage.includes('Either remove it from the element, or pass a string or number value')
     ) {
       return // Suppress these expected warnings
     }

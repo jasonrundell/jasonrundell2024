@@ -29,27 +29,26 @@ export default function CommentsSection({
   const [isAdmin, setIsAdmin] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [fetchError, setFetchError] = useState<string | null>(null)
 
-  const fetchComments = useCallback(async () => {
-    try {
-      const res = await fetch(
-        `/api/comments?contentType=${encodeURIComponent(contentType)}&slug=${encodeURIComponent(contentSlug)}`
-      )
-      if (res.ok) {
-        const data = await res.json()
-        setComments(data.comments)
-      }
-    } catch (err) {
-      console.error('Failed to fetch comments:', err)
+  const loadComments = useCallback(async (): Promise<Comment[]> => {
+    const res = await fetch(
+      `/api/comments?contentType=${encodeURIComponent(contentType)}&slug=${encodeURIComponent(contentSlug)}`
+    )
+    if (!res.ok) {
+      throw new Error(`Failed to fetch comments: ${res.status} ${res.statusText}`)
     }
+    const data = await res.json()
+    return data.comments as Comment[]
   }, [contentType, contentSlug])
 
   useEffect(() => {
     const init = async () => {
       const supabase = createClient()
+      const authResult = await supabase.auth.getUser()
       const {
         data: { user },
-      } = await supabase.auth.getUser()
+      } = authResult
 
       if (user) {
         setCurrentUserId(user.id)
@@ -57,12 +56,19 @@ export default function CommentsSection({
         setIsAdmin(user.app_metadata?.role === 'admin')
       }
 
-      await fetchComments()
-      setIsLoading(false)
+      try {
+        const fetchedComments = await loadComments()
+        setComments(fetchedComments)
+      } catch (err) {
+        console.error('Failed to fetch comments:', err)
+        setFetchError('Comments could not be loaded. Please try refreshing the page.')
+      } finally {
+        setIsLoading(false)
+      }
     }
 
     init()
-  }, [fetchComments])
+  }, [loadComments])
 
   const handleCommentCreated = (comment: Comment) => {
     setComments((prev) => [comment, ...prev])
@@ -80,6 +86,15 @@ export default function CommentsSection({
 
   if (isLoading) {
     return <CommentsSkeleton />
+  }
+
+  if (fetchError) {
+    return (
+      <CommentsContainer>
+        <CommentsHeading>Comments</CommentsHeading>
+        <EmptyState>{fetchError}</EmptyState>
+      </CommentsContainer>
+    )
   }
 
   return (

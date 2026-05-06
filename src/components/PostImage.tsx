@@ -1,4 +1,4 @@
-import ContentfulImage from './ContentfulImage'
+import ContentImage from './ContentImage'
 import Link from 'next/link'
 
 import { StyledImageContainer } from '@/styles/common'
@@ -18,7 +18,7 @@ export default function PostImage({
 }: PostImageProps) {
   const image = (
     <StyledImageContainer>
-      <ContentfulImage
+      <ContentImage
         alt={altText}
         src={url}
         fill={true}

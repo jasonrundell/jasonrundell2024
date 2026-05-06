@@ -9,8 +9,8 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const customJestConfig = {
   testEnvironment: 'jsdom',
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   moduleNameMapper: {
+    '^@jasonrundell/dropship$': '<rootDir>/src/components/dropship.tsx',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transformIgnorePatterns: [
@@ -34,11 +34,16 @@ const customJestConfig = {
     '!src/**/loading.tsx',
     '!src/data/**',
     '!src/styles/**',
+    // Infrastructure files that run outside Jest's module scope
+    '!src/instrumentation.ts',
+    '!src/app/api/test/**',
+    '!src/utils/supabase/public-client.ts',
   ],
   testPathIgnorePatterns: [
     '<rootDir>/.next/',
     '<rootDir>/node_modules/',
-    '<rootDir>/src/__tests__/utils/',
+    // Exclude shared test utilities (not test files themselves)
+    '/__tests__/utils/',
   ],
 }
 

@@ -1,7 +1,6 @@
 import { withPigment } from '@pigment-css/nextjs-plugin'
 import { withSentryConfig } from '@sentry/nextjs'
 import withBundleAnalyzer from '@next/bundle-analyzer'
-import webpack from 'webpack'
 import { fileURLToPath } from 'url'
 import { dirname, resolve } from 'path'
 
@@ -14,12 +13,11 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   poweredByHeader: false,
+  outputFileTracingRoot: __dirname,
+  bundlePagesRouterDependencies: true,
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'images.ctfassets.net' },
-    ],
+    remotePatterns: [],
   },
   async redirects() {
     return [
@@ -59,16 +57,23 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              // 'unsafe-inline' is required by Next.js 14 for hydration/routing inline scripts.
+              // 'unsafe-inline' is required by Next.js for hydration/routing inline scripts.
               // 'unsafe-eval' is only included in development for webpack HMR source maps.
+              // va.vercel-scripts.com hosts the @vercel/speed-insights runtime.
               process.env.NODE_ENV === 'development'
-                ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com"
-                : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+                ? "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com"
+                : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
+              // Sentry's session replay integration spawns a Web Worker from
+              // a blob: URL. Without an explicit worker-src the browser falls
+              // back to script-src and blocks it.
+              "worker-src 'self' blob:",
               // 'unsafe-inline' is required by Pigment CSS (CSS-in-JS).
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://*.supabase.co https://*.supabase.in https://www.google-analytics.com",
+              // Sentry posts events to *.ingest.sentry.io (region-prefixed).
+              // va.vercel-scripts.com receives Speed Insights vitals beacons.
+              "connect-src 'self' https://*.supabase.co https://*.supabase.in https://www.google-analytics.com https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://va.vercel-scripts.com",
               "frame-src 'self' https://www.youtube.com",
               "object-src 'none'",
               "base-uri 'self'",
@@ -81,17 +86,12 @@ const nextConfig = {
       },
     ]
   },
-  // Optimize development mode
-  experimental: {
-    bundlePagesExternals: true,
-    serverComponentsExternalPackages: ['isomorphic-dompurify', 'jsdom', 'dompurify'],
-    // Enable faster refresh
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  // Enable faster refresh
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
@@ -116,18 +116,9 @@ const nextConfig = {
       }
     }
     
-    // Fix for isomorphic-dompurify/jsdom default-stylesheet.css issue
-    // in client bundles (server-side is handled by serverComponentsExternalPackages).
-    config.plugins.push(
-      new webpack.NormalModuleReplacementPlugin(
-        /default-stylesheet\.css$/,
-        resolve(__dirname, 'src/lib/empty-stylesheet.js')
-      )
-    )
-
     config.resolve.alias = {
       ...config.resolve.alias,
-      'default-stylesheet.css': resolve(__dirname, 'src/lib/empty-stylesheet.js'),
+      '@jasonrundell/dropship$': resolve(__dirname, 'src/components/dropship.tsx'),
     }
     
     return config
@@ -159,12 +150,17 @@ export default withSentryConfig(withPigment(bundleAnalyzer(nextConfig)), {
   // Hides source maps from generated client bundles
   hideSourceMaps: true,
 
-  // Automatically tree-shake Sentry logger statements to reduce bundle size
-  disableLogger: true,
+  webpack: {
+    // Automatically tree-shake Sentry logger statements to reduce bundle size
+    treeshake: {
+      removeDebugLogging: true,
+    },
 
-  // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
-  // See the following for more information:
-  // https://docs.sentry.io/product/crons/
-  // https://vercel.com/docs/cron-jobs
-  automaticVercelMonitors: true,
+    // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
+    // See the following for more information:
+    // https://docs.sentry.io/product/crons/
+    // https://vercel.com/docs/cron-jobs
+    automaticVercelMonitors: true,
+  },
+
 })

@@ -1,38 +1,17 @@
 import { signInAction } from '@/app/actions'
 import { FormMessage } from '@/components/auth/form-message'
-import { SubmitButton } from '@/components/auth/submit-button'
 import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
 import { Checkbox } from '@/components/auth/ui/checkbox'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { styled } from '@pigment-css/react'
-import Tokens from '@/lib/tokens'
 import { StyledLink } from '@/styles/common'
-
-const FormWrapper = styled('form')`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-`
-
-const FieldGroup = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-`
-
-const FullWidthButton = styled(SubmitButton)`
-  width: 100%;
-`
-
-const BottomText = styled('p')`
-  text-align: center;
-  color: ${Tokens.colors.textSecondary.value};
-  font-size: 1rem;
-  margin-top: 1.5rem;
-`
+import {
+  AuthFormWrapper as FormWrapper,
+  AuthFieldGroup as FieldGroup,
+  AuthFullWidthButton as FullWidthButton,
+  AuthFooterText as BottomText,
+} from '@/components/auth/auth-form-shell'
 
 const RememberGroup = styled('div')`
   display: flex;

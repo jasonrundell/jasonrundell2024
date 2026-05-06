@@ -1,0 +1,259 @@
+import { styled } from '@pigment-css/react'
+import { Heading } from '@jasonrundell/dropship'
+import Link from 'next/link'
+import Tokens from '@/lib/tokens'
+
+export const StyledDivBgDark = styled('div')`
+  background-color: ${Tokens.colors.surfaceElevated.var};
+`
+
+export const StyledIntroParagraph = styled('p')`
+  font-size: ${Tokens.sizes.fonts.large.value}${Tokens.sizes.fonts.large.unit};
+  line-height: 1.3;
+  @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
+      .breakpoints.medium.unit}) {
+    font-size: ${Tokens.sizes.fonts.xlarge.value}${Tokens.sizes.fonts.xlarge.unit};
+  }
+`
+
+export const StyledContainer = styled('div')`
+  padding: 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+  @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
+      .breakpoints.medium.unit}) {
+    margin: 0 auto;
+    max-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes.breakpoints.large.unit};
+  }
+`
+
+export const StyledList = styled('ul')`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
+
+export const StyledListItem = styled('li')`
+  display: flex;
+  margin: 0;
+  padding: 0 0 ${Tokens.sizes.padding.small.value}${Tokens.sizes.padding.small
+      .unit} 0;
+  align-items: center;
+`
+
+export const StyledSection = styled('section')`
+  padding: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit} 0;
+`
+
+export const StyledBody = styled('div')`
+  a {
+    color: ${Tokens.colors.rolePrompt.var};
+  }
+  p {
+    width: 100%;
+  }
+  p:first-child {
+    font-size: ${Tokens.sizes.fonts.medium.value}${Tokens.sizes.fonts.medium.unit};
+  }
+  li p:first-child {
+    font-size: ${Tokens.sizes.fonts.small.value}${Tokens.sizes.fonts.small.unit};
+  }
+  h2 {
+    width: 100%;
+  }
+  h3 {
+    width: 100%;
+    color: ${Tokens.colors.roleHeading.var};
+  }
+  h4 {
+    width: 100%;
+  }
+  h5 {
+    width: 100%;
+  }
+  h6 {
+    width: 100%;
+  }
+`
+
+export const StyledBreadcrumb = styled('div')`
+  font-size: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+  padding-bottom: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+
+  a {
+    color: ${Tokens.colors.rolePrompt.var};
+  }
+`
+
+export const StyledMorePostsHeading = styled('h2')`
+  font-size: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+  font-weight: 700;
+  color: ${Tokens.colors.roleHeading.var};
+`
+
+export const StyledHeading = styled(Heading)`
+  font-weight: 700;
+  color: ${Tokens.colors.roleHeading.var};
+  margin-bottom: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit} !important;
+`
+
+export const StyledHeading3 = styled(Heading)`
+  font-size: 1.5rem !important;
+  margin: 0 0 ${Tokens.sizes.small.value}${Tokens.sizes.small.unit} 0 !important;
+`
+
+export const StyledDescription = styled('p')`
+  font-size: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+  text-transform: italic;
+  color: ${Tokens.colors.roleHeading.var};
+  width: 100%;
+`
+
+export const StyledEmbeddedAsset = styled('div')`
+  display: flex;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  align-items: flex-start;
+  margin: 40px auto;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    max-height: 350px;
+  }
+`
+export const StyledImageContainer = styled('div')`
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 150px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
+  background-color: ${Tokens.colors.surfaceDeepest.var};
+
+  @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
+      .breakpoints.medium.unit}) {
+    height: 350px;
+    margin-bottom: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
+  }
+
+  @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
+      .breakpoints.large.unit}) {
+    height: 400px;
+  }
+
+  img {
+    object-fit: contain;
+    object-position: center;
+  }
+`
+
+export const StyledLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
+  color: ${Tokens.colors.rolePrompt.var};
+  text-decoration: none;
+  transition: color 0.15s;
+  text-decoration: underline;
+`
+
+export const StyledFlexSection = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+`
+
+export const StyledModal = styled('div')`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: ${Tokens.colors.surfaceOverlay.var};
+  z-index: ${Tokens.zIndex.modal.value};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+`
+
+export const StyledModalContent = styled('div')`
+  position: relative;
+  width: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const StyledCloseButton = styled('button')`
+  position: absolute;
+  top: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+  right: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
+  background: ${Tokens.colors.white.value}36;
+  border: none;
+  color: ${Tokens.colors.rolePrompt.var};
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease-in-out;
+  z-index: ${Tokens.zIndex.modalContent.value};
+
+  &:hover {
+    background: ${Tokens.colors.primaryVariant.value}E6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${Tokens.colors.primary.value}99;
+    outline-offset: 2px;
+  }
+`
+
+/** Shared `<h3>` heading for preview cards (ProjectPreview, PostPreview, Skills). */
+export const StyledPreviewHeading = styled('h3')`
+  font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
+  margin: 0 0 ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit} 0;
+`
+
+/**
+ * Circular translucent icon button shared by GalleryModal nav arrows and
+ * StyledCloseButton descendants. Extend for positional variants.
+ */
+export const StyledIconCircleButton = styled('button')`
+  background: ${Tokens.colors.white.value}36;
+  border: none;
+  color: ${Tokens.colors.rolePrompt.var};
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease-in-out;
+
+  &:hover {
+    background: ${Tokens.colors.primaryVariant.value}E6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${Tokens.colors.primary.value}99;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: ${Tokens.opacity.low.value};
+    cursor: not-allowed;
+  }
+`

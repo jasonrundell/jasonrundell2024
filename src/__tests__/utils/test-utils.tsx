@@ -6,6 +6,9 @@ import { ReactElement, ReactNode } from 'react'
  * Use this instead of the default render from @testing-library/react
  * to ensure all components have access to necessary providers.
  *
+ * Currently a thin pass-through. Add real providers (theme, Supabase mock, etc.)
+ * here when your component tests need a specific context. See CONVENTIONS.md.
+ *
  * @example
  * ```tsx
  * import { render, screen } from '@/__tests__/utils/test-utils'
@@ -31,3 +34,7 @@ export * from '@testing-library/react'
 // Override render with our custom render
 export { customRender as render }
 
+// Jest requires at least one test per file
+test('test-utils module exports render', () => {
+  expect(typeof customRender).toBe('function')
+})

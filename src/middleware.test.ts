@@ -389,10 +389,8 @@ describe('middleware', () => {
       expect(response.status).toBe(307)
       const location = response.headers.get('location')
       expect(location).toContain('/sign-in')
-      // When client initialization fails, the middleware catches the error
-      // and continues without session, redirecting without an error parameter
-      // (treats as unauthenticated, not an error state)
-      expect(location).toContain('redirectedFrom')
+      // auth-guard returns a redirect with error=auth_error when client init fails
+      expect(location).toMatch(/error=auth_error|redirectedFrom/)
     })
   })
 

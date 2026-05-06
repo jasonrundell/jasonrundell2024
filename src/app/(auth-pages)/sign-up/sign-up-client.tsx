@@ -2,7 +2,6 @@
 
 import { signUpAction } from '@/app/actions'
 import { FormMessage } from '@/components/auth/form-message'
-import { SubmitButton } from '@/components/auth/submit-button'
 import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
 import { AuthLayout } from '@/components/auth/auth-layout'
@@ -10,31 +9,12 @@ import { PasswordInput } from '@/components/auth/password-input'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { StyledLink } from '@/styles/common'
-
-const FormWrapper = styled('form')`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-`
-
-const FieldGroup = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-`
-
-const FullWidthButton = styled(SubmitButton)`
-  width: 100%;
-`
-
-const BottomText = styled('p')`
-  text-align: center;
-  color: ${Tokens.colors.textSecondary.value};
-  font-size: 1rem;
-  margin-top: 1.5rem;
-`
+import {
+  AuthFormWrapper as FormWrapper,
+  AuthFieldGroup as FieldGroup,
+  AuthFullWidthButton as FullWidthButton,
+  AuthFooterText as BottomText,
+} from '@/components/auth/auth-form-shell'
 
 const SuccessWrapper = styled('div')`
   display: flex;
@@ -49,7 +29,7 @@ const SuccessIcon = styled('div')`
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: ${Tokens.colors.primary.value};
+  background: ${Tokens.colors.rolePrompt.var};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,14 +38,14 @@ const SuccessIcon = styled('div')`
 `
 
 const SuccessTitle = styled('h1')`
-  color: ${Tokens.colors.secondary.value};
+  color: ${Tokens.colors.roleHeading.var};
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
 `
 
 const SuccessMessage = styled('p')`
-  color: ${Tokens.colors.textSecondary.value};
+  color: ${Tokens.colors.textSecondary.var};
   font-size: 1rem;
   line-height: 1.5;
   margin: 0;
@@ -75,7 +55,7 @@ const SuccessMessage = styled('p')`
 const ActionButton = styled(StyledLink)`
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background: ${Tokens.colors.primary.value};
+  background: ${Tokens.colors.rolePrompt.var};
   color: white;
   text-decoration: none;
   border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
@@ -83,8 +63,7 @@ const ActionButton = styled(StyledLink)`
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${Tokens.colors.primaryHover?.value ||
-    Tokens.colors.primary.value};
+    background: ${Tokens.colors.primaryVariant.var};
   }
 `
 
@@ -93,8 +72,81 @@ interface SignUpClientProps {
   error?: string
 }
 
+function SignUpFields({ errorMessage }: { errorMessage?: string }) {
+  return (
+    <FormWrapper action={signUpAction}>
+      {errorMessage && <FormMessage message={{ error: errorMessage }} />}
+      <FieldGroup>
+        <Label htmlFor="displayName">Display Name</Label>
+        <Input
+          name="displayName"
+          type="text"
+          placeholder="How others will see you"
+          minLength={2}
+          maxLength={50}
+          required
+        />
+      </FieldGroup>
+      <FieldGroup>
+        <Label htmlFor="profileSlug">Profile URL</Label>
+        <Input
+          name="profileSlug"
+          id="profileSlug"
+          type="text"
+          placeholder="your-name"
+          minLength={3}
+          maxLength={30}
+          required
+          autoComplete="off"
+          aria-describedby="profileSlug-hint"
+        />
+        <BottomText id="profileSlug-hint" style={{ marginTop: 0 }}>
+          Your public profile will be at /u/your-name. Use 3–30 lowercase
+          letters, numbers, and hyphens only.
+        </BottomText>
+      </FieldGroup>
+      <FieldGroup>
+        <Label htmlFor="email">Email</Label>
+        <Input
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+          required
+          data-sentry-mask
+        />
+      </FieldGroup>
+      <FieldGroup>
+        <Label htmlFor="password">Password</Label>
+        <PasswordInput
+          name="password"
+          placeholder="Create a password"
+          required
+          data-sentry-mask
+        />
+      </FieldGroup>
+      <FieldGroup>
+        <Label htmlFor="confirmPassword">Confirm Password</Label>
+        <Input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm your password"
+          minLength={8}
+          required
+          data-sentry-mask
+        />
+      </FieldGroup>
+      <FullWidthButton formAction={signUpAction} pendingText="Signing up...">
+        Sign up
+      </FullWidthButton>
+      <BottomText>
+        Already have an account?{' '}
+        <StyledLink href="/sign-in">Sign in</StyledLink>
+      </BottomText>
+    </FormWrapper>
+  )
+}
+
 export default function SignUpClient({ success, error }: SignUpClientProps) {
-  // Check if we have a success message from query parameters
   if (success) {
     return (
       <AuthLayout
@@ -114,153 +166,9 @@ export default function SignUpClient({ success, error }: SignUpClientProps) {
     )
   }
 
-  // Check if we have an error message
-  if (error) {
-    return (
-      <AuthLayout title="Create an account" subtitle="Sign up to get started">
-        <FormWrapper action={signUpAction}>
-          <FormMessage message={{ error }} />
-          <FieldGroup>
-            <Label htmlFor="displayName">Display Name</Label>
-            <Input
-              name="displayName"
-              type="text"
-              placeholder="How others will see you"
-              minLength={2}
-              maxLength={50}
-              required
-            />
-          </FieldGroup>
-          <FieldGroup>
-            <Label htmlFor="profileSlug">Profile URL</Label>
-            <Input
-              name="profileSlug"
-              id="profileSlug"
-              type="text"
-              placeholder="your-name"
-              minLength={3}
-              maxLength={30}
-              required
-              autoComplete="off"
-              aria-describedby="profileSlug-hint"
-            />
-            <BottomText id="profileSlug-hint" style={{ marginTop: 0 }}>
-              Your public profile will be at /u/your-name. Use 3–30 lowercase
-              letters, numbers, and hyphens only.
-            </BottomText>
-          </FieldGroup>
-          <FieldGroup>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              name="email"
-              type="email"
-              placeholder="you@example.com"
-              required
-              data-sentry-mask
-            />
-          </FieldGroup>
-          <FieldGroup>
-            <Label htmlFor="password">Password</Label>
-            <PasswordInput
-              name="password"
-              placeholder="Create a password"
-              required
-              data-sentry-mask
-            />
-          </FieldGroup>
-          <FieldGroup>
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <Input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm your password"
-              minLength={8}
-              required
-              data-sentry-mask
-            />
-          </FieldGroup>
-          <FullWidthButton
-            formAction={signUpAction}
-            pendingText="Signing up..."
-          >
-            Sign up
-          </FullWidthButton>
-          <BottomText>
-            Already have an account?{' '}
-            <StyledLink href="/sign-in">Sign in</StyledLink>
-          </BottomText>
-        </FormWrapper>
-      </AuthLayout>
-    )
-  }
-
   return (
     <AuthLayout title="Create an account" subtitle="Sign up to get started">
-      <FormWrapper action={signUpAction}>
-        <FieldGroup>
-          <Label htmlFor="displayName">Display Name</Label>
-          <Input
-            name="displayName"
-            type="text"
-            placeholder="How others will see you"
-            minLength={2}
-            maxLength={50}
-            required
-          />
-        </FieldGroup>
-        <FieldGroup>
-          <Label htmlFor="profileSlug">Profile URL</Label>
-          <Input
-            name="profileSlug"
-            id="profileSlug"
-            type="text"
-            placeholder="your-name"
-            minLength={3}
-            maxLength={30}
-            required
-            autoComplete="off"
-            aria-describedby="profileSlug-hint-default"
-          />
-          <BottomText id="profileSlug-hint-default" style={{ marginTop: 0 }}>
-            Your public profile will be at /u/your-name. Use 3–30 lowercase
-            letters, numbers, and hyphens only.
-          </BottomText>
-        </FieldGroup>
-        <FieldGroup>
-          <Label htmlFor="email">Email</Label>
-          <Input
-            name="email"
-            type="email"
-            placeholder="you@example.com"
-            required
-          />
-        </FieldGroup>
-        <FieldGroup>
-          <Label htmlFor="password">Password</Label>
-          <PasswordInput
-            name="password"
-            placeholder="Create a password"
-            required
-          />
-        </FieldGroup>
-        <FieldGroup>
-          <Label htmlFor="confirmPassword">Confirm Password</Label>
-          <Input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm your password"
-            minLength={8}
-            required
-          />
-        </FieldGroup>
-        <FullWidthButton formAction={signUpAction} pendingText="Signing up...">
-          Sign up
-        </FullWidthButton>
-        <BottomText>
-          Already have an account?{' '}
-          <StyledLink href="/sign-in">Sign in</StyledLink>
-        </BottomText>
-      </FormWrapper>
+      <SignUpFields errorMessage={error} />
     </AuthLayout>
   )
 }

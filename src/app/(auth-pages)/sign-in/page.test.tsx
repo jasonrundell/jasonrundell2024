@@ -1,5 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import Login from './page'
 
 // Mock dependencies
 jest.mock('@/app/actions', () => ({
@@ -7,120 +8,135 @@ jest.mock('@/app/actions', () => ({
 }))
 
 jest.mock('@/components/auth/auth-layout', () => {
-  return function MockAuthLayout({
-    children,
-    title,
-    subtitle,
-  }: {
-    children: React.ReactNode
-    title: string
-    subtitle: string
-  }) {
-    return (
-      <div data-testid="auth-layout">
-        <h1>{title}</h1>
-        <p>{subtitle}</p>
-        {children}
-      </div>
-    )
+  return {
+    AuthLayout: function MockAuthLayout({
+      children,
+      title,
+      subtitle,
+    }: {
+      children: React.ReactNode
+      title: string
+      subtitle: string
+    }) {
+      return (
+        <div data-testid="auth-layout">
+          <h1>{title}</h1>
+          <p>{subtitle}</p>
+          {children}
+        </div>
+      )
+    },
   }
 })
 
 jest.mock('@/components/auth/form-message', () => {
-  return function MockFormMessage({
-    message,
-  }: {
-    message: { error?: string; message?: string }
-  }) {
-    if (message.error) {
-      return <div data-testid="error-message">{message.error}</div>
-    }
-    if (message.message) {
-      return <div data-testid="success-message">{message.message}</div>
-    }
-    return null
+  return {
+    FormMessage: function MockFormMessage({
+      message,
+    }: {
+      message: { error?: string; message?: string }
+    }) {
+      if (message.error) {
+        return <div data-testid="error-message">{message.error}</div>
+      }
+      if (message.message) {
+        return <div data-testid="success-message">{message.message}</div>
+      }
+      return null
+    },
   }
 })
 
 jest.mock('@/components/auth/submit-button', () => {
-  return function MockSubmitButton({
-    children,
-    pendingText,
-  }: {
-    children: React.ReactNode
-    pendingText?: string
-  }) {
-    return (
-      <button
-        type="submit"
-        data-testid="submit-button"
-        data-pending-text={pendingText}
-      >
-        {children}
-      </button>
-    )
+  return {
+    SubmitButton: function MockSubmitButton({
+      children,
+      pendingText,
+    }: {
+      children: React.ReactNode
+      pendingText?: string
+    }) {
+      return (
+        <button
+          type="submit"
+          data-testid="submit-button"
+          data-pending-text={pendingText}
+        >
+          {children}
+        </button>
+      )
+    },
   }
 })
 
 
 jest.mock('@/components/auth/ui/input', () => {
-  return function MockInput({
-    name,
-    type,
-    placeholder,
-    required,
-  }: {
-    name: string
-    type: string
-    placeholder: string
-    required?: boolean
-  }) {
-    return (
-      <input
-        data-testid={`input-${name}`}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        required={required}
-      />
-    )
+  return {
+    Input: function MockInput({
+      name,
+      type,
+      placeholder,
+      required,
+    }: {
+      name: string
+      type: string
+      placeholder: string
+      required?: boolean
+    }) {
+      return (
+        <input
+          data-testid={`input-${name}`}
+          id={name}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          required={required}
+        />
+      )
+    },
   }
 })
 
 jest.mock('@/components/auth/ui/label', () => {
-  return function MockLabel({
-    children,
-    htmlFor,
-  }: {
-    children: React.ReactNode
-    htmlFor: string
-  }) {
-    return (
-      <label htmlFor={htmlFor} data-testid={`label-${htmlFor}`}>
-        {children}
-      </label>
-    )
+  return {
+    Label: function MockLabel({
+      children,
+      htmlFor,
+    }: {
+      children: React.ReactNode
+      htmlFor: string
+    }) {
+      return (
+        <label htmlFor={htmlFor} data-testid={`label-${htmlFor}`}>
+          {children}
+        </label>
+      )
+    },
   }
 })
 
 jest.mock('@/components/auth/ui/checkbox', () => {
-  return function MockCheckbox({ id, name }: { id: string; name: string }) {
-    return (
-      <input
-        data-testid={`checkbox-${id}`}
-        type="checkbox"
-        id={id}
-        name={name}
-      />
-    )
+  return {
+    Checkbox: function MockCheckbox({ id, name }: { id: string; name: string }) {
+      return (
+        <input
+          data-testid={`checkbox-${id}`}
+          type="checkbox"
+          id={id}
+          name={name}
+        />
+      )
+    },
   }
 })
 
 // Mock the styled components
 jest.mock('@pigment-css/react', () => ({
-  styled: (Component: React.ComponentType<Record<string, unknown>>) => {
-    return function StyledComponent(props: Record<string, unknown>) {
-      return <Component {...props} />
+  styled: (Component: React.ElementType) => {
+    return function createStyledComponent() {
+      return function StyledComponent(props: Record<string, unknown>) {
+        return React.createElement(Component, props)
+      }
     }
   },
 }))
@@ -545,5 +561,59 @@ describe('Sign In Page', () => {
         screen.getByText('Sign in to your account to continue')
       ).toBeInTheDocument()
     })
+  })
+})
+
+describe('Sign In Page actual component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  it('renders the actual login form without a message', async () => {
+    render(await Login({ searchParams: Promise.resolve({}) }))
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: /welcome back/i })
+    ).toBeInTheDocument()
+    expect(screen.getByLabelText('Email')).toBeInTheDocument()
+    expect(screen.getByLabelText('Password')).toBeInTheDocument()
+    expect(screen.queryByTestId('error-message')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('success-message')).not.toBeInTheDocument()
+  })
+
+  it('maps known auth errors in the actual login component', async () => {
+    jest.spyOn(console, 'error').mockImplementation()
+
+    render(
+      await Login({
+        searchParams: Promise.resolve({
+          error: 'invalid_credentials',
+          redirectedFrom: '/profile',
+        }),
+      })
+    )
+
+    expect(screen.getByTestId('error-message')).toHaveTextContent(
+      'Invalid email or password. Please try again.'
+    )
+    expect(console.error).toHaveBeenCalledWith('Auth error:', {
+      errorCode: 'invalid_credentials',
+      message: 'Invalid email or password. Please try again.',
+      redirectedFrom: '/profile',
+    })
+  })
+
+  it('maps known success messages in the actual login component', async () => {
+    render(
+      await Login({
+        searchParams: Promise.resolve({
+          message: 'email_confirmed',
+        }),
+      })
+    )
+
+    expect(screen.getByTestId('success-message')).toHaveTextContent(
+      'Email confirmed successfully. Please sign in.'
+    )
   })
 })

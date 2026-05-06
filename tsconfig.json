@@ -22,6 +22,9 @@
       }
     ],
     "paths": {
+      "@jasonrundell/dropship": [
+        "./src/components/dropship.tsx"
+      ],
       "@/*": [
         "./src/*"
       ]

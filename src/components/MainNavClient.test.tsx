@@ -125,7 +125,7 @@ describe('MainNavClient Component', () => {
 
       // Assert
       await waitFor(() => {
-        expect(screen.getByRole('link', { name: /login/i })).toBeInTheDocument()
+        expect(screen.getByRole('link', { name: /sign in/i })).toBeInTheDocument()
         expect(
           screen.getByRole('link', { name: /sign up/i })
         ).toBeInTheDocument()

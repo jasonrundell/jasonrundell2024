@@ -45,13 +45,13 @@ describe('server', () => {
       expect(createClient).toBeDefined()
     })
 
-    it('should create a Supabase client with correct configuration', () => {
+    it('should create a Supabase client with correct configuration', async () => {
       // Arrange
       const mockSupabaseClient = { auth: {} }
       mockCreateServerClient.mockReturnValue(mockSupabaseClient)
 
       // Act
-      const result = createClient()
+      const result = await createClient()
 
       // Assert
       expect(mockCreateServerClient).toHaveBeenCalledWith(
@@ -73,7 +73,7 @@ describe('server', () => {
       expect(result).toBe(mockSupabaseClient)
     })
 
-    it('should use provided cookie store when passed as parameter', () => {
+    it('should use provided cookie store when passed as parameter', async () => {
       // Arrange
       const customCookieStore = {
         get: jest.fn(),
@@ -88,7 +88,7 @@ describe('server', () => {
       mockCreateServerClient.mockReturnValue(mockSupabaseClient)
 
       // Act
-      createClient(customCookieStore)
+      await createClient(customCookieStore)
 
       // Assert
       expect(mockCreateServerClient).toHaveBeenCalledWith(
@@ -109,13 +109,13 @@ describe('server', () => {
       )
     })
 
-    it('should use default cookies() when no cookie store provided', () => {
+    it('should use default cookies() when no cookie store provided', async () => {
       // Arrange
       const mockSupabaseClient = { auth: {} }
       mockCreateServerClient.mockReturnValue(mockSupabaseClient)
 
       // Act
-      createClient()
+      await createClient()
 
       // Assert
       expect(mockCookies).toHaveBeenCalled()
@@ -132,11 +132,11 @@ describe('server', () => {
         remove: (name: string, options: Record<string, unknown>) => void
       }
 
-      beforeEach(() => {
+      beforeEach(async () => {
         const mockSupabaseClient = { auth: {} }
         mockCreateServerClient.mockReturnValue(mockSupabaseClient)
 
-        createClient()
+        await createClient()
         cookieHandlers = mockCreateServerClient.mock.calls[0][2].cookies
       })
 
@@ -248,13 +248,13 @@ describe('server', () => {
     })
 
     describe('auth configuration', () => {
-      it('should configure auth with correct options', () => {
+      it('should configure auth with correct options', async () => {
         // Arrange
         const mockSupabaseClient = { auth: {} }
         mockCreateServerClient.mockReturnValue(mockSupabaseClient)
 
         // Act
-        createClient()
+        await createClient()
 
         // Assert
         const authConfig = mockCreateServerClient.mock.calls[0][2].auth
@@ -267,13 +267,13 @@ describe('server', () => {
     })
 
     describe('environment variables', () => {
-      it('should pass environment variables to createServerClient', () => {
+      it('should pass environment variables to createServerClient', async () => {
         // Arrange
         const mockSupabaseClient = { auth: {} }
         mockCreateServerClient.mockReturnValue(mockSupabaseClient)
 
         // Act
-        createClient()
+        await createClient()
 
         // Assert
         const callArgs = mockCreateServerClient.mock.calls[0]
@@ -293,13 +293,13 @@ describe('server', () => {
         })
       })
 
-      it('should handle undefined environment variables gracefully', () => {
+      it('should handle undefined environment variables gracefully', async () => {
         // Arrange
         const mockSupabaseClient = { auth: {} }
         mockCreateServerClient.mockReturnValue(mockSupabaseClient)
 
         // Act
-        createClient()
+        await createClient()
 
         // Assert - the function should still work even if env vars are undefined in test
         expect(mockCreateServerClient).toHaveBeenCalledWith(

@@ -1,13 +1,13 @@
-import Link from 'next/link'
 import { Spacer, Row } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 
 import ProjectPreviewImage from './ProjectPreviewImage'
 import Tokens from '@/lib/tokens'
+import { StyledLink } from '@/styles/common'
 
 interface ProjectPreviewProps {
   title: string
-  image: {
+  image?: {
     file: {
       url: string
     }
@@ -18,13 +18,12 @@ interface ProjectPreviewProps {
 
 const StyledImage = styled('div')`
   position: relative;
-  display: flex;
+  display: block;
   margin: 0 auto;
-  height: 208px;
-  width: auto;
-  object-fit: cover;
-  background-color: ${Tokens.colors.backgroundDarker.value};
-  align-items: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: ${Tokens.colors.surfaceDeepest.var};
   margin-bottom: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
 `
 
@@ -41,21 +40,19 @@ export default function ProjectPreview({
 }: ProjectPreviewProps) {
   return (
     <div>
-      {image && image.file && (
-        <Row>
-          <StyledImage>
-            <ProjectPreviewImage
-              title={title}
-              slug={slug}
-              url={image.file.url}
-            />
-          </StyledImage>
-        </Row>
-      )}
+      <Row>
+        <StyledImage>
+          <ProjectPreviewImage
+            title={title}
+            slug={slug}
+            url={image?.file?.url}
+          />
+        </StyledImage>
+      </Row>
       <Spacer />
       <Row>
         <StyledHeading>
-          <Link href={`/projects/${slug}`}>{title}</Link>
+          <StyledLink href={`/projects/${slug}`}>{title}</StyledLink>
         </StyledHeading>
       </Row>
       <Spacer />

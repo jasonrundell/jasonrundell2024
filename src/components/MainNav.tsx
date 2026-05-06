@@ -11,7 +11,7 @@ const StyledMenuContainer = styled('div')`
   left: 0;
   right: 0;
   z-index: ${Tokens.zIndex.nav.value};
-  background-color: ${Tokens.colors.background.value};
+  background-color: ${Tokens.colors.surfaceBase.var};
   transition: background 1.3s ease, --background-color-start 1.3s ease,
     --background-color-end 1.3s ease;
 `
@@ -34,6 +34,8 @@ const StyledMenu = styled('div')`
 const StyledDesktopNav = styled('nav')`
   display: none;
   flex: 1;
+  align-items: center;
+  justify-content: space-between;
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
       .breakpoints.large.unit}) {
@@ -62,6 +64,7 @@ const StyledList = styled('ul')`
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
       .breakpoints.large.unit}) {
     margin: 0;
+    margin-left: auto;
   }
 `
 
@@ -72,14 +75,24 @@ const StyledListItem = styled('li')`
   text-wrap: nowrap;
 
   a {
-    color: ${Tokens.colors.secondary.value};
+    color: ${Tokens.colors.roleHeading.var};
   }
 `
 
 const StyledTitle = styled(HeadingAnimation)`
   text-wrap: nowrap;
-  color: ${Tokens.colors.background.value};
+  color: ${Tokens.colors.surfaceBase.var};
 `
+
+/**
+ * Serializable matcher passed to HeadingAnimation so terminal-style
+ * steps render in the monospace font. Kept outside the component to
+ * preserve referential stability.
+ */
+const TERMINAL_MONO_MATCHER = {
+  prefixes: ['jason$'],
+  exact: [':)'],
+}
 
 /**
  * Animation steps for the navigation title.
@@ -186,22 +199,34 @@ export default function MainNav() {
       <StyledMenu>
         {/* Desktop Navigation */}
         <StyledDesktopNav aria-label="Main Navigation">
+          <StyledTitle
+            steps={NAVIGATION_STEPS}
+            speed={100}
+            monoStepMatcher={TERMINAL_MONO_MATCHER}
+          />
           <StyledList>
             <StyledListItem>
-              <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
+              <Link href="/about">About</Link>
             </StyledListItem>
             <StyledListItem>
-              <Link href="/#blog">Blog</Link>
+              <Link href="/projects">Projects</Link>
             </StyledListItem>
             <StyledListItem>
-              <Link href="/#projects">Projects</Link>
+              <Link href="/posts">Blog</Link>
+            </StyledListItem>
+            <StyledListItem>
+              <Link href="/contact">Contact</Link>
             </StyledListItem>
           </StyledList>
         </StyledDesktopNav>
 
         {/* Mobile Navigation */}
         <StyledMobileNav aria-label="Main Navigation">
-          <StyledTitle steps={NAVIGATION_STEPS} speed={100} />
+          <StyledTitle
+            steps={NAVIGATION_STEPS}
+            speed={100}
+            monoStepMatcher={TERMINAL_MONO_MATCHER}
+          />
         </StyledMobileNav>
 
         <MainNavClient />

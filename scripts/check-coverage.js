@@ -8,7 +8,7 @@ const summaryPath = path.join(
 )
 
 const thresholds = {
-  branches: 60,
+  branches: 70,
   functions: 70,
   lines: 70,
   statements: 70,

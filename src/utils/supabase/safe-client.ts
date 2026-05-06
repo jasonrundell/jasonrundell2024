@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
 import { checkSupabaseStatus, type SupabaseStatus } from '@/utils/supabase/status'
+import { SUPABASE_STATUS_TTL_MS } from '@/lib/constants'
 
 export interface SafeSupabaseResult<T = unknown> {
   data: T | null
@@ -14,7 +15,7 @@ export interface SafeSupabaseResult<T = unknown> {
 export class SafeSupabaseClient {
   private status: SupabaseStatus | null = null
   private lastStatusCheck = 0
-  private readonly STATUS_CACHE_DURATION = 30000 // 30 seconds
+  private readonly STATUS_CACHE_DURATION = SUPABASE_STATUS_TTL_MS
 
   /**
    * Check Supabase status with caching

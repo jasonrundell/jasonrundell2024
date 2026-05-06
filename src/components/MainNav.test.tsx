@@ -65,24 +65,36 @@ describe('MainNav Component', () => {
     expect(animations.length).toBeGreaterThan(0)
   })
 
-  it('should render Blog link in desktop navigation', () => {
-    // Act
+  it('should render About link in desktop navigation', () => {
     render(<MainNav />)
 
-    // Assert
-    const blogLink = screen.getByRole('link', { name: /blog/i })
-    expect(blogLink).toBeInTheDocument()
-    expect(blogLink).toHaveAttribute('href', '/#blog')
+    const aboutLink = screen.getByRole('link', { name: /^about$/i })
+    expect(aboutLink).toBeInTheDocument()
+    expect(aboutLink).toHaveAttribute('href', '/about')
   })
 
   it('should render Projects link in desktop navigation', () => {
-    // Act
     render(<MainNav />)
 
-    // Assert
-    const projectsLink = screen.getByRole('link', { name: /projects/i })
+    const projectsLink = screen.getByRole('link', { name: /^projects$/i })
     expect(projectsLink).toBeInTheDocument()
-    expect(projectsLink).toHaveAttribute('href', '/#projects')
+    expect(projectsLink).toHaveAttribute('href', '/projects')
+  })
+
+  it('should render Blog link in desktop navigation', () => {
+    render(<MainNav />)
+
+    const blogLink = screen.getByRole('link', { name: /^blog$/i })
+    expect(blogLink).toBeInTheDocument()
+    expect(blogLink).toHaveAttribute('href', '/posts')
+  })
+
+  it('should render Contact link in desktop navigation', () => {
+    render(<MainNav />)
+
+    const contactLink = screen.getByRole('link', { name: /^contact$/i })
+    expect(contactLink).toBeInTheDocument()
+    expect(contactLink).toHaveAttribute('href', '/contact')
   })
 
   it('should render MainNavClient component', () => {
