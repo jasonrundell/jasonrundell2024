@@ -26,9 +26,10 @@ This index is the first stop for contributors and agents. It maps the current mo
 - **Comment API** behavior belongs in `src/app/api/comments/**`; shared comment UI in `src/components/comments/**`.
 - **HTML sanitization** for user input: `src/lib/strip-html-tags.ts`.
 - **Reusable component styling** in `src/styles/common.tsx`.
+- **Header auth state** (`src/components/useNavUser.ts`): client Supabase session for `MainNavClient`; subscribes to `onAuthStateChange` and re-syncs from cookie storage on pathname changes so the nav updates after server-action sign-in without a full reload.
 
 ## Runtime Entry Points
-- `src/app/layout.tsx`: Root layout, metadata, navigation, footer, and global status banner.
+- `src/app/layout.tsx`: Root layout, metadata, `MainNav` (including `MainNavClient` + `useNavUser` for cookie-backed auth state), footer, and global status banner.
 - `src/app/page.tsx`: Homepage — reads projects, posts, and lastSong in parallel via `src/lib/content.ts`.
 - `src/middleware.ts`: Request middleware and Supabase session refresh.
 - `src/instrumentation.ts`: App instrumentation hook.
