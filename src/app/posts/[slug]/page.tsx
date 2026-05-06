@@ -8,7 +8,6 @@ import RenderedMDX from '@/components/markdown/RenderedMDX'
 import PostHeader from '@/components/PostHeader'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { buildBlogPostingJsonLd } from '@/lib/jsonld'
-import { Post } from '@/typeDefinitions/app'
 import {
   StyledContainer,
   StyledSection,
@@ -32,7 +31,7 @@ export async function generateMetadata({
   params,
 }: PostProps): Promise<Metadata> {
   const slug = (await params).slug
-  const post = await getEntryBySlug<Post>('post', slug)
+  const post = await getEntryBySlug('post', slug)
 
   return {
     title: `${post.title} | Jason Rundell`,
@@ -45,7 +44,7 @@ export async function generateMetadata({
 
 export default async function page({ params }: PostProps) {
   const slug = (await params).slug
-  const post = await getEntryBySlug<Post>('post', slug)
+  const post = await getEntryBySlug('post', slug)
 
   if (!post.title) {
     notFound()

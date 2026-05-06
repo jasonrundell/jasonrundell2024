@@ -6,7 +6,6 @@ import { notFound } from 'next/navigation'
 import { getEntryBySlug, getProjects } from '@/lib/content'
 import RenderedMDX from '@/components/markdown/RenderedMDX'
 import { SITE_DESCRIPTION } from '@/lib/constants'
-import { Project } from '@/typeDefinitions/app'
 import ProjectGalleryLazy from '@/components/ProjectGalleryLazy'
 import {
   StyledContainer,
@@ -36,7 +35,7 @@ export async function generateMetadata({
   params,
 }: ProjectProps): Promise<Metadata> {
   const slug = (await params).slug
-  const project = await getEntryBySlug<Project>('project', slug)
+  const project = await getEntryBySlug('project', slug)
 
   return {
     title: `${project.title} | Jason Rundell`,
@@ -49,7 +48,7 @@ export async function generateMetadata({
 
 export default async function page({ params }: ProjectProps) {
   const slug = (await params).slug
-  const project = await getEntryBySlug<Project>('project', slug)
+  const project = await getEntryBySlug('project', slug)
 
   if (!project.title) {
     notFound()
