@@ -261,10 +261,7 @@ global.console = {
     // Next.js server actions pass functions as these props, which is expected behavior
     const firstArg = args[0]
     const warningMessage = typeof firstArg === 'string' ? firstArg : firstArg?.toString() || ''
-    const fullMessage = args.map(arg => 
-      typeof arg === 'string' ? arg : arg?.toString() || ''
-    ).join(' ')
-    
+
     if (
       warningMessage.includes('Invalid value for prop `formAction`') ||
       warningMessage.includes('Invalid value for prop `action`') ||
