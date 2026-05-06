@@ -63,13 +63,15 @@ if (typeof global.Request === 'undefined') {
           return
         }
 
-        if (typeof init.forEach === 'function') {
-          init.forEach((value, key) => this.set(key, value))
+        // Arrays have forEach; must branch on Array.isArray first so [['k','v']]
+        // is not treated as iterable (value, index) pairs.
+        if (Array.isArray(init)) {
+          init.forEach(([key, value]) => this.set(key, value))
           return
         }
 
-        if (Array.isArray(init)) {
-          init.forEach(([key, value]) => this.set(key, value))
+        if (typeof init.forEach === 'function') {
+          init.forEach((value, key) => this.set(key, value))
           return
         }
 
