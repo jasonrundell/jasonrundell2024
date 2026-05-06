@@ -16,6 +16,7 @@
     "prebuild": "npm run tokens:build && node ./scripts/sync-content-images.js",
     "build": "next build",
     "start": "next start",
+    "start:ci": "next start",
     "lint": "next lint",
     "tokens:build": "node ./scripts/build-tokens.js",
     "tokens:check": "npm run tokens:build && git diff --exit-code -- src/lib/tokens.generated.ts src/styles/tokens.generated.css",
