@@ -220,8 +220,6 @@ const filteredError = (...args) => {
       return String(arg)
     }).join(' ')
     
-    const isContentfulError = false // Contentful removed; placeholder for filter chain
-    
     // Check if this is the HTMLFormElement.requestSubmit error
     // Check both message and stack trace, and also check if it's from jsdom
     // Also check the stack trace for jsdom-specific paths
@@ -243,8 +241,7 @@ const filteredError = (...args) => {
       errorMessage.includes('Sign in error:') || // Suppress expected sign-in test errors
       errorMessage.includes('Invalid value for prop `formAction`') || // Suppress Next.js server action warnings
       errorMessage.includes('Invalid value for prop `action`') || // Suppress Next.js server action warnings
-      errorMessage.includes('Either remove it from the element, or pass a string or number value') || // Suppress Next.js server action warnings
-      isContentfulError // Suppress expected Contentful error logs during tests
+      errorMessage.includes('Either remove it from the element, or pass a string or number value') // Suppress Next.js server action warnings
     ) {
       // Completely suppress - don't call original, don't log anything
       return
