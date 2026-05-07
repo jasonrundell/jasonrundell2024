@@ -1,14 +1,27 @@
-import { toProjectCardItem } from './projectUtils'
+import { compareProjectsByDateDesc, toProjectCardItem } from './projectUtils'
 import { Project } from '@/typeDefinitions/app'
 
 const baseProject: Project = {
   title: 'Test Project',
   slug: 'test-project',
-  order: 1,
+  createdDate: '2025-01-01T00:00:00.000Z',
   excerpt: 'A test excerpt',
   description: '',
   technology: ['TypeScript'],
 }
+
+describe('compareProjectsByDateDesc', () => {
+  it('orders newer projects before older ones', () => {
+    const older: Project = { ...baseProject, createdDate: '2020-01-01T00:00:00.000Z' }
+    const newer: Project = {
+      ...baseProject,
+      slug: 'p2',
+      createdDate: '2021-01-01T00:00:00.000Z',
+    }
+    expect(compareProjectsByDateDesc(older, newer)).toBeGreaterThan(0)
+    expect(compareProjectsByDateDesc(newer, older)).toBeLessThan(0)
+  })
+})
 
 describe('toProjectCardItem', () => {
   it('maps a project with full featuredImage data', () => {

@@ -50,7 +50,8 @@ export interface ContentImage {
 export interface Project {
   title: string
   slug: string
-  order: number
+  /** ISO 8601 string; used for sort order (newest first in listings) */
+  createdDate: string
   excerpt: string
   /** Raw MDX source string rendered by <RenderedMDX /> */
   description: string

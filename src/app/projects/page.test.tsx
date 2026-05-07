@@ -65,9 +65,9 @@ describe('Projects page', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     getProjects.mockResolvedValue([
-      { slug: 'b', title: 'B', order: 2, excerpt: 'eb' },
-      { slug: 'a', title: 'A', order: 1, excerpt: 'ea' },
-      { slug: 'c', title: 'C', order: 3, excerpt: 'ec' },
+      { slug: 'b', title: 'B', createdDate: '2025-01-02', excerpt: 'eb' },
+      { slug: 'a', title: 'A', createdDate: '2025-01-03', excerpt: 'ea' },
+      { slug: 'c', title: 'C', createdDate: '2025-01-01', excerpt: 'ec' },
     ])
   })
 
@@ -80,7 +80,7 @@ describe('Projects page', () => {
     expect(headings[0]).toHaveTextContent(/^projects$/i)
   })
 
-  it('renders all projects sorted by order', async () => {
+  it('renders all projects sorted by date descending', async () => {
     const pageComponent = await ProjectsPage()
     render(pageComponent)
 

@@ -163,10 +163,10 @@ jest.mock('@/styles/common', () => ({
 }))
 
 const fakeProjects = [
-  { slug: 'p1', title: 'Project 1', order: 2, excerpt: 'e1' },
-  { slug: 'p2', title: 'Project 2', order: 1, excerpt: 'e2' },
-  { slug: 'p3', title: 'Project 3', order: 3, excerpt: 'e3' },
-  { slug: 'p4', title: 'Project 4', order: 4, excerpt: 'e4' },
+  { slug: 'p1', title: 'Project 1', createdDate: '2025-01-02', excerpt: 'e1' },
+  { slug: 'p2', title: 'Project 2', createdDate: '2025-01-03', excerpt: 'e2' },
+  { slug: 'p3', title: 'Project 3', createdDate: '2025-01-01', excerpt: 'e3' },
+  { slug: 'p4', title: 'Project 4', createdDate: '2024-01-01', excerpt: 'e4' },
 ]
 
 const fakePosts = [
@@ -185,7 +185,13 @@ const fakeLastSong = {
 describe('Home page (hub)', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    getFeaturedProjects.mockResolvedValue(fakeProjects)
+    getFeaturedProjects.mockImplementation((limit: number) => {
+      const sorted = [...fakeProjects].sort(
+        (a, b) =>
+          new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+      )
+      return Promise.resolve(sorted.slice(0, limit))
+    })
     getLatestPosts.mockResolvedValue(fakePosts)
     getLastSong.mockResolvedValue(fakeLastSong)
   })
@@ -234,7 +240,7 @@ describe('Home page (hub)', () => {
     expect(screen.getByTestId('last-song')).toBeInTheDocument()
   })
 
-  it('limits selected projects to three (sorted by order)', async () => {
+  it('limits selected projects to three (sorted by date desc)', async () => {
     const pageComponent = await Page()
     render(pageComponent)
 

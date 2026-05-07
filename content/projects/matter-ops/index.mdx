@@ -1,19 +1,45 @@
 ---
-title: "Matter Ops"
-slug: "matter-ops"
-order: 0
-excerpt: "Self-hosted smart home dashboard that discovers LAN devices with mDNS (Matter, HomeKit, Cast, AirPlay, HTTP) and shows them in a real-time React UI backed by Express and SQLite."
-technology: ["React", "TypeScript", "Vite", "Tailwind", "Express", "SQLite", "Drizzle ORM", "mDNS", "DNS-SD", "Vitest", "Node.js"]
-link: "https://github.com/jasonrundell/matter-ops"
-featuredImageAlt: ""
-featuredImageDescription: ""
+title: 'Matter Ops'
+slug: 'matter-ops'
+createdDate: '2026-03-31T12:00:00.000Z'
+excerpt:
+  'Self-hosted smart home dashboard that discovers LAN devices with mDNS
+  (Matter, HomeKit, Cast, AirPlay, HTTP) and shows them in a real-time React UI
+  backed by Express and SQLite.'
+technology:
+  [
+    'React',
+    'TypeScript',
+    'Vite',
+    'Tailwind',
+    'Express',
+    'SQLite',
+    'Drizzle ORM',
+    'mDNS',
+    'DNS-SD',
+    'Vitest',
+    'Node.js',
+  ]
+link: 'https://github.com/jasonrundell/matter-ops'
+featuredImageAlt: ''
+featuredImageDescription: ''
 ---
-Matter Ops runs on your machine, scans the local network with DNS-SD/mDNS, and lists discovered devices in a modern web UI. Findings are stored in SQLite so the dashboard stays useful across restarts.
 
-**What it discovers** Matter (`_matter._tcp` / `_matterc._udp`), HomeKit/HAP, Google Cast, AirPlay, and HTTP/HTTPS services—so you see printers, hubs, speakers, and other gear that advertise on the LAN.
+Matter Ops runs on your machine, scans the local network with DNS-SD/mDNS, and
+lists discovered devices in a modern web UI. Findings are stored in SQLite so
+the dashboard stays useful across restarts.
 
-**Highlights** Automatic discovery, filterable device grid, deep detail views (addresses, ports, TXT, FQDN), optional camera streaming via go2rtc (RTSP→HLS), network diagnostic, dark/light theme, and a settings area for discovery status and configuration.
+**What it discovers** Matter (`_matter._tcp` / `_matterc._udp`), HomeKit/HAP,
+Google Cast, AirPlay, and HTTP/HTTPS services—so you see printers, hubs,
+speakers, and other gear that advertise on the LAN.
 
-**Stack** React 18, Vite, Tailwind CSS, Radix UI, TanStack Query, Express 5, TypeScript, SQLite with Drizzle ORM, bonjour-service for discovery, Vitest for tests. Optional go2rtc for live camera feeds.
+**Highlights** Automatic discovery, filterable device grid, deep detail views
+(addresses, ports, TXT, FQDN), optional camera streaming via go2rtc (RTSP→HLS),
+network diagnostic, dark/light theme, and a settings area for discovery status
+and configuration.
+
+**Stack** React 18, Vite, Tailwind CSS, Radix UI, TanStack Query, Express 5,
+TypeScript, SQLite with Drizzle ORM, bonjour-service for discovery, Vitest for
+tests. Optional go2rtc for live camera feeds.
 
 **License** MIT.

@@ -31,10 +31,6 @@ export default function ContactPage() {
             time on the calendar or connect on LinkedIn.
           </p>
         </Row>
-        <Spacer />
-        <Row>
-          <ContactList />
-        </Row>
       </StyledSection>
     </StyledContainer>
   )

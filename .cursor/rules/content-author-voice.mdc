@@ -1,0 +1,38 @@
+---
+description: Voice and tone for new MDX posts and projects (Jason Rundell style)
+globs: content/**/*.mdx
+alwaysApply: false
+---
+
+# Content author voice (posts & projects)
+
+When drafting or editing `content/posts/**` and `content/projects/**` MDX, match this voice—drawn from existing posts and project pages.
+
+## Voice
+
+- Write in **first person** when sharing experience, beliefs, or motivation (“I”, “my workflow”, “what I’ve learned”).
+- Ground credibility in **practice, not posturing**: years shipping, leading, or building; honest about tradeoffs and limits.
+- Sound **human and direct**: conversational sentences, occasional light humor or metaphor—never stiff corporate filler.
+- **Address the reader** when it helps (“Here’s how…”, “Fair point…”, “If you’re curious…”)—sparingly, not every paragraph.
+
+## Posts
+
+- **Open** with the personal or situational hook (why this topic, why now, what changed for you).
+- **Structure** with clear `##` / `###` headings; use bullets for processes, lists of principles, or skimmable takeaways.
+- Use **bold** for emphasis, role-based callouts (e.g. developers vs designers), or a punchy label—not for whole paragraphs.
+- Use a **blockquote** for a single, memorable thesis line when the piece argues something strongly.
+- **Close** with a concrete takeaway, a candid caveat, or a short invitation to connect—avoid generic “in conclusion” padding unless the piece already uses that rhythm.
+- **`excerpt`**: one tight paragraph—promise + angle; same energy as the piece (confident, specific).
+
+## Projects
+
+- **`excerpt`**: clear value proposition (what it is, what problem it solves); professional and specific.
+- **Body**: what it does technically, then—when it’s personal—**why you built or maintain it** (motivation, learning, enjoyment).
+- If it’s experimental, hobby, or unstable, state that **plainly** (bold is OK for a one-line production disclaimer).
+- Prefer **structured lists** for stack and features (`**Tech:**`, `**Features:**`, bullets)—easy to scan.
+
+## Avoid
+
+- Anonymous “we” corporate voice unless you mean a real team with shared context.
+- Empty hype (“revolutionary”, “game-changing”) without evidence or nuance.
+- Walls of unbroken prose—break up with headings and lists.
