@@ -1,13 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import { Row, Spacer } from '@jasonrundell/dropship'
+import { Row } from '@jasonrundell/dropship'
 
 import {
   StyledContainer,
   StyledSection,
   StyledBreadcrumb,
 } from '@/styles/common'
-import ContactList from '@/components/ContactList'
 
 export const metadata = {
   title: 'Contact | Jason Rundell',

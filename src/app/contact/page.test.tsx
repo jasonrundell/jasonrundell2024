@@ -1,12 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import ContactPage from './page'
 
-jest.mock('@/components/ContactList', () => {
-  return function MockContactList() {
-    return <div data-testid="contact-list">Contact List</div>
-  }
-})
-
 jest.mock('next/link', () => {
   return function MockLink({
     children,
@@ -50,10 +44,14 @@ describe('Contact page', () => {
     expect(headings[0]).toHaveTextContent(/contact me/i)
   })
 
-  it('renders the contact list', () => {
+  it('renders the intro guidance for reaching out', () => {
     render(<ContactPage />)
 
-    expect(screen.getByTestId('contact-list')).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        /The fastest way to reach me is email\. For longer conversations, book time on the calendar or connect on LinkedIn\./
+      )
+    ).toBeInTheDocument()
   })
 
   it('renders a breadcrumb to home', () => {
