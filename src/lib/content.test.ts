@@ -82,7 +82,7 @@ describe('getProjects', () => {
 
     const project = projects.find((p: { slug: string }) => p.slug === 'test-project')
     expect(project?.title).toBe('Test Project')
-    expect(project?.order).toBe(1)
+    expect(project?.createdDate).toBe('2025-12-01T00:00:00.000Z')
     expect(project?.technology).toEqual(['TypeScript', 'React'])
     expect(project?.link).toBe('https://github.com/example/test-project')
     expect(project?.description).toContain('Project description')
@@ -100,10 +100,11 @@ describe('getProjects', () => {
 })
 
 describe('getFeaturedProjects', () => {
-  it('limits returned projects and sorts by order', async () => {
+  it('limits returned projects and sorts by date descending', async () => {
     const featured = await content.getFeaturedProjects(1)
     expect(featured).toHaveLength(1)
-    expect(featured[0].order).toBe(1)
+    expect(featured[0].slug).toBe('test-project')
+    expect(featured[0].createdDate).toBe('2025-12-01T00:00:00.000Z')
   })
 })
 
@@ -204,11 +205,9 @@ describe('content.ts edge case branches', () => {
     expect(noDate).toBeDefined()
   })
 
-  it('getFeaturedProjects sorts projects with missing order to end', async () => {
-    // fixture contains a project with no order field, which defaults to 999
+  it('getFeaturedProjects sorts projects with the earliest date last', async () => {
     const projects = await content.getFeaturedProjects(100)
-    const noOrder = projects.find((p: { slug: string }) => p.slug === 'no-order-project')
-    expect(noOrder).toBeDefined()
+    expect(projects[projects.length - 1].slug).toBe('no-order-project')
   })
 
   it('getProjects resolves an absolute / image path directly', async () => {

@@ -1,0 +1,161 @@
+---
+title:
+  'Building Coding Fundamentals: My System for Sustainable AI-Assisted
+  Development'
+slug: 'building-coding-fundamentals-my-system-for-sustainable-ai-development'
+excerpt:
+  "Twenty years of developer instincts, a year of scattered AI rules, and one
+  Matt Pocock talk finally converged into a project. Here's how I built Coding
+  Fundamentals—a portable Cursor pack that keeps my AI sessions grounded in what
+  actually matters."
+date: '2026-05-07T12:00-04:00'
+author: 'Jason Rundell'
+featuredImage: './featured.webp'
+featuredImageAlt:
+  'Stylized blueprint with interconnected nodes representing software
+  fundamentals anchoring AI-assisted code generation'
+featuredImageDescription: ''
+---
+
+This project didn't start with a manifesto or a set of principles on a
+whiteboard. It started with instincts—twenty-plus years of shipping software,
+leading teams, and building things that needed to survive contact with real
+users. Those instincts were always there, but they didn't have a home in my AI
+workflow until everything aligned.
+
+The result is
+[Coding Fundamentals](https://github.com/jasonrundell/coding-fundamentals): a
+portable pack of Cursor rules, skills, and install helpers that I now use across
+every new AI-assisted project.
+
+## The Moment It Came Together
+
+For the past year I've been deep in AI-assisted development—building projects
+like [Matter Ops](https://github.com/jasonrundell/matter-ops) and
+[ARC Line](https://github.com/jasonrundell/arcline), iterating on Cursor rules
+and skills, trying to get them portable and reusable across projects. I kept
+running into the same friction: rules scattered across repos, skills that
+weren't quite transferable, sessions where the agent and I were misaligned on
+fundamentals I thought were obvious.
+
+Then I watched Matt Pocock's talk,
+["Software Fundamentals Matter More Than Ever."](https://www.youtube.com/watch?v=v4F1gFy-hqg)
+
+It hit differently. Not because the ideas were new to me—they weren't. But
+because he articulated the scaffolding I'd been missing. He gave language and
+structure to instincts I'd been carrying for two decades but hadn't organized
+into anything actionable for AI workflows. Hearing someone lay it out clearly
+was the catalyst. I knew immediately that this was the shape my scattered rules
+and skills needed to take.
+
+I took a transcript of the talk, sat down with Claude Opus 4.7, and worked
+through a plan to build it all out as a proper project. The fundamentals in the
+pack aren't things I learned from the talk—they're things I've lived. The talk
+gave me permission to stop treating them as implicit and make them explicit.
+
+## How I Built It
+
+The process was straightforward once the shape was clear. I used Opus 4.7 to
+help me structure the repo, draft the docs, and organize guidance into layers
+that match how Cursor actually works:
+
+- **A tiny always-on rule** (`global-fundamentals.mdc`) that sits in every
+  conversation—read before writing, follow existing patterns, work in small
+  steps. Under 15 lines.
+- **Opt-in skills** for deeper workflow moments—the orchestrator skill for
+  refreshing the full family, and Grill Me for pressure-testing ideas before
+  building.
+- **Rule templates** for common project concerns (testing, CSS, content voice)
+  that you adopt per-project instead of globally.
+- **Validation scripts** and a self-assessment scorecard to keep the repo itself
+  healthy.
+
+## Grill Me: The Skill I Use Most
+
+Of everything in the pack, the
+[Grill Me skill](https://raw.githubusercontent.com/jasonrundell/coding-fundamentals/refs/heads/main/skills/grill-me/SKILL.md)
+has had the biggest impact on my workflow. It runs a design-concept discovery
+session—basically interrogating your idea before you commit to building it.
+
+Here's what I've noticed: most of the questions it asks, I already know the
+answers to. And typically the recommended answers are the ones I'd go with
+anyway. But every now and then—maybe one in five sessions—it surfaces a question
+I hadn't considered. Something about a constraint, a dependency, or a user flow
+that wasn't on my radar. Those moments genuinely enhance the final result.
+
+For brand new projects especially, I won't skip it. That early pressure-testing
+saves me from building the wrong thing at AI speed, which is a much more
+expensive mistake than it used to be.
+
+> My partner asked me "What do you get out of [Grill Me]?". My answer is: "Using
+> Grill Me is like going from ordering at McDonalds to Chipotle. More selection,
+> better ingredients. Better meal at the end."
+
+## What This Doesn't Cover
+
+I want to be clear: Coding Fundamentals is about **code**
+fundamentals—structure, patterns, feedback loops, module boundaries. It does not
+cover design fundamentals. If you're trying to create a prototype, a UI, or
+figure out how something should look and feel for users, this pack won't help
+you there.
+
+Design is a different skill set entirely, and it's something I'm currently
+trialling with a separate product project. Maybe that becomes its own pack down
+the road—but for now, Coding Fundamentals stays in its lane.
+
+## How I Implement It Across New Projects
+
+Here's my actual setup flow when I start a new AI-assisted project:
+
+**1. Install the global rule.** The `global-fundamentals.mdc` file goes into my
+user-level Cursor rules. It's always present, always lightweight. Every session
+starts with these fundamentals in the agent's context.
+
+**2. Copy the skills.** The `coding-fundamentals` and `grill-me` skills go into
+user-level skills. I invoke the coding fundamentals skill when I want to refresh
+or extend the skill family for a specific project. I invoke Grill Me before any
+non-trivial design decision.
+
+**3. Pick relevant rule templates.** If the project uses Tailwind, I drop in the
+CSS rules. If it has MDX content, the author voice rule comes along. Each
+project gets only what applies.
+
+**4. Remove duplication.** I use the deduplication guide to strip any overlap
+between the global fundamentals and project-specific rules that might have
+accumulated.
+
+**5. Run the onboarding prompts.** The pack includes practical prompts for both
+new and existing projects—things like "Audit this project for module boundary
+clarity" or "Propose a testing strategy aligned with small-verified-steps."
+
+None of this slows me down. The rules are short enough to be invisible overhead,
+and the skills are opt-in—I pull them in when the situation calls for deliberate
+thinking, not for every trivial fix.
+
+## What Changed in Practice
+
+Since rolling this out across my projects:
+
+- **Reusable guidance, finally.** I'd been copy-pasting rules between repos for
+  a year. Now there's one source of truth that I install and update centrally.
+- **Better first sessions.** New projects start grounded instead of drifting.
+  The agent and I are aligned on how to work from the first prompt.
+- **Grill Me catches the blind spots.** That one unexpected question per session
+  compounds over time. Fewer "why did I build it this way?" moments three weeks
+  in.
+- **Instincts made explicit.** Things I used to enforce through code review or
+  verbal feedback are now in the agent's context automatically. I don't have to
+  re-teach every session.
+
+## It's Open Source
+
+The whole thing is MIT-licensed at
+[github.com/jasonrundell/coding-fundamentals](https://github.com/jasonrundell/coding-fundamentals).
+It's intentionally portable—no org-specific secrets, no project-specific config.
+If you use Cursor and want a lightweight way to keep AI sessions grounded in
+solid engineering, grab the global rule and see if it resonates.
+
+Fair warning: I built this for my own workflow and taste. Your mileage will
+vary. But the underlying idea—that AI-assisted development needs explicit,
+lightweight structural guidance built from your own instincts—is something I
+think every developer working with agents should be thinking about.

@@ -15,10 +15,10 @@ This index is the first stop for contributors and agents. It maps the current mo
 - `src/__tests__`: Shared test utilities.
 - `scripts`: Build and maintenance scripts (`build-tokens.js`, `sync-content-images.js`, `check-coverage.js`).
 - `docs`: Project docs, audit notes, and this index.
-- `.cursor`: Project rules and reusable audit command playbooks for AI-assisted work.
+- `.cursor`: Project rules and reusable audit command playbooks for AI-assisted work. Author voice for new MDX: `.cursor/rules/content-author-voice.mdc` (globs `content/**/*.mdx`).
 
 ## Module Boundaries
-- **Content reads** belong in `src/lib/content.ts`. Consumers call exported functions (`getPosts`, `getProjects`, `getSkills`, `getPositions`, `getReferences`, `getLastSong`, `getEntryBySlug`, `getFeaturedProjects`, `getLatestPosts`) instead of reading the filesystem directly. The module throws (never returns fallback data) when required content is missing.
+- **Content reads** belong in `src/lib/content.ts`. Consumers call exported functions (`getPosts`, `getProjects`, `getSkills`, `getPositions`, `getReferences`, `getLastSong`, `getEntryBySlug`, `getFeaturedProjects`, `getLatestPosts`) instead of reading the filesystem directly. The module throws (never returns fallback data) when required content is missing. Project MDX requires a `createdDate` (ISO 8601) frontmatter field; listings sort newest-first via `compareProjectsByDateDesc` in `src/lib/projectUtils.ts`.
 - **MDX rendering** belongs in `src/lib/markdown.tsx`. The `<RenderedMDX source={string} />` client component handles GFM tables and fenced code blocks.
 - **Supabase** browser/server construction belongs in `src/utils/supabase/client.ts` and `src/utils/supabase/server.ts`.
 - **Supabase availability** handling belongs in `src/utils/supabase/status.ts` and `src/utils/supabase/safe-client.ts`.

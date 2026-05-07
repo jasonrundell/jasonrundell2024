@@ -2,11 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Row, Spacer, Grid } from '@jasonrundell/dropship'
 
-import {
-  getFeaturedProjects,
-  getLastSong,
-  getLatestPosts,
-} from '@/lib/content'
+import { getFeaturedProjects, getLastSong, getLatestPosts } from '@/lib/content'
 import { toProjectCardItem } from '@/lib/projectUtils'
 
 import {
@@ -76,21 +72,11 @@ export const metadata = {
 export const revalidate = 86400
 
 export default async function HomePage() {
-  const [projects, posts, lastSong] = await Promise.all([
+  const [featuredProjects, posts, lastSong] = await Promise.all([
     getFeaturedProjects(HOMEPAGE_PROJECT_LIMIT),
     getLatestPosts(HOMEPAGE_POST_LIMIT),
     getLastSong(),
   ])
-
-  const selectedProjects = [...projects]
-    .sort((a, b) => {
-      const orderA =
-        typeof a.order === 'number' ? a.order : Number.MAX_SAFE_INTEGER
-      const orderB =
-        typeof b.order === 'number' ? b.order : Number.MAX_SAFE_INTEGER
-      return orderA - orderB
-    })
-    .slice(0, HOMEPAGE_PROJECT_LIMIT)
 
   const latestPosts = [...posts]
     .sort((a, b) => {
@@ -138,9 +124,7 @@ export default async function HomePage() {
                 door.
               </p>
             </Row>
-            <Row>
-              {lastSong && <LastSong song={lastSong} />}
-            </Row>
+            <Row>{lastSong && <LastSong song={lastSong} />}</Row>
           </Grid>
           <Spacer />
           <Reveal>
@@ -148,12 +132,12 @@ export default async function HomePage() {
           </Reveal>
         </StyledSection>
 
-        <StyledSection id="selected-projects">
-          <SectionHeading comment="selected-projects.tsx">
-            Selected projects
+        <StyledSection id="latest-projects">
+          <SectionHeading comment="latest-projects.tsx">
+            Latest Projects
           </SectionHeading>
           <Row>
-            <MoreProjects items={selectedProjects.map(toProjectCardItem)} />
+            <MoreProjects items={featuredProjects.map(toProjectCardItem)} />
           </Row>
         </StyledSection>
       </StyledContainer>

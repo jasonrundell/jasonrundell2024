@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Row, Spacer } from '@jasonrundell/dropship'
 
 import { getProjects } from '@/lib/content'
-import { toProjectCardItem } from '@/lib/projectUtils'
+import { compareProjectsByDateDesc, toProjectCardItem } from '@/lib/projectUtils'
 import {
   StyledContainer,
   StyledSection,
@@ -22,11 +22,7 @@ export const revalidate = 86400
 export default async function ProjectsPage() {
   const projects = await getProjects()
 
-  const sortedProjects = [...projects].sort((a, b) => {
-    const orderA = typeof a.order === 'number' ? a.order : Number.MAX_SAFE_INTEGER
-    const orderB = typeof b.order === 'number' ? b.order : Number.MAX_SAFE_INTEGER
-    return orderA - orderB
-  })
+  const sortedProjects = [...projects].sort(compareProjectsByDateDesc)
 
   return (
     <StyledContainer>

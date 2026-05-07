@@ -10,6 +10,7 @@ import type {
   LastSong,
   ContentImage,
 } from '@/typeDefinitions/app'
+import { compareProjectsByDateDesc } from '@/lib/projectUtils'
 
 const CONTENT_DIR = path.join(process.cwd(), 'content')
 
@@ -143,6 +144,22 @@ export async function getEntryBySlug(
 // Projects
 // ---------------------------------------------------------------------------
 
+function parseProjectCreatedDate(slug: string, raw: unknown): string {
+  if (raw == null || (typeof raw === 'string' && raw.trim() === '')) {
+    const msg = `Project "${slug}" is missing required frontmatter field: createdDate`
+    console.error(msg)
+    throw new Error(msg)
+  }
+  const dateStr = String(raw)
+  const t = new Date(dateStr).getTime()
+  if (Number.isNaN(t)) {
+    const msg = `Project "${slug}" has invalid createdDate in frontmatter: ${dateStr}`
+    console.error(msg)
+    throw new Error(msg)
+  }
+  return dateStr
+}
+
 function parseProject(slug: string): Project {
   const mdxDir = path.join(CONTENT_DIR, 'projects', slug)
   const filePath = path.join(mdxDir, 'index.mdx')
@@ -175,7 +192,7 @@ function parseProject(slug: string): Project {
   return {
     title: data.title as string,
     slug: (data.slug as string | undefined) ?? slug,
-    order: (data.order as number | undefined) ?? 999,
+    createdDate: parseProjectCreatedDate(slug, data.createdDate),
     excerpt: (data.excerpt as string | undefined) ?? '',
     description: content,
     technology: (data.technology as string[] | undefined) ?? [],
@@ -194,13 +211,7 @@ export async function getProjects(): Promise<Project[]> {
 
 export async function getFeaturedProjects(limit: number): Promise<Project[]> {
   const projects = await getProjects()
-  return [...projects]
-    .sort((a, b) => {
-      const orderA = typeof a.order === 'number' ? a.order : Number.MAX_SAFE_INTEGER
-      const orderB = typeof b.order === 'number' ? b.order : Number.MAX_SAFE_INTEGER
-      return orderA - orderB
-    })
-    .slice(0, limit)
+  return [...projects].sort(compareProjectsByDateDesc).slice(0, limit)
 }
 
 // ---------------------------------------------------------------------------

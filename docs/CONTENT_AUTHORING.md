@@ -134,7 +134,7 @@ The `predev` script runs `sync-content-images` automatically — no manual step 
    ---
    title: "My Project"
    slug: "my-project"
-   order: 10
+   createdDate: "2026-05-01T12:00:00.000Z"
    excerpt: "Short description shown in the project card."
    technology: ["TypeScript", "React", "Next.js"]
    link: "https://github.com/jasonrundell/my-project"
@@ -159,7 +159,7 @@ The `predev` script runs `sync-content-images` automatically — no manual step 
 |-------|----------|------|-------|
 | `title` | Yes | string | Project name |
 | `slug` | Yes | string | Must match the directory name |
-| `order` | Yes | number | Lower number = shown earlier in lists |
+| `createdDate` | Yes | ISO 8601 string | Newer dates appear first in project lists (same format as post `date`) |
 | `excerpt` | Yes | string | Shown in the project card |
 | `technology` | Yes | string[] | Rendered as the tech stack list |
 | `link` | No | string | GitHub / repo URL |
