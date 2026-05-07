@@ -132,7 +132,7 @@ export default async function HomePage() {
           </Reveal>
         </StyledSection>
 
-        <StyledSection id="selected-projects">
+        <StyledSection id="latest-projects">
           <SectionHeading comment="latest-projects.tsx">
             Latest Projects
           </SectionHeading>
