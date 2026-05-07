@@ -105,7 +105,10 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
 
         if (!armed) {
           armed = true
-          if (intersecting) {
+          const rect = node.getBoundingClientRect()
+          const isPartiallyVisible =
+            rect.top < window.innerHeight && rect.bottom > 0
+          if (intersecting || isPartiallyVisible) {
             observer.disconnect()
             return
           }
