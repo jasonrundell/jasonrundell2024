@@ -168,6 +168,25 @@ describe('content display components', () => {
     expect(screen.getByText('Jane Doe')).toBeInTheDocument()
     expect(screen.getByText('Acme')).toBeInTheDocument()
 
+    const { container: multilineContainer } = render(
+      <References
+        references={[
+          {
+            id: '2',
+            citeName: 'John Smith',
+            company: 'Example Co.',
+            order: 2,
+            emphasis: false,
+            quote: 'First paragraph.\n\nSecond paragraph.',
+          },
+        ]}
+      />
+    )
+
+    expect(multilineContainer.querySelectorAll('p')).toHaveLength(2)
+    expect(screen.getByText(/First paragraph\./)).toBeInTheDocument()
+    expect(screen.getByText(/Second paragraph\./)).toBeInTheDocument()
+
     expect(() => render(<References references={[]} />)).toThrow(
       'References data is required.'
     )

@@ -12,8 +12,9 @@ const borderRadiusMedium = `${Tokens.borderRadius.medium.value}${Tokens.borderRa
 const StyledReferencesGrid = styled('section')`
   display: grid;
   gap: ${spacingLarge};
-  margin-block: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge.unit};
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-block: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding
+      .xlarge.unit};
+  grid-template-columns: 1fr;
 `
 
 const StyledReferenceCard = styled('article')`
@@ -44,6 +45,14 @@ const StyledQuote = styled(Blockquote)`
   }
 `
 
+const StyledQuoteParagraph = styled('p')`
+  margin: 0;
+
+  &:not(:last-child) {
+    margin-bottom: ${spacingMedium};
+  }
+`
+
 const StyledReferenceMeta = styled('div')`
   display: flex;
   flex-direction: column;
@@ -67,6 +76,12 @@ const StyledCompany = styled('span')`
     content: '// ';
   }
 `
+
+function formatQuoteParagraphs(quote: string) {
+  return quote.split('\n\n').map((paragraph, index) => (
+    <StyledQuoteParagraph key={index}>{paragraph}</StyledQuoteParagraph>
+  ))
+}
 
 function ensureField<Value>(value: Value, label: string, index: number): Value {
   if (!value) {
@@ -96,7 +111,7 @@ export default function References({ references }: ReferencesDef) {
 
         return (
           <StyledReferenceCard key={`${citeName}-${index}`}>
-            <StyledQuote>{quote}</StyledQuote>
+            <StyledQuote>{formatQuoteParagraphs(quote)}</StyledQuote>
             <StyledReferenceMeta>
               <StyledCite>{citeName}</StyledCite>
               {company && <StyledCompany>{company}</StyledCompany>}
