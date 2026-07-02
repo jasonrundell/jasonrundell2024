@@ -31,7 +31,7 @@ const HUB_DOORS: ReadonlyArray<HubDoor> = [
   {
     href: '/about',
     label: 'About',
-    description: 'Bio, skills, experience, and recommendations.',
+    description: 'Background, skills, and what I bring to the table.',
   },
   {
     href: '/projects',
@@ -45,18 +45,18 @@ const HUB_DOORS: ReadonlyArray<HubDoor> = [
   },
 ] as const
 
-const HERO_HEADING = 'Manager / Full Stack Developer'
+const HERO_HEADING = 'Engineering Leader / Full-Stack Architect'
 
 const HERO_PITCH =
-  "Hi! I'm an AI-first Application Development Manager and Senior Full Stack Web Developer with 20+ years leading high-impact web platforms and engineering teams."
+  "I'm an engineering leader and full-stack architect who joins organizations at inflection points — where chaos needs order, and order needs questioning."
 
 const HERO_FIELDS: ReadonlyArray<HeroConstField> = [
   { key: 'name', value: 'Jason Rundell' },
-  { key: 'role', value: 'Manager / Full Stack Developer' },
+  { key: 'role', value: 'Engineering Leader / Full-Stack Architect' },
   {
     key: 'pitch',
     value:
-      'AI-first ADM and Senior Full Stack Web Developer with 20+ years leading high-impact web platforms.',
+      '20+ years scaling teams, modernizing platforms, and building the systems that let engineering orgs ship with confidence.',
   },
 ] as const
 
@@ -64,9 +64,9 @@ const HOMEPAGE_PROJECT_LIMIT = 3
 const HOMEPAGE_POST_LIMIT = 3
 
 export const metadata = {
-  title: 'Manager / Full Stack Developer | Jason Rundell',
+  title: 'Engineering Leader / Full-Stack Architect | Jason Rundell',
   description:
-    'Jason Rundell — AI-first Application Development Manager and Senior Full Stack Web Developer.',
+    'Jason Rundell — engineering leader and full-stack architect. 20+ years scaling teams, modernizing platforms, and shipping with confidence.',
 }
 
 export const revalidate = 86400
@@ -115,9 +115,9 @@ export default async function HomePage() {
           >
             <Row>
               <StyledIntroParagraph>
-                Hi! I&apos;m an AI-first Application Development Manager and
-                Senior Full Stack Web Developer with 20+ years leading
-                high-impact web platforms and engineering teams.
+                I&apos;m an engineering leader and full-stack architect who
+                joins organizations at inflection points — where chaos needs
+                order, and order needs questioning.
               </StyledIntroParagraph>
               <p>
                 Looking for the long version, my work, or my writing? Pick a
