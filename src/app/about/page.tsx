@@ -1,27 +1,19 @@
 import React from 'react'
-import { ExternalLink } from 'lucide-react'
 import Link from 'next/link'
-import { Row, Spacer } from '@jasonrundell/dropship'
+import { Row } from '@jasonrundell/dropship'
 
-import {
-  getSkills,
-  getReferences,
-  getPositions,
-} from '@/lib/content'
+import { getSkills, getReferences, getPositions } from '@/lib/content'
 
 import {
   StyledContainer,
   StyledIntroParagraph,
   StyledSection,
-  StyledLink,
   StyledBreadcrumb,
 } from '@/styles/common'
 
 import Skills from '@/components/Skills'
 import References from '@/components/References'
-import Positions from '@/components/Positions'
-import Icon from '@/components/Icon'
-import { SectionHeading, PromptList, PromptItem } from '@/components/chrome'
+import { SectionHeading } from '@/components/chrome'
 import { buildPersonJsonLd } from '@/lib/jsonld'
 
 export const metadata = {
@@ -35,7 +27,7 @@ export const revalidate = 86400
 const personJsonLd = buildPersonJsonLd()
 
 export default async function AboutPage() {
-  const [skills, references, positions] = await Promise.all([
+  const [skills, references] = await Promise.all([
     getSkills(),
     getReferences(),
     getPositions(),
@@ -83,29 +75,6 @@ export default async function AboutPage() {
       <StyledSection id="skills">
         <SectionHeading comment="skills.tsx">Skills</SectionHeading>
         <Row>{skills && <Skills skills={skills} />}</Row>
-      </StyledSection>
-
-      <StyledSection id="experience">
-        <SectionHeading comment="experience.tsx">Experience</SectionHeading>
-        <Row>
-          {positions.length > 0 && <Positions positions={positions} />}
-        </Row>
-        <Spacer />
-        <Row>
-          <PromptList aria-label="More experience links">
-            <PromptItem>
-              <Icon type="LinkedIn" />{' '}
-              <StyledLink
-                href="https://www.linkedin.com/in/jasonrundell/"
-                rel="noopener noreferrer"
-                target="_blank"
-                aria-label="See more on LinkedIn"
-              >
-                <ExternalLink size={18} /> See more on LinkedIn
-              </StyledLink>
-            </PromptItem>
-          </PromptList>
-        </Row>
       </StyledSection>
 
       <StyledSection id="recommendations">

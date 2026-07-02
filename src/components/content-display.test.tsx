@@ -128,7 +128,7 @@ describe('content display components', () => {
     expect(screen.getByText('Globex')).toBeInTheDocument()
   })
 
-  it('groups skills by category', () => {
+  it('renders skills in a searchable 3D cloud with category legend', () => {
     render(
       <Skills
         skills={[
@@ -139,10 +139,48 @@ describe('content display components', () => {
       />
     )
 
-    expect(screen.getByRole('heading', { name: 'Frontend' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Backend' })).toBeInTheDocument()
     expect(screen.getByText('React')).toBeInTheDocument()
+    expect(screen.getByText('TypeScript')).toBeInTheDocument()
     expect(screen.getByText('Supabase')).toBeInTheDocument()
+    expect(screen.getByLabelText('Search skills')).toBeInTheDocument()
+    expect(screen.getByLabelText('Skills cloud')).toBeInTheDocument()
+    expect(screen.getByLabelText('Filter by Frontend')).toBeInTheDocument()
+    expect(screen.getByLabelText('Filter by Backend')).toBeInTheDocument()
+  })
+
+  it('shows result count when searching skills', () => {
+    render(
+      <Skills
+        skills={[
+          { id: '1', category: 'Frontend', name: 'React' },
+          { id: '2', category: 'Frontend', name: 'TypeScript' },
+          { id: '3', category: 'Backend', name: 'Supabase' },
+        ]}
+      />
+    )
+
+    fireEvent.change(screen.getByLabelText('Search skills'), {
+      target: { value: 'react' },
+    })
+
+    expect(screen.getByText('1 / 3')).toBeInTheDocument()
+  })
+
+  it('filters skills by category name via legend button', () => {
+    render(
+      <Skills
+        skills={[
+          { id: '1', category: 'Frontend', name: 'React' },
+          { id: '2', category: 'Frontend', name: 'TypeScript' },
+          { id: '3', category: 'Backend', name: 'Supabase' },
+        ]}
+      />
+    )
+
+    fireEvent.click(screen.getByLabelText('Filter by Frontend'))
+
+    expect(screen.getByLabelText('Search skills')).toHaveValue('Frontend')
+    expect(screen.getByText('2 / 3')).toBeInTheDocument()
   })
 
   it('renders references and rejects missing reference data', () => {
