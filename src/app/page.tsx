@@ -15,6 +15,7 @@ import {
 
 import MorePosts from '@/components/MorePosts'
 import MoreProjects from '@/components/MoreProjects'
+import InfiniteSourcePromo from '@/components/InfiniteSourcePromo'
 import HeroTerminal, { type HeroConstField } from '@/components/HeroTerminal'
 import HubDoors, { type HubDoor } from '@/components/HubDoors'
 import LastSong from '@/components/LastSong'
@@ -130,6 +131,10 @@ export default async function HomePage() {
           <Reveal>
             <HubDoors doors={HUB_DOORS} ariaLabel="Site sections" />
           </Reveal>
+        </StyledSection>
+
+        <StyledSection id="infinite-source">
+          <InfiniteSourcePromo />
         </StyledSection>
 
         <StyledSection id="latest-projects">
