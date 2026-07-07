@@ -52,6 +52,23 @@ function resolveImagePath(relativeSrc: string, mdxDir: string): string {
   return publicPath
 }
 
+/**
+ * Rewrite relative image paths in a markdown body to their public URLs.
+ *
+ * Body markdown uses paths relative to the mdx file, e.g.
+ *   ![alt](./content-image-1.webp)
+ * which must be resolved to /content/<type>/<slug>/content-image-1.webp so the
+ * browser requests the static asset instead of resolving it against the page URL.
+ */
+function resolveBodyImagePaths(content: string, mdxDir: string): string {
+  const markdownImage = /(!\[[^\]]*\]\()(\s*<?)([^)\s>]+)([^)]*\))/g
+  return content.replace(
+    markdownImage,
+    (_match, prefix, open, url, suffix) =>
+      `${prefix}${open}${resolveImagePath(url, mdxDir)}${suffix}`
+  )
+}
+
 function slugDirs(contentType: 'posts' | 'projects'): string[] {
   const dir = path.join(CONTENT_DIR, contentType)
   if (!fs.existsSync(dir)) {
@@ -98,7 +115,7 @@ function parsePost(slug: string): Post {
   return {
     title: data.title as string,
     slug: (data.slug as string | undefined) ?? slug,
-    content,
+    content: resolveBodyImagePaths(content, mdxDir),
     excerpt: (data.excerpt as string | undefined) ?? '',
     featuredImage,
     date: (data.date as string | undefined) ?? '',
@@ -194,7 +211,7 @@ function parseProject(slug: string): Project {
     slug: (data.slug as string | undefined) ?? slug,
     createdDate: parseProjectCreatedDate(slug, data.createdDate),
     excerpt: (data.excerpt as string | undefined) ?? '',
-    description: content,
+    description: resolveBodyImagePaths(content, mdxDir),
     technology: (data.technology as string[] | undefined) ?? [],
     link: data.link as string | undefined,
     siteLink: data.siteLink as string | undefined,
