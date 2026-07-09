@@ -21,13 +21,12 @@ const fields: ReadonlyArray<HeroConstField> = [
 const baseProps = {
   fields,
   heading: 'Manager / Full Stack Developer',
-  pitch: 'AI-first ADM and Senior Full Stack Web Developer with 20+ years.',
+  pitch: 'AI-first ADM and Senior Full Stack Web Developer with 25+ years.',
 }
 
 const setReducedMotion = (matches: boolean) => {
   ;(window.matchMedia as jest.Mock).mockImplementation((query: string) => ({
-    matches:
-      matches && query.includes('prefers-reduced-motion') ? true : false,
+    matches: matches && query.includes('prefers-reduced-motion') ? true : false,
     media: query,
     onchange: null,
     addListener: jest.fn(),
@@ -145,11 +144,7 @@ describe('HeroTerminal', () => {
     it('renders a partial mid-segment slice while typing is still in progress', () => {
       jest.useFakeTimers()
       const { container } = render(
-        <HeroTerminal
-          {...baseProps}
-          comment="hero.tsx"
-          typeIntervalMs={50}
-        />
+        <HeroTerminal {...baseProps} comment="hero.tsx" typeIntervalMs={50} />
       )
 
       // Advance only enough for a handful of characters: should land

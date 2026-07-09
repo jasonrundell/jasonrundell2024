@@ -49,7 +49,7 @@ export default async function AboutPage() {
           <StyledIntroParagraph>
             I&apos;m an engineering leader and full-stack architect who joins
             organizations at inflection points — where chaos needs order, and
-            order needs questioning. Over 20+ years I&apos;ve scaled teams,
+            order needs questioning. Over 25+ years I&apos;ve scaled teams,
             modernized platforms, and built the systems and standards that let
             engineering orgs ship with confidence.
           </StyledIntroParagraph>

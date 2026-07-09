@@ -13,12 +13,9 @@ export function buildPersonJsonLd() {
     name: AUTHOR.name,
     jobTitle: 'Manager / Full Stack Developer',
     url: `${SITE_DOMAIN}/about`,
-    sameAs: [
-      AUTHOR.url,
-      'https://github.com/jasonrundell',
-    ],
+    sameAs: [AUTHOR.url, 'https://github.com/jasonrundell'],
     description:
-      'AI-first Application Development Manager and Senior Full Stack Web Developer with 20+ years leading high-impact web platforms and engineering teams.',
+      'AI-first Application Development Manager and Senior Full Stack Web Developer with 25+ years leading high-impact web platforms and engineering teams.',
   }
 }
 
@@ -39,6 +36,8 @@ export function buildBlogPostingJsonLd(post: Post, slug: string) {
       '@id': `${SITE_DOMAIN}/posts/${slug}`,
     },
     ...(imageUrl ? { image: imageUrl } : {}),
-    ...(post.author ? { author: { '@type': 'Person', name: post.author } } : {}),
+    ...(post.author
+      ? { author: { '@type': 'Person', name: post.author } }
+      : {}),
   }
 }

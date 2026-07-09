@@ -57,7 +57,7 @@ const HERO_FIELDS: ReadonlyArray<HeroConstField> = [
   {
     key: 'pitch',
     value:
-      '20+ years scaling teams, modernizing platforms, and building the systems that let engineering orgs ship with confidence.',
+      '25+ years scaling teams, modernizing platforms, and building the systems that let engineering orgs ship with confidence.',
   },
 ] as const
 
@@ -67,7 +67,7 @@ const HOMEPAGE_POST_LIMIT = 3
 export const metadata = {
   title: 'Engineering Leader / Full-Stack Architect | Jason Rundell',
   description:
-    'Jason Rundell — engineering leader and full-stack architect. 20+ years scaling teams, modernizing platforms, and shipping with confidence.',
+    'Jason Rundell — engineering leader and full-stack architect. 25+ years scaling teams, modernizing platforms, and shipping with confidence.',
 }
 
 export const revalidate = 86400
