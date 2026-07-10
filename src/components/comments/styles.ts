@@ -4,14 +4,15 @@ import Tokens from '@/lib/tokens'
 
 export const CommentsContainer = styled('div')`
   margin-top: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
-  border-top: 1px solid ${Tokens.colors.primary.value}30;
+  border-top: 1px solid ${Tokens.colors.lineSubtle.var};
   padding-top: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
 `
 
 export const CommentsHeading = styled('h3')`
+  font-family: ${Tokens.fonts.heading.family};
   font-size: ${Tokens.sizes.fonts.large.value}${Tokens.sizes.fonts.large.unit};
-  font-weight: 700;
-  color: ${Tokens.colors.roleHeading.var};
+  font-weight: 600;
+  color: ${Tokens.colors.ink.var};
   margin: 0 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit} 0;
 `
 
@@ -22,10 +23,10 @@ export const CommentsList = styled('div')`
 `
 
 export const CommentCard = styled('div')`
-  background: ${Tokens.colors.surfaceDeepest.var};
-  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
+  background: ${Tokens.colors.surfaceSecondary.var};
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
+  border-left: 2px solid ${Tokens.colors.accent.var};
   padding: ${Tokens.sizes.padding.medium.value}${Tokens.sizes.padding.medium.unit};
-  border: 1px solid ${Tokens.colors.primary.value}15;
 `
 
 export const CommentHeader = styled('div')`
@@ -53,7 +54,7 @@ export const CommentDate = styled('span')`
 `
 
 export const CommentBody = styled('p')`
-  color: ${Tokens.colors.roleBody.var};
+  color: ${Tokens.colors.ink.var};
   margin: 0;
   line-height: 1.5;
   white-space: pre-wrap;
@@ -105,10 +106,10 @@ export const CommentTextarea = styled('textarea')`
   width: 100%;
   min-height: 100px;
   padding: ${Tokens.sizes.padding.small.value}${Tokens.sizes.padding.small.unit};
-  background: ${Tokens.colors.surfaceDeepest.var};
-  border: 1px solid ${Tokens.colors.primary.value}30;
-  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
-  color: ${Tokens.colors.roleBody.var};
+  background: ${Tokens.colors.surfaceSecondary.var};
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
+  border-radius: 0;
+  color: ${Tokens.colors.ink.var};
   font-family: ${Tokens.fonts.body.family};
   font-size: ${Tokens.fontSizes.base.value}${Tokens.fontSizes.base.unit};
   resize: vertical;
@@ -121,7 +122,7 @@ export const CommentTextarea = styled('textarea')`
   }
 
   &::placeholder {
-    color: ${Tokens.colors.textSecondary.var};
+    color: ${Tokens.colors.inkFaint.var};
   }
 `
 
@@ -138,10 +139,10 @@ export const CharCount = styled('span')`
 
 export const SubmitCommentButton = styled('button')`
   padding: ${Tokens.sizes.padding.small.value}${Tokens.sizes.padding.small.unit} ${Tokens.sizes.padding.large.value}${Tokens.sizes.padding.large.unit};
-  background: ${Tokens.colors.rolePrompt.var};
-  color: ${Tokens.colors.surfaceDeepest.var};
+  background: ${Tokens.colors.accent.var};
+  color: ${Tokens.colors.onAccent.var};
   border: none;
-  border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
+  border-radius: 0;
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.15s;

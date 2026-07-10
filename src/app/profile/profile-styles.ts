@@ -36,7 +36,7 @@ export const UserAvatar = styled('div')`
   font-size: 2rem;
   font-weight: bold;
   color: white;
-  border: 4px solid ${Tokens.colors.surfaceDeepest.var};
+  border: 4px solid ${Tokens.colors.surfaceSecondary.var};
   box-shadow: 0 4px 20px ${Tokens.colors.primary.value}4D;
 `
 
@@ -75,15 +75,14 @@ export const InfoGrid = styled('div')`
 `
 
 export const InfoCard = styled('div')`
-  background: ${Tokens.colors.surfaceDeepest.var};
-  border-radius: ${Tokens.borderRadius.large.value}${Tokens.borderRadius.large.unit};
+  background: ${Tokens.colors.surfaceSecondary.var};
+  border-radius: 0;
   padding: 1.25rem;
-  border: 1px solid ${Tokens.colors.primary.value}20;
-  transition: all 0.2s ease;
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
+  transition: border-color 0.2s ease;
 
   &:hover {
-    border-color: ${Tokens.colors.primary.value}40;
-    transform: translateY(-2px);
+    border-color: ${Tokens.colors.accent.var};
   }
 `
 
@@ -115,10 +114,10 @@ export const ProfileForm = styled('form')`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  background: ${Tokens.colors.surfaceDeepest.var};
-  border-radius: ${Tokens.borderRadius.large.value}${Tokens.borderRadius.large.unit};
+  background: ${Tokens.colors.surfaceSecondary.var};
+  border-radius: 0;
   padding: 1.5rem;
-  border: 1px solid ${Tokens.colors.primary.value}20;
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
 `
 
 export const FormRow = styled('div')`

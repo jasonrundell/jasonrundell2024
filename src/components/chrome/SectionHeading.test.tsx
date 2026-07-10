@@ -74,13 +74,13 @@ describe('SectionHeading', () => {
     expect(heading.tagName).toBe('H3')
   })
 
-  it('renders the // comment line above the heading and marks it aria-hidden', () => {
+  it('renders the eyebrow comment above the heading and marks it aria-hidden', () => {
     const { container } = render(
-      <SectionHeading comment="experience.tsx">Experience</SectionHeading>
+      <SectionHeading comment="Experience">Experience</SectionHeading>
     )
 
     const comment = container.querySelector('[data-section-comment]')
-    expect(comment).toHaveTextContent('// experience.tsx')
+    expect(comment).toHaveTextContent('Experience')
     expect(comment).toHaveAttribute('aria-hidden', 'true')
   })
 
@@ -138,7 +138,7 @@ describe('SectionHeading', () => {
       ).toBeInTheDocument()
       expect(
         container.querySelector('[data-section-comment]')
-      ).toHaveTextContent('// experience.tsx')
+      ).toHaveTextContent('experience.tsx')
     })
   })
 })

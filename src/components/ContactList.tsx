@@ -1,53 +1,72 @@
-import Icon from './Icon'
-import { ExternalLink } from 'lucide-react'
-import { StyledLink } from '@/styles/common'
-import PromptList, { PromptItem } from '@/components/chrome/PromptList'
+import Link from 'next/link'
+import { styled } from '@pigment-css/react'
+import Tokens from '@/lib/tokens'
+
+const StyledList = styled('ul')`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+`
+
+const StyledItem = styled('li')`
+  a {
+    color: ${Tokens.colors.footerLink.var};
+    font-family: ${Tokens.fonts.body.var};
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  a:hover {
+    color: ${Tokens.colors.footerLinkHover.var};
+    text-decoration: underline;
+  }
+`
+
+const CONTACT_LINKS = [
+  {
+    href: 'mailto:contact@jasonrundell.com',
+    label: 'contact@jasonrundell.com',
+    external: false,
+  },
+  {
+    href: 'https://calendly.com/jason-rundell/60-minute-meeting',
+    label: 'Book time with me',
+    external: true,
+  },
+  {
+    href: 'https://www.linkedin.com/in/jasonrundell/',
+    label: 'LinkedIn',
+    external: true,
+  },
+  {
+    href: 'https://github.com/jasonrundell?tab=repositories',
+    label: 'GitHub',
+    external: true,
+  },
+] as const
 
 export default function ContactList() {
   return (
-    <PromptList aria-label="Ways to reach me">
-      <PromptItem>
-        <Icon type="Email" />{' '}
-        <StyledLink
-          href="mailto:contact@jasonrundell.com"
-          aria-label="Email me"
-        >
-          Email me
-        </StyledLink>
-      </PromptItem>
-      <PromptItem>
-        <Icon type="Calendar" />{' '}
-        <StyledLink
-          href="https://calendly.com/jason-rundell/60-minute-meeting"
-          rel="noopener noreferrer"
-          target="_blank"
-          aria-label="Book time with me"
-        >
-          <ExternalLink size={18} /> Book time with me
-        </StyledLink>
-      </PromptItem>
-      <PromptItem>
-        <Icon type="GitHub" />{' '}
-        <StyledLink
-          href="https://github.com/jasonrundell?tab=repositories&q=&type=&language=&sort="
-          rel="noopener noreferrer"
-          target="_blank"
-          aria-label="My open-source work on GitHub"
-        >
-          <ExternalLink size={18} /> My open-source work on GitHub
-        </StyledLink>
-      </PromptItem>
-      <PromptItem>
-        <Icon type="LinkedIn" />{' '}
-        <StyledLink
-          href="https://www.linkedin.com/in/jasonrundell/"
-          rel="noopener noreferrer"
-          target="_blank"
-          aria-label="Connect on LinkedIn"
-        >
-          <ExternalLink size={18} /> Connect on LinkedIn
-        </StyledLink>
-      </PromptItem>
-    </PromptList>
+    <StyledList aria-label="Ways to reach me">
+      {CONTACT_LINKS.map((link) => (
+        <StyledItem key={link.href}>
+          {link.external ? (
+            <Link
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {link.label}
+            </Link>
+          ) : (
+            <Link href={link.href}>{link.label}</Link>
+          )}
+        </StyledItem>
+      ))}
+    </StyledList>
   )
 }

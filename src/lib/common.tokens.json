@@ -132,72 +132,120 @@
     }
   },
   "colors": {
-    "primary": {
-      "value": "#e9be62",
+    "surfacePrimary": {
+      "value": "#f7f8fa",
       "unit": "hex"
     },
-    "primaryVariant": {
-      "value": "#3700b3",
+    "surfaceSecondary": {
+      "value": "#ffffff",
       "unit": "hex"
     },
-    "secondary": {
-      "value": "#eeeeee",
+    "ink": {
+      "value": "#1a1a1a",
       "unit": "hex"
     },
-    "secondaryVariant": {
-      "value": "#018786",
+    "inkMuted": {
+      "value": "#5f5f5f",
+      "unit": "hex"
+    },
+    "inkFaint": {
+      "value": "#767676",
       "unit": "hex"
     },
     "accent": {
-      "value": "#ff4081",
+      "value": "#1f4d3a",
+      "unit": "hex"
+    },
+    "accentSoft": {
+      "value": "#2f5d50",
+      "unit": "hex"
+    },
+    "line": {
+      "value": "#1a1a1a",
+      "unit": "hex"
+    },
+    "lineSubtle": {
+      "value": "#e6e8ec",
+      "unit": "hex"
+    },
+    "onAccent": {
+      "value": "#f7f8fa",
+      "unit": "hex"
+    },
+    "onInk": {
+      "value": "#f7f8fa",
+      "unit": "hex"
+    },
+    "footerLink": {
+      "value": "#d6d3d1",
+      "unit": "hex"
+    },
+    "footerLinkHover": {
+      "value": "#f7f8fa",
+      "unit": "hex"
+    },
+    "primary": {
+      "value": "#1f4d3a",
+      "unit": "hex"
+    },
+    "primaryVariant": {
+      "value": "#2f5d50",
+      "unit": "hex"
+    },
+    "secondary": {
+      "value": "#e6e8ec",
+      "unit": "hex"
+    },
+    "secondaryVariant": {
+      "value": "#2f5d50",
       "unit": "hex"
     },
     "background": {
-      "value": "#151c25",
+      "value": "#f7f8fa",
       "unit": "hex"
     },
     "backgroundDark": {
-      "value": "#0e131a",
+      "value": "#1a1a1a",
       "unit": "hex"
     },
     "backgroundDarker": {
-      "value": "#0e131a",
+      "value": "#141414",
       "unit": "hex"
     },
     "surface": {
-      "value": "#000000",
+      "value": "#ffffff",
       "unit": "hex"
     },
     "textPrimary": {
-      "value": "#b8c5d6",
+      "value": "#1a1a1a",
       "unit": "hex"
     },
     "textSecondary": {
-      "value": "#757575",
+      "value": "#5f5f5f",
       "unit": "hex"
     },
     "border": {
-      "value": "#dddddd",
+      "value": "#e6e8ec",
       "unit": "hex"
     },
     "link": {
-      "value": "#0070f3",
+      "value": "#1f4d3a",
       "unit": "hex"
     },
     "muted": {
-      "value": "#f6f6f6",
+      "value": "#f7f8fa",
       "unit": "hex"
     },
     "success": {
-      "value": "#9ece6a",
+      "value": "#1f4d3a",
       "unit": "hex"
     },
     "warning": {
-      "value": "#f5a623",
+      "value": "#8a5a00",
       "unit": "hex"
     },
     "error": {
-      "value": "#f7768e",
+      "value": "#a01523",
       "unit": "hex"
     },
     "white": {
@@ -205,39 +253,39 @@
       "unit": "hex"
     },
     "rolePrompt": {
-      "value": "#e9be62",
+      "value": "#1f4d3a",
       "unit": "hex"
     },
     "roleSuccess": {
-      "value": "#9ece6a",
+      "value": "#1f4d3a",
       "unit": "hex"
     },
     "roleInfo": {
-      "value": "#7dd3c0",
+      "value": "#2f5d50",
       "unit": "hex"
     },
     "roleDanger": {
-      "value": "#f7768e",
+      "value": "#a01523",
       "unit": "hex"
     },
     "roleBody": {
-      "value": "#b8c5d6",
+      "value": "#1a1a1a",
       "unit": "hex"
     },
     "roleHeading": {
-      "value": "#eeeeee",
+      "value": "#1a1a1a",
       "unit": "hex"
     },
     "surfaceBase": {
-      "value": "#151c25",
+      "value": "#f7f8fa",
       "unit": "hex"
     },
     "surfaceElevated": {
-      "value": "#232f3e",
+      "value": "#ffffff",
       "unit": "hex"
     },
     "surfaceDeepest": {
-      "value": "#0e131a",
+      "value": "#1a1a1a",
       "unit": "hex"
     },
     "surfaceOverlay": {
@@ -348,13 +396,13 @@
       "family": "var(--font-geist-sans), Geist, system-ui, sans-serif"
     },
     "heading": {
-      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif"
+      "family": "var(--font-newsreader), Newsreader, Georgia, 'Times New Roman', serif"
     },
     "monospace": {
-      "family": "var(--font-geist-mono), 'Geist Mono', ui-monospace, 'Courier New', monospace"
+      "family": "var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, 'Courier New', monospace"
     },
     "quotes": {
-      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif"
+      "family": "var(--font-newsreader), Newsreader, Georgia, 'Times New Roman', serif"
     }
   },
   "### NOTES ###": {

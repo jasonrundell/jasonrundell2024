@@ -188,8 +188,8 @@ describe('MainNavClient Component', () => {
       })
 
       // Click a link to close menu
-      const blogLink = screen.getByRole('link', { name: /blog/i })
-      await user.click(blogLink)
+      const writingLink = screen.getByRole('link', { name: /writing/i })
+      await user.click(writingLink)
 
       // Assert
       await waitFor(() => {

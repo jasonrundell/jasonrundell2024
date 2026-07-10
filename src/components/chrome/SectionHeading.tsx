@@ -6,19 +6,19 @@ import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import {
   REVEAL_FADE_DURATION_MS,
-  REVEAL_TYPE_DURATION_MS,
   fadeUpKeyframes,
-  typeInKeyframes,
   useReveal,
 } from '@/styles/motion'
 
 const StyledSectionComment = styled('span')`
   display: block;
   font-family: ${Tokens.fonts.monospace.family};
-  font-size: ${Tokens.sizes.fonts.small.value}${Tokens.sizes.fonts.small.unit};
-  color: ${Tokens.colors.roleInfo.var};
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: ${Tokens.colors.accent.var};
   margin-bottom: ${Tokens.sizes.xsmall.value}${Tokens.sizes.xsmall.unit};
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 `
 
 const StyledHeadingWrapper = styled('div')`
@@ -29,27 +29,21 @@ const StyledHeadingWrapper = styled('div')`
   h2,
   h3 {
     margin: 0;
+    font-family: ${Tokens.fonts.heading.family};
+    color: ${Tokens.colors.ink.var};
   }
 
-  &[data-reveal-state='hidden'] > [data-section-comment] {
-    clip-path: inset(0 100% 0 0);
-  }
-
+  &[data-reveal-state='hidden'] > [data-section-comment],
   &[data-reveal-state='hidden'] > h2,
   &[data-reveal-state='hidden'] > h3 {
     opacity: 0;
     transform: translateY(8px);
   }
 
-  &[data-reveal-state='visible'] > [data-section-comment] {
-    animation: ${typeInKeyframes} ${REVEAL_TYPE_DURATION_MS}ms steps(20, end)
-      forwards;
-  }
-
+  &[data-reveal-state='visible'] > [data-section-comment],
   &[data-reveal-state='visible'] > h2,
   &[data-reveal-state='visible'] > h3 {
     animation: ${fadeUpKeyframes} ${REVEAL_FADE_DURATION_MS}ms ease-out both;
-    animation-delay: ${REVEAL_TYPE_DURATION_MS}ms;
   }
 `
 
@@ -57,9 +51,9 @@ export type SectionHeadingLevel = 2 | 3
 
 interface SectionHeadingProps {
   /**
-   * The "filename" portion of the syntax-highlight chrome comment line,
-   * e.g. `skills.tsx`. Rendered as `// {comment}` above the heading and
-   * marked aria-hidden so the heading itself remains the announced label.
+   * Eyebrow label rendered in monospace above the heading (e.g. `Selected
+   * work`). Marked aria-hidden so the heading itself remains the announced
+   * label.
    */
   comment: string
   /** Heading text. */
@@ -97,7 +91,7 @@ export default function SectionHeading({
   return (
     <StyledHeadingWrapper ref={ref} data-reveal-state={state}>
       <StyledSectionComment data-section-comment aria-hidden="true">
-        {`// ${comment}`}
+        {comment}
       </StyledSectionComment>
       <Heading id={id} {...rest}>
         {children}

@@ -10,10 +10,11 @@ const StyledInput = styled('input')`
   height: 2.5rem;
   padding: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall
       .unit} ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
-  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
-  background: ${Tokens.colors.background.value}D9;
-  color: ${Tokens.colors.roleBody.var};
-  border: 1px solid ${Tokens.colors.textPrimary.value}1F;
+  border-radius: 0;
+  background: ${Tokens.colors.surfaceSecondary.var};
+  color: ${Tokens.colors.ink.var};
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
+  font-family: ${Tokens.fonts.body.var};
   font-size: 1rem;
   font-weight: 500;
   transition: box-shadow 0.15s, border-color 0.15s;

@@ -8,30 +8,39 @@ export const dynamic = 'force-dynamic'
 const Container = styled('div')`
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 1.5rem 4rem;
 `
 
 const StatusCard = styled('div')`
   padding: 1.5rem;
-  border-radius: 8px;
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
+  background-color: ${Tokens.colors.surfaceSecondary.var};
   margin-bottom: 1rem;
 `
 
 const StatusTitle = styled('h2')`
   margin: 0 0 1rem 0;
+  font-family: ${Tokens.fonts.heading.var};
   font-size: 1.25rem;
   font-weight: 600;
+  color: ${Tokens.colors.ink.var};
 `
 
 const StatusText = styled('p')`
   margin: 0 0 0.5rem 0;
   font-size: 1rem;
+  color: ${Tokens.colors.inkMuted.var};
+
+  strong {
+    color: ${Tokens.colors.ink.var};
+  }
 `
 
 const CodeBlock = styled('pre')`
-  background: ${Tokens.colors.muted.var};
+  background: ${Tokens.colors.ink.var};
+  color: ${Tokens.colors.onInk.var};
+  font-family: ${Tokens.fonts.monospace.var};
   padding: 1rem;
-  border-radius: ${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit};
   overflow-x: auto;
   font-size: 0.875rem;
   margin: 1rem 0;

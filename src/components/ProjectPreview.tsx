@@ -1,9 +1,8 @@
-import { Spacer, Row } from '@jasonrundell/dropship'
+import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 
 import ProjectPreviewImage from './ProjectPreviewImage'
 import Tokens from '@/lib/tokens'
-import { StyledLink } from '@/styles/common'
 
 interface ProjectPreviewProps {
   title: string
@@ -16,20 +15,58 @@ interface ProjectPreviewProps {
   slug: string
 }
 
+const StyledCard = styled('article')`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: ${Tokens.colors.surfaceSecondary.var};
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    border-color: ${Tokens.colors.accent.var};
+    box-shadow: inset 3px 0 0 0 ${Tokens.colors.accent.var};
+  }
+`
+
 const StyledImage = styled('div')`
   position: relative;
   display: block;
-  margin: 0 auto;
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background-color: ${Tokens.colors.surfaceDeepest.var};
-  margin-bottom: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
+  background-color: ${Tokens.colors.surfacePrimary.var};
+  border-bottom: 1px solid ${Tokens.colors.lineSubtle.var};
+`
+
+const StyledContent = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
 `
 
 const StyledHeading = styled('h3')`
-  font-size: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
-  line-height: 1.3;
+  font-family: ${Tokens.fonts.heading.var};
+  font-size: 1.375rem;
+  line-height: 1.2;
+  margin: 0;
+
+  a {
+    color: ${Tokens.colors.ink.var};
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: ${Tokens.colors.accent.var};
+  }
+`
+
+const StyledExcerpt = styled('p')`
+  color: ${Tokens.colors.inkMuted.var};
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0.25rem 0 0;
 `
 
 export default function ProjectPreview({
@@ -39,27 +76,20 @@ export default function ProjectPreview({
   excerpt,
 }: ProjectPreviewProps) {
   return (
-    <div>
-      <Row>
-        <StyledImage>
-          <ProjectPreviewImage
-            title={title}
-            slug={slug}
-            url={image?.file?.url}
-          />
-        </StyledImage>
-      </Row>
-      <Spacer />
-      <Row>
+    <StyledCard>
+      <StyledImage>
+        <ProjectPreviewImage
+          title={title}
+          slug={slug}
+          url={image?.file?.url}
+        />
+      </StyledImage>
+      <StyledContent>
         <StyledHeading>
-          <StyledLink href={`/projects/${slug}`}>{title}</StyledLink>
+          <Link href={`/projects/${slug}`}>{title}</Link>
         </StyledHeading>
-      </Row>
-      <Spacer />
-      <Row>
-        <p>{excerpt}</p>
-      </Row>
-      <Spacer />
-    </div>
+        <StyledExcerpt>{excerpt}</StyledExcerpt>
+      </StyledContent>
+    </StyledCard>
   )
 }

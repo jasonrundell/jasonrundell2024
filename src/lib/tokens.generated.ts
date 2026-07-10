@@ -169,88 +169,148 @@ const Tokens = {
     }
   },
   "colors": {
+    "surfacePrimary": {
+      "value": "#f7f8fa",
+      "unit": "hex",
+      "var": "var(--color-surface-primary)"
+    },
+    "surfaceSecondary": {
+      "value": "#ffffff",
+      "unit": "hex",
+      "var": "var(--color-surface-secondary)"
+    },
+    "ink": {
+      "value": "#1a1a1a",
+      "unit": "hex",
+      "var": "var(--color-ink)"
+    },
+    "inkMuted": {
+      "value": "#5f5f5f",
+      "unit": "hex",
+      "var": "var(--color-ink-muted)"
+    },
+    "inkFaint": {
+      "value": "#767676",
+      "unit": "hex",
+      "var": "var(--color-ink-faint)"
+    },
+    "accent": {
+      "value": "#1f4d3a",
+      "unit": "hex",
+      "var": "var(--color-accent)"
+    },
+    "accentSoft": {
+      "value": "#2f5d50",
+      "unit": "hex",
+      "var": "var(--color-accent-soft)"
+    },
+    "line": {
+      "value": "#1a1a1a",
+      "unit": "hex",
+      "var": "var(--color-line)"
+    },
+    "lineSubtle": {
+      "value": "#e6e8ec",
+      "unit": "hex",
+      "var": "var(--color-line-subtle)"
+    },
+    "onAccent": {
+      "value": "#f7f8fa",
+      "unit": "hex",
+      "var": "var(--color-on-accent)"
+    },
+    "onInk": {
+      "value": "#f7f8fa",
+      "unit": "hex",
+      "var": "var(--color-on-ink)"
+    },
+    "footerLink": {
+      "value": "#d6d3d1",
+      "unit": "hex",
+      "var": "var(--color-footer-link)"
+    },
+    "footerLinkHover": {
+      "value": "#f7f8fa",
+      "unit": "hex",
+      "var": "var(--color-footer-link-hover)"
+    },
     "primary": {
-      "value": "#e9be62",
+      "value": "#1f4d3a",
       "unit": "hex",
       "var": "var(--color-primary)"
     },
     "primaryVariant": {
-      "value": "#3700b3",
+      "value": "#2f5d50",
       "unit": "hex",
       "var": "var(--color-primary-variant)"
     },
     "secondary": {
-      "value": "#eeeeee",
+      "value": "#e6e8ec",
       "unit": "hex",
       "var": "var(--color-secondary)"
     },
     "secondaryVariant": {
-      "value": "#018786",
+      "value": "#2f5d50",
       "unit": "hex",
       "var": "var(--color-secondary-variant)"
     },
-    "accent": {
-      "value": "#ff4081",
-      "unit": "hex",
-      "var": "var(--color-accent)"
-    },
     "background": {
-      "value": "#151c25",
+      "value": "#f7f8fa",
       "unit": "hex",
       "var": "var(--color-background)"
     },
     "backgroundDark": {
-      "value": "#0e131a",
+      "value": "#1a1a1a",
       "unit": "hex",
       "var": "var(--color-background-dark)"
     },
     "backgroundDarker": {
-      "value": "#0e131a",
+      "value": "#141414",
       "unit": "hex",
       "var": "var(--color-background-darker)"
     },
     "surface": {
-      "value": "#000000",
+      "value": "#ffffff",
       "unit": "hex",
       "var": "var(--color-surface)"
     },
     "textPrimary": {
-      "value": "#b8c5d6",
+      "value": "#1a1a1a",
       "unit": "hex",
       "var": "var(--color-text-primary)"
     },
     "textSecondary": {
-      "value": "#757575",
+      "value": "#5f5f5f",
       "unit": "hex",
       "var": "var(--color-text-secondary)"
     },
     "border": {
-      "value": "#dddddd",
+      "value": "#e6e8ec",
       "unit": "hex",
       "var": "var(--color-border)"
     },
     "link": {
-      "value": "#0070f3",
+      "value": "#1f4d3a",
       "unit": "hex",
       "var": "var(--color-link)"
     },
     "muted": {
-      "value": "#f6f6f6",
+      "value": "#f7f8fa",
       "unit": "hex",
       "var": "var(--color-muted)"
     },
     "success": {
-      "value": "#9ece6a",
+      "value": "#1f4d3a",
       "unit": "hex",
       "var": "var(--color-success)"
     },
     "warning": {
-      "value": "#f5a623",
+      "value": "#8a5a00",
       "unit": "hex",
       "var": "var(--color-warning)"
     },
     "error": {
-      "value": "#f7768e",
+      "value": "#a01523",
       "unit": "hex",
       "var": "var(--color-error)"
     },
@@ -260,47 +320,47 @@ const Tokens = {
       "var": "var(--color-white)"
     },
     "rolePrompt": {
-      "value": "#e9be62",
+      "value": "#1f4d3a",
       "unit": "hex",
       "var": "var(--color-role-prompt)"
     },
     "roleSuccess": {
-      "value": "#9ece6a",
+      "value": "#1f4d3a",
       "unit": "hex",
       "var": "var(--color-role-success)"
     },
     "roleInfo": {
-      "value": "#7dd3c0",
+      "value": "#2f5d50",
       "unit": "hex",
       "var": "var(--color-role-info)"
     },
     "roleDanger": {
-      "value": "#f7768e",
+      "value": "#a01523",
       "unit": "hex",
       "var": "var(--color-role-danger)"
     },
     "roleBody": {
-      "value": "#b8c5d6",
+      "value": "#1a1a1a",
       "unit": "hex",
       "var": "var(--color-role-body)"
     },
     "roleHeading": {
-      "value": "#eeeeee",
+      "value": "#1a1a1a",
       "unit": "hex",
       "var": "var(--color-role-heading)"
     },
     "surfaceBase": {
-      "value": "#151c25",
+      "value": "#f7f8fa",
       "unit": "hex",
       "var": "var(--color-surface-base)"
     },
     "surfaceElevated": {
-      "value": "#232f3e",
+      "value": "#ffffff",
       "unit": "hex",
       "var": "var(--color-surface-elevated)"
     },
     "surfaceDeepest": {
-      "value": "#0e131a",
+      "value": "#1a1a1a",
       "unit": "hex",
       "var": "var(--color-surface-deepest)"
     },
@@ -436,15 +496,15 @@ const Tokens = {
       "var": "var(--font-family-body)"
     },
     "heading": {
-      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif",
+      "family": "var(--font-newsreader), Newsreader, Georgia, 'Times New Roman', serif",
       "var": "var(--font-family-heading)"
     },
     "monospace": {
-      "family": "var(--font-geist-mono), 'Geist Mono', ui-monospace, 'Courier New', monospace",
+      "family": "var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, 'Courier New', monospace",
       "var": "var(--font-family-monospace)"
     },
     "quotes": {
-      "family": "var(--font-geist-sans), Geist, system-ui, sans-serif",
+      "family": "var(--font-newsreader), Newsreader, Georgia, 'Times New Roman', serif",
       "var": "var(--font-family-quotes)"
     }
   }

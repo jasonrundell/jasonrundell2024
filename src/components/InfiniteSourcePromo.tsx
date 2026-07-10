@@ -78,13 +78,14 @@ export const INFINITE_SOURCE_VENTURES: ReadonlyArray<PromoVenture> = [
 ] as const
 
 const StyledIntro = styled('p')`
-  font-size: ${Tokens.sizes.fonts.medium.value}${Tokens.sizes.fonts.medium.unit};
-  line-height: 1.5;
-  color: ${Tokens.colors.roleBody.var};
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  color: ${Tokens.colors.inkMuted.var};
   max-width: 60ch;
+  margin-top: 1rem;
 
   strong {
-    color: ${Tokens.colors.roleHeading.var};
+    color: ${Tokens.colors.ink.var};
   }
 `
 
@@ -104,35 +105,37 @@ const StyledGrid = styled('div')`
 const StyledColumnLabel = styled('span')`
   display: block;
   font-family: ${Tokens.fonts.monospace.family};
-  font-size: ${Tokens.sizes.fonts.small.value}${Tokens.sizes.fonts.small.unit};
-  color: ${Tokens.colors.roleInfo.var};
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: ${Tokens.colors.accent.var};
   margin-bottom: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 `
 
 const StyledItemTitle = styled('span')`
   font-weight: 600;
-  color: ${Tokens.colors.roleHeading.var};
+  color: ${Tokens.colors.ink.var};
 `
 
 const StyledItemMeta = styled('span')`
-  color: ${Tokens.colors.roleBody.var};
+  color: ${Tokens.colors.inkMuted.var};
 `
 
 const StyledStatus = styled('span')`
   font-family: ${Tokens.fonts.monospace.family};
-  font-size: ${Tokens.sizes.fonts.small.value}${Tokens.sizes.fonts.small.unit};
-  color: ${Tokens.colors.rolePrompt.var};
+  font-size: 0.8125rem;
+  color: ${Tokens.colors.inkFaint.var};
 `
 
 const StyledVentureLink = styled('a')`
-  color: ${Tokens.colors.roleHeading.var};
+  color: ${Tokens.colors.ink.var};
   font-weight: 600;
   text-decoration: none;
 
   &:hover,
   &:focus-visible {
-    color: ${Tokens.colors.rolePrompt.var};
+    color: ${Tokens.colors.accent.var};
     text-decoration: underline;
   }
 `
@@ -144,24 +147,21 @@ const StyledCtaRow = styled('div')`
 const StyledCtaLink = styled('a')`
   display: inline-flex;
   align-items: center;
-  gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
-  padding: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit}
-    ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
-  border: 1px solid ${Tokens.colors.rolePrompt.var};
-  border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small
-      .unit};
-  font-family: ${Tokens.fonts.monospace.family};
+  gap: 0.5rem;
+  padding: 0.875rem 1.375rem;
+  background: ${Tokens.colors.accent.var};
+  border: 1px solid ${Tokens.colors.accent.var};
+  font-family: ${Tokens.fonts.body.family};
+  font-size: 0.9375rem;
   font-weight: 600;
-  color: ${Tokens.colors.rolePrompt.var};
+  color: ${Tokens.colors.onAccent.var};
   text-decoration: none;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 
   &:hover,
   &:focus-visible {
-    background-color: ${Tokens.colors.rolePrompt.var};
-    color: ${Tokens.colors.surfaceBase.var};
+    background-color: ${Tokens.colors.accentSoft.var};
+    border-color: ${Tokens.colors.accentSoft.var};
   }
 `
 
@@ -173,7 +173,7 @@ const StyledCtaLink = styled('a')`
 export default function InfiniteSourcePromo() {
   return (
     <>
-      <SectionHeading comment="infinite-source.tsx">
+      <SectionHeading comment="Studio">
         Infinite Source Agency Inc.
       </SectionHeading>
       <Reveal>
@@ -187,9 +187,7 @@ export default function InfiniteSourcePromo() {
 
       <StyledGrid>
         <div>
-          <StyledColumnLabel aria-hidden="true">
-            {'// services'}
-          </StyledColumnLabel>
+          <StyledColumnLabel aria-hidden="true">Services</StyledColumnLabel>
           <PromptList aria-label="Infinite Source services">
             {INFINITE_SOURCE_SERVICES.map((service) => (
               <PromptItem key={service.title}>
@@ -204,9 +202,7 @@ export default function InfiniteSourcePromo() {
         </div>
 
         <div>
-          <StyledColumnLabel aria-hidden="true">
-            {'// ventures'}
-          </StyledColumnLabel>
+          <StyledColumnLabel aria-hidden="true">Ventures</StyledColumnLabel>
           <PromptList aria-label="Infinite Source ventures">
             {INFINITE_SOURCE_VENTURES.map((venture) => (
               <PromptItem key={venture.name}>
@@ -233,8 +229,12 @@ export default function InfiniteSourcePromo() {
       </StyledGrid>
 
       <StyledCtaRow>
-        <StyledCtaLink href={INFINITE_SOURCE_URL} target="_blank">
-          [ Visit infinitesource.agency ]
+        <StyledCtaLink
+          href={INFINITE_SOURCE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit infinitesource.agency →
         </StyledCtaLink>
       </StyledCtaRow>
     </>

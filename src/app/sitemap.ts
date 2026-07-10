@@ -10,6 +10,11 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
     changeFrequency: 'monthly',
   },
   {
+    url: `${SITE_DOMAIN}/how-i-lead`,
+    priority: 0.9,
+    changeFrequency: 'monthly',
+  },
+  {
     url: `${SITE_DOMAIN}/contact`,
     priority: 0.7,
     changeFrequency: 'yearly',

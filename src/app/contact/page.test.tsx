@@ -13,53 +13,42 @@ jest.mock('next/link', () => {
   }
 })
 
-jest.mock('@/styles/common', () => ({
-  StyledContainer: ({ children }: { children: React.ReactNode }) => (
-    <div data-testid="container">{children}</div>
-  ),
-  StyledSection: ({
-    children,
-    id,
-  }: {
-    children: React.ReactNode
-    id?: string
-  }) => (
-    <section data-testid="section" id={id}>
-      {children}
-    </section>
-  ),
-  StyledBreadcrumb: ({ children }: { children: React.ReactNode }) => (
-    <nav data-testid="breadcrumb" aria-label="Breadcrumb">
-      {children}
-    </nav>
-  ),
-}))
-
 describe('Contact page', () => {
   it('renders a single h1', () => {
     render(<ContactPage />)
 
     const headings = screen.getAllByRole('heading', { level: 1 })
     expect(headings).toHaveLength(1)
-    expect(headings[0]).toHaveTextContent(/contact me/i)
+    expect(headings[0]).toHaveTextContent(/book a conversation/i)
   })
 
   it('renders the intro guidance for reaching out', () => {
     render(<ContactPage />)
 
     expect(
-      screen.getByText(
-        /The fastest way to reach me is email\. For longer conversations, book time on the calendar or connect on LinkedIn\./
-      )
+      screen.getByText(/The fastest way to reach me is email/i)
     ).toBeInTheDocument()
   })
 
-  it('renders a breadcrumb to home', () => {
+  it('renders an email contact link', () => {
     render(<ContactPage />)
 
-    expect(screen.getByRole('link', { name: /^home$/i })).toHaveAttribute(
-      'href',
-      '/'
-    )
+    expect(
+      screen.getByRole('link', { name: /contact@jasonrundell\.com/i })
+    ).toHaveAttribute('href', 'mailto:contact@jasonrundell.com')
+  })
+
+  it('renders the three ways to work together', () => {
+    render(<ContactPage />)
+
+    expect(
+      screen.getByRole('heading', { name: /full-time leadership/i })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /fractional cto/i })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /selective hands-on builds/i })
+    ).toBeInTheDocument()
   })
 })

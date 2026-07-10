@@ -1,47 +1,50 @@
 import React from 'react'
-import Link from 'next/link'
-import { Row, Spacer } from '@jasonrundell/dropship'
+import type { Metadata } from 'next'
 
 import { getProjects } from '@/lib/content'
 import { compareProjectsByDateDesc, toProjectCardItem } from '@/lib/projectUtils'
 import {
-  StyledContainer,
-  StyledSection,
-  StyledBreadcrumb,
-} from '@/styles/common'
+  BandSection,
+  Container,
+  Eyebrow,
+  DisplayTitle,
+  Lead,
+} from '@/styles/editorial'
 import MoreProjects from '@/components/MoreProjects'
+import { SITE_DOMAIN } from '@/lib/constants'
 
-export const metadata = {
-  title: 'Projects | Jason Rundell',
+export const metadata: Metadata = {
+  title: 'Selected work | Jason Rundell',
   description:
-    'A complete index of projects by Jason Rundell — open-source work, side projects, and shipped products.',
+    'Selected work by Jason Rundell — shipped products, open-source, and side projects across leadership and hands-on engineering.',
+  alternates: { canonical: `${SITE_DOMAIN}/projects` },
 }
 
 export const revalidate = 86400
 
 export default async function ProjectsPage() {
   const projects = await getProjects()
-
   const sortedProjects = [...projects].sort(compareProjectsByDateDesc)
 
   return (
-    <StyledContainer>
-      <StyledSection id="projects">
-        <StyledBreadcrumb>
-          <Link href="/">Home</Link> &gt; Projects
-        </StyledBreadcrumb>
-        <h1>Projects</h1>
-        <Row>
-          <p>
-            A full index of the projects I&apos;ve shipped, contributed to, or
-            built for fun. Pick one to see the tech stack and a short write-up.
-          </p>
-        </Row>
-        <Spacer />
-        <Row>
+    <>
+      <BandSection tone="paper">
+        <Container>
+          <Eyebrow label="Selected work" />
+          <DisplayTitle>Things I&rsquo;ve built and shipped</DisplayTitle>
+          <Lead>
+            A full index of projects I&rsquo;ve shipped, contributed to, or
+            built for the craft of it. Pick one for the stack and a short
+            write-up.
+          </Lead>
+        </Container>
+      </BandSection>
+
+      <BandSection tone="surface">
+        <Container>
           <MoreProjects items={sortedProjects.map(toProjectCardItem)} />
-        </Row>
-      </StyledSection>
-    </StyledContainer>
+        </Container>
+      </BandSection>
+    </>
   )
 }

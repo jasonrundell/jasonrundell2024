@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>jasonrundell.com — Style Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Newsreader:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-bg: #f7f8fa;
+        --color-surface: #ffffff;
+        --color-text: #1a1a1a;
+        --color-text-muted: #666666;
+        --color-text-faint: #888888;
+        --color-accent: #1f4d3a;
+        --color-accent-soft: #2f5d50;
+        --color-craft-steel: #3f3f46;
+        --color-illo-ink: #2e3338;
+        --color-border: #1a1a1a;
+        --color-border-subtle: #eef0f2;
+        --color-footer-muted: #a8a29e;
+        --font-display: "Newsreader", Georgia, serif;
+        --font-body: "Geist", system-ui, sans-serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-family: var(--font-body);
+        line-height: 1.5;
+        max-width: 52rem;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      h1 {
+        font-size: clamp(1.75rem, 4vw, 2.25rem);
+        margin: 0 0 0.5rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+        margin: 2.5rem 0 0.75rem;
+        padding-bottom: 0.35rem;
+        border-bottom: 1px solid var(--color-border-subtle);
+      }
+
+      .muted {
+        color: var(--color-text-muted);
+      }
+
+      .banner {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        padding: 1rem 1.25rem;
+        margin: 1rem 0 2rem;
+      }
+
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+        gap: 0.75rem;
+      }
+
+      .swatch {
+        border: 1px solid var(--color-border-subtle);
+        background: var(--color-surface);
+        overflow: hidden;
+      }
+
+      .swatch-chip {
+        height: 3.5rem;
+      }
+
+      .swatch-meta {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.8rem;
+        font-family: var(--font-mono);
+      }
+
+      .type-specimen {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border-subtle);
+        padding: 1rem 1.25rem;
+        margin: 0.75rem 0;
+      }
+
+      .type-specimen .label {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--color-text-faint);
+        margin-bottom: 0.35rem;
+      }
+
+      .display-sample {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .heading-sample {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 600;
+      }
+
+      .body-sample {
+        font-size: 1rem;
+      }
+
+      .mono-sample {
+        font-family: var(--font-mono);
+        font-size: 0.95rem;
+        color: var(--color-accent);
+      }
+
+      .cta {
+        display: inline-block;
+        margin-top: 0.75rem;
+        padding: 0.85rem 1.35rem;
+        background: var(--color-accent);
+        color: #f7f8fa;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: background 0.15s ease;
+      }
+
+      .cta:hover,
+      .cta:focus-visible {
+        background: var(--color-accent-soft);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 0.5rem 0.4rem;
+        border-bottom: 1px solid var(--color-border-subtle);
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--color-text-muted);
+        font-weight: 600;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        font-family: var(--font-mono);
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      @media (max-width: 640px) {
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .list-block {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border-subtle);
+        padding: 1rem 1.25rem;
+      }
+
+      .list-block h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1rem;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.2rem;
+      }
+
+      code {
+        font-family: var(--font-mono);
+        font-size: 0.85em;
+      }
+
+      .illo-preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+        gap: 0.75rem;
+        margin: 0.75rem 0;
+      }
+
+      .illo-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        padding: 0.85rem 1rem;
+      }
+
+      .illo-card strong {
+        font-family: var(--font-display);
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+
+      .illo-card span {
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+      }
+
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-border-subtle);
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>jasonrundell.com — Style Guide</h1>
+    <p class="muted">
+      Human review page. AI source of truth:
+      <code>.cursor/skills/site-designer/style-guide.md</code>
+    </p>
+
+    <div class="banner">
+      <strong>Status:</strong> Draft for approval with Line-Art Pencil mocks in
+      <code>design/site.pen</code>. Cool paper ground, forest accent, Newsreader +
+      Geist + IBM Plex Mono. Continuous-line editorial craft signal.
+    </div>
+
+    <h2>Mood</h2>
+    <p>
+      <strong>Brand tension:</strong> Leadership + craft — technical engineering
+      leader who still raises the bar hands-on.
+    </p>
+    <p>
+      <strong>Atmosphere:</strong> Calm authority; deliberate spacing;
+      continuous-line illustrations as the dominant visual — not neon, purple
+      glow, cream-terracotta clichés, or diagram-panel systems maps.
+    </p>
+
+    <h2>Color</h2>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-bg)"></div>
+        <div class="swatch-meta">bg<br />#F7F8FA</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-surface)"></div>
+        <div class="swatch-meta">surface<br />#FFFFFF</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-text)"></div>
+        <div class="swatch-meta">ink<br />#1A1A1A</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-text-muted)"></div>
+        <div class="swatch-meta">muted<br />#666666</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-text-faint)"></div>
+        <div class="swatch-meta">faint<br />#888888</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-accent)"></div>
+        <div class="swatch-meta">accent<br />#1F4D3A</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-accent-soft)"></div>
+        <div class="swatch-meta">accent soft<br />#2F5D50</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-illo-ink)"></div>
+        <div class="swatch-meta">illo ink<br />#2E3338</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-craft-steel)"></div>
+        <div class="swatch-meta">craft steel<br />#3F3F46</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-border-subtle)"></div>
+        <div class="swatch-meta">line subtle<br />#EEF0F2</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: var(--color-footer-muted)"></div>
+        <div class="swatch-meta">footer muted<br />#A8A29E</div>
+      </div>
+    </div>
+    <a class="cta" href="#">Book a conversation</a>
+
+    <h2>Typography</h2>
+    <div class="type-specimen">
+      <div class="label">Display — Newsreader · 48–56 / 600</div>
+      <div class="display-sample">Lead engineering orgs.</div>
+    </div>
+    <div class="type-specimen">
+      <div class="label">Heading — Newsreader · 28–36 / 600</div>
+      <div class="heading-sample">How I lead</div>
+    </div>
+    <div class="type-specimen">
+      <div class="label">Body — Geist · 15–18 / 400</div>
+      <div class="body-sample">
+        Joins at inflection points and builds the systems, culture, and standards
+        that let teams scale.
+      </div>
+    </div>
+    <div class="type-specimen">
+      <div class="label">Mono — IBM Plex Mono · 11–14 / 500</div>
+      <div class="mono-sample">ENGINEERING LEADER · PLAYER-COACH</div>
+    </div>
+
+    <h2>Spacing</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Page gutter</td>
+          <td>64px / 20px</td>
+          <td>Desktop / mobile horizontal padding</td>
+        </tr>
+        <tr>
+          <td>Section pad</td>
+          <td>56–72px</td>
+          <td>Vertical between major bands</td>
+        </tr>
+        <tr>
+          <td>Stack gap</td>
+          <td>20–36px</td>
+          <td>Within a section</td>
+        </tr>
+        <tr>
+          <td>Tight</td>
+          <td>8–12px</td>
+          <td>Labels → body</td>
+        </tr>
+        <tr>
+          <td>Primary CTA</td>
+          <td>14×22</td>
+          <td>Solid accent button padding</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Motion</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Motion</th>
+          <th>Trigger</th>
+          <th>Intent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hero / illo draw</td>
+          <td>Scroll-in / first paint</td>
+          <td>Continuous-line illustration draws itself; copy settles with it</td>
+        </tr>
+        <tr>
+          <td>Section enter</td>
+          <td>Scroll</td>
+          <td>Soft upward fade for proof / principles</td>
+        </tr>
+        <tr>
+          <td>CTA press</td>
+          <td>Hover / focus</td>
+          <td>Accent → accent soft; no glow</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="muted">
+      Respect <code>prefers-reduced-motion</code> — draw and section motion become
+      instant.
+    </p>
+
+    <h2>Imagery</h2>
+    <p>
+      Continuous-line editorial · scalable vector · single forest accent per
+      composition. Sources in <code>design/illustrations/</code>.
+    </p>
+    <div class="illo-preview">
+      <div class="illo-card">
+        <strong>Hero</strong>
+        <span>Team → system → platform. Homepage.</span>
+      </div>
+      <div class="illo-card">
+        <strong>Loop</strong>
+        <span>Diagnose → improve → measure → scale. How I lead.</span>
+      </div>
+      <div class="illo-card">
+        <strong>Branch</strong>
+        <span>Commits merge into a platform. Selected work.</span>
+      </div>
+    </div>
+    <ul>
+      <li>Line ink <code>#2E3338</code>, paper <code>#F7F8FA</code>, one accent focal</li>
+      <li>Hairline borders, sharp corners, no hero overlay chips</li>
+      <li>Maps to content — not decoration</li>
+    </ul>
+
+    <h2>Components</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Element</th>
+          <th>Rules</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Primary CTA</td>
+          <td>Solid accent, light text, sharp corners, 14×22 pad</td>
+        </tr>
+        <tr>
+          <td>Secondary CTA</td>
+          <td>Text link with arrow; no pill</td>
+        </tr>
+        <tr>
+          <td>Nav</td>
+          <td>Newsreader brand left; Geist links + CTA right</td>
+        </tr>
+        <tr>
+          <td>Mobile nav</td>
+          <td>Menu / full-height ink sheet with Close + large links</td>
+        </tr>
+        <tr>
+          <td>Footer</td>
+          <td>Dark ink band; Explore / Connect; mono engagement note</td>
+        </tr>
+        <tr>
+          <td>Cards</td>
+          <td>None in hero; mode tiles only in “Ways to work”</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Hover / interactive</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Element</th>
+          <th>Default</th>
+          <th>Hover</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nav link</td>
+          <td>#666666</td>
+          <td>#1A1A1A</td>
+        </tr>
+        <tr>
+          <td>Primary CTA</td>
+          <td>#1F4D3A</td>
+          <td>#2F5D50</td>
+        </tr>
+        <tr>
+          <td>Secondary link</td>
+          <td>#1A1A1A</td>
+          <td>#1F4D3A</td>
+        </tr>
+        <tr>
+          <td>Footer link</td>
+          <td>#E7E5E4</td>
+          <td>#F7F8FA</td>
+        </tr>
+        <tr>
+          <td>Mobile menu</td>
+          <td>Menu (#666)</td>
+          <td>Menu (#1A1A1A) · open = Close (#A8A29E)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="muted">No glow. Focus outline uses accent/ink — never color alone.</p>
+
+    <h2>Do / Don’t</h2>
+    <div class="two-col">
+      <div class="list-block">
+        <h3>Do</h3>
+        <ul>
+          <li>Prove leadership and craft in the first viewport</li>
+          <li>One job per section</li>
+          <li>Match Line-Art Pencil mocks after approval</li>
+          <li>One accent focal mark per illustration</li>
+        </ul>
+      </div>
+      <div class="list-block">
+        <h3>Don’t</h3>
+        <ul>
+          <li>Purple gradients, dark glow, cream + terracotta clichés</li>
+          <li>Resume-page or pure IC portfolio vibes</li>
+          <li>Hero overlays, pill clusters, hero stat strips</li>
+          <li>Multiple accent fills in one illustration</li>
+          <li>Implement before explicit approval</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      Synced with <code>.cursor/skills/site-designer/style-guide.md</code> and
+      Line-Art frames in <code>design/site.pen</code>. Partner skill:
+      <code>leadership-rebrand-site</code>.
+    </footer>
+  </body>
+</html>

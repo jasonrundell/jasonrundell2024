@@ -1,80 +1,65 @@
-import { Blockquote } from '@jasonrundell/dropship'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { References as ReferencesDef } from '@/typeDefinitions/app'
 
-const spacingSmall = `${Tokens.sizes.spacing.small.value}${Tokens.sizes.spacing.small.unit}`
-const spacingMedium = `${Tokens.sizes.spacing.medium.value}${Tokens.sizes.spacing.medium.unit}`
-const spacingLarge = `${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit}`
-const paddingLarge = `${Tokens.sizes.padding.large.value}${Tokens.sizes.padding.large.unit}`
-const borderRadiusMedium = `${Tokens.borderRadius.medium.value}${Tokens.borderRadius.medium.unit}`
+const bp = `${Tokens.sizes.breakpoints.large.value}${Tokens.sizes.breakpoints.large.unit}`
 
 const StyledReferencesGrid = styled('section')`
   display: grid;
-  gap: ${spacingLarge};
-  margin-block: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding
-      .xlarge.unit};
+  gap: 1.5rem;
   grid-template-columns: 1fr;
+
+  @media (min-width: ${bp}) {
+    grid-template-columns: 1fr 1fr;
+  }
 `
 
 const StyledReferenceCard = styled('article')`
-  background: ${Tokens.colors.surfaceDeepest.var};
-  border: 1px solid ${Tokens.colors.surfaceBase.var};
-  border-radius: ${borderRadiusMedium};
-  padding: ${paddingLarge};
+  background: ${Tokens.colors.surfaceSecondary.var};
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
+  border-left: 2px solid ${Tokens.colors.accent.var};
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: ${spacingMedium};
-  color: ${Tokens.colors.roleHeading.var};
-  box-shadow: ${Tokens.shadows.small.value} ${Tokens.colors.background.value}33;
+  gap: 1.25rem;
 `
 
-const StyledQuote = styled(Blockquote)`
+const StyledQuote = styled('blockquote')`
   margin: 0;
-  font-family: ${Tokens.fonts.body.family};
-  font-size: ${Tokens.sizes.medium.value}${Tokens.sizes.medium.unit};
-  line-height: ${Tokens.sizes.lineHeight.value}${Tokens.sizes.lineHeight.unit};
-  color: ${Tokens.colors.roleBody.var};
-
-  &::before {
-    top: -0.5rem !important;
-    left: -1.5rem !important;
-  }
-  &::after {
-    right: -1.5rem !important;
-  }
+  font-family: ${Tokens.fonts.quotes.var};
+  font-size: 1.1875rem;
+  line-height: 1.5;
+  color: ${Tokens.colors.ink.var};
 `
 
 const StyledQuoteParagraph = styled('p')`
   margin: 0;
 
   &:not(:last-child) {
-    margin-bottom: ${spacingMedium};
+    margin-bottom: 1rem;
   }
 `
 
 const StyledReferenceMeta = styled('div')`
   display: flex;
   flex-direction: column;
-  gap: ${spacingSmall};
+  gap: 0.35rem;
   margin-top: auto;
 `
 
 const StyledCite = styled('span')`
+  font-family: ${Tokens.fonts.body.var};
   font-weight: 600;
-  color: ${Tokens.colors.white.var};
-  font-size: ${Tokens.fontSizes.base.value}${Tokens.fontSizes.base.unit};
+  color: ${Tokens.colors.ink.var};
+  font-size: 1rem;
 `
 
 const StyledCompany = styled('span')`
   font-family: ${Tokens.fonts.monospace.family};
-  font-size: ${Tokens.fontSizes.sm.value}${Tokens.fontSizes.sm.unit};
+  font-size: 0.8125rem;
   letter-spacing: 0.04em;
-  color: ${Tokens.colors.roleInfo.var};
-
-  &::before {
-    content: '// ';
-  }
+  text-transform: uppercase;
+  color: ${Tokens.colors.inkFaint.var};
 `
 
 function formatQuoteParagraphs(quote: string) {

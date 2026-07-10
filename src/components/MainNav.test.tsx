@@ -14,12 +14,6 @@ jest.mock('next/link', () => {
   }
 })
 
-jest.mock('./HeadingAnimation', () => {
-  return function MockHeadingAnimation() {
-    return <div data-testid="heading-animation">Jason Rundell</div>
-  }
-})
-
 jest.mock('./MainNavClient', () => {
   return function MockMainNavClient() {
     return <div data-testid="main-nav-client">Nav Client</div>
@@ -56,13 +50,12 @@ describe('MainNav Component', () => {
     expect(navs.length).toBeGreaterThanOrEqual(1)
   })
 
-  it('should render heading animation in desktop nav', () => {
-    // Act
+  it('should render the brand link home', () => {
     render(<MainNav />)
 
-    // Assert
-    const animations = screen.getAllByTestId('heading-animation')
-    expect(animations.length).toBeGreaterThan(0)
+    const brand = screen.getByRole('link', { name: /^jason rundell$/i })
+    expect(brand).toBeInTheDocument()
+    expect(brand).toHaveAttribute('href', '/')
   })
 
   it('should render About link in desktop navigation', () => {
@@ -73,26 +66,36 @@ describe('MainNav Component', () => {
     expect(aboutLink).toHaveAttribute('href', '/about')
   })
 
-  it('should render Projects link in desktop navigation', () => {
+  it('should render How I lead link in desktop navigation', () => {
     render(<MainNav />)
 
-    const projectsLink = screen.getByRole('link', { name: /^projects$/i })
+    const link = screen.getByRole('link', { name: /^how i lead$/i })
+    expect(link).toBeInTheDocument()
+    expect(link).toHaveAttribute('href', '/how-i-lead')
+  })
+
+  it('should render Selected work link in desktop navigation', () => {
+    render(<MainNav />)
+
+    const projectsLink = screen.getByRole('link', { name: /^selected work$/i })
     expect(projectsLink).toBeInTheDocument()
     expect(projectsLink).toHaveAttribute('href', '/projects')
   })
 
-  it('should render Blog link in desktop navigation', () => {
+  it('should render Writing link in desktop navigation', () => {
     render(<MainNav />)
 
-    const blogLink = screen.getByRole('link', { name: /^blog$/i })
+    const blogLink = screen.getByRole('link', { name: /^writing$/i })
     expect(blogLink).toBeInTheDocument()
     expect(blogLink).toHaveAttribute('href', '/posts')
   })
 
-  it('should render Contact link in desktop navigation', () => {
+  it('should render the Book a conversation CTA', () => {
     render(<MainNav />)
 
-    const contactLink = screen.getByRole('link', { name: /^contact$/i })
+    const contactLink = screen.getByRole('link', {
+      name: /^book a conversation$/i,
+    })
     expect(contactLink).toBeInTheDocument()
     expect(contactLink).toHaveAttribute('href', '/contact')
   })
