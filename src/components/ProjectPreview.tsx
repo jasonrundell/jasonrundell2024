@@ -1,54 +1,35 @@
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 
-import ProjectPreviewImage from './ProjectPreviewImage'
 import Tokens from '@/lib/tokens'
 
 interface ProjectPreviewProps {
   title: string
-  image?: {
-    file: {
-      url: string
-    }
-  }
   excerpt: string
   slug: string
+  createdDate: string
+  technology: string[]
 }
 
-const StyledCard = styled('article')`
+const StyledRow = styled('article')`
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background-color: ${Tokens.colors.surfaceSecondary.var};
-  border: 1px solid ${Tokens.colors.lineSubtle.var};
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-
-  &:hover {
-    border-color: ${Tokens.colors.accent.var};
-    box-shadow: inset 3px 0 0 0 ${Tokens.colors.accent.var};
-  }
+  gap: 0.625rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid ${Tokens.colors.lineSubtle.var};
 `
 
-const StyledImage = styled('div')`
-  position: relative;
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background-color: ${Tokens.colors.surfacePrimary.var};
-  border-bottom: 1px solid ${Tokens.colors.lineSubtle.var};
-`
-
-const StyledContent = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.5rem;
+const StyledMeta = styled('p')`
+  font-family: ${Tokens.fonts.monospace.var};
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: ${Tokens.colors.accent.var};
+  margin: 0;
 `
 
 const StyledHeading = styled('h3')`
   font-family: ${Tokens.fonts.heading.var};
-  font-size: 1.375rem;
+  font-size: 1.5rem;
   line-height: 1.2;
   margin: 0;
 
@@ -65,31 +46,61 @@ const StyledHeading = styled('h3')`
 const StyledExcerpt = styled('p')`
   color: ${Tokens.colors.inkMuted.var};
   font-size: 1rem;
-  line-height: 1.6;
-  margin: 0.25rem 0 0;
+  line-height: 1.5;
+  margin: 0;
+`
+
+const StyledStack = styled('p')`
+  font-family: ${Tokens.fonts.monospace.var};
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: ${Tokens.colors.inkFaint.var};
+  margin: 0;
+`
+
+const StyledCta = styled(Link)`
+  align-self: flex-start;
+  margin-top: 0.15rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: ${Tokens.colors.accent.var};
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    color: ${Tokens.colors.accentSoft.var};
+  }
 `
 
 export default function ProjectPreview({
   title,
-  image,
   slug,
   excerpt,
+  createdDate,
+  technology,
 }: ProjectPreviewProps) {
+  const year = new Date(createdDate).getUTCFullYear()
+  if (Number.isNaN(year)) {
+    throw new Error(
+      `ProjectPreview: invalid createdDate "${createdDate}" for project "${slug}"`
+    )
+  }
+
+  const href = `/projects/${slug}`
+
   return (
-    <StyledCard>
-      <StyledImage>
-        <ProjectPreviewImage
-          title={title}
-          slug={slug}
-          url={image?.file?.url}
-        />
-      </StyledImage>
-      <StyledContent>
-        <StyledHeading>
-          <Link href={`/projects/${slug}`}>{title}</Link>
-        </StyledHeading>
-        <StyledExcerpt>{excerpt}</StyledExcerpt>
-      </StyledContent>
-    </StyledCard>
+    <StyledRow>
+      <StyledMeta>{year}</StyledMeta>
+      <StyledHeading>
+        <Link href={href}>{title}</Link>
+      </StyledHeading>
+      <StyledExcerpt>{excerpt}</StyledExcerpt>
+      {technology.length > 0 && (
+        <StyledStack>{technology.join(' · ')}</StyledStack>
+      )}
+      <StyledCta href={href} aria-label={`View project: ${title}`}>
+        View project &rarr;
+      </StyledCta>
+    </StyledRow>
   )
 }

@@ -234,22 +234,28 @@ describe('content display components', () => {
       .toHaveAttribute('href', '/posts/ai-development-notes')
   })
 
-  it('renders project preview content and image links', () => {
+  it('renders project preview as a list row with meta, stack and CTA', () => {
     render(
       <ProjectPreview
         title="Matter Ops"
-        image={{ file: { url: '/content/projects/matter-ops/featured.webp' } }}
         slug="matter-ops"
         excerpt="An operational dashboard."
+        createdDate="2026-01-01T00:00:00.000Z"
+        technology={['React', 'Express', 'SQLite']}
       />
     )
 
-    expect(screen.getAllByRole('link', { name: 'Matter Ops' })).toHaveLength(2)
-    expect(screen.getByAltText('')).toHaveAttribute(
-      'src',
-      '/content/projects/matter-ops/featured.webp'
+    expect(screen.getByRole('link', { name: 'Matter Ops' })).toHaveAttribute(
+      'href',
+      '/projects/matter-ops'
     )
+    expect(screen.queryByRole('img')).not.toBeInTheDocument()
     expect(screen.getByText('An operational dashboard.')).toBeInTheDocument()
+    expect(screen.getByText('2026')).toBeInTheDocument()
+    expect(screen.getByText('React · Express · SQLite')).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: 'View project: Matter Ops' })
+    ).toHaveAttribute('href', '/projects/matter-ops')
   })
 
   it('renders post and project preview lists', () => {
@@ -274,11 +280,8 @@ describe('content display components', () => {
               title: 'First Project',
               slug: 'first-project',
               excerpt: 'Project excerpt',
-              featuredImage: {
-                file: { url: '/content/projects/first-project/featured.webp' },
-                altText: 'Project image',
-                description: 'Project image description',
-              },
+              createdDate: '2024-06-01T00:00:00.000Z',
+              technology: ['Next.js'],
             },
           ]}
         />
@@ -286,7 +289,10 @@ describe('content display components', () => {
     )
 
     expect(screen.getAllByRole('link', { name: 'First Post' })).toHaveLength(2)
-    expect(screen.getAllByRole('link', { name: 'First Project' })).toHaveLength(2)
+    expect(screen.getByRole('link', { name: 'First Project' })).toHaveAttribute(
+      'href',
+      '/projects/first-project'
+    )
   })
 
   it('wraps post and project images in the correct route when slug is provided', () => {

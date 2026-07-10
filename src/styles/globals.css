@@ -37,6 +37,14 @@ p {
   line-height: 1.6;
 }
 
+/*
+ * Base typography for headings. Colour is intentionally NOT set here: `color`
+ * is inherited from `body` (ink) by default, and styled components (footer,
+ * chrome, cards) set their own colour. Pigment CSS emits component styles in a
+ * `@layer`, and an unlayered `color` here would override every one of them —
+ * turning the footer heading invisible (ink on ink) and CTA labels invisible
+ * (accent on accent). Leaving colour to inheritance/components avoids that.
+ */
 h1,
 h2,
 h3,
@@ -44,7 +52,6 @@ h4,
 h5,
 h6 {
   font-family: var(--font-family-heading);
-  color: var(--color-ink);
   font-weight: 600;
   line-height: 1.15;
   margin: 0 0 0.5rem;
@@ -74,8 +81,12 @@ h6 {
   font-size: 0.9375rem;
 }
 
+/*
+ * Link decoration defaults only. Link COLOUR is owned by components/prose
+ * (StyledBody, StyledBreadcrumb, nav, footer, CTAs) so this unlayered rule
+ * cannot override the colour of any Pigment-styled link.
+ */
 a {
-  color: var(--color-accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }

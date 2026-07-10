@@ -2,8 +2,8 @@ import React from 'react'
 import { styled } from '@pigment-css/react'
 
 import Tokens from '@/lib/tokens'
-import { SectionHeading, PromptList, PromptItem } from '@/components/chrome'
-import { Reveal } from '@/styles/motion'
+import { PromptList, PromptItem } from '@/components/chrome'
+import { SectionHeader } from '@/styles/editorial'
 
 export type PromoService = {
   title: string
@@ -173,17 +173,12 @@ const StyledCtaLink = styled('a')`
 export default function InfiniteSourcePromo() {
   return (
     <>
-      <SectionHeading comment="Studio">
-        Infinite Source Agency Inc.
-      </SectionHeading>
-      <Reveal>
-        <StyledIntro>
-          I founded and run <strong>Infinite Source Agency Inc.</strong>{' '}
-          (September 2025), a web agency and creative studio. We build
-          professional websites and web apps for clients — and craft our own
-          software, games, and music.
-        </StyledIntro>
-      </Reveal>
+      <SectionHeader eyebrow="Studio" title="Infinite Source Agency Inc." />
+      <StyledIntro>
+        I founded and run <strong>Infinite Source Agency Inc.</strong> (September
+        2025), a web agency and creative studio. We build professional websites
+        and web apps for clients — and craft our own software, games, and music.
+      </StyledIntro>
 
       <StyledGrid>
         <div>

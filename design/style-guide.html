@@ -15,15 +15,15 @@
         --color-bg: #f7f8fa;
         --color-surface: #ffffff;
         --color-text: #1a1a1a;
-        --color-text-muted: #666666;
-        --color-text-faint: #888888;
+        --color-text-muted: #5f5f5f;
+        --color-text-faint: #767676;
         --color-accent: #1f4d3a;
         --color-accent-soft: #2f5d50;
         --color-craft-steel: #3f3f46;
         --color-illo-ink: #2e3338;
         --color-border: #1a1a1a;
-        --color-border-subtle: #eef0f2;
-        --color-footer-muted: #a8a29e;
+        --color-border-subtle: #e6e8ec;
+        --color-footer-muted: #d6d3d1;
         --font-display: "Newsreader", Georgia, serif;
         --font-body: "Geist", system-ui, sans-serif;
         --font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -231,6 +231,54 @@
         color: var(--color-text-muted);
       }
 
+      .project-card {
+        border-top: 1px solid var(--color-border-subtle);
+        padding: 1.5rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        max-width: 34rem;
+      }
+
+      .project-meta {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--color-accent);
+      }
+
+      .project-title {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--color-text);
+      }
+
+      .project-desc {
+        font-size: 0.95rem;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+      }
+
+      .project-stack {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--color-text-faint);
+      }
+
+      .project-cta {
+        margin-top: 0.15rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--color-accent);
+        text-decoration: none;
+        width: fit-content;
+      }
+
+      .project-cta:hover,
+      .project-cta:focus-visible {
+        color: var(--color-accent-soft);
+      }
+
       footer {
         margin-top: 3rem;
         padding-top: 1rem;
@@ -280,11 +328,11 @@
       </div>
       <div class="swatch">
         <div class="swatch-chip" style="background: var(--color-text-muted)"></div>
-        <div class="swatch-meta">muted<br />#666666</div>
+        <div class="swatch-meta">muted<br />#5F5F5F</div>
       </div>
       <div class="swatch">
         <div class="swatch-chip" style="background: var(--color-text-faint)"></div>
-        <div class="swatch-meta">faint<br />#888888</div>
+        <div class="swatch-meta">faint<br />#767676</div>
       </div>
       <div class="swatch">
         <div class="swatch-chip" style="background: var(--color-accent)"></div>
@@ -304,11 +352,11 @@
       </div>
       <div class="swatch">
         <div class="swatch-chip" style="background: var(--color-border-subtle)"></div>
-        <div class="swatch-meta">line subtle<br />#EEF0F2</div>
+        <div class="swatch-meta">line subtle<br />#E6E8EC</div>
       </div>
       <div class="swatch">
         <div class="swatch-chip" style="background: var(--color-footer-muted)"></div>
-        <div class="swatch-meta">footer muted<br />#A8A29E</div>
+        <div class="swatch-meta">footer link<br />#D6D3D1</div>
       </div>
     </div>
     <a class="cta" href="#">Book a conversation</a>
@@ -444,26 +492,64 @@
         </tr>
         <tr>
           <td>Secondary CTA</td>
-          <td>Text link with arrow; no pill</td>
+          <td>Text link with arrow (View project →); no pill, no border</td>
         </tr>
         <tr>
           <td>Nav</td>
-          <td>Newsreader brand left; Geist links + CTA right</td>
+          <td>Newsreader brand left; Geist links + CTA right (`LA Nav Desktop`)</td>
         </tr>
         <tr>
           <td>Mobile nav</td>
-          <td>Menu / full-height ink sheet with Close + large links</td>
+          <td>Closed: Brand + Menu. Open: ink sheet + Close + large links + CTA</td>
         </tr>
         <tr>
           <td>Footer</td>
-          <td>Dark ink band; Explore / Connect; mono engagement note</td>
+          <td>Dark ink band; Navigate / Connect / Engage (`LA Footer`)</td>
         </tr>
         <tr>
           <td>Cards</td>
           <td>None in hero; mode tiles only in “Ways to work”</td>
         </tr>
+        <tr>
+          <td>Project card</td>
+          <td>
+            Hairline-separated list row (no box): mono meta label → Newsreader
+            title → Geist description → mono tech stack → secondary
+            <code>View project →</code> link. No thumbnail. Whole row links to
+            <code>/projects/[slug]</code>.
+          </td>
+        </tr>
       </tbody>
     </table>
+
+    <h3 style="font-family: var(--font-display); font-size: 1.05rem; margin: 1.5rem 0 0.5rem;">
+      Project card pattern (with CTA)
+    </h3>
+    <div class="project-card">
+      <div class="project-meta">2026</div>
+      <div class="project-title">Coding Fundamentals</div>
+      <div class="project-desc">
+        Reusable Cursor rules, skills, and install helpers that turn durable
+        software principles into practical AI-assisted development guidance.
+      </div>
+      <div class="project-stack">Cursor · Markdown · Shell</div>
+      <a class="project-cta" href="#">View project →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-meta">2025 · Winner</div>
+      <div class="project-title">ARC Line</div>
+      <div class="project-desc">
+        Voice-based multi-hotline for the ARC Raiders universe — Twilio
+        ConversationRelay, moderation pipeline, ElevenLabs.
+      </div>
+      <div class="project-stack">Node · TypeScript · Fastify · Twilio · Supabase</div>
+      <a class="project-cta" href="#">View project →</a>
+    </div>
+    <p class="muted">
+      No thumbnail. The whole row links to the project; the accent
+      <code>View project →</code> link is the explicit affordance and deepens to
+      <code>#2F5D50</code> on hover.
+    </p>
 
     <h2>Hover / interactive</h2>
     <table>
@@ -477,7 +563,7 @@
       <tbody>
         <tr>
           <td>Nav link</td>
-          <td>#666666</td>
+          <td>#5F5F5F</td>
           <td>#1A1A1A</td>
         </tr>
         <tr>
@@ -491,14 +577,19 @@
           <td>#1F4D3A</td>
         </tr>
         <tr>
+          <td>Project card <code>View project →</code></td>
+          <td>#1F4D3A</td>
+          <td>#2F5D50 (arrow nudges right)</td>
+        </tr>
+        <tr>
           <td>Footer link</td>
-          <td>#E7E5E4</td>
+          <td>#D6D3D1</td>
           <td>#F7F8FA</td>
         </tr>
         <tr>
           <td>Mobile menu</td>
-          <td>Menu (#666)</td>
-          <td>Menu (#1A1A1A) · open = Close (#A8A29E)</td>
+          <td>Menu (#5F5F5F)</td>
+          <td>Menu (#1A1A1A) · open drawer = light links (#F7F8FA) + #D6D3D1 secondary</td>
         </tr>
       </tbody>
     </table>

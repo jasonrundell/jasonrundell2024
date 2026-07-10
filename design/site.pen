@@ -14,94 +14,13 @@
       "layout": "none",
       "children": [
         {
-          "type": "frame",
-          "id": "tyIwN",
-          "x": 0,
-          "y": 0,
+          "id": "g1wRcW",
+          "type": "ref",
+          "ref": "jInqi",
           "name": "LA Nav",
           "width": 1280,
-          "padding": [
-            28,
-            64
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "GbCJn",
-              "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 28,
-              "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "Zc9Eb",
-              "gap": 28,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "f0txA",
-                  "fill": "$inkMuted",
-                  "content": "How I lead",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "P5Kj3E",
-                  "fill": "$inkMuted",
-                  "content": "Selected work",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "s7NOCI",
-                  "fill": "$inkMuted",
-                  "content": "Writing",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "zJCta",
-                  "fill": "$inkMuted",
-                  "content": "About",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "aX3GR",
-                  "fill": "$accent",
-                  "padding": [
-                    10,
-                    16
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "UCPTD",
-                      "fill": "#F7F8FA",
-                      "content": "Book a conversation",
-                      "fontFamily": "Geist",
-                      "fontSize": 13,
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "x": 0,
+          "y": 0
         },
         {
           "type": "frame",
@@ -215,34 +134,6 @@
           ]
         },
         {
-          "type": "frame",
-          "id": "NVkAk",
-          "x": 64,
-          "y": 848,
-          "gap": 8,
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "s4LPT",
-              "fill": "$inkFaint",
-              "content": "MOTION",
-              "fontFamily": "IBM Plex Mono",
-              "fontSize": 10,
-              "fontWeight": "normal"
-            },
-            {
-              "type": "text",
-              "id": "C53TH",
-              "fill": "$inkFaint",
-              "content": "Illustration draws itself on scroll-in · reduced-motion: instant",
-              "fontFamily": "Geist",
-              "fontSize": 12,
-              "fontWeight": "normal"
-            }
-          ]
-        },
-        {
           "type": "script",
           "id": "r0mdd",
           "x": 715,
@@ -266,91 +157,11 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "FWX2j",
-          "width": "fill_container",
-          "padding": [
-            28,
-            64
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "IZTXz",
-              "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 28,
-              "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "TsQLz",
-              "gap": 28,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "KYT9I",
-                  "fill": "$inkMuted",
-                  "content": "How I lead",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "y0tj9C",
-                  "fill": "$inkMuted",
-                  "content": "Selected work",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "OyGmu",
-                  "fill": "$inkMuted",
-                  "content": "Writing",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "zs49S",
-                  "fill": "$inkMuted",
-                  "content": "About",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "bYPYl",
-                  "fill": "$accent",
-                  "padding": [
-                    10,
-                    16
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "qV7o6",
-                      "fill": "#F7F8FA",
-                      "content": "Book a conversation",
-                      "fontFamily": "Geist",
-                      "fontSize": 13,
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "id": "ocCL9",
+          "type": "ref",
+          "ref": "jInqi",
+          "name": "LA Nav",
+          "width": "fill_container"
         },
         {
           "type": "frame",
@@ -1217,6 +1028,8 @@
               "type": "text",
               "id": "PmTEo",
               "fill": "$inkMuted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
               "content": "Open builds that prove the craft bar — Coding Fundamentals, ARC Line, Matter Ops, Dropship, React Mega Menu, and this site. Writing and GitHub stay subordinate to the leadership narrative.",
               "fontFamily": "Geist",
               "fontSize": 15,
@@ -1662,129 +1475,11 @@
           ]
         },
         {
-          "type": "frame",
-          "id": "Y4UfQm",
-          "width": "fill_container",
-          "fill": "$ink",
-          "layout": "vertical",
-          "gap": 24,
-          "padding": [
-            48,
-            64
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "Rmkjn",
-              "width": "fill_container",
-              "justifyContent": "space_between",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "qFUSN",
-                  "fill": "#F7F8FA",
-                  "content": "Jason Rundell",
-                  "fontFamily": "Newsreader",
-                  "fontSize": 22,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "e9ocBA",
-                  "gap": 40,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "Azzv0",
-                      "layout": "vertical",
-                      "gap": 8,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "ZwdiZ",
-                          "fill": "#A8A29E",
-                          "content": "Navigate",
-                          "fontFamily": "IBM Plex Mono",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "CpCuz",
-                          "fill": "#F7F8FA",
-                          "content": "How I lead · Selected work · About",
-                          "fontFamily": "Geist",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "lwj0U",
-                      "layout": "vertical",
-                      "gap": 8,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "tTjJ2",
-                          "fill": "#A8A29E",
-                          "content": "Connect",
-                          "fontFamily": "IBM Plex Mono",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "Vjiid",
-                          "fill": "#F7F8FA",
-                          "content": "LinkedIn · GitHub · Email",
-                          "fontFamily": "Geist",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "nIwBl",
-                      "layout": "vertical",
-                      "gap": 8,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "FYjgY",
-                          "fill": "#A8A29E",
-                          "content": "Engage",
-                          "fontFamily": "IBM Plex Mono",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "yptov",
-                          "fill": "#F7F8FA",
-                          "content": "Book a conversation",
-                          "fontFamily": "Geist",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "text",
-              "id": "D9w9hc",
-              "fill": "#A8A29E",
-              "content": "Canada · Remote-first · FT leadership · Fractional · Selective build via Infinite Source",
-              "fontFamily": "IBM Plex Mono",
-              "fontSize": 11,
-              "fontWeight": "normal"
-            }
-          ]
+          "id": "u8eodp",
+          "type": "ref",
+          "ref": "quyO9",
+          "name": "LA Footer",
+          "width": "fill_container"
         }
       ]
     },
@@ -1800,70 +1495,17 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "K0XhN",
+          "id": "V6XJSR",
+          "type": "ref",
+          "ref": "jInqi",
+          "name": "LA Nav",
           "width": "fill_container",
-          "padding": [
-            28,
-            64
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "l0hSo",
+          "descendants": {
+            "XNYUZ": {
               "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 28,
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "niojD",
-              "gap": 28,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "uAaxS",
-                  "fill": "$ink",
-                  "content": "How I lead",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "text",
-                  "id": "l9mGjQ",
-                  "fill": "$inkMuted",
-                  "content": "Selected work",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "g6ofM",
-                  "fill": "$inkMuted",
-                  "content": "Writing",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "si2yU",
-                  "fill": "$inkMuted",
-                  "content": "About",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                }
-              ]
             }
-          ]
+          }
         },
         {
           "type": "frame",
@@ -2190,6 +1832,13 @@
               ]
             }
           ]
+        },
+        {
+          "id": "F8BIS1",
+          "type": "ref",
+          "ref": "quyO9",
+          "name": "LA Footer",
+          "width": "fill_container"
         }
       ]
     },
@@ -2206,35 +1855,11 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "dJAYg",
-          "width": "fill_container",
-          "padding": [
-            18,
-            20
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "p95jG7",
-              "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 20,
-              "fontWeight": "600"
-            },
-            {
-              "type": "text",
-              "id": "QFqmN",
-              "fill": "$ink",
-              "content": "≡",
-              "fontFamily": "Geist",
-              "fontSize": 22,
-              "fontWeight": "normal"
-            }
-          ]
+          "id": "zptOO",
+          "type": "ref",
+          "ref": "afJyd",
+          "name": "LA Nav Mobile",
+          "width": "fill_container"
         },
         {
           "type": "frame",
@@ -2381,70 +2006,17 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "BnyRu",
+          "id": "eTzOV",
+          "type": "ref",
+          "ref": "jInqi",
+          "name": "LA Nav",
           "width": "fill_container",
-          "padding": [
-            28,
-            64
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "Bj6UK",
+          "descendants": {
+            "RgivU": {
               "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 28,
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "ZAD5d",
-              "gap": 28,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "vrqF0",
-                  "fill": "$inkMuted",
-                  "content": "How I lead",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "GWSaQ",
-                  "fill": "$inkMuted",
-                  "content": "Selected work",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "hZfdM",
-                  "fill": "$inkMuted",
-                  "content": "Writing",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "vrB1Y",
-                  "fill": "$ink",
-                  "content": "About",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                }
-              ]
             }
-          ]
+          }
         },
         {
           "type": "frame",
@@ -3741,6 +3313,13 @@
               ]
             }
           ]
+        },
+        {
+          "id": "Nb9z7",
+          "type": "ref",
+          "ref": "quyO9",
+          "name": "LA Footer",
+          "width": "fill_container"
         }
       ]
     },
@@ -3966,91 +3545,17 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "L1FbS",
+          "id": "C36Nv",
+          "type": "ref",
+          "ref": "jInqi",
+          "name": "LA Nav",
           "width": "fill_container",
-          "padding": [
-            28,
-            64
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "HuK72",
+          "descendants": {
+            "b4zihP": {
               "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 28,
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "SufUZ",
-              "gap": 28,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "dpXP7",
-                  "fill": "$inkMuted",
-                  "content": "How I lead",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "SENNX",
-                  "fill": "$ink",
-                  "content": "Selected work",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "text",
-                  "id": "sihAc",
-                  "fill": "$inkMuted",
-                  "content": "Writing",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "MxqnC",
-                  "fill": "$inkMuted",
-                  "content": "About",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "cHhAh",
-                  "fill": "$accent",
-                  "padding": [
-                    10,
-                    16
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "XeZ3z",
-                      "fill": "#F7F8FA",
-                      "content": "Book a conversation",
-                      "fontFamily": "Geist",
-                      "fontSize": 13,
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             }
-          ]
+          }
         },
         {
           "type": "frame",
@@ -4897,6 +4402,13 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M8KfjL",
+          "type": "ref",
+          "ref": "quyO9",
+          "name": "LA Footer",
+          "width": "fill_container"
         }
       ]
     },
@@ -4912,91 +4424,17 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "PNdPq",
+          "id": "lGEHR",
+          "type": "ref",
+          "ref": "jInqi",
+          "name": "LA Nav",
           "width": "fill_container",
-          "padding": [
-            28,
-            64
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "QMhJt",
+          "descendants": {
+            "R3lbd": {
               "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 28,
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "v56Zc",
-              "gap": 28,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Vwgri",
-                  "fill": "$inkMuted",
-                  "content": "How I lead",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "ZJ3Q9",
-                  "fill": "$inkMuted",
-                  "content": "Selected work",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "nlUD5",
-                  "fill": "$ink",
-                  "content": "Writing",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "text",
-                  "id": "Pz7pG",
-                  "fill": "$inkMuted",
-                  "content": "About",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "y9Cqf",
-                  "fill": "$accent",
-                  "padding": [
-                    10,
-                    16
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "IVr5X",
-                      "fill": "#F7F8FA",
-                      "content": "Book a conversation",
-                      "fontFamily": "Geist",
-                      "fontSize": 13,
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             }
-          ]
+          }
         },
         {
           "type": "frame",
@@ -5545,6 +4983,13 @@
               ]
             }
           ]
+        },
+        {
+          "id": "AK4gJ",
+          "type": "ref",
+          "ref": "quyO9",
+          "name": "LA Footer",
+          "width": "fill_container"
         }
       ]
     },
@@ -5560,91 +5005,17 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "S25c4",
+          "id": "O5Qda",
+          "type": "ref",
+          "ref": "jInqi",
+          "name": "LA Nav",
           "width": "fill_container",
-          "padding": [
-            28,
-            64
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "GQUp7",
+          "descendants": {
+            "R3lbd": {
               "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 28,
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "XVcvy",
-              "gap": 28,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "n0sDl",
-                  "fill": "$inkMuted",
-                  "content": "How I lead",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "Itm64",
-                  "fill": "$inkMuted",
-                  "content": "Selected work",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "TS0DF",
-                  "fill": "$ink",
-                  "content": "Writing",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "text",
-                  "id": "Iyki8",
-                  "fill": "$inkMuted",
-                  "content": "About",
-                  "fontFamily": "Geist",
-                  "fontSize": 14,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "HzhKe",
-                  "fill": "$accent",
-                  "padding": [
-                    10,
-                    16
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "tvXT8",
-                      "fill": "#F7F8FA",
-                      "content": "Book a conversation",
-                      "fontFamily": "Geist",
-                      "fontSize": 13,
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             }
-          ]
+          }
         },
         {
           "type": "frame",
@@ -5995,6 +5366,13 @@
               ]
             }
           ]
+        },
+        {
+          "id": "mlpIz",
+          "type": "ref",
+          "ref": "quyO9",
+          "name": "LA Footer",
+          "width": "fill_container"
         }
       ]
     },
@@ -6010,35 +5388,11 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "sj71x",
-          "width": "fill_container",
-          "padding": [
-            18,
-            20
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "zHsHW",
-              "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 20,
-              "fontWeight": "600"
-            },
-            {
-              "type": "text",
-              "id": "m4dMd",
-              "fill": "$ink",
-              "content": "≡",
-              "fontFamily": "Geist",
-              "fontSize": 22,
-              "fontWeight": "normal"
-            }
-          ]
+          "id": "jwcCO",
+          "type": "ref",
+          "ref": "afJyd",
+          "name": "LA Nav Mobile",
+          "width": "fill_container"
         },
         {
           "type": "frame",
@@ -6353,35 +5707,11 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "YyT35",
-          "width": "fill_container",
-          "padding": [
-            18,
-            20
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "A03Yx",
-              "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 20,
-              "fontWeight": "600"
-            },
-            {
-              "type": "text",
-              "id": "xvE0T",
-              "fill": "$ink",
-              "content": "≡",
-              "fontFamily": "Geist",
-              "fontSize": 22,
-              "fontWeight": "normal"
-            }
-          ]
+          "id": "l7vfY",
+          "type": "ref",
+          "ref": "afJyd",
+          "name": "LA Nav Mobile",
+          "width": "fill_container"
         },
         {
           "type": "frame",
@@ -7608,35 +6938,11 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "c4aVC6",
-          "width": "fill_container",
-          "padding": [
-            18,
-            20
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "MMomT",
-              "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 20,
-              "fontWeight": "600"
-            },
-            {
-              "type": "text",
-              "id": "VgEiT",
-              "fill": "$ink",
-              "content": "≡",
-              "fontFamily": "Geist",
-              "fontSize": 22,
-              "fontWeight": "normal"
-            }
-          ]
+          "id": "i7sVn",
+          "type": "ref",
+          "ref": "afJyd",
+          "name": "LA Nav Mobile",
+          "width": "fill_container"
         },
         {
           "type": "frame",
@@ -8305,35 +7611,11 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "UIxDX",
-          "width": "fill_container",
-          "padding": [
-            18,
-            20
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "ESBPU",
-              "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 20,
-              "fontWeight": "600"
-            },
-            {
-              "type": "text",
-              "id": "X5AVfk",
-              "fill": "$ink",
-              "content": "≡",
-              "fontFamily": "Geist",
-              "fontSize": 22,
-              "fontWeight": "normal"
-            }
-          ]
+          "id": "zgUis",
+          "type": "ref",
+          "ref": "afJyd",
+          "name": "LA Nav Mobile",
+          "width": "fill_container"
         },
         {
           "type": "frame",
@@ -8896,35 +8178,11 @@
       "layout": "vertical",
       "children": [
         {
-          "type": "frame",
-          "id": "HUQlx",
-          "width": "fill_container",
-          "padding": [
-            18,
-            20
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "r55Xe4",
-              "fill": "$ink",
-              "content": "Jason Rundell",
-              "fontFamily": "Newsreader",
-              "fontSize": 20,
-              "fontWeight": "600"
-            },
-            {
-              "type": "text",
-              "id": "xmmJD",
-              "fill": "$ink",
-              "content": "≡",
-              "fontFamily": "Geist",
-              "fontSize": 22,
-              "fontWeight": "normal"
-            }
-          ]
+          "id": "P2ufA",
+          "type": "ref",
+          "ref": "afJyd",
+          "name": "LA Nav Mobile",
+          "width": "fill_container"
         },
         {
           "type": "frame",
@@ -9221,6 +8479,420 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "jInqi",
+      "x": 80,
+      "y": 7800,
+      "name": "LA Nav Desktop",
+      "reusable": true,
+      "width": 1280,
+      "padding": [
+        28,
+        64
+      ],
+      "justifyContent": "space_between",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "text",
+          "id": "VBPCe",
+          "name": "Brand",
+          "fill": "$ink",
+          "content": "Jason Rundell",
+          "fontFamily": "Newsreader",
+          "fontSize": 28,
+          "fontWeight": "600"
+        },
+        {
+          "type": "frame",
+          "id": "UUGGd",
+          "name": "Nav Links",
+          "gap": 28,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "XNYUZ",
+              "name": "How I lead",
+              "fill": "$inkMuted",
+              "content": "How I lead",
+              "fontFamily": "Geist",
+              "fontSize": 14,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "b4zihP",
+              "name": "Selected work",
+              "fill": "$inkMuted",
+              "content": "Selected work",
+              "fontFamily": "Geist",
+              "fontSize": 14,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "R3lbd",
+              "name": "Writing",
+              "fill": "$inkMuted",
+              "content": "Writing",
+              "fontFamily": "Geist",
+              "fontSize": 14,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "RgivU",
+              "name": "About",
+              "fill": "$inkMuted",
+              "content": "About",
+              "fontFamily": "Geist",
+              "fontSize": 14,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "qGlnX",
+              "name": "Nav CTA",
+              "fill": "$accent",
+              "padding": [
+                10,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "JadPx",
+                  "name": "CTA Label",
+                  "fill": "$surfacePrimary",
+                  "content": "Book a conversation",
+                  "fontFamily": "Geist",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "afJyd",
+      "x": 80,
+      "y": 7920,
+      "name": "LA Nav Mobile",
+      "reusable": true,
+      "width": 390,
+      "padding": [
+        18,
+        20
+      ],
+      "justifyContent": "space_between",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "text",
+          "id": "z1pjb",
+          "name": "Brand",
+          "fill": "$ink",
+          "content": "Jason Rundell",
+          "fontFamily": "Newsreader",
+          "fontSize": 20,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "W0MiO",
+          "name": "Menu",
+          "fill": "$inkMuted",
+          "content": "Menu",
+          "fontFamily": "Geist",
+          "fontSize": 14,
+          "fontWeight": "500"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "quyO9",
+      "x": 80,
+      "y": 8040,
+      "name": "LA Footer",
+      "reusable": true,
+      "width": 1280,
+      "fill": "$ink",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": [
+        48,
+        64
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "F8DLA",
+          "name": "Footer Top",
+          "width": "fill_container",
+          "justifyContent": "space_between",
+          "children": [
+            {
+              "type": "text",
+              "id": "xB4jq",
+              "name": "Footer Brand",
+              "fill": "$surfacePrimary",
+              "content": "Jason Rundell",
+              "fontFamily": "Newsreader",
+              "fontSize": 22,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "b9TaXN",
+              "name": "Footer Cols",
+              "gap": 40,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "K8A1aD",
+                  "name": "Navigate",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "IOgDb",
+                      "name": "Navigate Label",
+                      "fill": "#A8A29E",
+                      "content": "Navigate",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "J2746",
+                      "name": "Navigate Body",
+                      "fill": "$surfacePrimary",
+                      "content": "How I lead · Selected work · About",
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "f3d3Rb",
+                  "name": "Connect",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PUUpR",
+                      "name": "Connect Label",
+                      "fill": "#A8A29E",
+                      "content": "Connect",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VOUBc",
+                      "name": "Connect Body",
+                      "fill": "$surfacePrimary",
+                      "content": "LinkedIn · GitHub · Email",
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "AO7Qf",
+                  "name": "Engage",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CRnqb",
+                      "name": "Engage Label",
+                      "fill": "#A8A29E",
+                      "content": "Engage",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mNNkr",
+                      "name": "Engage Body",
+                      "fill": "$surfacePrimary",
+                      "content": "Book a conversation",
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "DPxMH",
+          "name": "Footer Note",
+          "fill": "#A8A29E",
+          "content": "Canada · Remote-first · FT leadership · Fractional · Selective build via Infinite Source",
+          "fontFamily": "IBM Plex Mono",
+          "fontSize": 11,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "J0JWym",
+      "x": 3330,
+      "y": 11146,
+      "name": "Line-Art — Mobile Menu Open",
+      "clip": true,
+      "width": 390,
+      "height": 760,
+      "fill": "$ink",
+      "layout": "vertical",
+      "gap": 48,
+      "padding": [
+        18,
+        20,
+        40,
+        20
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "xwj5C",
+          "name": "Sheet Top",
+          "width": "fill_container",
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "HqxVE",
+              "name": "Brand",
+              "fill": "$surfacePrimary",
+              "content": "Jason Rundell",
+              "fontFamily": "Newsreader",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "JaevW",
+              "name": "Close",
+              "fill": "#A8A29E",
+              "content": "Close",
+              "fontFamily": "Geist",
+              "fontSize": 14,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "MvYiy",
+          "name": "Sheet Links",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 28,
+          "children": [
+            {
+              "type": "text",
+              "id": "GARaF",
+              "name": "How I lead",
+              "fill": "$surfacePrimary",
+              "content": "How I lead",
+              "fontFamily": "Newsreader",
+              "fontSize": 36,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "SNqnb",
+              "name": "Selected work",
+              "fill": "$surfacePrimary",
+              "content": "Selected work",
+              "fontFamily": "Newsreader",
+              "fontSize": 36,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "yqR2A",
+              "name": "Writing",
+              "fill": "$surfacePrimary",
+              "content": "Writing",
+              "fontFamily": "Newsreader",
+              "fontSize": 36,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "cVgP8",
+              "name": "About",
+              "fill": "$surfacePrimary",
+              "content": "About",
+              "fontFamily": "Newsreader",
+              "fontSize": 36,
+              "fontWeight": "600"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "eTxw1",
+          "name": "Sheet CTA",
+          "width": "fill_container",
+          "fill": "$accent",
+          "padding": [
+            16,
+            20
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "Z4jKz3",
+              "name": "CTA Label",
+              "fill": "$surfacePrimary",
+              "content": "Book a conversation",
+              "fontFamily": "Geist",
+              "fontSize": 15,
+              "fontWeight": "600"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "jAyJJ",
+          "name": "Sheet Note",
+          "fill": "#A8A29E",
+          "content": "Canada · Remote-first · Leadership · Craft",
+          "fontFamily": "IBM Plex Mono",
+          "fontSize": 11,
+          "fontWeight": "normal"
         }
       ]
     }

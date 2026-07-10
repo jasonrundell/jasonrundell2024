@@ -24,77 +24,42 @@ describe('compareProjectsByDateDesc', () => {
 })
 
 describe('toProjectCardItem', () => {
-  it('maps a project with full featuredImage data', () => {
+  it('maps the fields the card list needs', () => {
+    const project: Project = {
+      ...baseProject,
+      technology: ['TypeScript', 'React'],
+    }
+
+    const result = toProjectCardItem(project)
+
+    expect(result).toEqual({
+      title: 'Test Project',
+      excerpt: 'A test excerpt',
+      slug: 'test-project',
+      createdDate: '2025-01-01T00:00:00.000Z',
+      technology: ['TypeScript', 'React'],
+    })
+  })
+
+  it('preserves an empty technology list without inventing data', () => {
+    const project: Project = { ...baseProject, technology: [] }
+
+    const result = toProjectCardItem(project)
+
+    expect(result.technology).toEqual([])
+  })
+
+  it('does not carry the featured image onto the card item', () => {
     const project: Project = {
       ...baseProject,
       featuredImage: {
         src: '/content/projects/test-project/featured.webp',
         alt: 'Alt text',
-        description: 'Image description',
       },
     }
 
     const result = toProjectCardItem(project)
 
-    expect(result).toEqual({
-      title: 'Test Project',
-      excerpt: 'A test excerpt',
-      slug: 'test-project',
-      featuredImage: {
-        file: { url: '/content/projects/test-project/featured.webp' },
-        altText: 'Alt text',
-        description: 'Image description',
-      },
-    })
-  })
-
-  it('omits featuredImage when the source project has no image', () => {
-    const result = toProjectCardItem(baseProject)
-
-    expect(result).toEqual({
-      title: 'Test Project',
-      excerpt: 'A test excerpt',
-      slug: 'test-project',
-    })
-    expect(result.featuredImage).toBeUndefined()
-  })
-
-  it('defaults missing alt text and description to empty strings when a src is present', () => {
-    const project: Project = {
-      ...baseProject,
-      featuredImage: {
-        src: '/content/projects/test-project/featured.webp',
-        alt: '',
-      },
-    }
-
-    const result = toProjectCardItem(project)
-
-    expect(result.featuredImage).toEqual({
-      file: { url: '/content/projects/test-project/featured.webp' },
-      altText: '',
-      description: '',
-    })
-  })
-
-  it('omits featuredImage when src is empty', () => {
-    const project: Project = {
-      ...baseProject,
-      featuredImage: { src: '', alt: 'Alt' },
-    }
-
-    const result = toProjectCardItem(project)
-    expect(result.featuredImage).toBeUndefined()
-  })
-
-  it('defaults undefined alt and description to empty strings via nullish coalescing', () => {
-    const project: Project = {
-      ...baseProject,
-      featuredImage: { src: '/content/projects/test-project/featured.webp' },
-    }
-
-    const result = toProjectCardItem(project)
-    expect(result.featuredImage?.altText).toBe('')
-    expect(result.featuredImage?.description).toBe('')
+    expect(result).not.toHaveProperty('featuredImage')
   })
 })
