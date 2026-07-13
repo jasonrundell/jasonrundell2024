@@ -71,7 +71,8 @@ export const StyledBody = styled('div')`
   a {
     color: ${Tokens.colors.accent.var};
   }
-  a:hover {
+  a:hover,
+  a:focus-visible {
     color: ${Tokens.colors.accentSoft.var};
   }
   p {

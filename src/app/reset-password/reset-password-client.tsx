@@ -7,23 +7,27 @@ import Tokens from '@/lib/tokens'
 
 export default function ResetPasswordClient({ token }: { token: string }) {
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    setError(null)
 
     try {
       const formData = new FormData(e.target as HTMLFormElement)
       formData.append('token', token)
 
-      // Call the server action directly
       await resetPasswordAction(formData)
 
-      // If we reach here, the action completed successfully
-      // The server action should have redirected, but if not, we'll redirect manually
       window.location.href = '/sign-in?message=password_reset_success'
-    } catch (error) {
-      console.error('Password reset error:', error)
+    } catch (err) {
+      console.error('Password reset error:', err)
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to reset password. Please try again.'
+      )
       setIsLoading(false)
     }
   }
@@ -33,6 +37,20 @@ export default function ResetPasswordClient({ token }: { token: string }) {
       title="Reset Password"
       subtitle="Please enter your new password below"
     >
+      {error && (
+        <div
+          role="alert"
+          style={{
+            color: '#b91c1c',
+            borderLeft: '2px solid #b91c1c',
+            padding: '0.5rem 1rem',
+            fontSize: '0.875rem',
+            marginBottom: '0.5rem',
+          }}
+        >
+          {error}
+        </div>
+      )}
       <form
         onSubmit={handleSubmit}
         style={{
@@ -55,6 +73,7 @@ export default function ResetPasswordClient({ token }: { token: string }) {
         >
           <label htmlFor="password">New password</label>
           <input
+            id="password"
             type="password"
             name="password"
             placeholder="New password"
@@ -77,6 +96,7 @@ export default function ResetPasswordClient({ token }: { token: string }) {
         >
           <label htmlFor="confirmPassword">Confirm password</label>
           <input
+            id="confirmPassword"
             type="password"
             name="confirmPassword"
             placeholder="Confirm password"

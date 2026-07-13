@@ -8,7 +8,7 @@ export const CommentsContainer = styled('div')`
   padding-top: ${Tokens.sizes.xlarge.value}${Tokens.sizes.xlarge.unit};
 `
 
-export const CommentsHeading = styled('h3')`
+export const CommentsHeading = styled('h2')`
   font-family: ${Tokens.fonts.heading.family};
   font-size: ${Tokens.sizes.fonts.large.value}${Tokens.sizes.fonts.large.unit};
   font-weight: 600;
@@ -16,7 +16,10 @@ export const CommentsHeading = styled('h3')`
   margin: 0 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit} 0;
 `
 
-export const CommentsList = styled('div')`
+export const CommentsList = styled('ul')`
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
@@ -43,7 +46,8 @@ export const CommentAuthor = styled(Link)`
   font-size: ${Tokens.fontSizes.sm.value}${Tokens.fontSizes.sm.unit};
   transition: color 0.15s;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     text-decoration: underline;
   }
 `
@@ -77,7 +81,8 @@ export const ActionButton = styled('button')`
   border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
   transition: color 0.15s, background 0.15s;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: ${Tokens.colors.rolePrompt.var};
     background: ${Tokens.colors.primary.value}15;
   }
@@ -89,7 +94,8 @@ export const ActionButton = styled('button')`
 `
 
 export const DeleteButton = styled(ActionButton)`
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: ${Tokens.colors.roleDanger.var};
     background: ${Tokens.colors.error.value}15;
   }
@@ -116,8 +122,9 @@ export const CommentTextarea = styled('textarea')`
   transition: border-color 0.15s;
   box-sizing: border-box;
 
-  &:focus {
-    outline: none;
+  &:focus-visible {
+    outline: 2px solid ${Tokens.colors.accent.var};
+    outline-offset: 2px;
     border-color: ${Tokens.colors.rolePrompt.var};
   }
 
@@ -147,7 +154,8 @@ export const SubmitCommentButton = styled('button')`
   cursor: pointer;
   transition: opacity 0.15s;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     opacity: 0.9;
   }
 

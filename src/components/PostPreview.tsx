@@ -26,7 +26,8 @@ const StyledCard = styled('article')`
   border: 1px solid ${Tokens.colors.lineSubtle.var};
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     border-color: ${Tokens.colors.accent.var};
     box-shadow: inset 3px 0 0 0 ${Tokens.colors.accent.var};
   }
@@ -48,7 +49,7 @@ const StyledContent = styled('div')`
   padding: 1.5rem;
 `
 
-const StyledHeading = styled('h3')`
+const StyledHeading = styled('h2')`
   font-family: ${Tokens.fonts.heading.var};
   font-size: 1.375rem;
   line-height: 1.2;

@@ -123,12 +123,12 @@ describe('MainNavClient Component', () => {
       // Act
       render(<MainNavClient />)
 
-      // Assert
+      // Assert -- both desktop and mobile drawer render these links
       await waitFor(() => {
-        expect(screen.getByRole('link', { name: /sign in/i })).toBeInTheDocument()
+        expect(screen.getAllByRole('link', { name: /sign in/i }).length).toBeGreaterThanOrEqual(1)
         expect(
-          screen.getByRole('link', { name: /sign up/i })
-        ).toBeInTheDocument()
+          screen.getAllByRole('link', { name: /sign up/i }).length
+        ).toBeGreaterThanOrEqual(1)
       })
     })
 
@@ -139,7 +139,7 @@ describe('MainNavClient Component', () => {
       // Assert
       await waitFor(() => {
         expect(
-          screen.getByRole('button', { name: /toggle mobile menu/i })
+          screen.getByRole('button', { name: /open menu|close menu/i })
         ).toBeInTheDocument()
       })
     })
@@ -152,11 +152,11 @@ describe('MainNavClient Component', () => {
       render(<MainNavClient />)
       await waitFor(() => {
         expect(
-          screen.getByRole('button', { name: /toggle mobile menu/i })
+          screen.getByRole('button', { name: /open menu|close menu/i })
         ).toBeInTheDocument()
       })
       const menuButton = screen.getByRole('button', {
-        name: /toggle mobile menu/i,
+        name: /open menu|close menu/i,
       })
       await user.click(menuButton)
 
@@ -173,11 +173,11 @@ describe('MainNavClient Component', () => {
       render(<MainNavClient />)
       await waitFor(() => {
         expect(
-          screen.getByRole('button', { name: /toggle mobile menu/i })
+          screen.getByRole('button', { name: /open menu|close menu/i })
         ).toBeInTheDocument()
       })
       const menuButton = screen.getByRole('button', {
-        name: /toggle mobile menu/i,
+        name: /open menu|close menu/i,
       })
       await user.click(menuButton)
 
@@ -218,14 +218,14 @@ describe('MainNavClient Component', () => {
       // Act
       render(<MainNavClient />)
 
-      // Assert
+      // Assert -- both desktop and mobile drawer render profile links
       await waitFor(() => {
         expect(
-          screen.getByRole('link', { name: /profile/i })
-        ).toBeInTheDocument()
+          screen.getAllByRole('link', { name: /profile/i }).length
+        ).toBeGreaterThanOrEqual(1)
         expect(
-          screen.getByRole('button', { name: /log out/i })
-        ).toBeInTheDocument()
+          screen.getAllByRole('button', { name: /log out/i }).length
+        ).toBeGreaterThanOrEqual(1)
       })
     })
 
@@ -237,11 +237,11 @@ describe('MainNavClient Component', () => {
       render(<MainNavClient />)
       await waitFor(() => {
         expect(
-          screen.getByRole('button', { name: /toggle mobile menu/i })
+          screen.getByRole('button', { name: /open menu|close menu/i })
         ).toBeInTheDocument()
       })
       const menuButton = screen.getByRole('button', {
-        name: /toggle mobile menu/i,
+        name: /open menu|close menu/i,
       })
       await user.click(menuButton)
 
@@ -315,11 +315,11 @@ describe('MainNavClient Component', () => {
       render(<MainNavClient />)
       await waitFor(() => {
         expect(
-          screen.getByRole('button', { name: /toggle mobile menu/i })
+          screen.getByRole('button', { name: /open menu|close menu/i })
         ).toBeInTheDocument()
       })
       const menuButton = screen.getByRole('button', {
-        name: /toggle mobile menu/i,
+        name: /open menu|close menu/i,
       })
       await user.click(menuButton)
 

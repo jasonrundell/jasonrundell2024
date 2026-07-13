@@ -88,7 +88,7 @@ export default async function RootLayout({
         <GoogleAnalytics gaId="G-GZFPYCJVHQ" />
         <SupabaseStatusBanner />
         <header>{MainNav()}</header>
-        <main id="main-content">
+        <main id="main-content" tabIndex={-1}>
           <PageTransition>{children}</PageTransition>
         </main>
         {await Footer()}

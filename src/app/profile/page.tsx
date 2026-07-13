@@ -1,4 +1,10 @@
+import type { Metadata } from 'next'
 import { createSafeClient } from '@/utils/supabase/safe-client'
+
+export const metadata: Metadata = {
+  title: 'Profile | Jason Rundell',
+  description: 'Manage your profile settings.',
+}
 import { redirect } from 'next/navigation'
 import ProfileClient from '@/app/profile/profile-client'
 import { AuthLayout } from '@/components/auth/auth-layout'

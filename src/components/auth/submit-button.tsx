@@ -21,7 +21,8 @@ export function SubmitButton({
   return (
     <Button
       type="submit"
-      aria-disabled={isPending}
+      disabled={isPending}
+      aria-busy={isPending}
       onClick={handleClick}
       {...props}
     >

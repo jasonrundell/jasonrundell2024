@@ -7,7 +7,7 @@ import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { NAV_LINKS } from '@/components/MainNav'
 
-const StyledMobileMenu = styled('div')`
+const StyledMobileMenu = styled('nav')`
   position: fixed;
   top: 4rem;
   left: 0;
@@ -67,7 +67,8 @@ const StyledMobileListItem = styled('li')`
     width: 100%;
     font-family: ${Tokens.fonts.heading.var};
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       color: ${Tokens.colors.footerLink.var};
     }
   }
@@ -90,7 +91,8 @@ const StyledMobileCta = styled(Link)`
   font-weight: 600;
   text-decoration: none;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: ${Tokens.colors.accentSoft.var};
   }
 `
@@ -116,7 +118,8 @@ const StyledSecondaryList = styled('ul')`
     padding: 0;
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       color: ${Tokens.colors.footerLinkHover.var};
     }
   }
@@ -137,7 +140,8 @@ export default function MobileDrawer({
     <StyledMobileMenu
       id="mobile-menu"
       className={isOpen ? 'open' : ''}
-      aria-hidden={!isOpen}
+      aria-label="Mobile navigation"
+      {...(!isOpen ? { inert: '' as unknown as boolean } : {})}
     >
       <StyledMobileList>
         {NAV_LINKS.map((link) => (

@@ -81,7 +81,8 @@ export const InfoCard = styled('div')`
   border: 1px solid ${Tokens.colors.lineSubtle.var};
   transition: border-color 0.2s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     border-color: ${Tokens.colors.accent.var};
   }
 `
@@ -145,7 +146,8 @@ export const PasswordToggleButton = styled('button')`
   justify-content: center;
   transition: color 0.2s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: ${Tokens.colors.rolePrompt.var};
   }
 `
@@ -167,7 +169,8 @@ export const CancelButton = styled('button')`
   font-weight: 500;
   transition: all 0.2s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     border-color: ${Tokens.colors.roleBody.var};
     color: ${Tokens.colors.roleBody.var};
   }

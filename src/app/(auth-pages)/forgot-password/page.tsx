@@ -60,7 +60,8 @@ const BackButton = styled(Link)`
   font-weight: 500;
   transition: opacity 0.2s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     opacity: 0.8;
   }
 `
@@ -79,7 +80,8 @@ const TryAgainButton = styled('button')`
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: ${Tokens.colors.rolePrompt.var};
     color: white;
   }
@@ -141,7 +143,7 @@ function ForgotPasswordContent() {
   if (isCheckingAuth) {
     return (
       <AuthLayout title="Checking Authentication" subtitle="Please wait...">
-        <div>Loading...</div>
+        <div role="status" aria-live="polite">Loading...</div>
       </AuthLayout>
     )
   }
@@ -176,7 +178,7 @@ function ForgotPasswordContent() {
         subtitle="We've sent you a password reset link"
       >
         <SuccessContainer>
-          <SuccessIcon />
+          <SuccessIcon aria-hidden="true" />
           <SuccessTitle>Reset link sent!</SuccessTitle>
           <SuccessMessage>
             We&apos;ve sent a password reset link to{' '}
@@ -208,6 +210,7 @@ function ForgotPasswordContent() {
         <FieldGroup>
           <Label htmlFor="email">Email</Label>
           <Input
+            id="email"
             name="email"
             type="email"
             placeholder="you@example.com"
@@ -242,7 +245,7 @@ export default function ForgotPassword() {
     <Suspense
       fallback={
         <AuthLayout title="Loading..." subtitle="Please wait">
-          <div>Loading...</div>
+          <div role="status" aria-live="polite">Loading...</div>
         </AuthLayout>
       }
     >

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { Play, ExternalLink, Music } from 'lucide-react'
 import { styled } from '@pigment-css/react'
@@ -113,13 +113,36 @@ export default function LastSong({ song }: LastSongProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const videoId = song.youtubeId || extractYouTubeId(song.url)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
+  const trapFocus = useCallback((e: KeyboardEvent) => {
+    if (e.key !== 'Tab' || !dialogRef.current) return
+    const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), [href], iframe, [tabindex]:not([tabindex="-1"])'
+    )
+    if (focusable.length === 0) return
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault()
+      last.focus()
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault()
+      first.focus()
+    }
+  }, [])
+
   useEffect(() => {
     if (!isModalOpen) return
+
+    previousFocusRef.current = document.activeElement as HTMLElement
+    setTimeout(() => closeButtonRef.current?.focus(), 0)
 
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -128,19 +151,21 @@ export default function LastSong({ song }: LastSongProps) {
     }
 
     document.addEventListener('keydown', handleEscape)
+    document.addEventListener('keydown', trapFocus)
     document.body.style.overflow = 'hidden'
 
     return () => {
       document.removeEventListener('keydown', handleEscape)
+      document.removeEventListener('keydown', trapFocus)
       document.body.style.overflow = 'unset'
+      previousFocusRef.current?.focus()
     }
-  }, [isModalOpen])
+  }, [isModalOpen, trapFocus])
 
   const handlePlay = () => {
     if (videoId) {
       setIsModalOpen(true)
     } else {
-      // If no video ID, open the URL directly
       window.open(song.url, '_blank', 'noopener noreferrer')
     }
   }
@@ -158,7 +183,7 @@ export default function LastSong({ song }: LastSongProps) {
       <StyledFlexSection>
         <StyledSongInfo>
           <StyledTitle>
-            <StyledIconWrapper>
+            <StyledIconWrapper aria-hidden="true">
               <Music size={20} />
             </StyledIconWrapper>
             Listening to:
@@ -194,8 +219,9 @@ export default function LastSong({ song }: LastSongProps) {
             role="dialog"
             aria-modal="true"
           >
-            <StyledVideoModalContent onClick={(e) => e.stopPropagation()}>
+            <StyledVideoModalContent ref={dialogRef} onClick={(e) => e.stopPropagation()}>
               <StyledCloseButton
+                ref={closeButtonRef}
                 onClick={handleCloseModal}
                 aria-label="Close video player"
               >

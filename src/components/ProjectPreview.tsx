@@ -27,7 +27,7 @@ const StyledMeta = styled('p')`
   margin: 0;
 `
 
-const StyledHeading = styled('h3')`
+const StyledHeading = styled('h2')`
   font-family: ${Tokens.fonts.heading.var};
   font-size: 1.5rem;
   line-height: 1.2;

@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 import type { ReactNode } from 'react'
 
 /**
@@ -11,6 +12,13 @@ import type { ReactNode } from 'react'
  */
 export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname()
+
+  useEffect(() => {
+    const mainContent = document.getElementById('main-content')
+    if (mainContent) {
+      mainContent.focus({ preventScroll: true })
+    }
+  }, [pathname])
 
   return (
     <div key={pathname} className="page-transition">

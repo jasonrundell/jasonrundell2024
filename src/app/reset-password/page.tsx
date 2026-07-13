@@ -1,4 +1,10 @@
+import type { Metadata } from 'next'
 import { createClient } from '@/utils/supabase/server'
+
+export const metadata: Metadata = {
+  title: 'Reset password | Jason Rundell',
+  description: 'Set a new password for your account.',
+}
 import { redirect } from 'next/navigation'
 import ResetPasswordClient from '@/app/reset-password/reset-password-client'
 

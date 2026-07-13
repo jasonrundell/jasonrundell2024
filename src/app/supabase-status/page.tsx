@@ -1,4 +1,10 @@
+import type { Metadata } from 'next'
 import { checkSupabaseStatus } from '@/utils/supabase/status'
+
+export const metadata: Metadata = {
+  title: 'Database status | Jason Rundell',
+  description: 'Current Supabase database connectivity status.',
+}
 import { createSafeClient } from '@/utils/supabase/safe-client'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'

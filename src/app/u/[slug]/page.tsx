@@ -38,7 +38,7 @@ const CommentMeta = styled(Link)`
   }
 `
 
-const SectionHeading = styled('h3')`
+const SectionHeading = styled('h2')`
   font-size: ${Tokens.sizes.fonts.medium.value}${Tokens.sizes.fonts.medium.unit};
   color: ${Tokens.colors.roleHeading.var};
   margin: 0 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit} 0;
