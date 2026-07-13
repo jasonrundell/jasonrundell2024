@@ -367,7 +367,7 @@
                     {
                       "type": "text",
                       "id": "CJNwG",
-                      "fill": "$ink",
+                      "fill": "$brass",
                       "content": "~60%",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 32,
@@ -396,7 +396,7 @@
                     {
                       "type": "text",
                       "id": "d1E93t",
-                      "fill": "$ink",
+                      "fill": "$brass",
                       "content": "~50%",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 32,
@@ -425,7 +425,7 @@
                     {
                       "type": "text",
                       "id": "J1RW7",
-                      "fill": "$ink",
+                      "fill": "$brass",
                       "content": "up to 12",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 32,
@@ -454,7 +454,7 @@
                     {
                       "type": "text",
                       "id": "p1Drr7",
-                      "fill": "$ink",
+                      "fill": "$brass",
                       "content": "$206M",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 32,
@@ -1070,7 +1070,7 @@
                     {
                       "type": "text",
                       "id": "sJYDg",
-                      "fill": "$inkFaint",
+                      "fill": "$brass",
                       "content": "AI craft pack",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 11,
@@ -1144,7 +1144,7 @@
                     {
                       "type": "text",
                       "id": "aVMOn",
-                      "fill": "$inkFaint",
+                      "fill": "$brass",
                       "content": "Smart home ops",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 11,
@@ -1181,7 +1181,7 @@
                     {
                       "type": "text",
                       "id": "grYgv",
-                      "fill": "$inkFaint",
+                      "fill": "$brass",
                       "content": "Design system",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 11,
@@ -1218,7 +1218,7 @@
                     {
                       "type": "text",
                       "id": "uRpGR",
-                      "fill": "$inkFaint",
+                      "fill": "$brass",
                       "content": "A11y nav",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 11,
@@ -1255,7 +1255,7 @@
                     {
                       "type": "text",
                       "id": "cLWMd",
-                      "fill": "$inkFaint",
+                      "fill": "$brass",
                       "content": "This site",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 11,
@@ -2974,7 +2974,7 @@
                     {
                       "type": "text",
                       "id": "r0IkG",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": 220,
                       "content": "AI & agentic",
@@ -3013,7 +3013,7 @@
                     {
                       "type": "text",
                       "id": "d0vnUD",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": 220,
                       "content": "Front end",
@@ -3052,7 +3052,7 @@
                     {
                       "type": "text",
                       "id": "m4rWrR",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": 220,
                       "content": "Back end & data",
@@ -3091,7 +3091,7 @@
                     {
                       "type": "text",
                       "id": "FLNWJ",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": 220,
                       "content": "Cloud & DevOps",
@@ -3130,7 +3130,7 @@
                     {
                       "type": "text",
                       "id": "cqs4B",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": 220,
                       "content": "Content management",
@@ -3169,7 +3169,7 @@
                     {
                       "type": "text",
                       "id": "V5XOh",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": 220,
                       "content": "Testing & quality",
@@ -3208,7 +3208,7 @@
                     {
                       "type": "text",
                       "id": "v4opDQ",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": 220,
                       "content": "Performance & monitoring",
@@ -3247,7 +3247,7 @@
                     {
                       "type": "text",
                       "id": "ZNXOO",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": 220,
                       "content": "Versioning",
@@ -3727,7 +3727,7 @@
                     {
                       "type": "text",
                       "id": "V4548",
-                      "fill": "$inkFaint",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Craft: Dockerized onboarding (weeks → 1 day), LAMP platform serving hundreds of millions in monthly assets.",
@@ -3805,7 +3805,7 @@
                     {
                       "type": "text",
                       "id": "DNGbW",
-                      "fill": "$inkFaint",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Craft: Amplify CI/CD, Cypress, Sentry, PR review culture.",
@@ -3883,7 +3883,7 @@
                     {
                       "type": "text",
                       "id": "vnsaX",
-                      "fill": "$inkFaint",
+                      "fill": "$brass",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Craft: Copilot Enterprise rollout, agentic playbooks, delivery continuity.",
@@ -4020,7 +4020,7 @@
                 {
                   "type": "text",
                   "id": "ZWxnd",
-                  "fill": "$inkFaint",
+                  "fill": "$brass",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "Cursor · Markdown · Shell",
@@ -4109,7 +4109,7 @@
                 {
                   "type": "text",
                   "id": "JgX4a",
-                  "fill": "$inkFaint",
+                  "fill": "$brass",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "Node · TypeScript · Fastify · Twilio · Supabase",
@@ -4198,7 +4198,7 @@
                 {
                   "type": "text",
                   "id": "m42mH",
-                  "fill": "$inkFaint",
+                  "fill": "$brass",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "React · Express · SQLite · mDNS",
@@ -4287,7 +4287,7 @@
                 {
                   "type": "text",
                   "id": "mqBTy",
-                  "fill": "$inkFaint",
+                  "fill": "$brass",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "React · Storybook · Chromatic · Pigment-CSS",
@@ -4376,7 +4376,7 @@
                 {
                   "type": "text",
                   "id": "ppdWN",
-                  "fill": "$inkFaint",
+                  "fill": "$brass",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "React · TypeScript · Vite · Jest",
@@ -4465,7 +4465,7 @@
                 {
                   "type": "text",
                   "id": "Qavgo",
-                  "fill": "$inkFaint",
+                  "fill": "$brass",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "Next.js · React · Vercel · Contentful",
@@ -6723,7 +6723,7 @@
                     {
                       "type": "text",
                       "id": "M1FUrS",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "content": "AI & agentic",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 12,
@@ -6761,7 +6761,7 @@
                     {
                       "type": "text",
                       "id": "cb7Fm",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "content": "Front end",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 12,
@@ -6799,7 +6799,7 @@
                     {
                       "type": "text",
                       "id": "PPetZ",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "content": "Back end & data",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 12,
@@ -6837,7 +6837,7 @@
                     {
                       "type": "text",
                       "id": "E0y9cQ",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "content": "Cloud & DevOps",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 12,
@@ -6875,7 +6875,7 @@
                     {
                       "type": "text",
                       "id": "VPk2L",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "content": "Content management",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 12,
@@ -6913,7 +6913,7 @@
                     {
                       "type": "text",
                       "id": "V0o0vs",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "content": "Testing & quality",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 12,
@@ -6951,7 +6951,7 @@
                     {
                       "type": "text",
                       "id": "UzPfC",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "content": "Performance & monitoring",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 12,
@@ -6989,7 +6989,7 @@
                     {
                       "type": "text",
                       "id": "cJrco",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "content": "Versioning",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 12,
