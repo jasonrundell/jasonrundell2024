@@ -105,8 +105,7 @@ so work can start with targeted reads instead of broad repo scans.
 - `/projects/[slug]`: `src/app/projects/[slug]/page.tsx`
 - `/about`: `src/app/about/page.tsx`
 - `/how-i-lead`: `src/app/how-i-lead/page.tsx` - leadership operating-loop page
-- `/contact`: `src/app/contact/page.tsx` - "Book a conversation" + engagement
-  modes
+- `/contact`: `src/app/contact/page.tsx` - "Book a chat" + engagement modes
 - `/posts`: `src/app/posts/page.tsx`
 - `/projects`: `src/app/projects/page.tsx`
 - `/profile`: `src/app/profile/page.tsx` and

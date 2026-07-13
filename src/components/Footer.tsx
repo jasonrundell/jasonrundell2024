@@ -80,7 +80,7 @@ const StyledNavList = styled('ul')`
   }
 `
 
-const StyledModes = styled('p')`
+const StyledModes = styled('div')`
   font-family: ${Tokens.fonts.monospace.var};
   font-size: 0.8125rem;
   line-height: 1.7;
@@ -108,7 +108,7 @@ const EXPLORE_LINKS = [
   { href: '/projects', label: 'Selected work' },
   { href: '/posts', label: 'Writing' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Book a conversation' },
+  { href: '/contact', label: 'Book a chat' },
 ] as const
 
 /** Global footer - dark band with lede, Explore/Connect columns, modes note. */

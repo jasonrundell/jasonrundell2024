@@ -18,9 +18,9 @@ import {
 import { SITE_DOMAIN } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Book a conversation | Jason Rundell',
+  title: 'Book a chat | Jason Rundell',
   description:
-    'Book a conversation with Jason Rundell about full-time leadership, fractional engineering leadership, or selective hands-on work.',
+    'Book a chat with Jason Rundell about full-time leadership, fractional engineering leadership, or selective hands-on work.',
   alternates: { canonical: `${SITE_DOMAIN}/contact` },
 }
 
@@ -85,7 +85,7 @@ export default function ContactPage() {
       <BandSection tone="paper">
         <Container>
           <Eyebrow label="Contact" />
-          <DisplayTitle>Book a conversation</DisplayTitle>
+          <DisplayTitle>Book a chat</DisplayTitle>
           <Lead>
             The fastest way to reach me is email, or grab a time on my calendar.
             Tell me where your team is and where you need it to go.

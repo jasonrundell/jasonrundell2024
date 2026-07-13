@@ -21,7 +21,10 @@ const StyledMobileMenu = styled('div')`
   transform: translateY(-8px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
   z-index: ${Tokens.zIndex.overlay.value};
   overflow-y: auto;
 
@@ -147,7 +150,7 @@ export default function MobileDrawer({
       </StyledMobileList>
 
       <StyledMobileCta href="/contact" onClick={onClose}>
-        Book a conversation
+        Book a chat
       </StyledMobileCta>
 
       <StyledSecondaryList>

@@ -11,7 +11,9 @@ const StyledMenuContainer = styled('div')`
   right: 0;
   z-index: ${Tokens.zIndex.nav.value};
   background-color: ${Tokens.colors.surfacePrimary.var};
-  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+  transition:
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 `
 
 const StyledMenu = styled('div')`
@@ -94,7 +96,9 @@ const StyledNavCta = styled(Link)`
   font-weight: 600;
   text-decoration: none;
   border: 1px solid ${Tokens.colors.accent.var};
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 
   &:hover {
     background: ${Tokens.colors.accentSoft.var};
@@ -124,7 +128,7 @@ export default function MainNav() {
               </StyledListItem>
             ))}
           </StyledList>
-          <StyledNavCta href="/contact">Book a conversation</StyledNavCta>
+          <StyledNavCta href="/contact">Book a chat</StyledNavCta>
         </StyledDesktopNav>
 
         <MainNavClient />

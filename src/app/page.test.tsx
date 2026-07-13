@@ -86,7 +86,7 @@ describe('Home page', () => {
     render(pageComponent)
 
     expect(
-      screen.getAllByRole('link', { name: /book a conversation/i })[0]
+      screen.getAllByRole('link', { name: /book a chat/i })[0]
     ).toHaveAttribute('href', '/contact')
     expect(
       screen.getByRole('link', { name: /view selected work/i })

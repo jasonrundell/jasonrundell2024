@@ -75,7 +75,7 @@
               "fill": "$ink",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "Lead engineering orgs.\nStill raise the technical bar.",
+              "content": "Lead engineering orgs.\nRaise the technical bar.",
               "lineHeight": 1.12,
               "fontFamily": "Newsreader",
               "fontSize": 52,
@@ -113,7 +113,7 @@
                       "type": "text",
                       "id": "OBMUc",
                       "fill": "#F7F8FA",
-                      "content": "Book a conversation",
+                      "content": "Book a chat",
                       "fontFamily": "Geist",
                       "fontSize": 15,
                       "fontWeight": "600"
@@ -224,7 +224,7 @@
                   "fill": "$ink",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Lead engineering orgs.\nStill raise the technical bar.",
+                  "content": "Lead engineering orgs.\nRaise the technical bar.",
                   "lineHeight": 1.12,
                   "fontFamily": "Newsreader",
                   "fontSize": 52,
@@ -262,7 +262,7 @@
                           "type": "text",
                           "id": "fEDA4",
                           "fill": "#F7F8FA",
-                          "content": "Book a conversation",
+                          "content": "Book a chat",
                           "fontFamily": "Geist",
                           "fontSize": 15,
                           "fontWeight": "600"
@@ -1465,7 +1465,7 @@
                   "type": "text",
                   "id": "pnjS7",
                   "fill": "#F7F8FA",
-                  "content": "Book a conversation",
+                  "content": "Book a chat",
                   "fontFamily": "Geist",
                   "fontSize": 15,
                   "fontWeight": "600"
@@ -1940,7 +1940,7 @@
               "fill": "$ink",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "Lead engineering orgs. Still raise the technical bar.",
+              "content": "Lead engineering orgs. Raise the technical bar.",
               "lineHeight": 1.14,
               "fontFamily": "Newsreader",
               "fontSize": 32,
@@ -1974,7 +1974,7 @@
                   "type": "text",
                   "id": "ReAgY",
                   "fill": "#F7F8FA",
-                  "content": "Book a conversation",
+                  "content": "Book a chat",
                   "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "600"
@@ -3305,7 +3305,7 @@
                   "type": "text",
                   "id": "uU50i",
                   "fill": "#F7F8FA",
-                  "content": "Book a conversation",
+                  "content": "Book a chat",
                   "fontFamily": "Geist",
                   "fontSize": 15,
                   "fontWeight": "600"
@@ -4532,7 +4532,7 @@
                   "type": "text",
                   "id": "P85VD",
                   "fill": "#F7F8FA",
-                  "content": "Book a conversation",
+                  "content": "Book a chat",
                   "fontFamily": "Geist",
                   "fontSize": 15,
                   "fontWeight": "600"
@@ -7053,7 +7053,7 @@
                   "type": "text",
                   "id": "C0oDw",
                   "fill": "#F7F8FA",
-                  "content": "Book a conversation",
+                  "content": "Book a chat",
                   "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "600"
@@ -7864,7 +7864,7 @@
                   "type": "text",
                   "id": "E5sx9",
                   "fill": "#F7F8FA",
-                  "content": "Book a conversation",
+                  "content": "Book a chat",
                   "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "600"
@@ -8846,7 +8846,7 @@
                   "id": "JadPx",
                   "name": "CTA Label",
                   "fill": "$surfacePrimary",
-                  "content": "Book a conversation",
+                  "content": "Book a chat",
                   "fontFamily": "Geist",
                   "fontSize": 13,
                   "fontWeight": "600"
@@ -9013,7 +9013,7 @@
                       "id": "mNNkr",
                       "name": "Engage Body",
                       "fill": "$surfacePrimary",
-                      "content": "Book a conversation",
+                      "content": "Book a chat",
                       "fontFamily": "Geist",
                       "fontSize": 13,
                       "fontWeight": "normal"
@@ -9153,7 +9153,7 @@
               "id": "Z4jKz3",
               "name": "CTA Label",
               "fill": "$surfacePrimary",
-              "content": "Book a conversation",
+              "content": "Book a chat",
               "fontFamily": "Geist",
               "fontSize": 15,
               "fontWeight": "600"

@@ -180,7 +180,7 @@ export default async function AboutPage() {
             {references.length > 0 && <References references={references} />}
           </div>
           <CtaRow>
-            <PrimaryCta href="/contact">Book a conversation</PrimaryCta>
+            <PrimaryCta href="/contact">Book a chat</PrimaryCta>
             <SecondaryCta href="/how-i-lead">How I lead →</SecondaryCta>
           </CtaRow>
         </Container>

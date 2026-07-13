@@ -19,7 +19,7 @@ describe('Contact page', () => {
 
     const headings = screen.getAllByRole('heading', { level: 1 })
     expect(headings).toHaveLength(1)
-    expect(headings[0]).toHaveTextContent(/book a conversation/i)
+    expect(headings[0]).toHaveTextContent(/book a chat/i)
   })
 
   it('renders the intro guidance for reaching out', () => {

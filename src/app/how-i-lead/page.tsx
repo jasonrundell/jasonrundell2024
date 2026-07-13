@@ -187,7 +187,7 @@ export default function HowILeadPage() {
                 system, then coach the team to run and improve it.
               </Lead>
               <CtaRow>
-                <PrimaryCta href="/contact">Book a conversation</PrimaryCta>
+                <PrimaryCta href="/contact">Book a chat</PrimaryCta>
                 <SecondaryCta href="/projects">See the work →</SecondaryCta>
               </CtaRow>
             </div>
@@ -243,7 +243,7 @@ export default function HowILeadPage() {
             ))}
           </PrincipleGrid>
           <CtaRow>
-            <PrimaryCta href="/contact">Book a conversation</PrimaryCta>
+            <PrimaryCta href="/contact">Book a chat</PrimaryCta>
           </CtaRow>
         </Container>
       </BandSection>

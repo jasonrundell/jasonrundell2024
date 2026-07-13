@@ -63,7 +63,7 @@ Use these lines in mocks and implementation unless the user revises them.
 
 **Hero eyebrow:** Engineering Leader · Player-Coach
 
-**Hero headline:** Lead engineering orgs. Still raise the technical bar.
+**Hero headline:** Lead engineering orgs. Raise the technical bar.
 
 **Hero support:** I join at inflection points and build the systems, culture,
 and standards that let teams scale - while staying close enough to the code to

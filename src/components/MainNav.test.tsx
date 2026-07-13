@@ -90,11 +90,11 @@ describe('MainNav Component', () => {
     expect(blogLink).toHaveAttribute('href', '/posts')
   })
 
-  it('should render the Book a conversation CTA', () => {
+  it('should render the Book a chat CTA', () => {
     render(<MainNav />)
 
     const contactLink = screen.getByRole('link', {
-      name: /^book a conversation$/i,
+      name: /^book a chat$/i,
     })
     expect(contactLink).toBeInTheDocument()
     expect(contactLink).toHaveAttribute('href', '/contact')

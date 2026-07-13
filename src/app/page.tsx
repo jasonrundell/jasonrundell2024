@@ -89,7 +89,7 @@ const ProofCell = styled('div')`
   }
 `
 
-const ProofValue = styled('p')`
+const ProofValue = styled('div')`
   font-family: ${Tokens.fonts.heading.var};
   font-size: 1.75rem;
   font-weight: 600;
@@ -248,7 +248,7 @@ export default async function HomePage() {
             <div>
               <Eyebrow label="Engineering Leader · Player-Coach" />
               <DisplayTitle>
-                Lead engineering orgs. Still raise the technical bar.
+                Lead engineering orgs. Raise the technical bar.
               </DisplayTitle>
               <Lead>
                 I join at inflection points and build the systems, culture, and
@@ -256,7 +256,7 @@ export default async function HomePage() {
                 the code to raise the bar.
               </Lead>
               <CtaRow>
-                <PrimaryCta href="/contact">Book a conversation</PrimaryCta>
+                <PrimaryCta href="/contact">Book a chat</PrimaryCta>
                 <SecondaryCta href="/projects">
                   View selected work →
                 </SecondaryCta>
@@ -316,7 +316,7 @@ export default async function HomePage() {
             <div>
               <SectionHeader
                 eyebrow="Selected work"
-                title="Where I've moved the needle"
+                title="Moving the needle"
               />
               <CaseList>
                 {CASES.map((c) => (
@@ -376,7 +376,7 @@ export default async function HomePage() {
             ))}
           </ModesGrid>
           <CtaRow>
-            <PrimaryCta href="/contact">Book a conversation</PrimaryCta>
+            <PrimaryCta href="/contact">Book a chat</PrimaryCta>
           </CtaRow>
         </Container>
       </BandSection>

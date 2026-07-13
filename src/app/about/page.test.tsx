@@ -84,9 +84,10 @@ describe('About page', () => {
     expect(
       screen.getByRole('link', { name: /infinite source/i })
     ).toHaveAttribute('href', 'https://infinitesource.agency')
-    expect(
-      screen.getByRole('link', { name: /book a conversation/i })
-    ).toHaveAttribute('href', '/contact')
+    expect(screen.getByRole('link', { name: /book a chat/i })).toHaveAttribute(
+      'href',
+      '/contact'
+    )
   })
 
   it('renders Person JSON-LD structured data', async () => {
