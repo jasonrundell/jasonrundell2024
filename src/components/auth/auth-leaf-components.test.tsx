@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@/__tests__/utils/test-utils'
 
+import { FormMessage } from './form-message'
 import Header from './hero'
 import NextLogo from './next-logo'
 import { PasswordInput } from './password-input'
@@ -15,6 +16,19 @@ jest.mock('lucide-react', () => ({
 }))
 
 describe('auth leaf components', () => {
+  it('renders form message variants', () => {
+    const { rerender } = render(
+      <FormMessage message={{ success: 'Profile saved' }} />
+    )
+    expect(screen.getByText('Profile saved')).toBeInTheDocument()
+
+    rerender(<FormMessage message={{ error: 'Something went wrong' }} />)
+    expect(screen.getByText('Something went wrong')).toBeInTheDocument()
+
+    rerender(<FormMessage message={{ message: 'Check your inbox' }} />)
+    expect(screen.getByText('Check your inbox')).toBeInTheDocument()
+  })
+
   it('renders password input with strength feedback and configured attributes', () => {
     render(
       <PasswordInput
@@ -33,6 +47,14 @@ describe('auth leaf components', () => {
     fireEvent.change(input, { target: { value: 'StrongPassword1!' } })
 
     expect(screen.getByText('At least 8 characters')).toBeInTheDocument()
+  })
+
+  it('renders password input with default required and minLength', () => {
+    render(<PasswordInput name="password" placeholder="Password" />)
+
+    const input = screen.getByLabelText('Password')
+    expect(input).toHaveAttribute('minLength', '8')
+    expect(input).not.toBeRequired()
   })
 
   it('renders badge variants with caller classes', () => {
