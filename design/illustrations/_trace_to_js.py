@@ -1,6 +1,7 @@
 """Vectorize a line-art PNG into a Pencil script (.js) that returns scalable path nodes.
 
-Usage: python _trace_to_js.py <input.png> <output.js> <name>
+Usage: python _trace_to_js.py <input.png> <output.js> [color_precision] [layer_difference] [filter_speckle]
+Defaults: color_precision=5, layer_difference=32, filter_speckle=16.
 Maps traced colors to site tokens: ink graphite lines, paper background, single forest accent.
 """
 import re
@@ -54,16 +55,29 @@ def nums(d):
 
 def bbox(d):
     n = nums(d)
-    return min(n[0::2]), min(n[1::2]), max(n[0::2]), max(n[1::2])
+    xs, ys = n[0::2], n[1::2]
+    if not xs or not ys:
+        return None
+    return min(xs), min(ys), max(xs), max(ys)
 
 
 def hx(h):
-    h = h.lstrip("#")
+    h = (h or "").strip().lstrip("#")
+    if len(h) == 3:
+        h = "".join(c * 2 for c in h)
+    if len(h) != 6 or any(c not in "0123456789abcdefABCDEF" for c in h):
+        raise ValueError("expected hex color, got %r" % h)
     return int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
 
 
 def classify(f):
-    r, g, b = hx(f)
+    f = (f or "").strip().lower()
+    if not f or f == "none":
+        return "ink"
+    try:
+        r, g, b = hx(f)
+    except ValueError as e:
+        raise ValueError("unusable path fill %r: %s" % (f, e)) from e
     if g >= 45 and (g - r) >= 15 and (g - b) >= 6:
         return "accent"
     if min(r, g, b) > 205:
@@ -86,10 +100,18 @@ def convert(inp, out_js, cp=5, ld=32, fs=16):
 
     kept = []
     for f, d in paths:
-        x0, y0, x1, y1 = bbox(d)
+        bb = bbox(d)
+        if bb is None:
+            continue
+        x0, y0, x1, y1 = bb
         if (x1 - x0) > 1000 and (y1 - y0) > 1000:  # drop full-canvas background
             continue
         kept.append((f, d))
+
+    if not kept:
+        raise RuntimeError(
+            "%s: no drawable paths after filtering (trace produced nothing usable)" % inp
+        )
 
     gx0 = min(bbox(d)[0] for _, d in kept)
     gy0 = min(bbox(d)[1] for _, d in kept)
@@ -119,6 +141,13 @@ def convert(inp, out_js, cp=5, ld=32, fs=16):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print(
+            "Usage: python _trace_to_js.py <input.png> <output.js> "
+            "[color_precision] [layer_difference] [filter_speckle]",
+            file=sys.stderr,
+        )
+        sys.exit(2)
     cp = int(sys.argv[3]) if len(sys.argv) > 3 else 5
     ld = int(sys.argv[4]) if len(sys.argv) > 4 else 32
     fs = int(sys.argv[5]) if len(sys.argv) > 5 else 16
