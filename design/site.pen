@@ -6,7 +6,7 @@
       "id": "BKXsq",
       "x": 1440,
       "y": 8218,
-      "name": "Line-Art — Home First Viewport Desktop",
+      "name": "Line-Art - Home First Viewport Desktop",
       "clip": true,
       "width": 1280,
       "height": 900,
@@ -87,7 +87,7 @@
               "fill": "$inkMuted",
               "textGrowth": "fixed-width",
               "width": 500,
-              "content": "I join at inflection points and build the systems, culture, and standards that let teams scale — while staying close enough to the code to raise the bar.",
+              "content": "I join at inflection points and build the systems, culture, and standards that let teams scale - while staying close enough to the code to raise the bar.",
               "lineHeight": 1.45,
               "fontFamily": "Geist",
               "fontSize": 18,
@@ -150,7 +150,7 @@
       "id": "jPNGu",
       "x": 1440,
       "y": 9238,
-      "name": "Line-Art — Home Full Scroll Desktop",
+      "name": "Line-Art - Home Full Scroll Desktop",
       "clip": true,
       "width": 1280,
       "fill": "$surfacePrimary",
@@ -236,7 +236,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": 500,
-                  "content": "I join at inflection points and build the systems, culture, and standards that let teams scale — while staying close enough to the code to raise the bar.",
+                  "content": "I join at inflection points and build the systems, culture, and standards that let teams scale - while staying close enough to the code to raise the bar.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 18,
@@ -594,7 +594,7 @@
                           "fill": "$inkMuted",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Find the real constraint — people, process, or platform — before prescribing. I diagnose, then build.",
+                          "content": "Find the real constraint - people, process, or platform - before prescribing. I diagnose, then build.",
                           "fontFamily": "Geist",
                           "fontSize": 15,
                           "fontWeight": "normal"
@@ -648,7 +648,7 @@
                           "fill": "$inkMuted",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Install standards, coaching loops, and delivery systems that stick — then drive adoption.",
+                          "content": "Install standards, coaching loops, and delivery systems that stick - then drive adoption.",
                           "fontFamily": "Geist",
                           "fontSize": 15,
                           "fontWeight": "normal"
@@ -702,7 +702,7 @@
                           "fill": "$inkMuted",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "Track outcomes teams feel: bugs, deploy speed, onboarding ramp — not vanity dashboards.",
+                          "content": "Track outcomes teams feel: bugs, deploy speed, onboarding ramp - not vanity dashboards.",
                           "fontFamily": "Geist",
                           "fontSize": 15,
                           "fontWeight": "normal"
@@ -877,7 +877,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Led CMI’s tech transformation — scaled the remote-first team 4→10 while owning release workflow end-to-end. Cut post-release bugs ~60% and installed hiring, coaching, and quality practices that stuck. Craft: Dockerized onboarding (weeks → 1 day), LAMP platform serving hundreds of millions in monthly assets.",
+                  "content": "Led CMI’s tech transformation - scaled the remote-first team 4→10 while owning release workflow end-to-end. Cut post-release bugs ~60% and installed hiring, coaching, and quality practices that stuck. Craft: Dockerized onboarding (weeks → 1 day), LAMP platform serving hundreds of millions in monthly assets.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -917,7 +917,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "First front-end hire at Canada’s first regulated crypto marketplace; promoted twice. Led Vue→React/Gatsby→Next.js migration — ~50% faster deploys, ~70% faster renders — while managing delivery through Kanban→sprints. Craft: Amplify CI/CD, Cypress, Sentry, PR review.",
+                  "content": "First front-end hire at Canada’s first regulated crypto marketplace; promoted twice. Led Vue→React/Gatsby→Next.js migration - ~50% faster deploys, ~70% faster renders - while managing delivery through Kanban→sprints. Craft: Amplify CI/CD, Cypress, Sentry, PR review.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -957,7 +957,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Supported 12 developers through acquisition, reorganization, and delivery-model change. Kept platform confidence while the org shifted. Later pattern: AI adoption with governance (Copilot Enterprise, agentic playbooks) — not cargo-cult tooling.",
+                  "content": "Supported 12 developers through acquisition, reorganization, and delivery-model change. Kept platform confidence while the org shifted. Later pattern: AI adoption with governance (Copilot Enterprise, agentic playbooks) - not cargo-cult tooling.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -1030,7 +1030,7 @@
               "fill": "$inkMuted",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "Open builds that prove the craft bar — Coding Fundamentals, ARC Line, Matter Ops, Dropship, React Mega Menu, and this site. Writing and GitHub stay subordinate to the leadership narrative.",
+              "content": "Open builds that prove the craft bar - Coding Fundamentals, ARC Line, Matter Ops, Dropship, React Mega Menu, and this site. Writing and GitHub stay subordinate to the leadership narrative.",
               "fontFamily": "Geist",
               "fontSize": 15,
               "fontWeight": "normal"
@@ -1356,7 +1356,7 @@
                       "fill": "#A8A29E",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Canada remote — Director / SDM / Head of Eng. Assess-and-improve mandates at Series A–C and scale-ups.",
+                      "content": "Canada remote - Director / SDM / Head of Eng. Assess-and-improve mandates at Series A–C and scale-ups.",
                       "fontFamily": "Geist",
                       "fontSize": 14,
                       "fontWeight": "normal"
@@ -1488,7 +1488,7 @@
       "id": "MujEn",
       "x": 2880,
       "y": 9238,
-      "name": "Line-Art — How I Lead Desktop",
+      "name": "Line-Art - How I Lead Desktop",
       "clip": true,
       "width": 1280,
       "fill": "$surfacePrimary",
@@ -1579,7 +1579,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": 520,
-                  "content": "I don’t run a playbook off the shelf. I diagnose the real constraint, install systems that stick, measure what teams feel, and scale without losing the craft bar — then run the loop again.",
+                  "content": "I don’t run a playbook off the shelf. I diagnose the real constraint, install systems that stick, measure what teams feel, and scale without losing the craft bar - then run the loop again.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 18,
@@ -1656,7 +1656,7 @@
                       "fill": "$inkMuted",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Find the real constraint — people, process, or platform — before prescribing. Listen, map the system, name the bottleneck.",
+                      "content": "Find the real constraint - people, process, or platform - before prescribing. Listen, map the system, name the bottleneck.",
                       "lineHeight": 1.45,
                       "fontFamily": "Geist",
                       "fontSize": 16,
@@ -1766,7 +1766,7 @@
                       "fill": "$inkMuted",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Track outcomes teams feel — fewer bugs, faster deploys, shorter onboarding — not vanity dashboards.",
+                      "content": "Track outcomes teams feel - fewer bugs, faster deploys, shorter onboarding - not vanity dashboards.",
                       "lineHeight": 1.45,
                       "fontFamily": "Geist",
                       "fontSize": 16,
@@ -1847,7 +1847,7 @@
       "id": "jQowj",
       "x": 2880,
       "y": 11146,
-      "name": "Line-Art — Home Mobile",
+      "name": "Line-Art - Home Mobile",
       "clip": true,
       "width": 390,
       "height": 760,
@@ -1952,7 +1952,7 @@
               "fill": "$inkMuted",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "I join at inflection points and build the systems, culture, and standards that let teams scale — while staying close to the code.",
+              "content": "I join at inflection points and build the systems, culture, and standards that let teams scale - while staying close to the code.",
               "lineHeight": 1.45,
               "fontFamily": "Geist",
               "fontSize": 15,
@@ -1999,7 +1999,7 @@
       "id": "AfKUa",
       "x": 4320,
       "y": 9238,
-      "name": "Line-Art — About Desktop",
+      "name": "Line-Art - About Desktop",
       "clip": true,
       "width": 1280,
       "fill": "$surfacePrimary",
@@ -2090,7 +2090,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": 540,
-                  "content": "I’m an engineering leader who joins at inflection points — growth, migration, acquisition — and builds the systems, culture, and standards that let teams scale without losing craft.",
+                  "content": "I’m an engineering leader who joins at inflection points - growth, migration, acquisition - and builds the systems, culture, and standards that let teams scale without losing craft.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 18,
@@ -2179,7 +2179,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "I’ve spent my career close to the work — first as a hands-on developer, then leading remote-first teams through the messy middle of scaling. I care about the same things at every level: does the team ship confidently, and does the bar keep rising?",
+                  "content": "I’ve spent my career close to the work - first as a hands-on developer, then leading remote-first teams through the messy middle of scaling. I care about the same things at every level: does the team ship confidently, and does the bar keep rising?",
                   "lineHeight": 1.5,
                   "fontFamily": "Geist",
                   "fontSize": 17,
@@ -2191,7 +2191,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "At CMI I led a tech transformation, grew the team, and cut post-release bugs while making onboarding a one-day exercise. At Bitbuy — Canada’s first regulated crypto marketplace — I was the first front-end hire, promoted twice, and led platform migrations that made deploys faster and safer through a $206M acquisition.",
+                  "content": "At CMI I led a tech transformation, grew the team, and cut post-release bugs while making onboarding a one-day exercise. At Bitbuy - Canada’s first regulated crypto marketplace - I was the first front-end hire, promoted twice, and led platform migrations that made deploys faster and safer through a $206M acquisition.",
                   "lineHeight": 1.5,
                   "fontFamily": "Geist",
                   "fontSize": 17,
@@ -2300,7 +2300,7 @@
                       "fill": "$inkMuted",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Standards aren’t bureaucracy — they’re how a team ships fast without breaking trust.",
+                      "content": "Standards aren’t bureaucracy - they’re how a team ships fast without breaking trust.",
                       "lineHeight": 1.45,
                       "fontFamily": "Geist",
                       "fontSize": 14,
@@ -2631,7 +2631,7 @@
                   "fill": "$ink",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "“When Jason joined our team, he didn’t just improve our development practices — he changed how we thought about building software. He authored an AI usage policy before our org even had one, and built confidence and capability across the team. He’s the kind of person who quietly leaves every team stronger than he found it.”",
+                  "content": "“When Jason joined our team, he didn’t just improve our development practices - he changed how we thought about building software. He authored an AI usage policy before our org even had one, and built confidence and capability across the team. He’s the kind of person who quietly leaves every team stronger than he found it.”",
                   "lineHeight": 1.4,
                   "fontFamily": "Newsreader",
                   "fontSize": 26,
@@ -2697,7 +2697,7 @@
                       "fill": "$ink",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "“He’s gone above and beyond to help manage, mentor, and grow our frontend team — a talented, knowledgeable engineer with an incredible work ethic.”",
+                      "content": "“He’s gone above and beyond to help manage, mentor, and grow our frontend team - a talented, knowledgeable engineer with an incredible work ethic.”",
                       "lineHeight": 1.45,
                       "fontFamily": "Newsreader",
                       "fontSize": 17,
@@ -2748,7 +2748,7 @@
                       "fill": "$ink",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "“A stand-out technical lead who thoroughly understands the tech and communicates it effectively — and cares deeply about his team.”",
+                      "content": "“A stand-out technical lead who thoroughly understands the tech and communicates it effectively - and cares deeply about his team.”",
                       "lineHeight": 1.45,
                       "fontFamily": "Newsreader",
                       "fontSize": 17,
@@ -2799,7 +2799,7 @@
                       "fill": "$ink",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "“Jason brings a creativity to technology rarely seen in developers — a trusted advisor for the evolution of our platforms.”",
+                      "content": "“Jason brings a creativity to technology rarely seen in developers - a trusted advisor for the evolution of our platforms.”",
                       "lineHeight": 1.45,
                       "fontFamily": "Newsreader",
                       "fontSize": 17,
@@ -3328,7 +3328,7 @@
       "id": "dWIrQ",
       "x": 2880,
       "y": 12026,
-      "name": "Line-Art — Illustration System",
+      "name": "Line-Art - Illustration System",
       "width": 1280,
       "fill": "$surfaceSecondary",
       "layout": "vertical",
@@ -3367,7 +3367,7 @@
           "fill": "$inkMuted",
           "textGrowth": "fixed-width",
           "width": 860,
-          "content": "One line quality across every scene, drawn as resizable vector paths (one shared source per illustration). Exactly one solid forest-green element per composition as the focal point. Each illustration maps to content — not decoration.",
+          "content": "One line quality across every scene, drawn as resizable vector paths (one shared source per illustration). Exactly one solid forest-green element per composition as the focal point. Each illustration maps to content - not decoration.",
           "lineHeight": 1.45,
           "fontFamily": "Geist",
           "fontSize": 15,
@@ -3411,7 +3411,7 @@
                   "type": "text",
                   "id": "i7iaF",
                   "fill": "$ink",
-                  "content": "Hero — team to platform",
+                  "content": "Hero - team to platform",
                   "fontFamily": "Newsreader",
                   "fontSize": 18,
                   "fontWeight": "600"
@@ -3461,7 +3461,7 @@
                   "type": "text",
                   "id": "Zheit",
                   "fill": "$ink",
-                  "content": "Loop — operating cadence",
+                  "content": "Loop - operating cadence",
                   "fontFamily": "Newsreader",
                   "fontSize": 18,
                   "fontWeight": "600"
@@ -3511,7 +3511,7 @@
                   "type": "text",
                   "id": "JNb9l",
                   "fill": "$ink",
-                  "content": "Branch — shipped work",
+                  "content": "Branch - shipped work",
                   "fontFamily": "Newsreader",
                   "fontSize": 18,
                   "fontWeight": "600"
@@ -3538,7 +3538,7 @@
       "id": "fPJbK",
       "x": 5760,
       "y": 8218,
-      "name": "Line-Art — Selected Work Desktop",
+      "name": "Line-Art - Selected Work Desktop",
       "clip": true,
       "width": 1280,
       "fill": "$surfacePrimary",
@@ -3639,7 +3639,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": 520,
-                  "content": "Named cases where I joined at an inflection point, changed how the team shipped, and left measurable outcomes — org and craft together.",
+                  "content": "Named cases where I joined at an inflection point, changed how the team shipped, and left measurable outcomes - org and craft together.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 18,
@@ -3718,7 +3718,7 @@
                       "fill": "$inkMuted",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Led CMI’s tech transformation — grew the remote-first team 4→10 while owning release workflow end-to-end. Cut post-release bugs ~60% and installed hiring, coaching, and quality practices that stuck.",
+                      "content": "Led CMI’s tech transformation - grew the remote-first team 4→10 while owning release workflow end-to-end. Cut post-release bugs ~60% and installed hiring, coaching, and quality practices that stuck.",
                       "lineHeight": 1.5,
                       "fontFamily": "Geist",
                       "fontSize": 16,
@@ -3796,7 +3796,7 @@
                       "fill": "$inkMuted",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "First front-end hire at Canada’s first regulated crypto marketplace; promoted twice. Led Vue→React/Gatsby→Next.js migration — ~50% faster deploys, ~70% faster renders — while managing delivery through Kanban→sprints.",
+                      "content": "First front-end hire at Canada’s first regulated crypto marketplace; promoted twice. Led Vue→React/Gatsby→Next.js migration - ~50% faster deploys, ~70% faster renders - while managing delivery through Kanban→sprints.",
                       "lineHeight": 1.5,
                       "fontFamily": "Geist",
                       "fontSize": 16,
@@ -3874,7 +3874,7 @@
                       "fill": "$inkMuted",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Supported 12 developers through acquisition, reorganization, and delivery-model change. Kept platform confidence while the org shifted. Later pattern: AI adoption with governance — not cargo-cult tooling.",
+                      "content": "Supported 12 developers through acquisition, reorganization, and delivery-model change. Kept platform confidence while the org shifted. Later pattern: AI adoption with governance - not cargo-cult tooling.",
                       "lineHeight": 1.5,
                       "fontFamily": "Geist",
                       "fontSize": 16,
@@ -3959,7 +3959,7 @@
               "type": "text",
               "id": "ZtuW7",
               "fill": "$inkMuted",
-              "content": "Hands-on builds that prove the craft bar — open source and shipped work, subordinate to the leadership narrative.",
+              "content": "Hands-on builds that prove the craft bar - open source and shipped work, subordinate to the leadership narrative.",
               "fontFamily": "Geist",
               "fontSize": 16,
               "fontWeight": "normal"
@@ -4027,6 +4027,29 @@
                   "fontFamily": "IBM Plex Mono",
                   "fontSize": 12,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "BNE2y",
+                  "name": "CTA Row",
+                  "padding": [
+                    8,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lHwtX",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -4077,7 +4100,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Voice-based multi-hotline for the ARC Raiders universe — Twilio ConversationRelay, moderation pipeline, ElevenLabs.",
+                  "content": "Voice-based multi-hotline for the ARC Raiders universe - Twilio ConversationRelay, moderation pipeline, ElevenLabs.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -4093,6 +4116,29 @@
                   "fontFamily": "IBM Plex Mono",
                   "fontSize": 12,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "uJLxF",
+                  "name": "CTA Row",
+                  "padding": [
+                    8,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Xa1Vm",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -4159,6 +4205,29 @@
                   "fontFamily": "IBM Plex Mono",
                   "fontSize": 12,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "MhONh",
+                  "name": "CTA Row",
+                  "padding": [
+                    8,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "G0GpT",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -4209,7 +4278,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "React component design system with Chromatic and Storybook — visualize, test, and document UI in isolation.",
+                  "content": "React component design system with Chromatic and Storybook - visualize, test, and document UI in isolation.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -4225,6 +4294,29 @@
                   "fontFamily": "IBM Plex Mono",
                   "fontSize": 12,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "WhpqV",
+                  "name": "CTA Row",
+                  "padding": [
+                    8,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hqJYE",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -4275,7 +4367,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Accessible, responsive mega-menu boilerplate for complex top navigation — ARIA, keyboard, TypeScript.",
+                  "content": "Accessible, responsive mega-menu boilerplate for complex top navigation - ARIA, keyboard, TypeScript.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -4291,6 +4383,29 @@
                   "fontFamily": "IBM Plex Mono",
                   "fontSize": 12,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "Sg8Rt",
+                  "name": "CTA Row",
+                  "padding": [
+                    8,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uLAlc",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -4341,7 +4456,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "This site — Next.js, Contentful, and a continuous redesign toward leadership + craft positioning.",
+                  "content": "This site - Next.js, Contentful, and a continuous redesign toward leadership + craft positioning.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -4357,6 +4472,29 @@
                   "fontFamily": "IBM Plex Mono",
                   "fontSize": 12,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "tMDCv",
+                  "name": "CTA Row",
+                  "padding": [
+                    8,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "vR6n1",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             }
@@ -4415,9 +4553,9 @@
     {
       "type": "frame",
       "id": "bv0bp",
-      "x": 5760,
-      "y": 10512,
-      "name": "Line-Art — Writing Overview Desktop",
+      "x": 7082,
+      "y": 8218,
+      "name": "Line-Art - Writing Overview Desktop",
       "clip": true,
       "width": 1280,
       "fill": "$surfacePrimary",
@@ -4505,7 +4643,7 @@
               "fill": "$inkMuted",
               "textGrowth": "fixed-width",
               "width": 640,
-              "content": "Leadership, craft, and AI with governance — essays that stay close to how teams actually ship.",
+              "content": "Leadership, craft, and AI with governance - essays that stay close to how teams actually ship.",
               "lineHeight": 1.45,
               "fontFamily": "Geist",
               "fontSize": 18,
@@ -4661,7 +4799,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": 900,
-                  "content": "How a voice hotline for ARC Raiders won the Twilio Hotline Challenge — ConversationRelay, moderation, and shipping under contest pressure.",
+                  "content": "How a voice hotline for ARC Raiders won the Twilio Hotline Challenge - ConversationRelay, moderation, and shipping under contest pressure.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -4813,7 +4951,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": 900,
-                  "content": "Reframing individual credit when you lead from the front — and why the scoreboard that matters is the team’s.",
+                  "content": "Reframing individual credit when you lead from the front - and why the scoreboard that matters is the team’s.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -4889,7 +5027,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": 900,
-                  "content": "How to write values and norms that stick — adoption as the deliverable, not the PDF.",
+                  "content": "How to write values and norms that stick - adoption as the deliverable, not the PDF.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -4965,7 +5103,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": 900,
-                  "content": "Consistency, isolation, and the trade-offs — when Docker earns its keep and when it adds friction.",
+                  "content": "Consistency, isolation, and the trade-offs - when Docker earns its keep and when it adds friction.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 15,
@@ -4996,9 +5134,9 @@
     {
       "type": "frame",
       "id": "osz0P",
-      "x": 7200,
-      "y": 10512,
-      "name": "Line-Art — Blog Post Desktop",
+      "x": 7082,
+      "y": 10089,
+      "name": "Line-Art - Blog Post Desktop",
       "clip": true,
       "width": 1280,
       "fill": "$surfacePrimary",
@@ -5381,7 +5519,7 @@
       "id": "d7wwQ",
       "x": 3789,
       "y": 12798,
-      "name": "Line-Art — How I Lead Mobile",
+      "name": "Line-Art - How I Lead Mobile",
       "clip": true,
       "width": 390,
       "fill": "$surfacePrimary",
@@ -5542,7 +5680,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Find the real constraint — people, process, or platform — before prescribing.",
+                  "content": "Find the real constraint - people, process, or platform - before prescribing.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 14,
@@ -5636,7 +5774,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Track outcomes teams feel — bugs, deploys, onboarding — not vanity dashboards.",
+                  "content": "Track outcomes teams feel - bugs, deploys, onboarding - not vanity dashboards.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 14,
@@ -5700,7 +5838,7 @@
       "id": "G2iPT",
       "x": 4246,
       "y": 12798,
-      "name": "Line-Art — About Mobile",
+      "name": "Line-Art - About Mobile",
       "clip": true,
       "width": 390,
       "fill": "$surfacePrimary",
@@ -5865,7 +6003,7 @@
               "fill": "$inkMuted",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "I’ve spent my career close to the work — first as a hands-on developer, then leading remote-first teams through the messy middle of scaling.",
+              "content": "I’ve spent my career close to the work - first as a hands-on developer, then leading remote-first teams through the messy middle of scaling.",
               "lineHeight": 1.5,
               "fontFamily": "Geist",
               "fontSize": 15,
@@ -5964,7 +6102,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Standards aren’t bureaucracy — they’re how a team ships fast without breaking trust.",
+                  "content": "Standards aren’t bureaucracy - they’re how a team ships fast without breaking trust.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 14,
@@ -6306,7 +6444,7 @@
                   "fill": "$ink",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "“He didn’t just improve our development practices — he changed how we thought about building software. He’s the kind of person who quietly leaves every team stronger than he found it.”",
+                  "content": "“He didn’t just improve our development practices - he changed how we thought about building software. He’s the kind of person who quietly leaves every team stronger than he found it.”",
                   "lineHeight": 1.4,
                   "fontFamily": "Newsreader",
                   "fontSize": 19,
@@ -6357,7 +6495,7 @@
                   "fill": "$ink",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "“He’s gone above and beyond to help manage, mentor, and grow our frontend team — a talented, knowledgeable engineer with an incredible work ethic.”",
+                  "content": "“He’s gone above and beyond to help manage, mentor, and grow our frontend team - a talented, knowledgeable engineer with an incredible work ethic.”",
                   "lineHeight": 1.45,
                   "fontFamily": "Newsreader",
                   "fontSize": 16,
@@ -6408,7 +6546,7 @@
                   "fill": "$ink",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "“A stand-out technical lead who thoroughly understands the tech and communicates it effectively — and cares deeply about his team.”",
+                  "content": "“A stand-out technical lead who thoroughly understands the tech and communicates it effectively - and cares deeply about his team.”",
                   "lineHeight": 1.45,
                   "fontFamily": "Newsreader",
                   "fontSize": 16,
@@ -6459,7 +6597,7 @@
                   "fill": "$ink",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "“Jason brings a creativity to technology rarely seen in developers — a trusted advisor for the evolution of our platforms.”",
+                  "content": "“Jason brings a creativity to technology rarely seen in developers - a trusted advisor for the evolution of our platforms.”",
                   "lineHeight": 1.45,
                   "fontFamily": "Newsreader",
                   "fontSize": 16,
@@ -6931,7 +7069,7 @@
       "id": "HZkSF",
       "x": 4714,
       "y": 12798,
-      "name": "Line-Art — Selected Work Mobile",
+      "name": "Line-Art - Selected Work Mobile",
       "clip": true,
       "width": 390,
       "fill": "$surfacePrimary",
@@ -7144,7 +7282,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "First FE hire; promoted twice. Vue→Next migration — ~50% faster deploys, ~70% faster renders.",
+                  "content": "First FE hire; promoted twice. Vue→Next migration - ~50% faster deploys, ~70% faster renders.",
                   "lineHeight": 1.45,
                   "fontFamily": "Geist",
                   "fontSize": 14,
@@ -7307,6 +7445,29 @@
                   "fontFamily": "Geist",
                   "fontSize": 13,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "jzZpq",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fY1sD",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -7354,6 +7515,29 @@
                   "fontFamily": "Geist",
                   "fontSize": 13,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "qThpV",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "AFqHN",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -7401,6 +7585,29 @@
                   "fontFamily": "Geist",
                   "fontSize": 13,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "LFEU8",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jt415",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -7448,6 +7655,29 @@
                   "fontFamily": "Geist",
                   "fontSize": 13,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "KSjwg",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ZkWe9",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -7495,6 +7725,29 @@
                   "fontFamily": "Geist",
                   "fontSize": 13,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "bJRfl",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ydHJG",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             },
@@ -7537,11 +7790,34 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "This site — Next.js + Contentful.",
+                  "content": "This site - Next.js + Contentful.",
                   "lineHeight": 1.4,
                   "fontFamily": "Geist",
                   "fontSize": 13,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "lj3Mt",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Lhk2j",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
                 }
               ]
             }
@@ -7604,7 +7880,7 @@
       "id": "dgXyw",
       "x": 5180,
       "y": 12798,
-      "name": "Line-Art — Writing Overview Mobile",
+      "name": "Line-Art - Writing Overview Mobile",
       "clip": true,
       "width": 390,
       "fill": "$surfacePrimary",
@@ -7841,7 +8117,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Voice hotline for ARC Raiders — ConversationRelay and shipping under pressure.",
+                  "content": "Voice hotline for ARC Raiders - ConversationRelay and shipping under pressure.",
                   "lineHeight": 1.4,
                   "fontFamily": "Geist",
                   "fontSize": 14,
@@ -8069,7 +8345,7 @@
                   "fill": "$inkMuted",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "How to write values that stick — adoption as the deliverable.",
+                  "content": "How to write values that stick - adoption as the deliverable.",
                   "lineHeight": 1.4,
                   "fontFamily": "Geist",
                   "fontSize": 14,
@@ -8171,7 +8447,7 @@
       "id": "JHOtg",
       "x": 5631,
       "y": 12798,
-      "name": "Line-Art — Blog Post Mobile",
+      "name": "Line-Art - Blog Post Mobile",
       "clip": true,
       "width": 390,
       "fill": "$surfacePrimary",
@@ -8294,7 +8570,7 @@
               "fill": "$inkMuted",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "In the intricate dance of code reviews, there’s a common pitfall: dropping subtle hints rather than clear, actionable feedback. The intention might be independence — the result is often confusion.",
+              "content": "In the intricate dance of code reviews, there’s a common pitfall: dropping subtle hints rather than clear, actionable feedback. The intention might be independence - the result is often confusion.",
               "lineHeight": 1.6,
               "fontFamily": "Geist",
               "fontSize": 15,
@@ -8342,7 +8618,7 @@
               "fill": "$inkMuted",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "When a reviewer explains what needs to change and why, the developer internalizes the practice — not just the patch.",
+              "content": "When a reviewer explains what needs to change and why, the developer internalizes the practice - not just the patch.",
               "lineHeight": 1.6,
               "fontFamily": "Geist",
               "fontSize": 15,
@@ -8378,7 +8654,7 @@
               "fill": "$inkMuted",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "The goal of code reviews isn’t just catching bugs — it’s helping each developer grow more confident in their craft.",
+              "content": "The goal of code reviews isn’t just catching bugs - it’s helping each developer grow more confident in their craft.",
               "lineHeight": 1.6,
               "fontFamily": "Geist",
               "fontSize": 15,
@@ -8765,7 +9041,7 @@
       "id": "J0JWym",
       "x": 3330,
       "y": 11146,
-      "name": "Line-Art — Mobile Menu Open",
+      "name": "Line-Art - Mobile Menu Open",
       "clip": true,
       "width": 390,
       "height": 760,

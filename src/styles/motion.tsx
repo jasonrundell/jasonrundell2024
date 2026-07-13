@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * Tier 2 scroll-reveal motion module — the single place where one-shot
+ * Tier 2 scroll-reveal motion module - the single place where one-shot
  * IntersectionObserver-driven reveals are implemented for the refined
  * terminal aesthetic.
  *
@@ -24,7 +24,7 @@
  *
  * The file uses the `.tsx` extension because the `Reveal` /
  * `RevealStaggerGroup` / `RevealStaggerItem` exports are React components
- * authored with JSX. Imports stay `from '@/styles/motion'` — Next/Webpack
+ * authored with JSX. Imports stay `from '@/styles/motion'` - Next/Webpack
  * resolves the extension automatically.
  */
 
@@ -228,8 +228,7 @@ const RevealStaggerContext =
 
 const StyledStaggerGroup = styled('div')``
 
-interface RevealStaggerGroupProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface RevealStaggerGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
 }
 
@@ -291,11 +290,7 @@ export function RevealStaggerItem({
   } as React.CSSProperties
 
   return (
-    <StyledStaggerItem
-      data-reveal-state={state}
-      style={mergedStyle}
-      {...rest}
-    >
+    <StyledStaggerItem data-reveal-state={state} style={mergedStyle} {...rest}>
       {children}
     </StyledStaggerItem>
   )

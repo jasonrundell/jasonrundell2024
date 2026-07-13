@@ -20,7 +20,7 @@ interface MetaDateProps {
 }
 
 /**
- * Date metadata rendered with the refined-terminal chrome — cyan, monospaced,
+ * Date metadata rendered with the refined-terminal chrome - cyan, monospaced,
  * leading `// ` glyph. The component is the canonical date renderer for
  * post and project preview cards, blog post headers, and any other
  * "metadata" surface.

@@ -1,7 +1,6 @@
-export const SITE_NAME =
-  'Jason Rundell — Engineering leader & player-coach'
+export const SITE_NAME = 'Jason Rundell - Engineering leader & player-coach'
 export const SITE_DESCRIPTION =
-  'Jason Rundell is an engineering leader with 25+ years in full-stack web development — joining at inflection points to build the systems, culture, and standards that let teams scale.'
+  'Jason Rundell is an engineering leader with 25+ years in full-stack web development - joining at inflection points to build the systems, culture, and standards that let teams scale.'
 export const SITE_DOMAIN = 'https://jasonrundell.com'
 export const HOME_OG_IMAGE_URL = `${SITE_DOMAIN}/images/ai-powered-developer.webp`
 

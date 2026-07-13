@@ -40,7 +40,7 @@ const StyledDoorItem = styled('li')`
 `
 
 /**
- * Hub doors — the primary 3-door navigation grid on `/`. Phase 4 swaps the
+ * Hub doors - the primary 3-door navigation grid on `/`. Phase 4 swaps the
  * card style for terminal-button chrome via `TerminalButtonLink` so the
  * visual language matches the rest of the refined-terminal aesthetic.
  */

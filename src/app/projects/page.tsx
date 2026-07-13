@@ -2,7 +2,10 @@ import React from 'react'
 import type { Metadata } from 'next'
 
 import { getProjects } from '@/lib/content'
-import { compareProjectsByDateDesc, toProjectCardItem } from '@/lib/projectUtils'
+import {
+  compareProjectsByDateDesc,
+  toProjectCardItem,
+} from '@/lib/projectUtils'
 import {
   BandSection,
   Container,
@@ -16,7 +19,7 @@ import { SITE_DOMAIN } from '@/lib/constants'
 export const metadata: Metadata = {
   title: 'Selected work | Jason Rundell',
   description:
-    'Selected work by Jason Rundell — shipped products, open-source, and side projects across leadership and hands-on engineering.',
+    'Selected work by Jason Rundell - shipped products, open-source, and side projects across leadership and hands-on engineering.',
   alternates: { canonical: `${SITE_DOMAIN}/projects` },
 }
 

@@ -4,7 +4,7 @@ import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 
 /**
- * Editorial design primitives — the single source for the leadership/craft
+ * Editorial design primitives - the single source for the leadership/craft
  * visual system (paper ground, forest accent, Newsreader + Geist + IBM Plex
  * Mono). Pages compose these instead of re-declaring band/heading/CTA styles.
  *
@@ -64,7 +64,7 @@ export const Container = styled('div')`
   }
 `
 
-/** Accent hairline with endcaps — the recurring systems-map motif. */
+/** Accent hairline with endcaps - the recurring systems-map motif. */
 const RuleWrap = styled('span')`
   display: inline-flex;
   align-items: center;
@@ -173,7 +173,7 @@ export function SectionHeader({
   )
 }
 
-/** Solid forest CTA — sharp corners, no glow. */
+/** Solid forest CTA - sharp corners, no glow. */
 export const PrimaryCta = styled(Link)`
   display: inline-flex;
   align-items: center;
@@ -186,7 +186,9 @@ export const PrimaryCta = styled(Link)`
   font-weight: 600;
   text-decoration: none;
   border: 1px solid ${Tokens.colors.accent.var};
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 
   &:hover {
     background: ${Tokens.colors.accentSoft.var};
@@ -195,7 +197,7 @@ export const PrimaryCta = styled(Link)`
   }
 `
 
-/** Text link with arrow — secondary action, no pill. */
+/** Text link with arrow - secondary action, no pill. */
 export const SecondaryCta = styled(Link)`
   display: inline-flex;
   align-items: center;
@@ -205,7 +207,9 @@ export const SecondaryCta = styled(Link)`
   font-size: 0.9375rem;
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.15s ease, gap 0.15s ease;
+  transition:
+    color 0.15s ease,
+    gap 0.15s ease;
 
   &:hover {
     color: ${Tokens.colors.accent.var};

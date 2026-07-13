@@ -4,7 +4,7 @@ import AUTHOR from '@/lib/author'
 
 /**
  * Builds a schema.org `Person` object for the /about page.
- * Identity data is sourced from `src/lib/author.ts` — single source of truth.
+ * Identity data is sourced from `src/lib/author.ts` - single source of truth.
  */
 export function buildPersonJsonLd() {
   return {

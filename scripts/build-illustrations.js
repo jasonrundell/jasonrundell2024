@@ -1,11 +1,11 @@
 /**
  * Codegen: read the approved Pencil vector scripts in design/illustrations/*.js
- * and emit src/components/illustrations/paths.generated.ts — a typed data module
+ * and emit src/components/illustrations/paths.generated.ts - a typed data module
  * with { viewBox, paths: [{ fill, d }] } per illustration.
  *
  * The .js sources return an array of Pencil path nodes (each carrying a baked
  * `viewBox`, `geometry` d-string, and resolved `fill` hex). We execute each file
- * in a sandbox with a stub `pencil` object and capture that array — no manual
+ * in a sandbox with a stub `pencil` object and capture that array - no manual
  * copying of the (very large) path strings.
  *
  * Run via `npm run illustrations:build`. The artifact is committed.

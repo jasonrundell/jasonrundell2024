@@ -15,7 +15,7 @@ import { SITE_DOMAIN } from '@/lib/constants'
 export const metadata: Metadata = {
   title: 'Writing | Jason Rundell',
   description:
-    'Writing by Jason Rundell — notes on engineering leadership, the web, and the practical edges of AI-assisted work.',
+    'Writing by Jason Rundell - notes on engineering leadership, the web, and the practical edges of AI-assisted work.',
   alternates: { canonical: `${SITE_DOMAIN}/posts` },
 }
 

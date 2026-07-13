@@ -1,5 +1,5 @@
 /**
- * Refined-terminal "chrome" primitives — the small set of visual primitives
+ * Refined-terminal "chrome" primitives - the small set of visual primitives
  * that carry the syntax-highlight aesthetic across pages without scattering
  * one-off styles into every component.
  *

@@ -98,7 +98,7 @@ const nextConfig = {
   webpack: (config, { dev }) => {
     if (dev) {
       // Keep watchOptions only. Do not override `devtool` or `optimization.splitChunks`
-      // in development — Next.js owns those for Fast Refresh / RSC client manifests.
+      // in development - Next.js owns those for Fast Refresh / RSC client manifests.
       // Overriding them caused "Could not find the module … in the React Client Manifest"
       // after full reloads (especially with concurrent `npm run dev` on Windows).
       config.watchOptions = {

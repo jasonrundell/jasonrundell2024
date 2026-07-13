@@ -21,7 +21,7 @@ import { SITE_DOMAIN } from '@/lib/constants'
 export const metadata: Metadata = {
   title: 'How I lead | Jason Rundell',
   description:
-    'How Jason Rundell leads engineering teams — an operating loop of assess, set standards, build the system, and coach the team, applied at inflection points.',
+    'How Jason Rundell leads engineering teams - an operating loop of assess, set standards, build the system, and coach the team, applied at inflection points.',
   alternates: { canonical: `${SITE_DOMAIN}/how-i-lead` },
 }
 
@@ -131,7 +131,7 @@ const STEPS = [
   {
     title: 'Set standards',
     blurb:
-      'Make quality, delivery, and expectations explicit — from code review and testing to how decisions get made.',
+      'Make quality, delivery, and expectations explicit - from code review and testing to how decisions get made.',
   },
   {
     title: 'Build the system',
@@ -141,7 +141,7 @@ const STEPS = [
   {
     title: 'Coach the team',
     blurb:
-      'Grow people to run and improve the system themselves — including adopting AI with real governance, not hype.',
+      'Grow people to run and improve the system themselves - including adopting AI with real governance, not hype.',
   },
 ] as const
 
@@ -162,7 +162,7 @@ const PRINCIPLES = [
     label: 'Principle 03',
     title: 'AI with governance',
     blurb:
-      'Adopt agentic development with policy, training, and guardrails — measured, not hyped.',
+      'Adopt agentic development with policy, training, and guardrails - measured, not hyped.',
   },
   {
     label: 'Principle 04',
@@ -182,7 +182,7 @@ export default function HowILeadPage() {
               <Eyebrow label="How I lead" />
               <DisplayTitle>An operating loop, not a job title</DisplayTitle>
               <Lead>
-                Leadership isn&rsquo;t a rank — it&rsquo;s a repeatable loop I
+                Leadership isn&rsquo;t a rank - it&rsquo;s a repeatable loop I
                 run at every engagement: assess, set standards, build the
                 system, then coach the team to run and improve it.
               </Lead>

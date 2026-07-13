@@ -4,7 +4,7 @@ import { Skills as SkillsDef } from '@/typeDefinitions/app'
 import Tokens from '@/lib/tokens'
 
 /**
- * Capability matrix — skills grouped by category into a hairline grid. Replaces
+ * Capability matrix - skills grouped by category into a hairline grid. Replaces
  * the earlier 3D cloud with a calm, scannable editorial treatment that reads as
  * a systems map of what Jason works in.
  */

@@ -111,7 +111,7 @@ const EXPLORE_LINKS = [
   { href: '/contact', label: 'Book a conversation' },
 ] as const
 
-/** Global footer — dark band with lede, Explore/Connect columns, modes note. */
+/** Global footer - dark band with lede, Explore/Connect columns, modes note. */
 export default async function Footer() {
   return (
     <StyledFooter id="contact">
@@ -121,7 +121,7 @@ export default async function Footer() {
             <h2>Let&rsquo;s talk about your next inflection point.</h2>
             <p>
               Full-time leadership, fractional engineering leadership, or
-              selective hands-on work — start with a conversation.
+              selective hands-on work - start with a conversation.
             </p>
           </StyledLede>
 

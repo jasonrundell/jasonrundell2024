@@ -28,10 +28,10 @@ export function getSupabaseAnonKey(): string {
   return key
 }
 
-/** Returns true only when both env vars are present — safe for UI-only checks. */
+/** Returns true only when both env vars are present - safe for UI-only checks. */
 export function hasSupabaseEnv(): boolean {
   return Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_URL &&
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   )
 }

@@ -156,7 +156,9 @@ const StyledCtaLink = styled('a')`
   font-weight: 600;
   color: ${Tokens.colors.onAccent.var};
   text-decoration: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 
   &:hover,
   &:focus-visible {
@@ -166,7 +168,7 @@ const StyledCtaLink = styled('a')`
 `
 
 /**
- * Homepage promo for Infinite Source Agency Inc. — the web agency and creative
+ * Homepage promo for Infinite Source Agency Inc. - the web agency and creative
  * studio Jason founded and runs. Surfaces the agency's client services and its
  * in-house ventures (software, games, and music) with a CTA out to the site.
  */
@@ -175,9 +177,10 @@ export default function InfiniteSourcePromo() {
     <>
       <SectionHeader eyebrow="Studio" title="Infinite Source Agency Inc." />
       <StyledIntro>
-        I founded and run <strong>Infinite Source Agency Inc.</strong> (September
-        2025), a web agency and creative studio. We build professional websites
-        and web apps for clients — and craft our own software, games, and music.
+        I founded and run <strong>Infinite Source Agency Inc.</strong>{' '}
+        (September 2025), a web agency and creative studio. We build
+        professional websites and web apps for clients - and craft our own
+        software, games, and music.
       </StyledIntro>
 
       <StyledGrid>
@@ -188,7 +191,7 @@ export default function InfiniteSourcePromo() {
               <PromptItem key={service.title}>
                 <span>
                   <StyledItemTitle>{service.title}</StyledItemTitle>
-                  {' — '}
+                  {' - '}
                   <StyledItemMeta>{service.description}</StyledItemMeta>
                 </span>
               </PromptItem>
@@ -213,7 +216,7 @@ export default function InfiniteSourcePromo() {
                   ) : (
                     <StyledItemTitle>{venture.name}</StyledItemTitle>
                   )}
-                  {' — '}
+                  {' - '}
                   <StyledItemMeta>{venture.tagline}</StyledItemMeta>{' '}
                   <StyledStatus>({venture.status})</StyledStatus>
                 </span>

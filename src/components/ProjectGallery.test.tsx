@@ -124,8 +124,14 @@ describe('ProjectGallery', () => {
 
     const galleryImages = screen.getAllByTestId('gallery-image')
     expect(galleryImages).toHaveLength(2)
-    expect(galleryImages[0]).toHaveAttribute('src', '/content/p/gallery/01.webp')
-    expect(galleryImages[1]).toHaveAttribute('src', '/content/p/gallery/02.webp')
+    expect(galleryImages[0]).toHaveAttribute(
+      'src',
+      '/content/p/gallery/01.webp'
+    )
+    expect(galleryImages[1]).toHaveAttribute(
+      'src',
+      '/content/p/gallery/02.webp'
+    )
   })
 
   it('filters out images without a src', () => {
@@ -169,9 +175,7 @@ describe('ProjectGallery', () => {
 
   it('shows image info when title and description are present', async () => {
     const user = userEvent.setup()
-    const images = [
-      makeImage({ alt: 'My Photo', description: 'Sunset scene' }),
-    ]
+    const images = [makeImage({ alt: 'My Photo', description: 'Sunset scene' })]
     render(<ProjectGallery images={images} />)
 
     await user.click(
@@ -218,10 +222,10 @@ describe('ProjectGallery', () => {
     await user.keyboard('{ArrowLeft}')
     // ArrowRight navigates back
     await user.keyboard('{ArrowRight}')
-    // ArrowRight again (at last — no-op branch)
+    // ArrowRight again (at last - no-op branch)
     await user.keyboard('{ArrowRight}')
     await user.keyboard('{ArrowRight}')
-    // ArrowLeft (at first — no-op branch)
+    // ArrowLeft (at first - no-op branch)
     await user.keyboard('{ArrowLeft}')
     await user.keyboard('{ArrowLeft}')
     // Escape closes
@@ -260,14 +264,14 @@ describe('ProjectGallery', () => {
       name: /view keyboard test in full screen/i,
     })
     await user.type(galleryButton, '{Enter}')
-    await waitFor(() =>
-      expect(screen.getByTestId('modal')).toBeInTheDocument()
-    )
+    await waitFor(() => expect(screen.getByTestId('modal')).toBeInTheDocument())
   })
 
   it('passes correct props to ContentImage', async () => {
     const user = userEvent.setup()
-    const images = [makeImage({ src: '/content/p/gallery/01.webp', alt: 'Prop test' })]
+    const images = [
+      makeImage({ src: '/content/p/gallery/01.webp', alt: 'Prop test' }),
+    ]
     render(<ProjectGallery images={images} />)
 
     const galleryImg = screen.getByTestId('gallery-image')

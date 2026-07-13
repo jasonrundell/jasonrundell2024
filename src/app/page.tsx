@@ -196,17 +196,17 @@ const PROOF = [
 
 const CASES = [
   {
-    title: 'CMI — scaled the org, tightened the system',
+    title: 'CMI - scaled the org, tightened the system',
     blurb:
       'Grew the team 4→10, reformed deployment, and stood up engineering metrics that gave leadership real visibility.',
   },
   {
-    title: 'Bitbuy — fewer bugs, faster ships',
+    title: 'Bitbuy - fewer bugs, faster ships',
     blurb:
       'Built end-to-end testing and CI/CD that cut post-release bugs and sped up deployments and renders.',
   },
   {
-    title: 'Bitbuy → WonderFi — stability through a $206M acquisition',
+    title: 'Bitbuy → WonderFi - stability through a $206M acquisition',
     blurb:
       'Kept the platform stable and the team steady through a major acquisition and integration.',
   },
@@ -252,7 +252,7 @@ export default async function HomePage() {
               </DisplayTitle>
               <Lead>
                 I join at inflection points and build the systems, culture, and
-                standards that let teams scale — while staying close enough to
+                standards that let teams scale - while staying close enough to
                 the code to raise the bar.
               </Lead>
               <CtaRow>
@@ -275,7 +275,7 @@ export default async function HomePage() {
           <SectionHeader
             eyebrow="Outcomes"
             title="Proof, not posturing"
-            intro="Selected, labeled results from teams I've led — kept honest about where each came from."
+            intro="Selected, labeled results from teams I've led - kept honest about where each came from."
           />
           <ProofGrid>
             {PROOF.map((p) => (
@@ -288,7 +288,7 @@ export default async function HomePage() {
         </Container>
       </BandSection>
 
-      {/* How I lead — operating loop teaser */}
+      {/* How I lead - operating loop teaser */}
       <BandSection tone="paper">
         <Container>
           <TwoCol>
@@ -296,12 +296,10 @@ export default async function HomePage() {
               <SectionHeader
                 eyebrow="How I lead"
                 title="An operating loop, not a job title"
-                intro="Assess, set standards, build the system, then coach the team to run it — and question the order when it stops serving the work."
+                intro="Assess, set standards, build the system, then coach the team to run it - and question the order when it stops serving the work."
               />
               <SectionFoot>
-                <SecondaryCta href="/how-i-lead">
-                  See how I lead →
-                </SecondaryCta>
+                <SecondaryCta href="/how-i-lead">See how I lead →</SecondaryCta>
               </SectionFoot>
             </div>
             <Art>
@@ -311,7 +309,7 @@ export default async function HomePage() {
         </Container>
       </BandSection>
 
-      {/* Selected work — cases + projects */}
+      {/* Selected work - cases + projects */}
       <BandSection tone="surface">
         <Container>
           <TwoCol>

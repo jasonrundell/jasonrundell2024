@@ -80,7 +80,9 @@ const StyledHomeLink = styled(Link)`
   font-size: 0.9375rem;
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 
   &:hover,
   &:focus-visible {
@@ -101,7 +103,9 @@ const StyledResetButton = styled('button')`
   font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
 
   &:hover,
   &:focus-visible {
@@ -135,7 +139,7 @@ export default function TerminalErrorPage({
           No page at <StyledPath>{pathname}</StyledPath>
         </StyledCommand>
         <StyledHeading id="terminal-error-heading">
-          {statusCode} — {title}
+          {statusCode} - {title}
         </StyledHeading>
         <StyledBody>{message}</StyledBody>
         <StyledActions>

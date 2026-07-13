@@ -36,7 +36,7 @@ describe('Password Reset Actions', () => {
       // Act
       await forgotPasswordAction(formData)
 
-      // Assert — redirects with error when email is missing
+      // Assert - redirects with error when email is missing
       expect(encodedRedirect).toHaveBeenCalledWith(
         'error',
         '/forgot-password',
@@ -52,7 +52,7 @@ describe('Password Reset Actions', () => {
       // Act
       await forgotPasswordAction(formData)
 
-      // Assert — empty string is falsy, so treated as missing
+      // Assert - empty string is falsy, so treated as missing
       expect(encodedRedirect).toHaveBeenCalledWith(
         'error',
         '/forgot-password',

@@ -26,7 +26,7 @@ import { SITE_DOMAIN } from '@/lib/constants'
 export const metadata: Metadata = {
   title: 'About | Jason Rundell',
   description:
-    'About Jason Rundell — an engineering leader and player-coach with 25+ years in full-stack web development, skills, and recommendations.',
+    'About Jason Rundell - an engineering leader and player-coach with 25+ years in full-stack web development, skills, and recommendations.',
   alternates: { canonical: `${SITE_DOMAIN}/about` },
 }
 
@@ -77,10 +77,7 @@ const FACTS = [
 ]
 
 export default async function AboutPage() {
-  const [skills, references] = await Promise.all([
-    getSkills(),
-    getReferences(),
-  ])
+  const [skills, references] = await Promise.all([getSkills(), getReferences()])
 
   return (
     <>
@@ -96,7 +93,7 @@ export default async function AboutPage() {
           <Lead>
             I&rsquo;m an engineering leader with 25+ years in full-stack web
             development. I join at inflection points and build the systems,
-            culture, and standards that let teams scale — while staying close
+            culture, and standards that let teams scale - while staying close
             enough to the code to raise the bar.
           </Lead>
         </Container>
@@ -133,8 +130,8 @@ export default async function AboutPage() {
               </p>
               <p>
                 My journey started in a high-school library in 1997 discovering
-                GeoCities. Since then I&rsquo;ve shipped work across every era of
-                the web — from iframes and Flash to React design systems,
+                GeoCities. Since then I&rsquo;ve shipped work across every era
+                of the web - from iframes and Flash to React design systems,
                 Jamstack, and now agentic AI. The common thread isn&rsquo;t a
                 stack; it&rsquo;s an instinct to find what&rsquo;s broken or
                 inefficient and build something better.

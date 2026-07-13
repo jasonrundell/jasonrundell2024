@@ -1,4 +1,4 @@
-# Positioning Reference — Jason Rundell
+# Positioning Reference - Jason Rundell
 
 Load this when designing or briefing the personal brand site.
 
@@ -54,7 +54,7 @@ claims:
    not “just a developer”)
 2. **30 seconds:** See proof of outcomes + domains + how he works
 3. **Clear CTAs:** book a call / email / LinkedIn / resume path
-4. **Optional builder path:** case studies / writing / GitHub — subordinate to
+4. **Optional builder path:** case studies / writing / GitHub - subordinate to
    leadership narrative
 
 ## Canonical Site Copy (approved draft)
@@ -66,14 +66,14 @@ Use these lines in mocks and implementation unless the user revises them.
 **Hero headline:** Lead engineering orgs. Still raise the technical bar.
 
 **Hero support:** I join at inflection points and build the systems, culture,
-and standards that let teams scale — while staying close enough to the code to
+and standards that let teams scale - while staying close enough to the code to
 raise the bar.
 
-**Stage-fit (How I lead / About — not hero support):** Thrive where chaos needs
+**Stage-fit (How I lead / About - not hero support):** Thrive where chaos needs
 order, and order needs questioning. Best fit: Series A–C and assess-and-improve
 mandates.
 
-**Proof (labeled — do not merge CMI/Bitbuy scales):**
+**Proof (labeled - do not merge CMI/Bitbuy scales):**
 
 - ~60% fewer post-release bugs · CMI
 - ~50% faster deploys / ~70% faster renders · Bitbuy
