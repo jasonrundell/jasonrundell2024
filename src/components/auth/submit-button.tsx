@@ -10,18 +10,28 @@ type Props = ComponentProps<typeof Button> & {
 export function SubmitButton({
   children,
   pendingText = 'Submitting...',
+  disabled,
+  onClick,
   ...props
 }: Props) {
   const [isPending, setIsPending] = useState(false)
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick?.(event)
+    if (event.defaultPrevented) return
+
+    const form = event.currentTarget.form
+    // Only lock the button when a real submit is about to proceed.
+    // Native HTML validation can block submit after click — don't stay disabled.
+    if (!form || !form.checkValidity()) return
+
     setIsPending(true)
   }
 
   return (
     <Button
       type="submit"
-      disabled={isPending}
+      disabled={disabled || isPending}
       aria-busy={isPending}
       onClick={handleClick}
       {...props}

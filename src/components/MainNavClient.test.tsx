@@ -197,6 +197,61 @@ describe('MainNavClient Component', () => {
         expect(mobileMenu).not.toHaveClass('open')
       })
     })
+
+    it('should close mobile menu on Escape and restore focus to the menu button', async () => {
+      const user = userEvent.setup()
+
+      render(<MainNavClient />)
+      await waitFor(() => {
+        expect(
+          screen.getByRole('button', { name: /open menu/i })
+        ).toBeInTheDocument()
+      })
+
+      const menuButton = screen.getByRole('button', { name: /open menu/i })
+      await user.click(menuButton)
+
+      await waitFor(() => {
+        expect(document.getElementById('mobile-menu')).toHaveClass('open')
+        expect(document.body.style.overflow).toBe('hidden')
+      })
+
+      await user.keyboard('{Escape}')
+
+      await waitFor(() => {
+        expect(document.getElementById('mobile-menu')).not.toHaveClass('open')
+        expect(document.body.style.overflow).toBe('')
+        expect(
+          screen.getByRole('button', { name: /open menu/i })
+        ).toHaveFocus()
+      })
+    })
+
+    it('should close an open mobile menu when the menu button is clicked again', async () => {
+      const user = userEvent.setup()
+
+      render(<MainNavClient />)
+      await waitFor(() => {
+        expect(
+          screen.getByRole('button', { name: /open menu/i })
+        ).toBeInTheDocument()
+      })
+
+      const openButton = screen.getByRole('button', { name: /open menu/i })
+      await user.click(openButton)
+
+      await waitFor(() => {
+        expect(
+          screen.getByRole('button', { name: /close menu/i })
+        ).toBeInTheDocument()
+      })
+
+      await user.click(screen.getByRole('button', { name: /close menu/i }))
+
+      await waitFor(() => {
+        expect(document.getElementById('mobile-menu')).not.toHaveClass('open')
+      })
+    })
   })
 
   describe('Authenticated State', () => {

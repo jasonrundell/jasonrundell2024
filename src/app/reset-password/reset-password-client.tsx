@@ -3,6 +3,7 @@
 import { resetPasswordAction } from '@/app/actions'
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { useState } from 'react'
+import { unstable_rethrow } from 'next/navigation'
 import Tokens from '@/lib/tokens'
 
 export default function ResetPasswordClient({ token }: { token: string }) {
@@ -22,6 +23,8 @@ export default function ResetPasswordClient({ token }: { token: string }) {
 
       window.location.href = '/sign-in?message=password_reset_success'
     } catch (err) {
+      // redirect()/encodedRedirect() throw control-flow errors — rethrow them
+      unstable_rethrow(err)
       console.error('Password reset error:', err)
       setError(
         err instanceof Error

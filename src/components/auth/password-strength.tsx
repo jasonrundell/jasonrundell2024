@@ -11,12 +11,8 @@ interface PasswordStrengthProps {
 export function PasswordStrength({ password }: PasswordStrengthProps) {
   const requirements = getPasswordRequirements(password)
   const strength = getPasswordStrength(password)
-
-  const getStrengthColor = (strength: number) => {
-    if (strength < 33) return 'bg-warning'
-    if (strength < 66) return 'bg-accent'
-    return 'bg-success'
-  }
+  const strengthColor =
+    strength < 33 ? '#8a5a00' : strength < 66 ? '#1f4d3a' : '#166534'
 
   return (
     <div style={{ marginTop: '0.75rem' }}>
@@ -38,7 +34,7 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
           style={{
             height: '100%',
             width: `${strength}%`,
-            backgroundColor: strength < 33 ? '#8a5a00' : strength < 66 ? '#1f4d3a' : '#166534',
+            backgroundColor: strengthColor,
             transition: 'width 0.3s ease',
           }}
         />

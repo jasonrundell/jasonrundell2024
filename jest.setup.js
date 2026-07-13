@@ -169,6 +169,19 @@ jest.mock('@pigment-css/react', () => {
 // Mock Next.js navigation
 jest.mock('next/navigation', () => ({
   redirect: jest.fn(),
+  unstable_rethrow: (error) => {
+    if (
+      error &&
+      typeof error === 'object' &&
+      'digest' in error &&
+      typeof error.digest === 'string' &&
+      (error.digest.startsWith('NEXT_REDIRECT') ||
+        error.digest.startsWith('NEXT_NOT_FOUND') ||
+        error.digest.startsWith('NEXT_HTTP_ERROR_FALLBACK'))
+    ) {
+      throw error
+    }
+  },
   useRouter: jest.fn(() => ({
     push: jest.fn(),
     replace: jest.fn(),
