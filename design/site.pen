@@ -1107,7 +1107,7 @@
                     {
                       "type": "text",
                       "id": "R70VU",
-                      "fill": "$inkFaint",
+                      "fill": "$brass",
                       "content": "Twilio winner",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 11,
@@ -4077,7 +4077,7 @@
                     {
                       "type": "text",
                       "id": "U2QSe",
-                      "fill": "$accent",
+                      "fill": "$brass",
                       "content": "2025 · Winner",
                       "fontFamily": "IBM Plex Mono",
                       "fontSize": 12,
@@ -7489,7 +7489,7 @@
                 {
                   "type": "text",
                   "id": "wYKnb",
-                  "fill": "$accent",
+                  "fill": "$brass",
                   "content": "2025 · Winner",
                   "fontFamily": "IBM Plex Mono",
                   "fontSize": 11,
@@ -9188,11 +9188,11 @@
     },
     "inkMuted": {
       "type": "color",
-      "value": "#666666"
+      "value": "#5F5F5F"
     },
     "inkFaint": {
       "type": "color",
-      "value": "#888888"
+      "value": "#6E6E6E"
     },
     "accent": {
       "type": "color",
@@ -9208,11 +9208,19 @@
     },
     "lineSubtle": {
       "type": "color",
-      "value": "#EEF0F2"
+      "value": "#E6E8EC"
     },
     "craftSteel": {
       "type": "color",
       "value": "#3F3F46"
+    },
+    "brass": {
+      "type": "color",
+      "value": "#8A5A16"
+    },
+    "brassSoft": {
+      "type": "color",
+      "value": "#A16A1C"
     }
   },
   "fileToken": "0c474dd6-88f4-4cb5-9122-7de00efcebd1"

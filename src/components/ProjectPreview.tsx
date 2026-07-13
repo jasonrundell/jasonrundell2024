@@ -54,7 +54,7 @@ const StyledStack = styled('p')`
   font-family: ${Tokens.fonts.monospace.var};
   font-size: 0.75rem;
   letter-spacing: 0.02em;
-  color: ${Tokens.colors.inkFaint.var};
+  color: ${Tokens.colors.brass.var};
   margin: 0;
 `
 

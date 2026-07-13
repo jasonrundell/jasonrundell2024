@@ -54,7 +54,7 @@ const StyledCategory = styled('h3')`
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: ${Tokens.colors.accent.var};
+  color: ${Tokens.colors.brass.var};
   margin: 0 0 1rem;
 `
 

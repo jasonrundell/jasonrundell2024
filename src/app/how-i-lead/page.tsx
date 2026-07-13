@@ -65,7 +65,7 @@ const StepItem = styled('li')`
     content: counter(step, decimal-leading-zero);
     font-family: ${Tokens.fonts.monospace.var};
     font-size: 0.875rem;
-    color: ${Tokens.colors.accent.var};
+    color: ${Tokens.colors.brass.var};
     padding-top: 0.3rem;
   }
 

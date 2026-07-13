@@ -16,9 +16,11 @@
         --color-surface: #ffffff;
         --color-text: #1a1a1a;
         --color-text-muted: #5f5f5f;
-        --color-text-faint: #767676;
+        --color-text-faint: #6e6e6e;
         --color-accent: #1f4d3a;
         --color-accent-soft: #2f5d50;
+        --color-brass: #8a5a16;
+        --color-brass-soft: #a16a1c;
         --color-craft-steel: #3f3f46;
         --color-illo-ink: #2e3338;
         --color-border: #1a1a1a;
@@ -301,6 +303,18 @@
       + Geist + IBM Plex Mono. Continuous-line editorial craft signal.
     </div>
 
+    <div class="banner" style="border-left: 4px solid var(--color-brass)">
+      <strong>Approved &amp; live:</strong> A third color —
+      <strong>Craft brass</strong> (<code>#8A5A16</code>) with hover
+      <code>#A16A1C</code>. A warm, worked-metal counterpoint to the forest
+      green. Role: <strong>the hands-on craft signal</strong> — proof metrics,
+      craft-proof lines, tech-stack + skill-category labels, project/status tags,
+      and award labels.
+      Green stays for actions and eyebrows. Applied in
+      <code>design/site.pen</code> and code tokens
+      (<code>--color-brass</code> / <code>--color-brass-soft</code>).
+    </div>
+
     <h2>Mood</h2>
     <p>
       <strong>Brand tension:</strong> Leadership + craft - technical engineering
@@ -338,7 +352,7 @@
           class="swatch-chip"
           style="background: var(--color-text-faint)"
         ></div>
-        <div class="swatch-meta">faint<br />#767676</div>
+        <div class="swatch-meta">faint<br />#6E6E6E</div>
       </div>
       <div class="swatch">
         <div class="swatch-chip" style="background: var(--color-accent)"></div>
@@ -350,6 +364,17 @@
           style="background: var(--color-accent-soft)"
         ></div>
         <div class="swatch-meta">accent soft<br />#2F5D50</div>
+      </div>
+      <div class="swatch" style="border-color: var(--color-brass)">
+        <div class="swatch-chip" style="background: var(--color-brass)"></div>
+        <div class="swatch-meta">brass · NEW<br />#8A5A16</div>
+      </div>
+      <div class="swatch" style="border-color: var(--color-brass)">
+        <div
+          class="swatch-chip"
+          style="background: var(--color-brass-soft)"
+        ></div>
+        <div class="swatch-meta">brass soft · NEW<br />#A16A1C</div>
       </div>
       <div class="swatch">
         <div
@@ -381,6 +406,171 @@
       </div>
     </div>
     <a class="cta" href="#">Book a chat</a>
+
+    <h3
+      style="
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        margin: 1.5rem 0 0.5rem;
+      "
+    >
+      Proposed usage - brass beside green
+    </h3>
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border-subtle);
+        padding: 1rem 1.25rem;
+      "
+    >
+      <span
+        style="
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: var(--color-brass);
+        "
+        >2025 · Winner</span
+      >
+      <span
+        style="
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: var(--color-accent);
+        "
+        >Engineering Leader</span
+      >
+      <a class="cta" href="#" style="margin-top: 0">Book a chat</a>
+    </div>
+    <p class="muted">
+      Green stays the primary action (CTA) and the leadership eyebrow. Brass is
+      the hands-on craft signal - proof metrics, craft-proof lines, tech-stack +
+      skill-category labels, project/status tags, and award labels. Never a competing CTA, never a
+      section eyebrow, never paired with green inside one illustration focal.
+    </p>
+
+    <h2>Accessibility (WCAG 2.1 AA)</h2>
+    <p class="muted">
+      Thresholds: <strong>4.5:1</strong> normal text, <strong>3:1</strong> large
+      text (≥24px / ≥18.66px bold) and non-text UI/graphics. Ratios are sRGB
+      relative-luminance contrast against the stated background.
+    </p>
+
+    <h3
+      style="
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        margin: 1.5rem 0 0.5rem;
+      "
+    >
+      Text on paper #F7F8FA
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Foreground</th>
+          <th>Ratio</th>
+          <th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ink #1A1A1A</td>
+          <td>16.4:1</td>
+          <td>AAA</td>
+        </tr>
+        <tr>
+          <td>muted #5F5F5F</td>
+          <td>6.0:1</td>
+          <td>AA (normal)</td>
+        </tr>
+        <tr>
+          <td>faint #6E6E6E</td>
+          <td>4.8:1</td>
+          <td>AA (normal) - fixed from 4.27:1 at #767676</td>
+        </tr>
+        <tr>
+          <td>accent #1F4D3A</td>
+          <td>9.1:1</td>
+          <td>AAA</td>
+        </tr>
+        <tr>
+          <td>accent soft #2F5D50</td>
+          <td>7.0:1</td>
+          <td>AAA</td>
+        </tr>
+        <tr>
+          <td>brass #8A5A16</td>
+          <td>5.6:1</td>
+          <td>AA (normal)</td>
+        </tr>
+        <tr>
+          <td>brass soft #A16A1C</td>
+          <td>4.3:1</td>
+          <td>Large text / non-text / fills only (4.6:1 on white)</td>
+        </tr>
+        <tr>
+          <td>illo ink #2E3338</td>
+          <td>12.0:1</td>
+          <td>Graphic (needs 3:1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3
+      style="
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        margin: 1.5rem 0 0.5rem;
+      "
+    >
+      Fills &amp; dark band
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Combination</th>
+          <th>Ratio</th>
+          <th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#F7F8FA on accent (CTA)</td>
+          <td>9.1:1</td>
+          <td>AAA</td>
+        </tr>
+        <tr>
+          <td>#F7F8FA on accent soft (hover)</td>
+          <td>7.0:1</td>
+          <td>AAA</td>
+        </tr>
+        <tr>
+          <td>footer link #D6D3D1 on ink</td>
+          <td>11.7:1</td>
+          <td>AAA</td>
+        </tr>
+        <tr>
+          <td>mobile close #A8A29E on ink</td>
+          <td>6.9:1</td>
+          <td>AAA</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="muted">
+      <strong>Non-text:</strong> <code>line #1A1A1A</code> borders = 16.4:1.
+      <code>lineSubtle #E6E8EC</code> hairlines = 1.15:1 - decorative dividers
+      only (exempt from 1.4.11); never the sole boundary of an interactive
+      control. Focus outline uses accent/ink (9.1:1 / 16.4:1) - clears 3:1, never
+      color alone.
+    </p>
 
     <h2>Typography</h2>
     <div class="type-specimen">
@@ -649,6 +839,7 @@
           <li>One job per section</li>
           <li>Match Line-Art Pencil mocks after approval</li>
           <li>One accent focal mark per illustration</li>
+          <li>Use brass as the craft signal: proof metrics, craft lines, tech-stack/skill labels/tags, awards</li>
         </ul>
       </div>
       <div class="list-block">
@@ -658,6 +849,7 @@
           <li>Resume-page or pure IC portfolio vibes</li>
           <li>Hero overlays, pill clusters, hero stat strips</li>
           <li>Multiple accent fills in one illustration</li>
+          <li>Use brass for CTAs/eyebrows, or pair brass with green in one illo focal</li>
           <li>Implement before explicit approval</li>
         </ul>
       </div>

@@ -149,7 +149,7 @@
       "unit": "hex"
     },
     "inkFaint": {
-      "value": "#767676",
+      "value": "#6e6e6e",
       "unit": "hex"
     },
     "accent": {
@@ -158,6 +158,14 @@
     },
     "accentSoft": {
       "value": "#2f5d50",
+      "unit": "hex"
+    },
+    "brass": {
+      "value": "#8a5a16",
+      "unit": "hex"
+    },
+    "brassSoft": {
+      "value": "#a16a1c",
       "unit": "hex"
     },
     "line": {

@@ -190,7 +190,7 @@ const Tokens = {
       "var": "var(--color-ink-muted)"
     },
     "inkFaint": {
-      "value": "#767676",
+      "value": "#6e6e6e",
       "unit": "hex",
       "var": "var(--color-ink-faint)"
     },
@@ -203,6 +203,16 @@ const Tokens = {
       "value": "#2f5d50",
       "unit": "hex",
       "var": "var(--color-accent-soft)"
+    },
+    "brass": {
+      "value": "#8a5a16",
+      "unit": "hex",
+      "var": "var(--color-brass)"
+    },
+    "brassSoft": {
+      "value": "#a16a1c",
+      "unit": "hex",
+      "var": "var(--color-brass-soft)"
     },
     "line": {
       "value": "#1a1a1a",

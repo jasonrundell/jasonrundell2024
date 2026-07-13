@@ -93,7 +93,7 @@ const ProofValue = styled('div')`
   font-family: ${Tokens.fonts.heading.var};
   font-size: 1.75rem;
   font-weight: 600;
-  color: ${Tokens.colors.ink.var};
+  color: ${Tokens.colors.brass.var};
   margin: 0 0 0.35rem;
   line-height: 1.1;
 `
@@ -136,7 +136,7 @@ const CaseItem = styled('li')`
     content: counter(case, decimal-leading-zero);
     font-family: ${Tokens.fonts.monospace.var};
     font-size: 0.8125rem;
-    color: ${Tokens.colors.accent.var};
+    color: ${Tokens.colors.brass.var};
     padding-top: 0.35rem;
   }
 
