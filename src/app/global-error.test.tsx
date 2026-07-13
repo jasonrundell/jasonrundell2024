@@ -62,7 +62,10 @@ describe('GlobalError', () => {
 
     expect(captureException).toHaveBeenCalledWith(error)
     expect(
-      screen.getByRole('heading', { level: 1, name: /500: runtime error/i })
+      screen.getByRole('heading', {
+        level: 1,
+        name: /500: something went wrong/i,
+      })
     ).toBeInTheDocument()
     expect(screen.getByText(/command not found:/i)).toBeInTheDocument()
   })

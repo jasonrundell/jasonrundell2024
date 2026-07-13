@@ -4,9 +4,9 @@ export default async function NotFound() {
   return (
     <TerminalErrorPage
       statusCode="404"
-      title="Page Not Found"
-      comment="not-found.tsx"
-      message="The route you requested is not in this site map. Return home and choose a known command."
+      title="Page not found"
+      comment="Not found"
+      message="The page you're looking for isn't here. Head back home and pick a path."
     />
   )
 }

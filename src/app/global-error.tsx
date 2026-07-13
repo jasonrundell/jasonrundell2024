@@ -23,9 +23,9 @@ export default function GlobalError({
       <body className={GeistSans.className}>
         <TerminalErrorPage
           statusCode="500"
-          title="Runtime Error"
-          comment="global-error.tsx"
-          message="The current route crashed before it could finish rendering. Try the command again or return home."
+          title="Something went wrong"
+          comment="Error"
+          message="This page crashed before it could finish rendering. Try again, or head back home."
           reset={reset}
         />
       </body>

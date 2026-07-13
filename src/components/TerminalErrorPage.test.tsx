@@ -35,53 +35,56 @@ describe('TerminalErrorPage', () => {
     render(
       <TerminalErrorPage
         statusCode="404"
-        title="Page Not Found"
-        comment="not-found.tsx"
+        title="Page not found"
+        comment="Not found"
         message="No route matched."
       />
     )
-    expect(screen.getByText(/command not found:/i)).toHaveTextContent(
-      '$ command not found: /'
-    )
+    expect(
+      screen.getByText(
+        (_, el) => el?.textContent === 'No page at /'
+      )
+    ).toBeInTheDocument()
   })
 
-  it('renders the terminal command failure for the current path', () => {
+  it('renders the error message for the current path', () => {
     render(
       <TerminalErrorPage
         statusCode="404"
-        title="Page Not Found"
-        comment="not-found.tsx"
+        title="Page not found"
+        comment="Not found"
         message="No route matched this command."
       />
     )
 
     expect(
-      screen.getByRole('heading', { level: 1, name: /404: page not found/i })
+      screen.getByRole('heading', { level: 1, name: /404.*page not found/i })
     ).toBeInTheDocument()
-    expect(screen.getByText(/command not found:/i)).toHaveTextContent(
-      '$ command not found: /missing-route'
-    )
-    expect(screen.getByRole('link', { name: /cd \/home/i })).toHaveAttribute(
-      'href',
-      '/'
-    )
+    expect(
+      screen.getByText(
+        (_, el) => el?.textContent === 'No page at /missing-route'
+      )
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: /back to home/i })
+    ).toHaveAttribute('href', '/')
   })
 
-  it('calls reset when the retry command is available', async () => {
+  it('calls reset when the retry action is available', async () => {
     const reset = jest.fn()
     const user = userEvent.setup()
 
     render(
       <TerminalErrorPage
         statusCode="500"
-        title="Runtime Error"
-        comment="global-error.tsx"
+        title="Something went wrong"
+        comment="Error"
         message="The route crashed before it could finish rendering."
         reset={reset}
       />
     )
 
-    await user.click(screen.getByRole('button', { name: /retry command/i }))
+    await user.click(screen.getByRole('button', { name: /try again/i }))
 
     expect(reset).toHaveBeenCalledTimes(1)
   })

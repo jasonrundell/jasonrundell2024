@@ -98,19 +98,19 @@ describe('content display components', () => {
   it('renders contact links with accessible labels', () => {
     render(<ContactList />)
 
-    expect(screen.getByLabelText('Email me')).toHaveAttribute(
-      'href',
-      'mailto:contact@jasonrundell.com'
-    )
-    expect(screen.getByLabelText('Book time with me')).toHaveAttribute(
-      'target',
-      '_blank'
-    )
-    expect(screen.getByLabelText('My open-source work on GitHub')).toHaveAttribute(
+    expect(
+      screen.getByRole('link', { name: /contact@jasonrundell\.com/i })
+    ).toHaveAttribute('href', 'mailto:contact@jasonrundell.com')
+    expect(
+      screen.getByRole('link', { name: /book time with me/i })
+    ).toHaveAttribute('target', '_blank')
+    expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute(
       'rel',
       'noopener noreferrer'
     )
-    expect(screen.getByLabelText('Connect on LinkedIn')).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: /linkedin/i })
+    ).toBeInTheDocument()
   })
 
   it('renders unique position companies once', () => {
@@ -128,7 +128,7 @@ describe('content display components', () => {
     expect(screen.getByText('Globex')).toBeInTheDocument()
   })
 
-  it('renders skills in a searchable 3D cloud with category legend', () => {
+  it('renders skills as a capability matrix grouped by category', () => {
     render(
       <Skills
         skills={[
@@ -139,48 +139,25 @@ describe('content display components', () => {
       />
     )
 
+    expect(screen.getByLabelText('Capability matrix')).toBeInTheDocument()
     expect(screen.getByText('React')).toBeInTheDocument()
     expect(screen.getByText('TypeScript')).toBeInTheDocument()
     expect(screen.getByText('Supabase')).toBeInTheDocument()
-    expect(screen.getByLabelText('Search skills')).toBeInTheDocument()
-    expect(screen.getByLabelText('Skills cloud')).toBeInTheDocument()
-    expect(screen.getByLabelText('Filter by Frontend')).toBeInTheDocument()
-    expect(screen.getByLabelText('Filter by Backend')).toBeInTheDocument()
+
+    expect(screen.getByRole('heading', { name: 'Frontend' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Backend' })).toBeInTheDocument()
+
+    const frontendList = screen.getByRole('list', { name: 'Frontend' })
+    expect(frontendList).toBeInTheDocument()
+    expect(frontendList.querySelectorAll('li')).toHaveLength(2)
   })
 
-  it('shows result count when searching skills', () => {
-    render(
-      <Skills
-        skills={[
-          { id: '1', category: 'Frontend', name: 'React' },
-          { id: '2', category: 'Frontend', name: 'TypeScript' },
-          { id: '3', category: 'Backend', name: 'Supabase' },
-        ]}
-      />
+  it('throws when skills data is missing', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation()
+    expect(() => render(<Skills skills={[]} />)).toThrow(
+      'Skills data is required.'
     )
-
-    fireEvent.change(screen.getByLabelText('Search skills'), {
-      target: { value: 'react' },
-    })
-
-    expect(screen.getByText('1 / 3')).toBeInTheDocument()
-  })
-
-  it('filters skills by category name via legend button', () => {
-    render(
-      <Skills
-        skills={[
-          { id: '1', category: 'Frontend', name: 'React' },
-          { id: '2', category: 'Frontend', name: 'TypeScript' },
-          { id: '3', category: 'Backend', name: 'Supabase' },
-        ]}
-      />
-    )
-
-    fireEvent.click(screen.getByLabelText('Filter by Frontend'))
-
-    expect(screen.getByLabelText('Search skills')).toHaveValue('Frontend')
-    expect(screen.getByText('2 / 3')).toBeInTheDocument()
+    consoleError.mockRestore()
   })
 
   it('renders references and rejects missing reference data', () => {
@@ -257,22 +234,28 @@ describe('content display components', () => {
       .toHaveAttribute('href', '/posts/ai-development-notes')
   })
 
-  it('renders project preview content and image links', () => {
+  it('renders project preview as a list row with meta, stack and CTA', () => {
     render(
       <ProjectPreview
         title="Matter Ops"
-        image={{ file: { url: '/content/projects/matter-ops/featured.webp' } }}
         slug="matter-ops"
         excerpt="An operational dashboard."
+        createdDate="2026-01-01T00:00:00.000Z"
+        technology={['React', 'Express', 'SQLite']}
       />
     )
 
-    expect(screen.getAllByRole('link', { name: 'Matter Ops' })).toHaveLength(2)
-    expect(screen.getByAltText('')).toHaveAttribute(
-      'src',
-      '/content/projects/matter-ops/featured.webp'
+    expect(screen.getByRole('link', { name: 'Matter Ops' })).toHaveAttribute(
+      'href',
+      '/projects/matter-ops'
     )
+    expect(screen.queryByRole('img')).not.toBeInTheDocument()
     expect(screen.getByText('An operational dashboard.')).toBeInTheDocument()
+    expect(screen.getByText('2026')).toBeInTheDocument()
+    expect(screen.getByText('React · Express · SQLite')).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: 'View project: Matter Ops' })
+    ).toHaveAttribute('href', '/projects/matter-ops')
   })
 
   it('renders post and project preview lists', () => {
@@ -297,11 +280,8 @@ describe('content display components', () => {
               title: 'First Project',
               slug: 'first-project',
               excerpt: 'Project excerpt',
-              featuredImage: {
-                file: { url: '/content/projects/first-project/featured.webp' },
-                altText: 'Project image',
-                description: 'Project image description',
-              },
+              createdDate: '2024-06-01T00:00:00.000Z',
+              technology: ['Next.js'],
             },
           ]}
         />
@@ -309,7 +289,10 @@ describe('content display components', () => {
     )
 
     expect(screen.getAllByRole('link', { name: 'First Post' })).toHaveLength(2)
-    expect(screen.getAllByRole('link', { name: 'First Project' })).toHaveLength(2)
+    expect(screen.getByRole('link', { name: 'First Project' })).toHaveAttribute(
+      'href',
+      '/projects/first-project'
+    )
   })
 
   it('wraps post and project images in the correct route when slug is provided', () => {

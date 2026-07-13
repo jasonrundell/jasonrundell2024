@@ -1,19 +1,22 @@
 import React from 'react'
-import Link from 'next/link'
-import { Row, Spacer } from '@jasonrundell/dropship'
+import type { Metadata } from 'next'
 
 import { getPosts } from '@/lib/content'
 import {
-  StyledContainer,
-  StyledSection,
-  StyledBreadcrumb,
-} from '@/styles/common'
+  BandSection,
+  Container,
+  Eyebrow,
+  DisplayTitle,
+  Lead,
+} from '@/styles/editorial'
 import MorePosts from '@/components/MorePosts'
+import { SITE_DOMAIN } from '@/lib/constants'
 
-export const metadata = {
-  title: 'Blog | Jason Rundell',
+export const metadata: Metadata = {
+  title: 'Writing | Jason Rundell',
   description:
-    'The full blog archive by Jason Rundell — notes on the web, engineering, AI, and the craft of shipping.',
+    'Writing by Jason Rundell - notes on engineering leadership, the web, and the practical edges of AI-assisted work.',
+  alternates: { canonical: `${SITE_DOMAIN}/posts` },
 }
 
 export const revalidate = 86400
@@ -28,23 +31,23 @@ export default async function PostsPage() {
   })
 
   return (
-    <StyledContainer>
-      <StyledSection id="posts">
-        <StyledBreadcrumb>
-          <Link href="/">Home</Link> &gt; Blog
-        </StyledBreadcrumb>
-        <h1>Blog</h1>
-        <Row>
-          <p>
-            Notes, tutorials, and longer thoughts on building for the web, the
-            engineering craft, and the practical edges of AI-assisted work.
-          </p>
-        </Row>
-        <Spacer />
-        <Row>
+    <>
+      <BandSection tone="paper">
+        <Container>
+          <Eyebrow label="Writing" />
+          <DisplayTitle>Notes on leadership and the craft</DisplayTitle>
+          <Lead>
+            Longer thoughts on engineering leadership, building for the web, and
+            the practical edges of AI-assisted work.
+          </Lead>
+        </Container>
+      </BandSection>
+
+      <BandSection tone="surface">
+        <Container>
           <MorePosts posts={sortedPosts} />
-        </Row>
-      </StyledSection>
-    </StyledContainer>
+        </Container>
+      </BandSection>
+    </>
   )
 }

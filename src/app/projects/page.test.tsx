@@ -39,28 +39,6 @@ jest.mock('next/link', () => {
   }
 })
 
-jest.mock('@/styles/common', () => ({
-  StyledContainer: ({ children }: { children: React.ReactNode }) => (
-    <div data-testid="container">{children}</div>
-  ),
-  StyledSection: ({
-    children,
-    id,
-  }: {
-    children: React.ReactNode
-    id?: string
-  }) => (
-    <section data-testid="section" id={id}>
-      {children}
-    </section>
-  ),
-  StyledBreadcrumb: ({ children }: { children: React.ReactNode }) => (
-    <nav data-testid="breadcrumb" aria-label="Breadcrumb">
-      {children}
-    </nav>
-  ),
-}))
-
 describe('Projects page', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -77,7 +55,7 @@ describe('Projects page', () => {
 
     const headings = screen.getAllByRole('heading', { level: 1 })
     expect(headings).toHaveLength(1)
-    expect(headings[0]).toHaveTextContent(/^projects$/i)
+    expect(headings[0]).toHaveTextContent(/built and shipped/i)
   })
 
   it('renders all projects sorted by date descending', async () => {
@@ -88,14 +66,10 @@ describe('Projects page', () => {
     expect(items.map((el) => el.textContent)).toEqual(['A', 'B', 'C'])
   })
 
-  it('renders a breadcrumb to home', async () => {
+  it('renders the "Selected work" eyebrow', async () => {
     const pageComponent = await ProjectsPage()
     render(pageComponent)
 
-    expect(screen.getByTestId('breadcrumb')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /^home$/i })).toHaveAttribute(
-      'href',
-      '/'
-    )
+    expect(screen.getByText(/selected work/i)).toBeInTheDocument()
   })
 })

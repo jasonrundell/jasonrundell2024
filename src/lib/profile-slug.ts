@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const PROFILE_SLUG_MIN = 3
 export const PROFILE_SLUG_MAX = 30
 
-/** Reserved path segments and app routes — cannot be used as profile slugs */
+/** Reserved path segments and app routes - cannot be used as profile slugs */
 const RESERVED_SLUGS = new Set([
   'admin',
   'api',
@@ -25,13 +25,19 @@ const RESERVED_SLUGS = new Set([
 
 export const profileSlugSchema = z
   .string()
-  .min(PROFILE_SLUG_MIN, `Profile URL must be at least ${PROFILE_SLUG_MIN} characters`)
-  .max(PROFILE_SLUG_MAX, `Profile URL must be at most ${PROFILE_SLUG_MAX} characters`)
-  .regex(
-    /^[a-z0-9-]+$/,
-    'Use only lowercase letters, numbers, and hyphens'
+  .min(
+    PROFILE_SLUG_MIN,
+    `Profile URL must be at least ${PROFILE_SLUG_MIN} characters`
   )
-  .refine((s) => !s.startsWith('-') && !s.endsWith('-'), 'Cannot start or end with a hyphen')
+  .max(
+    PROFILE_SLUG_MAX,
+    `Profile URL must be at most ${PROFILE_SLUG_MAX} characters`
+  )
+  .regex(/^[a-z0-9-]+$/, 'Use only lowercase letters, numbers, and hyphens')
+  .refine(
+    (s) => !s.startsWith('-') && !s.endsWith('-'),
+    'Cannot start or end with a hyphen'
+  )
   .refine((s) => !/--/.test(s), 'Cannot contain consecutive hyphens')
   .refine((s) => !RESERVED_SLUGS.has(s), 'This profile URL is reserved')
 
@@ -74,11 +80,8 @@ export function generateInitialProfileSlug(
   authUserId: string
 ): string {
   const raw = displayNameOrEmailLocal.trim().toLowerCase()
-  const slugified = raw
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-  const base =
-    slugified.length >= 3 ? slugified.slice(0, 20) : 'user'
+  const slugified = raw.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+  const base = slugified.length >= 3 ? slugified.slice(0, 20) : 'user'
   const tail = authUserId.replace(/-/g, '').slice(-8)
   const combined = `${base}-${tail}`
   return combined.slice(0, PROFILE_SLUG_MAX)

@@ -99,7 +99,7 @@ describe('ProjectPreviewImage', () => {
     })
   })
 
-  describe('URL missing — placeholder fallback', () => {
+  describe('URL missing - placeholder fallback', () => {
     it('renders the local placeholder Image when no URL is provided', () => {
       render(<ProjectPreviewImage title="ARC Line" slug="arcline" />)
 

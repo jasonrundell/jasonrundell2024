@@ -20,6 +20,7 @@
     "lint": "next lint",
     "tokens:build": "node ./scripts/build-tokens.js",
     "tokens:check": "npm run tokens:build && git diff --exit-code -- src/lib/tokens.generated.ts src/styles/tokens.generated.css",
+    "illustrations:build": "node ./scripts/build-illustrations.js",
     "lighthouse:ci": "lhci autorun",
     "test": "jest --coverage --passWithNoTests",
     "test:watch": "jest --watch",

@@ -68,13 +68,11 @@ export interface Projects {
 
 export type ProjectCardItem = {
   title: string
-  featuredImage?: {
-    file: { url: string }
-    altText: string
-    description: string
-  }
   excerpt: string
   slug: string
+  /** ISO 8601 string; the card shows its year as the meta label */
+  createdDate: string
+  technology: string[]
 }
 
 export interface Post {

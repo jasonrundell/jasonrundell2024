@@ -7,28 +7,13 @@ export function compareProjectsByDateDesc(a: Project, b: Project): number {
   return timeB - timeA
 }
 
-/**
- * Map a Project to the lightweight shape consumed by card components.
- * featuredImage is omitted when the source has no usable URL — downstream
- * components treat the image as optional rather than receiving an empty string.
- */
+/** Map a Project to the lightweight shape consumed by the card list. */
 export function toProjectCardItem(project: Project): ProjectCardItem {
-  const base: ProjectCardItem = {
+  return {
     title: project.title,
     excerpt: project.excerpt,
     slug: project.slug,
-  }
-
-  if (!project.featuredImage?.src) {
-    return base
-  }
-
-  return {
-    ...base,
-    featuredImage: {
-      file: { url: project.featuredImage.src },
-      altText: project.featuredImage.alt ?? '',
-      description: project.featuredImage.description ?? '',
-    },
+    createdDate: project.createdDate,
+    technology: project.technology,
   }
 }

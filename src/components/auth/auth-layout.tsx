@@ -7,68 +7,54 @@ const StyledAuthContainer = styled('div')`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 80vh;
-  padding: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.large.unit};
-  background-color: ${Tokens.colors.surfaceBase.var};
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-  }
+  min-height: 70vh;
+  padding: 3rem 1.5rem 4rem;
+  background-color: ${Tokens.colors.surfacePrimary.var};
 `
 
 const StyledAuthCard = styled('div')`
   width: 100%;
   max-width: 420px;
-  padding: ${Tokens.sizes.padding.xlarge.value}${Tokens.sizes.padding.xlarge
-      .unit} 2.5rem;
-  background-color: ${Tokens.colors.surfaceDeepest.var};
-  border-radius: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
-  box-shadow: ${Tokens.shadows.large.value} ${Tokens.colors.surface.value}33,
-    0 4px 8px ${Tokens.colors.surface.value}1A;
+  padding: 2.5rem 2rem;
+  background-color: ${Tokens.colors.surfaceSecondary.var};
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 `
 
 const StyledAuthHeader = styled('div')`
-  text-align: center;
-  margin-bottom: 2.5rem;
-  padding-bottom: ${Tokens.sizes.spacing.large.value}${Tokens.sizes.spacing.large.unit};
-  border-bottom: 1px solid ${Tokens.colors.secondary.value}1A;
+  text-align: left;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid ${Tokens.colors.lineSubtle.var};
+`
+
+const StyledEyebrow = styled('span')`
+  display: block;
+  font-family: ${Tokens.fonts.monospace.var};
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: ${Tokens.colors.accent.var};
+  margin-bottom: 0.75rem;
 `
 
 const StyledAuthTitle = styled('h1')`
-  color: ${Tokens.colors.rolePrompt.var};
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  background-color: ${Tokens.colors.rolePrompt.var};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: ${Tokens.shadows.text.value} ${Tokens.colors.surface.value}1A;
+  font-family: ${Tokens.fonts.heading.var};
+  color: ${Tokens.colors.ink.var};
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 `
 
 const StyledAuthSubtitle = styled('p')`
-  color: ${Tokens.colors.roleBody.var};
-  font-size: 1.15rem;
-  margin-bottom: 0;
-  opacity: ${Tokens.opacity.higher.value};
-  transition: opacity 0.3s ease;
-
-  ${StyledAuthCard}:hover & {
-    opacity: 1;
-  }
+  color: ${Tokens.colors.inkMuted.var};
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
 `
 
 interface AuthLayoutProps {
@@ -82,6 +68,7 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
     <StyledAuthContainer>
       <StyledAuthCard>
         <StyledAuthHeader>
+          <StyledEyebrow>Account</StyledEyebrow>
           <StyledAuthTitle>{title}</StyledAuthTitle>
           <StyledAuthSubtitle>{subtitle}</StyledAuthSubtitle>
         </StyledAuthHeader>

@@ -4,18 +4,18 @@ import AUTHOR from '@/lib/author'
 
 /**
  * Builds a schema.org `Person` object for the /about page.
- * Identity data is sourced from `src/lib/author.ts` — single source of truth.
+ * Identity data is sourced from `src/lib/author.ts` - single source of truth.
  */
 export function buildPersonJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: AUTHOR.name,
-    jobTitle: 'Manager / Full Stack Developer',
+    jobTitle: 'Engineering Leader',
     url: `${SITE_DOMAIN}/about`,
     sameAs: [AUTHOR.url, 'https://github.com/jasonrundell'],
     description:
-      'AI-first Application Development Manager and Senior Full Stack Web Developer with 25+ years leading high-impact web platforms and engineering teams.',
+      'Engineering leader and player-coach with 25+ years in full-stack web development, joining at inflection points to build the systems, culture, and standards that let teams scale.',
   }
 }
 

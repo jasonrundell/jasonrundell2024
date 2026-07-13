@@ -1,7 +1,7 @@
 /**
  * Plain-text HTML stripping for APIs and server routes.
  *
- * No DOMPurify/jsdom — safe to import from serverless handlers that must stay
+ * No DOMPurify/jsdom - safe to import from serverless handlers that must stay
  * lightweight.
  */
 
@@ -207,9 +207,7 @@ function shieldEncodedAngleBrackets(s: string): string {
   let prev = ''
   while (out !== prev) {
     prev = out
-    out = out
-      .replace(/&lt;/gi, MARK_LT)
-      .replace(/&gt;/gi, MARK_GT)
+    out = out.replace(/&lt;/gi, MARK_LT).replace(/&gt;/gi, MARK_GT)
     out = out.replace(/&#(\d+);/g, (full, digits: string) => {
       const n = Number.parseInt(digits, 10)
       if (n === 60) {
@@ -242,7 +240,10 @@ function unshieldAngleBrackets(s: string): string {
  * Decode HTML entities (named + numeric) once. Caller loops until stable.
  */
 function decodeHtmlEntitiesOnce(s: string): string {
-  let out = s.replace(ENTITY_RE, (match) => ENTITY_MAP[match.toLowerCase()] ?? match)
+  let out = s.replace(
+    ENTITY_RE,
+    (match) => ENTITY_MAP[match.toLowerCase()] ?? match
+  )
   out = out.replace(NUMERIC_DEC_RE, (full, digits: string) => {
     const code = Number.parseInt(digits, 10)
     if (!isUnicodeScalarValue(code)) {

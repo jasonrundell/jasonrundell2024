@@ -69,8 +69,7 @@ const removeIO = () => {
 
 const setReducedMotion = (matches: boolean) => {
   ;(window.matchMedia as jest.Mock).mockImplementation((query: string) => ({
-    matches:
-      matches && query.includes('prefers-reduced-motion') ? true : false,
+    matches: matches && query.includes('prefers-reduced-motion') ? true : false,
     media: query,
     onchange: null,
     addListener: jest.fn(),
@@ -92,7 +91,7 @@ import {
   useReveal,
 } from './motion'
 
-describe('motion module — Tier 2 scroll reveals', () => {
+describe('motion module - Tier 2 scroll reveals', () => {
   beforeEach(() => {
     setReducedMotion(false)
     installMockIO()
@@ -115,7 +114,7 @@ describe('motion module — Tier 2 scroll reveals', () => {
     })
   })
 
-  describe('Reveal — single-element fade-up', () => {
+  describe('Reveal - single-element fade-up', () => {
     it('renders settled (data-reveal-state="ready") on first paint', () => {
       const { container } = render(
         <Reveal>
@@ -205,7 +204,7 @@ describe('motion module — Tier 2 scroll reveals', () => {
     })
   })
 
-  describe('RevealStaggerGroup + RevealStaggerItem — staggered cards', () => {
+  describe('RevealStaggerGroup + RevealStaggerItem - staggered cards', () => {
     it('shares a single IntersectionObserver across the group', () => {
       render(
         <RevealStaggerGroup>
@@ -322,12 +321,10 @@ describe('motion module — Tier 2 scroll reveals', () => {
     })
   })
 
-  describe('useReveal — direct hook consumers', () => {
+  describe('useReveal - direct hook consumers', () => {
     function Probe() {
       const [ref, state] = useReveal<HTMLDivElement>()
-      return (
-        <div ref={ref} data-testid="probe" data-reveal-state={state} />
-      )
+      return <div ref={ref} data-testid="probe" data-reveal-state={state} />
     }
 
     it('exposes the same ready → hidden → visible lifecycle to ad-hoc consumers', () => {

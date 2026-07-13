@@ -1,6 +1,5 @@
 import { styled } from '@pigment-css/react'
 import Link from 'next/link'
-import HeadingAnimation from './HeadingAnimation'
 import Tokens from '@/lib/tokens'
 import MainNavClient from '@/components/MainNavClient'
 
@@ -11,23 +10,38 @@ const StyledMenuContainer = styled('div')`
   left: 0;
   right: 0;
   z-index: ${Tokens.zIndex.nav.value};
-  background-color: ${Tokens.colors.surfaceBase.var};
-  transition: background 1.3s ease, --background-color-start 1.3s ease,
-    --background-color-end 1.3s ease;
+  background-color: ${Tokens.colors.surfacePrimary.var};
+  transition:
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 `
 
 const StyledMenu = styled('div')`
   display: flex;
   flex-direction: row;
-  max-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes.breakpoints.large.unit};
+  max-width: 75rem;
   margin: 0 auto;
   height: 4rem;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
 
-  @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-      .breakpoints.large.unit}) {
-    padding: 0;
+  @media (min-width: ${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes
+      .breakpoints.medium.unit}) {
+    padding: 0 4rem;
+  }
+`
+
+const StyledBrand = styled(Link)`
+  font-family: ${Tokens.fonts.heading.var};
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: ${Tokens.colors.ink.var};
+  text-decoration: none;
+  text-wrap: nowrap;
+
+  &:hover {
+    color: ${Tokens.colors.accent.var};
   }
 `
 
@@ -35,7 +49,8 @@ const StyledDesktopNav = styled('nav')`
   display: none;
   flex: 1;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 2rem;
 
   @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
       .breakpoints.large.unit}) {
@@ -43,191 +58,78 @@ const StyledDesktopNav = styled('nav')`
   }
 `
 
-const StyledMobileNav = styled('nav')`
-  display: flex;
-  flex: 1;
-
-  @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-      .breakpoints.large.unit}) {
-    display: none;
-  }
-`
-
 const StyledList = styled('ul')`
   display: flex;
-  margin: 0 0 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit};
+  margin: 0;
   padding: 0;
   list-style: none;
   flex-direction: row;
   align-items: center;
-
-  @media (min-width: ${Tokens.sizes.breakpoints.large.value}${Tokens.sizes
-      .breakpoints.large.unit}) {
-    margin: 0;
-    margin-left: auto;
-  }
+  gap: 1.75rem;
 `
 
 const StyledListItem = styled('li')`
   display: flex;
-  flex-flow: row nowrap;
-  margin: 0 ${Tokens.sizes.large.value}${Tokens.sizes.large.unit} 0 0;
-  text-wrap: nowrap;
 
   a {
-    color: ${Tokens.colors.roleHeading.var};
+    font-family: ${Tokens.fonts.body.var};
+    font-size: 0.9375rem;
+    color: ${Tokens.colors.inkMuted.var};
+    text-decoration: none;
+    text-wrap: nowrap;
+    transition: color 0.15s ease;
+  }
+
+  a:hover {
+    color: ${Tokens.colors.ink.var};
   }
 `
 
-const StyledTitle = styled(HeadingAnimation)`
-  text-wrap: nowrap;
-  color: ${Tokens.colors.surfaceBase.var};
+const StyledNavCta = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: ${Tokens.colors.accent.var};
+  color: ${Tokens.colors.onAccent.var};
+  font-family: ${Tokens.fonts.body.var};
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid ${Tokens.colors.accent.var};
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    background: ${Tokens.colors.accentSoft.var};
+    border-color: ${Tokens.colors.accentSoft.var};
+  }
 `
 
-/**
- * Serializable matcher passed to HeadingAnimation so terminal-style
- * steps render in the monospace font. Kept outside the component to
- * preserve referential stability.
- */
-const TERMINAL_MONO_MATCHER = {
-  prefixes: ['jason$'],
-  exact: [':)'],
-}
+/** Primary site navigation. Editorial brand + links + a single primary CTA. */
+export const NAV_LINKS = [
+  { href: '/how-i-lead', label: 'How I lead' },
+  { href: '/projects', label: 'Selected work' },
+  { href: '/posts', label: 'Writing' },
+  { href: '/about', label: 'About' },
+] as const
 
-/**
- * Animation steps for the navigation title.
- * Moved outside component to avoid recreation on every render.
- */
-const NAVIGATION_STEPS = [
-  'Jason Rundell',
-  'Jason Rundell',
-  'Jason Rundell',
-  'Jason Rundell',
-  'Jason Rundell',
-  'Jason Rundell',
-  'Jason Rundel',
-  'Jason Runde',
-  'Jason Rund',
-  'Jason Run',
-  'Jason Ru',
-  'Jason R',
-  'Jason ',
-  'Jason',
-  'Jaso',
-  'Jas',
-  'Ja',
-  'J',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  'jason$',
-  'jason$',
-  'jason$',
-  'jason$',
-  'jason$',
-  'jason$',
-  'jason$',
-  'jason$ n',
-  'jason$ np',
-  'jason$ npm',
-  'jason$ npm ',
-  'jason$ npm r',
-  'jason$ npm ru',
-  'jason$ npm run',
-  'jason$ npm run ',
-  'jason$ npm run d',
-  'jason$ npm run de',
-  'jason$ npm run dev',
-  'jason$ npm run dev',
-  'jason$ npm run dev',
-  'jason$ npm run dev',
-  'jason$ npm run dev',
-  'jason$ npm run dev',
-  'jason$ npm run dev',
-  'jason$ npm run dev',
-  'jason$ npm run de',
-  'jason$ npm run d',
-  'jason$ npm run de',
-  'jason$ npm run del',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
-  'jason$ npm run dell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  'jason$ rundell',
-  ':)',
-  ':)',
-  ':)',
-  ':)',
-  ':)',
-  ':)',
-  ':)',
-  ':)',
-  ':)',
-  ':)',
-  ':)',
-  ':)',
-  'Jason Rundell',
-] satisfies string[]
-
-/**
- * Main navigation component with responsive desktop and mobile layouts.
- * Includes animated title and navigation links.
- */
 export default function MainNav() {
   return (
     <StyledMenuContainer id="menu">
       <StyledMenu>
-        {/* Desktop Navigation */}
-        <StyledDesktopNav aria-label="Main Navigation">
-          <StyledTitle
-            steps={NAVIGATION_STEPS}
-            speed={100}
-            monoStepMatcher={TERMINAL_MONO_MATCHER}
-          />
-          <StyledList>
-            <StyledListItem>
-              <Link href="/about">About</Link>
-            </StyledListItem>
-            <StyledListItem>
-              <Link href="/projects">Projects</Link>
-            </StyledListItem>
-            <StyledListItem>
-              <Link href="/posts">Blog</Link>
-            </StyledListItem>
-            <StyledListItem>
-              <Link href="/contact">Contact</Link>
-            </StyledListItem>
-          </StyledList>
-        </StyledDesktopNav>
+        <StyledBrand href="/">Jason Rundell</StyledBrand>
 
-        {/* Mobile Navigation */}
-        <StyledMobileNav aria-label="Main Navigation">
-          <StyledTitle
-            steps={NAVIGATION_STEPS}
-            speed={100}
-            monoStepMatcher={TERMINAL_MONO_MATCHER}
-          />
-        </StyledMobileNav>
+        <StyledDesktopNav aria-label="Main Navigation">
+          <StyledList>
+            {NAV_LINKS.map((link) => (
+              <StyledListItem key={link.href}>
+                <Link href={link.href}>{link.label}</Link>
+              </StyledListItem>
+            ))}
+          </StyledList>
+          <StyledNavCta href="/contact">Book a chat</StyledNavCta>
+        </StyledDesktopNav>
 
         <MainNavClient />
       </StyledMenu>

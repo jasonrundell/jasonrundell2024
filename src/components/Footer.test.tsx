@@ -48,13 +48,13 @@ describe('Footer Component', () => {
     expect(footer).toHaveAttribute('id', 'contact')
   })
 
-  it('should display "Contact me" heading', async () => {
+  it('should display the contact lede heading', async () => {
     // Act
     const footerComponent = await Footer()
     render(footerComponent)
 
     // Assert
-    const heading = screen.getByRole('heading', { name: /contact me/i })
+    const heading = screen.getByRole('heading', { name: /inflection point/i })
     expect(heading).toBeInTheDocument()
   })
 

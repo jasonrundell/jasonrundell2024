@@ -39,28 +39,6 @@ jest.mock('next/link', () => {
   }
 })
 
-jest.mock('@/styles/common', () => ({
-  StyledContainer: ({ children }: { children: React.ReactNode }) => (
-    <div data-testid="container">{children}</div>
-  ),
-  StyledSection: ({
-    children,
-    id,
-  }: {
-    children: React.ReactNode
-    id?: string
-  }) => (
-    <section data-testid="section" id={id}>
-      {children}
-    </section>
-  ),
-  StyledBreadcrumb: ({ children }: { children: React.ReactNode }) => (
-    <nav data-testid="breadcrumb" aria-label="Breadcrumb">
-      {children}
-    </nav>
-  ),
-}))
-
 describe('Posts page', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -71,13 +49,13 @@ describe('Posts page', () => {
     ])
   })
 
-  it('renders a single h1 with the Blog title', async () => {
+  it('renders a single h1 with the page title', async () => {
     const pageComponent = await PostsPage()
     render(pageComponent)
 
     const headings = screen.getAllByRole('heading', { level: 1 })
     expect(headings).toHaveLength(1)
-    expect(headings[0]).toHaveTextContent(/^blog$/i)
+    expect(headings[0]).toHaveTextContent(/leadership and the craft/i)
   })
 
   it('renders posts sorted by date descending', async () => {

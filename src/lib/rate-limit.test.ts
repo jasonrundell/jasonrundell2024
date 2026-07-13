@@ -83,7 +83,7 @@ describe('rateLimit', () => {
     const blocked = rateLimit('slide-key', config)
     expect(blocked.success).toBe(false)
 
-    // Advance to t=10.001s — first request (t=0) falls out of window
+    // Advance to t=10.001s - first request (t=0) falls out of window
     jest.advanceTimersByTime(2_001)
     const allowed = rateLimit('slide-key', config)
     expect(allowed.success).toBe(true)

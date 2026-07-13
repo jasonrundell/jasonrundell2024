@@ -6,13 +6,10 @@ import Tokens from '@/lib/tokens'
 
 const StyledMetaDate = styled('time')`
   font-family: ${Tokens.fonts.monospace.family};
-  font-size: ${Tokens.sizes.fonts.small.value}${Tokens.sizes.fonts.small.unit};
-  color: ${Tokens.colors.roleInfo.var};
-  letter-spacing: 0.02em;
-
-  &::before {
-    content: '// ';
-  }
+  font-size: 0.8125rem;
+  color: ${Tokens.colors.inkFaint.var};
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 `
 
 interface MetaDateProps {
@@ -23,7 +20,7 @@ interface MetaDateProps {
 }
 
 /**
- * Date metadata rendered with the refined-terminal chrome — cyan, monospaced,
+ * Date metadata rendered with the refined-terminal chrome - cyan, monospaced,
  * leading `// ` glyph. The component is the canonical date renderer for
  * post and project preview cards, blog post headers, and any other
  * "metadata" surface.

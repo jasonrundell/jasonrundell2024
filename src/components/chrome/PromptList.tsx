@@ -26,17 +26,8 @@ const StyledPromptItem = styled('li')`
   gap: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit};
   margin: 0;
   padding: 0;
-  color: ${Tokens.colors.roleBody.var};
-  line-height: 1.5;
-
-  &::before {
-    content: '>';
-    flex-shrink: 0;
-    width: 1ch;
-    font-family: ${Tokens.fonts.monospace.family};
-    color: ${Tokens.colors.roleSuccess.var};
-    font-weight: 600;
-  }
+  color: ${Tokens.colors.ink.var};
+  line-height: 1.6;
 
   [data-reveal-state='hidden'] > & {
     opacity: 0;

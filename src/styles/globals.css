@@ -3,20 +3,29 @@
 html,
 body {
   font-size: 16px;
-  background-color: var(--color-surface-base);
-  color: var(--color-role-body);
-  margin: 3rem 0 0;
+  background-color: var(--color-surface-primary);
+  color: var(--color-ink);
+  margin: 0;
+  font-family: var(--font-family-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  padding-top: 4rem;
 }
 
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: -60px;
   left: 0;
-  background: #000;
-  color: #fff;
-  padding: 8px;
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+  padding: 12px 16px;
   text-decoration: none;
-  z-index: 100;
+  font-family: var(--font-family-monospace);
+  font-size: 0.8125rem;
+  z-index: 1001;
 }
 
 .skip-link:focus {
@@ -25,64 +34,71 @@ body {
 
 p {
   margin: 0 0 1rem 0;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
+/*
+ * Base typography for headings. Colour is intentionally NOT set here: `color`
+ * is inherited from `body` (ink) by default, and styled components (footer,
+ * chrome, cards) set their own colour. Pigment CSS emits component styles in a
+ * `@layer`, and an unlayered `color` here would override every one of them —
+ * turning the footer heading invisible (ink on ink) and CTA labels invisible
+ * (accent on accent). Leaving colour to inheritance/components avoids that.
+ */
+h1,
 h2,
 h3,
 h4,
-time {
-  color: var(--color-role-heading);
-  font-weight: 400;
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
 }
 
 h1 {
-  font-size: var(--size-large);
-  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
 }
 
 h2 {
-  font-size: var(--size-medium);
-  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
 }
 
 h3 {
-  font-size: var(--size-small);
-  font-weight: 700;
+  font-size: 1.375rem;
 }
 
 h4 {
-  font-size: var(--size-small);
-  font-weight: 700;
+  font-size: 1.125rem;
 }
 
 h5 {
-  font-size: var(--size-small);
-  font-weight: 700;
+  font-size: 1rem;
 }
 
 h6 {
-  font-size: var(--size-small);
-  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+/*
+ * Link decoration defaults only. Link COLOUR is owned by components/prose
+ * (StyledBody, StyledBreadcrumb, nav, footer, CTAs) so this unlayered rule
+ * cannot override the colour of any Pigment-styled link.
+ */
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 
 hr {
   width: 100%;
+  border: none;
+  border-top: 1px solid var(--color-line-subtle);
   margin-bottom: 1.5rem;
 }
 
-@property --background-color-start {
-  syntax: '<color>';
-  initial-value: #151c25;
-  inherits: false;
-}
-
-@property --background-color-end {
-  syntax: '<color>';
-  initial-value: #151c25;
-  inherits: false;
-}
-
+/* Fixed header shell */
 #menu {
   width: 100%;
   position: fixed;
@@ -90,24 +106,13 @@ hr {
   left: 0;
   right: 0;
   z-index: 99;
-  background-color: var(--color-surface-base);
-  transition: background 1.3s ease, --background-color-start 1.3s ease,
-    --background-color-end 1.3s ease;
+  background-color: var(--color-surface-primary);
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
 #menu.scrolled {
-  background: linear-gradient(
-    180deg,
-    var(--background-color-start) 0%,
-    var(--background-color-end) 100%
-  );
-  --background-color-start: #151c25;
-  --background-color-end: #0e131a;
-}
-
-#menu:not(.scrolled) {
-  --background-color-start: #151c25;
-  --background-color-end: #151c25;
+  background-color: var(--color-surface-secondary);
+  box-shadow: 0 1px 0 0 var(--color-line-subtle);
 }
 
 .decoration--none {
@@ -118,18 +123,11 @@ hr {
   display: block;
   width: 100%;
   height: 18.75rem;
-}
-
-.rounded-full {
-  border-radius: 9999px;
-}
-
-.font-bold {
-  font-weight: bold;
+  border: 1px solid var(--color-line-subtle);
 }
 
 .primary-color {
-  color: var(--color-role-prompt);
+  color: var(--color-accent);
 }
 
 /* Screen reader only class for accessibility */
@@ -145,13 +143,14 @@ hr {
   border-width: 0;
 }
 
-/* Focus styles for accessibility */
+/* Focus styles for accessibility (never colour alone) */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--color-role-prompt);
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -162,10 +161,28 @@ select:focus-visible {
 }
 
 /*
+ * Dissolve-wipe page transition. The wrapper fades/settles on route change.
+ * Fully collapsed for users who request reduced motion.
+ */
+.page-transition {
+  animation: page-dissolve 320ms ease both;
+}
+
+@keyframes page-dissolve {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
  * Global motion guard. Honours users who request reduced motion at the OS
  * level so every animation/transition collapses to a near-instant settled
- * state. Components with motion logic (HeroTerminal, Tier 2 reveals) read
- * the same media query and bypass their effects accordingly.
+ * state. Components with motion logic read the same media query too.
  */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -177,5 +194,9 @@ select:focus-visible {
     transition-duration: 0.001ms !important;
     transition-delay: 0ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .page-transition {
+    animation: none;
   }
 }

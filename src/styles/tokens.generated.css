@@ -38,33 +38,47 @@
   --size-headings-h6: 0.85rem;
 
   /* colors */
-  --color-primary: #e9be62;
-  --color-primary-variant: #3700b3;
-  --color-secondary: #eeeeee;
-  --color-secondary-variant: #018786;
-  --color-accent: #ff4081;
-  --color-background: #151c25;
-  --color-background-dark: #0e131a;
-  --color-background-darker: #0e131a;
-  --color-surface: #000000;
-  --color-text-primary: #b8c5d6;
-  --color-text-secondary: #757575;
-  --color-border: #dddddd;
-  --color-link: #0070f3;
-  --color-muted: #f6f6f6;
-  --color-success: #9ece6a;
-  --color-warning: #f5a623;
-  --color-error: #f7768e;
+  --color-surface-primary: #f7f8fa;
+  --color-surface-secondary: #ffffff;
+  --color-ink: #1a1a1a;
+  --color-ink-muted: #5f5f5f;
+  --color-ink-faint: #6e6e6e;
+  --color-accent: #1f4d3a;
+  --color-accent-soft: #2f5d50;
+  --color-brass: #8a5a16;
+  --color-brass-soft: #a16a1c;
+  --color-line: #1a1a1a;
+  --color-line-subtle: #e6e8ec;
+  --color-on-accent: #f7f8fa;
+  --color-on-ink: #f7f8fa;
+  --color-footer-link: #d6d3d1;
+  --color-footer-link-hover: #f7f8fa;
+  --color-primary: #1f4d3a;
+  --color-primary-variant: #2f5d50;
+  --color-secondary: #e6e8ec;
+  --color-secondary-variant: #2f5d50;
+  --color-background: #f7f8fa;
+  --color-background-dark: #1a1a1a;
+  --color-background-darker: #141414;
+  --color-surface: #ffffff;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #5f5f5f;
+  --color-border: #e6e8ec;
+  --color-link: #1f4d3a;
+  --color-muted: #f7f8fa;
+  --color-success: #1f4d3a;
+  --color-warning: #8a5a00;
+  --color-error: #a01523;
   --color-white: #ffffff;
-  --color-role-prompt: #e9be62;
-  --color-role-success: #9ece6a;
-  --color-role-info: #7dd3c0;
-  --color-role-danger: #f7768e;
-  --color-role-body: #b8c5d6;
-  --color-role-heading: #eeeeee;
-  --color-surface-base: #151c25;
-  --color-surface-elevated: #232f3e;
-  --color-surface-deepest: #0e131a;
+  --color-role-prompt: #1f4d3a;
+  --color-role-success: #1f4d3a;
+  --color-role-info: #2f5d50;
+  --color-role-danger: #a01523;
+  --color-role-body: #1a1a1a;
+  --color-role-heading: #1a1a1a;
+  --color-surface-base: #f7f8fa;
+  --color-surface-elevated: #ffffff;
+  --color-surface-deepest: #1a1a1a;
   --color-surface-overlay: #000000;
 
   /* fontSizes */
@@ -101,7 +115,7 @@
 
   /* fonts */
   --font-family-body: var(--font-geist-sans), Geist, system-ui, sans-serif;
-  --font-family-heading: var(--font-geist-sans), Geist, system-ui, sans-serif;
-  --font-family-monospace: var(--font-geist-mono), 'Geist Mono', ui-monospace, 'Courier New', monospace;
-  --font-family-quotes: var(--font-geist-sans), Geist, system-ui, sans-serif;
+  --font-family-heading: var(--font-newsreader), Newsreader, Georgia, 'Times New Roman', serif;
+  --font-family-monospace: var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+  --font-family-quotes: var(--font-newsreader), Newsreader, Georgia, 'Times New Roman', serif;
 }
