@@ -21,7 +21,8 @@ export const TerminalCtaBase = `
   border-radius: ${Tokens.borderRadius.small.value}${Tokens.borderRadius.small.unit};
   transition: background 0.15s, color 0.15s;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: ${Tokens.colors.rolePrompt.var};
     color: ${Tokens.colors.surfaceBase.var};
   }

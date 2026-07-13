@@ -1,6 +1,7 @@
 'use client'
 
 import { createPortal } from 'react-dom'
+import { useEffect, useRef, useCallback } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
@@ -110,6 +111,37 @@ export default function GalleryModal({
   onPrev,
   onNext,
 }: GalleryModalProps) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
+
+  const trapFocus = useCallback((e: KeyboardEvent) => {
+    if (e.key !== 'Tab' || !dialogRef.current) return
+    const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'
+    )
+    if (focusable.length === 0) return
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault()
+      last.focus()
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault()
+      first.focus()
+    }
+  }, [])
+
+  useEffect(() => {
+    previousFocusRef.current = document.activeElement as HTMLElement
+    closeButtonRef.current?.focus()
+    document.addEventListener('keydown', trapFocus)
+    return () => {
+      document.removeEventListener('keydown', trapFocus)
+      previousFocusRef.current?.focus()
+    }
+  }, [trapFocus])
+
   return createPortal(
     <StyledModal
       onClick={onClose}
@@ -117,8 +149,8 @@ export default function GalleryModal({
       role="dialog"
       aria-modal="true"
     >
-      <StyledModalContent onClick={(e) => e.stopPropagation()}>
-        <StyledCloseButton onClick={onClose} aria-label="Close image gallery">
+      <StyledModalContent ref={dialogRef} onClick={(e) => e.stopPropagation()}>
+        <StyledCloseButton ref={closeButtonRef} onClick={onClose} aria-label="Close image gallery">
           <X size={24} />
         </StyledCloseButton>
 

@@ -37,7 +37,7 @@ const SuccessIcon = styled('div')`
   color: white;
 `
 
-const SuccessTitle = styled('h1')`
+const SuccessTitle = styled('h2')`
   color: ${Tokens.colors.roleHeading.var};
   font-size: 1.5rem;
   font-weight: 600;
@@ -62,7 +62,8 @@ const ActionButton = styled(StyledLink)`
   font-weight: 500;
   transition: background-color 0.2s;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: ${Tokens.colors.primaryVariant.var};
   }
 `
@@ -79,6 +80,7 @@ function SignUpFields({ errorMessage }: { errorMessage?: string }) {
       <FieldGroup>
         <Label htmlFor="displayName">Display Name</Label>
         <Input
+          id="displayName"
           name="displayName"
           type="text"
           placeholder="How others will see you"
@@ -108,6 +110,7 @@ function SignUpFields({ errorMessage }: { errorMessage?: string }) {
       <FieldGroup>
         <Label htmlFor="email">Email</Label>
         <Input
+          id="email"
           name="email"
           type="email"
           placeholder="you@example.com"
@@ -127,6 +130,7 @@ function SignUpFields({ errorMessage }: { errorMessage?: string }) {
       <FieldGroup>
         <Label htmlFor="confirmPassword">Confirm Password</Label>
         <Input
+          id="confirmPassword"
           type="password"
           name="confirmPassword"
           placeholder="Confirm your password"
@@ -154,7 +158,7 @@ export default function SignUpClient({ success, error }: SignUpClientProps) {
         subtitle="We've sent you a verification link"
       >
         <SuccessWrapper>
-          <SuccessIcon>✓</SuccessIcon>
+          <SuccessIcon aria-hidden="true">✓</SuccessIcon>
           <SuccessTitle>Account created successfully!</SuccessTitle>
           <SuccessMessage>
             A verification link has been sent to your email address. Please

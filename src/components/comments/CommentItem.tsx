@@ -113,12 +113,13 @@ export default function CommentItem({
       {isEditing ? (
         <>
           <EditTextarea
+            aria-label="Edit comment"
             value={editBody}
             onChange={(e) => setEditBody(e.target.value)}
             maxLength={MAX_BODY_LENGTH}
             disabled={isSubmitting}
           />
-          {error && <ErrorText>{error}</ErrorText>}
+          {error && <ErrorText role="alert">{error}</ErrorText>}
           <SubmitRow>
             <ActionButton
               type="button"
@@ -193,7 +194,7 @@ export default function CommentItem({
             </CommentActions>
           )}
 
-          {error && <ErrorText>{error}</ErrorText>}
+          {error && <ErrorText role="alert">{error}</ErrorText>}
         </>
       )}
     </CommentCard>

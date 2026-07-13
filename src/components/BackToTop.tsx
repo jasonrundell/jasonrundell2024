@@ -21,12 +21,12 @@ const BackToTopStyle = styled('div')<BackToTopStyleProps>({
   borderRadius: 0,
   cursor: 'pointer',
   transition: 'opacity 0.3s ease, transform 0.3s ease, background-color 0.15s ease',
-  '&:hover': {
+  '&:hover, &:focus-visible': {
     backgroundColor: Tokens.colors.accentSoft.var,
     transform: 'translateY(-2px)',
   },
-  '&:focus': {
-    outline: `2px solid ${Tokens.colors.accent.var}`,
+  '&:focus-visible': {
+    outline: `2px solid ${Tokens.colors.onAccent.var}`,
     outlineOffset: '2px',
   },
   variants: [
@@ -91,11 +91,13 @@ const BackToTop: React.FC = () => {
       onClick={scrollToTop}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
           scrollToTop()
         }
       }}
       role="button"
-      tabIndex={0}
+      tabIndex={isVisible ? 0 : -1}
+      aria-hidden={!isVisible}
       aria-label="Back to top"
       isVisible={isVisible}
     >

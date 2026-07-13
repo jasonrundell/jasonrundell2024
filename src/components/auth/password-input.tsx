@@ -9,25 +9,24 @@ interface PasswordInputProps {
   placeholder: string
   required?: boolean
   minLength?: number
+  'data-sentry-mask'?: boolean
 }
 
 /**
- * Password input component with strength indicator.
- * Includes proper label for accessibility.
+ * Password input with strength indicator. The external visible `<Label>`
+ * in the form provides the accessible name via `htmlFor`/`id`.
  */
 export function PasswordInput({
   name,
   placeholder,
   required = false,
   minLength = 8,
+  ...rest
 }: PasswordInputProps) {
   const [password, setPassword] = useState('')
 
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={name} className="sr-only">
-        {placeholder}
-      </label>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Input
         id={name}
         type="password"
@@ -37,7 +36,7 @@ export function PasswordInput({
         required={required}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        aria-label={placeholder}
+        {...rest}
       />
       <PasswordStrength password={password} />
     </div>

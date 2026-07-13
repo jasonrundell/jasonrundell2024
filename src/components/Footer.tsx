@@ -74,7 +74,8 @@ const StyledNavList = styled('ul')`
     transition: color 0.15s ease;
   }
 
-  a:hover {
+  a:hover,
+  a:focus-visible {
     color: ${Tokens.colors.footerLinkHover.var};
     text-decoration: underline;
   }

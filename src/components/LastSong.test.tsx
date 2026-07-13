@@ -238,6 +238,32 @@ describe('LastSong Component', () => {
       })
     })
 
+    it('should trap Tab focus within the video modal', async () => {
+      const user = userEvent.setup()
+
+      render(<LastSong song={mockSong} />)
+      await user.click(screen.getByRole('button', { name: /play song/i }))
+
+      await waitFor(() => {
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+      })
+
+      const closeButton = screen.getByRole('button', {
+        name: /close video player/i,
+      })
+      await waitFor(() => {
+        expect(closeButton).toHaveFocus()
+      })
+
+      // Modal focusables are close button + iframe; Shift+Tab from first wraps to last
+      await user.keyboard('{Shift>}{Tab}{/Shift}')
+      const iframe = screen.getByTitle(/test song by test artist/i)
+      expect(iframe).toHaveFocus()
+
+      await user.keyboard('{Tab}')
+      expect(closeButton).toHaveFocus()
+    })
+
     it('should lock body scroll when modal is open', async () => {
       // Arrange
       const user = userEvent.setup()

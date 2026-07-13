@@ -190,7 +190,8 @@ export const PrimaryCta = styled(Link)`
     background 0.15s ease,
     border-color 0.15s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: ${Tokens.colors.accentSoft.var};
     border-color: ${Tokens.colors.accentSoft.var};
     color: ${Tokens.colors.onAccent.var};
@@ -211,7 +212,8 @@ export const SecondaryCta = styled(Link)`
     color 0.15s ease,
     gap 0.15s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: ${Tokens.colors.accent.var};
     gap: 0.6rem;
   }

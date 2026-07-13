@@ -25,7 +25,8 @@ const StyledGalleryItem = styled('div')`
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     transform: scale(1.02);
   }
 

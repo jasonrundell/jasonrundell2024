@@ -92,7 +92,7 @@ export default function CommentsSection({
     return (
       <CommentsContainer>
         <CommentsHeading>Comments</CommentsHeading>
-        <EmptyState>{fetchError}</EmptyState>
+        <EmptyState role="alert">{fetchError}</EmptyState>
       </CommentsContainer>
     )
   }
@@ -118,14 +118,15 @@ export default function CommentsSection({
       ) : (
         <CommentsList>
           {comments.map((comment) => (
-            <CommentItem
-              key={comment.id}
-              comment={comment}
-              currentUserId={currentUserId}
-              isAdmin={isAdmin}
-              onUpdated={handleCommentUpdated}
-              onDeleted={handleCommentDeleted}
-            />
+            <li key={comment.id}>
+              <CommentItem
+                comment={comment}
+                currentUserId={currentUserId}
+                isAdmin={isAdmin}
+                onUpdated={handleCommentUpdated}
+                onDeleted={handleCommentDeleted}
+              />
+            </li>
           ))}
         </CommentsList>
       )}

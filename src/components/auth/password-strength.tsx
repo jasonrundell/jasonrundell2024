@@ -11,63 +11,74 @@ interface PasswordStrengthProps {
 export function PasswordStrength({ password }: PasswordStrengthProps) {
   const requirements = getPasswordRequirements(password)
   const strength = getPasswordStrength(password)
-
-  const getStrengthColor = (strength: number) => {
-    if (strength < 33) return 'bg-warning'
-    if (strength < 66) return 'bg-accent'
-    return 'bg-success'
-  }
+  const strengthColor =
+    strength < 33 ? '#8a5a00' : strength < 66 ? '#1f4d3a' : '#166534'
 
   return (
-    <div className="mt-3">
-      <div className="h-1 bg-background-dark rounded-sm mb-4 overflow-hidden">
+    <div style={{ marginTop: '0.75rem' }}>
+      <div
+        role="progressbar"
+        aria-valuenow={strength}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Password strength"
+        style={{
+          height: '4px',
+          backgroundColor: '#e5e7eb',
+          borderRadius: '2px',
+          marginBottom: '1rem',
+          overflow: 'hidden',
+        }}
+      >
         <div
-          className={`h-full transition-all duration-300 ${getStrengthColor(
-            strength
-          )}`}
-          style={{ width: `${strength}%` }}
+          style={{
+            height: '100%',
+            width: `${strength}%`,
+            backgroundColor: strengthColor,
+            transition: 'width 0.3s ease',
+          }}
         />
       </div>
-      <ul className="list-none p-0 m-0 text-sm text-text-secondary space-y-1">
-        <li className="flex items-center gap-2">
+      <ul aria-live="polite" style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: '0.875rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           {requirements.length ? (
-            <CheckCircle className="text-success w-4 h-4" />
+            <CheckCircle aria-hidden="true" size={16} />
           ) : (
-            <XCircle className="text-warning w-4 h-4" />
+            <XCircle aria-hidden="true" size={16} />
           )}
-          <span>At least 8 characters</span>
+          <span>{requirements.length ? 'Met:' : 'Required:'} At least 8 characters</span>
         </li>
-        <li className="flex items-center gap-2">
+        <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           {requirements.uppercase ? (
-            <CheckCircle className="text-success w-4 h-4" />
+            <CheckCircle aria-hidden="true" size={16} />
           ) : (
-            <XCircle className="text-warning w-4 h-4" />
+            <XCircle aria-hidden="true" size={16} />
           )}
-          <span>At least one uppercase letter</span>
+          <span>{requirements.uppercase ? 'Met:' : 'Required:'} At least one uppercase letter</span>
         </li>
-        <li className="flex items-center gap-2">
+        <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           {requirements.lowercase ? (
-            <CheckCircle className="text-success w-4 h-4" />
+            <CheckCircle aria-hidden="true" size={16} />
           ) : (
-            <XCircle className="text-warning w-4 h-4" />
+            <XCircle aria-hidden="true" size={16} />
           )}
-          <span>At least one lowercase letter</span>
+          <span>{requirements.lowercase ? 'Met:' : 'Required:'} At least one lowercase letter</span>
         </li>
-        <li className="flex items-center gap-2">
+        <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           {requirements.number ? (
-            <CheckCircle className="text-success w-4 h-4" />
+            <CheckCircle aria-hidden="true" size={16} />
           ) : (
-            <XCircle className="text-warning w-4 h-4" />
+            <XCircle aria-hidden="true" size={16} />
           )}
-          <span>At least one number</span>
+          <span>{requirements.number ? 'Met:' : 'Required:'} At least one number</span>
         </li>
-        <li className="flex items-center gap-2">
+        <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           {requirements.special ? (
-            <CheckCircle className="text-success w-4 h-4" />
+            <CheckCircle aria-hidden="true" size={16} />
           ) : (
-            <XCircle className="text-warning w-4 h-4" />
+            <XCircle aria-hidden="true" size={16} />
           )}
-          <span>At least one special character</span>
+          <span>{requirements.special ? 'Met:' : 'Required:'} At least one special character</span>
         </li>
       </ul>
     </div>

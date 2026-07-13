@@ -2,7 +2,7 @@
 
 import { encodedRedirect } from '@/utils/utils'
 import { createClient } from '@/utils/supabase/server'
-import { redirect } from 'next/navigation'
+import { redirect, unstable_rethrow } from 'next/navigation'
 import { rateLimit } from '@/lib/rate-limit'
 import { AUTH_RATE_LIMITS, getClientIp } from './_shared'
 
@@ -95,6 +95,7 @@ export const resetPasswordAction = async (formData: FormData) => {
     )
     return redirect('/sign-in?message=password_reset_success')
   } catch (error) {
+    unstable_rethrow(error)
     console.error('Unexpected error during password reset:', error)
     return encodedRedirect(
       'error',

@@ -67,13 +67,15 @@ export default function CommentForm({
   return (
     <CommentFormWrapper onSubmit={handleSubmit}>
       <CommentTextarea
+        id="comment-body"
+        aria-label="Write a comment"
         value={body}
         onChange={(e) => setBody(e.target.value)}
         placeholder="Write a comment..."
         maxLength={MAX_BODY_LENGTH}
         disabled={isSubmitting}
       />
-      {error && <ErrorText>{error}</ErrorText>}
+      {error && <ErrorText role="alert">{error}</ErrorText>}
       <SubmitRow>
         <CharCount>
           {trimmedBody.length} / {MAX_BODY_LENGTH}

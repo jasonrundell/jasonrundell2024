@@ -6,7 +6,7 @@ import { styled } from '@pigment-css/react'
 
 import Tokens from '@/lib/tokens'
 
-const StyledShell = styled('main')`
+const StyledShell = styled('div')`
   min-height: 70vh;
   display: flex;
   align-items: center;

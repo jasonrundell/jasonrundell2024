@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { styled } from '@pigment-css/react'
 import Tokens from '@/lib/tokens'
 import { useNavUser } from './useNavUser'
@@ -68,6 +68,12 @@ const LARGE_BREAKPOINT_PX =
 const MainNavClient: React.FC = () => {
   const { user, isLoading } = useNavUser()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false)
+    menuButtonRef.current?.focus()
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,6 +97,19 @@ const MainNavClient: React.FC = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeMobileMenu()
+    }
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isMobileMenuOpen, closeMobileMenu])
+
   if (isLoading) {
     return (
       <>
@@ -104,14 +123,19 @@ const MainNavClient: React.FC = () => {
     )
   }
 
-  const closeMobileMenu = () => setIsMobileMenuOpen(false)
-
   return (
     <>
       <StyledMobileMenuButton
+        ref={menuButtonRef}
         className={isMobileMenuOpen ? 'open' : ''}
-        onClick={() => setIsMobileMenuOpen((o) => !o)}
-        aria-label="Toggle mobile menu"
+        onClick={() => {
+          if (isMobileMenuOpen) {
+            closeMobileMenu()
+          } else {
+            setIsMobileMenuOpen(true)
+          }
+        }}
+        aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isMobileMenuOpen}
         aria-controls="mobile-menu"
       >

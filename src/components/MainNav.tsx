@@ -40,7 +40,8 @@ const StyledBrand = styled(Link)`
   text-decoration: none;
   text-wrap: nowrap;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: ${Tokens.colors.accent.var};
   }
 `
@@ -80,7 +81,8 @@ const StyledListItem = styled('li')`
     transition: color 0.15s ease;
   }
 
-  a:hover {
+  a:hover,
+  a:focus-visible {
     color: ${Tokens.colors.ink.var};
   }
 `
@@ -100,7 +102,8 @@ const StyledNavCta = styled(Link)`
     background 0.15s ease,
     border-color 0.15s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: ${Tokens.colors.accentSoft.var};
     border-color: ${Tokens.colors.accentSoft.var};
   }

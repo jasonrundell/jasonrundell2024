@@ -57,43 +57,41 @@ jest.mock('@/styles/motion', () => ({
   ),
 }))
 
-jest.mock('@/styles/common', () => ({
-  StyledModal: ({
+jest.mock('@/styles/common', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports -- jest.mock factory runs before ESM imports
+  const React = require('react')
+  const StyledModal = ({
     children,
     onClick,
     ...props
-  }: {
-    children: React.ReactNode
-    onClick?: () => void
-    [key: string]: unknown
   }) => (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- test double
     <div data-testid="modal" onClick={onClick} {...props}>
       {children}
     </div>
-  ),
-  StyledModalContent: ({
-    children,
-    onClick,
-  }: {
-    children: React.ReactNode
-    onClick?: (e: React.MouseEvent) => void
-  }) => (
-    <div data-testid="modal-content" onClick={onClick}>
+  )
+  const StyledModalContent = React.forwardRef(({ children, onClick }, ref) => (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- test double
+    <div data-testid="modal-content" ref={ref} onClick={onClick}>
       {children}
     </div>
-  ),
-  StyledCloseButton: ({
-    children,
-    onClick,
-  }: {
-    children: React.ReactNode
-    onClick?: () => void
-  }) => (
-    <button data-testid="close-button" onClick={onClick}>
-      {children}
-    </button>
-  ),
-}))
+  ))
+  StyledModalContent.displayName = 'StyledModalContent'
+  const StyledCloseButton = React.forwardRef(
+    ({ children, onClick, ...props }, ref) => (
+      <button
+        data-testid="close-button"
+        ref={ref}
+        onClick={onClick}
+        {...props}
+      >
+        {children}
+      </button>
+    )
+  )
+  StyledCloseButton.displayName = 'StyledCloseButton'
+  return { StyledModal, StyledModalContent, StyledCloseButton }
+})
 
 const makeImage = (overrides?: Partial<ContentImage>): ContentImage => ({
   src: '/content/projects/test/gallery/01.webp',
@@ -263,7 +261,8 @@ describe('ProjectGallery', () => {
     const galleryButton = screen.getByRole('button', {
       name: /view keyboard test in full screen/i,
     })
-    await user.type(galleryButton, '{Enter}')
+    galleryButton.focus()
+    await user.keyboard('{Enter}')
     await waitFor(() => expect(screen.getByTestId('modal')).toBeInTheDocument())
   })
 
@@ -284,5 +283,30 @@ describe('ProjectGallery', () => {
     )
     const modalImages = screen.getAllByTestId('gallery-image')
     expect(modalImages[1]).toHaveAttribute('data-quality', '90')
+  })
+
+  it('traps Tab focus within the open gallery modal', async () => {
+    const user = userEvent.setup()
+    const images = [
+      makeImage({ src: '/a.webp', alt: 'First' }),
+      makeImage({ src: '/b.webp', alt: 'Second' }),
+      makeImage({ src: '/c.webp', alt: 'Third' }),
+    ]
+    render(<ProjectGallery images={images} />)
+
+    // Open middle image so both prev and next controls exist
+    await user.click(
+      screen.getByRole('button', { name: /view second in full screen/i })
+    )
+    expect(screen.getByTestId('modal')).toBeInTheDocument()
+
+    const closeButton = screen.getByLabelText('Close image gallery')
+    await waitFor(() => expect(closeButton).toHaveFocus())
+
+    await user.keyboard('{Shift>}{Tab}{/Shift}')
+    expect(screen.getByLabelText('Next image')).toHaveFocus()
+
+    await user.keyboard('{Tab}')
+    expect(closeButton).toHaveFocus()
   })
 })

@@ -1,4 +1,10 @@
+import type { Metadata } from 'next'
 import { signInAction } from '@/app/actions'
+
+export const metadata: Metadata = {
+  title: 'Sign in | Jason Rundell',
+  description: 'Sign in to your Jason Rundell account.',
+}
 import { FormMessage } from '@/components/auth/form-message'
 import { Input } from '@/components/auth/ui/input'
 import { Label } from '@/components/auth/ui/label'
@@ -88,6 +94,7 @@ export default async function Login({
         <FieldGroup>
           <Label htmlFor="email">Email</Label>
           <Input
+            id="email"
             name="email"
             type="email"
             placeholder="you@example.com"
@@ -109,6 +116,7 @@ export default async function Login({
             </StyledLink>
           </div>
           <Input
+            id="password"
             type="password"
             name="password"
             placeholder="Your password"

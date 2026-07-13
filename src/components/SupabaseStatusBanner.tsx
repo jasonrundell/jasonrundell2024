@@ -47,7 +47,7 @@ const Message = styled('p')`
 const ActionButton = styled('button')`
   background: white;
   border: 1px solid ${Tokens.colors.secondary.value}4D;
-  color: ${Tokens.colors.surface.var};
+  color: ${Tokens.colors.ink.var};
   padding: ${Tokens.sizes.spacing.xsmall.value}${Tokens.sizes.spacing.xsmall.unit} ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
   border-radius: ${Tokens.borderRadius.xsmall.value}${Tokens.borderRadius.xsmall.unit};
   margin-left: ${Tokens.sizes.small.value}${Tokens.sizes.small.unit};
@@ -57,7 +57,8 @@ const ActionButton = styled('button')`
   transition: background 0.2s ease;
   font-weight: 500;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: ${Tokens.colors.secondary.value}4D;
   }
 `
@@ -69,12 +70,13 @@ const CloseButton = styled('button')`
   transform: translateY(-50%);
   background: white;
   border: none;
-  color: ${Tokens.colors.surface.var};
+  color: ${Tokens.colors.ink.var};
   cursor: pointer;
   font-size: 1.2rem;
   transition: opacity 0.2s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     opacity: 1;
   }
 `
@@ -231,6 +233,8 @@ export default function SupabaseStatusBanner({
   return (
     <StyledBanner
       className={`${getBannerClass()} ${isVisible ? 'visible' : 'hidden'}`}
+      role="alert"
+      aria-live="assertive"
     >
       <Message>{getMessage()}</Message>
       {getActionButton()}

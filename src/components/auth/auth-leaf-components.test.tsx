@@ -31,12 +31,15 @@ describe('auth leaf components', () => {
 
   it('renders password input with strength feedback and configured attributes', () => {
     render(
-      <PasswordInput
-        name="password"
-        placeholder="Password"
-        required
-        minLength={12}
-      />
+      <>
+        <label htmlFor="password">Password</label>
+        <PasswordInput
+          name="password"
+          placeholder="Password"
+          required
+          minLength={12}
+        />
+      </>
     )
 
     const input = screen.getByLabelText('Password')
@@ -46,11 +49,16 @@ describe('auth leaf components', () => {
 
     fireEvent.change(input, { target: { value: 'StrongPassword1!' } })
 
-    expect(screen.getByText('At least 8 characters')).toBeInTheDocument()
+    expect(screen.getByText(/At least 8 characters/)).toBeInTheDocument()
   })
 
   it('renders password input with default required and minLength', () => {
-    render(<PasswordInput name="password" placeholder="Password" />)
+    render(
+      <>
+        <label htmlFor="password">Password</label>
+        <PasswordInput name="password" placeholder="Password" />
+      </>
+    )
 
     const input = screen.getByLabelText('Password')
     expect(input).toHaveAttribute('minLength', '8')
