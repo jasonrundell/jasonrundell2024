@@ -141,7 +141,7 @@ export default function MobileDrawer({
       id="mobile-menu"
       className={isOpen ? 'open' : ''}
       aria-label="Mobile navigation"
-      {...(!isOpen ? { inert: '' as unknown as boolean } : {})}
+      {...(!isOpen ? ({ inert: true } as { inert: true }) : {})}
     >
       <StyledMobileList>
         {NAV_LINKS.map((link) => (
