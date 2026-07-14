@@ -1,28 +1,28 @@
-# Jason Rundell 2024 Personal Site
+# Jason Rundell Personal Site
 
-This is the 2024 edition of Jason Rundell's personal website, built with Next.js
-and Contentful for dynamic content management. The site showcases projects,
-posts, and skills, with a focus on accessibility, modern web technologies, and
-optimized performance.
+Personal marketing and portfolio site for Jason Rundell — technical engineering
+leader and hands-on builder. Built with Next.js App Router, file-based MDX
+content, Pigment CSS, and Supabase (auth, profiles, comments).
 
 ## Features
 
-- **Dynamic Content**: Uses Contentful as a headless CMS for managing posts,
-  projects, and images.
-- **Responsive Design**: Optimized for desktop and mobile devices.
-- **Accessible and Inclusive**: Designed with accessibility in mind, including
-  semantic HTML and contrast adjustments.
-- **SEO-Friendly**: Configured for search engines with proper metadata.
-- **Image Optimization**: Next.js's `next/image` is used to optimize images.
+- **File-based content**: Posts and projects live as MDX under `content/`, read
+  through `src/lib/content.ts`.
+- **Responsive design**: Optimized for desktop and mobile.
+- **Accessible and inclusive**: Semantic HTML, contrast, and keyboard-friendly
+  patterns.
+- **SEO-friendly**: Next.js Metadata API, Open Graph, and JSON-LD.
+- **Image optimization**: `next/image` plus build-time content image sync.
 
 ## Development
 
-### Project Documentation
+### Project documentation
 
 - Project index: [docs/PROJECT_INDEX.md](./docs/PROJECT_INDEX.md)
-- Keep the index updated whenever routes, integrations, folder structure, or test locations change.
+- Domain glossary: [docs/glossary.md](./docs/glossary.md)
 - Codebase conventions: [CONVENTIONS.md](./CONVENTIONS.md)
-- Latest audit: [docs/audits/2026-05-codebase-audit.md](./docs/audits/2026-05-codebase-audit.md)
+- Content authoring: [docs/CONTENT_AUTHORING.md](./docs/CONTENT_AUTHORING.md)
+- Keep the index and glossary updated when routes, modules, or domain terms change.
 
 ### Validation
 
@@ -33,31 +33,24 @@ Terminal, and Linux shells.
 - Tests with enforced coverage gates: `npm run test:ci`
 - Production build: `npm run build`
 
-Coverage is enforced by `scripts/check-coverage.js`.
+Coverage is enforced by `scripts/check-coverage.js` (70% statements/functions/lines).
 
-### Getting Started
+### Getting started
 
 1. Clone the repository
-2. Install dependencies: `npm install`
-3. Run validation: `npm run lint` and `npm run test:ci`
-4. Run the development server: `npm run dev`
-
-## Deployment
-
-### Contentful Webhooks
-
-To enable incremental builds when content is published in Contentful, set up
-webhooks to trigger automatic revalidation. See
-[docs/WEBHOOK_SETUP.md](./docs/WEBHOOK_SETUP.md) for complete setup
-instructions.
+2. Copy `.env.example` to `.env.local` and set Supabase values
+3. Install dependencies: `npm install`
+4. Run validation: `npm run lint` and `npm run test:ci`
+5. Run the development server: `npm run dev`
 
 ## Technologies
 
-- **Next.js**: A powerful React framework for server-rendered applications.
-- **React**: Component-based structure for easy customization and scalability.
-- **Contentful**: Headless CMS for managing content.
-- **Pigment-CSS**: CSS-in-JS library for styled components.
-- **Jest**: Testing framework to ensure quality and functionality.
+- **Next.js**: App Router for server-rendered pages and route handlers
+- **React**: UI components (server-first)
+- **MDX / gray-matter**: File-based posts and projects
+- **Supabase**: Auth, profiles, comments (RLS required)
+- **Pigment CSS**: Styled components and design tokens
+- **Jest**: Unit and integration tests
 
 ## License
 

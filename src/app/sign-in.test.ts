@@ -27,7 +27,7 @@ describe('Sign In Action', () => {
     _clearStore()
   })
 
-  describe('Successful Login with Valid Credentials', () => {
+  describe('Successful sign-in with valid credentials', () => {
     it('should authenticate user and redirect to profile with valid credentials', async () => {
       // Arrange
       const formData = new FormData()
@@ -51,8 +51,8 @@ describe('Sign In Action', () => {
     })
   })
 
-  describe('Failed Login with Invalid Credentials', () => {
-    it('should handle invalid login credentials error', async () => {
+  describe('Failed sign-in with invalid credentials', () => {
+    it('should handle invalid credentials error', async () => {
       // Arrange
       const formData = new FormData()
       formData.append('email', 'test@example.com')
@@ -95,7 +95,7 @@ describe('Sign In Action', () => {
     })
   })
 
-  describe('Failed Login with Unconfirmed Email', () => {
+  describe('Failed sign-in with unconfirmed email', () => {
     it('should handle unconfirmed email error', async () => {
       // Arrange
       const formData = new FormData()
@@ -239,8 +239,8 @@ describe('Sign In Action', () => {
     })
   })
 
-  describe('Login After Password Reset', () => {
-    it('should handle successful login after password reset', async () => {
+  describe('Sign-in after password reset', () => {
+    it('should handle successful sign-in after password reset', async () => {
       // Arrange
       const formData = new FormData()
       formData.append('email', 'reset@example.com')
@@ -263,8 +263,8 @@ describe('Sign In Action', () => {
     })
   })
 
-  describe('Login After Email Confirmation', () => {
-    it('should handle successful login after email confirmation', async () => {
+  describe('Sign-in after email confirmation', () => {
+    it('should handle successful sign-in after email confirmation', async () => {
       // Arrange
       const formData = new FormData()
       formData.append('email', 'confirmed@example.com')

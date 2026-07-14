@@ -407,21 +407,16 @@ describe('middleware', () => {
       expect(response.status).toBe(200)
     })
 
-    it('should protect dashboard routes', async () => {
-      // Arrange
+    it('should not treat /dashboard as a protected route', async () => {
+      // Arrange — no app route exists; matcher no longer includes it
       const request = createMockRequest('/dashboard')
-      mockSupabaseClient.auth.getUser.mockResolvedValue({
-        data: { user: null },
-        error: null,
-      })
 
       // Act
       const response = await middleware(request)
 
       // Assert
-      expect(response.status).toBe(307)
-      const location = response.headers.get('location')
-      expect(location).toContain('/sign-in')
+      expect(response).toBeInstanceOf(NextResponse)
+      expect(response.status).toBe(200)
     })
   })
 })

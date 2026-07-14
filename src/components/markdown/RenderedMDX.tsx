@@ -40,9 +40,8 @@ const markdownComponents: Components = {
 /**
  * Renders a markdown/MDX body string using react-markdown with GFM support.
  *
- * Used wherever Contentful rich text was previously rendered via
- * documentToReactComponents(). The `source` string comes from gray-matter
- * frontmatter parsing of the MDX file's body.
+ * Used wherever MDX body content is rendered. The `source` string comes from
+ * gray-matter frontmatter parsing of the MDX file's body.
  *
  * Images are rendered as plain <img> elements with responsive sizing so that
  * content/ images (unknown dimensions) render without requiring explicit

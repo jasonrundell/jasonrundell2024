@@ -1,0 +1,28 @@
+# Build and dependency artifacts
+.next/
+node_modules/
+out/
+build/
+.swc/
+
+# Test and audit outputs
+coverage/
+.lighthouseci/
+
+# Locks and generated TypeScript build info
+package-lock.json
+*.tsbuildinfo
+
+# Env and secrets
+.env*
+!.env.example
+
+# Synced/generated assets
+public/content/
+src/lib/tokens.generated.ts
+src/styles/tokens.generated.css
+src/components/illustrations/paths.generated.ts
+
+# Certificates and local tooling
+certificates/
+.vercel/

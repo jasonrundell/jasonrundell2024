@@ -46,7 +46,7 @@ const successMessages: Record<string, string> = {
   email_confirmed: 'Email confirmed successfully. Please sign in.',
 }
 
-export default async function Login({
+export default async function SignInPage({
   searchParams,
 }: {
   searchParams: Promise<{

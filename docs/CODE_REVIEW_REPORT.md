@@ -1,4 +1,16 @@
 # Code Review Report
+
+> **Superseded historical snapshot.** Written against a Contentful-era codebase
+> and should not drive current work. Prefer:
+>
+> - Module map & routes: [`docs/PROJECT_INDEX.md`](./PROJECT_INDEX.md)
+> - Domain vocabulary: [`docs/glossary.md`](./glossary.md)
+> - Conventions: [`CONVENTIONS.md`](../CONVENTIONS.md)
+> - Testing guidance: [`docs/TESTING_AUDIT_REPORT.md`](./TESTING_AUDIT_REPORT.md)
+> - Fresh review prompt: [`docs/AI_CODE_REVIEW_PROMPT.md`](./AI_CODE_REVIEW_PROMPT.md)
+>
+> Kept for audit trail only.
+
 **Date:** Generated Review  
 **Codebase:** jasonrundell2024  
 **Reviewer:** AI Code Review (Based on AI_CODE_REVIEW_PROMPT.md)

@@ -31,7 +31,7 @@ export interface Reference {
   citeName: string
   order: number
   emphasis: boolean
-  /** Plain markdown string (converted from Contentful rich text during migration) */
+  /** Plain markdown string from MDX frontmatter */
   quote: string
 }
 

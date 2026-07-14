@@ -5,9 +5,10 @@
   "author": "Jason Rundell <jason.rundell@gmail.com>",
   "keywords": [
     "next.js",
-    "contentful",
+    "mdx",
     "react",
-    "pigment-css"
+    "pigment-css",
+    "supabase"
   ],
   "scripts": {
     "dell": "npm run dev",

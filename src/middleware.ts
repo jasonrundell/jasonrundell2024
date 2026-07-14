@@ -36,8 +36,7 @@ export async function middleware(request: NextRequest) {
   // Only enforce auth for routes this middleware is configured to guard.
   // The config.matcher already limits invocation in production; this guard
   // ensures the function is safe when called directly in tests or other contexts.
-  const isProtectedPath =
-    pathname.startsWith('/profile') || pathname.startsWith('/dashboard')
+  const isProtectedPath = pathname.startsWith('/profile')
   if (!isProtectedPath) {
     return NextResponse.next()
   }
@@ -49,5 +48,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/:path*', '/profile/:path*', '/dashboard/:path*'],
+  matcher: ['/api/:path*', '/profile/:path*'],
 }
