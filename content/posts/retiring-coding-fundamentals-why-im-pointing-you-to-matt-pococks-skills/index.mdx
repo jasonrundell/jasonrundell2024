@@ -1,0 +1,131 @@
+---
+title:
+  "Retiring Coding Fundamentals: Why I'm Pointing You to Matt Pocock's Skills"
+slug: 'retiring-coding-fundamentals-why-im-pointing-you-to-matt-pococks-skills'
+excerpt:
+  'Two months ago I wrote about building Coding Fundamentals, my portable pack
+  of Cursor rules and skills. This is the follow-up I did not expect to write
+  so soon: I am shutting it down, and the reason is a good one. The person
+  whose talk inspired the project built the same thing—better.'
+date: '2026-07-14T12:00-04:00'
+author: 'Jason Rundell'
+featuredImage: './featured.webp'
+featuredImageAlt:
+  'Stylized blueprint of a small constellation of nodes merging into a larger,
+  brighter network, representing a personal project folding into a community
+  one'
+featuredImageDescription: ''
+---
+
+Two months ago I published
+[a post about building Coding Fundamentals](/posts/building-coding-fundamentals-my-system-for-sustainable-ai-development)—my
+portable pack of Cursor rules and skills for keeping AI-assisted development
+grounded in software fundamentals. I ended that post with a fair warning: "I
+built this for my own workflow and taste. Your mileage will vary."
+
+Well, here's a follow-up I didn't expect to write this soon: I'm retiring the
+project. And the reason is about as good as reasons get.
+
+## Matt Built It. Of Course He Did.
+
+If you read the original post, you'll remember the origin story. Coding
+Fundamentals was inspired by Matt Pocock's talk,
+["Software Fundamentals Matter More Than Ever."](https://www.youtube.com/watch?v=v4F1gFy-hqg)
+I took the transcript, sat down with an agent, and turned the principles into a
+skill family I could carry across projects.
+
+What I should have seen coming: Matt didn't stop at the talk. He built
+[mattpocock/skills](https://github.com/mattpocock/skills)—his own agent skills,
+straight from his working setup, grounded in the exact same books and
+principles. Grilling sessions before planning. Ubiquitous language via a shared
+`CONTEXT.md`. TDD with red-green loops. Deep modules à la Ousterhout. The whole
+lineage.
+
+Last week he shipped
+[v1.1](https://www.youtube.com/watch?v=A8mokin_YOs), and it's a complete
+development lifecycle now: `/grill-with-docs` to align, `/to-spec` and
+`/to-tickets` to plan, `/implement` to build, `/code-review` to check the work
+against your standards _and_ Martin Fowler's refactoring smells, and
+`/wayfinder` for plans too big to fit in one agent session. The repo is sitting
+at 170k stars with around 7 million downloads, and the v1.1 changes are full of
+fixes for failure modes that only surface when that many people hammer on your
+skills—grilling that asks one question at a time and actually waits for
+confirmation, a clean distinction between facts the agent can discover and
+decisions only you can make.
+
+## The Honest Comparison
+
+I sat down and mapped my skill family against his, and asked an agent to give
+me an unbiased read while I was at it. The overlap was nearly one-to-one:
+
+- My `grill-me` → his `grill-me`, hardened by thousands of users' bug reports.
+- My `ubiquitous-language` glossary → his `grill-with-docs` and
+  `domain-modeling`, built right into the planning flow.
+- My `tdd-feedback-loops` → his `tdd`, refined to work unattended.
+- My `deep-modules-architecture` → his `codebase-design` plus
+  `improve-codebase-architecture`, which doesn't just describe the principle
+  but rescues codebases that already became a ball of mud.
+- My `interface-first-delegation` → baked into his `to-spec`, which quizzes you
+  about which modules you're touching before a spec exists.
+
+Every one of those rows has the same answer to "whose version is better?" His.
+Not because I did a bad job—because he's the originator of the framing,
+iterating weekly, with a feedback loop of millions of installs. My versions
+were a faithful solo reimplementation of ideas he was already shipping and
+sharpening.
+
+I could keep maintaining a parallel, slightly-behind copy of another person's
+system. Or I could admit what the project was actually for.
+
+> The goal was never to own the tooling. It was to work grounded in
+> fundamentals. Matt's skills do that better than mine, so that's what I use
+> now.
+
+## What Retirement Looks Like
+
+The [GitHub repo](https://github.com/jasonrundell/coding-fundamentals) stays
+up, archived, so nothing links to a void. The README will point where this post
+points: install Matt's skills and start there.
+
+```bash
+npx skills@latest add mattpocock/skills
+```
+
+A few pieces don't have an equivalent in Matt's set, and those survive in my
+personal setup:
+
+- **Token efficiency** - my cross-cutting rules for lean context: MCP audits,
+  `.cursorignore` hygiene, always-apply rule discipline. Cursor-specific, still
+  useful.
+- **Verified delegation** - a skill I added just last week after going down the
+  multi-agent rabbit hole via Nate B. Jones's
+  ["verify the work, not the model"](https://natesnewsletter.substack.com/p/trust-ai-agents)
+  pattern: a boss model writes specs, cheap workers implement, and executed
+  checks—not agent self-reports—decide pass or fail. Matt's skills are
+  single-agent lifecycle; this covers the swarm case.
+- **My rule templates** - the `.mdc` files for Supabase, React/TypeScript,
+  accessibility, and CSS reuse. Those were always my stack preferences, not
+  philosophy.
+
+## What Building It Was Worth
+
+I don't consider the last two months wasted. Not even close.
+
+Building the pack forced me to make twenty years of instincts explicit—that was
+the real product, and it's still in my head where it belongs. I learned how
+skills actually work under the hood, which now makes me a much sharper
+_consumer_ of other people's skills. And Grill Me genuinely changed how I start
+projects; I'm just invoking Matt's version of it now.
+
+There's also a lesson here about building in the AI tooling space in 2026:
+**the half-life of a solo tooling project is brutally short**. The ecosystem
+converges fast, and the person with the biggest feedback loop wins. If your
+project overlaps with something community-scale, the honest move is to
+contribute or adopt—not to keep a private fork of an idea alive out of
+sentiment.
+
+Retiring a project you announced two months ago stings a little, I won't
+pretend otherwise. But shipping ego-free is one of those fundamentals too.
+
+Go install [Matt's skills](https://github.com/mattpocock/skills). Tell him I
+sent you.
