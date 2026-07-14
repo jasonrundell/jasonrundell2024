@@ -3,13 +3,22 @@ title: 'Coding Fundamentals'
 slug: 'coding-fundamentals'
 createdDate: '2026-05-07T12:00:00.000Z'
 excerpt:
-  'Reusable Cursor rules, skills, and install helpers that turn durable software
-  principles into practical AI-assisted development guidance.'
+  'Retired. A portable pack of Cursor rules, skills, and install helpers that
+  turned durable software principles into AI-assisted development guidance—now
+  archived in favour of Matt Pocock''s skills project.'
 technology: ['Cursor', 'Markdown', 'PowerShell', 'Bash', 'Shell Scripting']
 link: 'https://github.com/jasonrundell/coding-fundamentals'
 featuredImageAlt: ''
 featuredImageDescription: ''
 ---
+
+**This project is retired.** The repo remains archived on GitHub so existing
+links keep working, but I no longer maintain it. For the same fundamentals as
+an actively maintained, community-scale skill set, use
+[Matt Pocock's skills](https://github.com/mattpocock/skills) instead—built by
+the person whose talk inspired this project in the first place. I wrote about
+the decision in
+[Retiring Coding Fundamentals](/posts/retiring-coding-fundamentals-why-im-pointing-you-to-matt-pococks-skills).
 
 A portable pack of Cursor rules, skills, and scripts I built to keep my
 AI-assisted workflow grounded in fundamentals that actually matter - design
@@ -19,15 +28,16 @@ The idea came from a simple realization: good codebases matter **more** with AI,
 not less. Speed amplifies entropy, so the guardrails need to travel with you
 across every project.
 
-### What's inside
+### What was inside
 
 - **`global-fundamentals.mdc`** - a tiny always-on rule covering the core
   principles. Short enough to leave enabled everywhere.
 - **Rule templates** - optional `.mdc` files for common project concerns,
   defaulting to `alwaysApply: false` so they only activate where they fit.
 - **Skills** - an orchestrator skill for creating or refreshing the full
-  fundamentals family, plus a "grill me" skill for design-concept discovery
-  before plans or PRDs.
+  fundamentals family, a "grill me" skill for design-concept discovery before
+  plans or PRDs, and a "verified delegation" skill for multi-agent work checked
+  by executed commands instead of agent self-reports.
 - **Install scripts** - conservative PowerShell and Bash scripts for Windows,
   macOS, and Linux.
 - **Validation scripts** - repo health checks for docs, rules, skills, and index
@@ -44,16 +54,23 @@ across every project.
 - Design interfaces deliberately, then delegate implementation behind tests.
 - Keep context lean so the agent spends attention on the work that matters.
 
-### Why I built it
+### Why I built it, and why I retired it
 
 I kept copying the same rules and skills between projects and trimming
-duplicates after the fact. This repo is the canonical source - install the
+duplicates after the fact. This repo became the canonical source - install the
 global rule everywhere, opt into templates per project, and use the skills when
 the conversation calls for it.
+
+Then [Matt Pocock's skills](https://github.com/mattpocock/skills) matured into
+a complete development lifecycle grounded in the same principles, refined by a
+feedback loop of millions of installs. Maintaining a parallel solo
+reimplementation stopped making sense, so I adopted his set and archived mine.
+The full story is in
+[the retirement post](/posts/retiring-coding-fundamentals-why-im-pointing-you-to-matt-pococks-skills).
 
 Kudos to Matt Pocock's talk
 ["Software Fundamentals Matter More Than Ever"](https://www.youtube.com/watch?v=v4F1gFy-hqg)
 which came at the perfect time and inspired me to finally get my AI house in
-order.
+order - twice.
 
 **License** MIT.
