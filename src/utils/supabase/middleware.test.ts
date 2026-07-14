@@ -35,7 +35,7 @@ describe('middleware', () => {
           getAll: jest.fn().mockReturnValue([]),
         },
         nextUrl: {
-          pathname: '/dashboard',
+          pathname: '/profile',
         },
       } as unknown as NextRequest
 
@@ -60,7 +60,7 @@ describe('middleware', () => {
           getAll: jest.fn().mockReturnValue([]),
         },
         nextUrl: {
-          pathname: '/dashboard',
+          pathname: '/profile',
         },
       } as unknown as NextRequest
 
@@ -78,7 +78,7 @@ describe('middleware', () => {
       expect(mockCreateServerClient).toHaveBeenCalled()
     })
 
-    it('should redirect root route to dashboard when user is authenticated', async () => {
+    it('should redirect root route to profile when user is authenticated', async () => {
       // Arrange
       const mockRequest = {
         cookies: {
@@ -112,7 +112,7 @@ describe('middleware', () => {
             .mockReturnValue([{ name: 'test-cookie', value: 'test-value' }]),
         },
         nextUrl: {
-          pathname: '/dashboard',
+          pathname: '/profile',
         },
       } as unknown as NextRequest
 
@@ -137,7 +137,7 @@ describe('middleware', () => {
           getAll: jest.fn().mockReturnValue([]),
         },
         nextUrl: {
-          pathname: '/dashboard',
+          pathname: '/profile',
         },
       } as unknown as NextRequest
 
@@ -159,7 +159,7 @@ describe('middleware', () => {
           getAll: jest.fn().mockReturnValue([]),
         },
         nextUrl: {
-          pathname: '/dashboard',
+          pathname: '/profile',
         },
       } as unknown as NextRequest
 

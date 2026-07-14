@@ -80,7 +80,7 @@ describe('Auth Callback Route', () => {
     it('should handle auth flow with redirect_to parameter', async () => {
       // Arrange
       const url =
-        'http://localhost:3000/auth/callback?type=signup&code=auth-code&redirect_to=/dashboard'
+        'http://localhost:3000/auth/callback?type=signup&code=auth-code&redirect_to=/projects'
       const request = new Request(url)
 
       mockSupabase.auth.exchangeCodeForSession.mockResolvedValue({
@@ -97,7 +97,7 @@ describe('Auth Callback Route', () => {
       )
       const { NextResponse } = await import('next/server')
       expect(NextResponse.redirect).toHaveBeenCalledWith(
-        'http://localhost:3000/dashboard'
+        'http://localhost:3000/projects'
       )
     })
 

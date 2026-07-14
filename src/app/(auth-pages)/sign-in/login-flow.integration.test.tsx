@@ -126,8 +126,8 @@ jest.mock('@pigment-css/react', () => ({
   },
 }))
 
-// Create a mock Login component for testing
-const MockLogin = ({
+// Create a mock SignInPage component for testing
+const MockSignInPage = ({
   searchParams,
 }: {
   searchParams: { error?: string; message?: string; redirectedFrom?: string }
@@ -234,7 +234,7 @@ const MockLogin = ({
   )
 }
 
-describe('Login Flow Integration Tests', () => {
+describe('Sign-in Flow Integration Tests', () => {
   const user = userEvent.setup()
 
   beforeEach(() => {
@@ -242,9 +242,9 @@ describe('Login Flow Integration Tests', () => {
   })
 
   describe('Feature: User Authentication', () => {
-    it('should successfully login with valid credentials', async () => {
+    it('should successfully sign in with valid credentials', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I enter a valid email address
       const emailInput = screen.getByTestId('input-email')
@@ -264,9 +264,9 @@ describe('Login Flow Integration Tests', () => {
       expect(passwordInput).toHaveValue('ValidPassword123!')
     })
 
-    it('should handle login with remember me option', async () => {
+    it('should handle sign-in with remember me option', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I enter valid credentials
       const emailInput = screen.getByTestId('input-email')
@@ -292,7 +292,7 @@ describe('Login Flow Integration Tests', () => {
   describe('Feature: Form Validation and User Experience', () => {
     it('should prevent form submission with missing email', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I leave the email field empty
       const emailInput = screen.getByTestId('input-email')
@@ -309,7 +309,7 @@ describe('Login Flow Integration Tests', () => {
 
     it('should prevent form submission with missing password', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I enter an email address
       const emailInput = screen.getByTestId('input-email')
@@ -326,7 +326,7 @@ describe('Login Flow Integration Tests', () => {
 
     it('should prevent form submission with both fields empty', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I leave both email and password fields empty
       const emailInput = screen.getByTestId('input-email')
@@ -341,7 +341,7 @@ describe('Login Flow Integration Tests', () => {
 
     it('should show loading state during form submission', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I enter valid information
       const emailInput = screen.getByTestId('input-email')
@@ -360,7 +360,7 @@ describe('Login Flow Integration Tests', () => {
     it('should display invalid credentials error message', async () => {
       // Given I am on the sign-in page with an error
       const searchParams = { error: 'invalid_credentials' }
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // When I view the page
       // Then I should see the error message
@@ -373,7 +373,7 @@ describe('Login Flow Integration Tests', () => {
     it('should display database paused error message', async () => {
       // Given I am on the sign-in page with a database error
       const searchParams = { error: 'supabase_paused' }
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // When I view the page
       // Then I should see the error message
@@ -388,7 +388,7 @@ describe('Login Flow Integration Tests', () => {
     it('should display database unavailable error message', async () => {
       // Given I am on the sign-in page with a database error
       const searchParams = { error: 'supabase_unavailable' }
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // When I view the page
       // Then I should see the error message
@@ -401,7 +401,7 @@ describe('Login Flow Integration Tests', () => {
     it('should display email not confirmed error message', async () => {
       // Given I am on the sign-in page with an email error
       const searchParams = { error: 'email_not_confirmed' }
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // When I view the page
       // Then I should see the error message
@@ -416,7 +416,7 @@ describe('Login Flow Integration Tests', () => {
     it('should display password reset success message', async () => {
       // Given I am on the sign-in page with a success message
       const searchParams = { message: 'password_reset_success' }
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // When I view the page
       // Then I should see the success message
@@ -431,7 +431,7 @@ describe('Login Flow Integration Tests', () => {
     it('should display email confirmed success message', async () => {
       // Given I am on the sign-in page with a success message
       const searchParams = { message: 'email_confirmed' }
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // When I view the page
       // Then I should see the success message
@@ -445,7 +445,7 @@ describe('Login Flow Integration Tests', () => {
   describe('Feature: Navigation and Accessibility', () => {
     it('should have navigation to forgot password page', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I view the page
       // Then I should see the forgot password link
@@ -459,7 +459,7 @@ describe('Login Flow Integration Tests', () => {
 
     it('should have navigation to sign up page', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I view the page
       // Then I should see the sign up link
@@ -473,7 +473,7 @@ describe('Login Flow Integration Tests', () => {
   describe('Feature: Accessibility and Mobile Experience', () => {
     it('should have proper form labels for accessibility', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I view the form fields
       // Then I should see proper labels
@@ -484,7 +484,7 @@ describe('Login Flow Integration Tests', () => {
 
     it('should have required fields clearly marked', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I view the form fields
       // Then I should see required attributes
@@ -496,7 +496,7 @@ describe('Login Flow Integration Tests', () => {
 
     it('should have proper input types for accessibility', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I view the form fields
       // Then I should see proper input types
@@ -508,7 +508,7 @@ describe('Login Flow Integration Tests', () => {
 
     it('should have proper placeholders for user guidance', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I view the form fields
       // Then I should see proper placeholders
@@ -522,7 +522,7 @@ describe('Login Flow Integration Tests', () => {
   describe('Feature: Form Submission Prevention', () => {
     it('should have proper form structure for submission', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I view the form
       // Then I should see a proper form structure
@@ -532,7 +532,7 @@ describe('Login Flow Integration Tests', () => {
 
     it('should handle form submission prevention correctly', async () => {
       // Given I am on the sign-in page
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // When I try to submit with empty fields
       const emailInput = screen.getByTestId('input-email')
@@ -548,7 +548,7 @@ describe('Login Flow Integration Tests', () => {
     it('should handle error message display and persistence', async () => {
       // Given I am on the sign-in page with an error
       const searchParams = { error: 'invalid_credentials' }
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // When I view the page
       // Then I should see the error message
@@ -561,7 +561,7 @@ describe('Login Flow Integration Tests', () => {
     it('should handle success message display and persistence', async () => {
       // Given I am on the sign-in page with a success message
       const searchParams = { message: 'password_reset_success' }
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // When I view the page
       // Then I should see the success message

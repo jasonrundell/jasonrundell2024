@@ -37,15 +37,16 @@ language consistent across code, prompts, and documentation.
 
 ## Vocabulary (Ubiquitous Language)
 
-These terms are the **single canonical names** used in code, types, nav labels,
-and this repository's documentation.
+Canonical glossary: [`docs/glossary.md`](./docs/glossary.md). Keep that file
+current; this table is a short summary for contributors.
 
 | Concept              | Code type name | User-facing label               | JSON-LD term   | Notes                                                                          |
 | -------------------- | -------------- | ------------------------------- | -------------- | ------------------------------------------------------------------------------ |
 | Blog entry           | `Post`         | "Blog" (section), "post" (item) | `BlogPosting`  | Nav link text is "Blog"; the route is `/posts`; the TypeScript type is `Post`. |
 | Portfolio piece      | `Project`      | "Project"                       | `CreativeWork` |                                                                                |
-| Authenticated action | -              | "Sign in" / "Sign out"          | -              | Never "Login" / "Logout".                                                      |
+| Authenticated action | -              | "Sign in" / "Sign out"          | -              | Never "Login" / "Logout". Page export: `SignInPage`.                           |
 | Public profile       | `UserProfile`  | -                               | `Person`       |                                                                                |
+| Site author identity | `Author`       | -                               | via `Person`   | `src/lib/author.ts` — used by `src/lib/jsonld.ts`.                             |
 
 ---
 

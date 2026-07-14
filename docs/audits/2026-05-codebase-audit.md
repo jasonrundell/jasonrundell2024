@@ -1,5 +1,16 @@
 # Codebase Audit - May 2026
 
+> **Superseded historical snapshot (May 2026).** Do not treat findings here as
+> current. Prefer:
+>
+> - Module map & routes: [`docs/PROJECT_INDEX.md`](../PROJECT_INDEX.md)
+> - Domain vocabulary: [`docs/glossary.md`](../glossary.md)
+> - Conventions: [`CONVENTIONS.md`](../../CONVENTIONS.md)
+> - Testing guidance: [`docs/TESTING_AUDIT_REPORT.md`](../TESTING_AUDIT_REPORT.md)
+>
+> Kept for audit trail only (e.g. orphans and DRY notes that have since been
+> addressed or intentionally deferred).
+
 **Scope:** All of `src/` (components, app, lib, utils, styles, typeDefinitions,
 data) plus root configs. **Excludes:** `.next/`, `node_modules/`, `coverage/`,
 `.lighthouseci/`, generated tokens (`*.generated.*`), content MDX. **Guiding

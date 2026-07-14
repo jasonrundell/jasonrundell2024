@@ -1,21 +1,30 @@
+---
+description: Agent navigation map for jasonrundell.com — start with PROJECT_INDEX, respect module boundaries
+alwaysApply: true
+---
+
 # Project Navigation For Agents
 
 Start with `docs/PROJECT_INDEX.md` before broad searches. It is the maintained map of routes, module boundaries, integrations, validation commands, and expected build/test noise.
+
+Domain vocabulary lives in `docs/glossary.md` (canonical) and is summarized in `CONVENTIONS.md`.
 
 ## Context Hygiene
 
 - Prefer targeted reads and `rg` searches over reading whole directories.
 - Keep changes inside the smallest owning module. If the owner is unclear, update `docs/PROJECT_INDEX.md` as part of the work.
 - Do not paste large generated reports into chat when a focused doc update or test would create a better feedback loop.
+- Prefer `@file` references over pasted file contents.
 
 ## Boundaries
 
-- App routes, route handlers, and server actions live in `src/app`.
+- App routes, route handlers, and server actions live in `src/app`. Server actions are split under `src/app/actions/` (re-exported from `src/app/actions.ts`).
 - Reusable UI belongs in `src/components`; feature UI should stay in feature subfolders such as `auth` and `comments`.
-- Contentful access belongs behind `src/lib/contentful.ts`.
+- File-based MDX content reads belong behind `src/lib/content.ts`. Do not read `content/` from pages directly.
+- MDX rendering belongs in `src/lib/markdown.tsx` / `src/components/markdown/RenderedMDX.tsx`.
 - Supabase access belongs behind `src/utils/supabase/**`.
-- Shared domain helpers belong in `src/lib`; generic utilities belong in `src/utils`.
-- Shared styles belong in `src/styles/common.tsx`; local styles should stay in the component file.
+- Shared domain helpers belong in `src/lib`; framework adapters belong in `src/utils`.
+- Shared styles belong in `src/styles/` (`editorial.tsx`, `common.ts`, `terminal.ts`, etc.); local styles stay in the component file.
 
 ## Feedback Loop
 
@@ -26,5 +35,5 @@ Start with `docs/PROJECT_INDEX.md` before broad searches. It is the maintained m
 
 ## Data Rules
 
-- Required Contentful, Supabase, and profile/comment data should log and throw or return an explicit error response. Do not introduce silent fallback data.
+- Required content, Supabase, and profile/comment data should log and throw or return an explicit error response. Do not introduce silent fallback data.
 - Supabase tables must have RLS enabled, and `src/lib/db/schema.sql` must be updated when table shape or policy expectations change.

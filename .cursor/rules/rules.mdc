@@ -1,69 +1,48 @@
-## Preferred tech stack
+---
+description: Project coding standards for jasonrundell.com (Next.js App Router, Pigment CSS, Supabase, Jest)
+alwaysApply: true
+---
 
-- Next.js (latest stable) using app router for ecom sites, platforms, full-blown
-  websites or Vite (latest stable) for utility apps
-- React (latest stable)
-- Cypress (latest stable) E2E tests
-- Jest (stable compatible version with React) for unit tests
+# Project standards
 
-## Code, TypeScript & Typing
+## Stack
 
-- Always use TypeScript
-- Always apply code suggestions
-- Make changes but do not handle commits
-- Make commit messages short and concise and use the Conventional Commit message
-  convention
-- Import Ordering:
-  1. External dependencies
-  2. Internal dependencies (use absolute imports)
-  3. CSS / style imports
-- Functional methodology
-- Directory naming: lowercase‑with‑dashes (e.g. components/auth-wizard)
-- Atomic component design
-- React Hooks only (no class components)
-- Semantic versioning used for all projects
-- JSDoc / TSDoc comments on complex APIs
-- Storybook for interactive component demos
+- Next.js App Router, React, TypeScript
+- Pigment CSS (no Tailwind)
+- File-based MDX in `content/` via `src/lib/content.ts`
+- Supabase for auth, profiles, and comments
+- Jest + React Testing Library for unit/integration tests
+- Lighthouse CI for performance checks
 
-## Database / Supabase
+## Code
 
-- Row Level Security should always be enabled on all tables and policies should
-  be created when necessary to ensure all features function correctly
-- Do not try to automatically connect to Supabase and make changes. All Supabase
-  changes must be done manually by me.
-- All projects must have a sql/setup.sql file which contains all SQL needed to
-  recreate the project's databse from scratch. This file needs to be kept
-  up-to-date when database enhancements are made.
-- Database enhancements must be manually made by me via a migration sql file you
-  provide.
+- Prefer TypeScript everywhere; use absolute `@/` imports
+- Import order: external → internal (`@/`) → styles
+- Functional React only; default to server components; add `'use client'` only when needed
+- Follow `CONVENTIONS.md` for directory roles and file naming
+- Use domain terms from `docs/glossary.md` (never "Login"/"Logout" in UI or new symbols)
+- Make changes but do not create commits unless asked
+- Conventional Commits when committing
 
-## Testing & Quality
+## Supabase
 
-- Unit tests with Jest + React Testing Library
-- E2E tests with Cypress for critical flows
-- Type‑coverage checks and lint (ESLint, TSLint) on CI
-- Pre‑commit hooks: lint-staged, prettier --write
-- Lighthouse audits as part of CI
+- RLS enabled on all tables; update `src/lib/db/schema.sql` when schema or policies change
+- Do not connect to Supabase or apply migrations automatically — provide SQL for manual application
+- Auth/profile mutations live in `src/app/actions/**`
 
-## Accessibility & SEO
+## Testing and quality
 
-- React Axe for accessibility auditing
-- Semantic HTML: <button>, <main>, <nav>
-- ARIA roles/labels where needed
-- Keyboard focus management and visible focus states
-- Minimum color contrast ≥ 4.5:1 (AA)
-- Next.js SEO: <Head> for title/meta (if project uses Next), canonical links,
-  OpenGraph tags
+- Co-locate tests (`Foo.tsx` → `Foo.test.tsx`)
+- Enforce ≥70% coverage via `npm run test:ci` / `scripts/check-coverage.js`
+- No silent fallbacks for required data — log and throw (or return an explicit error response)
+- Prefer tests at module interfaces over implementation details
 
-## General process
+## Accessibility and SEO
 
-- Don't use fallback data aproaches, instead, log and throw an error when
-  something required is missing or has an error.
+- Semantic HTML; visible focus; contrast ≥ 4.5:1 (AA)
+- Next.js Metadata API for titles, canonicals, and Open Graph
 
-## Styling & Theming
+## Styling
 
-- CSS‑in‑JS or Pigment‑CSS variables; avoid inline styles
-- Do not use Tailwind
-- Design tokens for colors, spacing, typography
-- Theming: centralized theme file, typed theme interface
-- BEM or utility classes for overrides
+- Pigment CSS `styled()`; design tokens from `src/lib/tokens.ts`
+- Cross-component styles in `src/styles/`; no raw hex for colors/spacing when a token exists

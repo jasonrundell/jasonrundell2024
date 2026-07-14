@@ -119,7 +119,7 @@ describe('MainNavClient Component', () => {
       })
     })
 
-    it('should render login and sign up buttons when not authenticated', async () => {
+    it('should render sign-in and sign-up buttons when not authenticated', async () => {
       // Act
       render(<MainNavClient />)
 
@@ -269,7 +269,7 @@ describe('MainNavClient Component', () => {
       })
     })
 
-    it('should render profile and logout buttons when authenticated', async () => {
+    it('should render profile and sign-out buttons when authenticated', async () => {
       // Act
       render(<MainNavClient />)
 

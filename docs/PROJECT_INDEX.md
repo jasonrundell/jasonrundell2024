@@ -36,7 +36,8 @@ so work can start with targeted reads instead of broad repo scans.
   approved Pencil `.js` line-art sources in `design/illustrations/` into
   `src/components/illustrations/paths.generated.ts`, consumed by
   `src/components/illustrations/LineArt.tsx`.
-- `docs`: Project docs, audit notes, and this index.
+- `docs`: Project docs, audit notes, domain glossary (`docs/glossary.md`), and
+  this index.
 - `design/`: Visual redesign artifacts - Line-Art system. `style-guide.html`
   (human review), `site.pen` (Pencil mocks: home, How I lead, About, Selected
   work, Writing, Blog, Illustration System + mobile), `illustrations/`
@@ -64,7 +65,10 @@ so work can start with targeted reads instead of broad repo scans.
   `src/utils/supabase/client.ts` and `src/utils/supabase/server.ts`.
 - **Supabase availability** handling belongs in `src/utils/supabase/status.ts`
   and `src/utils/supabase/safe-client.ts`.
-- **Auth and profile mutations** are centralized in `src/app/actions.ts`.
+- **Auth and profile mutations** are split under `src/app/actions/` and
+  re-exported from `src/app/actions.ts`. See `src/app/actions/README.md`.
+- **Site author identity** for bylines/JSON-LD: `src/lib/author.ts` (consumed by
+  `src/lib/jsonld.ts`).
 - **Comment API** behavior belongs in `src/app/api/comments/**`; shared comment
   UI in `src/components/comments/**`.
 - **HTML sanitization** for user input: `src/lib/strip-html-tags.ts`.
@@ -79,6 +83,8 @@ so work can start with targeted reads instead of broad repo scans.
   session for `MainNavClient`; subscribes to `onAuthStateChange` and re-syncs
   from cookie storage on pathname changes so the nav updates after server-action
   sign-in without a full reload.
+- **Edge middleware** (`src/middleware.ts`): API CORS/rate-limit plus auth
+  enforcement for `/profile/**` only. Helpers live in `src/middleware/`.
 
 ## Runtime Entry Points
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Login from './page'
+import SignInPage from './page'
 
 // Mock dependencies
 jest.mock('@/app/actions', () => ({
@@ -141,8 +141,8 @@ jest.mock('@pigment-css/react', () => ({
   },
 }))
 
-// Create a mock Login component for testing
-const MockLogin = ({
+// Create a mock SignInPage component for testing
+const MockSignInPage = ({
   searchParams,
 }: {
   searchParams: { error?: string; message?: string; redirectedFrom?: string }
@@ -259,7 +259,7 @@ describe('Sign In Page', () => {
   describe('Page Rendering', () => {
     it('should render the sign-in page with correct title and subtitle', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       expect(screen.getByText('Welcome back')).toBeInTheDocument()
@@ -270,7 +270,7 @@ describe('Sign In Page', () => {
 
     it('should render all form fields with proper labels', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       expect(screen.getByLabelText('Email')).toBeInTheDocument()
@@ -280,7 +280,7 @@ describe('Sign In Page', () => {
 
     it('should render the sign-in button with correct text', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       expect(
@@ -291,7 +291,7 @@ describe('Sign In Page', () => {
 
     it('should render navigation links', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       expect(screen.getByText('Forgot Password?')).toBeInTheDocument()
@@ -302,7 +302,7 @@ describe('Sign In Page', () => {
   describe('Form Validation and User Experience', () => {
     it('should show loading state during form submission', () => {
       // Arrange
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Act & Assert
       const submitButton = screen.getByRole('button', { name: 'Sign in' })
@@ -311,7 +311,7 @@ describe('Sign In Page', () => {
 
     it('should have proper form structure with action', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const form = document.querySelector('form')
@@ -320,7 +320,7 @@ describe('Sign In Page', () => {
 
     it('should have required attributes on mandatory fields', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const emailInput = screen.getByTestId('input-email')
@@ -336,7 +336,7 @@ describe('Sign In Page', () => {
       const searchParams = { error: 'invalid_credentials' }
 
       // Act
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // Assert
       expect(screen.getByTestId('error-message')).toBeInTheDocument()
@@ -350,7 +350,7 @@ describe('Sign In Page', () => {
       const searchParams = { error: 'supabase_paused' }
 
       // Act
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // Assert
       expect(screen.getByTestId('error-message')).toBeInTheDocument()
@@ -366,7 +366,7 @@ describe('Sign In Page', () => {
       const searchParams = { error: 'supabase_unavailable' }
 
       // Act
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // Assert
       expect(screen.getByTestId('error-message')).toBeInTheDocument()
@@ -380,7 +380,7 @@ describe('Sign In Page', () => {
       const searchParams = { error: 'email_not_confirmed' }
 
       // Act
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // Assert
       expect(screen.getByTestId('error-message')).toBeInTheDocument()
@@ -394,7 +394,7 @@ describe('Sign In Page', () => {
       const searchParams = { error: 'auth_error' }
 
       // Act
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // Assert
       expect(screen.getByTestId('error-message')).toBeInTheDocument()
@@ -410,7 +410,7 @@ describe('Sign In Page', () => {
       const searchParams = { message: 'password_reset_success' }
 
       // Act
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // Assert
       expect(screen.getByTestId('success-message')).toBeInTheDocument()
@@ -426,7 +426,7 @@ describe('Sign In Page', () => {
       const searchParams = { message: 'email_confirmed' }
 
       // Act
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // Assert
       expect(screen.getByTestId('success-message')).toBeInTheDocument()
@@ -439,7 +439,7 @@ describe('Sign In Page', () => {
   describe('Form Accessibility', () => {
     it('should have proper label associations', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const emailLabel = screen.getByTestId('label-email')
@@ -452,7 +452,7 @@ describe('Sign In Page', () => {
 
     it('should have proper input types', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const emailInput = screen.getByTestId('input-email')
@@ -463,7 +463,7 @@ describe('Sign In Page', () => {
 
     it('should have proper placeholders', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const emailInput = screen.getByTestId('input-email')
@@ -476,7 +476,7 @@ describe('Sign In Page', () => {
   describe('Navigation and Links', () => {
     it('should have forgot password link', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const forgotPasswordLink = screen.getByText('Forgot Password?')
@@ -489,7 +489,7 @@ describe('Sign In Page', () => {
 
     it('should have sign up link', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const signUpLink = screen.getByText('Sign up')
@@ -501,7 +501,7 @@ describe('Sign In Page', () => {
   describe('Remember Me Functionality', () => {
     it('should render remember me checkbox', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const rememberCheckbox = screen.getByTestId('checkbox-remember')
@@ -511,7 +511,7 @@ describe('Sign In Page', () => {
 
     it('should have remember me label', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       expect(screen.getByText('Remember me')).toBeInTheDocument()
@@ -521,7 +521,7 @@ describe('Sign In Page', () => {
   describe('Form Submission', () => {
     it('should have form with proper action', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const form = document.querySelector('form')
@@ -530,7 +530,7 @@ describe('Sign In Page', () => {
 
     it('should have submit button with proper type', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       const submitButton = screen.getByRole('button', { name: 'Sign in' })
@@ -544,7 +544,7 @@ describe('Sign In Page', () => {
       const searchParams = { error: 'unknown_error' }
 
       // Act
-      render(<MockLogin searchParams={searchParams} />)
+      render(<MockSignInPage searchParams={searchParams} />)
 
       // Assert
       expect(screen.getByTestId('error-message')).toBeInTheDocument()
@@ -553,7 +553,7 @@ describe('Sign In Page', () => {
 
     it('should handle missing search parameters gracefully', () => {
       // Act
-      render(<MockLogin searchParams={{}} />)
+      render(<MockSignInPage searchParams={{}} />)
 
       // Assert
       expect(screen.getByText('Welcome back')).toBeInTheDocument()
@@ -569,8 +569,8 @@ describe('Sign In Page actual component', () => {
     jest.clearAllMocks()
   })
 
-  it('renders the actual login form without a message', async () => {
-    render(await Login({ searchParams: Promise.resolve({}) }))
+  it('renders the actual sign-in form without a message', async () => {
+    render(await SignInPage({ searchParams: Promise.resolve({}) }))
 
     expect(
       screen.getByRole('heading', { level: 1, name: /welcome back/i })
@@ -581,11 +581,11 @@ describe('Sign In Page actual component', () => {
     expect(screen.queryByTestId('success-message')).not.toBeInTheDocument()
   })
 
-  it('maps known auth errors in the actual login component', async () => {
+  it('maps known auth errors in the actual sign-in component', async () => {
     jest.spyOn(console, 'error').mockImplementation()
 
     render(
-      await Login({
+      await SignInPage({
         searchParams: Promise.resolve({
           error: 'invalid_credentials',
           redirectedFrom: '/profile',
@@ -603,9 +603,9 @@ describe('Sign In Page actual component', () => {
     })
   })
 
-  it('maps known success messages in the actual login component', async () => {
+  it('maps known success messages in the actual sign-in component', async () => {
     render(
-      await Login({
+      await SignInPage({
         searchParams: Promise.resolve({
           message: 'email_confirmed',
         }),
