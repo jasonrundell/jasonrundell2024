@@ -32,7 +32,10 @@ describe('PageTransition', () => {
       </PageTransition>
     )
 
-    expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true })
+    expect(focusSpy).toHaveBeenCalledWith({
+      preventScroll: true,
+      focusVisible: false,
+    })
 
     focusSpy.mockRestore()
     document.body.removeChild(main)

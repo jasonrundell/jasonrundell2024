@@ -16,7 +16,8 @@ export default function PageTransition({ children }: { children: ReactNode }) {
   useEffect(() => {
     const mainContent = document.getElementById('main-content')
     if (mainContent) {
-      mainContent.focus({ preventScroll: true })
+      // Keep AT focus move without a focus-visible ring (see globals.css).
+      mainContent.focus({ preventScroll: true, focusVisible: false })
     }
   }, [pathname])
 
