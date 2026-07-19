@@ -91,8 +91,12 @@ so work can start with targeted reads instead of broad repo scans.
 - `src/app/layout.tsx`: Root layout, metadata (site-wide OpenGraph/Twitter +
   `metadataBase`), fonts (Geist Sans body, Newsreader headings, IBM Plex Mono
   labels), `MainNav` (including `MainNavClient` + `useNavUser` for cookie-backed
-  auth state), `PageTransition` wrapper (dissolve on route change, gated by
-  reduced motion), footer, and global status banner.
+  auth state),   `PageTransition` wrapper (dissolve on route change, gated by
+  reduced motion; moves focus to `#main-content` without a focus ring),
+  footer, and global status banner. Global styles (`src/styles/globals.css`)
+  use `box-sizing: border-box` and suppress the `#main-content` focus outline
+  so route focus management does not paint a full-height accent edge or force
+  horizontal scroll on mobile.
 - `src/app/page.tsx`: Homepage - reads featured projects and latest posts in
   parallel via `src/lib/content.ts`; editorial hero + outcomes/proof +
   operating-loop teaser + selected work + Infinite Source promo + engagement

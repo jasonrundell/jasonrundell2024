@@ -16,7 +16,12 @@ export default function PageTransition({ children }: { children: ReactNode }) {
   useEffect(() => {
     const mainContent = document.getElementById('main-content')
     if (mainContent) {
-      mainContent.focus({ preventScroll: true })
+      // Keep AT focus move without a focus-visible ring (see globals.css).
+      // `focusVisible` is supported in Chromium; cast until lib.dom ships it.
+      mainContent.focus({
+        preventScroll: true,
+        focusVisible: false,
+      } as FocusOptions)
     }
   }, [pathname])
 
