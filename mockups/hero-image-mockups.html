@@ -408,6 +408,238 @@
       .m3-copy .display-title {
         font-size: clamp(2.25rem, 5vw, 3rem);
       }
+
+      /* ============================================================
+         MOCKUP 04 — Terminal window portrait (on-brand w/ hero)
+         ============================================================ */
+      .m4-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+      }
+      @media (min-width: 64rem) {
+        .m4-grid {
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 4rem;
+        }
+      }
+      .m4-art {
+        order: -1;
+        max-width: 460px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      @media (min-width: 64rem) {
+        .m4-art {
+          order: 1;
+          max-width: none;
+        }
+      }
+      .m4-window {
+        border: 1px solid #2f3338;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #1a1a1a; /* surfaceDeepest */
+        box-shadow: 0 20px 40px -24px rgba(26, 26, 26, 0.55);
+      }
+      .m4-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 0.85rem;
+        background: #141414; /* backgroundDarker */
+        border-bottom: 1px solid #2f3338;
+      }
+      .m4-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #3a3f45;
+      }
+      .m4-dot.g {
+        background: var(--accent);
+      }
+      .m4-title {
+        margin-left: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: #9aa0a6;
+      }
+      .m4-photo {
+        aspect-ratio: 4 / 3;
+        background-image: var(--portrait);
+        background-size: cover;
+        background-position: 50% 16%;
+      }
+      .m4-prompt {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        line-height: 1.7;
+        color: #d6d3d1;
+        padding: 0.85rem 1rem 1rem;
+      }
+      .m4-prompt .p {
+        color: var(--on-accent);
+      }
+      .m4-prompt .k {
+        color: #6f9e8c;
+      } /* soft forest */
+      .m4-prompt .s {
+        color: #8fb3a4;
+      }
+
+      /* ============================================================
+         MOCKUP 05 — Blueprint / systems-map overlay
+         ============================================================ */
+      .m5-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+      }
+      @media (min-width: 64rem) {
+        .m5-grid {
+          grid-template-columns: 0.95fr 1.05fr;
+          gap: 4rem;
+        }
+      }
+      .m5-art {
+        order: -1;
+        max-width: 440px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      @media (min-width: 64rem) {
+        .m5-art {
+          order: 0;
+          max-width: none;
+        }
+      }
+      .m5-plate {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border: 1px solid var(--accent);
+      }
+      .m5-plate .img {
+        position: absolute;
+        inset: 0;
+        background-image: var(--portrait);
+        background-size: cover;
+        background-position: 50% 14%;
+        filter: grayscale(1) contrast(1.02) brightness(1.03);
+      }
+      /* faint measurement grid */
+      .m5-plate .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(to right, rgba(31, 77, 58, 0.16) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(31, 77, 58, 0.16) 1px, transparent 1px);
+        background-size: 2.25rem 2.25rem;
+      }
+      /* crosshair over the face */
+      .m5-plate .cross {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        width: 34%;
+        aspect-ratio: 1;
+        transform: translate(-50%, -50%);
+        border: 1px solid var(--brass);
+        border-radius: 50%;
+      }
+      .m5-plate .cross::before,
+      .m5-plate .cross::after {
+        content: '';
+        position: absolute;
+        background: var(--brass);
+      }
+      .m5-plate .cross::before {
+        left: 50%;
+        top: -14px;
+        bottom: -14px;
+        width: 1px;
+        transform: translateX(-50%);
+      }
+      .m5-plate .cross::after {
+        top: 50%;
+        left: -14px;
+        right: -14px;
+        height: 1px;
+        transform: translateY(-50%);
+      }
+      .m5-tag {
+        position: absolute;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        background: rgba(247, 248, 250, 0.9);
+        padding: 0.15rem 0.4rem;
+      }
+      .m5-tag.tl {
+        top: 0.5rem;
+        left: 0.5rem;
+      }
+      .m5-tag.br {
+        bottom: 0.5rem;
+        right: 0.5rem;
+        color: var(--brass);
+      }
+
+      /* ============================================================
+         MOCKUP 06 — Contact-sheet triptych
+         ============================================================ */
+      .m6-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        background: #1a1a1a;
+        padding: 10px;
+        border: 1px solid var(--line-subtle);
+      }
+      .m6-pane {
+        position: relative;
+        aspect-ratio: 3 / 5;
+        overflow: hidden;
+        background-image: var(--portrait);
+        background-size: 300% auto; /* one photo spread across 3 panes */
+      }
+      .m6-pane:nth-child(1) {
+        background-position: 0% 12%;
+        filter: grayscale(1) contrast(1.05);
+      }
+      .m6-pane:nth-child(2) {
+        background-position: 50% 12%;
+      }
+      .m6-pane:nth-child(3) {
+        background-position: 100% 12%;
+      }
+      .m6-pane:nth-child(3)::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--accent);
+        mix-blend-mode: color;
+        opacity: 0.6;
+      }
+      .m6-num {
+        position: absolute;
+        bottom: 6px;
+        left: 6px;
+        z-index: 2;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: #f7f8fa;
+        background: rgba(26, 26, 26, 0.7);
+        padding: 0.1rem 0.35rem;
+      }
+      .m6-frames {
+        max-width: 620px;
+        margin: 0 auto;
+      }
     </style>
   </head>
   <body>
@@ -425,6 +657,9 @@
         <a href="#m1">01 · Duotone portrait</a>
         <a href="#m2">02 · Arched medallion</a>
         <a href="#m3">03 · Full-bleed cover</a>
+        <a href="#m4">04 · Terminal window</a>
+        <a href="#m5">05 · Blueprint overlay</a>
+        <a href="#m6">06 · Contact-sheet triptych</a>
       </nav>
     </header>
 
@@ -545,6 +780,143 @@
               <a class="cta-primary" href="#">Book a chat</a>
               <a class="cta-secondary" href="#">View selected work →</a>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MOCKUP 04 ============ -->
+    <section class="mock" id="m4">
+      <div class="mock-tag">
+        <span class="mono-label">Mockup 04</span>
+        <h2>Terminal window portrait</h2>
+      </div>
+      <p class="mock-note">
+        Leans directly into the site's animated-terminal hero identity: the
+        photo sits inside a terminal chrome (traffic-light dots, mono title bar)
+        with a syntax-highlighted prompt underneath. The most on-brand option —
+        it makes the headshot feel native to the existing hero rather than
+        bolted on.
+      </p>
+      <div class="container">
+        <div class="m4-grid">
+          <div>
+            <div class="eyebrow">
+              <span class="accent-rule"><span></span></span>
+              <span class="mono-label">Engineering Leader · Player-Coach</span>
+            </div>
+            <h2 class="display-title">
+              Lead engineering orgs. Raise the technical bar.
+            </h2>
+            <p class="lead">
+              I join at inflection points and build the systems, culture, and
+              standards that let teams scale — while staying close enough to the
+              code to raise the bar.
+            </p>
+            <div class="cta-row">
+              <a class="cta-primary" href="#">Book a chat</a>
+              <a class="cta-secondary" href="#">View selected work →</a>
+            </div>
+          </div>
+          <div class="m4-art">
+            <div class="m4-window">
+              <div class="m4-bar" aria-hidden="true">
+                <span class="m4-dot"></span>
+                <span class="m4-dot"></span>
+                <span class="m4-dot g"></span>
+                <span class="m4-title">~/jason — portrait.jpg</span>
+              </div>
+              <div class="m4-photo" role="img" aria-label="Jason Rundell"></div>
+              <pre class="m4-prompt"><span class="p">jason@rundell</span>:<span class="k">~</span>$ whoami
+<span class="s">engineering leader · player-coach</span><span class="p">▮</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MOCKUP 05 ============ -->
+    <section class="mock" id="m5">
+      <div class="mock-tag">
+        <span class="mono-label">Mockup 05</span>
+        <h2>Blueprint / systems-map overlay</h2>
+      </div>
+      <p class="mock-note">
+        The portrait as an engineering schematic: grayscale plate under a faint
+        forest measurement grid, a brass crosshair registering on the face, and
+        mono coordinate/annotation tags. Ties the photo to the "systems, not job
+        titles" language running through the site.
+      </p>
+      <div class="container">
+        <div class="m5-grid">
+          <div class="m5-art">
+            <div class="m5-plate">
+              <div class="img"></div>
+              <div class="grid" aria-hidden="true"></div>
+              <div class="cross" aria-hidden="true"></div>
+              <span class="m5-tag tl">fig.01 — operator</span>
+              <span class="m5-tag br">3584 × 4800</span>
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow">
+              <span class="accent-rule"><span></span></span>
+              <span class="mono-label">Engineering Leader · Player-Coach</span>
+            </div>
+            <h2 class="display-title">
+              Lead engineering orgs. Raise the technical bar.
+            </h2>
+            <p class="lead">
+              I join at inflection points and build the systems, culture, and
+              standards that let teams scale — while staying close enough to the
+              code to raise the bar.
+            </p>
+            <div class="cta-row">
+              <a class="cta-primary" href="#">Book a chat</a>
+              <a class="cta-secondary" href="#">View selected work →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MOCKUP 06 ============ -->
+    <section class="mock" id="m6">
+      <div class="mock-tag">
+        <span class="mono-label">Mockup 06</span>
+        <h2>Contact-sheet triptych</h2>
+      </div>
+      <p class="mock-note">
+        A photographer's contact sheet: the single frame is spread across three
+        panes on a dark backing, each graded differently (grayscale → colour →
+        forest duotone) with mono frame numbers. Reads as considered and
+        editorial, and works as a full-width band above the two-column content.
+      </p>
+      <div class="container">
+        <div class="m6-frames">
+          <div class="m6-strip">
+            <div class="m6-pane">
+              <span class="m6-num">01A</span>
+            </div>
+            <div class="m6-pane">
+              <span class="m6-num">01B</span>
+            </div>
+            <div class="m6-pane">
+              <span class="m6-num">01C</span>
+            </div>
+          </div>
+        </div>
+        <div style="max-width: 620px; margin: 1.75rem auto 0; text-align: center;">
+          <div class="eyebrow" style="align-items: center;">
+            <span class="accent-rule"><span></span></span>
+            <span class="mono-label">Engineering Leader · Player-Coach</span>
+          </div>
+          <h2 class="display-title" style="font-size: clamp(2rem, 4.5vw, 2.75rem);">
+            Lead engineering orgs. Raise the technical bar.
+          </h2>
+          <div class="cta-row" style="justify-content: center;">
+            <a class="cta-primary" href="#">Book a chat</a>
+            <a class="cta-secondary" href="#">View selected work →</a>
           </div>
         </div>
       </div>
