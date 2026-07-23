@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Homepage portrait — 3 hero mockups · Jason Rundell</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ---- Tokens lifted from src/lib/common.tokens.json ---- */
+      :root {
+        --surface-primary: #f7f8fa; /* paper ground */
+        --surface-secondary: #ffffff;
+        --ink: #1a1a1a;
+        --ink-muted: #5f5f5f;
+        --accent: #1f4d3a; /* forest */
+        --accent-soft: #2f5d50;
+        --brass: #8a5a16;
+        --line-subtle: #e6e8ec;
+        --on-accent: #f7f8fa;
+
+        --font-heading: 'Newsreader', Georgia, 'Times New Roman', serif;
+        --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+        --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+        /* Path is relative to this file: mockups/ -> ../public/images/... */
+        --portrait: url('../public/images/jasonrundell-profile-2026-02-02.jpg');
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--surface-primary);
+        color: var(--ink);
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ---- Page chrome (not part of the mockups) ---- */
+      .page-head {
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 1.5rem;
+      }
+      .page-head h1 {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        letter-spacing: -0.01em;
+        margin: 0.75rem 0 0.5rem;
+      }
+      .page-head p {
+        color: var(--ink-muted);
+        max-width: 60ch;
+        line-height: 1.6;
+        margin: 0;
+      }
+      .toc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+      .toc a {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        text-decoration: none;
+        color: var(--accent);
+        border: 1px solid var(--line-subtle);
+        padding: 0.5rem 0.85rem;
+        transition:
+          border-color 0.15s ease,
+          background 0.15s ease;
+      }
+      .toc a:hover {
+        border-color: var(--accent);
+        background: var(--surface-secondary);
+      }
+
+      .mono-label {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      /* Accent hairline w/ endcaps — the recurring systems-map motif */
+      .accent-rule {
+        display: inline-flex;
+        align-items: center;
+      }
+      .accent-rule::before,
+      .accent-rule::after {
+        content: '';
+        width: 1.5px;
+        height: 9px;
+        background: var(--accent);
+      }
+      .accent-rule span {
+        display: inline-block;
+        height: 1.5px;
+        width: 48px;
+        background: var(--accent);
+      }
+
+      /* Band separators between mockups */
+      .mock {
+        border-top: 1px solid var(--line-subtle);
+      }
+      .mock-tag {
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 0;
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+      }
+      .mock-tag h2 {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin: 0;
+      }
+      .mock-note {
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 0.5rem 1.5rem 0;
+        color: var(--ink-muted);
+        font-size: 0.9rem;
+        line-height: 1.55;
+        max-width: 65ch;
+      }
+
+      /* Shared hero copy column */
+      .container {
+        width: 100%;
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem 3.5rem;
+      }
+      .eyebrow {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      .display-title {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: clamp(2.25rem, 5.5vw, 3.25rem);
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+        margin: 0 0 1rem;
+      }
+      .lead {
+        font-size: 1.1875rem;
+        line-height: 1.6;
+        color: var(--ink-muted);
+        max-width: 55ch;
+        margin: 1rem 0 0;
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.5rem;
+        margin-top: 1.75rem;
+      }
+      .cta-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.875rem 1.375rem;
+        background: var(--accent);
+        color: var(--on-accent);
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid var(--accent);
+        transition: background 0.15s ease;
+      }
+      .cta-primary:hover {
+        background: var(--accent-soft);
+      }
+      .cta-secondary {
+        color: var(--ink);
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .cta-secondary:hover {
+        color: var(--accent);
+      }
+
+      /* ============================================================
+         MOCKUP 01 — Duotone editorial portrait (right column)
+         ============================================================ */
+      .m1-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+      }
+      @media (min-width: 64rem) {
+        .m1-grid {
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 4rem;
+        }
+      }
+      .m1-art {
+        order: -1;
+        max-width: 420px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      @media (min-width: 64rem) {
+        .m1-art {
+          order: 1;
+          max-width: none;
+        }
+      }
+      .m1-frame {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        border: 1px solid var(--line-subtle);
+        padding: 0.75rem;
+        background: var(--surface-secondary);
+      }
+      /* brass corner ticks */
+      .m1-frame::before,
+      .m1-frame::after {
+        content: '';
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--brass);
+      }
+      .m1-frame::before {
+        top: -1px;
+        left: -1px;
+        border-right: none;
+        border-bottom: none;
+      }
+      .m1-frame::after {
+        bottom: -1px;
+        right: -1px;
+        border-left: none;
+        border-top: none;
+      }
+      .m1-photo {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      .m1-photo::after {
+        /* forest duotone wash */
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--accent);
+        mix-blend-mode: color;
+        opacity: 0.55;
+      }
+      .m1-photo .img {
+        width: 100%;
+        height: 100%;
+        background-image: var(--portrait);
+        background-size: cover;
+        background-position: 50% 18%;
+        filter: grayscale(1) contrast(1.05);
+      }
+      .m1-caption {
+        position: absolute;
+        left: 0.75rem;
+        bottom: 0.75rem;
+        z-index: 2;
+        background: var(--surface-primary);
+        padding: 0.35rem 0.6rem;
+        border: 1px solid var(--line-subtle);
+      }
+
+      /* ============================================================
+         MOCKUP 02 — Arched medallion crop
+         ============================================================ */
+      .m2-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+      }
+      @media (min-width: 64rem) {
+        .m2-grid {
+          grid-template-columns: 0.85fr 1.15fr;
+          gap: 4rem;
+        }
+      }
+      .m2-art {
+        order: -1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.25rem;
+      }
+      @media (min-width: 64rem) {
+        .m2-art {
+          order: 0;
+          justify-content: flex-start;
+        }
+      }
+      .m2-medallion {
+        position: relative;
+        width: min(320px, 78vw);
+        aspect-ratio: 3 / 4;
+        border-radius: 999px 999px 12px 12px; /* arched top */
+        overflow: hidden;
+        background-image: var(--portrait);
+        background-size: cover;
+        background-position: 50% 12%;
+        box-shadow:
+          0 0 0 1px var(--line-subtle),
+          14px 14px 0 -1px var(--surface-secondary),
+          14px 14px 0 0 var(--accent); /* offset forest ring */
+      }
+      .m2-rail {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        writing-mode: vertical-rl;
+      }
+      @media (min-width: 40rem) {
+        .m2-rail {
+          display: flex;
+        }
+      }
+      .m2-rail .tick {
+        width: 1.5px;
+        height: 64px;
+        background: var(--brass);
+      }
+
+      /* ============================================================
+         MOCKUP 03 — Full-bleed cover with paper scrim
+         ============================================================ */
+      .m3-stage {
+        position: relative;
+        width: 100%;
+        min-height: 30rem;
+        background-image: var(--portrait);
+        background-size: cover;
+        background-position: 72% 14%;
+        display: flex;
+        align-items: center;
+      }
+      @media (min-width: 48rem) {
+        .m3-stage {
+          min-height: 34rem;
+        }
+      }
+      .m3-stage::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        /* paper scrim from the left so type stays legible */
+        background: linear-gradient(
+          100deg,
+          var(--surface-primary) 0%,
+          rgba(247, 248, 250, 0.94) 34%,
+          rgba(247, 248, 250, 0.55) 52%,
+          rgba(247, 248, 250, 0) 74%
+        );
+      }
+      @media (max-width: 47.99rem) {
+        .m3-stage::before {
+          background: linear-gradient(
+            180deg,
+            rgba(247, 248, 250, 0.86) 0%,
+            rgba(247, 248, 250, 0.72) 45%,
+            rgba(247, 248, 250, 0.95) 100%
+          );
+        }
+      }
+      .m3-inner {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+      }
+      .m3-copy {
+        max-width: 34rem;
+      }
+      .m3-copy .display-title {
+        font-size: clamp(2.25rem, 5vw, 3rem);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-head">
+      <span class="mono-label">// homepage hero · portrait integration</span>
+      <h1>Three ways to bring the photo into the hero</h1>
+      <p>
+        Same headshot, three distinct crops and treatments — each built on the
+        site's real tokens (paper ground, forest accent, brass, Newsreader /
+        Inter / IBM&nbsp;Plex&nbsp;Mono). Pick a direction and I'll wire it into
+        <code>src/app/page.tsx</code>. Open this file from the repo so the
+        relative image path resolves.
+      </p>
+      <nav class="toc">
+        <a href="#m1">01 · Duotone portrait</a>
+        <a href="#m2">02 · Arched medallion</a>
+        <a href="#m3">03 · Full-bleed cover</a>
+      </nav>
+    </header>
+
+    <!-- ============ MOCKUP 01 ============ -->
+    <section class="mock" id="m1">
+      <div class="mock-tag">
+        <span class="mono-label">Mockup 01</span>
+        <h2>Duotone editorial portrait</h2>
+      </div>
+      <p class="mock-note">
+        Drops into the existing right-hand hero slot in place of the line-art.
+        The photo is desaturated and washed forest-green so it reads as brand
+        art rather than a stock headshot, framed with a hairline border, brass
+        corner ticks, and a mono filename caption.
+      </p>
+      <div class="container">
+        <div class="m1-grid">
+          <div>
+            <div class="eyebrow">
+              <span class="accent-rule"><span></span></span>
+              <span class="mono-label">Engineering Leader · Player-Coach</span>
+            </div>
+            <h2 class="display-title">
+              Lead engineering orgs. Raise the technical bar.
+            </h2>
+            <p class="lead">
+              I join at inflection points and build the systems, culture, and
+              standards that let teams scale — while staying close enough to the
+              code to raise the bar.
+            </p>
+            <div class="cta-row">
+              <a class="cta-primary" href="#">Book a chat</a>
+              <a class="cta-secondary" href="#">View selected work →</a>
+            </div>
+          </div>
+          <div class="m1-art">
+            <div class="m1-frame">
+              <div class="m1-photo">
+                <div class="img"></div>
+              </div>
+              <span class="m1-caption mono-label">jason_rundell.jpg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MOCKUP 02 ============ -->
+    <section class="mock" id="m2">
+      <div class="mock-tag">
+        <span class="mono-label">Mockup 02</span>
+        <h2>Arched medallion crop</h2>
+      </div>
+      <p class="mock-note">
+        A tighter, more human crop: the portrait is masked into an arched
+        medallion offset by a solid forest ring (the same shape language as the
+        section motifs), with a brass tick rail. Feels editorial and warm while
+        staying geometric.
+      </p>
+      <div class="container">
+        <div class="m2-grid">
+          <div class="m2-art">
+            <div class="m2-medallion" role="img" aria-label="Jason Rundell"></div>
+            <div class="m2-rail" aria-hidden="true">
+              <span class="mono-label">est. leadership</span>
+              <span class="tick"></span>
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow">
+              <span class="accent-rule"><span></span></span>
+              <span class="mono-label">Engineering Leader · Player-Coach</span>
+            </div>
+            <h2 class="display-title">
+              Lead engineering orgs. Raise the technical bar.
+            </h2>
+            <p class="lead">
+              I join at inflection points and build the systems, culture, and
+              standards that let teams scale — while staying close enough to the
+              code to raise the bar.
+            </p>
+            <div class="cta-row">
+              <a class="cta-primary" href="#">Book a chat</a>
+              <a class="cta-secondary" href="#">View selected work →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MOCKUP 03 ============ -->
+    <section class="mock" id="m3">
+      <div class="mock-tag">
+        <span class="mono-label">Mockup 03</span>
+        <h2>Full-bleed cover with paper scrim</h2>
+      </div>
+      <p class="mock-note">
+        The boldest option — a magazine-cover band where the photo runs
+        full-bleed and a paper gradient scrim keeps the headline crisp. Best as
+        a distinct hero band above the current content rather than inside the
+        two-column grid.
+      </p>
+      <div class="m3-stage">
+        <div class="m3-inner">
+          <div class="m3-copy">
+            <div class="eyebrow">
+              <span class="accent-rule"><span></span></span>
+              <span class="mono-label">Engineering Leader · Player-Coach</span>
+            </div>
+            <h2 class="display-title">
+              Lead engineering orgs. Raise the technical bar.
+            </h2>
+            <p class="lead">
+              I join at inflection points and build the systems, culture, and
+              standards that let teams scale.
+            </p>
+            <div class="cta-row">
+              <a class="cta-primary" href="#">Book a chat</a>
+              <a class="cta-secondary" href="#">View selected work →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
