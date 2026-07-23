@@ -8,6 +8,7 @@ import RenderedMDX from '@/components/markdown/RenderedMDX'
 import PostHeader from '@/components/PostHeader'
 import { SITE_DESCRIPTION } from '@/lib/constants'
 import { buildBlogPostingJsonLd } from '@/lib/jsonld'
+import { buildPageMetadata } from '@/lib/metadata'
 import {
   StyledContainer,
   StyledSection,
@@ -33,13 +34,21 @@ export async function generateMetadata({
   const slug = (await params).slug
   const post = await getEntryBySlug('post', slug)
 
-  return {
+  return buildPageMetadata({
     title: `${post.title} | Jason Rundell`,
-    description: SITE_DESCRIPTION,
-    openGraph: {
-      images: post.featuredImage?.src ? [post.featuredImage.src] : [],
-    },
-  }
+    description: post.excerpt || SITE_DESCRIPTION,
+    path: `/posts/${slug}`,
+    type: 'article',
+    publishedTime: post.date,
+    image: post.featuredImage?.src
+      ? {
+          src: post.featuredImage.src,
+          alt: post.featuredImage.alt || post.title,
+          width: post.featuredImage.width,
+          height: post.featuredImage.height,
+        }
+      : undefined,
+  })
 }
 
 export default async function page({ params }: PostProps) {

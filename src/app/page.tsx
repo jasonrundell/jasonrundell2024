@@ -25,15 +25,12 @@ import {
   LoopIllustration,
   BranchIllustration,
 } from '@/components/illustrations/LineArt'
-import { SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants'
-
 const HOMEPAGE_PROJECT_LIMIT = 3
 const HOMEPAGE_POST_LIMIT = 3
 
-export const metadata = {
-  title: SITE_NAME,
-  description: SITE_DESCRIPTION,
-}
+// No `metadata` export: the home page is the one route whose title, canonical,
+// and share card are already exactly what `buildRootMetadata()` sets in
+// src/app/layout.tsx. Re-declaring them here would only risk drift.
 
 export const revalidate = 86400
 

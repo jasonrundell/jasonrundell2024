@@ -14,14 +14,14 @@ import {
   Lead,
 } from '@/styles/editorial'
 import MoreProjects from '@/components/MoreProjects'
-import { SITE_DOMAIN } from '@/lib/constants'
+import { buildPageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Selected work | Jason Rundell',
   description:
     'Selected work by Jason Rundell - shipped products, open-source, and side projects across leadership and hands-on engineering.',
-  alternates: { canonical: `${SITE_DOMAIN}/projects` },
-}
+  path: '/projects',
+})
 
 export const revalidate = 86400
 

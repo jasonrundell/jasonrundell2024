@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Spacer } from '@jasonrundell/dropship'
 import { createPublicClient } from '@/utils/supabase/public-client'
-import { SITE_DESCRIPTION } from '@/lib/constants'
+import { buildPageMetadata } from '@/lib/metadata'
 import {
   StyledContainer,
   StyledSection,
@@ -64,11 +64,20 @@ type PublicComment = {
 
 export const revalidate = 300
 
+/**
+ * An unresolvable slug renders the 404 view, so keep it out of the index and
+ * off share cards rather than advertising a profile that does not exist.
+ */
+const NOT_FOUND_METADATA: Metadata = {
+  title: 'User Not Found | Jason Rundell',
+  robots: { index: false, follow: false },
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const parsed = profileSlugSchema.safeParse(slug)
   if (!parsed.success) {
-    return { title: 'User Not Found | Jason Rundell' }
+    return NOT_FOUND_METADATA
   }
 
   const supabase = createPublicClient()
@@ -79,12 +88,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .single()
   const profile = data as Pick<PublicProfile, 'full_name'> | null
 
-  return {
-    title: profile
-      ? `${profile.full_name} | Jason Rundell`
-      : 'User Not Found | Jason Rundell',
-    description: SITE_DESCRIPTION,
+  if (!profile) {
+    return NOT_FOUND_METADATA
   }
+
+  return buildPageMetadata({
+    title: `${profile.full_name} | Jason Rundell`,
+    description: `Comments by ${profile.full_name} on jasonrundell.com.`,
+    path: `/u/${parsed.data}`,
+  })
 }
 
 export default async function PublicProfileBySlugPage({ params }: PageProps) {

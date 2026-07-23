@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { getEntryBySlug, getProjects } from '@/lib/content'
 import RenderedMDX from '@/components/markdown/RenderedMDX'
 import { SITE_DESCRIPTION } from '@/lib/constants'
+import { buildPageMetadata } from '@/lib/metadata'
 import ProjectGalleryLazy from '@/components/ProjectGalleryLazy'
 import {
   StyledContainer,
@@ -37,13 +38,21 @@ export async function generateMetadata({
   const slug = (await params).slug
   const project = await getEntryBySlug('project', slug)
 
-  return {
+  return buildPageMetadata({
     title: `${project.title} | Jason Rundell`,
-    description: SITE_DESCRIPTION,
-    openGraph: {
-      images: project.featuredImage?.src ? [project.featuredImage.src] : [],
-    },
-  }
+    description: project.excerpt || SITE_DESCRIPTION,
+    path: `/projects/${slug}`,
+    type: 'article',
+    publishedTime: project.createdDate,
+    image: project.featuredImage?.src
+      ? {
+          src: project.featuredImage.src,
+          alt: project.featuredImage.alt || project.title,
+          width: project.featuredImage.width,
+          height: project.featuredImage.height,
+        }
+      : undefined,
+  })
 }
 
 export default async function page({ params }: ProjectProps) {
