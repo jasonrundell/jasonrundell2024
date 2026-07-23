@@ -15,14 +15,14 @@ import {
   SectionHeader,
   MonoLabel,
 } from '@/styles/editorial'
-import { SITE_DOMAIN } from '@/lib/constants'
+import { buildPageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Book a chat | Jason Rundell',
   description:
     'Book a chat with Jason Rundell about full-time leadership, fractional engineering leadership, or selective hands-on work.',
-  alternates: { canonical: `${SITE_DOMAIN}/contact` },
-}
+  path: '/contact',
+})
 
 export const revalidate = 86400
 

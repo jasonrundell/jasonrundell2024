@@ -10,14 +10,14 @@ import {
   Lead,
 } from '@/styles/editorial'
 import MorePosts from '@/components/MorePosts'
-import { SITE_DOMAIN } from '@/lib/constants'
+import { buildPageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Writing | Jason Rundell',
   description:
     'Writing by Jason Rundell - notes on engineering leadership, the web, and the practical edges of AI-assisted work.',
-  alternates: { canonical: `${SITE_DOMAIN}/posts` },
-}
+  path: '/posts',
+})
 
 export const revalidate = 86400
 

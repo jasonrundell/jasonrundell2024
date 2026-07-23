@@ -11,6 +11,8 @@ export async function middleware(request: NextRequest) {
   if (
     pathname.startsWith('/_next/') ||
     pathname.startsWith('/favicon.ico') ||
+    pathname.startsWith('/favicon/') ||
+    pathname.startsWith('/site.webmanifest') ||
     pathname.startsWith('/images/') ||
     pathname.startsWith('/characters/') ||
     pathname.startsWith('/jason-rundell-web-developer-resume.pdf') ||

@@ -1,16 +1,12 @@
 import React from 'react'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { GeistSans } from 'geist/font/sans'
 import { Newsreader, IBM_Plex_Mono } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-import {
-  SITE_NAME,
-  SITE_DESCRIPTION,
-  SITE_DOMAIN,
-  HOME_OG_IMAGE_URL,
-} from '@/lib/constants'
+import { buildRootMetadata } from '@/lib/metadata'
+import Tokens from '@/lib/tokens'
 import '@/styles/globals.css'
 
 const newsreader = Newsreader({
@@ -44,25 +40,15 @@ import Footer from '@/components/Footer'
 import SupabaseStatusBanner from '@/components/SupabaseStatusBanner'
 import PageTransition from '@/components/PageTransition'
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_DOMAIN),
-  title: SITE_NAME,
-  description: SITE_DESCRIPTION,
-  alternates: { canonical: '/' },
-  openGraph: {
-    type: 'website',
-    siteName: 'Jason Rundell',
-    title: SITE_NAME,
-    description: SITE_DESCRIPTION,
-    url: SITE_DOMAIN,
-    images: [{ url: HOME_OG_IMAGE_URL, width: 1200, height: 630, alt: SITE_NAME }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: SITE_NAME,
-    description: SITE_DESCRIPTION,
-    images: [HOME_OG_IMAGE_URL],
-  },
+export const metadata: Metadata = buildRootMetadata()
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  // Matches the nav band (`surfacePrimary`) so mobile browser chrome blends
+  // into the top of the page.
+  themeColor: Tokens.colors.surfacePrimary.value,
+  colorScheme: 'light',
 }
 
 /**

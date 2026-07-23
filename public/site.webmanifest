@@ -1,0 +1,47 @@
+{
+  "id": "/",
+  "name": "Jason Rundell - Engineering leader & player-coach",
+  "short_name": "Jason Rundell",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "description": "Jason Rundell is an engineering leader with 25+ years in full-stack web development - joining at inflection points to build the systems, culture, and standards that let teams scale.",
+  "categories": ["portfolio", "productivity"],
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#f7f8fa",
+  "background_color": "#f7f8fa",
+  "icons": [
+    {
+      "src": "/favicon/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

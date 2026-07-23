@@ -28,14 +28,24 @@ so work can start with targeted reads instead of broad repo scans.
   `globals.css` holds the base editorial styling and the reduced-motion-gated
   dissolve page transition.
 - `src/typeDefinitions`: Shared TypeScript shapes for app data and comments.
-- `src/public`: Static assets served by Next.js.
+- `public`: The static directory Next.js actually serves. Holds the favicon set
+  and `browserconfig.xml` (`public/favicon/`), the web app manifest
+  (`public/site.webmanifest`), the default share card
+  (`public/images/og-default.png`), and the build-time content image sync
+  target (`public/content/`, gitignored).
+- `src/public`: **Not** served over HTTP. Images here are `import`ed by
+  components (see `src/components/Icon.tsx`) and bundled by Next.js; anything
+  that needs a stable URL belongs in `public/`.
 - `src/__tests__`: Shared test utilities.
 - `scripts`: Build and maintenance scripts (`build-tokens.js`,
-  `build-illustrations.js`, `sync-content-images.js`, `check-coverage.js`).
+  `build-illustrations.js`, `build-social-assets.js`, `sync-content-images.js`,
+  `check-coverage.js`).
   `build-illustrations.js` (run via `npm run illustrations:build`) turns the
   approved Pencil `.js` line-art sources in `design/illustrations/` into
   `src/components/illustrations/paths.generated.ts`, consumed by
   `src/components/illustrations/LineArt.tsx`.
+  `build-social-assets.js` (run via `npm run social:build`) renders the Open
+  Graph card and the Android maskable icon from the design tokens.
 - `docs`: Project docs, audit notes, domain glossary (`docs/glossary.md`), and
   this index.
 - `design/`: Visual redesign artifacts - Line-Art system. `style-guide.html`
@@ -107,6 +117,11 @@ so work can start with targeted reads instead of broad repo scans.
   headers, and webpack aliases.
 - `scripts/sync-content-images.js`: Copies images from `content/` to
   `public/content/` (run automatically by `predev` and `prebuild`).
+- `src/lib/metadata.ts`: Single source for canonical, Open Graph, and Twitter
+  tags. `buildPageMetadata()` per page, `buildRootMetadata()` for the root
+  layout (icons, manifest, crawler directives). Next.js replaces rather than
+  merges a parent layout's `openGraph`/`twitter`, so pages must go through the
+  helper or they inherit the home page's share card.
 
 ## Routes
 

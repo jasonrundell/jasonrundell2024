@@ -86,16 +86,32 @@ describe('public profile page', () => {
 
     await expect(
       generateMetadata({ params: Promise.resolve({ slug: 'jason-rundell' }) })
-    ).resolves.toEqual({
+    ).resolves.toMatchObject({
       title: 'Jason Rundell | Jason Rundell',
       description: expect.any(String),
+      alternates: { canonical: 'https://jasonrundell.com/u/jason-rundell' },
+      openGraph: { title: 'Jason Rundell | Jason Rundell' },
     })
   })
 
   it('returns not found metadata for invalid slugs', async () => {
     await expect(
       generateMetadata({ params: Promise.resolve({ slug: 'bad slug' }) })
-    ).resolves.toEqual({ title: 'User Not Found | Jason Rundell' })
+    ).resolves.toEqual({
+      title: 'User Not Found | Jason Rundell',
+      robots: { index: false, follow: false },
+    })
+  })
+
+  it('keeps an unknown profile out of the index', async () => {
+    single.mockResolvedValueOnce({ data: null })
+
+    await expect(
+      generateMetadata({ params: Promise.resolve({ slug: 'nobody' }) })
+    ).resolves.toEqual({
+      title: 'User Not Found | Jason Rundell',
+      robots: { index: false, follow: false },
+    })
   })
 
   it('renders profile comments with links to source content', async () => {

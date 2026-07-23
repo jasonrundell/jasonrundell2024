@@ -16,6 +16,8 @@ language consistent across code, prompts, and documentation.
 | `src/styles/`          | Pigment CSS styled primitives and design tokens. Not React components; pure style exports.                                             |
 | `src/typeDefinitions/` | Shared TypeScript types and interfaces (e.g. `Post`, `Project`, `Comment`).                                                            |
 | `src/data/`            | Static data that cannot be fetched at runtime. Keep minimal; prefer CMS content.                                                       |
+| `public/`              | The static directory Next.js serves. Anything that needs a stable URL (favicons, manifest, share cards) goes here.                     |
+| `src/public/`          | Not served over HTTP - images here are `import`ed by components and bundled. Never reference these by URL path.                        |
 | `src/__tests__/`       | Shared test utilities (`test-utils.tsx`). Co-locate unit tests with source files (`*.test.tsx`).                                       |
 
 ---

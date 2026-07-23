@@ -16,14 +16,14 @@ import {
   MonoLabel,
 } from '@/styles/editorial'
 import { LoopIllustration } from '@/components/illustrations/LineArt'
-import { SITE_DOMAIN } from '@/lib/constants'
+import { buildPageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'How I lead | Jason Rundell',
   description:
     'How Jason Rundell leads engineering teams - an operating loop of assess, set standards, build the system, and coach the team, applied at inflection points.',
-  alternates: { canonical: `${SITE_DOMAIN}/how-i-lead` },
-}
+  path: '/how-i-lead',
+})
 
 const bp = `${Tokens.sizes.breakpoints.large.value}${Tokens.sizes.breakpoints.large.unit}`
 

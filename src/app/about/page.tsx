@@ -21,14 +21,14 @@ import { StyledBody } from '@/styles/common'
 import Skills from '@/components/Skills'
 import References from '@/components/References'
 import { buildPersonJsonLd } from '@/lib/jsonld'
-import { SITE_DOMAIN } from '@/lib/constants'
+import { buildPageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'About | Jason Rundell',
   description:
     'About Jason Rundell - an engineering leader and player-coach with 25+ years in full-stack web development, skills, and recommendations.',
-  alternates: { canonical: `${SITE_DOMAIN}/about` },
-}
+  path: '/about',
+})
 
 export const revalidate = 86400
 

@@ -11,8 +11,25 @@ content, Pigment CSS, and Supabase (auth, profiles, comments).
 - **Responsive design**: Optimized for desktop and mobile.
 - **Accessible and inclusive**: Semantic HTML, contrast, and keyboard-friendly
   patterns.
-- **SEO-friendly**: Next.js Metadata API, Open Graph, and JSON-LD.
+- **SEO-friendly**: Next.js Metadata API, Open Graph, and JSON-LD. Every page
+  builds its canonical, Open Graph, and Twitter tags through
+  `src/lib/metadata.ts`.
 - **Image optimization**: `next/image` plus build-time content image sync.
+
+### Regenerating brand assets
+
+Generated artifacts are committed, so these only need re-running when their
+source changes:
+
+| Command                     | Produces                                                              |
+| --------------------------- | --------------------------------------------------------------------- |
+| `npm run tokens:build`      | `src/lib/tokens.generated.ts`, `src/styles/tokens.generated.css`      |
+| `npm run illustrations:build` | `src/components/illustrations/paths.generated.ts`                    |
+| `npm run social:build`      | `public/images/og-default.png`, `public/favicon/maskable-512.png`     |
+
+Static assets are served from `public/`. Note that `src/public/` is **not** a
+served directory - it only holds images that components `import` and Next.js
+bundles.
 
 ## Development
 
