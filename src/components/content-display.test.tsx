@@ -42,6 +42,10 @@ jest.mock('@jasonrundell/dropship', () => ({
 
 jest.mock('lucide-react', () => ({
   ExternalLink: () => <span data-testid="external-link-icon" />,
+  Mail: () => <span data-testid="mail-icon" />,
+  Calendar: () => <span data-testid="calendar-icon" />,
+  Linkedin: () => <span data-testid="linkedin-icon" />,
+  Github: () => <span data-testid="github-icon" />,
 }))
 
 jest.mock('next/link', () => {
