@@ -34,8 +34,8 @@
 
         --portrait: url('../public/images/jasonrundell-profile-2026-02-02.jpg');
 
-        /* Approved portrait grade — restrained, not an accent flood */
-        --portrait-grade: grayscale(0.72) contrast(1.04) brightness(1.02);
+        /* Portrait renders in natural colour — no sepia/duotone/desaturation */
+        --portrait-grade: none;
       }
 
       * {
@@ -786,10 +786,9 @@
             other section.
           </li>
           <li>
-            <strong>Grade:</strong> desaturated ~70%, slight contrast lift
-            (<code>grayscale(.72) contrast(1.04)</code>) — never a full
-            <code>$accent</code> duotone flood, which would break the
-            one-focal-mark rule.
+            <strong>Grade:</strong> natural colour, no filter. No sepia, no
+            desaturation, and never a full <code>$accent</code> duotone flood —
+            that would break the one-focal-mark rule.
           </li>
           <li>
             <strong>Frame:</strong> hairline <code>$lineSubtle</code>, sharp
