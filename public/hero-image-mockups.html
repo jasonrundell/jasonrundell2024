@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portrait integration — style-guide-compliant mockups · Jason Rundell</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Geist per style guide (NOT Inter). Newsreader display. IBM Plex Mono craft. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Geist:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================================
+         Tokens — src/lib/common.tokens.json + style-guide.md
+         ============================================================ */
+      :root {
+        --bg: #f7f8fa; /* paper ground */
+        --surface: #ffffff;
+        --ink: #1a1a1a;
+        --ink-muted: #5f5f5f;
+        --ink-faint: #6e6e6e;
+        --accent: #1f4d3a; /* forest — actions, mono labels */
+        --accent-soft: #2f5d50;
+        --brass: #8a5a16; /* craft signal ONLY */
+        --line: #1a1a1a;
+        --line-subtle: #e6e8ec;
+        --on-accent: #f7f8fa;
+
+        --font-display: 'Newsreader', Georgia, serif;
+        --font-body: 'Geist', 'Geist Sans', sans-serif;
+        --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+        --portrait: url('../public/images/jasonrundell-profile-2026-02-02.jpg');
+
+        /* Approved portrait grade — restrained, not an accent flood */
+        --portrait-grade: grayscale(0.72) contrast(1.04) brightness(1.02);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+        /* Atmospheric ground — workshop light on paper, not flat fill */
+        background-color: var(--bg);
+        background-image:
+          radial-gradient(
+            120% 80% at 12% -10%,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(255, 255, 255, 0) 60%
+          ),
+          radial-gradient(
+            90% 60% at 100% 0%,
+            rgba(31, 77, 58, 0.045) 0%,
+            rgba(31, 77, 58, 0) 55%
+          );
+        background-attachment: fixed;
+      }
+
+      /* ---------- shared primitives (mirror src/styles/editorial.tsx) ---------- */
+      .container {
+        width: 100%;
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 0 1.25rem;
+      }
+      @media (min-width: 48rem) {
+        .container {
+          padding: 0 4rem;
+        }
+      }
+      .band {
+        padding: 3.5rem 0;
+        border-top: 1px solid var(--line-subtle);
+      }
+      @media (min-width: 48rem) {
+        .band {
+          padding: 4.5rem 0;
+        }
+      }
+      .band--surface {
+        background: var(--surface);
+      }
+
+      .mono-label {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      /* Brass mono — craft signal only (proof figures, craft notes, tags) */
+      .mono-craft {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: var(--brass);
+      }
+
+      .accent-rule {
+        display: inline-flex;
+        align-items: center;
+      }
+      .accent-rule::before,
+      .accent-rule::after {
+        content: '';
+        width: 1.5px;
+        height: 9px;
+        background: var(--accent);
+      }
+      .accent-rule i {
+        display: inline-block;
+        height: 1.5px;
+        width: 48px;
+        background: var(--accent);
+      }
+
+      .eyebrow {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      .display-title {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: clamp(2.5rem, 6vw, 3.25rem);
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+        margin: 0 0 1rem;
+      }
+      .section-title {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: clamp(1.75rem, 3.5vw, 2.375rem);
+        line-height: 1.15;
+        margin: 0;
+      }
+      .lead {
+        font-size: 1.1875rem;
+        line-height: 1.6;
+        color: var(--ink-muted);
+        max-width: 60ch;
+        margin: 1rem 0 0;
+      }
+      @media (min-width: 48rem) {
+        .lead {
+          font-size: 1.3125rem;
+        }
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.5rem;
+        margin-top: 1.75rem;
+      }
+      .cta-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.875rem 1.375rem; /* 14×22 */
+        background: var(--accent);
+        color: var(--on-accent);
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid var(--accent);
+        transition: background 0.15s ease;
+      }
+      .cta-primary:hover {
+        background: var(--accent-soft);
+      }
+      .cta-secondary {
+        color: var(--ink);
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+      .cta-secondary:hover {
+        color: var(--accent);
+      }
+
+      /* ---------- portrait primitive (proposed rule) ---------- */
+      /* Sharp corners. Hairline frame. No overlay chips. No ornament. */
+      .portrait {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line-subtle);
+        background-color: var(--surface);
+        background-image: var(--portrait);
+        background-size: cover;
+        filter: var(--portrait-grade);
+      }
+      /* Caption lives OUTSIDE the frame, in normal flow */
+      .portrait-caption {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 0.75rem;
+        margin-top: 0.75rem;
+      }
+
+      /* ============================================================
+         Review chrome (not part of the design)
+         ============================================================ */
+      .page-head {
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 3.5rem 1.25rem 2rem;
+      }
+      @media (min-width: 48rem) {
+        .page-head {
+          padding: 3.5rem 4rem 2rem;
+        }
+      }
+      .page-head h1 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: clamp(2rem, 4.5vw, 2.75rem);
+        letter-spacing: -0.01em;
+        margin: 0.85rem 0 0.75rem;
+      }
+      .page-head p {
+        color: var(--ink-muted);
+        max-width: 68ch;
+        line-height: 1.65;
+        margin: 0 0 0.85rem;
+      }
+      .toc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+      .toc a {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        color: var(--accent);
+        border: 1px solid var(--line-subtle);
+        padding: 0.5rem 0.85rem;
+        transition:
+          border-color 0.15s ease,
+          background 0.15s ease;
+      }
+      .toc a:hover {
+        border-color: var(--accent);
+        background: var(--surface);
+      }
+
+      .track-head {
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 2.75rem 1.25rem 0;
+      }
+      @media (min-width: 48rem) {
+        .track-head {
+          padding: 2.75rem 4rem 0;
+        }
+      }
+      .track-head h2 {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin: 0.6rem 0 0.5rem;
+      }
+      .track-head p {
+        color: var(--ink-muted);
+        max-width: 68ch;
+        line-height: 1.6;
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .mock-meta {
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 2.25rem 1.25rem 0;
+      }
+      @media (min-width: 48rem) {
+        .mock-meta {
+          padding: 2.25rem 4rem 0;
+        }
+      }
+      .mock-meta h3 {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin: 0.5rem 0 0.4rem;
+      }
+      .mock-meta p {
+        color: var(--ink-muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        max-width: 68ch;
+        margin: 0;
+      }
+      .status {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.5rem;
+        border: 1px solid currentColor;
+      }
+      .status--ok {
+        color: var(--accent);
+      }
+      .status--amend {
+        color: var(--brass);
+      }
+
+      .demo {
+        border-top: 1px solid var(--line-subtle);
+        border-bottom: 1px solid var(--line-subtle);
+        margin-top: 1.5rem;
+      }
+
+      /* ============================================================
+         A1 — Portrait in the proof band
+         ============================================================ */
+      .a1-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+      }
+      @media (min-width: 64rem) {
+        .a1-grid {
+          grid-template-columns: 0.8fr 1.2fr;
+          gap: 4rem;
+        }
+      }
+      .a1-portrait {
+        width: 100%;
+        max-width: 340px;
+        aspect-ratio: 4 / 5;
+        background-position: 50% 16%;
+        margin: 0 auto;
+      }
+      @media (min-width: 64rem) {
+        .a1-portrait {
+          margin: 0;
+        }
+      }
+      .proof-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 2rem;
+        border-top: 1px solid var(--line-subtle);
+      }
+      @media (min-width: 40rem) {
+        .proof-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .proof-cell {
+        padding: 1.35rem 1.5rem 1.35rem 0;
+        border-bottom: 1px solid var(--line-subtle);
+      }
+      .proof-value {
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--brass); /* brass = the receipts */
+        margin: 0 0 0.35rem;
+        line-height: 1.1;
+      }
+      .proof-label {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        color: var(--ink-faint);
+      }
+
+      /* ============================================================
+         A2 — Player-coach split strip
+         ============================================================ */
+      .a2-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: start;
+      }
+      @media (min-width: 64rem) {
+        .a2-grid {
+          grid-template-columns: 1.15fr 0.85fr;
+          gap: 4rem;
+        }
+      }
+      .a2-portrait {
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        background-position: 50% 14%;
+      }
+      .craft-note {
+        margin-top: 1.5rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--line-subtle);
+      }
+      .craft-note p {
+        margin: 0.4rem 0 0;
+        color: var(--ink-muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      /* ============================================================
+         B1 — Editorial hero portrait (side-by-side)
+         ============================================================ */
+      .b1-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+      }
+      @media (min-width: 64rem) {
+        .b1-grid {
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 4rem;
+        }
+      }
+      .b1-art {
+        order: -1;
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      @media (min-width: 64rem) {
+        .b1-art {
+          order: 1;
+          max-width: none;
+        }
+      }
+      .b1-portrait {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        background-position: 50% 15%;
+      }
+      .name-signal {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      /* ============================================================
+         B2 — Letterbox hero (portrait above the headline)
+         ============================================================ */
+      .b2-portrait {
+        width: 100%;
+        aspect-ratio: 16 / 7;
+        background-position: 50% 20%;
+      }
+      @media (max-width: 47.99rem) {
+        .b2-portrait {
+          aspect-ratio: 3 / 2;
+          background-position: 50% 14%;
+        }
+      }
+      .b2-copy {
+        margin-top: 2.25rem;
+        max-width: 46rem;
+      }
+
+      /* ---------- proposed-rule callout ---------- */
+      .rule-box {
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+      }
+      @media (min-width: 48rem) {
+        .rule-box {
+          padding: 2.5rem 4rem 4rem;
+        }
+      }
+      .rule-inner {
+        border: 1px solid var(--line-subtle);
+        border-left: 3px solid var(--brass);
+        background: var(--surface);
+        padding: 1.75rem;
+      }
+      .rule-inner h3 {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        margin: 0.5rem 0 0.75rem;
+      }
+      .rule-inner ul {
+        margin: 0.5rem 0 0;
+        padding-left: 1.1rem;
+        color: var(--ink-muted);
+        line-height: 1.7;
+        font-size: 0.95rem;
+      }
+      .rule-inner code {
+        font-family: var(--font-mono);
+        font-size: 0.85em;
+        color: var(--accent);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-head">
+      <span class="mono-label">// portrait integration · style-guide pass</span>
+      <h1>Where the portrait goes — two tracks, four options</h1>
+      <p>
+        Rebuilt against
+        <code>.claude/skills/site-designer/style-guide.md</code>. Body type is
+        now <strong>Geist</strong> (not Inter), corners are sharp, frames are
+        hairline, there are no overlay chips or text-on-photo overlays, brass
+        appears only as the hands-on craft signal, and the ground is
+        atmospheric rather than a flat fill.
+      </p>
+      <p>
+        The guide currently assigns the hero's dominant visual to the
+        continuous-line illustration and has <em>no rule for photography</em>.
+        <strong>Track A</strong> respects that as written. <strong>Track B</strong>
+        makes the portrait the hero visual, which requires amending the guide —
+        the exact proposed wording is at the bottom of this page.
+      </p>
+      <nav class="toc">
+        <a href="#a1">A1 · Proof band</a>
+        <a href="#a2">A2 · Player-coach strip</a>
+        <a href="#b1">B1 · Editorial hero</a>
+        <a href="#b2">B2 · Letterbox hero</a>
+        <a href="#rule">Proposed imagery rule</a>
+      </nav>
+    </header>
+
+    <!-- =======================================================
+         TRACK A
+         ======================================================= -->
+    <div class="track-head">
+      <span class="mono-label">Track A</span>
+      <h2>Portrait below the hero — compliant as written</h2>
+      <p>
+        The hero keeps its line-art illustration, so nothing in the style guide
+        changes. The portrait anchors a lower band where a human face does more
+        work anyway: next to the proof, and next to the player-coach claim.
+      </p>
+    </div>
+
+    <!-- ---------------- A1 ---------------- -->
+    <section class="mock-meta" id="a1">
+      <span class="status status--ok">Compliant · no guide change</span>
+      <h3>A1 — Portrait in the proof band</h3>
+      <p>
+        Pairs the face with the receipts. Proof figures stay brass (the
+        sanctioned craft signal), the eyebrow stays forest, and the portrait
+        sits in a hairline frame with its caption in normal flow beneath it —
+        not as an overlay chip.
+      </p>
+    </section>
+    <div class="demo">
+      <section class="band band--surface">
+        <div class="container">
+          <div class="a1-grid">
+            <div>
+              <div class="portrait a1-portrait" role="img" aria-label="Jason Rundell"></div>
+              <div class="portrait-caption">
+                <span class="name-signal">Jason Rundell</span>
+                <span class="mono-label">Canada · remote-first</span>
+              </div>
+            </div>
+            <div>
+              <div class="eyebrow">
+                <span class="accent-rule"><i></i></span>
+                <span class="mono-label">Outcomes</span>
+              </div>
+              <h2 class="section-title">Proof, not posturing</h2>
+              <p class="lead">
+                Selected, labeled results from teams I've led — kept honest
+                about where each came from.
+              </p>
+              <div class="proof-grid">
+                <div class="proof-cell">
+                  <div class="proof-value">~60%</div>
+                  <span class="proof-label">fewer post-release bugs · CMI</span>
+                </div>
+                <div class="proof-cell">
+                  <div class="proof-value">~50%</div>
+                  <span class="proof-label">faster deploys · Bitbuy</span>
+                </div>
+                <div class="proof-cell">
+                  <div class="proof-value">Up to 12</div>
+                  <span class="proof-label">engineers led · Bitbuy</span>
+                </div>
+                <div class="proof-cell">
+                  <div class="proof-value">$206M</div>
+                  <span class="proof-label">acquisition support · WonderFi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ---------------- A2 ---------------- -->
+    <section class="mock-meta" id="a2">
+      <span class="status status--ok">Compliant · no guide change</span>
+      <h3>A2 — Player-coach strip</h3>
+      <p>
+        A quieter band carrying the stage-fit line from the positioning doc.
+        Taller 3:4 crop, portrait on the right, with a brass craft-proof note
+        underneath the copy — brass earning its keep as the "I still build"
+        marker rather than as ornament.
+      </p>
+    </section>
+    <div class="demo">
+      <section class="band">
+        <div class="container">
+          <div class="a2-grid">
+            <div>
+              <div class="eyebrow">
+                <span class="accent-rule"><i></i></span>
+                <span class="mono-label">Player-coach</span>
+              </div>
+              <h2 class="section-title">
+                Close enough to the code to make the call
+              </h2>
+              <p class="lead">
+                Thrive where chaos needs order, and order needs questioning.
+                Best fit: Series A–C and assess-and-improve mandates.
+              </p>
+              <div class="craft-note">
+                <span class="mono-craft">Craft: React · Next.js · TypeScript · Node · AWS · CI/CD</span>
+                <p>
+                  Still in the architecture reviews, the PR queue, and the
+                  pipeline — because sound technical calls need current context.
+                </p>
+              </div>
+              <div class="cta-row">
+                <a class="cta-secondary" href="#">See how I lead →</a>
+              </div>
+            </div>
+            <div>
+              <div class="portrait a2-portrait" role="img" aria-label="Jason Rundell"></div>
+              <div class="portrait-caption">
+                <span class="mono-label">Jason Rundell · 25+ years shipping</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =======================================================
+         TRACK B
+         ======================================================= -->
+    <div class="track-head">
+      <span class="mono-label">Track B</span>
+      <h2>Portrait as the hero visual — requires a guide amendment</h2>
+      <p>
+        The photo becomes the hero's one dominant visual, displacing the
+        line-art there. Everything else in the hero budget holds: name signal,
+        one headline, one supporting sentence, one CTA group, no overlay, no
+        cards. The line-art system still runs the interior sections.
+      </p>
+    </div>
+
+    <!-- ---------------- B1 ---------------- -->
+    <section class="mock-meta" id="b1">
+      <span class="status status--amend">Needs imagery-rule amendment</span>
+      <h3>B1 — Editorial hero portrait</h3>
+      <p>
+        The straight swap: portrait takes the right-hand hero slot in a 4:5
+        hairline frame, sharp corners, restrained grade. Adds the name as a
+        hero-level signal, which the guide asks for and the current hero only
+        implies through the nav.
+      </p>
+    </section>
+    <div class="demo">
+      <section class="band">
+        <div class="container">
+          <div class="b1-grid">
+            <div>
+              <div class="eyebrow">
+                <span class="accent-rule"><i></i></span>
+                <span class="mono-label">Engineering Leader · Player-Coach</span>
+              </div>
+              <h1 class="display-title">
+                Lead engineering orgs. Raise the technical bar.
+              </h1>
+              <p class="lead">
+                I join at inflection points and build the systems, culture, and
+                standards that let teams scale — while staying close enough to
+                the code to raise the bar.
+              </p>
+              <div class="cta-row">
+                <a class="cta-primary" href="#">Book a chat</a>
+                <a class="cta-secondary" href="#">View selected work →</a>
+              </div>
+            </div>
+            <div class="b1-art">
+              <div class="portrait b1-portrait" role="img" aria-label="Jason Rundell"></div>
+              <div class="portrait-caption">
+                <span class="name-signal">Jason Rundell</span>
+                <span class="mono-label">Canada · remote-first</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ---------------- B2 ---------------- -->
+    <section class="mock-meta" id="b2">
+      <span class="status status--amend">Needs imagery-rule amendment</span>
+      <h3>B2 — Letterbox hero</h3>
+      <p>
+        A different composition rather than a different treatment: a wide 16:7
+        crop spans the content column and the headline sits beneath it. The
+        photo leads without any text riding on top of it, so the no-overlay
+        rule holds. Reads more like a masthead than a portfolio header.
+      </p>
+    </section>
+    <div class="demo">
+      <section class="band band--surface">
+        <div class="container">
+          <div class="portrait b2-portrait" role="img" aria-label="Jason Rundell"></div>
+          <div class="portrait-caption">
+            <span class="name-signal">Jason Rundell</span>
+            <span class="mono-label">Engineering Leader · Player-Coach</span>
+          </div>
+          <div class="b2-copy">
+            <h1 class="display-title">
+              Lead engineering orgs. Raise the technical bar.
+            </h1>
+            <p class="lead">
+              I join at inflection points and build the systems, culture, and
+              standards that let teams scale — while staying close enough to
+              the code to raise the bar.
+            </p>
+            <div class="cta-row">
+              <a class="cta-primary" href="#">Book a chat</a>
+              <a class="cta-secondary" href="#">View selected work →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =======================================================
+         PROPOSED RULE
+         ======================================================= -->
+    <div class="rule-box" id="rule">
+      <span class="mono-craft">Guide amendment — required only for Track B</span>
+      <div class="rule-inner">
+        <span class="status status--amend">Proposed</span>
+        <h3>Imagery → add a “Portraiture” rule</h3>
+        <p style="color: var(--ink-muted); line-height: 1.65; margin: 0.5rem 0 0; font-size: 0.95rem;">
+          The Imagery section currently says the dominant visual is
+          continuous-line editorial illustration and that no photography is
+          required in the hero. Track B needs that softened to a single
+          sanctioned portrait, with the illustration system still owning
+          interior sections:
+        </p>
+        <ul>
+          <li>
+            <strong>One portrait, one place.</strong> A single approved portrait
+            of Jason; the line-art system remains the dominant visual for every
+            other section.
+          </li>
+          <li>
+            <strong>Grade:</strong> desaturated ~70%, slight contrast lift
+            (<code>grayscale(.72) contrast(1.04)</code>) — never a full
+            <code>$accent</code> duotone flood, which would break the
+            one-focal-mark rule.
+          </li>
+          <li>
+            <strong>Frame:</strong> hairline <code>$lineSubtle</code>, sharp
+            corners. No arches, rings, radii, or offset shadows.
+          </li>
+          <li>
+            <strong>No overlays.</strong> No text, badges, chips, or numerals on
+            the image. Captions sit outside the frame in normal flow.
+          </li>
+          <li>
+            <strong>No decorative brass.</strong> Brass stays the craft signal
+            (proof figures, craft notes, tech-stack lines, tags) — never a tick,
+            crosshair, or ornament around the photo.
+          </li>
+          <li>
+            <strong>Motion:</strong> portrait fades in with the hero copy; no
+            parallax, no draw effect. Honours
+            <code>prefers-reduced-motion</code>.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
