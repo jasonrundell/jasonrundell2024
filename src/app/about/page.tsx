@@ -166,6 +166,61 @@ export default async function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
 
+      {/*
+        Illustrated-portrait filter: posterizes the photo into flat tonal
+        bands and lays ink edge-lines over it, so the About hero reads as a
+        drawn portrait in the site's continuous-line idiom while staying a
+        real likeness. Applied only to the About hero image.
+      */}
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        style={{ position: 'absolute', width: 0, height: 0 }}
+      >
+        <filter
+          id="illustrated-portrait"
+          colorInterpolationFilters="sRGB"
+        >
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="smooth" />
+          <feColorMatrix in="smooth" type="saturate" values="0.22" result="desat" />
+          <feComponentTransfer in="desat" result="poster">
+            <feFuncR type="discrete" tableValues="0.09 0.30 0.52 0.74 0.94" />
+            <feFuncG type="discrete" tableValues="0.11 0.32 0.54 0.75 0.95" />
+            <feFuncB type="discrete" tableValues="0.12 0.33 0.55 0.76 0.96" />
+          </feComponentTransfer>
+          <feColorMatrix
+            in="smooth"
+            type="matrix"
+            values="0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0 0 0 1 0"
+            result="gray"
+          />
+          <feConvolveMatrix
+            in="gray"
+            order="3"
+            preserveAlpha="true"
+            kernelMatrix="0 -1 0  -1 4 -1  0 -1 0"
+            result="edgeRaw"
+          />
+          <feComponentTransfer in="edgeRaw" result="edgeBoost">
+            <feFuncR type="linear" slope="2.2" />
+            <feFuncG type="linear" slope="2.2" />
+            <feFuncB type="linear" slope="2.2" />
+          </feComponentTransfer>
+          <feColorMatrix
+            in="edgeBoost"
+            type="matrix"
+            values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.5 0.5 0.5 0 0"
+            result="inkAlpha"
+          />
+          <feFlood floodColor="#2E3338" result="inkColor" />
+          <feComposite in="inkColor" in2="inkAlpha" operator="in" result="ink" />
+          <feMerge>
+            <feMergeNode in="poster" />
+            <feMergeNode in="ink" />
+          </feMerge>
+        </filter>
+      </svg>
+
       <BandSection tone="paper">
         <Container>
           <AboutHeroGrid>
@@ -187,7 +242,11 @@ export default async function AboutPage() {
                   fill
                   priority
                   sizes="(min-width: 64rem) 38vw, (min-width: 48rem) 90vw, 100vw"
-                  style={{ objectFit: 'cover', objectPosition: '50% 20%' }}
+                  style={{
+                    objectFit: 'cover',
+                    objectPosition: '50% 20%',
+                    filter: 'url(#illustrated-portrait)',
+                  }}
                 />
               </PortraitFrame>
               <PortraitCaption>

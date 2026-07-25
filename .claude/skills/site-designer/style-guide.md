@@ -169,8 +169,12 @@ owns every interior section; the photo does not spread across the site.
 - **Sanctioned placements** — the homepage hero, and the About page (hero
   portrait + one candid alongside the story). Every other section's dominant
   visual stays line-art; photos do not spread further without a guide update.
-- **Grade:** natural colour, no filter. No sepia, no desaturation, and never a
-  full `$accent` duotone flood (that would break the one-focal-mark rule).
+- **Grade:** natural colour, no filter on the homepage hero. No sepia, no
+  desaturation, and never a full `$accent` duotone flood (that would break the
+  one-focal-mark rule). **Exception — About hero:** a stylised
+  *illustrated-portrait* treatment (posterized tonal bands + `#2E3338` ink
+  edge-lines, via SVG filter) is allowed, to tie the About photo to the
+  continuous-line illustration system. About-hero only.
 - **Frame:** hairline `$lineSubtle`, sharp corners, `4 / 5` portrait aspect.
   No arches, rings, radii, or offset shadows.
 - **No overlays:** no text, badges, chips, or numerals on the image. The name
