@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import { styled } from '@pigment-css/react'
 
@@ -20,6 +21,7 @@ import {
 import { StyledBody } from '@/styles/common'
 import Skills from '@/components/Skills'
 import References from '@/components/References'
+import { MonoLabel } from '@/styles/editorial'
 import { buildPersonJsonLd } from '@/lib/jsonld'
 import { buildPageMetadata } from '@/lib/metadata'
 
@@ -33,6 +35,84 @@ export const metadata: Metadata = buildPageMetadata({
 export const revalidate = 86400
 
 const personJsonLd = buildPersonJsonLd()
+
+const bp = `${Tokens.sizes.breakpoints.large.value}${Tokens.sizes.breakpoints.large.unit}`
+
+// Two-column intro: copy left, portrait right (mirrors the homepage B1 hero).
+const AboutHeroGrid = styled('div')`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+
+  @media (min-width: ${bp}) {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 4rem;
+  }
+`
+
+const AboutHeroArt = styled('div')`
+  order: -1;
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (min-width: ${bp}) {
+    order: 1;
+    max-width: none;
+  }
+`
+
+// Story band: candid photo alongside the narrative.
+const StoryGrid = styled('div')`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+
+  @media (min-width: ${bp}) {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 4rem;
+  }
+`
+
+const StoryArt = styled('div')`
+  max-width: 360px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (min-width: ${bp}) {
+    max-width: none;
+    position: sticky;
+    top: 2rem;
+  }
+`
+
+// Shared portrait primitive: natural colour, hairline frame, sharp corners,
+// caption in normal flow (style-guide Imagery → Portraiture).
+const PortraitFrame = styled('div')`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
+  background-color: ${Tokens.colors.surfaceSecondary.var};
+`
+
+const PortraitCaption = styled('div')`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-top: 0.75rem;
+`
+
+const NameSignal = styled('span')`
+  font-family: ${Tokens.fonts.heading.var};
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: ${Tokens.colors.ink.var};
+`
 
 const FactsGrid = styled('dl')`
   display: grid;
@@ -88,14 +168,34 @@ export default async function AboutPage() {
 
       <BandSection tone="paper">
         <Container>
-          <Eyebrow label="About" />
-          <DisplayTitle>An improver, not a maintainer</DisplayTitle>
-          <Lead>
-            I&rsquo;m an engineering leader with 25+ years in full-stack web
-            development. I join at inflection points and build the systems,
-            culture, and standards that let teams scale - while staying close
-            enough to the code to raise the bar.
-          </Lead>
+          <AboutHeroGrid>
+            <div>
+              <Eyebrow label="About" />
+              <DisplayTitle>An improver, not a maintainer</DisplayTitle>
+              <Lead>
+                I&rsquo;m an engineering leader with 25+ years in full-stack web
+                development. I join at inflection points and build the systems,
+                culture, and standards that let teams scale - while staying
+                close enough to the code to raise the bar.
+              </Lead>
+            </div>
+            <AboutHeroArt>
+              <PortraitFrame>
+                <Image
+                  src="/images/jasonrundell-about-2026.jpg"
+                  alt="Jason Rundell"
+                  fill
+                  priority
+                  sizes="(min-width: 64rem) 38vw, (min-width: 48rem) 90vw, 100vw"
+                  style={{ objectFit: 'cover', objectPosition: '50% 20%' }}
+                />
+              </PortraitFrame>
+              <PortraitCaption>
+                <NameSignal>Jason Rundell</NameSignal>
+                <MonoLabel>Canada · remote-first</MonoLabel>
+              </PortraitCaption>
+            </AboutHeroArt>
+          </AboutHeroGrid>
         </Container>
       </BandSection>
 
@@ -103,40 +203,57 @@ export default async function AboutPage() {
         <Container>
           <SectionHeader eyebrow="The story" title="How I work" />
           <div style={{ marginTop: '1.5rem' }}>
-            <StyledBody>
-              <p>
-                The work follows a pattern: I walk into an organization,
-                identify what&rsquo;s slowing it down, and build the fix.
-                That&rsquo;s looked like establishing AI governance for
-                enterprise tooling adoption, architecting QA platforms from
-                zero, launching unit-testing cultures where none existed, and
-                building multi-tenant SaaS infrastructure that turns weeks-long
-                launches into days.
-              </p>
-              <p>
-                I&rsquo;ve scaled engineering teams through hypergrowth, guided
-                orgs through acquisitions, and cut release defect rates by
-                introducing end-to-end ownership of the delivery pipeline. I run{' '}
-                <Link
-                  href="https://infinitesource.agency"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Infinite Source
-                </Link>
-                , where I take on fractional leadership and architecture
-                engagements for startups and scale-ups in MarTech, FinTech, and
-                AI tooling.
-              </p>
-              <p>
-                My journey started in a high-school library in 1997 discovering
-                GeoCities. Since then I&rsquo;ve shipped work across every era
-                of the web - from iframes and Flash to React design systems,
-                Jamstack, and now agentic AI. The common thread isn&rsquo;t a
-                stack; it&rsquo;s an instinct to find what&rsquo;s broken or
-                inefficient and build something better.
-              </p>
-            </StyledBody>
+            <StoryGrid>
+              <StoryArt>
+                <PortraitFrame>
+                  <Image
+                    src="/images/jasonrundell-candid-2026.jpg"
+                    alt="Jason Rundell"
+                    fill
+                    sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 90vw, 100vw"
+                    style={{ objectFit: 'cover', objectPosition: '50% 22%' }}
+                  />
+                </PortraitFrame>
+                <PortraitCaption>
+                  <MonoLabel>Player-coach · still shipping</MonoLabel>
+                </PortraitCaption>
+              </StoryArt>
+              <StyledBody>
+                <p>
+                  The work follows a pattern: I walk into an organization,
+                  identify what&rsquo;s slowing it down, and build the fix.
+                  That&rsquo;s looked like establishing AI governance for
+                  enterprise tooling adoption, architecting QA platforms from
+                  zero, launching unit-testing cultures where none existed, and
+                  building multi-tenant SaaS infrastructure that turns
+                  weeks-long launches into days.
+                </p>
+                <p>
+                  I&rsquo;ve scaled engineering teams through hypergrowth,
+                  guided orgs through acquisitions, and cut release defect rates
+                  by introducing end-to-end ownership of the delivery pipeline.
+                  I run{' '}
+                  <Link
+                    href="https://infinitesource.agency"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Infinite Source
+                  </Link>
+                  , where I take on fractional leadership and architecture
+                  engagements for startups and scale-ups in MarTech, FinTech,
+                  and AI tooling.
+                </p>
+                <p>
+                  My journey started in a high-school library in 1997
+                  discovering GeoCities. Since then I&rsquo;ve shipped work
+                  across every era of the web - from iframes and Flash to React
+                  design systems, Jamstack, and now agentic AI. The common
+                  thread isn&rsquo;t a stack; it&rsquo;s an instinct to find
+                  what&rsquo;s broken or inefficient and build something better.
+                </p>
+              </StyledBody>
+            </StoryGrid>
           </div>
         </Container>
       </BandSection>
