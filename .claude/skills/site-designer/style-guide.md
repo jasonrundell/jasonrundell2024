@@ -158,8 +158,28 @@ instant (no draw animation).
   - **Hero** - team → branching system → platform (homepage)
   - **Loop** - diagnose → improve → measure → scale (How I lead)
   - **Branch** - commits merge into a platform (Selected work)
-- No photography required in hero; no overlay badges or chips
 - Hairline borders, sharp corners
+
+### Portraiture (one sanctioned photo)
+
+A single approved portrait of Jason is allowed as the hero's dominant visual
+(homepage hero right column). The continuous-line illustration system still
+owns every interior section; the photo does not spread across the site.
+
+- **One portrait, one place** — the homepage hero only. Elsewhere the
+  dominant visual stays line-art.
+- **Grade:** natural colour, no filter. No sepia, no desaturation, and never a
+  full `$accent` duotone flood (that would break the one-focal-mark rule).
+- **Frame:** hairline `$lineSubtle`, sharp corners, `4 / 5` portrait aspect.
+  No arches, rings, radii, or offset shadows.
+- **No overlays:** no text, badges, chips, or numerals on the image. The name
+  signal + mono meta caption sit outside the frame in normal flow.
+- **No decorative brass:** brass stays the craft signal (proof figures, craft
+  notes, tech-stack lines, tags) — never a tick, crosshair, or ornament around
+  the photo.
+- **Motion:** portrait fades in with the hero copy; no parallax, no draw
+  effect. Honours `prefers-reduced-motion`.
+- **A11y:** meaningful `alt` ("Jason Rundell"); `priority` for LCP.
 
 ## Components
 

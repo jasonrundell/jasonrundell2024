@@ -134,14 +134,64 @@
           ]
         },
         {
-          "type": "script",
-          "id": "r0mdd",
-          "x": 715,
-          "y": 300,
-          "name": "LA Hero Illo (vector)",
-          "width": 480,
-          "height": 356,
-          "scriptUri": "illustrations/hero.js"
+          "type": "frame",
+          "id": "ODA7q",
+          "layoutPosition": "absolute",
+          "x": 760,
+          "y": 200,
+          "name": "LA Hero Portrait",
+          "width": 420,
+          "layout": "vertical",
+          "gap": 14,
+          "children": [
+            {
+              "type": "frame",
+              "id": "tWqCv",
+              "name": "Portrait Frame",
+              "clip": true,
+              "width": 420,
+              "height": 525,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "jasonrundell-profile-2026-02-02.jpg",
+                "mode": "fill"
+              },
+              "stroke": "$lineSubtle",
+              "strokeWidth": 1,
+              "strokeAlignment": "inner"
+            },
+            {
+              "type": "frame",
+              "id": "iyBiu",
+              "name": "Portrait Caption",
+              "width": "fill_container",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "yEtp9",
+                  "name": "Name Signal",
+                  "fill": "$ink",
+                  "content": "Jason Rundell",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 17,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "N0w5wb",
+                  "name": "Location Meta",
+                  "fill": "$accent",
+                  "content": "CANADA · REMOTE-FIRST",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -283,14 +333,64 @@
               ]
             },
             {
-              "type": "script",
-              "id": "U6ZhFE",
-              "x": 715,
-              "y": 150,
-              "name": "LF Hero Illo (vector)",
-              "width": 480,
-              "height": 356,
-              "scriptUri": "illustrations/hero.js"
+              "type": "frame",
+              "id": "i4qvT",
+              "layoutPosition": "absolute",
+              "x": 760,
+              "y": 52,
+              "name": "LF Hero Portrait",
+              "width": 400,
+              "layout": "vertical",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NROgm",
+                  "name": "Portrait Frame",
+                  "clip": true,
+                  "width": 400,
+                  "height": 500,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "jasonrundell-profile-2026-02-02.jpg",
+                    "mode": "fill"
+                  },
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": 1,
+                  "strokeAlignment": "inner"
+                },
+                {
+                  "type": "frame",
+                  "id": "axH4T",
+                  "name": "Portrait Caption",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KxWGo",
+                      "name": "Name Signal",
+                      "fill": "$ink",
+                      "content": "Jason Rundell",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 17,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HYqKD",
+                      "name": "Location Meta",
+                      "fill": "$accent",
+                      "content": "CANADA · REMOTE-FIRST",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1859,28 +1959,71 @@
           "type": "ref",
           "ref": "afJyd",
           "name": "LA Nav Mobile",
-          "width": "fill_container"
+          "width": "fill_container",
+          "x": 0,
+          "y": 0
         },
         {
           "type": "frame",
-          "id": "t9kigf",
-          "name": "M Illo Wrap",
+          "id": "q4UYTG",
+          "name": "M Portrait Wrap",
           "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
           "padding": [
-            6,
+            4,
             20,
-            0,
+            18,
             20
           ],
-          "justifyContent": "center",
+          "alignItems": "center",
           "children": [
             {
-              "type": "script",
-              "id": "nlxKu",
-              "name": "M Illo (vector)",
-              "width": 334,
-              "height": 248,
-              "scriptUri": "illustrations/hero.js"
+              "type": "frame",
+              "id": "yAGR4",
+              "name": "Portrait Frame",
+              "clip": true,
+              "width": 248,
+              "height": 310,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "jasonrundell-profile-2026-02-02.jpg",
+                "mode": "fill"
+              },
+              "stroke": "$lineSubtle",
+              "strokeWidth": 1,
+              "strokeAlignment": "inner"
+            },
+            {
+              "type": "frame",
+              "id": "VNjTv",
+              "name": "Portrait Caption",
+              "gap": 10,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "VHFq3",
+                  "name": "Name Signal",
+                  "fill": "$ink",
+                  "content": "Jason Rundell",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "pH6uH",
+                  "name": "Location Meta",
+                  "fill": "$accent",
+                  "content": "CANADA · REMOTE-FIRST",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
             }
           ]
         },
@@ -2100,7 +2243,7 @@
             },
             {
               "type": "script",
-              "id": "gE90g",
+              "id": "qihKW",
               "x": 745,
               "y": 80,
               "name": "A Hero Illo (vector)",

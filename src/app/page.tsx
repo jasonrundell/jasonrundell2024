@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { styled } from '@pigment-css/react'
 
 import { getFeaturedProjects, getLatestPosts } from '@/lib/content'
@@ -21,7 +22,6 @@ import MorePosts from '@/components/MorePosts'
 import MoreProjects from '@/components/MoreProjects'
 import InfiniteSourcePromo from '@/components/InfiniteSourcePromo'
 import {
-  HeroIllustration,
   LoopIllustration,
   BranchIllustration,
 } from '@/components/illustrations/LineArt'
@@ -58,6 +58,33 @@ const HeroArt = styled('div')`
     order: 1;
     max-width: none;
   }
+`
+
+// B1 editorial hero portrait: natural-colour photo in a hairline frame,
+// sharp corners, no overlay. Caption sits in normal flow beneath the frame
+// so the image itself stays chip-free (see style-guide Imagery → Portraiture).
+const PortraitFrame = styled('div')`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid ${Tokens.colors.lineSubtle.var};
+  background-color: ${Tokens.colors.surfaceSecondary.var};
+`
+
+const PortraitCaption = styled('div')`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-top: 0.75rem;
+`
+
+const NameSignal = styled('span')`
+  font-family: ${Tokens.fonts.heading.var};
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: ${Tokens.colors.ink.var};
 `
 
 const ProofGrid = styled('div')`
@@ -260,7 +287,20 @@ export default async function HomePage() {
               </CtaRow>
             </div>
             <HeroArt>
-              <HeroIllustration />
+              <PortraitFrame>
+                <Image
+                  src="/images/jasonrundell-profile-2026-02-02.jpg"
+                  alt="Jason Rundell"
+                  fill
+                  priority
+                  sizes="(min-width: 64rem) 40vw, (min-width: 48rem) 90vw, 100vw"
+                  style={{ objectFit: 'cover', objectPosition: '50% 15%' }}
+                />
+              </PortraitFrame>
+              <PortraitCaption>
+                <NameSignal>Jason Rundell</NameSignal>
+                <MonoLabel>Canada · remote-first</MonoLabel>
+              </PortraitCaption>
             </HeroArt>
           </HeroGrid>
         </Container>
