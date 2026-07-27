@@ -176,6 +176,10 @@
       "value": "#e6e8ec",
       "unit": "hex"
     },
+    "illoInk": {
+      "value": "#2e3338",
+      "unit": "hex"
+    },
     "onAccent": {
       "value": "#f7f8fa",
       "unit": "hex"

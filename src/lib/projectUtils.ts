@@ -15,5 +15,6 @@ export function toProjectCardItem(project: Project): ProjectCardItem {
     slug: project.slug,
     createdDate: project.createdDate,
     technology: project.technology,
+    featuredImage: project.featuredImage,
   }
 }

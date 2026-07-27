@@ -45,7 +45,10 @@ export default async function ProjectsPage() {
 
       <BandSection tone="surface">
         <Container>
-          <MoreProjects items={sortedProjects.map(toProjectCardItem)} />
+          <MoreProjects
+            items={sortedProjects.map(toProjectCardItem)}
+            showThumbnails
+          />
         </Container>
       </BandSection>
     </>

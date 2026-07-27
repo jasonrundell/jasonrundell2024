@@ -38,6 +38,7 @@ describe('toProjectCardItem', () => {
       slug: 'test-project',
       createdDate: '2025-01-01T00:00:00.000Z',
       technology: ['TypeScript', 'React'],
+      featuredImage: undefined,
     })
   })
 
@@ -49,7 +50,7 @@ describe('toProjectCardItem', () => {
     expect(result.technology).toEqual([])
   })
 
-  it('does not carry the featured image onto the card item', () => {
+  it('carries the featured image onto the card item so rows can show a thumbnail', () => {
     const project: Project = {
       ...baseProject,
       featuredImage: {
@@ -60,6 +61,15 @@ describe('toProjectCardItem', () => {
 
     const result = toProjectCardItem(project)
 
-    expect(result).not.toHaveProperty('featuredImage')
+    expect(result.featuredImage).toEqual({
+      src: '/content/projects/test-project/featured.webp',
+      alt: 'Alt text',
+    })
+  })
+
+  it('leaves the featured image undefined when the project has none', () => {
+    const result = toProjectCardItem(baseProject)
+
+    expect(result.featuredImage).toBeUndefined()
   })
 })

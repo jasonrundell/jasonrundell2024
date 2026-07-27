@@ -237,9 +237,36 @@
         border-top: 1px solid var(--color-border-subtle);
         padding: 1.5rem 0;
         display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 1.5rem;
+        max-width: 48rem;
+      }
+
+      .project-copy {
+        display: flex;
         flex-direction: column;
         gap: 0.6rem;
-        max-width: 34rem;
+        min-width: 0;
+      }
+
+      .project-thumb {
+        flex: none;
+        width: 240px;
+        aspect-ratio: 3 / 2;
+        border: 1px solid var(--color-border-subtle);
+        background: var(--color-bg);
+        object-fit: cover;
+        display: block;
+      }
+
+      @media (max-width: 34rem) {
+        .project-card {
+          flex-direction: column;
+        }
+        .project-thumb {
+          width: 100%;
+        }
       }
 
       .project-meta {
@@ -718,6 +745,52 @@
       >
     </ul>
 
+    <h3>Content imagery (project &amp; post featured images)</h3>
+    <p>
+      <strong>Supersedes the previous "No thumbnail" project-card rule.</strong>
+      Featured images were parsed but never rendered - only emitted into Open
+      Graph tags. They now carry real weight on <code>/projects</code> and
+      <code>/projects/[slug]</code>. Featured images are evidence, not
+      decoration: a screenshot of the thing running is craft proof. The
+      illustration system still owns every narrative section.
+    </p>
+    <ul>
+      <li
+        ><strong>Aspect <code>3 / 2</code>, always</strong> - author at 3:2 so no
+        layout has to crop meaningfully</li
+      >
+      <li
+        >Hairline <code>$lineSubtle</code> frame, sharp corners, no radius, no
+        shadow, no overlay - same frame language as the hero portrait</li
+      >
+      <li>No text, badges, or chips on the image; meta sits outside the frame</li>
+      <li
+        >Optional mono caption (<code>$inkFaint</code>, 11px) under a detail
+        hero only - never under a thumbnail</li
+      >
+      <li
+        >Weight and format governed by
+        <code>.claude/rules/image-optimization.mdc</code> - WebP, ≤1600px long
+        edge, ≤200 KB</li
+      >
+      <li
+        >Missing image → line-art placeholder in a <em>list row</em> (never a
+        grey box); on a <em>detail page</em> the image band is omitted
+        entirely</li
+      >
+    </ul>
+
+    <h3>Project placeholder (imageless projects)</h3>
+    <p>
+      Four of seven projects ship without a featured image, so the empty state is
+      a first-class part of the system. Continuous-line window mark on paper,
+      <code>#2E3338</code> stroke at 1.5, sharp corners, a single
+      <code>$accent</code> focal dot - same 3:2 box and hairline frame as a real
+      thumbnail. Pencil: <code>LA Project Placeholder</code> (240×160) /
+      <code>LA Project Placeholder Mobile</code> (350×233). Decorative only:
+      <code>alt=""</code>.
+    </p>
+
     <h2>Components</h2>
     <table>
       <thead>
@@ -760,10 +833,23 @@
         <tr>
           <td>Project card</td>
           <td>
-            Hairline-separated list row (no box): mono meta label → Newsreader
-            title → Geist description → mono tech stack → secondary
-            <code>View project →</code> link. No thumbnail. Whole row links to
+            Hairline-separated list row (no box). Desktop: 240×160 (3:2)
+            thumbnail left, 32px gap, copy right. Mobile: full-width thumbnail
+            stacked above. Copy order: mono meta label → Newsreader title →
+            Geist description (capped 620px) → mono tech stack → secondary
+            <code>View project →</code> link. Imageless projects use the
+            line-art placeholder. Whole row links to
             <code>/projects/[slug]</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>Project detail</td>
+          <td>
+            Title band (breadcrumb → mono meta → Newsreader 48 title → Geist 18
+            lead ≤720px → accent link row), then the featured image at full
+            container width, 3:2, hairline frame, optional mono caption. Body
+            below: 260px Tech stack sidebar + <code>fill_container</code> main
+            column capped at 640px. Gallery is a 3-up row in the main column.
           </td>
         </tr>
       </tbody>
@@ -779,29 +865,56 @@
       Project card pattern (with CTA)
     </h3>
     <div class="project-card">
-      <div class="project-meta">2026</div>
-      <div class="project-title">Coding Fundamentals</div>
-      <div class="project-desc">
-        Reusable Cursor rules, skills, and install helpers that turn durable
-        software principles into practical AI-assisted development guidance.
+      <img
+        class="project-thumb"
+        src="../content/projects/palknobs/featured.webp"
+        alt="PalKnobs world settings editor"
+      />
+      <div class="project-copy">
+        <div class="project-meta">2026</div>
+        <div class="project-title">PalKnobs</div>
+        <div class="project-desc">
+          A Windows desktop app for editing a Palworld dedicated server's
+          PalWorldSettings.ini - 120 settings with real labels, plain-English
+          descriptions, and proper controls.
+        </div>
+        <div class="project-stack">Electron · React 19 · TypeScript · Vite</div>
+        <a class="project-cta" href="#">View project →</a>
       </div>
-      <div class="project-stack">Cursor · Markdown · Shell</div>
-      <a class="project-cta" href="#">View project →</a>
     </div>
     <div class="project-card">
-      <div class="project-meta">2025 · Winner</div>
-      <div class="project-title">ARC Line</div>
-      <div class="project-desc">
-        Voice-based multi-hotline for the ARC Raiders universe - Twilio
-        ConversationRelay, moderation pipeline, ElevenLabs.
-      </div>
-      <div class="project-stack"
-        >Node · TypeScript · Fastify · Twilio · Supabase</div
+      <svg
+        class="project-thumb"
+        viewBox="0 0 200 150"
+        role="presentation"
+        aria-hidden="true"
       >
-      <a class="project-cta" href="#">View project →</a>
+        <path
+          d="M28 30 H172 V120 H28 Z M28 50 H172 M46 70 H124 M46 88 H154 M46 106 H100"
+          fill="none"
+          stroke="#2E3338"
+          stroke-width="1.5"
+        />
+        <circle cx="158" cy="106" r="6.5" fill="#1F4D3A" />
+      </svg>
+      <div class="project-copy">
+        <div class="project-meta">
+          2026 · <span style="color: var(--color-brass)">Retired</span>
+        </div>
+        <div class="project-title">Coding Fundamentals</div>
+        <div class="project-desc">
+          A portable pack of Cursor rules, skills, and install helpers that
+          turned durable software principles into AI-assisted development
+          guidance.
+        </div>
+        <div class="project-stack">Cursor · Markdown · PowerShell · Bash</div>
+        <a class="project-cta" href="#">View project →</a>
+      </div>
     </div>
     <p class="muted">
-      No thumbnail. The whole row links to the project; the accent
+      240×160 (3:2) thumbnail, hairline frame, sharp corners. Projects without a
+      featured image get the continuous-line placeholder at the same box, so the
+      list rhythm never breaks. The whole row links to the project; the accent
       <code>View project →</code> link is the explicit affordance and deepens to
       <code>#2F5D50</code> on hover.
     </p>
@@ -830,6 +943,11 @@
           <td>Secondary link</td>
           <td>#1A1A1A</td>
           <td>#1F4D3A</td>
+        </tr>
+        <tr>
+          <td>Project thumbnail</td>
+          <td>Hairline frame</td>
+          <td>Frame border → accent; image does not scale or tilt</td>
         </tr>
         <tr>
           <td>Project card <code>View project →</code></td>

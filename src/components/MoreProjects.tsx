@@ -8,6 +8,8 @@ import { RevealStaggerGroup, RevealStaggerItem } from '@/styles/motion'
 
 interface MoreProjectsProps {
   items: ProjectCardItem[]
+  /** Render each row with its 3:2 featured-image thumbnail. */
+  showThumbnails?: boolean
 }
 
 const StyledList = styled('div')`
@@ -15,7 +17,10 @@ const StyledList = styled('div')`
   flex-direction: column;
 `
 
-export default function MoreProjects({ items }: MoreProjectsProps) {
+export default function MoreProjects({
+  items,
+  showThumbnails = false,
+}: MoreProjectsProps) {
   return (
     <section id="more-projects">
       <RevealStaggerGroup>
@@ -28,6 +33,8 @@ export default function MoreProjects({ items }: MoreProjectsProps) {
                 excerpt={project.excerpt}
                 createdDate={project.createdDate}
                 technology={project.technology}
+                featuredImage={project.featuredImage}
+                showThumbnail={showThumbnails}
               />
             </RevealStaggerItem>
           ))}

@@ -262,6 +262,44 @@ describe('content display components', () => {
     ).toHaveAttribute('href', '/projects/matter-ops')
   })
 
+  it('renders the project row thumbnail when showThumbnail is enabled', () => {
+    render(
+      <ProjectPreview
+        title="PalKnobs"
+        slug="palknobs"
+        excerpt="A Windows desktop app."
+        createdDate="2026-07-26T12:00:00.000Z"
+        technology={['Electron']}
+        featuredImage={{
+          src: '/content/projects/palknobs/featured.webp',
+          alt: 'PalKnobs editor',
+        }}
+        showThumbnail
+      />
+    )
+
+    expect(screen.getByAltText('PalKnobs editor')).toHaveAttribute(
+      'src',
+      '/content/projects/palknobs/featured.webp'
+    )
+  })
+
+  it('falls back to the line-art placeholder when a project has no featured image', () => {
+    const { container } = render(
+      <ProjectPreview
+        title="Matter Ops"
+        slug="matter-ops"
+        excerpt="An operational dashboard."
+        createdDate="2026-01-01T00:00:00.000Z"
+        technology={['React']}
+        showThumbnail
+      />
+    )
+
+    expect(container.querySelector('svg')).toBeInTheDocument()
+    expect(screen.queryByRole('img')).not.toBeInTheDocument()
+  })
+
   it('renders post and project preview lists', () => {
     render(
       <>

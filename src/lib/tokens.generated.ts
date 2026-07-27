@@ -224,6 +224,11 @@ const Tokens = {
       "unit": "hex",
       "var": "var(--color-line-subtle)"
     },
+    "illoInk": {
+      "value": "#2e3338",
+      "unit": "hex",
+      "var": "var(--color-illo-ink)"
+    },
     "onAccent": {
       "value": "#f7f8fa",
       "unit": "hex",
