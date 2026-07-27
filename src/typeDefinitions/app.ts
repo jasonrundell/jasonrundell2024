@@ -73,6 +73,8 @@ export type ProjectCardItem = {
   /** ISO 8601 string; the card shows its year as the meta label */
   createdDate: string
   technology: string[]
+  /** Optional 3:2 thumbnail; rows without one fall back to the line-art placeholder */
+  featuredImage?: ContentImage
 }
 
 export interface Post {

@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import { styled } from '@pigment-css/react'
 
+import ProjectPreviewImage from './ProjectPreviewImage'
 import Tokens from '@/lib/tokens'
+import type { ContentImage } from '@/typeDefinitions/app'
+
+const bp = `${Tokens.sizes.breakpoints.medium.value}${Tokens.sizes.breakpoints.medium.unit}`
 
 interface ProjectPreviewProps {
   title: string
@@ -9,6 +13,12 @@ interface ProjectPreviewProps {
   slug: string
   createdDate: string
   technology: string[]
+  featuredImage?: ContentImage
+  /**
+   * Show the 3:2 thumbnail column. Off by default so the homepage list keeps
+   * its approved text-only composition; `/projects` opts in.
+   */
+  showThumbnail?: boolean
 }
 
 const StyledRow = styled('article')`
@@ -17,6 +27,32 @@ const StyledRow = styled('article')`
   gap: 0.625rem;
   padding: 1.75rem 0;
   border-top: 1px solid ${Tokens.colors.lineSubtle.var};
+
+  &[data-with-thumbnail='true'] {
+    gap: 1rem;
+
+    @media (min-width: ${bp}) {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+  }
+`
+
+const StyledThumb = styled('div')`
+  width: 100%;
+
+  @media (min-width: ${bp}) {
+    flex: none;
+    width: 15rem;
+  }
+`
+
+const StyledCopy = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  min-width: 0;
 `
 
 const StyledMeta = styled('p')`
@@ -47,6 +83,7 @@ const StyledExcerpt = styled('p')`
   color: ${Tokens.colors.inkMuted.var};
   font-size: 1rem;
   line-height: 1.5;
+  max-width: 38.75rem;
   margin: 0;
 `
 
@@ -78,6 +115,8 @@ export default function ProjectPreview({
   excerpt,
   createdDate,
   technology,
+  featuredImage,
+  showThumbnail = false,
 }: ProjectPreviewProps) {
   const year = new Date(createdDate).getUTCFullYear()
   if (Number.isNaN(year)) {
@@ -89,18 +128,30 @@ export default function ProjectPreview({
   const href = `/projects/${slug}`
 
   return (
-    <StyledRow>
-      <StyledMeta>{year}</StyledMeta>
-      <StyledHeading>
-        <Link href={href}>{title}</Link>
-      </StyledHeading>
-      <StyledExcerpt>{excerpt}</StyledExcerpt>
-      {technology.length > 0 && (
-        <StyledStack>{technology.join(' · ')}</StyledStack>
+    <StyledRow data-with-thumbnail={showThumbnail ? 'true' : undefined}>
+      {showThumbnail && (
+        <StyledThumb>
+          <ProjectPreviewImage
+            title={title}
+            slug={slug}
+            url={featuredImage?.src}
+            altText={featuredImage?.alt}
+          />
+        </StyledThumb>
       )}
-      <StyledCta href={href} aria-label={`View project: ${title}`}>
-        View project &rarr;
-      </StyledCta>
+      <StyledCopy>
+        <StyledMeta>{year}</StyledMeta>
+        <StyledHeading>
+          <Link href={href}>{title}</Link>
+        </StyledHeading>
+        <StyledExcerpt>{excerpt}</StyledExcerpt>
+        {technology.length > 0 && (
+          <StyledStack>{technology.join(' · ')}</StyledStack>
+        )}
+        <StyledCta href={href} aria-label={`View project: ${title}`}>
+          View project &rarr;
+        </StyledCta>
+      </StyledCopy>
     </StyledRow>
   )
 }

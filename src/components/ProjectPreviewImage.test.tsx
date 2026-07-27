@@ -1,40 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import ProjectPreviewImage from './ProjectPreviewImage'
 
-jest.mock('next/image', () => {
-  return function MockImage({
-    src,
-    alt,
-    ...rest
-  }: {
-    src: unknown
-    alt: string
-    [key: string]: unknown
-  }) {
-    const resolved =
-      typeof src === 'string'
-        ? src
-        : ((src as { src?: string } | undefined)?.src ??
-          'static-import-placeholder')
-    const htmlProps = { ...rest } as Record<string, unknown>
-    delete htmlProps.fill
-    delete htmlProps.sizes
-    delete htmlProps.style
-    delete htmlProps.priority
-    delete htmlProps.quality
-    delete htmlProps.loader
-    // eslint-disable-next-line @next/next/no-img-element
-    return (
-      <img
-        src={resolved}
-        alt={alt}
-        data-testid="next-image"
-        {...(htmlProps as React.ImgHTMLAttributes<HTMLImageElement>)}
-      />
-    )
-  }
-})
-
 jest.mock('next/link', () => {
   return function MockLink({
     children,
@@ -86,8 +52,8 @@ describe('ProjectPreviewImage', () => {
       expect(img).toHaveAttribute('alt', 'Matter Ops dashboard')
     })
 
-    it('does NOT render the local placeholder when URL is provided', () => {
-      render(
+    it('does NOT render the line-art placeholder when a URL is provided', () => {
+      const { container } = render(
         <ProjectPreviewImage
           title="Matter Ops"
           slug="matter-ops"
@@ -95,22 +61,28 @@ describe('ProjectPreviewImage', () => {
         />
       )
 
-      expect(screen.queryByTestId('next-image')).not.toBeInTheDocument()
+      expect(container.querySelector('svg')).not.toBeInTheDocument()
     })
   })
 
   describe('URL missing - placeholder fallback', () => {
-    it('renders the local placeholder Image when no URL is provided', () => {
-      render(<ProjectPreviewImage title="ARC Line" slug="arcline" />)
+    it('renders the line-art placeholder when no URL is provided', () => {
+      const { container } = render(
+        <ProjectPreviewImage title="ARC Line" slug="arcline" />
+      )
 
-      expect(screen.getByTestId('next-image')).toBeInTheDocument()
+      expect(container.querySelector('svg')).toBeInTheDocument()
       expect(screen.queryByTestId('content-image')).not.toBeInTheDocument()
     })
 
-    it('renders the placeholder with an empty alt (purely decorative)', () => {
-      render(<ProjectPreviewImage title="ARC Line" slug="arcline" />)
+    it('hides the placeholder from assistive tech (purely decorative)', () => {
+      const { container } = render(
+        <ProjectPreviewImage title="ARC Line" slug="arcline" />
+      )
 
-      expect(screen.getByTestId('next-image')).toHaveAttribute('alt', '')
+      const svg = container.querySelector('svg')
+      expect(svg).toHaveAttribute('aria-hidden', 'true')
+      expect(svg).toHaveAttribute('role', 'presentation')
     })
   })
 
@@ -129,10 +101,10 @@ describe('ProjectPreviewImage', () => {
     })
 
     it('renders without a link wrapper when no slug is provided', () => {
-      render(<ProjectPreviewImage title="ARC Line" />)
+      const { container } = render(<ProjectPreviewImage title="ARC Line" />)
 
       expect(screen.queryByRole('link')).not.toBeInTheDocument()
-      expect(screen.getByTestId('next-image')).toBeInTheDocument()
+      expect(container.querySelector('svg')).toBeInTheDocument()
     })
   })
 })

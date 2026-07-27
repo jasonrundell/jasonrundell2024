@@ -4,7 +4,11 @@
 > **Canonical for AI:** this file  
 > **Human review:**
 > [`design/style-guide.html`](../../../design/style-guide.html)  
-> **Mocks:** [`design/site.pen`](../../../design/site.pen) - Line-Art frames  
+> **Mocks:** [`design/site.pen`](../../../design/site.pen) - Line-Art frames.
+> Featured-image work (pending approval): `Line-Art - Projects List Desktop
+> (Thumbnails)`, `Line-Art - Projects List Mobile (Thumbnails)`, `Line-Art -
+> Project Detail Desktop`, `Line-Art - Project Detail Mobile`, plus the
+> `LA Project Placeholder` components.  
 > **Strategy partner:**
 > [`leadership-rebrand-site`](../leadership-rebrand-site/SKILL.md)
 
@@ -181,6 +185,48 @@ owns every interior section; the photo does not spread across the site.
   effect. Honours `prefers-reduced-motion`.
 - **A11y:** meaningful `alt` ("Jason Rundell"); `priority` for LCP.
 
+### Content imagery (project & post featured images)
+
+> **Supersedes the previous "No thumbnail" project-card rule.** Featured images
+> were parsed but never rendered — only emitted into Open Graph tags. They now
+> carry real weight on `/projects` and `/projects/[slug]`.
+
+Featured images are **evidence, not decoration** — a screenshot of the thing
+running is craft proof. They are the one place besides the hero portrait where
+photography/raster beats line art. The illustration system still owns every
+narrative section (hero, How I lead, Selected work bands).
+
+- **Aspect: `3 / 2`, always.** Author featured images at 3:2 so no layout has to
+  crop meaningfully. Thumbnails render 240×160, detail heroes render full
+  container width at 3:2.
+- **Frame:** hairline `$lineSubtle`, sharp corners, no radius, no shadow, no
+  overlay. Same frame language as the hero portrait.
+- **No text, badges, or chips on the image.** Year, tags, and titles sit outside
+  the frame in normal flow.
+- **Caption:** optional single mono line (`$inkFaint`, 11px) directly under a
+  detail hero. Never under a thumbnail.
+- **Weight and format:** governed by
+  [`.claude/rules/image-optimization.mdc`](../../rules/image-optimization.mdc) —
+  WebP, ≤1600px long edge, ≤200 KB for a featured image. No exceptions for
+  "temporary" art.
+- **Missing image:** in a **list row**, render the line-art placeholder (below)
+  so the rhythm holds — never a grey box, never a stretched logo, never a
+  collapsed row. On a **detail page**, omit the image band entirely; a
+  full-bleed placeholder hero is more empty line art than the page can carry.
+
+### Project placeholder (imageless projects)
+
+Four of seven projects ship without a featured image, so the empty state is a
+first-class part of the system, not an afterthought.
+
+- Continuous-line window mark on `$surfacePrimary`, `#2E3338` stroke at 1.5,
+  sharp corners — obeys the one-focal rule with a single `$accent` dot.
+- Same 3:2 box and hairline frame as a real thumbnail, so list rhythm never
+  breaks between an image row and a placeholder row.
+- Pencil: `LA Project Placeholder` (240×160) / `LA Project Placeholder Mobile`
+  (350×233).
+- Decorative only — `alt=""`, never announced to screen readers.
+
 ## Components
 
 | Element       | Rules                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
@@ -191,7 +237,8 @@ owns every interior section; the photo does not spread across the site.
 | Mobile nav    | Closed: Brand + “Menu” (`LA Nav Mobile`). Open: full-height `$ink` sheet with Close (`#A8A29E`), large Newsreader links, primary CTA (`Line-Art - Mobile Menu Open`)                                                                                                                                                                                                                                                                                                       |
 | Footer        | Dark `$ink` band; Navigate / Connect / Engage columns; engagement modes in mono note. Reusable Pencil: `LA Footer`                                                                                                                                                                                                                                                                                                                                                         |
 | Cards         | Default none in hero; mode tiles only in “Ways to work” (interaction/choice)                                                                                                                                                                                                                                                                                                                                                                                               |
-| Project card  | Hairline-separated list row (top `$lineSubtle` rule, no box), stacked: mono meta label (`$accent`, e.g. year / award) → Newsreader title (`$ink`, 24 desktop / 18 mobile) → Geist description (`$inkMuted`) → mono tech stack (`$inkFaint`) → secondary **`View project →`** link (`$accent`, Geist 600, 8px above). No thumbnail. Whole row links to `/projects/[slug]`; the arrow link is the explicit affordance. Pencil: `Line-Art - Selected Work Desktop` / `Mobile` |
+| Project card  | Hairline-separated list row (top `$lineSubtle` rule, no box). **Desktop:** horizontal — 240×160 (3:2) thumbnail left, 32px gap, copy column right. **Mobile:** stacked — full-width 3:2 thumbnail above the copy. Copy order is unchanged: mono meta label (`$accent` year · `$brass` status/award tag) → Newsreader title (`$ink`, 24 desktop / 20 mobile) → Geist description (`$inkMuted`, capped at 620px so the measure stays under 60ch) → mono tech stack (`$brass`) → secondary **`View project →`** link (`$accent`, Geist 600, 8px above). Imageless projects use the line-art placeholder at the same 3:2 box. Whole row links to `/projects/[slug]`; the arrow link is the explicit affordance. Pencil: `Line-Art - Projects List Desktop (Thumbnails)` / `Mobile` |
+| Project detail| Title band on `$surfacePrimary` (breadcrumb → mono meta → Newsreader 48 title → Geist 18 lead ≤720px → accent link row), then the featured image full container width at 3:2 with a hairline frame and optional mono caption, then a two-column body on `$surfaceSecondary` — 260px sidebar (Tech stack as a hairline-separated mono list, then a brass license/constraint line) and a `fill_container` main column capped at 640px. Gallery, when present, is a 3-up row inside the main column. Mobile collapses to a single column with the stack list below the body. Pencil: `Line-Art - Project Detail Desktop` / `Mobile` |
 
 ## Hover / interactive states
 
@@ -202,6 +249,7 @@ owns every interior section; the photo does not spread across the site.
 | Secondary link                | `$ink`                 | `$accent`                                                       |
 | Project card `View project →` | `$accent` text         | `$accentSoft`; arrow nudges right (no underline)                |
 | Project card (row)            | `$lineSubtle` top rule | card region tints toward `$surfaceSecondary`; title → `$accent` |
+| Project thumbnail             | Hairline frame         | frame border → `$accent`; image itself does not scale or tilt   |
 | Footer link                   | `#D6D3D1`              | `#F7F8FA`                                                       |
 | Mobile Menu                   | `$inkMuted`            | `$ink`; open drawer uses `$onInk` links + `#D6D3D1` secondary   |
 

@@ -1,0 +1,100 @@
+---
+description: Web optimisation budgets and rendering rules for every image shipped on jasonrundell.com
+globs: content/**,public/**,src/components/**
+alwaysApply: true
+---
+
+# Image optimisation
+
+Every image that reaches a browser — featured images, inline content images,
+galleries, social cards, UI assets — must be optimised **before it is committed**.
+Next.js resizes on request, but an unoptimised source still costs repo weight,
+deploy size, optimiser CPU, and cache storage. Optimise at the source.
+
+Never commit a screenshot, export, or AI-generated image straight from the tool
+that produced it. That is the single most common way an oversized asset lands in
+`content/`.
+
+## Format
+
+| Use                                 | Format                             |
+| ----------------------------------- | ---------------------------------- |
+| Photos, screenshots, generated art  | **WebP** (AVIF acceptable)         |
+| Icons, logos, diagrams, line art    | **SVG**                            |
+| Genuine lossless / hard transparency| PNG — justify it in the PR         |
+| Anything else                       | Not JPEG, not GIF, not BMP         |
+
+- **The file extension must match the actual encoding.** A PNG named
+  `featured.webp` fools reviewers and ships the unoptimised bytes anyway.
+  Verify with `sharp(path).metadata()` — trust `format`, not the filename.
+- Animation: prefer a muted, looping `<video>` (WebM/MP4) over an animated GIF.
+
+## Budgets
+
+Hard ceilings. If an asset exceeds one, resize or re-encode — do not commit and
+"fix later".
+
+| Role                                     | Max long edge | Max file size |
+| ---------------------------------------- | ------------- | ------------- |
+| Featured / hero (`featured.*`)           | 1600 px       | **200 KB**    |
+| Inline body image                        | 1200 px       | **150 KB**    |
+| Gallery item, card thumbnail, avatar     | 800 px        | **60 KB**     |
+| Open Graph card (`public/images/og-*`)   | 1200×630      | **150 KB**    |
+
+The layout container maxes out at `75rem` (1200 px) and body copy at `60ch`, so
+nothing needs a 2500 px source. Retina is already covered by `next/image`
+srcsets generated from a 1600 px original.
+
+## Producing an optimised asset
+
+`sharp` is already a dependency — no new tooling required:
+
+```bash
+node -e "require('sharp')('in.png').resize({width:1600,withoutEnlargement:true}).webp({quality:80}).toFile('featured.webp')"
+```
+
+Start at `quality: 80`. Drop toward 65 for photographic images that are still
+over budget; screenshots with flat colour usually pass at 80 or higher.
+
+Check what you produced before committing:
+
+```bash
+node -e "require('sharp')('featured.webp').metadata().then(m=>console.log(m.format,m.width+'x'+m.height))"
+```
+
+## Rendering
+
+- **Always render through `next/image`.** Use `ContentImage` for
+  `/content/...` string paths; use a static import for assets in `public/`.
+  Never write a raw `<img>` in `src/**` and never reference an image with a
+  bare `<img>` in MDX.
+- Every image needs either explicit `width`/`height` or `fill` **plus** a
+  `sizes` prop that reflects real layout width. Missing `sizes` on a `fill`
+  image makes Next serve the largest candidate — a silent CLS and bandwidth
+  regression.
+- Above-the-fold images (a project or post hero) get `priority`. Everything
+  below the fold stays lazy — that is the default; do not opt out.
+- `alt` is required. Describe the content for meaningful images; use `alt=""`
+  for purely decorative ones. Never repeat the adjacent heading verbatim.
+- Static imports (`public/`) give Next intrinsic dimensions and a blur
+  placeholder for free — prefer them for chrome and placeholder art.
+
+## Content images specifically
+
+- Images live co-located with their MDX (`content/<type>/<slug>/featured.webp`)
+  and are copied to `public/content/` by `scripts/sync-content-images.js` on
+  `predev` / `prebuild`. That script **copies; it does not optimise.** Whatever
+  weight you commit is exactly what ships.
+- `featuredImageAlt` in frontmatter is not optional when `featuredImage` is set.
+- Adding a new format to the sync script's allow-list means also adding it to
+  the table above.
+
+## Do not
+
+- Commit an image "temporarily" over budget.
+- Resize a large image down with CSS or `width`/`height` props instead of
+  re-encoding the file.
+- Add a remote pattern to `next.config.mjs` `images.remotePatterns` to dodge
+  optimising a local asset.
+- Upscale a small source to hit a dimension target — `withoutEnlargement: true`
+  exists for a reason.
