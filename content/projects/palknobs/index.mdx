@@ -1,0 +1,70 @@
+---
+title: 'PalKnobs'
+slug: 'palknobs'
+createdDate: '2026-07-26T12:00:00.000Z'
+excerpt:
+  'A Windows desktop app for editing a Palworld dedicated server’s
+  PalWorldSettings.ini — 120 settings with real labels, plain-English
+  descriptions, and proper controls, instead of one 4,000-character line of INI.'
+technology:
+  [
+    'Electron',
+    'React 19',
+    'TypeScript',
+    'Vite',
+    'Express 5',
+    'Node.js',
+    'Vitest',
+    'electron-builder',
+  ]
+link: 'https://github.com/jasonrundell/palknobs'
+featuredImage: './featured.webp'
+featuredImageAlt:
+  'PalKnobs desktop app showing the World settings screen with category filters
+  and labelled fields for server name, description, and passwords'
+featuredImageDescription: ''
+---
+
+Palworld's dedicated server stores every world setting in a single line of
+`PalWorldSettings.ini` — one `OptionSettings=(...)` blob, a few thousand
+characters wide, no line breaks, no comments. Want to double the capture rate?
+Find `CaptureRateAdd` somewhere in that wall of text, don't fat-finger a comma,
+and hope the server still boots. I ran a server for friends and did this exactly
+once before deciding I'd rather build an app than ever scroll sideways again.
+
+**PalKnobs** is that app. Install it, point it at your INI, and get all 120
+settings as toggles, sliders, and inputs — grouped into 13 categories, each with
+a description of what the setting _actually_ does in game.
+
+**How it works** An Express API parses and serializes the `OptionSettings=(...)`
+blob and a React UI renders it. In the desktop build, Electron boots that same
+API in-process, so there's no server to run and nothing to configure — it's one
+`.exe`. The parser quotes text and password FStrings correctly and refuses to
+write a malformed file, which matters a lot when the alternative is a server
+that won't start.
+
+**Features**
+
+- 120 settings across Server, Difficulty & Rates, Pals, PvP, Guilds, Voice Chat,
+  and more
+- Search and category filters, plus a live count of unsaved changes
+- Plain-English descriptions of each setting's gameplay effect — not just the
+  raw key name
+- Browse to any `PalWorldSettings.ini`; your choice is remembered
+- **Reload from file** to pick up edits made elsewhere, **Discard** to back out
+- Update banner when a newer GitHub release ships
+- Environment overrides (`PALSERVER_ROOT`, `PALSERVER_SETTINGS_PATH`) for
+  non-default Steam libraries
+
+**The honest caveats** It's Windows-only, because that's where PalServer
+actually lives. It isn't code-signed yet, so SmartScreen will give you the
+*"Windows protected your PC"* speech on first run — More info, then Run anyway.
+And it edits the file; it doesn't restart your server for you. That part's still
+on you.
+
+PalKnobs is unofficial and fan-made — not affiliated with or endorsed by
+Pocketpair, Inc.
+
+**License** MIT. Grab the installer from the
+[Releases](https://github.com/jasonrundell/palknobs/releases/latest) page, or
+build it from source if you'd rather.
