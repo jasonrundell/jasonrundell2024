@@ -9314,6 +9314,3334 @@
           "fontWeight": "normal"
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "g3Od7",
+      "x": 2800,
+      "y": 8040,
+      "name": "LA Project Placeholder",
+      "reusable": true,
+      "clip": true,
+      "width": 240,
+      "height": 160,
+      "fill": "$surfacePrimary",
+      "stroke": "$lineSubtle",
+      "strokeWidth": 1,
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "D7nzka",
+          "x": 20,
+          "y": 12,
+          "name": "Placeholder Line",
+          "geometry": "M28 30h144v90h-144z m0 20h144m-126 20h78m-78 18h108m-108 18h54",
+          "viewBox": [
+            0,
+            0,
+            200,
+            150
+          ],
+          "fill": "#00000000",
+          "width": 200,
+          "height": 136,
+          "stroke": "#2E3338",
+          "strokeWidth": 1.5,
+          "strokeLinecap": "square"
+        },
+        {
+          "type": "ellipse",
+          "id": "x8EBJp",
+          "x": 172,
+          "y": 100,
+          "name": "Focal Mark",
+          "fill": "$accent",
+          "width": 12,
+          "height": 12
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "WcUm3",
+      "x": 8522,
+      "y": 8218,
+      "name": "Line-Art - Projects List Desktop (Thumbnails)",
+      "clip": true,
+      "width": 1280,
+      "fill": "$surfacePrimary",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "jJo69",
+          "type": "ref",
+          "ref": "jInqi",
+          "name": "LA Nav",
+          "width": "fill_container",
+          "descendants": {
+            "b4zihP": {
+              "fill": "$ink",
+              "fontWeight": "600"
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "g5PUA",
+          "name": "List Header",
+          "width": "fill_container",
+          "fill": "$surfacePrimary",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            72,
+            64,
+            40,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "yOzH2",
+              "name": "Eyebrow Rule",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "id": "e2yCC",
+                  "name": "Tick L",
+                  "fill": "$accent",
+                  "width": 1.5,
+                  "height": 9
+                },
+                {
+                  "type": "rectangle",
+                  "id": "yjHtj",
+                  "name": "Rule",
+                  "fill": "$accent",
+                  "width": 48,
+                  "height": 1.5
+                },
+                {
+                  "type": "rectangle",
+                  "id": "bBIjG",
+                  "name": "Tick R",
+                  "fill": "$accent",
+                  "width": 1.5,
+                  "height": 9
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "aIPXb",
+              "name": "Eyebrow",
+              "fill": "$accent",
+              "content": "SELECTED WORK",
+              "fontFamily": "IBM Plex Mono",
+              "fontSize": 12,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "H7VT89",
+              "name": "Page Title",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": 760,
+              "content": "Things I’ve built and shipped",
+              "lineHeight": 1.12,
+              "fontFamily": "Newsreader",
+              "fontSize": 48,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "ScxLz",
+              "name": "Lead",
+              "fill": "$inkMuted",
+              "textGrowth": "fixed-width",
+              "width": 620,
+              "content": "A full index of projects I’ve shipped, contributed to, or built for the craft of it. Pick one for the stack and a short write-up.",
+              "lineHeight": 1.45,
+              "fontFamily": "Geist",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "x4lDh",
+          "name": "Project Rows",
+          "width": "fill_container",
+          "fill": "$surfaceSecondary",
+          "layout": "vertical",
+          "padding": [
+            8,
+            64,
+            72,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "N0GcJz",
+              "name": "Row PalKnobs",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 32,
+              "padding": [
+                32,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "kJkes",
+                  "name": "Thumb",
+                  "clip": true,
+                  "width": 240,
+                  "height": 160,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../content/projects/palknobs/featured.webp",
+                    "mode": "fill"
+                  },
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "FoKDL",
+                  "name": "Row Copy",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "P8kCTL",
+                      "name": "Meta",
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "b1ss9",
+                          "name": "Year",
+                          "fill": "$accent",
+                          "content": "2026",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "a1SugP",
+                      "name": "Title",
+                      "fill": "$ink",
+                      "content": "PalKnobs",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Vhy8t",
+                      "name": "Excerpt",
+                      "fill": "$inkMuted",
+                      "textGrowth": "fixed-width",
+                      "width": 620,
+                      "content": "A Windows desktop app for editing a Palworld dedicated server’s PalWorldSettings.ini — 120 settings with real labels, plain-English descriptions, and proper controls.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LbzZg",
+                      "name": "Tech",
+                      "fill": "$brass",
+                      "content": "Electron · React 19 · TypeScript · Vite",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Z7Jdo",
+                      "name": "CTA Row",
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "K7jp0l",
+                          "name": "View project",
+                          "fill": "$accent",
+                          "content": "View project →",
+                          "fontFamily": "Geist",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "C7vQOE",
+              "name": "Row Coding Fundamentals",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 32,
+              "padding": [
+                32,
+                0
+              ],
+              "children": [
+                {
+                  "id": "n4xyU0",
+                  "type": "ref",
+                  "ref": "g3Od7",
+                  "name": "Thumb Placeholder"
+                },
+                {
+                  "type": "frame",
+                  "id": "d0VbVI",
+                  "name": "Row Copy",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MJ9Ej",
+                      "name": "Meta",
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "G1yt0D",
+                          "name": "Year",
+                          "fill": "$accent",
+                          "content": "2026",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "XE0ex",
+                          "name": "Dot",
+                          "fill": "$inkFaint",
+                          "content": "·",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "X3MqRq",
+                          "name": "Tag",
+                          "fill": "$brass",
+                          "content": "Retired",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "nRUgg",
+                      "name": "Title",
+                      "fill": "$ink",
+                      "content": "Coding Fundamentals",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "c0twhu",
+                      "name": "Excerpt",
+                      "fill": "$inkMuted",
+                      "textGrowth": "fixed-width",
+                      "width": 620,
+                      "content": "A portable pack of Cursor rules, skills, and install helpers that turned durable software principles into AI-assisted development guidance.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "B4A7az",
+                      "name": "Tech",
+                      "fill": "$brass",
+                      "content": "Cursor · Markdown · PowerShell · Bash",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mtmJo",
+                      "name": "CTA Row",
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "k9rA1z",
+                          "name": "View project",
+                          "fill": "$accent",
+                          "content": "View project →",
+                          "fontFamily": "Geist",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "OW4sS",
+              "name": "Row Matter Ops",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 32,
+              "padding": [
+                32,
+                0
+              ],
+              "children": [
+                {
+                  "id": "cxMU2",
+                  "type": "ref",
+                  "ref": "g3Od7",
+                  "name": "Thumb Placeholder"
+                },
+                {
+                  "type": "frame",
+                  "id": "EXBo5",
+                  "name": "Row Copy",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "G1E6m",
+                      "name": "Meta",
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "cRVqS",
+                          "name": "Year",
+                          "fill": "$accent",
+                          "content": "2026",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "A7dLxq",
+                      "name": "Title",
+                      "fill": "$ink",
+                      "content": "Matter Ops",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "v7Hgu",
+                      "name": "Excerpt",
+                      "fill": "$inkMuted",
+                      "textGrowth": "fixed-width",
+                      "width": 620,
+                      "content": "Self-hosted smart home dashboard that discovers LAN devices with mDNS (Matter, HomeKit, Cast, AirPlay, HTTP) and shows them in a real-time React UI.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "JjSXK",
+                      "name": "Tech",
+                      "fill": "$brass",
+                      "content": "React · TypeScript · Vite · Tailwind",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "G0CPK",
+                      "name": "CTA Row",
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "h0lcs",
+                          "name": "View project",
+                          "fill": "$accent",
+                          "content": "View project →",
+                          "fontFamily": "Geist",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "TaKZl",
+              "name": "Row ARC Line",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 32,
+              "padding": [
+                32,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "PqBzs",
+                  "name": "Thumb",
+                  "clip": true,
+                  "width": 240,
+                  "height": 160,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../content/projects/arcline-twilio-hackathon/featured.webp",
+                    "mode": "fill"
+                  },
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "wpjFj",
+                  "name": "Row Copy",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "B8seiu",
+                      "name": "Meta",
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "M8BP77",
+                          "name": "Year",
+                          "fill": "$accent",
+                          "content": "2025",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Qyb5M",
+                          "name": "Dot",
+                          "fill": "$inkFaint",
+                          "content": "·",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hvAyq",
+                          "name": "Tag",
+                          "fill": "$brass",
+                          "content": "Winner",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "FqupK",
+                      "name": "Title",
+                      "fill": "$ink",
+                      "content": "ARC Line",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "gW1NM",
+                      "name": "Excerpt",
+                      "fill": "$inkMuted",
+                      "textGrowth": "fixed-width",
+                      "width": 620,
+                      "content": "A voice-based multi-hotline system for the ARC Raiders universe, built with Twilio ConversationRelay — call one number, pick a hotline.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dgxpO",
+                      "name": "Tech",
+                      "fill": "$brass",
+                      "content": "Node.js · TypeScript · Fastify · WebSocket",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ByqIr",
+                      "name": "CTA Row",
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "S6DFk",
+                          "name": "View project",
+                          "fill": "$accent",
+                          "content": "View project →",
+                          "fontFamily": "Geist",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "q7KHEg",
+              "name": "Row React Mega Menu",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 32,
+              "padding": [
+                32,
+                0
+              ],
+              "children": [
+                {
+                  "id": "T2ETB",
+                  "type": "ref",
+                  "ref": "g3Od7",
+                  "name": "Thumb Placeholder"
+                },
+                {
+                  "type": "frame",
+                  "id": "hyl66",
+                  "name": "Row Copy",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ZkFSB",
+                      "name": "Meta",
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "rncUh",
+                          "name": "Year",
+                          "fill": "$accent",
+                          "content": "2024",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "LNhJy",
+                      "name": "Title",
+                      "fill": "$ink",
+                      "content": "React Mega Menu",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FeC4j",
+                      "name": "Excerpt",
+                      "fill": "$inkMuted",
+                      "textGrowth": "fixed-width",
+                      "width": 620,
+                      "content": "An accessible, responsive boilerplate top navigation menu with a full mega-menu panel — ARIA, keyboard support, TypeScript.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Q91uH",
+                      "name": "Tech",
+                      "fill": "$brass",
+                      "content": "React 18 · TypeScript · ESLint · Jest",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wcZNP",
+                      "name": "CTA Row",
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "J242Zq",
+                          "name": "View project",
+                          "fill": "$accent",
+                          "content": "View project →",
+                          "fontFamily": "Geist",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "igmrU",
+              "name": "Row Dropship",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 32,
+              "padding": [
+                32,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "P0rZ5t",
+                  "name": "Thumb",
+                  "clip": true,
+                  "width": 240,
+                  "height": 160,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../content/projects/dropship/featured.webp",
+                    "mode": "fill"
+                  },
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "UZ19D",
+                  "name": "Row Copy",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "E5rTz",
+                      "name": "Meta",
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "TNCYl",
+                          "name": "Year",
+                          "fill": "$accent",
+                          "content": "2024",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "aSY72",
+                      "name": "Title",
+                      "fill": "$ink",
+                      "content": "Dropship",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nILjj",
+                      "name": "Excerpt",
+                      "fill": "$inkMuted",
+                      "textGrowth": "fixed-width",
+                      "width": 620,
+                      "content": "A React component design system using Chromatic and Storybook to visualize, test, and document UI components in isolation.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jxAAI",
+                      "name": "Tech",
+                      "fill": "$brass",
+                      "content": "React 18 · Storybook 8 · Chromatic · NPM",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "PZLjJ",
+                      "name": "CTA Row",
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "jjFBF",
+                          "name": "View project",
+                          "fill": "$accent",
+                          "content": "View project →",
+                          "fontFamily": "Geist",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Q1gNO",
+              "name": "Row JasonRundell.com",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 32,
+              "padding": [
+                32,
+                0
+              ],
+              "children": [
+                {
+                  "id": "k0Ao6",
+                  "type": "ref",
+                  "ref": "g3Od7",
+                  "name": "Thumb Placeholder"
+                },
+                {
+                  "type": "frame",
+                  "id": "Mw9Re",
+                  "name": "Row Copy",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "k1hLlD",
+                      "name": "Meta",
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "l0ah5t",
+                          "name": "Year",
+                          "fill": "$accent",
+                          "content": "2024",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "rPMwt",
+                      "name": "Title",
+                      "fill": "$ink",
+                      "content": "JasonRundell.com",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vewVX",
+                      "name": "Excerpt",
+                      "fill": "$inkMuted",
+                      "textGrowth": "fixed-width",
+                      "width": 620,
+                      "content": "This site — Next.js, MDX content, and a continuous redesign toward leadership + craft positioning.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Y2Vld",
+                      "name": "Tech",
+                      "fill": "$brass",
+                      "content": "Next.js 14 · React 18 · Vercel · Contentful",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n1lYi",
+                      "name": "CTA Row",
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "hmbfQ",
+                          "name": "View project",
+                          "fill": "$accent",
+                          "content": "View project →",
+                          "fontFamily": "Geist",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "RrHTh",
+          "name": "CTA Band",
+          "width": "fill_container",
+          "fill": "$surfacePrimary",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 64,
+          "children": [
+            {
+              "type": "text",
+              "id": "tZxzm",
+              "name": "CTA Title",
+              "fill": "$ink",
+              "content": "Need an improver at your inflection point?",
+              "fontFamily": "Newsreader",
+              "fontSize": 32,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "U7JI6N",
+              "name": "CTA Button",
+              "fill": "$accent",
+              "padding": [
+                14,
+                22
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "V3vuT",
+                  "name": "CTA Label",
+                  "fill": "#F7F8FA",
+                  "content": "Book a chat",
+                  "fontFamily": "Geist",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "i6L8AO",
+          "type": "ref",
+          "ref": "quyO9",
+          "name": "LA Footer",
+          "width": "fill_container"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Y7EMn",
+      "x": 9962,
+      "y": 8218,
+      "name": "Line-Art - Project Detail Desktop",
+      "clip": true,
+      "width": 1280,
+      "fill": "$surfacePrimary",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "AXXFD",
+          "type": "ref",
+          "ref": "jInqi",
+          "name": "LA Nav",
+          "width": "fill_container",
+          "descendants": {
+            "b4zihP": {
+              "fill": "$ink",
+              "fontWeight": "600"
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "ZrUj3",
+          "name": "Title Band",
+          "width": "fill_container",
+          "fill": "$surfacePrimary",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            48,
+            64,
+            36,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "U9rJBG",
+              "name": "Breadcrumb",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "BI6TN",
+                  "name": "Crumb Home",
+                  "fill": "$inkFaint",
+                  "content": "Home",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "UBL4v",
+                  "name": "Crumb /",
+                  "fill": "$inkFaint",
+                  "content": "/",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "RiUl5",
+                  "name": "Crumb Projects",
+                  "fill": "$inkFaint",
+                  "content": "Projects",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "g9kKQ",
+                  "name": "Crumb /",
+                  "fill": "$inkFaint",
+                  "content": "/",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "kihga",
+                  "name": "Crumb PalKnobs",
+                  "fill": "$inkMuted",
+                  "content": "PalKnobs",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "BJMls",
+              "name": "Meta",
+              "gap": 10,
+              "padding": [
+                10,
+                0,
+                0,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "oRHRw",
+                  "name": "Year",
+                  "fill": "$accent",
+                  "content": "2026",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "kFf0O",
+                  "name": "Dot",
+                  "fill": "$inkFaint",
+                  "content": "·",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "dduql",
+                  "name": "Tag",
+                  "fill": "$brass",
+                  "content": "Desktop app",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "us9KB",
+              "name": "Project Title",
+              "fill": "$ink",
+              "content": "PalKnobs",
+              "lineHeight": 1.12,
+              "fontFamily": "Newsreader",
+              "fontSize": 48,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "qcno4",
+              "name": "Project Lead",
+              "fill": "$inkMuted",
+              "textGrowth": "fixed-width",
+              "width": 720,
+              "content": "A Windows desktop app for editing a Palworld dedicated server’s PalWorldSettings.ini — 120 settings with real labels, plain-English descriptions, and proper controls, instead of one 4,000-character line of INI.",
+              "lineHeight": 1.45,
+              "fontFamily": "Geist",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "xRMMz",
+              "name": "Links",
+              "gap": 28,
+              "padding": [
+                8,
+                0,
+                0,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "PdZJh",
+                  "name": "GitHub Link",
+                  "fill": "$accent",
+                  "content": "Visit GitHub project →",
+                  "fontFamily": "Geist",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "pK1ND",
+                  "name": "Site Link",
+                  "fill": "$accent",
+                  "content": "Download latest release →",
+                  "fontFamily": "Geist",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Ft42d",
+          "name": "Featured Image Band",
+          "width": "fill_container",
+          "fill": "$surfacePrimary",
+          "layout": "vertical",
+          "padding": [
+            8,
+            64,
+            56,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "WTYlr",
+              "name": "Featured Image",
+              "clip": true,
+              "width": "fill_container",
+              "height": 768,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "../content/projects/palknobs/featured.webp",
+                "mode": "fill"
+              },
+              "stroke": "$lineSubtle",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "BYjpz",
+              "name": "Image Caption",
+              "fill": "$inkFaint",
+              "content": "PalKnobs editing PalWorldSettings.ini — 120 settings, 13 categories.",
+              "fontFamily": "IBM Plex Mono",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "a9RBL5",
+          "name": "Body Band",
+          "width": "fill_container",
+          "fill": "$surfaceSecondary",
+          "gap": 64,
+          "padding": [
+            64,
+            64,
+            72,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "hdxtc",
+              "name": "Sidebar",
+              "width": 260,
+              "layout": "vertical",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "WLxJM",
+                  "name": "Stack Heading",
+                  "fill": "$ink",
+                  "content": "Tech stack",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "JlesY",
+                  "name": "Stack List",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MrpcQ",
+                      "name": "Stack Electron",
+                      "width": "fill_container",
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": {
+                        "top": 1
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "YGOkt",
+                          "name": "Label",
+                          "fill": "$inkMuted",
+                          "content": "Electron",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "w8RkH",
+                      "name": "Stack React 19",
+                      "width": "fill_container",
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": {
+                        "top": 1
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "lIREy",
+                          "name": "Label",
+                          "fill": "$inkMuted",
+                          "content": "React 19",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VvOyp",
+                      "name": "Stack TypeScript",
+                      "width": "fill_container",
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": {
+                        "top": 1
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "B6TFu",
+                          "name": "Label",
+                          "fill": "$inkMuted",
+                          "content": "TypeScript",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "l04VWU",
+                      "name": "Stack Vite",
+                      "width": "fill_container",
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": {
+                        "top": 1
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "HkcGC",
+                          "name": "Label",
+                          "fill": "$inkMuted",
+                          "content": "Vite",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SMpWH",
+                      "name": "Stack Express 5",
+                      "width": "fill_container",
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": {
+                        "top": 1
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "l5fQmD",
+                          "name": "Label",
+                          "fill": "$inkMuted",
+                          "content": "Express 5",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "scpMS",
+                      "name": "Stack Node.js",
+                      "width": "fill_container",
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": {
+                        "top": 1
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "x2Ku7",
+                          "name": "Label",
+                          "fill": "$inkMuted",
+                          "content": "Node.js",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "b1fFHA",
+                      "name": "Stack Vitest",
+                      "width": "fill_container",
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": {
+                        "top": 1
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "yMI1g",
+                          "name": "Label",
+                          "fill": "$inkMuted",
+                          "content": "Vitest",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Z36LKu",
+                      "name": "Stack electron-builder",
+                      "width": "fill_container",
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": {
+                        "top": 1
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        8,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "nvePf",
+                          "name": "Label",
+                          "fill": "$inkMuted",
+                          "content": "electron-builder",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "LMnQP",
+                  "name": "License",
+                  "fill": "$brass",
+                  "content": "MIT · Windows only",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "lZYUw",
+              "name": "Main Column",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "x2o655",
+                  "name": "About Heading",
+                  "fill": "$ink",
+                  "content": "About",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "Fo8U8",
+                  "name": "Paragraph",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": 640,
+                  "content": "Palworld’s dedicated server stores every world setting in a single line of PalWorldSettings.ini — one OptionSettings=(...) blob, a few thousand characters wide, no line breaks, no comments. Want to double the capture rate? Find CaptureRateAdd somewhere in that wall of text, don’t fat-finger a comma, and hope the server still boots.",
+                  "lineHeight": 1.55,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "qXcZ8",
+                  "name": "Paragraph",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": 640,
+                  "content": "PalKnobs is that app. Install it, point it at your INI, and get all 120 settings as toggles, sliders, and inputs — grouped into 13 categories, each with a description of what the setting actually does in game.",
+                  "lineHeight": 1.55,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "hkZHa",
+                  "name": "Paragraph",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": 640,
+                  "content": "An Express API parses and serializes the blob and a React UI renders it. In the desktop build, Electron boots that same API in-process, so there’s no server to run and nothing to configure — it’s one .exe.",
+                  "lineHeight": 1.55,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "EBvli",
+                  "name": "Gallery Heading",
+                  "fill": "$ink",
+                  "content": "Gallery",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "ACMkW",
+                  "name": "Gallery Row",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NabJe",
+                      "name": "Gallery 01",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 150,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "../content/projects/arcline-twilio-hackathon/gallery/01.webp",
+                        "mode": "fill"
+                      },
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nHFuU",
+                      "name": "Gallery 02",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 150,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "../content/projects/arcline-twilio-hackathon/gallery/02.webp",
+                        "mode": "fill"
+                      },
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "x1KtKJ",
+                      "name": "Gallery 03",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 150,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "../content/projects/arcline-twilio-hackathon/gallery/03.webp",
+                        "mode": "fill"
+                      },
+                      "stroke": "$lineSubtle",
+                      "strokeWidth": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "E2Ys0",
+          "name": "CTA Band",
+          "width": "fill_container",
+          "fill": "$surfacePrimary",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 64,
+          "children": [
+            {
+              "type": "text",
+              "id": "m0JIP",
+              "name": "CTA Title",
+              "fill": "$ink",
+              "content": "Need an improver at your inflection point?",
+              "fontFamily": "Newsreader",
+              "fontSize": 32,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "apIJU",
+              "name": "CTA Button",
+              "fill": "$accent",
+              "padding": [
+                14,
+                22
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "dZhta",
+                  "name": "CTA Label",
+                  "fill": "#F7F8FA",
+                  "content": "Book a chat",
+                  "fontFamily": "Geist",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ovcIv",
+          "type": "ref",
+          "ref": "quyO9",
+          "name": "LA Footer",
+          "width": "fill_container"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "mo3TN",
+      "x": 3120,
+      "y": 8040,
+      "name": "LA Project Placeholder Mobile",
+      "reusable": true,
+      "clip": true,
+      "width": 350,
+      "height": 233,
+      "fill": "$surfacePrimary",
+      "stroke": "$lineSubtle",
+      "strokeWidth": 1,
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "MvHnG",
+          "x": 29,
+          "y": 17,
+          "name": "Placeholder Line",
+          "geometry": "M28 30h144v90h-144z m0 20h144m-126 20h78m-78 18h108m-108 18h54",
+          "viewBox": [
+            0,
+            0,
+            200,
+            150
+          ],
+          "fill": "#00000000",
+          "width": 292,
+          "height": 199,
+          "stroke": "#2E3338",
+          "strokeWidth": 1.5,
+          "strokeLinecap": "square"
+        },
+        {
+          "type": "ellipse",
+          "id": "RiSU8",
+          "x": 251,
+          "y": 146,
+          "name": "Focal Mark",
+          "fill": "$accent",
+          "width": 17,
+          "height": 17
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "BJ3Rq",
+      "x": 11402,
+      "y": 8218,
+      "name": "Line-Art - Projects List Mobile (Thumbnails)",
+      "clip": true,
+      "width": 390,
+      "fill": "$surfacePrimary",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "ksbuC",
+          "type": "ref",
+          "ref": "afJyd",
+          "name": "LA Nav Mobile",
+          "width": "fill_container"
+        },
+        {
+          "type": "frame",
+          "id": "GuPjc",
+          "name": "Header",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            28,
+            20,
+            18,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "iH5ZG",
+              "name": "Eyebrow Rule",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "id": "qzXvx",
+                  "name": "Tick L",
+                  "fill": "$accent",
+                  "width": 1.5,
+                  "height": 8
+                },
+                {
+                  "type": "rectangle",
+                  "id": "ccWpu",
+                  "name": "Rule",
+                  "fill": "$accent",
+                  "width": 36,
+                  "height": 1.5
+                },
+                {
+                  "type": "rectangle",
+                  "id": "Yx4JE",
+                  "name": "Tick R",
+                  "fill": "$accent",
+                  "width": 1.5,
+                  "height": 8
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "jgbN9",
+              "name": "Eyebrow",
+              "fill": "$accent",
+              "content": "SELECTED WORK",
+              "fontFamily": "IBM Plex Mono",
+              "fontSize": 11,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "Owinm",
+              "name": "Page Title",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Things I’ve built and shipped",
+              "lineHeight": 1.15,
+              "fontFamily": "Newsreader",
+              "fontSize": 30,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "jyFYl",
+              "name": "Lead",
+              "fill": "$inkMuted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "A full index of projects I’ve shipped, contributed to, or built for the craft of it.",
+              "lineHeight": 1.45,
+              "fontFamily": "Geist",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "eikfe",
+          "name": "Project Rows",
+          "width": "fill_container",
+          "fill": "$surfaceSecondary",
+          "layout": "vertical",
+          "padding": [
+            0,
+            20,
+            36,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Ccpob",
+              "name": "Row PalKnobs",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                24,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "vz5nm",
+                  "name": "Thumb",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 233,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../content/projects/palknobs/featured.webp",
+                    "mode": "fill"
+                  },
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "nr5ii",
+                  "name": "Meta",
+                  "gap": 8,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "blg1R",
+                      "name": "Year",
+                      "fill": "$accent",
+                      "content": "2026",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Yd8XH",
+                  "name": "Title",
+                  "fill": "$ink",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "PalKnobs",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "bO1Ir",
+                  "name": "Excerpt",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "A Windows desktop app for editing a Palworld dedicated server’s PalWorldSettings.ini — 120 settings with real labels and proper controls.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Zeft7",
+                  "name": "Tech",
+                  "fill": "$brass",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Electron · React 19 · Vite",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "RHuXm",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "L8x9KB",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zx02p",
+              "name": "Row Coding Fundamentals",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                24,
+                0
+              ],
+              "children": [
+                {
+                  "id": "hWOhI",
+                  "type": "ref",
+                  "ref": "mo3TN",
+                  "name": "Thumb Placeholder",
+                  "width": "fill_container"
+                },
+                {
+                  "type": "frame",
+                  "id": "gOqia",
+                  "name": "Meta",
+                  "gap": 8,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "V5Sfg",
+                      "name": "Year",
+                      "fill": "$accent",
+                      "content": "2026",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xz4Lh",
+                      "name": "Dot",
+                      "fill": "$inkFaint",
+                      "content": "·",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ozPnb",
+                      "name": "Tag",
+                      "fill": "$brass",
+                      "content": "Retired",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "bENjz",
+                  "name": "Title",
+                  "fill": "$ink",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Coding Fundamentals",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "EAKAr",
+                  "name": "Excerpt",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "A portable pack of Cursor rules, skills, and install helpers for AI-assisted development.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "GCDOz",
+                  "name": "Tech",
+                  "fill": "$brass",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Cursor · Markdown · Bash",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "GRNWf",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Oyr4M",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZNqpL",
+              "name": "Row Matter Ops",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                24,
+                0
+              ],
+              "children": [
+                {
+                  "id": "o3NNbE",
+                  "type": "ref",
+                  "ref": "mo3TN",
+                  "name": "Thumb Placeholder",
+                  "width": "fill_container"
+                },
+                {
+                  "type": "frame",
+                  "id": "MX7bO",
+                  "name": "Meta",
+                  "gap": 8,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qTKeX",
+                      "name": "Year",
+                      "fill": "$accent",
+                      "content": "2026",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "pQ2np",
+                  "name": "Title",
+                  "fill": "$ink",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Matter Ops",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "en4VV",
+                  "name": "Excerpt",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Self-hosted smart home dashboard that discovers LAN devices with mDNS and shows them in a real-time React UI.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "MswCD",
+                  "name": "Tech",
+                  "fill": "$brass",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "React · Express · SQLite",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "Fjlhw",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MtYXF",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nMkpw",
+              "name": "Row ARC Line",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                24,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "S93LwD",
+                  "name": "Thumb",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 233,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../content/projects/arcline-twilio-hackathon/featured.webp",
+                    "mode": "fill"
+                  },
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "BszHk",
+                  "name": "Meta",
+                  "gap": 8,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "v0L6BR",
+                      "name": "Year",
+                      "fill": "$accent",
+                      "content": "2025",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PLYaE",
+                      "name": "Dot",
+                      "fill": "$inkFaint",
+                      "content": "·",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WoWgG",
+                      "name": "Tag",
+                      "fill": "$brass",
+                      "content": "Winner",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "WZ0Xx",
+                  "name": "Title",
+                  "fill": "$ink",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "ARC Line",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "m1jrMv",
+                  "name": "Excerpt",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "A voice-based multi-hotline for the ARC Raiders universe, built with Twilio ConversationRelay.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "EGjXw",
+                  "name": "Tech",
+                  "fill": "$brass",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Node · TypeScript · Fastify",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "jsSZ2",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "O5e5aR",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fDwmM",
+              "name": "Row React Mega Menu",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                24,
+                0
+              ],
+              "children": [
+                {
+                  "id": "uOf06",
+                  "type": "ref",
+                  "ref": "mo3TN",
+                  "name": "Thumb Placeholder",
+                  "width": "fill_container"
+                },
+                {
+                  "type": "frame",
+                  "id": "dKVRl",
+                  "name": "Meta",
+                  "gap": 8,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ZusFu",
+                      "name": "Year",
+                      "fill": "$accent",
+                      "content": "2024",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "rTYjz",
+                  "name": "Title",
+                  "fill": "$ink",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "React Mega Menu",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "sEubB",
+                  "name": "Excerpt",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "An accessible, responsive boilerplate top navigation menu with a full mega-menu panel.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "GRFx5",
+                  "name": "Tech",
+                  "fill": "$brass",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "React · TypeScript · Jest",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "X5seL",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "aITHx",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "CODaE",
+              "name": "Row Dropship",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                24,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ot5VD",
+                  "name": "Thumb",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 233,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../content/projects/dropship/featured.webp",
+                    "mode": "fill"
+                  },
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "Tffdd",
+                  "name": "Meta",
+                  "gap": 8,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "r7vNW",
+                      "name": "Year",
+                      "fill": "$accent",
+                      "content": "2024",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "gquj7",
+                  "name": "Title",
+                  "fill": "$ink",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Dropship",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "N1PNnB",
+                  "name": "Excerpt",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "A React component design system using Chromatic and Storybook to document UI in isolation.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "KRzzM",
+                  "name": "Tech",
+                  "fill": "$brass",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "React · Storybook · Chromatic",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "HLTZS",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "b0rZT7",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "R5HXe",
+              "name": "Row JasonRundell.com",
+              "width": "fill_container",
+              "stroke": "$lineSubtle",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                24,
+                0
+              ],
+              "children": [
+                {
+                  "id": "J8tEmF",
+                  "type": "ref",
+                  "ref": "mo3TN",
+                  "name": "Thumb Placeholder",
+                  "width": "fill_container"
+                },
+                {
+                  "type": "frame",
+                  "id": "y7DUdr",
+                  "name": "Meta",
+                  "gap": 8,
+                  "padding": [
+                    4,
+                    0,
+                    0,
+                    0
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ZekXA",
+                      "name": "Year",
+                      "fill": "$accent",
+                      "content": "2024",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "YNjoS",
+                  "name": "Title",
+                  "fill": "$ink",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "JasonRundell.com",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "Wvt88",
+                  "name": "Excerpt",
+                  "fill": "$inkMuted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "This site — Next.js, MDX content, and a continuous redesign toward leadership + craft.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "xv9uA",
+                  "name": "Tech",
+                  "fill": "$brass",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Next.js · React · Vercel",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "C0VLb4",
+                  "name": "CTA Row",
+                  "padding": [
+                    6,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lwE8K",
+                      "name": "View project",
+                      "fill": "$accent",
+                      "content": "View project →",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "YxoBb",
+      "x": 11952,
+      "y": 8218,
+      "name": "Line-Art - Project Detail Mobile",
+      "clip": true,
+      "width": 390,
+      "fill": "$surfacePrimary",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "Xj61X",
+          "type": "ref",
+          "ref": "afJyd",
+          "name": "LA Nav Mobile",
+          "width": "fill_container"
+        },
+        {
+          "type": "frame",
+          "id": "ruNix",
+          "name": "Title Band",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            24,
+            20,
+            18,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "LSuhy",
+              "name": "Breadcrumb",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "gNMt8",
+                  "name": "Crumb Projects",
+                  "fill": "$inkFaint",
+                  "content": "Projects",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "YaJtB",
+                  "name": "Crumb /",
+                  "fill": "$inkFaint",
+                  "content": "/",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "u4bNf",
+                  "name": "Crumb PalKnobs",
+                  "fill": "$inkMuted",
+                  "content": "PalKnobs",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Dug83",
+              "name": "Meta",
+              "gap": 8,
+              "padding": [
+                6,
+                0,
+                0,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "LQS3i",
+                  "name": "Year",
+                  "fill": "$accent",
+                  "content": "2026",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "aJ36g",
+                  "name": "Dot",
+                  "fill": "$inkFaint",
+                  "content": "·",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "f4aBkQ",
+                  "name": "Tag",
+                  "fill": "$brass",
+                  "content": "Desktop app",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "LGJQY",
+              "name": "Project Title",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "PalKnobs",
+              "lineHeight": 1.15,
+              "fontFamily": "Newsreader",
+              "fontSize": 32,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "Uyqpv",
+              "name": "Project Lead",
+              "fill": "$inkMuted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "A Windows desktop app for editing a Palworld dedicated server’s PalWorldSettings.ini — 120 settings with real labels and proper controls.",
+              "lineHeight": 1.5,
+              "fontFamily": "Geist",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "q78em",
+              "name": "Links",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                6,
+                0,
+                0,
+                0
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "RhiQj",
+                  "name": "Visit GitHub project →",
+                  "fill": "$accent",
+                  "content": "Visit GitHub project →",
+                  "fontFamily": "Geist",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "q4Kua",
+                  "name": "Download latest release →",
+                  "fill": "$accent",
+                  "content": "Download latest release →",
+                  "fontFamily": "Geist",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "O4SIcg",
+          "name": "Featured Image Band",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            0,
+            20,
+            28,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "m80yjV",
+              "name": "Featured Image",
+              "clip": true,
+              "width": "fill_container",
+              "height": 233,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "../content/projects/palknobs/featured.webp",
+                "mode": "fill"
+              },
+              "stroke": "$lineSubtle",
+              "strokeWidth": 1
+            },
+            {
+              "type": "text",
+              "id": "e6t8Vr",
+              "name": "Image Caption",
+              "fill": "$inkFaint",
+              "content": "PalKnobs editing PalWorldSettings.ini.",
+              "fontFamily": "IBM Plex Mono",
+              "fontSize": 10,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QLQuH",
+          "name": "Body Band",
+          "width": "fill_container",
+          "fill": "$surfaceSecondary",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            32,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "ixpq3",
+              "name": "About Heading",
+              "fill": "$ink",
+              "content": "About",
+              "fontFamily": "Newsreader",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "QGyCi",
+              "name": "Paragraph",
+              "fill": "$inkMuted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Palworld’s dedicated server stores every world setting in a single line of PalWorldSettings.ini — one OptionSettings=(...) blob, a few thousand characters wide, no line breaks, no comments.",
+              "lineHeight": 1.55,
+              "fontFamily": "Geist",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "V0xOTj",
+              "name": "Paragraph",
+              "fill": "$inkMuted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "PalKnobs is that app. Install it, point it at your INI, and get all 120 settings as toggles, sliders, and inputs — grouped into 13 categories, each with a description of what the setting actually does in game.",
+              "lineHeight": 1.55,
+              "fontFamily": "Geist",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "MMClY",
+              "name": "Stack Heading",
+              "fill": "$ink",
+              "content": "Tech stack",
+              "fontFamily": "Newsreader",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "zjiKw",
+              "name": "Stack List",
+              "width": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ICR0y",
+                  "name": "Stack Electron",
+                  "width": "fill_container",
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "padding": [
+                    9,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ybFW3",
+                      "name": "Label",
+                      "fill": "$inkMuted",
+                      "content": "Electron",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NTvgj",
+                  "name": "Stack React 19",
+                  "width": "fill_container",
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "padding": [
+                    9,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "GjhlY",
+                      "name": "Label",
+                      "fill": "$inkMuted",
+                      "content": "React 19",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Yzs9L",
+                  "name": "Stack TypeScript",
+                  "width": "fill_container",
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "padding": [
+                    9,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A06043",
+                      "name": "Label",
+                      "fill": "$inkMuted",
+                      "content": "TypeScript",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "EZwSJ",
+                  "name": "Stack Vite",
+                  "width": "fill_container",
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "padding": [
+                    9,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ui8DL",
+                      "name": "Label",
+                      "fill": "$inkMuted",
+                      "content": "Vite",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "unliH",
+                  "name": "Stack Express 5",
+                  "width": "fill_container",
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "padding": [
+                    9,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "mkqxs",
+                      "name": "Label",
+                      "fill": "$inkMuted",
+                      "content": "Express 5",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZKmdA",
+                  "name": "Stack Node.js",
+                  "width": "fill_container",
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "padding": [
+                    9,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qpVEi",
+                      "name": "Label",
+                      "fill": "$inkMuted",
+                      "content": "Node.js",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "lYdCW",
+                  "name": "Stack Vitest",
+                  "width": "fill_container",
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "padding": [
+                    9,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ASWLa",
+                      "name": "Label",
+                      "fill": "$inkMuted",
+                      "content": "Vitest",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MmCFo",
+                  "name": "Stack electron-builder",
+                  "width": "fill_container",
+                  "stroke": "$lineSubtle",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "padding": [
+                    9,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "abMJx",
+                      "name": "Label",
+                      "fill": "$inkMuted",
+                      "content": "electron-builder",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "BN6KW",
+              "name": "License",
+              "fill": "$brass",
+              "content": "MIT · Windows only",
+              "fontFamily": "IBM Plex Mono",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "O6tMzv",
+          "name": "CTA Band",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            32,
+            20,
+            40,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "XuUWn",
+              "name": "CTA Title",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Need an improver at your inflection point?",
+              "lineHeight": 1.2,
+              "fontFamily": "Newsreader",
+              "fontSize": 24,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "DJUgE",
+              "name": "CTA Button",
+              "width": "fill_container",
+              "fill": "$accent",
+              "padding": [
+                14,
+                22
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Yub0f",
+                  "name": "CTA Label",
+                  "fill": "#F7F8FA",
+                  "content": "Book a chat",
+                  "fontFamily": "Geist",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
