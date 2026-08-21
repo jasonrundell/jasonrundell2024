@@ -1,0 +1,114 @@
+---
+title: 'Back to You'
+slug: 'back-to-you'
+createdDate: '2026-08-21T12:00:00.000Z'
+excerpt:
+  'A voice for Claude Code. Original spoken clips play through Claude Code hooks
+  when a task finishes, a decision is needed, or a turn errors out—so you can
+  leave the terminal and still know when you are needed.'
+technology:
+  [
+    'Node.js',
+    'JavaScript',
+    'PowerShell',
+    'Bash',
+    'Shell Scripting',
+    'npm',
+    'Claude Code Hooks',
+    'ElevenLabs',
+  ]
+link: 'https://github.com/jasonrundell/back-to-you'
+featuredImage: './featured.webp'
+featuredImageAlt:
+  'A terminal prompt reading npx backtoyou, with a block cursor after it'
+featuredImageDescription: 'One command, the same on macOS, Windows and Linux.'
+---
+
+You kick off a refactor, switch to your browser, and forget the terminal exists.
+Ten minutes later Claude has been sitting on a yes/no the whole time.
+
+Back to You gives [Claude Code](https://code.claude.com/docs) a quiet voice. It
+says _"Back to you."_ when a task finishes and _"Waiting on you."_ when it needs
+a decision—short, flat, never enthusiastic, like a competent engineer sitting
+beside you. Every clip is original audio made for this project, not game sounds
+borrowed from somewhere else.
+
+### What you hear
+
+- **A task finishes** - _"Back to you."_
+- **Claude needs a decision** - _"Waiting on you."_
+- **A turn fails** - _"Hit an error."_
+
+The first one plays at the end of every response, which is the point and also
+the thing to know before installing. Every clip stays under about a second and a
+half for exactly that reason.
+
+### Voice packs
+
+Four ship today, and which one you want is the only question the installer asks.
+
+- **`claude`** _(default)_ - calm, dry, competent-engineer-beside-you.
+  Understated humour, never enthusiastic.
+- **`gigatron`** - a reference to Ultron from the Avengers movie Age of Ultron.
+- **`mistress-of-pain`** - a nod to Claudia Black's Cydaea from Diablo III.
+- **`jay-run`** - can you guess who?
+
+Switching later rewrites a single line in `sound-theme.txt`—no reinstall, no
+restart, effective on the next sound. Drop your own `.mp3` or `.wav` files into
+a pack folder and the hook picks one at random each time it fires, so you can
+stack as many takes as you like.
+
+### Install
+
+```bash
+npx backtoyou
+```
+
+Node.js is the only prerequisite. No Homebrew, no `jq`, no Python, and the
+package has no dependencies of its own. `npx backtoyou --uninstall` backs up
+your settings, unwires the hooks, and deliberately keeps any packs or takes you
+added yourself.
+
+### How it works
+
+Claude Code [hooks](https://code.claude.com/docs/en/hooks) run a command when
+something happens. Back to You installs two hook scripts and points four events
+at them: `Stop`, `Notification`, `PreToolUse` (for the multiple-choice picker,
+which has no notification type of its own), and `StopFailure`. It merges those
+entries into `~/.claude/settings.json` without touching anything else, backing
+the file up first.
+
+The hooks are **Node on macOS and Linux, PowerShell on Windows**, which looks
+odd until you see why. Everything Node buys here solves a Unix problem—reading
+one field out of the hook payload used to cost `plutil` plus a
+JavaScript-for-Automation fallback. Windows never had that problem, and it plays
+audio through a .NET assembly Node can't reach, so a Node hook there would just
+have to launch PowerShell anyway.
+
+**What's deliberately not wired** is as much of the design as what is.
+`SessionStart` was in earlier versions; measured over a six-hour run it
+accounted for 69% of every sound heard, in bursts as tight as four in 43
+seconds—and a session starting is the one moment you're already looking at the
+terminal. `SubagentStop` went the same way: a subagent finishing isn't a moment
+that wants you back, and a turn that fans out to several of them announced every
+single one. `PostToolUseFailure` fires on a `grep` that finds nothing, so it
+stays alone too.
+
+### Why I built it
+
+I kept losing minutes to a terminal I wasn't watching. Notification sounds
+already exist, but a generic chime tells you something happened, not what kind
+of something—and the difference between "this is done" and "I need you to
+decide" is exactly the part worth knowing without switching windows. A short
+spoken line carries that distinction for free.
+
+Windows support is the most exercised; macOS and Linux are newer and have been
+through fewer hands. If something breaks there,
+[open an issue](https://github.com/jasonrundell/back-to-you/issues)—it's the
+fastest way to get it fixed.
+
+One honest limitation: hooks run wherever the session runs, so a cloud session
+executes the command inside a remote container with no path to your speakers. If
+you rely on audio feedback, run Claude Code locally.
+
+Voices by [ElevenLabs](https://elevenlabs.io).
