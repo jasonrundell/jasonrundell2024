@@ -7,7 +7,7 @@ Load this when designing or briefing the personal brand site.
 - **Name:** Jason Rundell
 - **Site:** jasonrundell.com
 - **Location:** Canada (Eastern), remote-first
-- **Identity:** Engineering leader with 25+ years full-stack web development
+- **Identity:** Engineering leader with 15+ years full-stack web development
   **and** people/delivery leadership
 - **Core narrative:** An **improver**, not a maintainer. Joins at inflection
   points and builds the systems, culture, and standards that let teams scale —

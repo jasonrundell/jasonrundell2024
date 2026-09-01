@@ -22,9 +22,7 @@ const fs = require('fs')
 const path = require('path')
 const React = require('react')
 const sharp = require('sharp')
-const {
-  ImageResponse,
-} = require('next/dist/compiled/@vercel/og/index.node.js')
+const { ImageResponse } = require('next/dist/compiled/@vercel/og/index.node.js')
 
 const ROOT = path.join(__dirname, '..')
 const TOKENS = require(path.join(ROOT, 'src/lib/common.tokens.json'))
@@ -64,14 +62,19 @@ const FONTS = [
     name: 'Newsreader',
     weight: 600,
     style: 'normal',
-    data: fs.readFileSync(path.join(ROOT, 'design/fonts/Newsreader-SemiBold.ttf')),
+    data: fs.readFileSync(
+      path.join(ROOT, 'design/fonts/Newsreader-SemiBold.ttf')
+    ),
   },
   {
     name: 'Geist',
     weight: 400,
     style: 'normal',
     data: fs.readFileSync(
-      path.join(ROOT, 'node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf')
+      path.join(
+        ROOT,
+        'node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf'
+      )
     ),
   },
   {
@@ -79,7 +82,10 @@ const FONTS = [
     weight: 500,
     style: 'normal',
     data: fs.readFileSync(
-      path.join(ROOT, 'node_modules/geist/dist/fonts/geist-sans/Geist-Medium.ttf')
+      path.join(
+        ROOT,
+        'node_modules/geist/dist/fonts/geist-sans/Geist-Medium.ttf'
+      )
     ),
   },
 ]
@@ -252,7 +258,7 @@ const card = box(
               color: INK_MUTED,
             },
           },
-          '25+ years in full-stack web development'
+          '15+ years in full-stack web development'
         ),
       ]
     ),

@@ -21,7 +21,7 @@ const fields: ReadonlyArray<HeroConstField> = [
 const baseProps = {
   fields,
   heading: 'Manager / Full Stack Developer',
-  pitch: 'AI-first ADM and Senior Full Stack Web Developer with 25+ years.',
+  pitch: 'AI-first ADM and Senior Full Stack Web Developer with 15+ years.',
 }
 
 const setReducedMotion = (matches: boolean) => {

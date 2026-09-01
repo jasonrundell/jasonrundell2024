@@ -15,7 +15,7 @@ export function buildPersonJsonLd() {
     url: `${SITE_DOMAIN}/about`,
     sameAs: [AUTHOR.url, 'https://github.com/jasonrundell'],
     description:
-      'Engineering leader and player-coach with 25+ years in full-stack web development, joining at inflection points to build the systems, culture, and standards that let teams scale.',
+      'Engineering leader and player-coach with 15+ years in full-stack web development, joining at inflection points to build the systems, culture, and standards that let teams scale.',
   }
 }
 

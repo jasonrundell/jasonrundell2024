@@ -26,7 +26,7 @@ import { buildPageMetadata } from '@/lib/metadata'
 export const metadata: Metadata = buildPageMetadata({
   title: 'About | Jason Rundell',
   description:
-    'About Jason Rundell - an engineering leader and player-coach with 25+ years in full-stack web development, skills, and recommendations.',
+    'About Jason Rundell - an engineering leader and player-coach with 15+ years in full-stack web development, skills, and recommendations.',
   path: '/about',
 })
 
@@ -68,7 +68,7 @@ const Fact = styled('div')`
 
 const FACTS = [
   { term: 'Based', detail: 'Canada (Eastern) · remote-first' },
-  { term: 'Experience', detail: '25+ years, full-stack + leadership' },
+  { term: 'Experience', detail: '15+ years, full-stack + leadership' },
   {
     term: 'Domains',
     detail: 'MarTech · FinTech · AI tooling · multi-tenant SaaS',
@@ -91,7 +91,7 @@ export default async function AboutPage() {
           <Eyebrow label="About" />
           <DisplayTitle>An improver, not a maintainer</DisplayTitle>
           <Lead>
-            I&rsquo;m an engineering leader with 25+ years in full-stack web
+            I&rsquo;m an engineering leader with 15+ years in full-stack web
             development. I join at inflection points and build the systems,
             culture, and standards that let teams scale - while staying close
             enough to the code to raise the bar.
