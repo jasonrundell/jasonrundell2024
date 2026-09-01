@@ -167,6 +167,7 @@ export default async function page({ params }: ProjectProps) {
     excerpt,
     link,
     siteLink,
+    storybookLink,
     gallery,
     featuredImage,
     createdDate,
@@ -185,7 +186,7 @@ export default async function page({ params }: ProjectProps) {
           {!Number.isNaN(year) && <StyledMeta>{year}</StyledMeta>}
           <DisplayTitle>{title}</DisplayTitle>
           {excerpt && <Lead>{excerpt}</Lead>}
-          {(link || siteLink) && (
+          {(link || siteLink || storybookLink) && (
             <StyledLinkRow>
               {link && (
                 <StyledProjectLink
@@ -203,6 +204,15 @@ export default async function page({ params }: ProjectProps) {
                   rel="noopener noreferrer"
                 >
                   Visit project&apos;s website &rarr;
+                </StyledProjectLink>
+              )}
+              {storybookLink && (
+                <StyledProjectLink
+                  href={storybookLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit project&apos;s Storybook &rarr;
                 </StyledProjectLink>
               )}
             </StyledLinkRow>

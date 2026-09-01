@@ -1,0 +1,65 @@
+---
+title: 'Topiary'
+slug: 'topiary'
+createdDate: '2026-09-01T12:00:00.000Z'
+excerpt:
+  'A React component library built on one idea: tokens drive form, components
+  drive function. The same markup renders four structurally different designs
+  by swapping design token files—no code changes required.'
+technology:
+  ['React 19', 'TypeScript', 'Storybook', 'Vitest', 'Vite', 'DTCG', 'NPM']
+link: 'https://github.com/jasonrundell/topiary'
+siteLink: 'https://topiary-system.vercel.app/'
+storybookLink: 'https://topiary-storybook.vercel.app/?path=/story/welcome--default'
+featuredImage: './featured.webp'
+featuredImageAlt: 'Topiary logo of a topiary peacock growing out of a pot'
+featuredImageDescription: ''
+---
+
+![Topiary logo](./content-image-1.webp)
+
+Topiary is a React component library built on one idea: **tokens drive form,
+components drive function**. It's the evolution of my previous component
+library, Dropship—same hobby, new name, and a much sharper thesis. I love
+component (design) systems, and building one of my own means I get to make
+every decision (and every mistake) myself.
+
+The name comes from the landscaping art form: the same shrub, pruned into
+completely different shapes. In Topiary, identical component markup renders
+four structurally different designs just by swapping token files. Think of it
+as a CSS Zen Garden, but for a component library.
+
+**By no means should you be using Topiary in a professional production
+environment.** It's always evolving and frequently has breaking changes that I
+just don't have the time to support. It's where I experiment—that's the point.
+
+**Tech:**
+
+- React 19
+- TypeScript
+- Storybook
+- Vitest
+- Vite
+- Zero runtime styling dependencies—styles compile to plain CSS
+
+**Features:**
+
+- Atoms: Blockquote, Box, Button, Card, Container, Grid, Heading, Link, Row,
+  Spacer. The set is minimal on purpose—it exists to demonstrate the token
+  contract, not to be everything to everyone.
+- Four themes: `hangar` (instrumentation, monospace headings, sharp corners),
+  `broadsheet` (editorial, serif, ink-on-paper), `arcade` (neo-brutalist,
+  heavy outlines, hard shadows), and `cascade` (soft, rounded, blurred
+  elevation). Switching is a single `data-theme` attribute.
+- Themes differ on _structural_ axes—radius, border width, shadow, font,
+  letter spacing—not just a coat of paint on the colors.
+- Design tokens follow the DTCG format
+  [https://tr.designtokens.org/](https://tr.designtokens.org/) and compile to
+  CSS custom properties, so you can override them at runtime without a
+  rebuild.
+- Storybook: Every component rendered in every theme, with a theme switcher
+  and a live token reference.
+- Accessibility: Axe testing runs in CI on every release.
+
+There's also a companion library, `@jasonrundell/topiary-primitives`, which
+provides the unstyled polymorphic HTML primitives that Topiary builds on.

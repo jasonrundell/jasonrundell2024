@@ -26,6 +26,11 @@ const nextConfig = {
         destination: '/projects/arcline-twilio-hackathon',
         permanent: true,
       },
+      {
+        source: '/projects/dropship',
+        destination: '/projects/topiary',
+        permanent: true,
+      },
     ]
   },
   async headers() {

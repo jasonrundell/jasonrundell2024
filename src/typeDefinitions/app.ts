@@ -58,6 +58,7 @@ export interface Project {
   technology: string[]
   link?: string
   siteLink?: string
+  storybookLink?: string
   featuredImage?: ContentImage
   gallery?: ContentImage[]
 }

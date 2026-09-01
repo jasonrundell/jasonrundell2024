@@ -215,6 +215,7 @@ function parseProject(slug: string): Project {
     technology: (data.technology as string[] | undefined) ?? [],
     link: data.link as string | undefined,
     siteLink: data.siteLink as string | undefined,
+    storybookLink: data.storybookLink as string | undefined,
     featuredImage,
     gallery,
   }
