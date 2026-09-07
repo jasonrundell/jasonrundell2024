@@ -1,39 +1,58 @@
 ---
 title: 'React Mega Menu'
 slug: 'react-mega-menu'
-createdDate: '2024-10-30T12:00:00.000Z'
+createdDate: '2026-08-30T12:00:00.000Z'
 excerpt:
-  'A React project which aims to be an accessible, responsive, boilerplate top
-  navigation menu with a "Mega Menu"!'
-technology: ['React 18', 'TypeScript', 'ESLint', 'Jest', 'Vite']
+  'An accessible, responsive top navigation menu for React with a "Mega Menu",
+  now on v3—React 19, styled through Topiary design tokens instead of
+  CSS-in-JS.'
+technology: ['React 19', 'TypeScript', 'Topiary', 'Vite', 'Jest']
 link: 'https://github.com/jasonrundell/react-mega-menu'
-siteLink: 'https://reactmegamenu.vercel.app/'
+siteLink: 'https://jasonrundell-react-mega-menu.vercel.app/'
 featuredImageAlt: ''
 featuredImageDescription: ''
 ---
 
-A powerful, accessible, and customizable mega menu component built with React
-and TypeScript. This component provides a modern solution for complex navigation
-patterns commonly found in enterprise applications.
+An accessible, responsive top navigation menu for React with a "Mega Menu,"
+styled by a shipped stylesheet and design tokens rather than CSS-in-JS.
+
+**v3** is a styling-architecture rewrite: it runs on React 19 and
+[Topiary](https://github.com/jasonrundell/topiary) design tokens instead of
+Emotion. The `Menu` component, its config shape, and every `rmm__*` id and
+class name stay the same, so migrating is mostly a dependency and stylesheet
+swap. The React 18 / Emotion line lives on as the v2.x branch for anyone not
+ready to move.
 
 ### Key Features
 
-- **Accessibility First:** Built with ARIA standards and keyboard navigation
-  support
-- **Customizable:** Extensive theming options and flexible layout configurations
-- **Performance Optimized:** Lazy loading and efficient rendering for large
-  menus
-- **TypeScript Support:** Full type safety and excellent developer experience
-- **Responsive Design:** Works seamlessly across all device sizes
+- **WCAG 2.1 AA compliant, W3C valid markup:** scanned with
+  [axe](https://github.com/dequelabs/axe-core) in every state (closed, open,
+  sub-panel open, mobile and desktop) as part of the test suite, with a
+  recorded keyboard walkthrough kept alongside it
+- **Fly-out mega panels and nested sub-panels** from a single config object,
+  with full keyboard support: Tab order, Enter/Space to open, Escape to close
+  and return focus, and outside click to close
+- **Responsive:** an off-canvas nav with a hamburger toggle below the `large`
+  breakpoint, a horizontal bar above it, with a configurable slide-in side
+  (`slideDirection`)
+- **Plain CSS, no runtime styling library:** one stylesheet, every value
+  routed through a documented `--rmm-*` token layer that defaults to Topiary
+  tokens with hardcoded fallbacks—so it re-skins across all four Topiary
+  themes from identical markup, and still renders correctly on its own if
+  Topiary isn't present
+- **Ships its own TypeScript declarations** and respects
+  [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
 
-### Technical Highlights
+### Demos
 
-The component uses modern React patterns including:
+Two demos prove out different parts of the system:
 
-- Custom hooks for state management
-- CSS-in-JS for dynamic styling
-- Intersection Observer for performance
-- Context API for theme management
+- [`demo/`](https://github.com/jasonrundell/react-mega-menu/tree/main/demo): a
+  Vite + React 19 + TypeScript app with a four-theme switcher and a
+  `slideDirection` toggle
+- [`next-demo/`](https://github.com/jasonrundell/react-mega-menu/tree/main/next-demo):
+  a Next.js 15 App Router app proving server-side rendering with no unstyled
+  flash
 
 ### Use Cases
 
@@ -42,4 +61,4 @@ Perfect for:
 - E-commerce sites with complex category navigation
 - Enterprise dashboards with multi-level menus
 - Documentation sites with hierarchical content
-- Any application requiring sophisticated navigation
+- Any application requiring sophisticated, accessible navigation
