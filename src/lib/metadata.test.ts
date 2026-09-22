@@ -97,6 +97,32 @@ describe('buildPageMetadata', () => {
 
     expect(article.openGraph).not.toHaveProperty('publishedTime')
   })
+
+  it('declares no image when the route generates its own card', () => {
+    const generated = buildPageMetadata({
+      title: 'A post | Jason Rundell',
+      description: 'A post.',
+      path: '/posts/a-post',
+      type: 'article',
+      generatedImage: true,
+    })
+
+    expect(generated.openGraph).not.toHaveProperty('images')
+    expect(generated.twitter).not.toHaveProperty('images')
+    expect(generated.twitter).toMatchObject({ card: 'summary_large_image' })
+  })
+
+  it('rejects an explicit image on a route that generates its own card', () => {
+    expect(() =>
+      buildPageMetadata({
+        title: 'A post | Jason Rundell',
+        description: 'A post.',
+        path: '/posts/a-post',
+        image: { src: '/a.png', alt: 'A' },
+        generatedImage: true,
+      })
+    ).toThrow('both an image and generatedImage')
+  })
 })
 
 describe('buildRootMetadata', () => {

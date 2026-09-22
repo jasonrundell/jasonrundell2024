@@ -39,14 +39,7 @@ export async function generateMetadata({
     path: `/projects/${slug}`,
     type: 'article',
     publishedTime: project.createdDate,
-    image: project.featuredImage?.src
-      ? {
-          src: project.featuredImage.src,
-          alt: project.featuredImage.alt || project.title,
-          width: project.featuredImage.width,
-          height: project.featuredImage.height,
-        }
-      : undefined,
+    generatedImage: true,
   })
 }
 
