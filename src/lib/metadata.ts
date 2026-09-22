@@ -21,6 +21,12 @@ export interface PageMetadataInput {
   path: string
   /** Share image. Root-relative or absolute; falls back to the site card. */
   image?: { src: string; alt: string; width?: number; height?: number }
+  /**
+   * The route renders its own card via `opengraph-image.tsx` /
+   * `twitter-image.tsx`. No image is declared here so the static fallback
+   * cannot be emitted alongside, or instead of, the generated one.
+   */
+  generatedImage?: boolean
   /** `article` adds authorship and publication data to the Open Graph tags. */
   type?: 'website' | 'article'
   /** ISO 8601 date. Only meaningful when `type` is `article`. */
@@ -49,9 +55,16 @@ export function buildPageMetadata({
   description,
   path,
   image,
+  generatedImage = false,
   type = 'website',
   publishedTime,
 }: PageMetadataInput): Metadata {
+  if (image && generatedImage) {
+    throw new Error(
+      `buildPageMetadata: ${path} passed both an image and generatedImage`
+    )
+  }
+
   const url = absoluteUrl(path)
 
   const shareImage = image
@@ -79,7 +92,7 @@ export function buildPageMetadata({
       title,
       description,
       url,
-      images: [shareImage],
+      ...(generatedImage ? {} : { images: [shareImage] }),
       ...(type === 'article'
         ? {
             authors: [AUTHOR.name],
@@ -91,7 +104,7 @@ export function buildPageMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [shareImage],
+      ...(generatedImage ? {} : { images: [shareImage] }),
     },
   }
 }
