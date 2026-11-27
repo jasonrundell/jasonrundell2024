@@ -1,0 +1,311 @@
+---
+title: 'Stack Health: The Step I Run Before Grill With Docs'
+slug: 'stack-health-the-step-i-run-before-grill-with-docs'
+excerpt:
+  'My AI workflow is great at planning, building, and reviewing the code I am
+  about to write. It never asks whether the runtime and framework underneath
+  that code are on fire. So I added a skill that does—and it earns its keep on
+  legacy projects, where you need to know what you are standing on before you
+  build on top of it, and you need evidence to bring to the team.'
+date: '2026-11-27T12:00-05:00'
+author: 'Jason Rundell'
+featuredImage: './featured.webp'
+featuredImageAlt:
+  'Blueprint-style illustration of a stack of layered platforms under a scanning
+  lens, with one middle layer glowing amber to flag a weak point'
+featuredImageDescription: ''
+---
+
+In October, PHP shipped emergency patches for two critical remote code execution
+flaws in PHP itself—not a framework, not a plugin, the runtime. Dubbed
+[PHP2Shell](https://www.bleepingcomputer.com/news/security/php-ships-emergency-patches-for-critical-php2shell-flaws),
+CVE-2026-109618 and CVE-2026-109619 were rated 9.2 by the vendor, and the only
+complete fix was to move to 8.5.12, 8.4.27, 8.3.36 or 8.2.35 immediately. If you
+were running PHP anywhere, you had a very bad week.
+
+Around the same time, my own site's most recent commit was a Next.js upgrade for
+October's RCE advisories. Nobody is immune, including the guy writing this post.
+
+That's when it clicked that my development workflow has a blind spot. And it's
+not a small one.
+
+## The Workflow Is Zoomed In
+
+I've been all-in on [Matt Pocock's skills](https://github.com/mattpocock/skills)
+since
+[I retired my own version](/posts/retiring-coding-fundamentals-why-im-pointing-you-to-matt-pococks-skills).
+The chain goes like this:
+
+1. **`grill-with-docs`** - interview me until the plan and the vocabulary are
+   nailed down, and record the hard-to-reverse decisions as ADRs.
+2. **`to-spec`** - turn that conversation into a spec.
+3. **`to-tickets`** - break the spec into work.
+4. **`implement`** - build it.
+5. **`code-review`** - check the work.
+6. **`retro`** - learn from it.
+
+Every one of those steps is about the code I'm _about to write_. That's the
+point, and they're excellent at it. But none of them step back and ask the macro
+question: **is the ground under this project still solid?** Code review looks at
+the diff. It doesn't look at the PHP version in your Dockerfile, the Postgres
+version in your compose file, or the framework that quietly went end-of-life
+eight months ago.
+
+So I wrote a skill for it. I call it `stack-health`.
+
+## Why It Goes Before Grill With Docs
+
+I went back and forth on this one. After grilling felt natural at first—you know
+what you're building, so you know what to check. But grilling is where decisions
+get _locked in_. If I discover after the session that the runtime we just
+designed around has a critical CVE or goes EOL next month, I'm reopening
+decisions I just settled. That's the expensive direction.
+
+Run it first, and the findings walk into the grilling session as constraints:
+"We're on PHP 8.2, which goes end-of-life on December 31. Does this feature
+change that plan, or does that plan change this feature?" That's a much better
+conversation to have _before_ you've written an ADR than after.
+
+> Grilling decides what you'll build. Stack health tells you whether the thing
+> you're building on can hold the weight.
+
+## Where It Really Earns Its Keep: Projects That Already Exist
+
+On a greenfield project, you pick current versions on day one and this skill
+mostly tells you "all clear." Fine. Boring is good.
+
+The real value is on **existing projects**—especially ones with some years on
+them.
+
+### You just joined a team with a lot of legacy
+
+Picture it: new contract, new codebase, and the first ticket is a feature
+sitting on top of code nobody has touched since 2021. Before you start piling
+new work onto old foundations, you want to know what you're standing on. Is the
+runtime supported? Is the framework still getting security releases? Is there a
+package in the lockfile that's on CISA's list of vulnerabilities being actively
+exploited in the wild?
+
+You _can_ figure all of that out by hand. It just takes a day you don't have in
+your first week, and you'll probably skip the runtime because `npm audit` came
+back clean and you felt good about yourself. (A spotless lockfile and a
+three-year-old base image can live very happily together in the same repo.)
+
+### Security is already a big concern on the team
+
+Some teams have been burned before, or they're in a regulated space, or
+leadership just watched PHP2Shell roll through the news and is asking pointed
+questions. In that world, a regular, dated read on the stack's health isn't
+paranoia—it's input for **prioritization**. If something critical shows up, the
+roadmap might need to change, and the team needs to hear that early.
+
+### Raising concerns without being "the new person who hates our code"
+
+This is the part I care about most as a leader. When you're new, your
+credibility is thin. Walking into standup and saying "I have a bad feeling about
+this stack" goes nowhere. Walking in with a dated report that says _this_
+component, _this_ version, _this_ advisory, _this_ is the fixed version, and
+_this_ is whether we're actually exposed—that's a conversation the team can act
+on.
+
+The skill is deliberately built to produce that artifact, and deliberately built
+_not_ to go rogue. It doesn't upgrade anything on its own. It hands you
+evidence, and the decisions stay with the people who own them.
+
+## What the Skill Actually Does
+
+It runs in five steps:
+
+1. **Inventory** - list every runtime, framework, database, base image, and
+   package with exact versions. It reads lockfiles, not manifests, because the
+   lockfile is what actually ships.
+2. **Run the deterministic tools first** - `npm audit`, `composer audit`,
+   `pip-audit`, `osv-scanner`, whatever applies. I don't want a language model
+   _remembering_ CVEs; I want it reading tool output.
+3. **Search for what the tools miss** - dependency audits mostly cover packages,
+   not your runtime, database, or web server. PHP2Shell was a runtime bug. So it
+   searches vendor advisories, the
+   [CISA Known Exploited Vulnerabilities](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
+   catalog, and [endoflife.date](https://endoflife.date/) for the exact versions
+   in use.
+4. **Triage** - a CVE isn't a finding until it applies to _your_ project. For
+   each one: Are we exposed? Is it being exploited? Is there a fix, and is it a
+   patch bump or a breaking upgrade?
+5. **Verdict** - write a dated `STACK-HEALTH.md` and sort everything into three
+   buckets.
+
+Those buckets are the whole point:
+
+- **Clear** - one line, move on. No padding.
+- **Patch now** - exposed and fixable. Becomes a ticket that goes _ahead_ of
+  feature work.
+- **Strategic risk** - no simple patch. An EOL runtime, an abandoned framework,
+  a breaking major upgrade. This one goes into the grilling session as an open
+  question, and probably to the wider team as a reprioritization conversation.
+
+It also reads your existing ADRs first, so if the team already accepted a risk
+on purpose, it doesn't re-raise it every week like a smoke detector with a dying
+battery.
+
+## Run It on a Schedule, Too
+
+Vulnerabilities don't wait for you to start a feature. If I'd only run this at
+the top of the workflow and I wasn't mid-feature the week PHP2Shell dropped, I'd
+have missed it. So it should also run weekly as a scheduled task. The workflow
+placement catches risk before you design; the schedule is the actual safety net.
+
+## The Honest Limits
+
+- **It's an agent with web search, not a security team.** It can miss things,
+  and it can misjudge exposure. That's why the report has a "Not checked"
+  section—it's required to say what it couldn't verify instead of guessing.
+- **It doesn't replace Dependabot, SCA tooling, or a pen test.** It sits _above_
+  those and asks the macro question they don't.
+- **The triage is only as good as its view of production.** "Is the SOAP
+  extension enabled in prod?" is sometimes a question only a human with access
+  can answer. The skill is told that "couldn't determine" is a valid answer and
+  a guess is not.
+
+Think of it as a conversation starter with receipts.
+
+## The Skill
+
+Here's the full `SKILL.md`. Drop it into your skills folder (for example,
+`.claude/skills/stack-health/SKILL.md`) next to Matt's, and invoke it before
+`/grill-with-docs`. It follows the same conventions—the agent finds the facts,
+you make the decisions.
+
+````markdown
+---
+name: stack-health
+description:
+  Audit the project's tech stack for known vulnerabilities, end-of-life
+  versions, and stability risks. Use before grill-with-docs, on a schedule, or
+  when the user asks whether the stack is safe or current.
+---
+
+# Stack Health
+
+Take the macro view: is the ground this project stands on still solid? This is
+not a code review. Ignore the project's own code quality and look only at what
+it depends on — runtimes, frameworks, databases, base images, and packages.
+
+Run this **before** `grill-with-docs`, so findings enter the grilling as
+constraints rather than reopening settled decisions. Also run it on a schedule:
+vulnerabilities do not wait for feature work.
+
+Finding _facts_ is your job, never the user's. The _decisions_ — patch, pin,
+migrate, accept the risk — are the user's.
+
+## 1. Inventory
+
+List every component with its **exact** version. Read, don't guess:
+
+- **Runtimes**: `.nvmrc`, `.tool-versions`, `composer.json` (`php`),
+  `package.json` (`engines`), `pyproject.toml`, `go.mod`, Dockerfile `FROM`
+  lines, CI config
+- **Packages**: lockfiles, not manifests — the lockfile is what actually ships
+- **Infrastructure**: databases, caches, queues, web servers, base images
+  (`docker-compose.yml`, IaC, deploy config)
+
+If a `CONTEXT-MAP.md` or `GLOSSARY-MAP.md` exists, the repo has multiple
+contexts: inventory each one.
+
+Read `docs/adr/` first. An ADR may already record an accepted risk or a pinned
+version — don't re-raise what was deliberately decided unless something has
+changed since.
+
+## 2. Run the deterministic tools
+
+Never answer a package-CVE question from memory. Run whichever apply and capture
+the output:
+
+- `npm audit` / `pnpm audit` / `yarn npm audit`
+- `composer audit`
+- `pip-audit`
+- `cargo audit`
+- `govulncheck ./...`
+- `osv-scanner` (covers most lockfiles; prefer it when available)
+
+If a tool is missing, say so in the report rather than silently skipping that
+ecosystem.
+
+## 3. Search for what the tools miss
+
+Dependency audits cover packages. They mostly do **not** cover the runtime, the
+database, or the web server — which is where the biggest incidents land. Your
+training data is stale by definition here, so search the web for every runtime
+and infrastructure component:
+
+- **Vendor security advisories** for the exact version in use
+- **CISA Known Exploited Vulnerabilities** catalog — is anything in the
+  inventory on it?
+- **End-of-life dates** (endoflife.date) — flag anything EOL or within six
+  months of it
+- **Recent news** — search `<component> vulnerability` for the current month
+- **Supply-chain signals** for key packages: compromised releases, maintainer
+  takeovers, abandonment, sudden licence changes
+
+Record the source and date for every finding.
+
+## 4. Triage
+
+A CVE is not a finding until it applies to _this_ project. For each one, answer:
+
+1. **Exposed?** Is the affected component, extension, or code path actually used
+   and reachable here? Check the code and config.
+2. **Exploited?** Is there a public exploit or in-the-wild use?
+3. **Fixable?** Is there a patched version, and is the upgrade a patch bump or a
+   breaking change?
+
+Be honest about uncertainty. "Could not determine whether the SOAP extension is
+enabled in production" is a valid answer; a guess is not.
+
+## 5. Verdict
+
+Write `STACK-HEALTH.md` at the repo root, replacing the previous one. Use the
+project's vocabulary from `CONTEXT.md` or `GLOSSARY.md` when naming systems.
+
+```md
+# Stack Health — <YYYY-MM-DD>
+
+**Verdict: CLEAR | PATCH NOW | STRATEGIC RISK**
+
+## Patch now
+
+- <component> <current> → <fixed>: <one-line why>, <source>
+
+## Strategic risks
+
+- <component>: <risk, deadline if any>, <source>
+
+## Checked and clear
+
+- <component> <version>
+
+## Not checked
+
+- <what and why>
+```
+
+Then sort every finding into one of three outcomes:
+
+- **Clear** — say so in one line and stop. Don't pad.
+- **Patch now** — exposed and fixable. Propose a ticket that goes ahead of
+  feature work. Do not upgrade anything yourself unless the user says to.
+- **Strategic risk** — no simple patch: an EOL runtime, an abandoned framework,
+  a breaking major upgrade. Carry it into `grill-with-docs` as an open question.
+  It is an ADR candidate, by the usual three tests: hard to reverse, surprising
+  without context, a real trade-off.
+
+Finish by giving the user the verdict and the top findings in a few lines. The
+file holds the detail.
+````
+
+If you're stepping into a codebase with some history this month—and with
+PHP2Shell still fresh and PHP 8.2 about to go EOL, a lot of you are—run it
+before you write a line. Worst case, it tells you everything's fine and you lose
+five minutes. Best case, you find the rotten floorboard before you put the piano
+on it.
+
+Cheers!
